@@ -96,3 +96,48 @@ img{display:block;max-width:100%}
 .bottom-links{display:flex;gap:16px}
 .bottom-links a{color:#94a3b8}
 .bottom-links a:hover{color:#fff}
+
+npm
+
+/* ===== Men Page ===== */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+
+.men-bc { background:#f8fafc; border-bottom:1px solid #e5e7eb; }
+.men-bc .container { display:flex; align-items:center; gap:8px; padding:16px 0; color:#64748b; }
+.men-bc-link { color:#3b82f6; text-decoration:none; }
+.men-bc-sep { opacity:.6; }
+
+.men-head { background:#fff; border-bottom:1px solid #e5e7eb; }
+.men-title { font-size:32px; font-weight:800; margin:24px 0 8px; }
+.men-sub { color:#64748b; margin-bottom:24px; }
+
+.men-content { display:grid; grid-template-columns: 260px 1fr; gap:24px; padding:32px 0; }
+@media (max-width: 1024px) { .men-content { grid-template-columns: 1fr; } }
+
+.men-side .men-card { background:#fff; border-radius:12px; padding:24px; position:sticky; top:80px; box-shadow:0 1px 2px rgba(0,0,0,.04); }
+.men-card-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+.link-btn { border:none; background:transparent; color:#3b82f6; cursor:pointer; }
+
+.men-block { margin-top:20px; }
+.men-block h4 { font-size:14px; font-weight:600; margin-bottom:10px; }
+.men-checks { display:grid; gap:8px; }
+.men-check { display:flex; align-items:center; gap:8px; color:#111827; }
+
+.men-range { display:flex; justify-content:space-between; color:#6b7280; font-size:14px; margin-top:8px; }
+.men-sizes { display:grid; grid-template-columns: repeat(3, 1fr); gap:8px; }
+.size-btn { padding:8px 0; border:1px solid #e5e7eb; border-radius:8px; background:#fff; cursor:pointer; }
+.size-btn:hover { border-color:#3b82f6; color:#3b82f6; }
+
+.men-main { min-width:0; }
+.men-toolbar { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:16px; }
+.men-toolbar .muted { color:#6b7280; font-size:14px; }
+.men-sort select { border:1px solid #e5e7eb; border-radius:8px; padding:8px 12px; background:#fff; }
+
+.men-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:24px; }
+@media (max-width: 1024px) { .men-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .men-grid { grid-template-columns: 1fr; } }
+
+.men-load { text-align:center; margin:32px 0 8px; }
+.outline-btn { border:1px solid #e5e7eb; background:#fff; border-radius:10px; padding:12px 18px; cursor:pointer; }
+.outline-btn:hover { border-color:#3b82f6; color:#3b82f6; }
+
