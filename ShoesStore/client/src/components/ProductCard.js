@@ -1,7 +1,9 @@
+// src/components/ProductCard.jsx
 import React from "react";
+import { Link } from "react-router-dom";
 
-export default function ProductCard({ image, name, price, extra }) {
-  return (
+export default function ProductCard({ id, image, name, price, extra }) {
+  const CardInner = (
     <div className="card">
       <img className="card-img" src={image} alt={name} />
       <div className="card-body">
@@ -13,4 +15,7 @@ export default function ProductCard({ image, name, price, extra }) {
       </div>
     </div>
   );
+
+ 
+  return id ? <Link to={`/product/${id}`}>{CardInner}</Link> : CardInner;
 }

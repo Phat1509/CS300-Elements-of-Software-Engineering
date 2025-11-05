@@ -1,33 +1,50 @@
-// src/components/Header.js
+// src/components/Header.jsx
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export default function Header() {
   return (
     <header className="hd">
       <div className="container hd-in">
-        <div className="logo">
+        {/* Logo */}
+        <Link to="/" className="logo" aria-label="Go home">
           <div className="logo-dot">S</div>
           <span className="logo-text">StepStyle</span>
-        </div>
+        </Link>
 
+        {/* Nav */}
         <nav className="nav">
-          <a href="/" className="nav-link">New Arrivals</a>
-          <Link to="/men" className="nav-link">Men</Link>
-          <Link to="/women" className="nav-link">Women</Link>  {/* mới */}
-          <Link to="/kids" className="nav-link">Kids</Link>    {/* mới */}
-          <Link to="/sale" className="nav-link">Sale</Link>    {/* mới */}
+          <NavLink to="/new" className="nav-link">
+            New Arrivals
+          </NavLink>
+          <NavLink to="/men" className="nav-link">
+            Men
+          </NavLink>
+          <NavLink to="/women" className="nav-link">
+            Women
+          </NavLink>
+          <NavLink to="/kids" className="nav-link">
+            Kids
+          </NavLink>
+          <NavLink to="/sale" className="nav-link">
+            Sale
+          </NavLink>
         </nav>
 
+        {/* Actions (right) */}
         <div className="actions">
-          <div className="search">
-            <span className="search-ico">🔍</span>
-            <input className="input" placeholder="Search shoes..." />
-          </div>
-          <button className="btn btn-outline" aria-label="Wishlist">♡</button>
-          <button className="btn btn-outline" aria-label="Account">👤</button>
+          <Link to="/wishlist" className="btn btn-outline" aria-label="Wishlist">
+            ♡
+          </Link>
+
+          <Link to="/auth" className="btn btn-outline" aria-label="Account">
+            👤
+          </Link>
+
           <div className="cart">
-            <button className="btn btn-outline" aria-label="Cart">🛒</button>
+            <Link to="/cart" className="btn btn-outline" aria-label="Cart">
+              🛒
+            </Link>
             <span className="badge cart-badge">3</span>
           </div>
         </div>
