@@ -47,7 +47,9 @@ CREATE TABLE public.products (
     description TEXT,
     price REAL NOT NULL,
     image_url VARCHAR,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    discount_percentage INTEGER CHECK (discount_percentage BETWEEN 0 AND 100),
+    is_active BOOLEAN DEFAULT true,
 );
 
 -- PRODUCT VARIANTS (different size/color)
