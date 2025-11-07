@@ -1,0 +1,51 @@
+# For use via `devcontainer.json`. The docker-compose-dev file sets some other
+# important variables.
+
+FROM debian:13
+
+WORKDIR /shoestore
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get update \
+	&& apt-get upgrade -y \
+	&& apt-get install -y \
+		# essentials
+		git locales sudo unzip \
+		# nice to haves
+		gh just fzf curl wget neovim fd-find bat \
+	# uninstall lynx so people don't get a CLI browser that can't load anything when they do `gh auth login`
+	&& apt-get purge -y lynx
+
+# so apt doesn't complain about the lack of a dialog-like program
+ENV DEBIAN_FRONTEND=readline
+
+# `fd` is called `fdfind` on debian. Awesome.
+RUN ln -s $(which fdfind) /usr/bin/fd
+
+# setup locales
+# https://stackoverflow.com/questions/28405902/how-to-set-the-locale-inside-a-debian-ubuntu-docker-container
+RUN echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen && locale-gen
+ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8
+
+# Fix locale issue perl repeatedly complains about
+RUN echo "LC_ALL=en_US.UTF-8\nLANG=en_US.UTF-8" > /etc/default/locale
+
+# create shoestore user and give them sudo
+RUN addgroup --gid 1000 shoestore \
+	&& adduser --disabled-password --uid 1000 --gid 1000 --home /home/shoestore shoestore \
+ 	&& echo "shoestore ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers
+
+# Make the /shoestore working directory owned by our user instead of root. Docker volumes
+# are mounted as root UNLESS the folder already exists inside the host and has non-root
+# ownership. This is the only way to declare a volume in docker has non-root ownership.
+# Unbelievably obscure.
+RUN chown -R shoestore:shoestore /shoestore
+
+USER shoestore
+
+# see above comment about non-root volumes
+RUN mkdir node_modules
+
+RUN curl -fsSL https://bun.sh/install | bash
+
+# keep container alive indefinitely
+CMD ["/bin/bash"]
