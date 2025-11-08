@@ -1,6 +1,7 @@
 import { t } from "elysia";
 import { jwt as jwtPlugin } from "@elysiajs/jwt";
-import { sessionPlugin } from "./lib/sessions";
+import { session } from "@beerpsi/elysia-session";
+import { BunSQLStore } from "@beerpsi/elysia-session/store/bun";
 
 export const jwt = jwtPlugin({
     name: "jwt",
@@ -9,8 +10,14 @@ export const jwt = jwtPlugin({
         userID: t.Integer(),
     }),
 });
-export const sessions = sessionPlugin({
+export const sessions = session({
+    store: new BunSQLStore({
+        sql: {
+            adapter: "postgres",
+            url: process.env.DATABASE_URL,
+        },
+    }),
     schema: t.Object({
-        userId: t.Optional(t.Integer()),
+        userId: t.Integer(),
     }),
 });

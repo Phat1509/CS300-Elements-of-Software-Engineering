@@ -7,6 +7,7 @@
         "gen-db-types": "kysely-codegen --out-file src/db/types.ts --dialect postgres"
     },
     "dependencies": {
+        "@beerpsi/elysia-session": "^0.1.0",
         "@elysiajs/jwt": "^1.4.0",
         "elysia": "latest",
         "kysely": "^0.28.8",

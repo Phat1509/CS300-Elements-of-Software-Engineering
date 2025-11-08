@@ -4,6 +4,7 @@
     "": {
       "name": "app",
       "dependencies": {
+        "@beerpsi/elysia-session": "^0.1.0",
         "@elysiajs/jwt": "^1.4.0",
         "elysia": "latest",
         "kysely": "^0.28.8",
@@ -20,6 +21,8 @@
     "@babel/code-frame": ["@babel/code-frame@7.27.1", "", { "dependencies": { "@babel/helper-validator-identifier": "^7.27.1", "js-tokens": "^4.0.0", "picocolors": "^1.1.1" } }, "sha512-cjQ7ZlQ0Mv3b47hABuTevyTuYN4i+loJKGeV9flcCgIK37cCXRh+L1bd3iBHlynerhQ7BhCkn2BPbQUL+rGqFg=="],
 
     "@babel/helper-validator-identifier": ["@babel/helper-validator-identifier@7.28.5", "", {}, "sha512-qSs4ifwzKJSV39ucNjsvc6WVHs6b7S03sOh2OcHF9UHfVPqWWALUsNUVzhSBiItjRZoLHx7nIarVjqKVusUZ1Q=="],
+
+    "@beerpsi/elysia-session": ["@beerpsi/elysia-session@0.1.0", "", { "peerDependencies": { "elysia": "^1.4.15" } }, "sha512-zEocBgiBJygnI9irsTGkPF60tuUWrSo6G1A5kjoCZgLpZHMJfhPwG6LsT830nMGSlqgcC3ICY3jEfqXqsyjdfA=="],
 
     "@borewit/text-codec": ["@borewit/text-codec@0.1.1", "", {}, "sha512-5L/uBxmjaCIX5h8Z+uu+kA9BQLkc/Wl06UGR5ajNRxu+/XjonB5i8JpgFMrPj3LXTCPA0pv8yxUvbUi+QthGGA=="],
 

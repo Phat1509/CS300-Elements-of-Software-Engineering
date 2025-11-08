@@ -18,7 +18,7 @@ export default new Elysia({ prefix: "/auth" })
         async ({ session, body }) => {
             const response = await LoginWithUsernamePassword(body);
 
-            session.userId = response.userId;
+            session.set("userId", response.userId);
 
             return response;
         },
@@ -42,23 +42,16 @@ export default new Elysia({ prefix: "/auth" })
     })
     .post(
         "/logout",
-        async ({ session, cookie }) => {
-            if (!session.userId) {
+        async ({ session }) => {
+            const userId = session.get("userId");
+
+            if (!userId) {
                 throw status(401, {
                     error: "You are not logged in.",
                 } satisfies UnsuccessfulAPIResponse);
             }
 
-            const sessionId = cookie.session.value;
-
-            if (sessionId) {
-                await db
-                    .deleteFrom("sessions")
-                    .where("id", "=", sessionId)
-                    .execute();
-            }
-
-            cookie.session.remove();
+            session.clear();
 
             return {
                 message: "Logout successful.",

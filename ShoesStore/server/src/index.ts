@@ -4,12 +4,6 @@ import { sessions } from "./plugins";
 
 const app = new Elysia({ prefix: "/api/v1" })
     .use(sessions)
-    .get("/", ({ session }) => {
-        return session.userId;
-    })
-    .get("/test", ({ session }) => {
-        session.userId = 42;
-    })
     .use(authModule)
     .listen({ hostname: "0.0.0.0", port: 3000 });
 
