@@ -9,7 +9,6 @@ import {
 } from "./model";
 import { LoginWithUsernamePassword, Register } from "./service";
 import { sessions } from "@/plugins";
-import { db } from "@/db";
 
 export default new Elysia({ prefix: "/auth" })
     .use(sessions)
