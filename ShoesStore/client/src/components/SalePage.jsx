@@ -151,10 +151,27 @@ const saleProducts = [
 
 export default function SalePage() {
   const [maxPrice, setMaxPrice] = React.useState(200);
+  const [sortBy, setSortBy] = React.useState("discount");
   const filteredProducts = React.useMemo(
     () => saleProducts.filter((p) => typeof p.price === "number" && p.price <= maxPrice),
     [maxPrice]
   );
+  const sortedProducts = React.useMemo(() => {
+    const arr = [...filteredProducts];
+    switch (sortBy) {
+      case "price-low":
+        return arr.sort((a, b) => a.price - b.price);
+      case "price-high":
+        return arr.sort((a, b) => b.price - a.price);
+      case "popular":
+        return arr.sort((a, b) => (b.reviews || 0) - (a.reviews || 0));
+      case "rating":
+        return arr.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+      case "discount":
+      default:
+        return arr.sort((a, b) => (b.discount || 0) - (a.discount || 0));
+    }
+  }, [filteredProducts, sortBy]);
   const handleClearAll = () => setMaxPrice(200);
   return (
     <main className="men-wrap">
@@ -254,7 +271,7 @@ export default function SalePage() {
             <p className="muted">Showing {filteredProducts.length} products on sale</p>
             <div className="men-sort">
               <span className="muted">Sort by:</span>
-              <select defaultValue="discount">
+              <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
                 <option value="discount">Biggest Discount</option>
                 <option value="price-low">Price: Low to High</option>
                 <option value="price-high">Price: High to Low</option>
@@ -265,7 +282,7 @@ export default function SalePage() {
           </div>
 
           <div className="men-grid">
-            {filteredProducts.map(p => <ProductCard key={p.id} {...p} />)}
+            {sortedProducts.map(p => <ProductCard key={p.id} {...p} />)}
           </div>
 
           <div className="men-load">

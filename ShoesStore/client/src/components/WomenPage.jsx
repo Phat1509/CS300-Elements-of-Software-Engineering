@@ -43,10 +43,27 @@ const womenProducts = [
 
 export default function WomenPage() {
   const [maxPrice, setMaxPrice] = React.useState(200);
+  const [sortBy, setSortBy] = React.useState("popular");
   const filteredProducts = React.useMemo(
     () => womenProducts.filter((p) => typeof p.price === "number" && p.price <= maxPrice),
     [maxPrice]
   );
+  const sortedProducts = React.useMemo(() => {
+    const arr = [...filteredProducts];
+    switch (sortBy) {
+      case "price-low":
+        return arr.sort((a, b) => a.price - b.price);
+      case "price-high":
+        return arr.sort((a, b) => b.price - a.price);
+      case "rating":
+        return arr.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+      case "newest":
+        return arr.sort((a, b) => b.id - a.id);
+      case "popular":
+      default:
+        return arr.sort((a, b) => (b.reviews || 0) - (a.reviews || 0));
+    }
+  }, [filteredProducts, sortBy]);
   const handleClearAll = () => setMaxPrice(200);
   return (
     <main className="men-wrap">
@@ -135,7 +152,7 @@ export default function WomenPage() {
             <p className="muted">Showing {filteredProducts.length} products</p>
             <div className="men-sort">
               <span className="muted">Sort by:</span>
-              <select defaultValue="popular">
+              <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
                 <option value="popular">Most Popular</option>
                 <option value="newest">Newest First</option>
                 <option value="price-low">Price: Low to High</option>
@@ -146,7 +163,7 @@ export default function WomenPage() {
           </div>
 
           <div className="men-grid">
-            {filteredProducts.map(p => <ProductCard key={p.id} {...p} />)}
+            {sortedProducts.map(p => <ProductCard key={p.id} {...p} />)}
           </div>
 
           <div className="men-load">

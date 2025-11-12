@@ -28,6 +28,24 @@ export default function NewArrivalsPage() {
     (p) => p.price >= minPrice && p.price <= maxPrice
   );
 
+  const sortedDisplayed = React.useMemo(() => {
+    const arr = [...displayed];
+    switch (sortBy) {
+      case "price-low":
+        return arr.sort((a, b) => a.price - b.price);
+      case "price-high":
+        return arr.sort((a, b) => b.price - a.price);
+      case "popular":
+        return arr.sort((a, b) => (b.reviews || 0) - (a.reviews || 0));
+      case "rating":
+        return arr.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+      case "newest":
+      default:
+        // Use id as a proxy for recency
+        return arr.sort((a, b) => b.id - a.id);
+    }
+  }, [displayed, sortBy]);
+
   return (
     <div className="na">
       {/* Breadcrumb */}
@@ -121,7 +139,7 @@ export default function NewArrivalsPage() {
             </div>
 
             <div className="na-products">
-              {displayed.map((p) => (
+              {sortedDisplayed.map((p) => (
                 <div key={p.id} className="na-card-wrap">
                   <ProductCard
                     {...p}
