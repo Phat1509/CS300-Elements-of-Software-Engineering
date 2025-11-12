@@ -42,6 +42,12 @@ const kidsProducts = [
 ];
 
 export default function KidsPage() {
+  const [maxPrice, setMaxPrice] = React.useState(100);
+  const filteredProducts = React.useMemo(
+    () => kidsProducts.filter((p) => typeof p.price === "number" && p.price <= maxPrice),
+    [maxPrice]
+  );
+  const handleClearAll = () => setMaxPrice(100);
   return (
     <main className="men-wrap">
       {/* Breadcrumb */}
@@ -70,7 +76,7 @@ export default function KidsPage() {
           <div className="men-card">
             <div className="men-card-top">
               <h3>Filters</h3>
-              <button className="link-btn" type="button">Clear All</button>
+              <button className="link-btn" type="button" onClick={handleClearAll}>Clear All</button>
             </div>
 
             <div className="men-block">
@@ -99,8 +105,16 @@ export default function KidsPage() {
 
             <div className="men-block">
               <h4>Price Range</h4>
-              <input type="range" min="0" max="100" step="5" />
-              <div className="men-range"><span>$0</span><span>$100</span></div>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                step="5"
+                value={maxPrice}
+                onChange={(e) => setMaxPrice(Number(e.target.value))}
+                aria-label="Filter by maximum price"
+              />
+              <div className="men-range"><span>$0</span><span>${maxPrice}</span></div>
             </div>
 
             <div className="men-block">
@@ -116,7 +130,7 @@ export default function KidsPage() {
 
         <div className="men-main">
           <div className="men-toolbar">
-            <p className="muted">Showing {kidsProducts.length} products</p>
+            <p className="muted">Showing {filteredProducts.length} products</p>
             <div className="men-sort">
               <span className="muted">Sort by:</span>
               <select defaultValue="popular">
@@ -130,7 +144,7 @@ export default function KidsPage() {
           </div>
 
           <div className="men-grid">
-            {kidsProducts.map(p => <ProductCard key={p.id} {...p} />)}
+            {filteredProducts.map(p => <ProductCard key={p.id} {...p} />)}
           </div>
 
           <div className="men-load">

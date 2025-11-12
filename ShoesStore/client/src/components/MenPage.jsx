@@ -39,6 +39,18 @@ const menProducts = [
 ];
 
 export default function MenPage() {
+  // Price slider state (max $200 by design)
+  const [maxPrice, setMaxPrice] = React.useState(200);
+
+  // Filter products by selected price
+  const filteredProducts = React.useMemo(
+    () => menProducts.filter((p) => typeof p.price === "number" && p.price <= maxPrice),
+    [maxPrice]
+  );
+
+  const handleClearAll = () => {
+    setMaxPrice(200);
+  };
   return (
     <main className="men-wrap">
       {/* Breadcrumb */}
@@ -68,7 +80,7 @@ export default function MenPage() {
           <div className="men-card">
             <div className="men-card-top">
               <h3>Filters</h3>
-              <button className="link-btn" type="button">Clear All</button>
+              <button className="link-btn" type="button" onClick={handleClearAll}>Clear All</button>
             </div>
 
             <div className="men-block">
@@ -85,9 +97,18 @@ export default function MenPage() {
 
             <div className="men-block">
               <h4>Price Range</h4>
-              <input type="range" min="0" max="200" step="10" />
+              <input
+                type="range"
+                min="0"
+                max="200"
+                step="10"
+                value={maxPrice}
+                onChange={(e) => setMaxPrice(Number(e.target.value))}
+                aria-label="Filter by maximum price"
+              />
               <div className="men-range">
-                <span>$0</span><span>$200</span>
+                <span>$0</span>
+                <span>${maxPrice}</span>
               </div>
             </div>
 
@@ -106,7 +127,7 @@ export default function MenPage() {
         <div className="men-main">
           {/* Toolbar */}
           <div className="men-toolbar">
-            <p className="muted">Showing {menProducts.length} products</p>
+            <p className="muted">Showing {filteredProducts.length} products</p>
             <div className="men-sort">
               <span className="muted">Sort by:</span>
               <select defaultValue="popular">
@@ -121,7 +142,7 @@ export default function MenPage() {
 
           {/* Grid */}
           <div className="men-grid">
-            {menProducts.map(p => (
+            {filteredProducts.map(p => (
               <ProductCard key={p.id} {...p} />
             ))}
           </div>

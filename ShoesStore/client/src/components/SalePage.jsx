@@ -150,6 +150,12 @@ const saleProducts = [
 ];
 
 export default function SalePage() {
+  const [maxPrice, setMaxPrice] = React.useState(200);
+  const filteredProducts = React.useMemo(
+    () => saleProducts.filter((p) => typeof p.price === "number" && p.price <= maxPrice),
+    [maxPrice]
+  );
+  const handleClearAll = () => setMaxPrice(200);
   return (
     <main className="men-wrap">
       {/* Breadcrumb */}
@@ -178,7 +184,7 @@ export default function SalePage() {
           <div className="men-card">
             <div className="men-card-top">
               <h3>Filters</h3>
-              <button className="link-btn" type="button">Clear All</button>
+              <button className="link-btn" type="button" onClick={handleClearAll}>Clear All</button>
             </div>
 
             <div className="men-block">
@@ -207,8 +213,16 @@ export default function SalePage() {
 
             <div className="men-block">
               <h4>Price Range</h4>
-              <input type="range" min="0" max="200" step="10" />
-              <div className="men-range"><span>$0</span><span>$200</span></div>
+              <input
+                type="range"
+                min="0"
+                max="200"
+                step="10"
+                value={maxPrice}
+                onChange={(e) => setMaxPrice(Number(e.target.value))}
+                aria-label="Filter by maximum price"
+              />
+              <div className="men-range"><span>$0</span><span>${maxPrice}</span></div>
             </div>
 
             <div className="men-block">
@@ -237,7 +251,7 @@ export default function SalePage() {
         {/* Main */}
         <div className="men-main">
           <div className="men-toolbar">
-            <p className="muted">Showing {saleProducts.length} products on sale</p>
+            <p className="muted">Showing {filteredProducts.length} products on sale</p>
             <div className="men-sort">
               <span className="muted">Sort by:</span>
               <select defaultValue="discount">
@@ -251,7 +265,7 @@ export default function SalePage() {
           </div>
 
           <div className="men-grid">
-            {saleProducts.map(p => <ProductCard key={p.id} {...p} />)}
+            {filteredProducts.map(p => <ProductCard key={p.id} {...p} />)}
           </div>
 
           <div className="men-load">
