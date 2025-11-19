@@ -1,7 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 
 export default function HomePage() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/homeProducts")
+      .then(res => res.json())
+      .then(data => {
+        setProducts(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Error fetching products:", err);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return <p>Loading products...</p>;
+  }
+
   return (
     <>
       {/* Categories */}
@@ -34,51 +54,15 @@ export default function HomePage() {
           </div>
 
           <div className="grid-products">
-            <ProductCard
-              image="https://images.unsplash.com/photo-1719523677291-a395426c1a87?auto=format&fit=crop&w=800&q=80"
-              name="Air Performance Runner"
-              price="129.99"
-              extra="-19%"
-            />
-            <ProductCard
-              image="https://images.unsplash.com/photo-1631482665588-d3a6f88e65f0?auto=format&fit=crop&w=800&q=80"
-              name="Classic White Sneaker"
-              price="89.99"
-            />
-            <ProductCard
-              image="https://images.unsplash.com/photo-1639619287843-da4b297d7672?auto=format&fit=crop&w=800&q=80"
-              name="Pro Athletic Trainer"
-              price="149.99"
-              extra="NEW"
-            />
-            <ProductCard
-              image="https://images.unsplash.com/photo-1759542890353-35f5568c1c90?auto=format&fit=crop&w=800&q=80"
-              name="Urban Casual Collection"
-              price="99.99"
-              extra="-17%"
-            />
-            <ProductCard
-              image="https://images.unsplash.com/photo-1761052720710-32349209f6b4?auto=format&fit=crop&w=800&q=80"
-              name="Premium Leather Boots"
-              price="179.99"
-            />
-            <ProductCard
-              image="https://images.unsplash.com/photo-1605348532760-6753d2c43329?auto=format&fit=crop&w=800&q=80"
-              name="Basketball Elite Pro"
-              price="169.99"
-              extra="NEW"
-            />
-            <ProductCard
-              image="https://images.unsplash.com/photo-1602504786849-b325e183168b?auto=format&fit=crop&w=800&q=80"
-              name="Lifestyle Comfort Plus"
-              price="119.99"
-              extra="-14%"
-            />
-            <ProductCard
-              image="https://images.unsplash.com/photo-1719523677291-a395426c1a87?auto=format&fit=crop&w=800&q=80"
-              name="Trail Running Max"
-              price="139.99"
-            />
+            {products.map(product => (
+              <ProductCard
+                key={product.id}
+                image={product.image}
+                name={product.name}
+                price={product.price}
+                extra={product.discountPercent ? `-${product.discountPercent}%` : product.isNew ? "NEW" : ""}
+              />
+            ))}
           </div>
 
           <div className="center">

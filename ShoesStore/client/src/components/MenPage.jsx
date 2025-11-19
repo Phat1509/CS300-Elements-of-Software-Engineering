@@ -1,77 +1,42 @@
-// src/components/MenPage.js
-import React from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import ProductCard from "./ProductCard";
 
-const menProducts = [
-  {
-    id: 201,
-    name: "Ultra Boost Performance",
-    price: 159.99,
-    originalPrice: 189.99,
-    image:
-      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1080&auto=format&fit=crop",
-    rating: 4.9,
-    reviews: 418,
-    category: "Running",
-  },
-  {
-    id: 202,
-    name: "Speed Sprint Elite",
-    price: 119.99,
-    image:
-      "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1080&auto=format&fit=crop",
-    rating: 4.8,
-    reviews: 245,
-    category: "Running",
-    discount: 20,
-  },
-  {
-    id: 203,
-    name: "Cloud Runner Pro",
-    price: 139.99,
-    image:
-      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1080&auto=format&fit=crop",
-    rating: 4.7,
-    reviews: 328,
-    category: "Running",
-  },
-  // 👉 Dán tiếp các item 204..212 từ Figma của bạn vào đây
-];
-
 export default function MenPage() {
-  // Price slider state (max $200 by design)
-  const [maxPrice, setMaxPrice] = React.useState(200);
-  const [sortBy, setSortBy] = React.useState("popular");
+  const [products, setProducts] = useState([]);
+  const [maxPrice, setMaxPrice] = useState(200);
+  const [sortBy, setSortBy] = useState("popular");
 
-  // Filter products by selected price
-  const filteredProducts = React.useMemo(
-    () => menProducts.filter((p) => typeof p.price === "number" && p.price <= maxPrice),
-    [maxPrice]
+  // Fetch data từ API
+  useEffect(() => {
+    fetch("http://localhost:5000/menProducts")
+      .then(res => res.json())
+      .then(data => setProducts(data))
+      .catch(err => console.error(err));
+  }, []);
+
+  // Filter products by price
+  const filteredProducts = useMemo(
+    () => products.filter(p => p.isActive && p.price <= maxPrice),
+    [products, maxPrice]
   );
 
-  const sortedProducts = React.useMemo(() => {
+  // Sort products
+  const sortedProducts = useMemo(() => {
     const arr = [...filteredProducts];
     switch (sortBy) {
-      case "price-low":
-        return arr.sort((a, b) => a.price - b.price);
-      case "price-high":
-        return arr.sort((a, b) => b.price - a.price);
-      case "rating":
-        return arr.sort((a, b) => (b.rating || 0) - (a.rating || 0));
-      case "newest":
-        return arr.sort((a, b) => b.id - a.id);
+      case "price-low": return arr.sort((a,b)=>a.price-b.price);
+      case "price-high": return arr.sort((a,b)=>b.price-a.price);
+      case "rating": return arr.sort((a,b)=>(b.rating||0)-(a.rating||0));
+      case "newest": return arr.sort((a,b)=>b.id-a.id);
       case "popular":
-      default:
-        return arr.sort((a, b) => (b.reviews || 0) - (a.reviews || 0));
+      default: return arr.sort((a,b)=>(b.reviews||0)-(a.reviews||0));
     }
   }, [filteredProducts, sortBy]);
 
-  const handleClearAll = () => {
-    setMaxPrice(200);
-  };
+  const handleClearAll = () => setMaxPrice(200);
+
   return (
     <main className="men-wrap">
-      {/* Breadcrumb */}
       <section className="men-bc">
         <div className="container">
           <a href="/" className="men-bc-link">Home</a>
@@ -80,20 +45,17 @@ export default function MenPage() {
         </div>
       </section>
 
-      {/* Page header */}
       <section className="men-head">
         <div className="container">
           <h1 className="men-title">Men&apos;s Collection</h1>
           <p className="men-sub">
-            Explore our curated selection of men's footwear. From athletic performance to
-            sophisticated style, find your perfect fit.
+            Explore our curated selection of men's footwear.
           </p>
         </div>
       </section>
 
-      {/* Content */}
       <section className="container men-content">
-        {/* Sidebar (tĩnh để đúng layout hình 2) */}
+        {/* Sidebar */}
         <aside className="men-side">
           <div className="men-card">
             <div className="men-card-top">
@@ -101,6 +63,7 @@ export default function MenPage() {
               <button className="link-btn" type="button" onClick={handleClearAll}>Clear All</button>
             </div>
 
+            {/* Category */}
             <div className="men-block">
               <h4>Category</h4>
               <div className="men-checks">
@@ -113,29 +76,13 @@ export default function MenPage() {
               </div>
             </div>
 
+            {/* Price */}
             <div className="men-block">
               <h4>Price Range</h4>
-              <input
-                type="range"
-                min="0"
-                max="200"
-                step="10"
-                value={maxPrice}
-                onChange={(e) => setMaxPrice(Number(e.target.value))}
-                aria-label="Filter by maximum price"
-              />
+              <input type="range" min="0" max="200" step="10" value={maxPrice} onChange={e=>setMaxPrice(Number(e.target.value))}/>
               <div className="men-range">
                 <span>$0</span>
                 <span>${maxPrice}</span>
-              </div>
-            </div>
-
-            <div className="men-block">
-              <h4>Size (US)</h4>
-              <div className="men-sizes">
-                {["8","8.5","9","9.5","10","10.5","11","11.5","12"].map(s=>(
-                  <button key={s} type="button" className="size-btn">{s}</button>
-                ))}
               </div>
             </div>
           </div>
@@ -143,12 +90,11 @@ export default function MenPage() {
 
         {/* Products */}
         <div className="men-main">
-          {/* Toolbar */}
           <div className="men-toolbar">
             <p className="muted">Showing {filteredProducts.length} products</p>
             <div className="men-sort">
               <span className="muted">Sort by:</span>
-              <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+              <select value={sortBy} onChange={e=>setSortBy(e.target.value)}>
                 <option value="popular">Most Popular</option>
                 <option value="newest">Newest First</option>
                 <option value="price-low">Price: Low to High</option>
@@ -158,16 +104,12 @@ export default function MenPage() {
             </div>
           </div>
 
-          {/* Grid */}
           <div className="men-grid">
-            {sortedProducts.map(p => (
-              <ProductCard key={p.id} {...p} />
-            ))}
+            {sortedProducts.map(p => <ProductCard key={p.id} {...p} />)}
           </div>
 
-          {/* Load more */}
           <div className="men-load">
-            <button className="outline-btn" type="button">Load More Products</button>
+            <button className="outline-btn">Load More Products</button>
           </div>
         </div>
       </section>
