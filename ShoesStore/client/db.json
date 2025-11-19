@@ -1,0 +1,1169 @@
+{
+  "homeProducts": [
+    {
+      "id": 101,
+      "name": "Air Performance Runner",
+      "brand": "Nike",
+      "price": 129.99,
+      "originalPrice": 149.99,
+      "discountPercent": 13,
+      "isNew": true,
+      "isHot": false,
+      "isActive": true,
+      "stock": 50,
+      "image": "https://images.unsplash.com/photo-1719523677291-a395426c1a87?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.8,
+      "reviews": 320,
+      "category": "Running",
+      "gender": "men",
+      "colors": [
+        "Black",
+        "White"
+      ],
+      "sizes": [
+        "38",
+        "39",
+        "40",
+        "41"
+      ],
+      "description": "Đôi giày chạy bộ chất lượng cao, thoáng khí và êm ái."
+    },
+    {
+      "id": 102,
+      "name": "Classic White Sneaker",
+      "brand": "Adidas",
+      "price": 89.99,
+      "originalPrice": 99.99,
+      "discountPercent": 10,
+      "isNew": false,
+      "isHot": true,
+      "isActive": true,
+      "stock": 80,
+      "image": "https://images.unsplash.com/photo-1631482665588-d3a6f88e65f0?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.7,
+      "reviews": 250,
+      "category": "Sneakers",
+      "gender": "women",
+      "colors": [
+        "White"
+      ],
+      "sizes": [
+        "36",
+        "37",
+        "38",
+        "39"
+      ],
+      "description": "Sneaker trắng cổ điển, dễ phối đồ, phù hợp đi học và đi làm."
+    },
+    {
+      "id": 103,
+      "name": "Pro Athletic Trainer",
+      "brand": "Puma",
+      "price": 149.99,
+      "originalPrice": 169.99,
+      "discountPercent": 12,
+      "isNew": true,
+      "isHot": true,
+      "isActive": true,
+      "stock": 40,
+      "image": "https://images.unsplash.com/photo-1639619287843-da4b297d7672?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.9,
+      "reviews": 410,
+      "category": "Training",
+      "gender": "men",
+      "colors": [
+        "Blue",
+        "Black"
+      ],
+      "sizes": [
+        "40",
+        "41",
+        "42",
+        "43"
+      ],
+      "description": "Giày tập luyện chuyên nghiệp, hỗ trợ luyện tập mạnh mẽ."
+    },
+    {
+      "id": 104,
+      "name": "Urban Street Runner",
+      "brand": "Reebok",
+      "price": 119.99,
+      "originalPrice": 139.99,
+      "discountPercent": 14,
+      "isNew": false,
+      "isHot": true,
+      "isActive": true,
+      "stock": 60,
+      "image": "https://images.unsplash.com/photo-1528701800489-20be9c5e6e9c?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.6,
+      "reviews": 210,
+      "category": "Street",
+      "gender": "men",
+      "colors": [
+        "Grey",
+        "Black"
+      ],
+      "sizes": [
+        "39",
+        "40",
+        "41",
+        "42"
+      ],
+      "description": "Giày thể thao phong cách đường phố, năng động và bền bỉ."
+    },
+    {
+      "id": 105,
+      "name": "Lightweight Jogger",
+      "brand": "Nike",
+      "price": 99.99,
+      "originalPrice": 119.99,
+      "discountPercent": 16,
+      "isNew": true,
+      "isHot": false,
+      "isActive": true,
+      "stock": 70,
+      "image": "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.5,
+      "reviews": 180,
+      "category": "Running",
+      "gender": "women",
+      "colors": [
+        "Pink",
+        "White"
+      ],
+      "sizes": [
+        "36",
+        "37",
+        "38",
+        "39"
+      ],
+      "description": "Giày chạy nhẹ, thoáng khí, phù hợp tập thể dục hàng ngày."
+    },
+    {
+      "id": 106,
+      "name": "High Comfort Sneaker",
+      "brand": "Puma",
+      "price": 139.99,
+      "originalPrice": 159.99,
+      "discountPercent": 12,
+      "isNew": false,
+      "isHot": true,
+      "isActive": true,
+      "stock": 50,
+      "image": "https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.8,
+      "reviews": 275,
+      "category": "Casual",
+      "gender": "men",
+      "colors": [
+        "Black",
+        "Grey"
+      ],
+      "sizes": [
+        "40",
+        "41",
+        "42",
+        "43"
+      ],
+      "description": "Giày sneaker thoải mái, phù hợp đi làm và dạo phố."
+    },
+    {
+      "id": 107,
+      "name": "Urban Flex Shoes",
+      "brand": "Reebok",
+      "price": 109.99,
+      "originalPrice": 129.99,
+      "discountPercent": 15,
+      "isNew": true,
+      "isHot": false,
+      "isActive": true,
+      "stock": 65,
+      "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.6,
+      "reviews": 190,
+      "category": "Sneakers",
+      "gender": "men",
+      "colors": [
+        "White",
+        "Blue"
+      ],
+      "sizes": [
+        "39",
+        "40",
+        "41",
+        "42"
+      ],
+      "description": "Sneaker đường phố linh hoạt, phong cách và bền."
+    },
+    {
+      "id": 108,
+      "name": "Light Boost Sprint",
+      "brand": "Nike",
+      "price": 159.99,
+      "originalPrice": 179.99,
+      "discountPercent": 11,
+      "isNew": true,
+      "isHot": true,
+      "isActive": true,
+      "stock": 45,
+      "image": "https://images.unsplash.com/photo-1527477396000-e27163b481c2?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.9,
+      "reviews": 410,
+      "category": "Running",
+      "gender": "men",
+      "colors": [
+        "Red",
+        "Black"
+      ],
+      "sizes": [
+        "40",
+        "41",
+        "42",
+        "43"
+      ],
+      "description": "Giày chạy bộ tăng tốc mạnh mẽ, thiết kế ấn tượng."
+    },
+    {
+      "id": 109,
+      "name": "Daily Wear Sneakers",
+      "brand": "Adidas",
+      "price": 79.99,
+      "originalPrice": 99.99,
+      "discountPercent": 20,
+      "isNew": false,
+      "isHot": false,
+      "isActive": true,
+      "stock": 90,
+      "image": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.5,
+      "reviews": 150,
+      "category": "Casual",
+      "gender": "women",
+      "colors": [
+        "White",
+        "Grey"
+      ],
+      "sizes": [
+        "36",
+        "37",
+        "38",
+        "39"
+      ],
+      "description": "Sneaker hàng ngày dễ phối đồ, thoải mái cả ngày."
+    },
+    {
+      "id": 110,
+      "name": "Performance Max Runner",
+      "brand": "Puma",
+      "price": 169.99,
+      "originalPrice": 199.99,
+      "discountPercent": 15,
+      "isNew": true,
+      "isHot": true,
+      "isActive": true,
+      "stock": 40,
+      "image": "https://images.unsplash.com/photo-1605348532760-6753d2c43329?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.9,
+      "reviews": 380,
+      "category": "Running",
+      "gender": "men",
+      "colors": [
+        "Black",
+        "White"
+      ],
+      "sizes": [
+        "40",
+        "41",
+        "42",
+        "43"
+      ],
+      "description": "Giày chạy hiệu suất cao, phù hợp vận động viên chuyên nghiệp."
+    }
+  ],
+  "kidsProducts": [
+    {
+      "id": 401,
+      "name": "Kids Colorful Sneakers",
+      "brand": "Nike",
+      "price": 59.99,
+      "originalPrice": 69.99,
+      "discountPercent": 14,
+      "isNew": true,
+      "isHot": true,
+      "isActive": true,
+      "stock": 50,
+      "image": "https://images.unsplash.com/photo-1707013537977-90e0a6cfa484?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.8,
+      "reviews": 156,
+      "category": "Sneakers",
+      "gender": "kids",
+      "colors": [
+        "Red",
+        "Blue",
+        "Yellow"
+      ],
+      "sizes": [
+        "28",
+        "29",
+        "30",
+        "31"
+      ],
+      "description": "Giày sneaker đầy màu sắc cho trẻ em, mềm mại và thoải mái."
+    },
+    {
+      "id": 402,
+      "name": "Youth Running Shoes",
+      "brand": "Adidas",
+      "price": 69.99,
+      "originalPrice": 79.99,
+      "discountPercent": 12,
+      "isNew": true,
+      "isHot": false,
+      "isActive": true,
+      "stock": 45,
+      "image": "https://images.unsplash.com/photo-1698749803716-7c7bacfa6721?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.7,
+      "reviews": 203,
+      "category": "Running",
+      "gender": "kids",
+      "colors": [
+        "Green",
+        "White"
+      ],
+      "sizes": [
+        "28",
+        "29",
+        "30",
+        "31"
+      ],
+      "description": "Giày chạy bộ cho trẻ em, êm ái và nhẹ."
+    },
+    {
+      "id": 403,
+      "name": "Kids Soft Runner",
+      "brand": "Puma",
+      "price": 49.99,
+      "originalPrice": 59.99,
+      "discountPercent": 16,
+      "isNew": false,
+      "isHot": false,
+      "isActive": true,
+      "stock": 60,
+      "image": "https://images.unsplash.com/photo-1532153955177-f59af40d6472?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.5,
+      "reviews": 87,
+      "category": "Running",
+      "gender": "kids",
+      "colors": [
+        "Blue",
+        "Yellow"
+      ],
+      "sizes": [
+        "28",
+        "29",
+        "30",
+        "31"
+      ],
+      "description": "Giày chạy nhẹ cho bé, mềm mại và linh hoạt."
+    },
+    {
+      "id": 404,
+      "name": "Kids Adventure Shoes",
+      "brand": "Merrell",
+      "price": 74.99,
+      "originalPrice": 89.99,
+      "discountPercent": 16,
+      "isNew": true,
+      "isHot": true,
+      "isActive": true,
+      "stock": 40,
+      "image": "https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.9,
+      "reviews": 210,
+      "category": "Outdoor",
+      "gender": "kids",
+      "colors": [
+        "Brown",
+        "Green"
+      ],
+      "sizes": [
+        "28",
+        "29",
+        "30",
+        "31"
+      ],
+      "description": "Giày phiêu lưu ngoài trời cho trẻ, bám tốt và êm chân."
+    },
+    {
+      "id": 405,
+      "name": "Cute Pink Sneakers",
+      "brand": "Skechers",
+      "price": 54.99,
+      "originalPrice": 64.99,
+      "discountPercent": 15,
+      "isNew": false,
+      "isHot": false,
+      "isActive": true,
+      "stock": 55,
+      "image": "https://images.unsplash.com/photo-1605733513549-de9b150bd70d?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.6,
+      "reviews": 166,
+      "category": "Sneakers",
+      "gender": "kids",
+      "colors": [
+        "Pink",
+        "White"
+      ],
+      "sizes": [
+        "28",
+        "29",
+        "30",
+        "31"
+      ],
+      "description": "Giày sneaker hồng dễ thương cho bé gái."
+    },
+    {
+      "id": 406,
+      "name": "Kids Sport Flex",
+      "brand": "New Balance",
+      "price": 62.99,
+      "originalPrice": 74.99,
+      "discountPercent": 16,
+      "isNew": true,
+      "isHot": false,
+      "isActive": true,
+      "stock": 50,
+      "image": "https://images.unsplash.com/photo-1504151932400-72d4384f04b3?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.7,
+      "reviews": 190,
+      "category": "Sport",
+      "gender": "kids",
+      "colors": [
+        "Blue",
+        "Red"
+      ],
+      "sizes": [
+        "28",
+        "29",
+        "30",
+        "31"
+      ],
+      "description": "Giày thể thao linh hoạt, hỗ trợ các hoạt động ngoài trời."
+    },
+    {
+      "id": 407,
+      "name": "Kids Ultra Light",
+      "brand": "Under Armour",
+      "price": 57.99,
+      "originalPrice": 67.99,
+      "discountPercent": 15,
+      "isNew": false,
+      "isHot": true,
+      "isActive": true,
+      "stock": 45,
+      "image": "https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.4,
+      "reviews": 73,
+      "category": "Running",
+      "gender": "kids",
+      "colors": [
+        "Grey",
+        "White"
+      ],
+      "sizes": [
+        "28",
+        "29",
+        "30",
+        "31"
+      ],
+      "description": "Giày chạy siêu nhẹ cho trẻ em, tiện lợi và thoải mái."
+    },
+    {
+      "id": 408,
+      "name": "Kids Trail Runner",
+      "brand": "Salomon",
+      "price": 69.99,
+      "originalPrice": 84.99,
+      "discountPercent": 18,
+      "isNew": true,
+      "isHot": false,
+      "isActive": true,
+      "stock": 40,
+      "image": "https://images.unsplash.com/photo-1617469165786-800c698d3762?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.9,
+      "reviews": 120,
+      "category": "Trail",
+      "gender": "kids",
+      "colors": [
+        "Green",
+        "Black"
+      ],
+      "sizes": [
+        "28",
+        "29",
+        "30",
+        "31"
+      ],
+      "description": "Giày chạy địa hình trẻ em, chắc chắn và bám tốt."
+    },
+    {
+      "id": 409,
+      "name": "Kids Fast Sneakers",
+      "brand": "Puma",
+      "price": 52.99,
+      "originalPrice": 62.99,
+      "discountPercent": 16,
+      "isNew": false,
+      "isHot": false,
+      "isActive": true,
+      "stock": 55,
+      "image": "https://images.unsplash.com/photo-1595341888016-a392ef81b7de?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.3,
+      "reviews": 55,
+      "category": "Sneakers",
+      "gender": "kids",
+      "colors": [
+        "Blue",
+        "Yellow"
+      ],
+      "sizes": [
+        "28",
+        "29",
+        "30",
+        "31"
+      ],
+      "description": "Sneaker nhanh nhẹn cho trẻ, dễ phối đồ."
+    },
+    {
+      "id": 410,
+      "name": "Kids Boost Runner",
+      "brand": "Adidas",
+      "price": 71.99,
+      "originalPrice": 84.99,
+      "discountPercent": 15,
+      "isNew": true,
+      "isHot": true,
+      "isActive": true,
+      "stock": 45,
+      "image": "https://images.unsplash.com/photo-1474496517593-25087749e8dc?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.8,
+      "reviews": 189,
+      "category": "Running",
+      "gender": "kids",
+      "colors": [
+        "Red",
+        "Black"
+      ],
+      "sizes": [
+        "28",
+        "29",
+        "30",
+        "31"
+      ],
+      "description": "Giày chạy nâng đỡ tốt, thích hợp cho mọi hoạt động của trẻ."
+    }
+  ],
+  "menProducts": [
+    {
+      "id": 201,
+      "name": "Ultra Boost Performance",
+      "brand": "Nike",
+      "price": 159.99,
+      "originalPrice": 189.99,
+      "discountPercent": 15,
+      "isNew": true,
+      "isHot": true,
+      "isActive": true,
+      "stock": 50,
+      "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.9,
+      "reviews": 418,
+      "category": "Running",
+      "gender": "men",
+      "colors": [
+        "Black",
+        "White"
+      ],
+      "sizes": [
+        "40",
+        "41",
+        "42",
+        "43"
+      ],
+      "description": "Giày chạy hiệu suất cao, phù hợp vận động viên chuyên nghiệp."
+    },
+    {
+      "id": 202,
+      "name": "Men Street Sneaker",
+      "brand": "Adidas",
+      "price": 119.99,
+      "originalPrice": 139.99,
+      "discountPercent": 14,
+      "isNew": false,
+      "isHot": true,
+      "isActive": true,
+      "stock": 60,
+      "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.6,
+      "reviews": 210,
+      "category": "Sneakers",
+      "gender": "men",
+      "colors": [
+        "Grey",
+        "Black"
+      ],
+      "sizes": [
+        "39",
+        "40",
+        "41",
+        "42"
+      ],
+      "description": "Sneaker đường phố năng động, bền bỉ."
+    },
+    {
+      "id": 203,
+      "name": "Classic Black Trainer",
+      "brand": "Puma",
+      "price": 139.99,
+      "originalPrice": 159.99,
+      "discountPercent": 13,
+      "isNew": false,
+      "isHot": false,
+      "isActive": true,
+      "stock": 70,
+      "image": "https://images.unsplash.com/photo-1584735174914-6b4b0a08f6c9?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.8,
+      "reviews": 355,
+      "category": "Training",
+      "gender": "men",
+      "colors": [
+        "Black"
+      ],
+      "sizes": [
+        "40",
+        "41",
+        "42",
+        "43"
+      ],
+      "description": "Giày tập luyện cổ điển, hỗ trợ tối đa cho bài tập."
+    },
+    {
+      "id": 204,
+      "name": "Men Trail Runner",
+      "brand": "Reebok",
+      "price": 149.99,
+      "originalPrice": 169.99,
+      "discountPercent": 12,
+      "isNew": true,
+      "isHot": false,
+      "isActive": true,
+      "stock": 40,
+      "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.7,
+      "reviews": 289,
+      "category": "Trail",
+      "gender": "men",
+      "colors": [
+        "Green",
+        "Black"
+      ],
+      "sizes": [
+        "40",
+        "41",
+        "42",
+        "43"
+      ],
+      "description": "Giày chạy địa hình, bám dính tốt, chịu lực."
+    },
+    {
+      "id": 205,
+      "name": "Premium Leather Shoes",
+      "brand": "Clarks",
+      "price": 199.99,
+      "originalPrice": 229.99,
+      "discountPercent": 13,
+      "isNew": false,
+      "isHot": true,
+      "isActive": true,
+      "stock": 30,
+      "image": "https://images.unsplash.com/photo-1600185366004-2a9a1c24f2a4?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.8,
+      "reviews": 401,
+      "category": "Casual",
+      "gender": "men",
+      "colors": [
+        "Brown",
+        "Black"
+      ],
+      "sizes": [
+        "40",
+        "41",
+        "42",
+        "43"
+      ],
+      "description": "Giày da cao cấp, lịch sự, phù hợp công sở."
+    },
+    {
+      "id": 206,
+      "name": "Men Lightweight Runner",
+      "brand": "Nike",
+      "price": 129.99,
+      "originalPrice": 149.99,
+      "discountPercent": 13,
+      "isNew": true,
+      "isHot": false,
+      "isActive": true,
+      "stock": 60,
+      "image": "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.6,
+      "reviews": 178,
+      "category": "Running",
+      "gender": "men",
+      "colors": [
+        "Blue",
+        "White"
+      ],
+      "sizes": [
+        "40",
+        "41",
+        "42",
+        "43"
+      ],
+      "description": "Giày chạy nhẹ, thoáng khí, phù hợp luyện tập hàng ngày."
+    },
+    {
+      "id": 207,
+      "name": "Men Air Sprint",
+      "brand": "Adidas",
+      "price": 169.99,
+      "originalPrice": 189.99,
+      "discountPercent": 11,
+      "isNew": true,
+      "isHot": true,
+      "isActive": true,
+      "stock": 45,
+      "image": "https://images.unsplash.com/photo-1605348532760-6753d2c43329?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.9,
+      "reviews": 260,
+      "category": "Running",
+      "gender": "men",
+      "colors": [
+        "Red",
+        "Black"
+      ],
+      "sizes": [
+        "40",
+        "41",
+        "42",
+        "43"
+      ],
+      "description": "Giày chạy tốc độ cao, thiết kế hiện đại."
+    },
+    {
+      "id": 208,
+      "name": "Men Soft Flex",
+      "brand": "Puma",
+      "price": 109.99,
+      "originalPrice": 129.99,
+      "discountPercent": 15,
+      "isNew": false,
+      "isHot": false,
+      "isActive": true,
+      "stock": 70,
+      "image": "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.4,
+      "reviews": 130,
+      "category": "Sneakers",
+      "gender": "men",
+      "colors": [
+        "White",
+        "Grey"
+      ],
+      "sizes": [
+        "39",
+        "40",
+        "41",
+        "42"
+      ],
+      "description": "Giày sneaker mềm mại, phù hợp dạo phố."
+    },
+    {
+      "id": 209,
+      "name": "Men Street Boost",
+      "brand": "Reebok",
+      "price": 149.99,
+      "originalPrice": 169.99,
+      "discountPercent": 12,
+      "isNew": true,
+      "isHot": true,
+      "isActive": true,
+      "stock": 55,
+      "image": "https://images.unsplash.com/photo-1528701800489-20be9c5e6e9c?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.7,
+      "reviews": 180,
+      "category": "Street",
+      "gender": "men",
+      "colors": [
+        "Black",
+        "Grey"
+      ],
+      "sizes": [
+        "40",
+        "41",
+        "42",
+        "43"
+      ],
+      "description": "Sneaker phong cách đường phố, bền bỉ."
+    },
+    {
+      "id": 210,
+      "name": "Men Daily Trainer",
+      "brand": "Nike",
+      "price": 99.99,
+      "originalPrice": 119.99,
+      "discountPercent": 16,
+      "isNew": false,
+      "isHot": false,
+      "isActive": true,
+      "stock": 80,
+      "image": "https://images.unsplash.com/photo-1600185365483-26d2ad8d7de5?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.3,
+      "reviews": 88,
+      "category": "Training",
+      "gender": "men",
+      "colors": [
+        "Black",
+        "White"
+      ],
+      "sizes": [
+        "40",
+        "41",
+        "42",
+        "43"
+      ],
+      "description": "Giày tập luyện hàng ngày, thoải mái và linh hoạt."
+    }
+  ],
+  "womenProducts": [
+    {
+      "id": 301,
+      "name": "Elegant Heels Collection",
+      "brand": "Jimmy Choo",
+      "price": 159.99,
+      "originalPrice": 189.99,
+      "discountPercent": 15,
+      "isNew": true,
+      "isHot": true,
+      "isActive": true,
+      "stock": 40,
+      "image": "https://images.unsplash.com/photo-1605733513549-de9b150bd70d?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.8,
+      "reviews": 324,
+      "category": "Heels",
+      "gender": "women",
+      "colors": [
+        "Red",
+        "Black"
+      ],
+      "sizes": [
+        "36",
+        "37",
+        "38",
+        "39"
+      ],
+      "description": "Giày cao gót thanh lịch, phù hợp dạ tiệc và công sở."
+    },
+    {
+      "id": 302,
+      "name": "Women Training Shoes",
+      "brand": "Nike",
+      "price": 129.99,
+      "originalPrice": 149.99,
+      "discountPercent": 13,
+      "isNew": true,
+      "isHot": false,
+      "isActive": true,
+      "stock": 50,
+      "image": "https://images.unsplash.com/photo-1579338559194-a162d19f9b20?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.7,
+      "reviews": 255,
+      "category": "Training",
+      "gender": "women",
+      "colors": [
+        "White",
+        "Pink"
+      ],
+      "sizes": [
+        "36",
+        "37",
+        "38",
+        "39"
+      ],
+      "description": "Giày tập luyện nữ, êm ái và thoáng khí."
+    },
+    {
+      "id": 303,
+      "name": "Women Air Flex",
+      "brand": "Adidas",
+      "price": 149.99,
+      "originalPrice": 169.99,
+      "discountPercent": 12,
+      "isNew": true,
+      "isHot": true,
+      "isActive": true,
+      "stock": 45,
+      "image": "https://images.unsplash.com/photo-1528701800489-20be9c5e6e9c?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.9,
+      "reviews": 310,
+      "category": "Lifestyle",
+      "gender": "women",
+      "colors": [
+        "Blue",
+        "White"
+      ],
+      "sizes": [
+        "36",
+        "37",
+        "38",
+        "39"
+      ],
+      "description": "Giày phong cách lifestyle, linh hoạt, nhẹ nhàng."
+    },
+    {
+      "id": 304,
+      "name": "Women Street Sneaker",
+      "brand": "Puma",
+      "price": 119.99,
+      "originalPrice": 139.99,
+      "discountPercent": 14,
+      "isNew": false,
+      "isHot": true,
+      "isActive": true,
+      "stock": 60,
+      "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.6,
+      "reviews": 240,
+      "category": "Sneakers",
+      "gender": "women",
+      "colors": [
+        "Grey",
+        "Black"
+      ],
+      "sizes": [
+        "36",
+        "37",
+        "38",
+        "39"
+      ],
+      "description": "Sneaker đường phố nữ, thời trang và năng động."
+    },
+    {
+      "id": 305,
+      "name": "Women Soft Runner",
+      "brand": "Reebok",
+      "price": 99.99,
+      "originalPrice": 119.99,
+      "discountPercent": 16,
+      "isNew": false,
+      "isHot": false,
+      "isActive": true,
+      "stock": 70,
+      "image": "https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.7,
+      "reviews": 170,
+      "category": "Running",
+      "gender": "women",
+      "colors": [
+        "Pink",
+        "White"
+      ],
+      "sizes": [
+        "36",
+        "37",
+        "38",
+        "39"
+      ],
+      "description": "Giày chạy nữ mềm mại, thoải mái."
+    },
+    {
+      "id": 306,
+      "name": "Women Canvas Casual",
+      "brand": "Vans",
+      "price": 89.99,
+      "originalPrice": 109.99,
+      "discountPercent": 17,
+      "isNew": false,
+      "isHot": false,
+      "isActive": true,
+      "stock": 80,
+      "image": "https://images.unsplash.com/photo-1584735174914-6b4b0a08f6c9?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.5,
+      "reviews": 120,
+      "category": "Casual",
+      "gender": "women",
+      "colors": [
+        "White",
+        "Beige"
+      ],
+      "sizes": [
+        "36",
+        "37",
+        "38",
+        "39"
+      ],
+      "description": "Giày vải nữ casual, dễ phối đồ hàng ngày."
+    },
+    {
+      "id": 307,
+      "name": "Women Trail Runner",
+      "brand": "Salomon",
+      "price": 139.99,
+      "originalPrice": 159.99,
+      "discountPercent": 12,
+      "isNew": true,
+      "isHot": true,
+      "isActive": true,
+      "stock": 40,
+      "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.8,
+      "reviews": 264,
+      "category": "Trail",
+      "gender": "women",
+      "colors": [
+        "Black",
+        "Green"
+      ],
+      "sizes": [
+        "36",
+        "37",
+        "38",
+        "39"
+      ],
+      "description": "Giày chạy địa hình nữ, bám dính tốt."
+    },
+    {
+      "id": 308,
+      "name": "Women Street Style",
+      "brand": "Converse",
+      "price": 110.99,
+      "originalPrice": 129.99,
+      "discountPercent": 14,
+      "isNew": false,
+      "isHot": false,
+      "isActive": true,
+      "stock": 60,
+      "image": "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.4,
+      "reviews": 98,
+      "category": "Street",
+      "gender": "women",
+      "colors": [
+        "Red",
+        "Black"
+      ],
+      "sizes": [
+        "36",
+        "37",
+        "38",
+        "39"
+      ],
+      "description": "Phong cách đường phố nữ, trẻ trung và năng động."
+    },
+    {
+      "id": 309,
+      "name": "Women Boost Lift",
+      "brand": "Adidas",
+      "price": 169.99,
+      "originalPrice": 189.99,
+      "discountPercent": 11,
+      "isNew": true,
+      "isHot": true,
+      "isActive": true,
+      "stock": 35,
+      "image": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.9,
+      "reviews": 370,
+      "category": "Lifestyle",
+      "gender": "women",
+      "colors": [
+        "White",
+        "Blue"
+      ],
+      "sizes": [
+        "36",
+        "37",
+        "38",
+        "39"
+      ],
+      "description": "Giày lifestyle nữ, nâng đỡ và êm ái."
+    },
+    {
+      "id": 310,
+      "name": "Women Light Comfort",
+      "brand": "Skechers",
+      "price": 79.99,
+      "originalPrice": 99.99,
+      "discountPercent": 20,
+      "isNew": false,
+      "isHot": false,
+      "isActive": true,
+      "stock": 75,
+      "image": "https://images.unsplash.com/photo-1474496517593-25087749e8dc?auto=format&fit=crop&w=800&q=80",
+      "images": [],
+      "rating": 4.3,
+      "reviews": 85,
+      "category": "Casual",
+      "gender": "women",
+      "colors": [
+        "White",
+        "Pink"
+      ],
+      "sizes": [
+        "36",
+        "37",
+        "38",
+        "39"
+      ],
+      "description": "Giày nữ nhẹ nhàng, thoải mái đi học hoặc đi chơi."
+    }
+  ]
+}
