@@ -29,6 +29,14 @@ export default function Header() {
           <NavLink to="/sale" className="nav-link">
             Sale
           </NavLink>
+
+          {/* Sign in and Join us */}
+          <NavLink to="/signin" className="nav-link auth-link">
+            Sign in
+          </NavLink>
+          <NavLink to="/signup" className="nav-link auth-link-primary">
+            Join us
+          </NavLink>
         </nav>
 
         {/* Actions (right) */}
@@ -37,7 +45,8 @@ export default function Header() {
             ♡
           </Link>
 
-          <Link to="/auth" className="btn btn-outline" aria-label="Account">
+          {/* Icon account to Sign in */}
+          <Link to="/signin" className="btn btn-outline" aria-label="Account">
             👤
           </Link>
 

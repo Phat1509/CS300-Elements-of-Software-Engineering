@@ -12,6 +12,10 @@ import WishlistPage from "./components/WishlistPage";
 import CartPage from "./components/CartPage";
 import ProductDetailPage from "./components/ProductDetailPage";
 import NewArrivalsPage from "./components/NewArrivalsPage";
+import SignInPage from "./components/SignInPage";
+import SignUpPage from "./components/SignUpPage";
+import LegalPage from "./components/LegalPage";
+
 import "./App.css";
 
 export default function App() {
@@ -36,6 +40,14 @@ export default function App() {
         <Route path="/wishlist" element={<WishlistPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/product/:id" element={<ProductDetailPage />} />
+
+        {/* Auth */}
+        <Route path="/signin" element={<SignInPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/signin" element={<SignInPage />} />
+<Route path="/signup" element={<SignUpPage />} />
+<Route path="/legal" element={<LegalPage />} />
+
       </Routes>
       <Footer />
     </BrowserRouter>
