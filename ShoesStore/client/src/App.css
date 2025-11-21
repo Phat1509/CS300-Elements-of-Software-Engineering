@@ -268,3 +268,196 @@ npm
 .pd-spec-row:last-child{border-bottom:0}
 .pd-spec-row .val{font-weight:600;color:#111827}
 
+
+/* ===== Auth layout ===== */
+
+.auth-wrap {
+  background: #f3f4f6;           /* nền xám nhẹ */
+  min-height: calc(100vh - 140px); /* trừ header + footer tầm tầm */
+}
+
+/* Header trên cùng của trang auth (tái dùng men-head) */
+.auth-wrap .men-head {
+  background: transparent;
+  padding: 40px 0 0;
+}
+
+.auth-wrap .men-title {
+  text-align: left;
+}
+
+.auth-wrap .men-sub {
+  max-width: 520px;
+}
+
+/* Card form */
+.auth-card {
+  max-width: 480px;
+  margin: 32px auto 64px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px 28px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+}
+
+/* Form layout */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Label + input trong form auth */
+.auth-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.auth-form .input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  font-size: 14px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.auth-form .input:focus {
+  outline: none;
+  border-color: #2563eb;
+  background: #ffffff;
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.3);
+}
+
+/* small link */
+.link-btn {
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: 14px;
+  color: #2563eb;
+  cursor: pointer;
+}
+
+.link-btn:hover {
+  text-decoration: underline;
+}
+
+/* shadow */
+.muted {
+  color: #6b7280;
+}
+
+/* primary full width /
+.auth-form .btn.btn-primary.btn-lg {
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+/* Checkbox row for Remember me */
+.auth-form .form-row {
+  font-size: 14px;
+}
+
+/* ===== Legal page ===== */
+
+.legal-wrap {
+  background: #ffffff;
+}
+
+.legal-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
+  gap: 32px;
+  align-items: flex-start;
+}
+
+/* Sidebar */
+.legal-toc {
+  position: sticky;
+  top: 96px;
+  padding: 16px 12px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+.legal-toc-title {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.legal-toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.legal-toc li + li {
+  margin-top: 6px;
+}
+
+.legal-toc a {
+  text-decoration: none;
+  color: #2563eb;
+}
+
+.legal-toc a:hover {
+  text-decoration: underline;
+}
+
+/* Content */
+.legal-content {
+  background: #ffffff;
+  padding: 24px 28px 40px;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+}
+
+.legal-content h2 {
+  font-size: 20px;
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.legal-content p,
+.legal-content ul {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #4b5563;
+}
+
+.legal-content ul {
+  padding-left: 18px;
+}
+
+.inline-link {
+  color: #2563eb;
+  cursor: pointer;
+}
+
+.inline-link:hover {
+  text-decoration: underline;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .legal-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .legal-toc {
+    position: static;
+  }
+}
+
