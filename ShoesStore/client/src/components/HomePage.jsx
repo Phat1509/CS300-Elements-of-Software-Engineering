@@ -6,7 +6,7 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/homeProducts")
+    fetch("http://localhost:5000/products?isHot=true")
       .then(res => res.json())
       .then(data => {
         setProducts(data);

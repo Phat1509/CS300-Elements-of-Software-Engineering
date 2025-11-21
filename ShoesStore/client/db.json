@@ -1,5 +1,5 @@
 {
-  "homeProducts": [
+  "products": [
     {
       "id": 101,
       "name": "Air Performance Runner",
@@ -288,9 +288,7 @@
         "43"
       ],
       "description": "Giày chạy hiệu suất cao, phù hợp vận động viên chuyên nghiệp."
-    }
-  ],
-  "kidsProducts": [
+    },
     {
       "id": 401,
       "name": "Kids Colorful Sneakers",
@@ -581,9 +579,7 @@
         "31"
       ],
       "description": "Giày chạy nâng đỡ tốt, thích hợp cho mọi hoạt động của trẻ."
-    }
-  ],
-  "menProducts": [
+    },
     {
       "id": 201,
       "name": "Ultra Boost Performance",
@@ -872,9 +868,7 @@
         "43"
       ],
       "description": "Giày tập luyện hàng ngày, thoải mái và linh hoạt."
-    }
-  ],
-  "womenProducts": [
+    },
     {
       "id": 301,
       "name": "Elegant Heels Collection",

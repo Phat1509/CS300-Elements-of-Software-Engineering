@@ -9,7 +9,7 @@ export default function KidsPage() {
 
   // Fetch từ API
   useEffect(() => {
-    fetch("http://localhost:5000/kidsProducts")
+    fetch("http://localhost:5000/products?gender=kids")
       .then(res => res.json())
       .then(data => setProducts(data))
       .catch(err => console.error(err));

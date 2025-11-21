@@ -8,7 +8,7 @@ export default function MenPage() {
 
   // Fetch data từ API
   useEffect(() => {
-    fetch("http://localhost:5000/menProducts")
+    fetch("http://localhost:5000/products?gender=men")
       .then(res => res.json())
       .then(data => setProducts(data))
       .catch(err => console.error(err));

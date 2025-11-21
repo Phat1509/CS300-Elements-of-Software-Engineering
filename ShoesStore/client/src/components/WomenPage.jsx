@@ -9,7 +9,7 @@ export default function WomenPage() {
 
   // Fetch từ API
   useEffect(() => {
-    fetch("http://localhost:5000/womenProducts")
+    fetch("http://localhost:5000/products?gender=women")
       .then(res => res.json())
       .then(data => setProducts(data))
       .catch(err => console.error(err));
