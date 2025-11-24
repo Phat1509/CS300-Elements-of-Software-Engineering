@@ -6,7 +6,6 @@ import { removeItem, addItem, clearCart } from "../redux/cartSlice";
 export default function CartPage() {
 	const dispatch = useDispatch();
 	const items = useSelector((s) => s.cart.items);
-
 	const subtotal = React.useMemo(
 		() => items.reduce((sum, it) => sum + it.price * it.quantity, 0),
 		[items]
@@ -23,14 +22,11 @@ export default function CartPage() {
 		dispatch(removeItem(item.id));
 		for (let i = 0; i < updated.quantity; i++) dispatch(addItem(updated));
 	};
-
 	const increaseQty = (item) => {
 		dispatch(addItem(item));
 	};
-
 	const handleRemove = (id) => dispatch(removeItem(id));
 	const handleClear = () => dispatch(clearCart());
-
 	const FallbackImg = ({ src, alt }) => (
 		<img
 			src={src}
@@ -41,9 +37,7 @@ export default function CartPage() {
 			style={{ width: 96, height: 96, objectFit: "cover", borderRadius: 12, border: "1px solid #e5e7eb" }}
 		/>
 	);
-
 	const Separator = () => <div style={{ height: 1, background: "#e5e7eb", margin: "16px 0" }} />;
-
 	return (
 		<>
 			<section className="men-bc">
@@ -53,7 +47,6 @@ export default function CartPage() {
 					<span>Cart</span>
 				</div>
 			</section>
-
 			<section className="container" style={{ padding: "24px 0 40px" }}>
 				<h1 className="men-title" style={{ marginBottom: 8 }}>Your Cart</h1>
 				<p className="muted" style={{ marginBottom: 24 }}>{items.length} item(s) · Free returns within 30 days</p>

@@ -45,8 +45,8 @@ export default function App() {
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/signin" element={<SignInPage />} />
-<Route path="/signup" element={<SignUpPage />} />
-<Route path="/legal" element={<LegalPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/legal" element={<LegalPage />} />
 
       </Routes>
       <Footer />
