@@ -5,7 +5,6 @@ import ProductCard from "./ProductCard.jsx";
 export default function NewArrivalsPage() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-
   const [showFilters, setShowFilters] = useState(false);
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(200);
