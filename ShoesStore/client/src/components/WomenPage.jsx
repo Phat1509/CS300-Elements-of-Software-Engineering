@@ -1,6 +1,7 @@
 // src/components/WomenPage.js
 import React, { useState, useEffect, useMemo } from "react";
 import ProductCard from "./ProductCard";
+import { getProducts } from "../ultilities/api";
 
 export default function WomenPage() {
   const [products, setProducts] = useState([]);
@@ -9,15 +10,14 @@ export default function WomenPage() {
 
   // Fetch từ API
   useEffect(() => {
-    fetch("http://localhost:5000/products?gender=women")
-      .then(res => res.json())
-      .then(data => setProducts(data))
-      .catch(err => console.error(err));
+    getProducts()
+      .then((all) => setProducts(all.filter((p) => p.gender === "women")))
+      .catch((err) => console.error(err));
   }, []);
 
   // Filter products theo giá
   const filteredProducts = useMemo(
-    () => products.filter(p => p.isActive && p.price <= maxPrice),
+    () => products.filter((p) => p.isActive && p.price <= maxPrice),
     [products, maxPrice]
   );
 
@@ -25,12 +25,17 @@ export default function WomenPage() {
   const sortedProducts = useMemo(() => {
     const arr = [...filteredProducts];
     switch (sortBy) {
-      case "price-low": return arr.sort((a,b)=>a.price-b.price);
-      case "price-high": return arr.sort((a,b)=>b.price-a.price);
-      case "rating": return arr.sort((a,b)=>(b.rating||0)-(a.rating||0));
-      case "newest": return arr.sort((a,b)=>b.id-a.id);
+      case "price-low":
+        return arr.sort((a, b) => a.price - b.price);
+      case "price-high":
+        return arr.sort((a, b) => b.price - a.price);
+      case "rating":
+        return arr.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+      case "newest":
+        return arr.sort((a, b) => b.id - a.id);
       case "popular":
-      default: return arr.sort((a,b)=>(b.reviews||0)-(a.reviews||0));
+      default:
+        return arr.sort((a, b) => (b.reviews || 0) - (a.reviews || 0));
     }
   }, [filteredProducts, sortBy]);
 
@@ -41,7 +46,9 @@ export default function WomenPage() {
       {/* Breadcrumb */}
       <section className="men-bc">
         <div className="container">
-          <a href="/" className="men-bc-link">Home</a>
+          <a href="/" className="men-bc-link">
+            Home
+          </a>
           <span className="men-bc-sep">›</span>
           <span>Women</span>
         </div>
@@ -52,7 +59,8 @@ export default function WomenPage() {
         <div className="container">
           <h1 className="men-title">Women&apos;s Collection</h1>
           <p className="men-sub">
-            Discover elegant and comfortable footwear designed for the modern woman.
+            Discover elegant and comfortable footwear designed for the modern
+            woman.
           </p>
         </div>
       </section>
@@ -64,13 +72,28 @@ export default function WomenPage() {
           <div className="men-card">
             <div className="men-card-top">
               <h3>Filters</h3>
-              <button className="link-btn" type="button" onClick={handleClearAll}>Clear All</button>
+              <button
+                className="link-btn"
+                type="button"
+                onClick={handleClearAll}
+              >
+                Clear All
+              </button>
             </div>
 
             <div className="men-block">
               <h4>Category</h4>
               <div className="men-checks">
-                {["All","Heels","Sneakers","Boots","Athletic","Running","Casual","Lifestyle"].map(c => (
+                {[
+                  "All",
+                  "Heels",
+                  "Sneakers",
+                  "Boots",
+                  "Athletic",
+                  "Running",
+                  "Casual",
+                  "Lifestyle",
+                ].map((c) => (
                   <label key={c} className="men-check">
                     <input type="checkbox" />
                     <span>{c}</span>
@@ -89,22 +112,35 @@ export default function WomenPage() {
                 value={maxPrice}
                 onChange={(e) => setMaxPrice(Number(e.target.value))}
               />
-              <div className="men-range"><span>$0</span><span>${maxPrice}</span></div>
+              <div className="men-range">
+                <span>$0</span>
+                <span>${maxPrice}</span>
+              </div>
             </div>
 
             <div className="men-block">
               <h4>Size (US)</h4>
               <div className="men-sizes">
-                {["5","5.5","6","6.5","7","7.5","8","8.5","9"].map(s => (
-                  <button key={s} type="button" className="size-btn">{s}</button>
-                ))}
+                {["5", "5.5", "6", "6.5", "7", "7.5", "8", "8.5", "9"].map(
+                  (s) => (
+                    <button key={s} type="button" className="size-btn">
+                      {s}
+                    </button>
+                  )
+                )}
               </div>
             </div>
 
             <div className="men-block">
               <h4>Heel Height</h4>
               <div className="men-checks">
-                {["Flat","Low (1-2\")","Mid (2-3\")","High (3-4\")","Very High (4+\")"].map(h => (
+                {[
+                  "Flat",
+                  'Low (1-2")',
+                  'Mid (2-3")',
+                  'High (3-4")',
+                  'Very High (4+")',
+                ].map((h) => (
                   <label key={h} className="men-check">
                     <input type="checkbox" />
                     <span>{h}</span>
@@ -121,7 +157,10 @@ export default function WomenPage() {
             <p className="muted">Showing {filteredProducts.length} products</p>
             <div className="men-sort">
               <span className="muted">Sort by:</span>
-              <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+              >
                 <option value="popular">Most Popular</option>
                 <option value="newest">Newest First</option>
                 <option value="price-low">Price: Low to High</option>
@@ -132,11 +171,22 @@ export default function WomenPage() {
           </div>
 
           <div className="men-grid">
-            {sortedProducts.map(p => <ProductCard key={p.id} {...p} />)}
+            {sortedProducts.map((p) => (
+              <ProductCard
+                key={p.id}
+                id={p.id}
+                image={p.image}
+                name={p.name}
+                price={p.price}
+                extra={p.discountPercent ? `-${p.discountPercent}%` : undefined}
+              />
+            ))}
           </div>
 
           <div className="men-load">
-            <button className="outline-btn" type="button">Load More Products</button>
+            <button className="outline-btn" type="button">
+              Load More Products
+            </button>
           </div>
         </div>
       </section>

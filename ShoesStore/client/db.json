@@ -1,1163 +1,5313 @@
 {
   "products": [
     {
-      "id": 101,
-      "name": "Air Performance Runner",
-      "brand": "Nike",
-      "price": 129.99,
-      "originalPrice": 149.99,
-      "discountPercent": 13,
-      "isNew": true,
-      "isHot": false,
-      "isActive": true,
-      "stock": 50,
-      "image": "https://images.unsplash.com/photo-1719523677291-a395426c1a87?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.8,
-      "reviews": 320,
-      "category": "Running",
-      "gender": "men",
-      "colors": [
-        "Black",
-        "White"
-      ],
-      "sizes": [
-        "38",
-        "39",
-        "40",
-        "41"
-      ],
-      "description": "Đôi giày chạy bộ chất lượng cao, thoáng khí và êm ái."
+      "product_id": 1000,
+      "brand_id": 5,
+      "category_id": 5,
+      "name": "Converse Practical meatloaf",
+      "slug": "converse-practical-meatloaf-1000",
+      "description": "Bestia adnuo cultellus celo patior crudelis. Damnatio bis uberrime. Trepide corrigo congregatio.",
+      "price": 184.38,
+      "image_url": "https://picsum.photos/seed/product-1000/800/600",
+      "created_at": "2025-12-29T12:47:41.291Z",
+      "discount_percentage": 21,
+      "is_active": true
     },
     {
-      "id": 102,
-      "name": "Classic White Sneaker",
-      "brand": "Adidas",
-      "price": 89.99,
-      "originalPrice": 99.99,
-      "discountPercent": 10,
-      "isNew": false,
-      "isHot": true,
-      "isActive": true,
-      "stock": 80,
-      "image": "https://images.unsplash.com/photo-1631482665588-d3a6f88e65f0?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.7,
-      "reviews": 250,
-      "category": "Sneakers",
-      "gender": "women",
-      "colors": [
-        "White"
-      ],
-      "sizes": [
-        "36",
-        "37",
-        "38",
-        "39"
-      ],
-      "description": "Sneaker trắng cổ điển, dễ phối đồ, phù hợp đi học và đi làm."
+      "product_id": 1001,
+      "brand_id": 3,
+      "category_id": 10,
+      "name": "Puma Small platypus",
+      "slug": "puma-small-platypus-1001",
+      "description": "Aegre averto earum vulticulus. Curto maiores approbo ultio accommodo praesentium antiquus ducimus. Curia molestiae sustineo apud aureus.",
+      "price": 179.51,
+      "image_url": "https://picsum.photos/seed/product-1001/800/600",
+      "created_at": "2025-12-29T12:47:41.291Z",
+      "discount_percentage": 5,
+      "is_active": true
     },
     {
-      "id": 103,
-      "name": "Pro Athletic Trainer",
-      "brand": "Puma",
-      "price": 149.99,
-      "originalPrice": 169.99,
-      "discountPercent": 12,
-      "isNew": true,
-      "isHot": true,
-      "isActive": true,
-      "stock": 40,
-      "image": "https://images.unsplash.com/photo-1639619287843-da4b297d7672?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.9,
-      "reviews": 410,
-      "category": "Training",
-      "gender": "men",
-      "colors": [
-        "Blue",
-        "Black"
-      ],
-      "sizes": [
-        "40",
-        "41",
-        "42",
-        "43"
-      ],
-      "description": "Giày tập luyện chuyên nghiệp, hỗ trợ luyện tập mạnh mẽ."
+      "product_id": 1002,
+      "brand_id": 2,
+      "category_id": 5,
+      "name": "Adidas Gorgeous heating",
+      "slug": "adidas-gorgeous-heating-1002",
+      "description": "Venia aer conforto. Illo tui dedico appello ter claustrum ustilo adicio amissio. Facere celo arcesso.",
+      "price": 45.06,
+      "image_url": "https://picsum.photos/seed/product-1002/800/600",
+      "created_at": "2025-12-29T12:47:41.291Z",
+      "discount_percentage": 26,
+      "is_active": true
     },
     {
-      "id": 104,
-      "name": "Urban Street Runner",
-      "brand": "Reebok",
-      "price": 119.99,
-      "originalPrice": 139.99,
-      "discountPercent": 14,
-      "isNew": false,
-      "isHot": true,
-      "isActive": true,
-      "stock": 60,
-      "image": "https://images.unsplash.com/photo-1719523677291-a395426c1a87?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.6,
-      "reviews": 210,
-      "category": "Street",
-      "gender": "men",
-      "colors": [
-        "Grey",
-        "Black"
-      ],
-      "sizes": [
-        "39",
-        "40",
-        "41",
-        "42"
-      ],
-      "description": "Giày thể thao phong cách đường phố, năng động và bền bỉ."
+      "product_id": 1003,
+      "brand_id": 4,
+      "category_id": 9,
+      "name": "Reebok Small fun",
+      "slug": "reebok-small-fun-1003",
+      "description": "Pecco facere arguo vergo. Tepesco cauda considero supellex amplexus cerno. Culpo reiciendis averto tenus.",
+      "price": 154.79,
+      "image_url": "https://picsum.photos/seed/product-1003/800/600",
+      "created_at": "2025-12-29T12:47:41.291Z",
+      "discount_percentage": 19,
+      "is_active": true
     },
     {
-      "id": 105,
-      "name": "Lightweight Jogger",
-      "brand": "Nike",
-      "price": 99.99,
-      "originalPrice": 119.99,
-      "discountPercent": 16,
-      "isNew": true,
-      "isHot": false,
-      "isActive": true,
-      "stock": 70,
-      "image": "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.5,
-      "reviews": 180,
-      "category": "Running",
-      "gender": "women",
-      "colors": [
-        "Pink",
-        "White"
-      ],
-      "sizes": [
-        "36",
-        "37",
-        "38",
-        "39"
-      ],
-      "description": "Giày chạy nhẹ, thoáng khí, phù hợp tập thể dục hàng ngày."
+      "product_id": 1004,
+      "brand_id": 5,
+      "category_id": 5,
+      "name": "Converse Intelligent secret",
+      "slug": "converse-intelligent-secret-1004",
+      "description": "Totus degero error assumenda suus validus tabernus. Vinum sint tenax umquam tamdiu socius vos vehemens. Angulus corpus conspergo cohaero suspendo valetudo.",
+      "price": 53.08,
+      "image_url": "https://picsum.photos/seed/product-1004/800/600",
+      "created_at": "2025-12-29T12:47:41.291Z",
+      "discount_percentage": 7,
+      "is_active": true
     },
     {
-      "id": 106,
-      "name": "High Comfort Sneaker",
-      "brand": "Puma",
-      "price": 139.99,
-      "originalPrice": 159.99,
-      "discountPercent": 12,
-      "isNew": false,
-      "isHot": true,
-      "isActive": true,
-      "stock": 50,
-      "image": "https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.8,
-      "reviews": 275,
-      "category": "Casual",
-      "gender": "men",
-      "colors": [
-        "Black",
-        "Grey"
-      ],
-      "sizes": [
-        "40",
-        "41",
-        "42",
-        "43"
-      ],
-      "description": "Giày sneaker thoải mái, phù hợp đi làm và dạo phố."
+      "product_id": 1005,
+      "brand_id": 2,
+      "category_id": 10,
+      "name": "Adidas Recycled quit",
+      "slug": "adidas-recycled-quit-1005",
+      "description": "Conturbo triumphus aliquam territo. Velociter amet vorax. Asper qui ullus id.",
+      "price": 199.96,
+      "image_url": "https://picsum.photos/seed/product-1005/800/600",
+      "created_at": "2025-12-29T12:47:41.291Z",
+      "discount_percentage": 17,
+      "is_active": true
     },
     {
-      "id": 107,
-      "name": "Urban Flex Shoes",
-      "brand": "Reebok",
-      "price": 109.99,
-      "originalPrice": 129.99,
-      "discountPercent": 15,
-      "isNew": true,
-      "isHot": false,
-      "isActive": true,
-      "stock": 65,
-      "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.6,
-      "reviews": 190,
-      "category": "Sneakers",
-      "gender": "men",
-      "colors": [
-        "White",
-        "Blue"
-      ],
-      "sizes": [
-        "39",
-        "40",
-        "41",
-        "42"
-      ],
-      "description": "Sneaker đường phố linh hoạt, phong cách và bền."
+      "product_id": 1006,
+      "brand_id": 3,
+      "category_id": 7,
+      "name": "Puma Intelligent sailor",
+      "slug": "puma-intelligent-sailor-1006",
+      "description": "Delectus depulso est demo somniculosus aeneus. Celer torqueo adsum ante stips abeo argumentum utrum suffoco. Subvenio adfectus tracto templum.",
+      "price": 148.79,
+      "image_url": "https://picsum.photos/seed/product-1006/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 5,
+      "is_active": true
     },
     {
-      "id": 108,
-      "name": "Light Boost Sprint",
-      "brand": "Nike",
-      "price": 159.99,
-      "originalPrice": 179.99,
-      "discountPercent": 11,
-      "isNew": true,
-      "isHot": true,
-      "isActive": true,
-      "stock": 45,
-      "image": "https://images.unsplash.com/photo-1527477396000-e27163b481c2?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.9,
-      "reviews": 410,
-      "category": "Running",
-      "gender": "men",
-      "colors": [
-        "Red",
-        "Black"
-      ],
-      "sizes": [
-        "40",
-        "41",
-        "42",
-        "43"
-      ],
-      "description": "Giày chạy bộ tăng tốc mạnh mẽ, thiết kế ấn tượng."
+      "product_id": 1007,
+      "brand_id": 4,
+      "category_id": 10,
+      "name": "Reebok Recycled cheetah",
+      "slug": "reebok-recycled-cheetah-1007",
+      "description": "Contra vel aveho thymbra voluptate sublime viridis in virtus torqueo. Custodia stipes caecus amissio crinis carus. Viduo urbs adhaero degero pauper tantum certus subito suasoria advenio.",
+      "price": 178.1,
+      "image_url": "https://picsum.photos/seed/product-1007/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 15,
+      "is_active": true
     },
     {
-      "id": 109,
-      "name": "Daily Wear Sneakers",
-      "brand": "Adidas",
-      "price": 79.99,
-      "originalPrice": 99.99,
-      "discountPercent": 20,
-      "isNew": false,
-      "isHot": false,
-      "isActive": true,
-      "stock": 90,
-      "image": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.5,
-      "reviews": 150,
-      "category": "Casual",
-      "gender": "women",
-      "colors": [
-        "White",
-        "Grey"
-      ],
-      "sizes": [
-        "36",
-        "37",
-        "38",
-        "39"
-      ],
-      "description": "Sneaker hàng ngày dễ phối đồ, thoải mái cả ngày."
+      "product_id": 1008,
+      "brand_id": 4,
+      "category_id": 12,
+      "name": "Reebok Small resource",
+      "slug": "reebok-small-resource-1008",
+      "description": "Sursum congregatio aliquam quo avaritia conicio. Auxilium una adsuesco. Corpus arcus uredo qui custodia aiunt stultus.",
+      "price": 59.27,
+      "image_url": "https://picsum.photos/seed/product-1008/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 10,
+      "is_active": true
     },
     {
-      "id": 110,
-      "name": "Performance Max Runner",
-      "brand": "Puma",
-      "price": 169.99,
-      "originalPrice": 199.99,
-      "discountPercent": 15,
-      "isNew": true,
-      "isHot": true,
-      "isActive": true,
-      "stock": 40,
-      "image": "https://images.unsplash.com/photo-1605348532760-6753d2c43329?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.9,
-      "reviews": 380,
-      "category": "Running",
-      "gender": "men",
-      "colors": [
-        "Black",
-        "White"
-      ],
-      "sizes": [
-        "40",
-        "41",
-        "42",
-        "43"
-      ],
-      "description": "Giày chạy hiệu suất cao, phù hợp vận động viên chuyên nghiệp."
+      "product_id": 1009,
+      "brand_id": 5,
+      "category_id": 6,
+      "name": "Converse Soft underneath",
+      "slug": "converse-soft-underneath-1009",
+      "description": "Auxilium vulnus unde causa depereo circumvenio conicio tyrannus. Demum apud demitto crepusculum demens defero abstergo. Saepe umbra caelum adficio confido auctus vigor.",
+      "price": 79.11,
+      "image_url": "https://picsum.photos/seed/product-1009/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 8,
+      "is_active": true
     },
     {
-      "id": 401,
-      "name": "Kids Colorful Sneakers",
-      "brand": "Nike",
-      "price": 59.99,
-      "originalPrice": 69.99,
-      "discountPercent": 14,
-      "isNew": true,
-      "isHot": true,
-      "isActive": true,
-      "stock": 50,
-      "image": "https://images.unsplash.com/photo-1707013537977-90e0a6cfa484?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.8,
-      "reviews": 156,
-      "category": "Sneakers",
-      "gender": "kids",
-      "colors": [
-        "Red",
-        "Blue",
-        "Yellow"
-      ],
-      "sizes": [
-        "28",
-        "29",
-        "30",
-        "31"
-      ],
-      "description": "Giày sneaker đầy màu sắc cho trẻ em, mềm mại và thoải mái."
+      "product_id": 1010,
+      "brand_id": 5,
+      "category_id": 12,
+      "name": "Converse Luxurious haversack",
+      "slug": "converse-luxurious-haversack-1010",
+      "description": "Blanditiis conitor statim stabilis succurro comedo bardus coniuratio statim. Adnuo contigo coniuratio usque venio ventus valeo. Volup commodi ascit suus ulterius.",
+      "price": 53.17,
+      "image_url": "https://picsum.photos/seed/product-1010/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 28,
+      "is_active": true
     },
     {
-      "id": 402,
-      "name": "Youth Running Shoes",
-      "brand": "Adidas",
-      "price": 69.99,
-      "originalPrice": 79.99,
-      "discountPercent": 12,
-      "isNew": true,
-      "isHot": false,
-      "isActive": true,
-      "stock": 45,
-      "image": "https://images.unsplash.com/photo-1698749803716-7c7bacfa6721?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.7,
-      "reviews": 203,
-      "category": "Running",
-      "gender": "kids",
-      "colors": [
-        "Green",
-        "White"
-      ],
-      "sizes": [
-        "28",
-        "29",
-        "30",
-        "31"
-      ],
-      "description": "Giày chạy bộ cho trẻ em, êm ái và nhẹ."
+      "product_id": 1011,
+      "brand_id": 4,
+      "category_id": 6,
+      "name": "Reebok Refined loyalty",
+      "slug": "reebok-refined-loyalty-1011",
+      "description": "Esse vox coerceo. Accusator advenio unde tui ventito tabesco comburo magni timidus fuga. Dolor ulterius cursim depromo aestivus agnitio.",
+      "price": 128.39,
+      "image_url": "https://picsum.photos/seed/product-1011/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 7,
+      "is_active": true
     },
     {
-      "id": 403,
-      "name": "Kids Soft Runner",
-      "brand": "Puma",
-      "price": 49.99,
-      "originalPrice": 59.99,
-      "discountPercent": 16,
-      "isNew": false,
-      "isHot": false,
-      "isActive": true,
-      "stock": 60,
-      "image": "https://images.unsplash.com/photo-1532153955177-f59af40d6472?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.5,
-      "reviews": 87,
-      "category": "Running",
-      "gender": "kids",
-      "colors": [
-        "Blue",
-        "Yellow"
-      ],
-      "sizes": [
-        "28",
-        "29",
-        "30",
-        "31"
-      ],
-      "description": "Giày chạy nhẹ cho bé, mềm mại và linh hoạt."
+      "product_id": 1012,
+      "brand_id": 3,
+      "category_id": 8,
+      "name": "Puma Generic flint",
+      "slug": "puma-generic-flint-1012",
+      "description": "Amaritudo degero adipisci utor arma varius. Conatus cursus sum amplitudo cunctatio. Bis despecto asper vulnus vis tego.",
+      "price": 157.29,
+      "image_url": "https://picsum.photos/seed/product-1012/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 17,
+      "is_active": true
     },
     {
-      "id": 404,
-      "name": "Kids Adventure Shoes",
-      "brand": "Merrell",
-      "price": 74.99,
-      "originalPrice": 89.99,
-      "discountPercent": 16,
-      "isNew": true,
-      "isHot": true,
-      "isActive": true,
-      "stock": 40,
-      "image": "https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.9,
-      "reviews": 210,
-      "category": "Outdoor",
-      "gender": "kids",
-      "colors": [
-        "Brown",
-        "Green"
-      ],
-      "sizes": [
-        "28",
-        "29",
-        "30",
-        "31"
-      ],
-      "description": "Giày phiêu lưu ngoài trời cho trẻ, bám tốt và êm chân."
+      "product_id": 1013,
+      "brand_id": 4,
+      "category_id": 4,
+      "name": "Reebok Oriental corporation",
+      "slug": "reebok-oriental-corporation-1013",
+      "description": "Mollitia volubilis curia considero virtus creo basium. Demergo totam apostolus campana terga aestus calculus thorax tolero truculenter. Aeger vallum fugit.",
+      "price": 128.24,
+      "image_url": "https://picsum.photos/seed/product-1013/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 8,
+      "is_active": true
     },
     {
-      "id": 405,
-      "name": "Cute Pink Sneakers",
-      "brand": "Skechers",
-      "price": 54.99,
-      "originalPrice": 64.99,
-      "discountPercent": 15,
-      "isNew": false,
-      "isHot": false,
-      "isActive": true,
-      "stock": 55,
-      "image": "https://images.unsplash.com/photo-1605733513549-de9b150bd70d?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.6,
-      "reviews": 166,
-      "category": "Sneakers",
-      "gender": "kids",
-      "colors": [
-        "Pink",
-        "White"
-      ],
-      "sizes": [
-        "28",
-        "29",
-        "30",
-        "31"
-      ],
-      "description": "Giày sneaker hồng dễ thương cho bé gái."
+      "product_id": 1014,
+      "brand_id": 5,
+      "category_id": 11,
+      "name": "Converse Practical thorn",
+      "slug": "converse-practical-thorn-1014",
+      "description": "Earum umquam vaco alo aufero decretum cornu territo totus. Sonitus correptius accusantium comptus. At aeneus voluptate ait argentum.",
+      "price": 77.98,
+      "image_url": "https://picsum.photos/seed/product-1014/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 2,
+      "is_active": true
     },
     {
-      "id": 406,
-      "name": "Kids Sport Flex",
-      "brand": "New Balance",
-      "price": 62.99,
-      "originalPrice": 74.99,
-      "discountPercent": 16,
-      "isNew": true,
-      "isHot": false,
-      "isActive": true,
-      "stock": 50,
-      "image": "https://images.unsplash.com/photo-1504151932400-72d4384f04b3?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.7,
-      "reviews": 190,
-      "category": "Sport",
-      "gender": "kids",
-      "colors": [
-        "Blue",
-        "Red"
-      ],
-      "sizes": [
-        "28",
-        "29",
-        "30",
-        "31"
-      ],
-      "description": "Giày thể thao linh hoạt, hỗ trợ các hoạt động ngoài trời."
+      "product_id": 1015,
+      "brand_id": 3,
+      "category_id": 11,
+      "name": "Puma Licensed charlatan",
+      "slug": "puma-licensed-charlatan-1015",
+      "description": "Consectetur paens delicate baiulus canis contego aeger. Usque subvenio sopor repellendus sulum. Thema creptio attero ater solium comes aduro solvo bellicus.",
+      "price": 84.85,
+      "image_url": "https://picsum.photos/seed/product-1015/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 23,
+      "is_active": true
     },
     {
-      "id": 407,
-      "name": "Kids Ultra Light",
-      "brand": "Under Armour",
-      "price": 57.99,
-      "originalPrice": 67.99,
-      "discountPercent": 15,
-      "isNew": false,
-      "isHot": true,
-      "isActive": true,
-      "stock": 45,
-      "image": "https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.4,
-      "reviews": 73,
-      "category": "Running",
-      "gender": "kids",
-      "colors": [
-        "Grey",
-        "White"
-      ],
-      "sizes": [
-        "28",
-        "29",
-        "30",
-        "31"
-      ],
-      "description": "Giày chạy siêu nhẹ cho trẻ em, tiện lợi và thoải mái."
+      "product_id": 1016,
+      "brand_id": 2,
+      "category_id": 12,
+      "name": "Adidas Electronic coal",
+      "slug": "adidas-electronic-coal-1016",
+      "description": "Theatrum vicinus denego asporto succedo ante. Undique amplexus cupio velit teneo degero infit cattus arto. Aestivus acervus exercitationem quisquam toties toties congregatio.",
+      "price": 115.26,
+      "image_url": "https://picsum.photos/seed/product-1016/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 6,
+      "is_active": true
     },
     {
-      "id": 408,
-      "name": "Kids Trail Runner",
-      "brand": "Salomon",
-      "price": 69.99,
-      "originalPrice": 84.99,
-      "discountPercent": 18,
-      "isNew": true,
-      "isHot": false,
-      "isActive": true,
-      "stock": 40,
-      "image": "https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.9,
-      "reviews": 120,
-      "category": "Trail",
-      "gender": "kids",
-      "colors": [
-        "Green",
-        "Black"
-      ],
-      "sizes": [
-        "28",
-        "29",
-        "30",
-        "31"
-      ],
-      "description": "Giày chạy địa hình trẻ em, chắc chắn và bám tốt."
+      "product_id": 1017,
+      "brand_id": 5,
+      "category_id": 4,
+      "name": "Converse Rustic divine",
+      "slug": "converse-rustic-divine-1017",
+      "description": "Temeritas cumque tam decipio cedo. Facere ater conservo absum celer surculus vulgaris spes. Annus cupressus theca vilis decipio.",
+      "price": 110.93,
+      "image_url": "https://picsum.photos/seed/product-1017/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 6,
+      "is_active": true
     },
     {
-      "id": 409,
-      "name": "Kids Fast Sneakers",
-      "brand": "Puma",
-      "price": 52.99,
-      "originalPrice": 62.99,
-      "discountPercent": 16,
-      "isNew": false,
-      "isHot": false,
-      "isActive": true,
-      "stock": 55,
-      "image": "https://images.unsplash.com/photo-1595341888016-a392ef81b7de?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.3,
-      "reviews": 55,
-      "category": "Sneakers",
-      "gender": "kids",
-      "colors": [
-        "Blue",
-        "Yellow"
-      ],
-      "sizes": [
-        "28",
-        "29",
-        "30",
-        "31"
-      ],
-      "description": "Sneaker nhanh nhẹn cho trẻ, dễ phối đồ."
+      "product_id": 1018,
+      "brand_id": 1,
+      "category_id": 7,
+      "name": "Nike Fresh simple",
+      "slug": "nike-fresh-simple-1018",
+      "description": "Expedita decerno summisse succedo coaegresco collum esse copia vivo sum. Clementia crux voluptatibus adicio. Antiquus amicitia odit verbum celebrer.",
+      "price": 115.83,
+      "image_url": "https://picsum.photos/seed/product-1018/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 27,
+      "is_active": true
     },
     {
-      "id": 410,
-      "name": "Kids Boost Runner",
-      "brand": "Adidas",
-      "price": 71.99,
-      "originalPrice": 84.99,
-      "discountPercent": 15,
-      "isNew": true,
-      "isHot": true,
-      "isActive": true,
-      "stock": 45,
-      "image": "https://images.unsplash.com/photo-1707013537977-90e0a6cfa484?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.8,
-      "reviews": 189,
-      "category": "Running",
-      "gender": "kids",
-      "colors": [
-        "Red",
-        "Black"
-      ],
-      "sizes": [
-        "28",
-        "29",
-        "30",
-        "31"
-      ],
-      "description": "Giày chạy nâng đỡ tốt, thích hợp cho mọi hoạt động của trẻ."
+      "product_id": 1019,
+      "brand_id": 2,
+      "category_id": 5,
+      "name": "Adidas Modern silk",
+      "slug": "adidas-modern-silk-1019",
+      "description": "Tergum praesentium cognomen callide cras odio. Viscus cauda deleo possimus aiunt ustilo ducimus tactus vester vulticulus. Reiciendis abutor bellum audentia vaco delibero patior balbus.",
+      "price": 176.04,
+      "image_url": "https://picsum.photos/seed/product-1019/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 21,
+      "is_active": true
     },
     {
-      "id": 201,
-      "name": "Ultra Boost Performance",
-      "brand": "Nike",
-      "price": 159.99,
-      "originalPrice": 189.99,
-      "discountPercent": 15,
-      "isNew": true,
-      "isHot": true,
-      "isActive": true,
-      "stock": 50,
-      "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.9,
-      "reviews": 418,
-      "category": "Running",
-      "gender": "men",
-      "colors": [
-        "Black",
-        "White"
-      ],
-      "sizes": [
-        "40",
-        "41",
-        "42",
-        "43"
-      ],
-      "description": "Giày chạy hiệu suất cao, phù hợp vận động viên chuyên nghiệp."
+      "product_id": 1020,
+      "brand_id": 4,
+      "category_id": 12,
+      "name": "Reebok Elegant signature",
+      "slug": "reebok-elegant-signature-1020",
+      "description": "Atqui cervus incidunt defero vulnus approbo adulescens possimus sollers statim. Clamo cruentus caecus valens suus sum caveo thesaurus molestiae desidero. Ratione volutabrum officiis culpa amicitia tergo aedificium.",
+      "price": 146.22,
+      "image_url": "https://picsum.photos/seed/product-1020/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 24,
+      "is_active": true
     },
     {
-      "id": 202,
-      "name": "Men Street Sneaker",
-      "brand": "Adidas",
-      "price": 119.99,
-      "originalPrice": 139.99,
-      "discountPercent": 14,
-      "isNew": false,
-      "isHot": true,
-      "isActive": true,
-      "stock": 60,
-      "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.6,
-      "reviews": 210,
-      "category": "Sneakers",
-      "gender": "men",
-      "colors": [
-        "Grey",
-        "Black"
-      ],
-      "sizes": [
-        "39",
-        "40",
-        "41",
-        "42"
-      ],
-      "description": "Sneaker đường phố năng động, bền bỉ."
+      "product_id": 1021,
+      "brand_id": 5,
+      "category_id": 12,
+      "name": "Converse Intelligent soliloquy",
+      "slug": "converse-intelligent-soliloquy-1021",
+      "description": "Arcus arbustum culpo. Demitto spes caecus vinitor vergo supplanto. Teneo vinco tersus.",
+      "price": 52.27,
+      "image_url": "https://picsum.photos/seed/product-1021/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 4,
+      "is_active": true
     },
     {
-      "id": 203,
-      "name": "Classic Black Trainer",
-      "brand": "Puma",
-      "price": 139.99,
-      "originalPrice": 159.99,
-      "discountPercent": 13,
-      "isNew": false,
-      "isHot": false,
-      "isActive": true,
-      "stock": 70,
-      "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.8,
-      "reviews": 355,
-      "category": "Training",
-      "gender": "men",
-      "colors": [
-        "Black"
-      ],
-      "sizes": [
-        "40",
-        "41",
-        "42",
-        "43"
-      ],
-      "description": "Giày tập luyện cổ điển, hỗ trợ tối đa cho bài tập."
+      "product_id": 1022,
+      "brand_id": 2,
+      "category_id": 12,
+      "name": "Adidas Electronic importance",
+      "slug": "adidas-electronic-importance-1022",
+      "description": "Omnis accedo verumtamen sulum carpo sollicito. Confugo debitis cilicium velociter dolorem quae tertius turpis. Aestus aperiam sopor vulgaris tot ab.",
+      "price": 62.89,
+      "image_url": "https://picsum.photos/seed/product-1022/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 20,
+      "is_active": true
     },
     {
-      "id": 204,
-      "name": "Men Trail Runner",
-      "brand": "Reebok",
-      "price": 149.99,
-      "originalPrice": 169.99,
-      "discountPercent": 12,
-      "isNew": true,
-      "isHot": false,
-      "isActive": true,
-      "stock": 40,
-      "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.7,
-      "reviews": 289,
-      "category": "Trail",
-      "gender": "men",
-      "colors": [
-        "Green",
-        "Black"
-      ],
-      "sizes": [
-        "40",
-        "41",
-        "42",
-        "43"
-      ],
-      "description": "Giày chạy địa hình, bám dính tốt, chịu lực."
+      "product_id": 1023,
+      "brand_id": 2,
+      "category_id": 7,
+      "name": "Adidas Unbranded haversack",
+      "slug": "adidas-unbranded-haversack-1023",
+      "description": "Urbs suppono territo veritatis adaugeo clibanus temperantia. Sodalitas alveus ventosus vaco officia damnatio adsidue ustulo tempore. Clarus coniuratio vilicus commodi una vespillo suadeo benevolentia.",
+      "price": 72.78,
+      "image_url": "https://picsum.photos/seed/product-1023/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 0,
+      "is_active": true
     },
     {
-      "id": 205,
-      "name": "Premium Leather Shoes",
-      "brand": "Clarks",
-      "price": 199.99,
-      "originalPrice": 229.99,
-      "discountPercent": 13,
-      "isNew": false,
-      "isHot": true,
-      "isActive": true,
-      "stock": 30,
-      "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.8,
-      "reviews": 401,
-      "category": "Casual",
-      "gender": "men",
-      "colors": [
-        "Brown",
-        "Black"
-      ],
-      "sizes": [
-        "40",
-        "41",
-        "42",
-        "43"
-      ],
-      "description": "Giày da cao cấp, lịch sự, phù hợp công sở."
+      "product_id": 1024,
+      "brand_id": 5,
+      "category_id": 5,
+      "name": "Converse Recycled swing",
+      "slug": "converse-recycled-swing-1024",
+      "description": "Tego antea assumenda. Stillicidium possimus cariosus utroque. Tepidus artificiose amissio deludo una.",
+      "price": 171.3,
+      "image_url": "https://picsum.photos/seed/product-1024/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 19,
+      "is_active": true
     },
     {
-      "id": 206,
-      "name": "Men Lightweight Runner",
-      "brand": "Nike",
-      "price": 129.99,
-      "originalPrice": 149.99,
-      "discountPercent": 13,
-      "isNew": true,
-      "isHot": false,
-      "isActive": true,
-      "stock": 60,
-      "image": "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.6,
-      "reviews": 178,
-      "category": "Running",
-      "gender": "men",
-      "colors": [
-        "Blue",
-        "White"
-      ],
-      "sizes": [
-        "40",
-        "41",
-        "42",
-        "43"
-      ],
-      "description": "Giày chạy nhẹ, thoáng khí, phù hợp luyện tập hàng ngày."
+      "product_id": 1025,
+      "brand_id": 3,
+      "category_id": 12,
+      "name": "Puma Small individual",
+      "slug": "puma-small-individual-1025",
+      "description": "Cena vito adficio laborum tamquam impedit turbo theatrum. Adsidue vergo desparatus bestia voro valeo deludo delinquo animi. Vulnus stipes amissio usque ars una voluntarius testimonium terga.",
+      "price": 150.6,
+      "image_url": "https://picsum.photos/seed/product-1025/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 2,
+      "is_active": true
     },
     {
-      "id": 207,
-      "name": "Men Air Sprint",
-      "brand": "Adidas",
-      "price": 169.99,
-      "originalPrice": 189.99,
-      "discountPercent": 11,
-      "isNew": true,
-      "isHot": true,
-      "isActive": true,
-      "stock": 45,
-      "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.9,
-      "reviews": 260,
-      "category": "Running",
-      "gender": "men",
-      "colors": [
-        "Red",
-        "Black"
-      ],
-      "sizes": [
-        "40",
-        "41",
-        "42",
-        "43"
-      ],
-      "description": "Giày chạy tốc độ cao, thiết kế hiện đại."
+      "product_id": 1026,
+      "brand_id": 4,
+      "category_id": 6,
+      "name": "Reebok Intelligent airmail",
+      "slug": "reebok-intelligent-airmail-1026",
+      "description": "Cimentarius audentia acceptus cedo surculus tamdiu viduo colo tempora. Aer astrum ambitus deludo anser cunctatio sol consequuntur. Ademptio iure incidunt aduro crepusculum virgo textor conitor vicinus ad.",
+      "price": 134.41,
+      "image_url": "https://picsum.photos/seed/product-1026/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 3,
+      "is_active": true
     },
     {
-      "id": 208,
-      "name": "Men Soft Flex",
-      "brand": "Puma",
-      "price": 109.99,
-      "originalPrice": 129.99,
-      "discountPercent": 15,
-      "isNew": false,
-      "isHot": false,
-      "isActive": true,
-      "stock": 70,
-      "image": "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.4,
-      "reviews": 130,
-      "category": "Sneakers",
-      "gender": "men",
-      "colors": [
-        "White",
-        "Grey"
-      ],
-      "sizes": [
-        "39",
-        "40",
-        "41",
-        "42"
-      ],
-      "description": "Giày sneaker mềm mại, phù hợp dạo phố."
+      "product_id": 1027,
+      "brand_id": 3,
+      "category_id": 5,
+      "name": "Puma Bespoke tectonics",
+      "slug": "puma-bespoke-tectonics-1027",
+      "description": "Sumo benevolentia urbanus correptius ustilo conscendo consectetur quia cultellus. Coadunatio uterque stips statua somnus sapiente inventore aut super voco. Curatio aedificium acidus cilicium valde tabula apto itaque charisma clamo.",
+      "price": 78.35,
+      "image_url": "https://picsum.photos/seed/product-1027/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 16,
+      "is_active": true
     },
     {
-      "id": 209,
-      "name": "Men Street Boost",
-      "brand": "Reebok",
-      "price": 149.99,
-      "originalPrice": 169.99,
-      "discountPercent": 12,
-      "isNew": true,
-      "isHot": true,
-      "isActive": true,
-      "stock": 55,
-      "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.7,
-      "reviews": 180,
-      "category": "Street",
-      "gender": "men",
-      "colors": [
-        "Black",
-        "Grey"
-      ],
-      "sizes": [
-        "40",
-        "41",
-        "42",
-        "43"
-      ],
-      "description": "Sneaker phong cách đường phố, bền bỉ."
+      "product_id": 1028,
+      "brand_id": 5,
+      "category_id": 7,
+      "name": "Converse Handmade interviewer",
+      "slug": "converse-handmade-interviewer-1028",
+      "description": "Cilicium voro alo. Voluptas cito velociter triumphus cetera careo quidem corpus. Taedium absum aeternus demo amissio velociter coadunatio venio aeternus sumo.",
+      "price": 161.69,
+      "image_url": "https://picsum.photos/seed/product-1028/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 25,
+      "is_active": true
     },
     {
-      "id": 210,
-      "name": "Men Daily Trainer",
-      "brand": "Nike",
-      "price": 99.99,
-      "originalPrice": 119.99,
-      "discountPercent": 16,
-      "isNew": false,
-      "isHot": false,
-      "isActive": true,
-      "stock": 80,
-      "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.3,
-      "reviews": 88,
-      "category": "Training",
-      "gender": "men",
-      "colors": [
-        "Black",
-        "White"
-      ],
-      "sizes": [
-        "40",
-        "41",
-        "42",
-        "43"
-      ],
-      "description": "Giày tập luyện hàng ngày, thoải mái và linh hoạt."
+      "product_id": 1029,
+      "brand_id": 1,
+      "category_id": 12,
+      "name": "Nike Elegant certification",
+      "slug": "nike-elegant-certification-1029",
+      "description": "Crepusculum iure benevolentia. Iste distinctio advoco cunctatio defessus aequus. Uredo cohors vehemens.",
+      "price": 113.67,
+      "image_url": "https://picsum.photos/seed/product-1029/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 13,
+      "is_active": true
     },
     {
-      "id": 301,
-      "name": "Elegant Heels Collection",
-      "brand": "Jimmy Choo",
-      "price": 159.99,
-      "originalPrice": 189.99,
-      "discountPercent": 15,
-      "isNew": true,
-      "isHot": true,
-      "isActive": true,
-      "stock": 40,
-      "image": "https://images.unsplash.com/photo-1605733513549-de9b150bd70d?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.8,
-      "reviews": 324,
-      "category": "Heels",
-      "gender": "women",
-      "colors": [
-        "Red",
-        "Black"
-      ],
-      "sizes": [
-        "36",
-        "37",
-        "38",
-        "39"
-      ],
-      "description": "Giày cao gót thanh lịch, phù hợp dạ tiệc và công sở."
+      "product_id": 1030,
+      "brand_id": 5,
+      "category_id": 5,
+      "name": "Converse Soft compromise",
+      "slug": "converse-soft-compromise-1030",
+      "description": "Confido tantum teres sint alias. Exercitationem una tui argumentum causa aeternus. Comedo beatae canto.",
+      "price": 171.82,
+      "image_url": "https://picsum.photos/seed/product-1030/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 14,
+      "is_active": true
     },
     {
-      "id": 302,
-      "name": "Women Training Shoes",
-      "brand": "Nike",
-      "price": 129.99,
-      "originalPrice": 149.99,
-      "discountPercent": 13,
-      "isNew": true,
-      "isHot": false,
-      "isActive": true,
-      "stock": 50,
-      "image": "https://images.unsplash.com/photo-1605733513549-de9b150bd70d?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.7,
-      "reviews": 255,
-      "category": "Training",
-      "gender": "women",
-      "colors": [
-        "White",
-        "Pink"
-      ],
-      "sizes": [
-        "36",
-        "37",
-        "38",
-        "39"
-      ],
-      "description": "Giày tập luyện nữ, êm ái và thoáng khí."
+      "product_id": 1031,
+      "brand_id": 3,
+      "category_id": 5,
+      "name": "Puma Electronic reboot",
+      "slug": "puma-electronic-reboot-1031",
+      "description": "Cohibeo averto pauci adiuvo consequatur speciosus. Casso depraedor aeger summa deduco suscipio. Quae thymbra aliquam nesciunt canis tener dignissimos vilitas uter.",
+      "price": 132.6,
+      "image_url": "https://picsum.photos/seed/product-1031/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 23,
+      "is_active": true
     },
     {
-      "id": 303,
-      "name": "Women Air Flex",
-      "brand": "Adidas",
-      "price": 149.99,
-      "originalPrice": 169.99,
-      "discountPercent": 12,
-      "isNew": true,
-      "isHot": true,
-      "isActive": true,
-      "stock": 45,
-      "image": "https://images.unsplash.com/photo-1605733513549-de9b150bd70d?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.9,
-      "reviews": 310,
-      "category": "Lifestyle",
-      "gender": "women",
-      "colors": [
-        "Blue",
-        "White"
-      ],
-      "sizes": [
-        "36",
-        "37",
-        "38",
-        "39"
-      ],
-      "description": "Giày phong cách lifestyle, linh hoạt, nhẹ nhàng."
+      "product_id": 1032,
+      "brand_id": 5,
+      "category_id": 10,
+      "name": "Converse Generic scorpion",
+      "slug": "converse-generic-scorpion-1032",
+      "description": "Vulpes cohaero calamitas. Testimonium dolore victus. Expedita cupressus alo contabesco damnatio.",
+      "price": 61.69,
+      "image_url": "https://picsum.photos/seed/product-1032/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 20,
+      "is_active": true
     },
     {
-      "id": 304,
-      "name": "Women Street Sneaker",
-      "brand": "Puma",
-      "price": 119.99,
-      "originalPrice": 139.99,
-      "discountPercent": 14,
-      "isNew": false,
-      "isHot": true,
-      "isActive": true,
-      "stock": 60,
-      "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.6,
-      "reviews": 240,
-      "category": "Sneakers",
-      "gender": "women",
-      "colors": [
-        "Grey",
-        "Black"
-      ],
-      "sizes": [
-        "36",
-        "37",
-        "38",
-        "39"
-      ],
-      "description": "Sneaker đường phố nữ, thời trang và năng động."
+      "product_id": 1033,
+      "brand_id": 3,
+      "category_id": 9,
+      "name": "Puma Intelligent fellow",
+      "slug": "puma-intelligent-fellow-1033",
+      "description": "Curatio cado titulus vehemens vulgaris comedo carbo audentia. Supellex tristis vilitas cauda defaeco repellendus victoria corrumpo caries. Creator conatus tyrannus alias et uxor aeternus tamen vestigium.",
+      "price": 76.72,
+      "image_url": "https://picsum.photos/seed/product-1033/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 30,
+      "is_active": true
     },
     {
-      "id": 305,
-      "name": "Women Soft Runner",
-      "brand": "Reebok",
-      "price": 99.99,
-      "originalPrice": 119.99,
-      "discountPercent": 16,
-      "isNew": false,
-      "isHot": false,
-      "isActive": true,
-      "stock": 70,
-      "image": "https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.7,
-      "reviews": 170,
-      "category": "Running",
-      "gender": "women",
-      "colors": [
-        "Pink",
-        "White"
-      ],
-      "sizes": [
-        "36",
-        "37",
-        "38",
-        "39"
-      ],
-      "description": "Giày chạy nữ mềm mại, thoải mái."
+      "product_id": 1034,
+      "brand_id": 5,
+      "category_id": 10,
+      "name": "Converse Fresh bathrobe",
+      "slug": "converse-fresh-bathrobe-1034",
+      "description": "Spes et decerno talio atavus delectus verus ducimus. Argumentum asperiores campana pariatur demulceo commodo verus cado caritas altus. Acerbitas depulso possimus.",
+      "price": 39.76,
+      "image_url": "https://picsum.photos/seed/product-1034/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 23,
+      "is_active": true
     },
     {
-      "id": 306,
-      "name": "Women Canvas Casual",
-      "brand": "Vans",
-      "price": 89.99,
-      "originalPrice": 109.99,
-      "discountPercent": 17,
-      "isNew": false,
-      "isHot": false,
-      "isActive": true,
-      "stock": 80,
-      "image": "https://images.unsplash.com/photo-1605733513549-de9b150bd70d?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.5,
-      "reviews": 120,
-      "category": "Casual",
-      "gender": "women",
-      "colors": [
-        "White",
-        "Beige"
-      ],
-      "sizes": [
-        "36",
-        "37",
-        "38",
-        "39"
-      ],
-      "description": "Giày vải nữ casual, dễ phối đồ hàng ngày."
+      "product_id": 1035,
+      "brand_id": 1,
+      "category_id": 7,
+      "name": "Nike Oriental pile",
+      "slug": "nike-oriental-pile-1035",
+      "description": "Taceo odit angelus. Video caelestis amita arcesso acidus contigo angulus defero. Comes pauper cognomen.",
+      "price": 79.46,
+      "image_url": "https://picsum.photos/seed/product-1035/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 27,
+      "is_active": true
     },
     {
-      "id": 307,
-      "name": "Women Trail Runner",
-      "brand": "Salomon",
-      "price": 139.99,
-      "originalPrice": 159.99,
-      "discountPercent": 12,
-      "isNew": true,
-      "isHot": true,
-      "isActive": true,
-      "stock": 40,
-      "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.8,
-      "reviews": 264,
-      "category": "Trail",
-      "gender": "women",
-      "colors": [
-        "Black",
-        "Green"
-      ],
-      "sizes": [
-        "36",
-        "37",
-        "38",
-        "39"
-      ],
-      "description": "Giày chạy địa hình nữ, bám dính tốt."
+      "product_id": 1036,
+      "brand_id": 3,
+      "category_id": 9,
+      "name": "Puma Tasty tomb",
+      "slug": "puma-tasty-tomb-1036",
+      "description": "Synagoga nobis ocer cogo amissio. Conitor venio varietas consectetur nisi conqueror altus. Nobis trucido auditor amor deputo sulum valeo crastinus ulciscor blandior.",
+      "price": 184.17,
+      "image_url": "https://picsum.photos/seed/product-1036/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 30,
+      "is_active": true
     },
     {
-      "id": 308,
-      "name": "Women Street Style",
-      "brand": "Converse",
-      "price": 110.99,
-      "originalPrice": 129.99,
-      "discountPercent": 14,
-      "isNew": false,
-      "isHot": false,
-      "isActive": true,
-      "stock": 60,
-      "image": "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.4,
-      "reviews": 98,
-      "category": "Street",
-      "gender": "women",
-      "colors": [
-        "Red",
-        "Black"
-      ],
-      "sizes": [
-        "36",
-        "37",
-        "38",
-        "39"
-      ],
-      "description": "Phong cách đường phố nữ, trẻ trung và năng động."
+      "product_id": 1037,
+      "brand_id": 3,
+      "category_id": 7,
+      "name": "Puma Fantastic tuba",
+      "slug": "puma-fantastic-tuba-1037",
+      "description": "Deficio agnitio umquam. Talio officiis attonbitus arbustum crudelis. Vos turpis abduco charisma autus conventus alioqui cuppedia quidem corrumpo.",
+      "price": 96.54,
+      "image_url": "https://picsum.photos/seed/product-1037/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 23,
+      "is_active": true
     },
     {
-      "id": 309,
-      "name": "Women Boost Lift",
-      "brand": "Adidas",
-      "price": 169.99,
-      "originalPrice": 189.99,
-      "discountPercent": 11,
-      "isNew": true,
-      "isHot": true,
-      "isActive": true,
+      "product_id": 1038,
+      "brand_id": 4,
+      "category_id": 9,
+      "name": "Reebok Recycled adult",
+      "slug": "reebok-recycled-adult-1038",
+      "description": "Labore aperiam cum aegrotatio sequi subito. Atrox fuga sum cogo minima defetiscor praesentium. Comparo admoneo strenuus textilis undique.",
+      "price": 51.73,
+      "image_url": "https://picsum.photos/seed/product-1038/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 25,
+      "is_active": true
+    },
+    {
+      "product_id": 1039,
+      "brand_id": 5,
+      "category_id": 12,
+      "name": "Converse Oriental masterpiece",
+      "slug": "converse-oriental-masterpiece-1039",
+      "description": "Ullam verecundia temeritas circumvenio tenus convoco. Theatrum cohaero subito abduco catena vulariter. Cibus delicate deleo adaugeo alioqui adaugeo rem voco crapula.",
+      "price": 115.15,
+      "image_url": "https://picsum.photos/seed/product-1039/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 2,
+      "is_active": true
+    },
+    {
+      "product_id": 1040,
+      "brand_id": 2,
+      "category_id": 12,
+      "name": "Adidas Fresh ectoderm",
+      "slug": "adidas-fresh-ectoderm-1040",
+      "description": "Dolorem eos vaco fugiat curriculum cibus porro degusto demonstro voco. Deinde contabesco voco ratione caecus cupressus aegre tondeo clam deduco. Accusantium pel acies.",
+      "price": 79.24,
+      "image_url": "https://picsum.photos/seed/product-1040/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 24,
+      "is_active": true
+    },
+    {
+      "product_id": 1041,
+      "brand_id": 1,
+      "category_id": 5,
+      "name": "Nike Gorgeous best-seller",
+      "slug": "nike-gorgeous-best-seller-1041",
+      "description": "Vomer spiritus denego curatio. Textus vitium amor territo usus summopere creber. Sopor vinculum territo tripudio illo.",
+      "price": 137.74,
+      "image_url": "https://picsum.photos/seed/product-1041/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 30,
+      "is_active": true
+    },
+    {
+      "product_id": 1042,
+      "brand_id": 4,
+      "category_id": 4,
+      "name": "Reebok Handmade pocket-watch",
+      "slug": "reebok-handmade-pocket-watch-1042",
+      "description": "Conservo artificiose accendo inventore concedo. Cupressus rerum comptus aperio torrens. Inventore cohors conitor cui.",
+      "price": 115.69,
+      "image_url": "https://picsum.photos/seed/product-1042/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 10,
+      "is_active": true
+    },
+    {
+      "product_id": 1043,
+      "brand_id": 5,
+      "category_id": 7,
+      "name": "Converse Fantastic gazebo",
+      "slug": "converse-fantastic-gazebo-1043",
+      "description": "Creo summa defendo culpo tertius aetas amitto. Adflicto ago vorax callide astrum adhuc illo patrocinor minus. Numquam maxime cumque defendo solum casus victoria.",
+      "price": 150.13,
+      "image_url": "https://picsum.photos/seed/product-1043/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 8,
+      "is_active": true
+    },
+    {
+      "product_id": 1044,
+      "brand_id": 4,
+      "category_id": 10,
+      "name": "Reebok Gorgeous crocodile",
+      "slug": "reebok-gorgeous-crocodile-1044",
+      "description": "Veniam anser cattus admoneo bis ratione. Convoco laboriosam debilito synagoga aperiam conturbo undique quam bos. Ambitus unus spes.",
+      "price": 144.5,
+      "image_url": "https://picsum.photos/seed/product-1044/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 11,
+      "is_active": true
+    },
+    {
+      "product_id": 1045,
+      "brand_id": 5,
+      "category_id": 7,
+      "name": "Converse Frozen bump",
+      "slug": "converse-frozen-bump-1045",
+      "description": "Vulpes odio sublime conspergo. Decimus astrum stipes. Dolorum voluptatibus verecundia omnis cohors exercitationem ullus delinquo.",
+      "price": 55.3,
+      "image_url": "https://picsum.photos/seed/product-1045/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 6,
+      "is_active": true
+    },
+    {
+      "product_id": 1046,
+      "brand_id": 1,
+      "category_id": 10,
+      "name": "Nike Fantastic swath",
+      "slug": "nike-fantastic-swath-1046",
+      "description": "Vehemens ventosus odio blanditiis. Astrum curiositas occaecati cilicium adstringo adversus architecto sunt. Suspendo molestiae occaecati capillus strues creber sto speciosus.",
+      "price": 83.19,
+      "image_url": "https://picsum.photos/seed/product-1046/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 12,
+      "is_active": true
+    },
+    {
+      "product_id": 1047,
+      "brand_id": 3,
+      "category_id": 6,
+      "name": "Puma Intelligent slime",
+      "slug": "puma-intelligent-slime-1047",
+      "description": "Facere concido expedita admoneo alter. Creo tripudio cado suus stillicidium cognomen arguo argentum. Vigor arbitro acer uredo aedificium cilicium terga coaegresco decimus.",
+      "price": 125.9,
+      "image_url": "https://picsum.photos/seed/product-1047/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 21,
+      "is_active": true
+    },
+    {
+      "product_id": 1048,
+      "brand_id": 4,
+      "category_id": 11,
+      "name": "Reebok Awesome knuckle",
+      "slug": "reebok-awesome-knuckle-1048",
+      "description": "Casus clementia tero ea aureus cado versus claudeo modi. Curtus error paulatim quo facere textus cuppedia asper. Cursus tamen venia magnam tardus.",
+      "price": 60.55,
+      "image_url": "https://picsum.photos/seed/product-1048/800/600",
+      "created_at": "2025-12-29T12:47:41.292Z",
+      "discount_percentage": 23,
+      "is_active": true
+    },
+    {
+      "product_id": 1049,
+      "brand_id": 2,
+      "category_id": 12,
+      "name": "Adidas Frozen advertisement",
+      "slug": "adidas-frozen-advertisement-1049",
+      "description": "Auctus aegrotatio ratione. Attero bellicus thalassinus aliquid uredo aspicio suscipio angustus consuasor. Compono creta ait curo.",
+      "price": 110.56,
+      "image_url": "https://picsum.photos/seed/product-1049/800/600",
+      "created_at": "2025-12-29T12:47:41.293Z",
+      "discount_percentage": 27,
+      "is_active": true
+    },
+    {
+      "product_id": 1050,
+      "brand_id": 5,
+      "category_id": 10,
+      "name": "Converse Luxurious flight",
+      "slug": "converse-luxurious-flight-1050",
+      "description": "Ter solvo acies velociter viriliter conforto. Canto capitulus spiculum vero demitto blanditiis aperio temeritas accusamus nesciunt. Vesica solium bonus antepono vespillo curiositas facere spero desidero.",
+      "price": 37.59,
+      "image_url": "https://picsum.photos/seed/product-1050/800/600",
+      "created_at": "2025-12-29T12:47:41.293Z",
+      "discount_percentage": 7,
+      "is_active": true
+    },
+    {
+      "product_id": 1051,
+      "brand_id": 4,
+      "category_id": 7,
+      "name": "Reebok Luxurious populist",
+      "slug": "reebok-luxurious-populist-1051",
+      "description": "Audax corpus vis campana reiciendis casus super numquam. Trepide acidus officia adficio. Tantillus ademptio adulescens.",
+      "price": 137,
+      "image_url": "https://picsum.photos/seed/product-1051/800/600",
+      "created_at": "2025-12-29T12:47:41.293Z",
+      "discount_percentage": 28,
+      "is_active": true
+    },
+    {
+      "product_id": 1052,
+      "brand_id": 4,
+      "category_id": 7,
+      "name": "Reebok Rustic bookcase",
+      "slug": "reebok-rustic-bookcase-1052",
+      "description": "Apparatus vigor virga validus temptatio illo vestrum supra. Uberrime at vita repudiandae ea amor celer chirographum deludo. Arceo animus architecto quo.",
+      "price": 152.9,
+      "image_url": "https://picsum.photos/seed/product-1052/800/600",
+      "created_at": "2025-12-29T12:47:41.293Z",
+      "discount_percentage": 23,
+      "is_active": true
+    },
+    {
+      "product_id": 1053,
+      "brand_id": 4,
+      "category_id": 12,
+      "name": "Reebok Sleek horst",
+      "slug": "reebok-sleek-horst-1053",
+      "description": "Civitas vulgivagus tener spiculum. Versus centum vulticulus. Agnosco valetudo reprehenderit ipsum crapula defessus ver sursum defungo aperiam.",
+      "price": 111.21,
+      "image_url": "https://picsum.photos/seed/product-1053/800/600",
+      "created_at": "2025-12-29T12:47:41.293Z",
+      "discount_percentage": 6,
+      "is_active": true
+    },
+    {
+      "product_id": 1054,
+      "brand_id": 5,
+      "category_id": 10,
+      "name": "Converse Soft clavicle",
+      "slug": "converse-soft-clavicle-1054",
+      "description": "Valde deleo acceptus ventus vomito sursum succedo depereo suffoco amplitudo. Sumptus tum statim caecus dedico. Ut tero eum tamisium clamo.",
+      "price": 125.13,
+      "image_url": "https://picsum.photos/seed/product-1054/800/600",
+      "created_at": "2025-12-29T12:47:41.293Z",
+      "discount_percentage": 7,
+      "is_active": true
+    },
+    {
+      "product_id": 1055,
+      "brand_id": 3,
+      "category_id": 5,
+      "name": "Puma Ergonomic thongs",
+      "slug": "puma-ergonomic-thongs-1055",
+      "description": "Curtus vesco surculus adicio provident tam vacuus a itaque. Certe deserunt illo sponte tenuis. Angustus argumentum rem clam cinis vulnero tego cribro.",
+      "price": 86.3,
+      "image_url": "https://picsum.photos/seed/product-1055/800/600",
+      "created_at": "2025-12-29T12:47:41.293Z",
+      "discount_percentage": 13,
+      "is_active": true
+    },
+    {
+      "product_id": 1056,
+      "brand_id": 2,
+      "category_id": 5,
+      "name": "Adidas Refined synergy",
+      "slug": "adidas-refined-synergy-1056",
+      "description": "Tamen explicabo super currus umquam torqueo. Contigo tres cohibeo paens. Pariatur decens barba totus.",
+      "price": 87.95,
+      "image_url": "https://picsum.photos/seed/product-1056/800/600",
+      "created_at": "2025-12-29T12:47:41.293Z",
+      "discount_percentage": 24,
+      "is_active": true
+    },
+    {
+      "product_id": 1057,
+      "brand_id": 3,
+      "category_id": 11,
+      "name": "Puma Modern completion",
+      "slug": "puma-modern-completion-1057",
+      "description": "Vix abeo vinco. Aliquid caelum tolero strues cultellus aperio. Cui utor virgo caste venustas defero cultura thalassinus alii.",
+      "price": 23.37,
+      "image_url": "https://picsum.photos/seed/product-1057/800/600",
+      "created_at": "2025-12-29T12:47:41.293Z",
+      "discount_percentage": 21,
+      "is_active": true
+    },
+    {
+      "product_id": 1058,
+      "brand_id": 2,
+      "category_id": 5,
+      "name": "Adidas Generic jungle",
+      "slug": "adidas-generic-jungle-1058",
+      "description": "Abutor tollo vestrum attollo adfero. Incidunt capitulus amita coniuratio ustilo theologus civis abutor triumphus. Articulus tam audacia aequus argentum supplanto valens usitas eaque.",
+      "price": 178.19,
+      "image_url": "https://picsum.photos/seed/product-1058/800/600",
+      "created_at": "2025-12-29T12:47:41.293Z",
+      "discount_percentage": 19,
+      "is_active": true
+    },
+    {
+      "product_id": 1059,
+      "brand_id": 1,
+      "category_id": 10,
+      "name": "Nike Small tomatillo",
+      "slug": "nike-small-tomatillo-1059",
+      "description": "Arceo conspergo ascit celo patria balbus vomica corrumpo ater cursus. Doloribus acceptus deleo alias confero adeptio copiose pauper desparatus. Spoliatio officiis claudeo substantia apud.",
+      "price": 126.86,
+      "image_url": "https://picsum.photos/seed/product-1059/800/600",
+      "created_at": "2025-12-29T12:47:41.293Z",
+      "discount_percentage": 18,
+      "is_active": true
+    },
+    {
+      "product_id": 1060,
+      "brand_id": 4,
+      "category_id": 5,
+      "name": "Reebok Modern meatloaf",
+      "slug": "reebok-modern-meatloaf-1060",
+      "description": "Cohaero temeritas amoveo compello acquiro nostrum officiis debilito arbitro appono. Sulum stips animi. Velociter civitas valeo desparatus vestigium a dolores aranea quos volva.",
+      "price": 90.4,
+      "image_url": "https://picsum.photos/seed/product-1060/800/600",
+      "created_at": "2025-12-29T12:47:41.293Z",
+      "discount_percentage": 10,
+      "is_active": true
+    },
+    {
+      "product_id": 1061,
+      "brand_id": 5,
+      "category_id": 5,
+      "name": "Converse Tasty lift",
+      "slug": "converse-tasty-lift-1061",
+      "description": "Absum vos talis tamisium templum supplanto benevolentia speciosus aspicio. Adipisci decet temperantia truculenter. Blandior denego barba fuga auctus.",
+      "price": 190.79,
+      "image_url": "https://picsum.photos/seed/product-1061/800/600",
+      "created_at": "2025-12-29T12:47:41.293Z",
+      "discount_percentage": 21,
+      "is_active": true
+    },
+    {
+      "product_id": 1062,
+      "brand_id": 3,
+      "category_id": 5,
+      "name": "Puma Frozen chap",
+      "slug": "puma-frozen-chap-1062",
+      "description": "Abstergo amplus surgo. Cupio ullus libero adopto cruciamentum carbo. Creator via clamo agnosco crur arbor.",
+      "price": 112.69,
+      "image_url": "https://picsum.photos/seed/product-1062/800/600",
+      "created_at": "2025-12-29T12:47:41.293Z",
+      "discount_percentage": 21,
+      "is_active": true
+    },
+    {
+      "product_id": 1063,
+      "brand_id": 4,
+      "category_id": 7,
+      "name": "Reebok Licensed galoshes",
+      "slug": "reebok-licensed-galoshes-1063",
+      "description": "Tero tamen accusantium thorax conforto aut subseco circumvenio. Possimus advenio adflicto. Succurro defleo cinis.",
+      "price": 52.17,
+      "image_url": "https://picsum.photos/seed/product-1063/800/600",
+      "created_at": "2025-12-29T12:47:41.293Z",
+      "discount_percentage": 30,
+      "is_active": true
+    },
+    {
+      "product_id": 1064,
+      "brand_id": 1,
+      "category_id": 5,
+      "name": "Nike Fresh seafood",
+      "slug": "nike-fresh-seafood-1064",
+      "description": "Suscipit vinitor debilito maxime basium numquam crepusculum. Usque cito vereor ad cogito concido. Degenero benevolentia alii suscipio tenus.",
+      "price": 71.48,
+      "image_url": "https://picsum.photos/seed/product-1064/800/600",
+      "created_at": "2025-12-29T12:47:41.293Z",
+      "discount_percentage": 22,
+      "is_active": true
+    },
+    {
+      "product_id": 1065,
+      "brand_id": 5,
+      "category_id": 5,
+      "name": "Converse Handcrafted strategy",
+      "slug": "converse-handcrafted-strategy-1065",
+      "description": "Arceo currus paulatim cometes. Sophismata uterque defendo patria crastinus calculus adfero volutabrum. Vorago nesciunt accedo sumo suus sollers volaticus.",
+      "price": 39.6,
+      "image_url": "https://picsum.photos/seed/product-1065/800/600",
+      "created_at": "2025-12-29T12:47:41.293Z",
+      "discount_percentage": 25,
+      "is_active": true
+    },
+    {
+      "product_id": 1066,
+      "brand_id": 2,
+      "category_id": 8,
+      "name": "Adidas Small vibration",
+      "slug": "adidas-small-vibration-1066",
+      "description": "Id tyrannus viridis tribuo aspicio calcar voluptatem calco tantum. Sui est sono despecto adduco calculus. Aspicio celer volutabrum tepesco.",
+      "price": 194.53,
+      "image_url": "https://picsum.photos/seed/product-1066/800/600",
+      "created_at": "2025-12-29T12:47:41.293Z",
+      "discount_percentage": 28,
+      "is_active": true
+    },
+    {
+      "product_id": 1067,
+      "brand_id": 1,
+      "category_id": 10,
+      "name": "Nike Fresh optimal",
+      "slug": "nike-fresh-optimal-1067",
+      "description": "Cotidie aeternus est esse tempus accusamus soleo labore. Ars astrum confero arx temperantia sol. Acies torrens natus tamen pecto.",
+      "price": 132.12,
+      "image_url": "https://picsum.photos/seed/product-1067/800/600",
+      "created_at": "2025-12-29T12:47:41.293Z",
+      "discount_percentage": 5,
+      "is_active": true
+    },
+    {
+      "product_id": 1068,
+      "brand_id": 5,
+      "category_id": 9,
+      "name": "Converse Rustic skyline",
+      "slug": "converse-rustic-skyline-1068",
+      "description": "Clibanus socius adversus cuppedia tergum varietas sperno. Tribuo aperiam victus molestias. Depraedor adflicto suadeo venustas ascit.",
+      "price": 133.74,
+      "image_url": "https://picsum.photos/seed/product-1068/800/600",
+      "created_at": "2025-12-29T12:47:41.293Z",
+      "discount_percentage": 25,
+      "is_active": true
+    },
+    {
+      "product_id": 1069,
+      "brand_id": 5,
+      "category_id": 12,
+      "name": "Converse Fantastic taxicab",
+      "slug": "converse-fantastic-taxicab-1069",
+      "description": "Argentum cibus consequuntur celo socius totus corpus bibo termes. Alioqui qui cauda tribuo tremo saepe sortitus. Civitas nam uterque cenaculum.",
+      "price": 93.14,
+      "image_url": "https://picsum.photos/seed/product-1069/800/600",
+      "created_at": "2025-12-29T12:47:41.293Z",
+      "discount_percentage": 12,
+      "is_active": true
+    },
+    {
+      "product_id": 1070,
+      "brand_id": 3,
+      "category_id": 9,
+      "name": "Puma Tasty chops",
+      "slug": "puma-tasty-chops-1070",
+      "description": "Theologus ambulo cauda labore aestus uberrime velociter concedo adulatio deorsum. Eveniet debeo reprehenderit deporto perspiciatis depraedor venustas. Voluptate appono stella derideo denego.",
+      "price": 150.82,
+      "image_url": "https://picsum.photos/seed/product-1070/800/600",
+      "created_at": "2025-12-29T12:47:41.293Z",
+      "discount_percentage": 23,
+      "is_active": true
+    },
+    {
+      "product_id": 1071,
+      "brand_id": 3,
+      "category_id": 4,
+      "name": "Puma Licensed cannon",
+      "slug": "puma-licensed-cannon-1071",
+      "description": "Vetus vesco auxilium aetas textilis vos aegre subiungo pecto suggero. Amitto celo cena tolero contabesco congregatio curtus. Dolorem delectatio tremo triumphus inventore tepidus voluptatum vetus aro.",
+      "price": 75.17,
+      "image_url": "https://picsum.photos/seed/product-1071/800/600",
+      "created_at": "2025-12-29T12:47:41.293Z",
+      "discount_percentage": 21,
+      "is_active": true
+    },
+    {
+      "product_id": 1072,
+      "brand_id": 4,
+      "category_id": 5,
+      "name": "Reebok Oriental cassava",
+      "slug": "reebok-oriental-cassava-1072",
+      "description": "Soluta aestas cilicium quis annus. Accusantium coerceo culpa sto vel speciosus constans thema thalassinus. Avarus theca defendo cognatus statim magni decor vigor totam.",
+      "price": 54.62,
+      "image_url": "https://picsum.photos/seed/product-1072/800/600",
+      "created_at": "2025-12-29T12:47:41.293Z",
+      "discount_percentage": 21,
+      "is_active": true
+    },
+    {
+      "product_id": 1073,
+      "brand_id": 5,
+      "category_id": 10,
+      "name": "Converse Tasty tuba",
+      "slug": "converse-tasty-tuba-1073",
+      "description": "Teneo verbum tempus. Contego aetas turba conduco in curso. Tribuo uxor calculus vilis.",
+      "price": 37.81,
+      "image_url": "https://picsum.photos/seed/product-1073/800/600",
+      "created_at": "2025-12-29T12:47:41.293Z",
+      "discount_percentage": 18,
+      "is_active": true
+    },
+    {
+      "product_id": 1074,
+      "brand_id": 5,
+      "category_id": 7,
+      "name": "Converse Sleek pepper",
+      "slug": "converse-sleek-pepper-1074",
+      "description": "Pax tamquam vesper. Charisma spectaculum creator baiulus depulso trepide. Sit cur angelus vulgaris atqui cavus patrocinor.",
+      "price": 67.09,
+      "image_url": "https://picsum.photos/seed/product-1074/800/600",
+      "created_at": "2025-12-29T12:47:41.293Z",
+      "discount_percentage": 6,
+      "is_active": true
+    },
+    {
+      "product_id": 1075,
+      "brand_id": 5,
+      "category_id": 9,
+      "name": "Converse Refined costume",
+      "slug": "converse-refined-costume-1075",
+      "description": "Arbitro vivo vesco aperio carus conspergo ter abundans sumptus. Maiores ciminatio adhaero adficio cum utroque qui. Tondeo tabella dignissimos alo carcer conscendo illum.",
+      "price": 141.2,
+      "image_url": "https://picsum.photos/seed/product-1075/800/600",
+      "created_at": "2025-12-29T12:47:41.293Z",
+      "discount_percentage": 22,
+      "is_active": true
+    },
+    {
+      "product_id": 1076,
+      "brand_id": 3,
+      "category_id": 11,
+      "name": "Puma Fantastic recommendation",
+      "slug": "puma-fantastic-recommendation-1076",
+      "description": "Patria celer teneo advenio adduco tepesco. Creptio pecus amor admiratio clam beneficium candidus voluptatum coniecto. Sui conscendo ducimus substantia valens aperte.",
+      "price": 132.19,
+      "image_url": "https://picsum.photos/seed/product-1076/800/600",
+      "created_at": "2025-12-29T12:47:41.293Z",
+      "discount_percentage": 8,
+      "is_active": true
+    },
+    {
+      "product_id": 1077,
+      "brand_id": 5,
+      "category_id": 7,
+      "name": "Converse Electronic graffiti",
+      "slug": "converse-electronic-graffiti-1077",
+      "description": "Vulgo clarus vaco suadeo approbo accendo appositus bene debeo. Adiuvo demitto officia vis trans tactus aliquid statua acies crux. Tres curto appositus abduco alo truculenter vorax conduco.",
+      "price": 79.18,
+      "image_url": "https://picsum.photos/seed/product-1077/800/600",
+      "created_at": "2025-12-29T12:47:41.293Z",
+      "discount_percentage": 2,
+      "is_active": true
+    },
+    {
+      "product_id": 1078,
+      "brand_id": 2,
+      "category_id": 5,
+      "name": "Adidas Tasty scholarship",
+      "slug": "adidas-tasty-scholarship-1078",
+      "description": "Defendo fugit spargo vulgo congregatio aeneus sumo coniecto reprehenderit. Cognomen creta crudelis. Cognatus amet administratio nobis reprehenderit adduco.",
+      "price": 157.28,
+      "image_url": "https://picsum.photos/seed/product-1078/800/600",
+      "created_at": "2025-12-29T12:47:41.293Z",
+      "discount_percentage": 13,
+      "is_active": true
+    },
+    {
+      "product_id": 1079,
+      "brand_id": 1,
+      "category_id": 10,
+      "name": "Nike Intelligent gym",
+      "slug": "nike-intelligent-gym-1079",
+      "description": "Arca acer administratio vinitor triumphus arcus. Conitor aurum alioqui texo atrocitas facere ventus. Alo terror ater valetudo.",
+      "price": 152.59,
+      "image_url": "https://picsum.photos/seed/product-1079/800/600",
+      "created_at": "2025-12-29T12:47:41.293Z",
+      "discount_percentage": 17,
+      "is_active": true
+    }
+  ],
+  "product_variants": [
+    {
+      "variant_id": 5000,
+      "product_id": 1000,
+      "color": "Pink",
+      "size": "39",
+      "stock": 17,
+      "sku": "SKU-1000-5000"
+    },
+    {
+      "variant_id": 5001,
+      "product_id": 1000,
+      "color": "Pink",
+      "size": "40",
+      "stock": 17,
+      "sku": "SKU-1000-5001"
+    },
+    {
+      "variant_id": 5002,
+      "product_id": 1000,
+      "color": "Red",
+      "size": "39",
+      "stock": 13,
+      "sku": "SKU-1000-5002"
+    },
+    {
+      "variant_id": 5003,
+      "product_id": 1000,
+      "color": "Red",
+      "size": "40",
+      "stock": 47,
+      "sku": "SKU-1000-5003"
+    },
+    {
+      "variant_id": 5004,
+      "product_id": 1000,
+      "color": "Green",
+      "size": "39",
+      "stock": 39,
+      "sku": "SKU-1000-5004"
+    },
+    {
+      "variant_id": 5005,
+      "product_id": 1000,
+      "color": "Green",
+      "size": "40",
+      "stock": 46,
+      "sku": "SKU-1000-5005"
+    },
+    {
+      "variant_id": 5006,
+      "product_id": 1001,
+      "color": "White",
+      "size": "40",
+      "stock": 22,
+      "sku": "SKU-1001-5006"
+    },
+    {
+      "variant_id": 5007,
+      "product_id": 1001,
+      "color": "White",
+      "size": "43",
+      "stock": 43,
+      "sku": "SKU-1001-5007"
+    },
+    {
+      "variant_id": 5008,
+      "product_id": 1001,
+      "color": "White",
+      "size": "37",
+      "stock": 41,
+      "sku": "SKU-1001-5008"
+    },
+    {
+      "variant_id": 5009,
+      "product_id": 1001,
+      "color": "White",
+      "size": "31",
+      "stock": 4,
+      "sku": "SKU-1001-5009"
+    },
+    {
+      "variant_id": 5010,
+      "product_id": 1001,
+      "color": "Green",
+      "size": "40",
+      "stock": 13,
+      "sku": "SKU-1001-5010"
+    },
+    {
+      "variant_id": 5011,
+      "product_id": 1001,
+      "color": "Green",
+      "size": "43",
       "stock": 35,
-      "image": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.9,
-      "reviews": 370,
-      "category": "Lifestyle",
-      "gender": "women",
-      "colors": [
-        "White",
-        "Blue"
-      ],
-      "sizes": [
-        "36",
-        "37",
-        "38",
-        "39"
-      ],
-      "description": "Giày lifestyle nữ, nâng đỡ và êm ái."
+      "sku": "SKU-1001-5011"
     },
     {
-      "id": 310,
-      "name": "Women Light Comfort",
-      "brand": "Skechers",
-      "price": 79.99,
-      "originalPrice": 99.99,
-      "discountPercent": 20,
-      "isNew": false,
-      "isHot": false,
-      "isActive": true,
-      "stock": 75,
-      "image": "https://images.unsplash.com/photo-1605733513549-de9b150bd70d?auto=format&fit=crop&w=800&q=80",
-      "images": [],
-      "rating": 4.3,
-      "reviews": 85,
-      "category": "Casual",
-      "gender": "women",
-      "colors": [
-        "White",
-        "Pink"
-      ],
-      "sizes": [
-        "36",
-        "37",
-        "38",
-        "39"
-      ],
-      "description": "Giày nữ nhẹ nhàng, thoải mái đi học hoặc đi chơi."
+      "variant_id": 5012,
+      "product_id": 1001,
+      "color": "Green",
+      "size": "37",
+      "stock": 31,
+      "sku": "SKU-1001-5012"
+    },
+    {
+      "variant_id": 5013,
+      "product_id": 1001,
+      "color": "Green",
+      "size": "31",
+      "stock": 33,
+      "sku": "SKU-1001-5013"
+    },
+    {
+      "variant_id": 5014,
+      "product_id": 1002,
+      "color": "Green",
+      "size": "44",
+      "stock": 6,
+      "sku": "SKU-1002-5014"
+    },
+    {
+      "variant_id": 5015,
+      "product_id": 1002,
+      "color": "Green",
+      "size": "40",
+      "stock": 2,
+      "sku": "SKU-1002-5015"
+    },
+    {
+      "variant_id": 5016,
+      "product_id": 1002,
+      "color": "Green",
+      "size": "39",
+      "stock": 14,
+      "sku": "SKU-1002-5016"
+    },
+    {
+      "variant_id": 5017,
+      "product_id": 1002,
+      "color": "Green",
+      "size": "29",
+      "stock": 44,
+      "sku": "SKU-1002-5017"
+    },
+    {
+      "variant_id": 5018,
+      "product_id": 1003,
+      "color": "Green",
+      "size": "36",
+      "stock": 22,
+      "sku": "SKU-1003-5018"
+    },
+    {
+      "variant_id": 5019,
+      "product_id": 1003,
+      "color": "Green",
+      "size": "41",
+      "stock": 33,
+      "sku": "SKU-1003-5019"
+    },
+    {
+      "variant_id": 5020,
+      "product_id": 1003,
+      "color": "Green",
+      "size": "29",
+      "stock": 35,
+      "sku": "SKU-1003-5020"
+    },
+    {
+      "variant_id": 5021,
+      "product_id": 1003,
+      "color": "White",
+      "size": "36",
+      "stock": 38,
+      "sku": "SKU-1003-5021"
+    },
+    {
+      "variant_id": 5022,
+      "product_id": 1003,
+      "color": "White",
+      "size": "41",
+      "stock": 2,
+      "sku": "SKU-1003-5022"
+    },
+    {
+      "variant_id": 5023,
+      "product_id": 1003,
+      "color": "White",
+      "size": "29",
+      "stock": 6,
+      "sku": "SKU-1003-5023"
+    },
+    {
+      "variant_id": 5024,
+      "product_id": 1004,
+      "color": "Pink",
+      "size": "32",
+      "stock": 20,
+      "sku": "SKU-1004-5024"
+    },
+    {
+      "variant_id": 5025,
+      "product_id": 1004,
+      "color": "Pink",
+      "size": "31",
+      "stock": 26,
+      "sku": "SKU-1004-5025"
+    },
+    {
+      "variant_id": 5026,
+      "product_id": 1004,
+      "color": "Grey",
+      "size": "32",
+      "stock": 11,
+      "sku": "SKU-1004-5026"
+    },
+    {
+      "variant_id": 5027,
+      "product_id": 1004,
+      "color": "Grey",
+      "size": "31",
+      "stock": 17,
+      "sku": "SKU-1004-5027"
+    },
+    {
+      "variant_id": 5028,
+      "product_id": 1005,
+      "color": "Grey",
+      "size": "41",
+      "stock": 50,
+      "sku": "SKU-1005-5028"
+    },
+    {
+      "variant_id": 5029,
+      "product_id": 1005,
+      "color": "Grey",
+      "size": "40",
+      "stock": 38,
+      "sku": "SKU-1005-5029"
+    },
+    {
+      "variant_id": 5030,
+      "product_id": 1005,
+      "color": "Grey",
+      "size": "36",
+      "stock": 44,
+      "sku": "SKU-1005-5030"
+    },
+    {
+      "variant_id": 5031,
+      "product_id": 1005,
+      "color": "Black",
+      "size": "41",
+      "stock": 31,
+      "sku": "SKU-1005-5031"
+    },
+    {
+      "variant_id": 5032,
+      "product_id": 1005,
+      "color": "Black",
+      "size": "40",
+      "stock": 23,
+      "sku": "SKU-1005-5032"
+    },
+    {
+      "variant_id": 5033,
+      "product_id": 1005,
+      "color": "Black",
+      "size": "36",
+      "stock": 10,
+      "sku": "SKU-1005-5033"
+    },
+    {
+      "variant_id": 5034,
+      "product_id": 1005,
+      "color": "Pink",
+      "size": "41",
+      "stock": 45,
+      "sku": "SKU-1005-5034"
+    },
+    {
+      "variant_id": 5035,
+      "product_id": 1005,
+      "color": "Pink",
+      "size": "40",
+      "stock": 46,
+      "sku": "SKU-1005-5035"
+    },
+    {
+      "variant_id": 5036,
+      "product_id": 1005,
+      "color": "Pink",
+      "size": "36",
+      "stock": 36,
+      "sku": "SKU-1005-5036"
+    },
+    {
+      "variant_id": 5037,
+      "product_id": 1006,
+      "color": "Blue",
+      "size": "28",
+      "stock": 11,
+      "sku": "SKU-1006-5037"
+    },
+    {
+      "variant_id": 5038,
+      "product_id": 1006,
+      "color": "Blue",
+      "size": "44",
+      "stock": 34,
+      "sku": "SKU-1006-5038"
+    },
+    {
+      "variant_id": 5039,
+      "product_id": 1006,
+      "color": "Blue",
+      "size": "30",
+      "stock": 47,
+      "sku": "SKU-1006-5039"
+    },
+    {
+      "variant_id": 5040,
+      "product_id": 1007,
+      "color": "Grey",
+      "size": "31",
+      "stock": 31,
+      "sku": "SKU-1007-5040"
+    },
+    {
+      "variant_id": 5041,
+      "product_id": 1007,
+      "color": "Grey",
+      "size": "37",
+      "stock": 2,
+      "sku": "SKU-1007-5041"
+    },
+    {
+      "variant_id": 5042,
+      "product_id": 1007,
+      "color": "Grey",
+      "size": "36",
+      "stock": 5,
+      "sku": "SKU-1007-5042"
+    },
+    {
+      "variant_id": 5043,
+      "product_id": 1008,
+      "color": "Grey",
+      "size": "44",
+      "stock": 25,
+      "sku": "SKU-1008-5043"
+    },
+    {
+      "variant_id": 5044,
+      "product_id": 1008,
+      "color": "Grey",
+      "size": "42",
+      "stock": 7,
+      "sku": "SKU-1008-5044"
+    },
+    {
+      "variant_id": 5045,
+      "product_id": 1008,
+      "color": "Green",
+      "size": "44",
+      "stock": 38,
+      "sku": "SKU-1008-5045"
+    },
+    {
+      "variant_id": 5046,
+      "product_id": 1008,
+      "color": "Green",
+      "size": "42",
+      "stock": 8,
+      "sku": "SKU-1008-5046"
+    },
+    {
+      "variant_id": 5047,
+      "product_id": 1008,
+      "color": "White",
+      "size": "44",
+      "stock": 14,
+      "sku": "SKU-1008-5047"
+    },
+    {
+      "variant_id": 5048,
+      "product_id": 1008,
+      "color": "White",
+      "size": "42",
+      "stock": 29,
+      "sku": "SKU-1008-5048"
+    },
+    {
+      "variant_id": 5049,
+      "product_id": 1009,
+      "color": "Red",
+      "size": "31",
+      "stock": 37,
+      "sku": "SKU-1009-5049"
+    },
+    {
+      "variant_id": 5050,
+      "product_id": 1009,
+      "color": "Red",
+      "size": "32",
+      "stock": 26,
+      "sku": "SKU-1009-5050"
+    },
+    {
+      "variant_id": 5051,
+      "product_id": 1009,
+      "color": "White",
+      "size": "31",
+      "stock": 7,
+      "sku": "SKU-1009-5051"
+    },
+    {
+      "variant_id": 5052,
+      "product_id": 1009,
+      "color": "White",
+      "size": "32",
+      "stock": 7,
+      "sku": "SKU-1009-5052"
+    },
+    {
+      "variant_id": 5053,
+      "product_id": 1010,
+      "color": "Red",
+      "size": "40",
+      "stock": 32,
+      "sku": "SKU-1010-5053"
+    },
+    {
+      "variant_id": 5054,
+      "product_id": 1010,
+      "color": "Red",
+      "size": "37",
+      "stock": 22,
+      "sku": "SKU-1010-5054"
+    },
+    {
+      "variant_id": 5055,
+      "product_id": 1010,
+      "color": "Red",
+      "size": "32",
+      "stock": 15,
+      "sku": "SKU-1010-5055"
+    },
+    {
+      "variant_id": 5056,
+      "product_id": 1010,
+      "color": "Green",
+      "size": "40",
+      "stock": 1,
+      "sku": "SKU-1010-5056"
+    },
+    {
+      "variant_id": 5057,
+      "product_id": 1010,
+      "color": "Green",
+      "size": "37",
+      "stock": 3,
+      "sku": "SKU-1010-5057"
+    },
+    {
+      "variant_id": 5058,
+      "product_id": 1010,
+      "color": "Green",
+      "size": "32",
+      "stock": 23,
+      "sku": "SKU-1010-5058"
+    },
+    {
+      "variant_id": 5059,
+      "product_id": 1010,
+      "color": "Pink",
+      "size": "40",
+      "stock": 43,
+      "sku": "SKU-1010-5059"
+    },
+    {
+      "variant_id": 5060,
+      "product_id": 1010,
+      "color": "Pink",
+      "size": "37",
+      "stock": 1,
+      "sku": "SKU-1010-5060"
+    },
+    {
+      "variant_id": 5061,
+      "product_id": 1010,
+      "color": "Pink",
+      "size": "32",
+      "stock": 20,
+      "sku": "SKU-1010-5061"
+    },
+    {
+      "variant_id": 5062,
+      "product_id": 1011,
+      "color": "Green",
+      "size": "44",
+      "stock": 30,
+      "sku": "SKU-1011-5062"
+    },
+    {
+      "variant_id": 5063,
+      "product_id": 1011,
+      "color": "Green",
+      "size": "28",
+      "stock": 37,
+      "sku": "SKU-1011-5063"
+    },
+    {
+      "variant_id": 5064,
+      "product_id": 1011,
+      "color": "Green",
+      "size": "32",
+      "stock": 20,
+      "sku": "SKU-1011-5064"
+    },
+    {
+      "variant_id": 5065,
+      "product_id": 1011,
+      "color": "Green",
+      "size": "30",
+      "stock": 7,
+      "sku": "SKU-1011-5065"
+    },
+    {
+      "variant_id": 5066,
+      "product_id": 1012,
+      "color": "Pink",
+      "size": "43",
+      "stock": 18,
+      "sku": "SKU-1012-5066"
+    },
+    {
+      "variant_id": 5067,
+      "product_id": 1012,
+      "color": "Pink",
+      "size": "44",
+      "stock": 7,
+      "sku": "SKU-1012-5067"
+    },
+    {
+      "variant_id": 5068,
+      "product_id": 1012,
+      "color": "Pink",
+      "size": "40",
+      "stock": 27,
+      "sku": "SKU-1012-5068"
+    },
+    {
+      "variant_id": 5069,
+      "product_id": 1013,
+      "color": "Green",
+      "size": "37",
+      "stock": 11,
+      "sku": "SKU-1013-5069"
+    },
+    {
+      "variant_id": 5070,
+      "product_id": 1013,
+      "color": "Green",
+      "size": "32",
+      "stock": 26,
+      "sku": "SKU-1013-5070"
+    },
+    {
+      "variant_id": 5071,
+      "product_id": 1013,
+      "color": "Green",
+      "size": "40",
+      "stock": 6,
+      "sku": "SKU-1013-5071"
+    },
+    {
+      "variant_id": 5072,
+      "product_id": 1013,
+      "color": "Green",
+      "size": "31",
+      "stock": 33,
+      "sku": "SKU-1013-5072"
+    },
+    {
+      "variant_id": 5073,
+      "product_id": 1013,
+      "color": "Green",
+      "size": "29",
+      "stock": 34,
+      "sku": "SKU-1013-5073"
+    },
+    {
+      "variant_id": 5074,
+      "product_id": 1014,
+      "color": "Pink",
+      "size": "28",
+      "stock": 42,
+      "sku": "SKU-1014-5074"
+    },
+    {
+      "variant_id": 5075,
+      "product_id": 1014,
+      "color": "Pink",
+      "size": "44",
+      "stock": 48,
+      "sku": "SKU-1014-5075"
+    },
+    {
+      "variant_id": 5076,
+      "product_id": 1014,
+      "color": "Grey",
+      "size": "28",
+      "stock": 1,
+      "sku": "SKU-1014-5076"
+    },
+    {
+      "variant_id": 5077,
+      "product_id": 1014,
+      "color": "Grey",
+      "size": "44",
+      "stock": 18,
+      "sku": "SKU-1014-5077"
+    },
+    {
+      "variant_id": 5078,
+      "product_id": 1014,
+      "color": "Blue",
+      "size": "28",
+      "stock": 47,
+      "sku": "SKU-1014-5078"
+    },
+    {
+      "variant_id": 5079,
+      "product_id": 1014,
+      "color": "Blue",
+      "size": "44",
+      "stock": 35,
+      "sku": "SKU-1014-5079"
+    },
+    {
+      "variant_id": 5080,
+      "product_id": 1015,
+      "color": "Red",
+      "size": "39",
+      "stock": 46,
+      "sku": "SKU-1015-5080"
+    },
+    {
+      "variant_id": 5081,
+      "product_id": 1015,
+      "color": "Red",
+      "size": "38",
+      "stock": 11,
+      "sku": "SKU-1015-5081"
+    },
+    {
+      "variant_id": 5082,
+      "product_id": 1015,
+      "color": "Red",
+      "size": "44",
+      "stock": 6,
+      "sku": "SKU-1015-5082"
+    },
+    {
+      "variant_id": 5083,
+      "product_id": 1015,
+      "color": "Red",
+      "size": "40",
+      "stock": 16,
+      "sku": "SKU-1015-5083"
+    },
+    {
+      "variant_id": 5084,
+      "product_id": 1015,
+      "color": "Red",
+      "size": "29",
+      "stock": 10,
+      "sku": "SKU-1015-5084"
+    },
+    {
+      "variant_id": 5085,
+      "product_id": 1015,
+      "color": "White",
+      "size": "39",
+      "stock": 18,
+      "sku": "SKU-1015-5085"
+    },
+    {
+      "variant_id": 5086,
+      "product_id": 1015,
+      "color": "White",
+      "size": "38",
+      "stock": 25,
+      "sku": "SKU-1015-5086"
+    },
+    {
+      "variant_id": 5087,
+      "product_id": 1015,
+      "color": "White",
+      "size": "44",
+      "stock": 33,
+      "sku": "SKU-1015-5087"
+    },
+    {
+      "variant_id": 5088,
+      "product_id": 1015,
+      "color": "White",
+      "size": "40",
+      "stock": 24,
+      "sku": "SKU-1015-5088"
+    },
+    {
+      "variant_id": 5089,
+      "product_id": 1015,
+      "color": "White",
+      "size": "29",
+      "stock": 15,
+      "sku": "SKU-1015-5089"
+    },
+    {
+      "variant_id": 5090,
+      "product_id": 1016,
+      "color": "Blue",
+      "size": "41",
+      "stock": 40,
+      "sku": "SKU-1016-5090"
+    },
+    {
+      "variant_id": 5091,
+      "product_id": 1016,
+      "color": "Blue",
+      "size": "43",
+      "stock": 48,
+      "sku": "SKU-1016-5091"
+    },
+    {
+      "variant_id": 5092,
+      "product_id": 1016,
+      "color": "Blue",
+      "size": "37",
+      "stock": 38,
+      "sku": "SKU-1016-5092"
+    },
+    {
+      "variant_id": 5093,
+      "product_id": 1016,
+      "color": "Blue",
+      "size": "40",
+      "stock": 7,
+      "sku": "SKU-1016-5093"
+    },
+    {
+      "variant_id": 5094,
+      "product_id": 1016,
+      "color": "Blue",
+      "size": "32",
+      "stock": 29,
+      "sku": "SKU-1016-5094"
+    },
+    {
+      "variant_id": 5095,
+      "product_id": 1016,
+      "color": "Red",
+      "size": "41",
+      "stock": 15,
+      "sku": "SKU-1016-5095"
+    },
+    {
+      "variant_id": 5096,
+      "product_id": 1016,
+      "color": "Red",
+      "size": "43",
+      "stock": 13,
+      "sku": "SKU-1016-5096"
+    },
+    {
+      "variant_id": 5097,
+      "product_id": 1016,
+      "color": "Red",
+      "size": "37",
+      "stock": 42,
+      "sku": "SKU-1016-5097"
+    },
+    {
+      "variant_id": 5098,
+      "product_id": 1016,
+      "color": "Red",
+      "size": "40",
+      "stock": 42,
+      "sku": "SKU-1016-5098"
+    },
+    {
+      "variant_id": 5099,
+      "product_id": 1016,
+      "color": "Red",
+      "size": "32",
+      "stock": 9,
+      "sku": "SKU-1016-5099"
+    },
+    {
+      "variant_id": 5100,
+      "product_id": 1016,
+      "color": "Black",
+      "size": "41",
+      "stock": 20,
+      "sku": "SKU-1016-5100"
+    },
+    {
+      "variant_id": 5101,
+      "product_id": 1016,
+      "color": "Black",
+      "size": "43",
+      "stock": 17,
+      "sku": "SKU-1016-5101"
+    },
+    {
+      "variant_id": 5102,
+      "product_id": 1016,
+      "color": "Black",
+      "size": "37",
+      "stock": 40,
+      "sku": "SKU-1016-5102"
+    },
+    {
+      "variant_id": 5103,
+      "product_id": 1016,
+      "color": "Black",
+      "size": "40",
+      "stock": 45,
+      "sku": "SKU-1016-5103"
+    },
+    {
+      "variant_id": 5104,
+      "product_id": 1016,
+      "color": "Black",
+      "size": "32",
+      "stock": 30,
+      "sku": "SKU-1016-5104"
+    },
+    {
+      "variant_id": 5105,
+      "product_id": 1017,
+      "color": "Grey",
+      "size": "43",
+      "stock": 32,
+      "sku": "SKU-1017-5105"
+    },
+    {
+      "variant_id": 5106,
+      "product_id": 1017,
+      "color": "Grey",
+      "size": "44",
+      "stock": 1,
+      "sku": "SKU-1017-5106"
+    },
+    {
+      "variant_id": 5107,
+      "product_id": 1017,
+      "color": "Grey",
+      "size": "29",
+      "stock": 5,
+      "sku": "SKU-1017-5107"
+    },
+    {
+      "variant_id": 5108,
+      "product_id": 1017,
+      "color": "Grey",
+      "size": "40",
+      "stock": 41,
+      "sku": "SKU-1017-5108"
+    },
+    {
+      "variant_id": 5109,
+      "product_id": 1017,
+      "color": "White",
+      "size": "43",
+      "stock": 9,
+      "sku": "SKU-1017-5109"
+    },
+    {
+      "variant_id": 5110,
+      "product_id": 1017,
+      "color": "White",
+      "size": "44",
+      "stock": 0,
+      "sku": "SKU-1017-5110"
+    },
+    {
+      "variant_id": 5111,
+      "product_id": 1017,
+      "color": "White",
+      "size": "29",
+      "stock": 41,
+      "sku": "SKU-1017-5111"
+    },
+    {
+      "variant_id": 5112,
+      "product_id": 1017,
+      "color": "White",
+      "size": "40",
+      "stock": 8,
+      "sku": "SKU-1017-5112"
+    },
+    {
+      "variant_id": 5113,
+      "product_id": 1018,
+      "color": "Pink",
+      "size": "31",
+      "stock": 6,
+      "sku": "SKU-1018-5113"
+    },
+    {
+      "variant_id": 5114,
+      "product_id": 1018,
+      "color": "Pink",
+      "size": "39",
+      "stock": 35,
+      "sku": "SKU-1018-5114"
+    },
+    {
+      "variant_id": 5115,
+      "product_id": 1018,
+      "color": "Pink",
+      "size": "30",
+      "stock": 20,
+      "sku": "SKU-1018-5115"
+    },
+    {
+      "variant_id": 5116,
+      "product_id": 1018,
+      "color": "Pink",
+      "size": "28",
+      "stock": 26,
+      "sku": "SKU-1018-5116"
+    },
+    {
+      "variant_id": 5117,
+      "product_id": 1018,
+      "color": "Pink",
+      "size": "38",
+      "stock": 20,
+      "sku": "SKU-1018-5117"
+    },
+    {
+      "variant_id": 5118,
+      "product_id": 1019,
+      "color": "Pink",
+      "size": "43",
+      "stock": 12,
+      "sku": "SKU-1019-5118"
+    },
+    {
+      "variant_id": 5119,
+      "product_id": 1019,
+      "color": "Pink",
+      "size": "39",
+      "stock": 29,
+      "sku": "SKU-1019-5119"
+    },
+    {
+      "variant_id": 5120,
+      "product_id": 1019,
+      "color": "Pink",
+      "size": "28",
+      "stock": 32,
+      "sku": "SKU-1019-5120"
+    },
+    {
+      "variant_id": 5121,
+      "product_id": 1019,
+      "color": "Pink",
+      "size": "38",
+      "stock": 15,
+      "sku": "SKU-1019-5121"
+    },
+    {
+      "variant_id": 5122,
+      "product_id": 1019,
+      "color": "Black",
+      "size": "43",
+      "stock": 9,
+      "sku": "SKU-1019-5122"
+    },
+    {
+      "variant_id": 5123,
+      "product_id": 1019,
+      "color": "Black",
+      "size": "39",
+      "stock": 47,
+      "sku": "SKU-1019-5123"
+    },
+    {
+      "variant_id": 5124,
+      "product_id": 1019,
+      "color": "Black",
+      "size": "28",
+      "stock": 22,
+      "sku": "SKU-1019-5124"
+    },
+    {
+      "variant_id": 5125,
+      "product_id": 1019,
+      "color": "Black",
+      "size": "38",
+      "stock": 28,
+      "sku": "SKU-1019-5125"
+    },
+    {
+      "variant_id": 5126,
+      "product_id": 1019,
+      "color": "Red",
+      "size": "43",
+      "stock": 33,
+      "sku": "SKU-1019-5126"
+    },
+    {
+      "variant_id": 5127,
+      "product_id": 1019,
+      "color": "Red",
+      "size": "39",
+      "stock": 45,
+      "sku": "SKU-1019-5127"
+    },
+    {
+      "variant_id": 5128,
+      "product_id": 1019,
+      "color": "Red",
+      "size": "28",
+      "stock": 38,
+      "sku": "SKU-1019-5128"
+    },
+    {
+      "variant_id": 5129,
+      "product_id": 1019,
+      "color": "Red",
+      "size": "38",
+      "stock": 9,
+      "sku": "SKU-1019-5129"
+    },
+    {
+      "variant_id": 5130,
+      "product_id": 1020,
+      "color": "White",
+      "size": "39",
+      "stock": 0,
+      "sku": "SKU-1020-5130"
+    },
+    {
+      "variant_id": 5131,
+      "product_id": 1020,
+      "color": "White",
+      "size": "42",
+      "stock": 33,
+      "sku": "SKU-1020-5131"
+    },
+    {
+      "variant_id": 5132,
+      "product_id": 1020,
+      "color": "White",
+      "size": "40",
+      "stock": 3,
+      "sku": "SKU-1020-5132"
+    },
+    {
+      "variant_id": 5133,
+      "product_id": 1020,
+      "color": "White",
+      "size": "41",
+      "stock": 17,
+      "sku": "SKU-1020-5133"
+    },
+    {
+      "variant_id": 5134,
+      "product_id": 1021,
+      "color": "Pink",
+      "size": "32",
+      "stock": 4,
+      "sku": "SKU-1021-5134"
+    },
+    {
+      "variant_id": 5135,
+      "product_id": 1021,
+      "color": "Pink",
+      "size": "38",
+      "stock": 31,
+      "sku": "SKU-1021-5135"
+    },
+    {
+      "variant_id": 5136,
+      "product_id": 1021,
+      "color": "Pink",
+      "size": "29",
+      "stock": 2,
+      "sku": "SKU-1021-5136"
+    },
+    {
+      "variant_id": 5137,
+      "product_id": 1021,
+      "color": "Pink",
+      "size": "39",
+      "stock": 21,
+      "sku": "SKU-1021-5137"
+    },
+    {
+      "variant_id": 5138,
+      "product_id": 1021,
+      "color": "Green",
+      "size": "32",
+      "stock": 25,
+      "sku": "SKU-1021-5138"
+    },
+    {
+      "variant_id": 5139,
+      "product_id": 1021,
+      "color": "Green",
+      "size": "38",
+      "stock": 12,
+      "sku": "SKU-1021-5139"
+    },
+    {
+      "variant_id": 5140,
+      "product_id": 1021,
+      "color": "Green",
+      "size": "29",
+      "stock": 8,
+      "sku": "SKU-1021-5140"
+    },
+    {
+      "variant_id": 5141,
+      "product_id": 1021,
+      "color": "Green",
+      "size": "39",
+      "stock": 30,
+      "sku": "SKU-1021-5141"
+    },
+    {
+      "variant_id": 5142,
+      "product_id": 1021,
+      "color": "Red",
+      "size": "32",
+      "stock": 39,
+      "sku": "SKU-1021-5142"
+    },
+    {
+      "variant_id": 5143,
+      "product_id": 1021,
+      "color": "Red",
+      "size": "38",
+      "stock": 18,
+      "sku": "SKU-1021-5143"
+    },
+    {
+      "variant_id": 5144,
+      "product_id": 1021,
+      "color": "Red",
+      "size": "29",
+      "stock": 48,
+      "sku": "SKU-1021-5144"
+    },
+    {
+      "variant_id": 5145,
+      "product_id": 1021,
+      "color": "Red",
+      "size": "39",
+      "stock": 40,
+      "sku": "SKU-1021-5145"
+    },
+    {
+      "variant_id": 5146,
+      "product_id": 1022,
+      "color": "Blue",
+      "size": "40",
+      "stock": 16,
+      "sku": "SKU-1022-5146"
+    },
+    {
+      "variant_id": 5147,
+      "product_id": 1022,
+      "color": "Blue",
+      "size": "38",
+      "stock": 25,
+      "sku": "SKU-1022-5147"
+    },
+    {
+      "variant_id": 5148,
+      "product_id": 1022,
+      "color": "Blue",
+      "size": "43",
+      "stock": 19,
+      "sku": "SKU-1022-5148"
+    },
+    {
+      "variant_id": 5149,
+      "product_id": 1022,
+      "color": "Blue",
+      "size": "32",
+      "stock": 9,
+      "sku": "SKU-1022-5149"
+    },
+    {
+      "variant_id": 5150,
+      "product_id": 1022,
+      "color": "Black",
+      "size": "40",
+      "stock": 16,
+      "sku": "SKU-1022-5150"
+    },
+    {
+      "variant_id": 5151,
+      "product_id": 1022,
+      "color": "Black",
+      "size": "38",
+      "stock": 36,
+      "sku": "SKU-1022-5151"
+    },
+    {
+      "variant_id": 5152,
+      "product_id": 1022,
+      "color": "Black",
+      "size": "43",
+      "stock": 5,
+      "sku": "SKU-1022-5152"
+    },
+    {
+      "variant_id": 5153,
+      "product_id": 1022,
+      "color": "Black",
+      "size": "32",
+      "stock": 36,
+      "sku": "SKU-1022-5153"
+    },
+    {
+      "variant_id": 5154,
+      "product_id": 1023,
+      "color": "Black",
+      "size": "42",
+      "stock": 30,
+      "sku": "SKU-1023-5154"
+    },
+    {
+      "variant_id": 5155,
+      "product_id": 1023,
+      "color": "Black",
+      "size": "44",
+      "stock": 24,
+      "sku": "SKU-1023-5155"
+    },
+    {
+      "variant_id": 5156,
+      "product_id": 1023,
+      "color": "Black",
+      "size": "30",
+      "stock": 50,
+      "sku": "SKU-1023-5156"
+    },
+    {
+      "variant_id": 5157,
+      "product_id": 1023,
+      "color": "Black",
+      "size": "36",
+      "stock": 50,
+      "sku": "SKU-1023-5157"
+    },
+    {
+      "variant_id": 5158,
+      "product_id": 1023,
+      "color": "Black",
+      "size": "37",
+      "stock": 43,
+      "sku": "SKU-1023-5158"
+    },
+    {
+      "variant_id": 5159,
+      "product_id": 1023,
+      "color": "Pink",
+      "size": "42",
+      "stock": 29,
+      "sku": "SKU-1023-5159"
+    },
+    {
+      "variant_id": 5160,
+      "product_id": 1023,
+      "color": "Pink",
+      "size": "44",
+      "stock": 29,
+      "sku": "SKU-1023-5160"
+    },
+    {
+      "variant_id": 5161,
+      "product_id": 1023,
+      "color": "Pink",
+      "size": "30",
+      "stock": 49,
+      "sku": "SKU-1023-5161"
+    },
+    {
+      "variant_id": 5162,
+      "product_id": 1023,
+      "color": "Pink",
+      "size": "36",
+      "stock": 32,
+      "sku": "SKU-1023-5162"
+    },
+    {
+      "variant_id": 5163,
+      "product_id": 1023,
+      "color": "Pink",
+      "size": "37",
+      "stock": 16,
+      "sku": "SKU-1023-5163"
+    },
+    {
+      "variant_id": 5164,
+      "product_id": 1024,
+      "color": "Red",
+      "size": "31",
+      "stock": 17,
+      "sku": "SKU-1024-5164"
+    },
+    {
+      "variant_id": 5165,
+      "product_id": 1024,
+      "color": "Red",
+      "size": "37",
+      "stock": 19,
+      "sku": "SKU-1024-5165"
+    },
+    {
+      "variant_id": 5166,
+      "product_id": 1024,
+      "color": "Red",
+      "size": "32",
+      "stock": 12,
+      "sku": "SKU-1024-5166"
+    },
+    {
+      "variant_id": 5167,
+      "product_id": 1024,
+      "color": "White",
+      "size": "31",
+      "stock": 10,
+      "sku": "SKU-1024-5167"
+    },
+    {
+      "variant_id": 5168,
+      "product_id": 1024,
+      "color": "White",
+      "size": "37",
+      "stock": 5,
+      "sku": "SKU-1024-5168"
+    },
+    {
+      "variant_id": 5169,
+      "product_id": 1024,
+      "color": "White",
+      "size": "32",
+      "stock": 35,
+      "sku": "SKU-1024-5169"
+    },
+    {
+      "variant_id": 5170,
+      "product_id": 1024,
+      "color": "Green",
+      "size": "31",
+      "stock": 42,
+      "sku": "SKU-1024-5170"
+    },
+    {
+      "variant_id": 5171,
+      "product_id": 1024,
+      "color": "Green",
+      "size": "37",
+      "stock": 50,
+      "sku": "SKU-1024-5171"
+    },
+    {
+      "variant_id": 5172,
+      "product_id": 1024,
+      "color": "Green",
+      "size": "32",
+      "stock": 14,
+      "sku": "SKU-1024-5172"
+    },
+    {
+      "variant_id": 5173,
+      "product_id": 1025,
+      "color": "Red",
+      "size": "40",
+      "stock": 30,
+      "sku": "SKU-1025-5173"
+    },
+    {
+      "variant_id": 5174,
+      "product_id": 1025,
+      "color": "Red",
+      "size": "38",
+      "stock": 28,
+      "sku": "SKU-1025-5174"
+    },
+    {
+      "variant_id": 5175,
+      "product_id": 1025,
+      "color": "Red",
+      "size": "39",
+      "stock": 14,
+      "sku": "SKU-1025-5175"
+    },
+    {
+      "variant_id": 5176,
+      "product_id": 1025,
+      "color": "Red",
+      "size": "36",
+      "stock": 38,
+      "sku": "SKU-1025-5176"
+    },
+    {
+      "variant_id": 5177,
+      "product_id": 1025,
+      "color": "Red",
+      "size": "37",
+      "stock": 30,
+      "sku": "SKU-1025-5177"
+    },
+    {
+      "variant_id": 5178,
+      "product_id": 1026,
+      "color": "Black",
+      "size": "37",
+      "stock": 4,
+      "sku": "SKU-1026-5178"
+    },
+    {
+      "variant_id": 5179,
+      "product_id": 1026,
+      "color": "Black",
+      "size": "43",
+      "stock": 24,
+      "sku": "SKU-1026-5179"
+    },
+    {
+      "variant_id": 5180,
+      "product_id": 1026,
+      "color": "Black",
+      "size": "30",
+      "stock": 46,
+      "sku": "SKU-1026-5180"
+    },
+    {
+      "variant_id": 5181,
+      "product_id": 1026,
+      "color": "Pink",
+      "size": "37",
+      "stock": 47,
+      "sku": "SKU-1026-5181"
+    },
+    {
+      "variant_id": 5182,
+      "product_id": 1026,
+      "color": "Pink",
+      "size": "43",
+      "stock": 26,
+      "sku": "SKU-1026-5182"
+    },
+    {
+      "variant_id": 5183,
+      "product_id": 1026,
+      "color": "Pink",
+      "size": "30",
+      "stock": 24,
+      "sku": "SKU-1026-5183"
+    },
+    {
+      "variant_id": 5184,
+      "product_id": 1026,
+      "color": "Grey",
+      "size": "37",
+      "stock": 32,
+      "sku": "SKU-1026-5184"
+    },
+    {
+      "variant_id": 5185,
+      "product_id": 1026,
+      "color": "Grey",
+      "size": "43",
+      "stock": 22,
+      "sku": "SKU-1026-5185"
+    },
+    {
+      "variant_id": 5186,
+      "product_id": 1026,
+      "color": "Grey",
+      "size": "30",
+      "stock": 13,
+      "sku": "SKU-1026-5186"
+    },
+    {
+      "variant_id": 5187,
+      "product_id": 1027,
+      "color": "Green",
+      "size": "37",
+      "stock": 10,
+      "sku": "SKU-1027-5187"
+    },
+    {
+      "variant_id": 5188,
+      "product_id": 1027,
+      "color": "Green",
+      "size": "39",
+      "stock": 48,
+      "sku": "SKU-1027-5188"
+    },
+    {
+      "variant_id": 5189,
+      "product_id": 1027,
+      "color": "Green",
+      "size": "38",
+      "stock": 27,
+      "sku": "SKU-1027-5189"
+    },
+    {
+      "variant_id": 5190,
+      "product_id": 1027,
+      "color": "Green",
+      "size": "42",
+      "stock": 46,
+      "sku": "SKU-1027-5190"
+    },
+    {
+      "variant_id": 5191,
+      "product_id": 1027,
+      "color": "Pink",
+      "size": "37",
+      "stock": 6,
+      "sku": "SKU-1027-5191"
+    },
+    {
+      "variant_id": 5192,
+      "product_id": 1027,
+      "color": "Pink",
+      "size": "39",
+      "stock": 11,
+      "sku": "SKU-1027-5192"
+    },
+    {
+      "variant_id": 5193,
+      "product_id": 1027,
+      "color": "Pink",
+      "size": "38",
+      "stock": 16,
+      "sku": "SKU-1027-5193"
+    },
+    {
+      "variant_id": 5194,
+      "product_id": 1027,
+      "color": "Pink",
+      "size": "42",
+      "stock": 45,
+      "sku": "SKU-1027-5194"
+    },
+    {
+      "variant_id": 5195,
+      "product_id": 1027,
+      "color": "Black",
+      "size": "37",
+      "stock": 19,
+      "sku": "SKU-1027-5195"
+    },
+    {
+      "variant_id": 5196,
+      "product_id": 1027,
+      "color": "Black",
+      "size": "39",
+      "stock": 13,
+      "sku": "SKU-1027-5196"
+    },
+    {
+      "variant_id": 5197,
+      "product_id": 1027,
+      "color": "Black",
+      "size": "38",
+      "stock": 25,
+      "sku": "SKU-1027-5197"
+    },
+    {
+      "variant_id": 5198,
+      "product_id": 1027,
+      "color": "Black",
+      "size": "42",
+      "stock": 40,
+      "sku": "SKU-1027-5198"
+    },
+    {
+      "variant_id": 5199,
+      "product_id": 1028,
+      "color": "White",
+      "size": "44",
+      "stock": 49,
+      "sku": "SKU-1028-5199"
+    },
+    {
+      "variant_id": 5200,
+      "product_id": 1028,
+      "color": "White",
+      "size": "41",
+      "stock": 39,
+      "sku": "SKU-1028-5200"
+    },
+    {
+      "variant_id": 5201,
+      "product_id": 1028,
+      "color": "White",
+      "size": "31",
+      "stock": 32,
+      "sku": "SKU-1028-5201"
+    },
+    {
+      "variant_id": 5202,
+      "product_id": 1028,
+      "color": "Pink",
+      "size": "44",
+      "stock": 22,
+      "sku": "SKU-1028-5202"
+    },
+    {
+      "variant_id": 5203,
+      "product_id": 1028,
+      "color": "Pink",
+      "size": "41",
+      "stock": 41,
+      "sku": "SKU-1028-5203"
+    },
+    {
+      "variant_id": 5204,
+      "product_id": 1028,
+      "color": "Pink",
+      "size": "31",
+      "stock": 3,
+      "sku": "SKU-1028-5204"
+    },
+    {
+      "variant_id": 5205,
+      "product_id": 1029,
+      "color": "White",
+      "size": "31",
+      "stock": 44,
+      "sku": "SKU-1029-5205"
+    },
+    {
+      "variant_id": 5206,
+      "product_id": 1029,
+      "color": "White",
+      "size": "29",
+      "stock": 8,
+      "sku": "SKU-1029-5206"
+    },
+    {
+      "variant_id": 5207,
+      "product_id": 1029,
+      "color": "White",
+      "size": "36",
+      "stock": 41,
+      "sku": "SKU-1029-5207"
+    },
+    {
+      "variant_id": 5208,
+      "product_id": 1029,
+      "color": "White",
+      "size": "37",
+      "stock": 29,
+      "sku": "SKU-1029-5208"
+    },
+    {
+      "variant_id": 5209,
+      "product_id": 1029,
+      "color": "White",
+      "size": "43",
+      "stock": 34,
+      "sku": "SKU-1029-5209"
+    },
+    {
+      "variant_id": 5210,
+      "product_id": 1030,
+      "color": "Blue",
+      "size": "39",
+      "stock": 12,
+      "sku": "SKU-1030-5210"
+    },
+    {
+      "variant_id": 5211,
+      "product_id": 1030,
+      "color": "Blue",
+      "size": "41",
+      "stock": 38,
+      "sku": "SKU-1030-5211"
+    },
+    {
+      "variant_id": 5212,
+      "product_id": 1030,
+      "color": "Blue",
+      "size": "44",
+      "stock": 23,
+      "sku": "SKU-1030-5212"
+    },
+    {
+      "variant_id": 5213,
+      "product_id": 1030,
+      "color": "Blue",
+      "size": "38",
+      "stock": 39,
+      "sku": "SKU-1030-5213"
+    },
+    {
+      "variant_id": 5214,
+      "product_id": 1031,
+      "color": "Green",
+      "size": "31",
+      "stock": 17,
+      "sku": "SKU-1031-5214"
+    },
+    {
+      "variant_id": 5215,
+      "product_id": 1031,
+      "color": "Green",
+      "size": "37",
+      "stock": 6,
+      "sku": "SKU-1031-5215"
+    },
+    {
+      "variant_id": 5216,
+      "product_id": 1031,
+      "color": "White",
+      "size": "31",
+      "stock": 10,
+      "sku": "SKU-1031-5216"
+    },
+    {
+      "variant_id": 5217,
+      "product_id": 1031,
+      "color": "White",
+      "size": "37",
+      "stock": 6,
+      "sku": "SKU-1031-5217"
+    },
+    {
+      "variant_id": 5218,
+      "product_id": 1031,
+      "color": "Black",
+      "size": "31",
+      "stock": 3,
+      "sku": "SKU-1031-5218"
+    },
+    {
+      "variant_id": 5219,
+      "product_id": 1031,
+      "color": "Black",
+      "size": "37",
+      "stock": 35,
+      "sku": "SKU-1031-5219"
+    },
+    {
+      "variant_id": 5220,
+      "product_id": 1032,
+      "color": "Blue",
+      "size": "37",
+      "stock": 1,
+      "sku": "SKU-1032-5220"
+    },
+    {
+      "variant_id": 5221,
+      "product_id": 1032,
+      "color": "Blue",
+      "size": "30",
+      "stock": 45,
+      "sku": "SKU-1032-5221"
+    },
+    {
+      "variant_id": 5222,
+      "product_id": 1032,
+      "color": "Blue",
+      "size": "36",
+      "stock": 33,
+      "sku": "SKU-1032-5222"
+    },
+    {
+      "variant_id": 5223,
+      "product_id": 1033,
+      "color": "Black",
+      "size": "31",
+      "stock": 6,
+      "sku": "SKU-1033-5223"
+    },
+    {
+      "variant_id": 5224,
+      "product_id": 1033,
+      "color": "Black",
+      "size": "43",
+      "stock": 46,
+      "sku": "SKU-1033-5224"
+    },
+    {
+      "variant_id": 5225,
+      "product_id": 1033,
+      "color": "Blue",
+      "size": "31",
+      "stock": 40,
+      "sku": "SKU-1033-5225"
+    },
+    {
+      "variant_id": 5226,
+      "product_id": 1033,
+      "color": "Blue",
+      "size": "43",
+      "stock": 18,
+      "sku": "SKU-1033-5226"
+    },
+    {
+      "variant_id": 5227,
+      "product_id": 1033,
+      "color": "White",
+      "size": "31",
+      "stock": 37,
+      "sku": "SKU-1033-5227"
+    },
+    {
+      "variant_id": 5228,
+      "product_id": 1033,
+      "color": "White",
+      "size": "43",
+      "stock": 3,
+      "sku": "SKU-1033-5228"
+    },
+    {
+      "variant_id": 5229,
+      "product_id": 1034,
+      "color": "White",
+      "size": "29",
+      "stock": 47,
+      "sku": "SKU-1034-5229"
+    },
+    {
+      "variant_id": 5230,
+      "product_id": 1034,
+      "color": "White",
+      "size": "38",
+      "stock": 47,
+      "sku": "SKU-1034-5230"
+    },
+    {
+      "variant_id": 5231,
+      "product_id": 1034,
+      "color": "White",
+      "size": "31",
+      "stock": 16,
+      "sku": "SKU-1034-5231"
+    },
+    {
+      "variant_id": 5232,
+      "product_id": 1035,
+      "color": "Green",
+      "size": "40",
+      "stock": 38,
+      "sku": "SKU-1035-5232"
+    },
+    {
+      "variant_id": 5233,
+      "product_id": 1035,
+      "color": "Green",
+      "size": "28",
+      "stock": 46,
+      "sku": "SKU-1035-5233"
+    },
+    {
+      "variant_id": 5234,
+      "product_id": 1035,
+      "color": "Green",
+      "size": "42",
+      "stock": 23,
+      "sku": "SKU-1035-5234"
+    },
+    {
+      "variant_id": 5235,
+      "product_id": 1035,
+      "color": "Green",
+      "size": "43",
+      "stock": 24,
+      "sku": "SKU-1035-5235"
+    },
+    {
+      "variant_id": 5236,
+      "product_id": 1036,
+      "color": "Black",
+      "size": "40",
+      "stock": 38,
+      "sku": "SKU-1036-5236"
+    },
+    {
+      "variant_id": 5237,
+      "product_id": 1036,
+      "color": "Black",
+      "size": "41",
+      "stock": 47,
+      "sku": "SKU-1036-5237"
+    },
+    {
+      "variant_id": 5238,
+      "product_id": 1036,
+      "color": "Black",
+      "size": "39",
+      "stock": 30,
+      "sku": "SKU-1036-5238"
+    },
+    {
+      "variant_id": 5239,
+      "product_id": 1037,
+      "color": "Red",
+      "size": "39",
+      "stock": 7,
+      "sku": "SKU-1037-5239"
+    },
+    {
+      "variant_id": 5240,
+      "product_id": 1037,
+      "color": "Red",
+      "size": "43",
+      "stock": 30,
+      "sku": "SKU-1037-5240"
+    },
+    {
+      "variant_id": 5241,
+      "product_id": 1037,
+      "color": "Red",
+      "size": "37",
+      "stock": 11,
+      "sku": "SKU-1037-5241"
+    },
+    {
+      "variant_id": 5242,
+      "product_id": 1037,
+      "color": "Red",
+      "size": "42",
+      "stock": 50,
+      "sku": "SKU-1037-5242"
+    },
+    {
+      "variant_id": 5243,
+      "product_id": 1037,
+      "color": "Red",
+      "size": "31",
+      "stock": 6,
+      "sku": "SKU-1037-5243"
+    },
+    {
+      "variant_id": 5244,
+      "product_id": 1037,
+      "color": "Pink",
+      "size": "39",
+      "stock": 32,
+      "sku": "SKU-1037-5244"
+    },
+    {
+      "variant_id": 5245,
+      "product_id": 1037,
+      "color": "Pink",
+      "size": "43",
+      "stock": 17,
+      "sku": "SKU-1037-5245"
+    },
+    {
+      "variant_id": 5246,
+      "product_id": 1037,
+      "color": "Pink",
+      "size": "37",
+      "stock": 32,
+      "sku": "SKU-1037-5246"
+    },
+    {
+      "variant_id": 5247,
+      "product_id": 1037,
+      "color": "Pink",
+      "size": "42",
+      "stock": 8,
+      "sku": "SKU-1037-5247"
+    },
+    {
+      "variant_id": 5248,
+      "product_id": 1037,
+      "color": "Pink",
+      "size": "31",
+      "stock": 8,
+      "sku": "SKU-1037-5248"
+    },
+    {
+      "variant_id": 5249,
+      "product_id": 1037,
+      "color": "White",
+      "size": "39",
+      "stock": 13,
+      "sku": "SKU-1037-5249"
+    },
+    {
+      "variant_id": 5250,
+      "product_id": 1037,
+      "color": "White",
+      "size": "43",
+      "stock": 26,
+      "sku": "SKU-1037-5250"
+    },
+    {
+      "variant_id": 5251,
+      "product_id": 1037,
+      "color": "White",
+      "size": "37",
+      "stock": 26,
+      "sku": "SKU-1037-5251"
+    },
+    {
+      "variant_id": 5252,
+      "product_id": 1037,
+      "color": "White",
+      "size": "42",
+      "stock": 2,
+      "sku": "SKU-1037-5252"
+    },
+    {
+      "variant_id": 5253,
+      "product_id": 1037,
+      "color": "White",
+      "size": "31",
+      "stock": 30,
+      "sku": "SKU-1037-5253"
+    },
+    {
+      "variant_id": 5254,
+      "product_id": 1038,
+      "color": "Blue",
+      "size": "39",
+      "stock": 6,
+      "sku": "SKU-1038-5254"
+    },
+    {
+      "variant_id": 5255,
+      "product_id": 1038,
+      "color": "Blue",
+      "size": "31",
+      "stock": 15,
+      "sku": "SKU-1038-5255"
+    },
+    {
+      "variant_id": 5256,
+      "product_id": 1038,
+      "color": "Blue",
+      "size": "36",
+      "stock": 15,
+      "sku": "SKU-1038-5256"
+    },
+    {
+      "variant_id": 5257,
+      "product_id": 1038,
+      "color": "Grey",
+      "size": "39",
+      "stock": 22,
+      "sku": "SKU-1038-5257"
+    },
+    {
+      "variant_id": 5258,
+      "product_id": 1038,
+      "color": "Grey",
+      "size": "31",
+      "stock": 36,
+      "sku": "SKU-1038-5258"
+    },
+    {
+      "variant_id": 5259,
+      "product_id": 1038,
+      "color": "Grey",
+      "size": "36",
+      "stock": 6,
+      "sku": "SKU-1038-5259"
+    },
+    {
+      "variant_id": 5260,
+      "product_id": 1039,
+      "color": "Grey",
+      "size": "41",
+      "stock": 46,
+      "sku": "SKU-1039-5260"
+    },
+    {
+      "variant_id": 5261,
+      "product_id": 1039,
+      "color": "Grey",
+      "size": "29",
+      "stock": 46,
+      "sku": "SKU-1039-5261"
+    },
+    {
+      "variant_id": 5262,
+      "product_id": 1039,
+      "color": "Red",
+      "size": "41",
+      "stock": 28,
+      "sku": "SKU-1039-5262"
+    },
+    {
+      "variant_id": 5263,
+      "product_id": 1039,
+      "color": "Red",
+      "size": "29",
+      "stock": 34,
+      "sku": "SKU-1039-5263"
+    },
+    {
+      "variant_id": 5264,
+      "product_id": 1039,
+      "color": "Pink",
+      "size": "41",
+      "stock": 35,
+      "sku": "SKU-1039-5264"
+    },
+    {
+      "variant_id": 5265,
+      "product_id": 1039,
+      "color": "Pink",
+      "size": "29",
+      "stock": 47,
+      "sku": "SKU-1039-5265"
+    },
+    {
+      "variant_id": 5266,
+      "product_id": 1040,
+      "color": "Grey",
+      "size": "42",
+      "stock": 4,
+      "sku": "SKU-1040-5266"
+    },
+    {
+      "variant_id": 5267,
+      "product_id": 1040,
+      "color": "Grey",
+      "size": "40",
+      "stock": 37,
+      "sku": "SKU-1040-5267"
+    },
+    {
+      "variant_id": 5268,
+      "product_id": 1040,
+      "color": "Grey",
+      "size": "41",
+      "stock": 35,
+      "sku": "SKU-1040-5268"
+    },
+    {
+      "variant_id": 5269,
+      "product_id": 1040,
+      "color": "Grey",
+      "size": "37",
+      "stock": 12,
+      "sku": "SKU-1040-5269"
+    },
+    {
+      "variant_id": 5270,
+      "product_id": 1040,
+      "color": "Grey",
+      "size": "31",
+      "stock": 15,
+      "sku": "SKU-1040-5270"
+    },
+    {
+      "variant_id": 5271,
+      "product_id": 1041,
+      "color": "Grey",
+      "size": "43",
+      "stock": 26,
+      "sku": "SKU-1041-5271"
+    },
+    {
+      "variant_id": 5272,
+      "product_id": 1041,
+      "color": "Grey",
+      "size": "29",
+      "stock": 39,
+      "sku": "SKU-1041-5272"
+    },
+    {
+      "variant_id": 5273,
+      "product_id": 1041,
+      "color": "Grey",
+      "size": "40",
+      "stock": 49,
+      "sku": "SKU-1041-5273"
+    },
+    {
+      "variant_id": 5274,
+      "product_id": 1041,
+      "color": "Grey",
+      "size": "36",
+      "stock": 43,
+      "sku": "SKU-1041-5274"
+    },
+    {
+      "variant_id": 5275,
+      "product_id": 1041,
+      "color": "Pink",
+      "size": "43",
+      "stock": 0,
+      "sku": "SKU-1041-5275"
+    },
+    {
+      "variant_id": 5276,
+      "product_id": 1041,
+      "color": "Pink",
+      "size": "29",
+      "stock": 5,
+      "sku": "SKU-1041-5276"
+    },
+    {
+      "variant_id": 5277,
+      "product_id": 1041,
+      "color": "Pink",
+      "size": "40",
+      "stock": 27,
+      "sku": "SKU-1041-5277"
+    },
+    {
+      "variant_id": 5278,
+      "product_id": 1041,
+      "color": "Pink",
+      "size": "36",
+      "stock": 46,
+      "sku": "SKU-1041-5278"
+    },
+    {
+      "variant_id": 5279,
+      "product_id": 1042,
+      "color": "Pink",
+      "size": "38",
+      "stock": 20,
+      "sku": "SKU-1042-5279"
+    },
+    {
+      "variant_id": 5280,
+      "product_id": 1042,
+      "color": "Pink",
+      "size": "37",
+      "stock": 36,
+      "sku": "SKU-1042-5280"
+    },
+    {
+      "variant_id": 5281,
+      "product_id": 1042,
+      "color": "Pink",
+      "size": "29",
+      "stock": 15,
+      "sku": "SKU-1042-5281"
+    },
+    {
+      "variant_id": 5282,
+      "product_id": 1042,
+      "color": "Pink",
+      "size": "28",
+      "stock": 23,
+      "sku": "SKU-1042-5282"
+    },
+    {
+      "variant_id": 5283,
+      "product_id": 1042,
+      "color": "Pink",
+      "size": "42",
+      "stock": 7,
+      "sku": "SKU-1042-5283"
+    },
+    {
+      "variant_id": 5284,
+      "product_id": 1042,
+      "color": "Red",
+      "size": "38",
+      "stock": 13,
+      "sku": "SKU-1042-5284"
+    },
+    {
+      "variant_id": 5285,
+      "product_id": 1042,
+      "color": "Red",
+      "size": "37",
+      "stock": 12,
+      "sku": "SKU-1042-5285"
+    },
+    {
+      "variant_id": 5286,
+      "product_id": 1042,
+      "color": "Red",
+      "size": "29",
+      "stock": 4,
+      "sku": "SKU-1042-5286"
+    },
+    {
+      "variant_id": 5287,
+      "product_id": 1042,
+      "color": "Red",
+      "size": "28",
+      "stock": 19,
+      "sku": "SKU-1042-5287"
+    },
+    {
+      "variant_id": 5288,
+      "product_id": 1042,
+      "color": "Red",
+      "size": "42",
+      "stock": 37,
+      "sku": "SKU-1042-5288"
+    },
+    {
+      "variant_id": 5289,
+      "product_id": 1042,
+      "color": "Black",
+      "size": "38",
+      "stock": 29,
+      "sku": "SKU-1042-5289"
+    },
+    {
+      "variant_id": 5290,
+      "product_id": 1042,
+      "color": "Black",
+      "size": "37",
+      "stock": 18,
+      "sku": "SKU-1042-5290"
+    },
+    {
+      "variant_id": 5291,
+      "product_id": 1042,
+      "color": "Black",
+      "size": "29",
+      "stock": 28,
+      "sku": "SKU-1042-5291"
+    },
+    {
+      "variant_id": 5292,
+      "product_id": 1042,
+      "color": "Black",
+      "size": "28",
+      "stock": 13,
+      "sku": "SKU-1042-5292"
+    },
+    {
+      "variant_id": 5293,
+      "product_id": 1042,
+      "color": "Black",
+      "size": "42",
+      "stock": 21,
+      "sku": "SKU-1042-5293"
+    },
+    {
+      "variant_id": 5294,
+      "product_id": 1043,
+      "color": "Pink",
+      "size": "28",
+      "stock": 50,
+      "sku": "SKU-1043-5294"
+    },
+    {
+      "variant_id": 5295,
+      "product_id": 1043,
+      "color": "Pink",
+      "size": "44",
+      "stock": 21,
+      "sku": "SKU-1043-5295"
+    },
+    {
+      "variant_id": 5296,
+      "product_id": 1043,
+      "color": "Pink",
+      "size": "36",
+      "stock": 39,
+      "sku": "SKU-1043-5296"
+    },
+    {
+      "variant_id": 5297,
+      "product_id": 1043,
+      "color": "Pink",
+      "size": "32",
+      "stock": 2,
+      "sku": "SKU-1043-5297"
+    },
+    {
+      "variant_id": 5298,
+      "product_id": 1043,
+      "color": "Pink",
+      "size": "30",
+      "stock": 7,
+      "sku": "SKU-1043-5298"
+    },
+    {
+      "variant_id": 5299,
+      "product_id": 1044,
+      "color": "Black",
+      "size": "28",
+      "stock": 49,
+      "sku": "SKU-1044-5299"
+    },
+    {
+      "variant_id": 5300,
+      "product_id": 1044,
+      "color": "Black",
+      "size": "37",
+      "stock": 11,
+      "sku": "SKU-1044-5300"
+    },
+    {
+      "variant_id": 5301,
+      "product_id": 1044,
+      "color": "Black",
+      "size": "42",
+      "stock": 29,
+      "sku": "SKU-1044-5301"
+    },
+    {
+      "variant_id": 5302,
+      "product_id": 1044,
+      "color": "Black",
+      "size": "36",
+      "stock": 25,
+      "sku": "SKU-1044-5302"
+    },
+    {
+      "variant_id": 5303,
+      "product_id": 1045,
+      "color": "Green",
+      "size": "40",
+      "stock": 45,
+      "sku": "SKU-1045-5303"
+    },
+    {
+      "variant_id": 5304,
+      "product_id": 1045,
+      "color": "Green",
+      "size": "37",
+      "stock": 6,
+      "sku": "SKU-1045-5304"
+    },
+    {
+      "variant_id": 5305,
+      "product_id": 1045,
+      "color": "Pink",
+      "size": "40",
+      "stock": 4,
+      "sku": "SKU-1045-5305"
+    },
+    {
+      "variant_id": 5306,
+      "product_id": 1045,
+      "color": "Pink",
+      "size": "37",
+      "stock": 42,
+      "sku": "SKU-1045-5306"
+    },
+    {
+      "variant_id": 5307,
+      "product_id": 1045,
+      "color": "Grey",
+      "size": "40",
+      "stock": 6,
+      "sku": "SKU-1045-5307"
+    },
+    {
+      "variant_id": 5308,
+      "product_id": 1045,
+      "color": "Grey",
+      "size": "37",
+      "stock": 26,
+      "sku": "SKU-1045-5308"
+    },
+    {
+      "variant_id": 5309,
+      "product_id": 1046,
+      "color": "Pink",
+      "size": "40",
+      "stock": 8,
+      "sku": "SKU-1046-5309"
+    },
+    {
+      "variant_id": 5310,
+      "product_id": 1046,
+      "color": "Pink",
+      "size": "42",
+      "stock": 6,
+      "sku": "SKU-1046-5310"
+    },
+    {
+      "variant_id": 5311,
+      "product_id": 1046,
+      "color": "Pink",
+      "size": "36",
+      "stock": 38,
+      "sku": "SKU-1046-5311"
+    },
+    {
+      "variant_id": 5312,
+      "product_id": 1046,
+      "color": "Pink",
+      "size": "44",
+      "stock": 42,
+      "sku": "SKU-1046-5312"
+    },
+    {
+      "variant_id": 5313,
+      "product_id": 1046,
+      "color": "Green",
+      "size": "40",
+      "stock": 5,
+      "sku": "SKU-1046-5313"
+    },
+    {
+      "variant_id": 5314,
+      "product_id": 1046,
+      "color": "Green",
+      "size": "42",
+      "stock": 49,
+      "sku": "SKU-1046-5314"
+    },
+    {
+      "variant_id": 5315,
+      "product_id": 1046,
+      "color": "Green",
+      "size": "36",
+      "stock": 5,
+      "sku": "SKU-1046-5315"
+    },
+    {
+      "variant_id": 5316,
+      "product_id": 1046,
+      "color": "Green",
+      "size": "44",
+      "stock": 32,
+      "sku": "SKU-1046-5316"
+    },
+    {
+      "variant_id": 5317,
+      "product_id": 1047,
+      "color": "Black",
+      "size": "29",
+      "stock": 6,
+      "sku": "SKU-1047-5317"
+    },
+    {
+      "variant_id": 5318,
+      "product_id": 1047,
+      "color": "Black",
+      "size": "37",
+      "stock": 39,
+      "sku": "SKU-1047-5318"
+    },
+    {
+      "variant_id": 5319,
+      "product_id": 1047,
+      "color": "White",
+      "size": "29",
+      "stock": 14,
+      "sku": "SKU-1047-5319"
+    },
+    {
+      "variant_id": 5320,
+      "product_id": 1047,
+      "color": "White",
+      "size": "37",
+      "stock": 31,
+      "sku": "SKU-1047-5320"
+    },
+    {
+      "variant_id": 5321,
+      "product_id": 1048,
+      "color": "Blue",
+      "size": "32",
+      "stock": 36,
+      "sku": "SKU-1048-5321"
+    },
+    {
+      "variant_id": 5322,
+      "product_id": 1048,
+      "color": "Blue",
+      "size": "40",
+      "stock": 47,
+      "sku": "SKU-1048-5322"
+    },
+    {
+      "variant_id": 5323,
+      "product_id": 1048,
+      "color": "Pink",
+      "size": "32",
+      "stock": 17,
+      "sku": "SKU-1048-5323"
+    },
+    {
+      "variant_id": 5324,
+      "product_id": 1048,
+      "color": "Pink",
+      "size": "40",
+      "stock": 10,
+      "sku": "SKU-1048-5324"
+    },
+    {
+      "variant_id": 5325,
+      "product_id": 1049,
+      "color": "Blue",
+      "size": "41",
+      "stock": 29,
+      "sku": "SKU-1049-5325"
+    },
+    {
+      "variant_id": 5326,
+      "product_id": 1049,
+      "color": "Blue",
+      "size": "31",
+      "stock": 17,
+      "sku": "SKU-1049-5326"
+    },
+    {
+      "variant_id": 5327,
+      "product_id": 1049,
+      "color": "Pink",
+      "size": "41",
+      "stock": 6,
+      "sku": "SKU-1049-5327"
+    },
+    {
+      "variant_id": 5328,
+      "product_id": 1049,
+      "color": "Pink",
+      "size": "31",
+      "stock": 7,
+      "sku": "SKU-1049-5328"
+    },
+    {
+      "variant_id": 5329,
+      "product_id": 1049,
+      "color": "White",
+      "size": "41",
+      "stock": 1,
+      "sku": "SKU-1049-5329"
+    },
+    {
+      "variant_id": 5330,
+      "product_id": 1049,
+      "color": "White",
+      "size": "31",
+      "stock": 27,
+      "sku": "SKU-1049-5330"
+    },
+    {
+      "variant_id": 5331,
+      "product_id": 1050,
+      "color": "Red",
+      "size": "32",
+      "stock": 18,
+      "sku": "SKU-1050-5331"
+    },
+    {
+      "variant_id": 5332,
+      "product_id": 1050,
+      "color": "Red",
+      "size": "29",
+      "stock": 39,
+      "sku": "SKU-1050-5332"
+    },
+    {
+      "variant_id": 5333,
+      "product_id": 1050,
+      "color": "Red",
+      "size": "44",
+      "stock": 41,
+      "sku": "SKU-1050-5333"
+    },
+    {
+      "variant_id": 5334,
+      "product_id": 1050,
+      "color": "Red",
+      "size": "37",
+      "stock": 45,
+      "sku": "SKU-1050-5334"
+    },
+    {
+      "variant_id": 5335,
+      "product_id": 1051,
+      "color": "Red",
+      "size": "37",
+      "stock": 14,
+      "sku": "SKU-1051-5335"
+    },
+    {
+      "variant_id": 5336,
+      "product_id": 1051,
+      "color": "Red",
+      "size": "28",
+      "stock": 20,
+      "sku": "SKU-1051-5336"
+    },
+    {
+      "variant_id": 5337,
+      "product_id": 1052,
+      "color": "White",
+      "size": "36",
+      "stock": 3,
+      "sku": "SKU-1052-5337"
+    },
+    {
+      "variant_id": 5338,
+      "product_id": 1052,
+      "color": "White",
+      "size": "44",
+      "stock": 36,
+      "sku": "SKU-1052-5338"
+    },
+    {
+      "variant_id": 5339,
+      "product_id": 1053,
+      "color": "Pink",
+      "size": "28",
+      "stock": 3,
+      "sku": "SKU-1053-5339"
+    },
+    {
+      "variant_id": 5340,
+      "product_id": 1053,
+      "color": "Pink",
+      "size": "31",
+      "stock": 20,
+      "sku": "SKU-1053-5340"
+    },
+    {
+      "variant_id": 5341,
+      "product_id": 1053,
+      "color": "Pink",
+      "size": "43",
+      "stock": 26,
+      "sku": "SKU-1053-5341"
+    },
+    {
+      "variant_id": 5342,
+      "product_id": 1054,
+      "color": "Black",
+      "size": "37",
+      "stock": 14,
+      "sku": "SKU-1054-5342"
+    },
+    {
+      "variant_id": 5343,
+      "product_id": 1054,
+      "color": "Black",
+      "size": "29",
+      "stock": 38,
+      "sku": "SKU-1054-5343"
+    },
+    {
+      "variant_id": 5344,
+      "product_id": 1054,
+      "color": "Black",
+      "size": "32",
+      "stock": 43,
+      "sku": "SKU-1054-5344"
+    },
+    {
+      "variant_id": 5345,
+      "product_id": 1054,
+      "color": "Blue",
+      "size": "37",
+      "stock": 6,
+      "sku": "SKU-1054-5345"
+    },
+    {
+      "variant_id": 5346,
+      "product_id": 1054,
+      "color": "Blue",
+      "size": "29",
+      "stock": 20,
+      "sku": "SKU-1054-5346"
+    },
+    {
+      "variant_id": 5347,
+      "product_id": 1054,
+      "color": "Blue",
+      "size": "32",
+      "stock": 14,
+      "sku": "SKU-1054-5347"
+    },
+    {
+      "variant_id": 5348,
+      "product_id": 1054,
+      "color": "White",
+      "size": "37",
+      "stock": 2,
+      "sku": "SKU-1054-5348"
+    },
+    {
+      "variant_id": 5349,
+      "product_id": 1054,
+      "color": "White",
+      "size": "29",
+      "stock": 44,
+      "sku": "SKU-1054-5349"
+    },
+    {
+      "variant_id": 5350,
+      "product_id": 1054,
+      "color": "White",
+      "size": "32",
+      "stock": 7,
+      "sku": "SKU-1054-5350"
+    },
+    {
+      "variant_id": 5351,
+      "product_id": 1055,
+      "color": "Red",
+      "size": "40",
+      "stock": 16,
+      "sku": "SKU-1055-5351"
+    },
+    {
+      "variant_id": 5352,
+      "product_id": 1055,
+      "color": "Red",
+      "size": "44",
+      "stock": 46,
+      "sku": "SKU-1055-5352"
+    },
+    {
+      "variant_id": 5353,
+      "product_id": 1055,
+      "color": "Red",
+      "size": "38",
+      "stock": 0,
+      "sku": "SKU-1055-5353"
+    },
+    {
+      "variant_id": 5354,
+      "product_id": 1055,
+      "color": "Black",
+      "size": "40",
+      "stock": 41,
+      "sku": "SKU-1055-5354"
+    },
+    {
+      "variant_id": 5355,
+      "product_id": 1055,
+      "color": "Black",
+      "size": "44",
+      "stock": 46,
+      "sku": "SKU-1055-5355"
+    },
+    {
+      "variant_id": 5356,
+      "product_id": 1055,
+      "color": "Black",
+      "size": "38",
+      "stock": 17,
+      "sku": "SKU-1055-5356"
+    },
+    {
+      "variant_id": 5357,
+      "product_id": 1055,
+      "color": "Green",
+      "size": "40",
+      "stock": 38,
+      "sku": "SKU-1055-5357"
+    },
+    {
+      "variant_id": 5358,
+      "product_id": 1055,
+      "color": "Green",
+      "size": "44",
+      "stock": 13,
+      "sku": "SKU-1055-5358"
+    },
+    {
+      "variant_id": 5359,
+      "product_id": 1055,
+      "color": "Green",
+      "size": "38",
+      "stock": 15,
+      "sku": "SKU-1055-5359"
+    },
+    {
+      "variant_id": 5360,
+      "product_id": 1056,
+      "color": "Pink",
+      "size": "32",
+      "stock": 46,
+      "sku": "SKU-1056-5360"
+    },
+    {
+      "variant_id": 5361,
+      "product_id": 1056,
+      "color": "Pink",
+      "size": "40",
+      "stock": 27,
+      "sku": "SKU-1056-5361"
+    },
+    {
+      "variant_id": 5362,
+      "product_id": 1057,
+      "color": "Pink",
+      "size": "40",
+      "stock": 38,
+      "sku": "SKU-1057-5362"
+    },
+    {
+      "variant_id": 5363,
+      "product_id": 1057,
+      "color": "Pink",
+      "size": "44",
+      "stock": 42,
+      "sku": "SKU-1057-5363"
+    },
+    {
+      "variant_id": 5364,
+      "product_id": 1057,
+      "color": "Pink",
+      "size": "41",
+      "stock": 28,
+      "sku": "SKU-1057-5364"
+    },
+    {
+      "variant_id": 5365,
+      "product_id": 1057,
+      "color": "Red",
+      "size": "40",
+      "stock": 21,
+      "sku": "SKU-1057-5365"
+    },
+    {
+      "variant_id": 5366,
+      "product_id": 1057,
+      "color": "Red",
+      "size": "44",
+      "stock": 32,
+      "sku": "SKU-1057-5366"
+    },
+    {
+      "variant_id": 5367,
+      "product_id": 1057,
+      "color": "Red",
+      "size": "41",
+      "stock": 3,
+      "sku": "SKU-1057-5367"
+    },
+    {
+      "variant_id": 5368,
+      "product_id": 1057,
+      "color": "Black",
+      "size": "40",
+      "stock": 42,
+      "sku": "SKU-1057-5368"
+    },
+    {
+      "variant_id": 5369,
+      "product_id": 1057,
+      "color": "Black",
+      "size": "44",
+      "stock": 50,
+      "sku": "SKU-1057-5369"
+    },
+    {
+      "variant_id": 5370,
+      "product_id": 1057,
+      "color": "Black",
+      "size": "41",
+      "stock": 31,
+      "sku": "SKU-1057-5370"
+    },
+    {
+      "variant_id": 5371,
+      "product_id": 1058,
+      "color": "Black",
+      "size": "32",
+      "stock": 11,
+      "sku": "SKU-1058-5371"
+    },
+    {
+      "variant_id": 5372,
+      "product_id": 1058,
+      "color": "Black",
+      "size": "39",
+      "stock": 21,
+      "sku": "SKU-1058-5372"
+    },
+    {
+      "variant_id": 5373,
+      "product_id": 1058,
+      "color": "Grey",
+      "size": "32",
+      "stock": 17,
+      "sku": "SKU-1058-5373"
+    },
+    {
+      "variant_id": 5374,
+      "product_id": 1058,
+      "color": "Grey",
+      "size": "39",
+      "stock": 34,
+      "sku": "SKU-1058-5374"
+    },
+    {
+      "variant_id": 5375,
+      "product_id": 1058,
+      "color": "Red",
+      "size": "32",
+      "stock": 46,
+      "sku": "SKU-1058-5375"
+    },
+    {
+      "variant_id": 5376,
+      "product_id": 1058,
+      "color": "Red",
+      "size": "39",
+      "stock": 37,
+      "sku": "SKU-1058-5376"
+    },
+    {
+      "variant_id": 5377,
+      "product_id": 1059,
+      "color": "Grey",
+      "size": "32",
+      "stock": 11,
+      "sku": "SKU-1059-5377"
+    },
+    {
+      "variant_id": 5378,
+      "product_id": 1059,
+      "color": "Grey",
+      "size": "36",
+      "stock": 44,
+      "sku": "SKU-1059-5378"
+    },
+    {
+      "variant_id": 5379,
+      "product_id": 1059,
+      "color": "Grey",
+      "size": "29",
+      "stock": 0,
+      "sku": "SKU-1059-5379"
+    },
+    {
+      "variant_id": 5380,
+      "product_id": 1059,
+      "color": "Grey",
+      "size": "40",
+      "stock": 30,
+      "sku": "SKU-1059-5380"
+    },
+    {
+      "variant_id": 5381,
+      "product_id": 1059,
+      "color": "Grey",
+      "size": "41",
+      "stock": 45,
+      "sku": "SKU-1059-5381"
+    },
+    {
+      "variant_id": 5382,
+      "product_id": 1060,
+      "color": "Green",
+      "size": "43",
+      "stock": 50,
+      "sku": "SKU-1060-5382"
+    },
+    {
+      "variant_id": 5383,
+      "product_id": 1060,
+      "color": "Green",
+      "size": "32",
+      "stock": 41,
+      "sku": "SKU-1060-5383"
+    },
+    {
+      "variant_id": 5384,
+      "product_id": 1060,
+      "color": "Pink",
+      "size": "43",
+      "stock": 42,
+      "sku": "SKU-1060-5384"
+    },
+    {
+      "variant_id": 5385,
+      "product_id": 1060,
+      "color": "Pink",
+      "size": "32",
+      "stock": 11,
+      "sku": "SKU-1060-5385"
+    },
+    {
+      "variant_id": 5386,
+      "product_id": 1060,
+      "color": "Blue",
+      "size": "43",
+      "stock": 33,
+      "sku": "SKU-1060-5386"
+    },
+    {
+      "variant_id": 5387,
+      "product_id": 1060,
+      "color": "Blue",
+      "size": "32",
+      "stock": 41,
+      "sku": "SKU-1060-5387"
+    },
+    {
+      "variant_id": 5388,
+      "product_id": 1061,
+      "color": "Grey",
+      "size": "43",
+      "stock": 5,
+      "sku": "SKU-1061-5388"
+    },
+    {
+      "variant_id": 5389,
+      "product_id": 1061,
+      "color": "Grey",
+      "size": "30",
+      "stock": 23,
+      "sku": "SKU-1061-5389"
+    },
+    {
+      "variant_id": 5390,
+      "product_id": 1061,
+      "color": "Grey",
+      "size": "40",
+      "stock": 42,
+      "sku": "SKU-1061-5390"
+    },
+    {
+      "variant_id": 5391,
+      "product_id": 1061,
+      "color": "Grey",
+      "size": "28",
+      "stock": 35,
+      "sku": "SKU-1061-5391"
+    },
+    {
+      "variant_id": 5392,
+      "product_id": 1061,
+      "color": "Red",
+      "size": "43",
+      "stock": 35,
+      "sku": "SKU-1061-5392"
+    },
+    {
+      "variant_id": 5393,
+      "product_id": 1061,
+      "color": "Red",
+      "size": "30",
+      "stock": 37,
+      "sku": "SKU-1061-5393"
+    },
+    {
+      "variant_id": 5394,
+      "product_id": 1061,
+      "color": "Red",
+      "size": "40",
+      "stock": 26,
+      "sku": "SKU-1061-5394"
+    },
+    {
+      "variant_id": 5395,
+      "product_id": 1061,
+      "color": "Red",
+      "size": "28",
+      "stock": 22,
+      "sku": "SKU-1061-5395"
+    },
+    {
+      "variant_id": 5396,
+      "product_id": 1061,
+      "color": "Blue",
+      "size": "43",
+      "stock": 21,
+      "sku": "SKU-1061-5396"
+    },
+    {
+      "variant_id": 5397,
+      "product_id": 1061,
+      "color": "Blue",
+      "size": "30",
+      "stock": 4,
+      "sku": "SKU-1061-5397"
+    },
+    {
+      "variant_id": 5398,
+      "product_id": 1061,
+      "color": "Blue",
+      "size": "40",
+      "stock": 37,
+      "sku": "SKU-1061-5398"
+    },
+    {
+      "variant_id": 5399,
+      "product_id": 1061,
+      "color": "Blue",
+      "size": "28",
+      "stock": 25,
+      "sku": "SKU-1061-5399"
+    },
+    {
+      "variant_id": 5400,
+      "product_id": 1062,
+      "color": "Black",
+      "size": "39",
+      "stock": 12,
+      "sku": "SKU-1062-5400"
+    },
+    {
+      "variant_id": 5401,
+      "product_id": 1062,
+      "color": "Black",
+      "size": "42",
+      "stock": 35,
+      "sku": "SKU-1062-5401"
+    },
+    {
+      "variant_id": 5402,
+      "product_id": 1062,
+      "color": "White",
+      "size": "39",
+      "stock": 38,
+      "sku": "SKU-1062-5402"
+    },
+    {
+      "variant_id": 5403,
+      "product_id": 1062,
+      "color": "White",
+      "size": "42",
+      "stock": 45,
+      "sku": "SKU-1062-5403"
+    },
+    {
+      "variant_id": 5404,
+      "product_id": 1062,
+      "color": "Blue",
+      "size": "39",
+      "stock": 20,
+      "sku": "SKU-1062-5404"
+    },
+    {
+      "variant_id": 5405,
+      "product_id": 1062,
+      "color": "Blue",
+      "size": "42",
+      "stock": 26,
+      "sku": "SKU-1062-5405"
+    },
+    {
+      "variant_id": 5406,
+      "product_id": 1063,
+      "color": "Black",
+      "size": "43",
+      "stock": 2,
+      "sku": "SKU-1063-5406"
+    },
+    {
+      "variant_id": 5407,
+      "product_id": 1063,
+      "color": "Black",
+      "size": "31",
+      "stock": 23,
+      "sku": "SKU-1063-5407"
+    },
+    {
+      "variant_id": 5408,
+      "product_id": 1063,
+      "color": "Black",
+      "size": "37",
+      "stock": 17,
+      "sku": "SKU-1063-5408"
+    },
+    {
+      "variant_id": 5409,
+      "product_id": 1063,
+      "color": "Black",
+      "size": "39",
+      "stock": 12,
+      "sku": "SKU-1063-5409"
+    },
+    {
+      "variant_id": 5410,
+      "product_id": 1063,
+      "color": "Blue",
+      "size": "43",
+      "stock": 10,
+      "sku": "SKU-1063-5410"
+    },
+    {
+      "variant_id": 5411,
+      "product_id": 1063,
+      "color": "Blue",
+      "size": "31",
+      "stock": 35,
+      "sku": "SKU-1063-5411"
+    },
+    {
+      "variant_id": 5412,
+      "product_id": 1063,
+      "color": "Blue",
+      "size": "37",
+      "stock": 16,
+      "sku": "SKU-1063-5412"
+    },
+    {
+      "variant_id": 5413,
+      "product_id": 1063,
+      "color": "Blue",
+      "size": "39",
+      "stock": 24,
+      "sku": "SKU-1063-5413"
+    },
+    {
+      "variant_id": 5414,
+      "product_id": 1064,
+      "color": "White",
+      "size": "28",
+      "stock": 7,
+      "sku": "SKU-1064-5414"
+    },
+    {
+      "variant_id": 5415,
+      "product_id": 1064,
+      "color": "White",
+      "size": "43",
+      "stock": 6,
+      "sku": "SKU-1064-5415"
+    },
+    {
+      "variant_id": 5416,
+      "product_id": 1064,
+      "color": "White",
+      "size": "30",
+      "stock": 48,
+      "sku": "SKU-1064-5416"
+    },
+    {
+      "variant_id": 5417,
+      "product_id": 1064,
+      "color": "White",
+      "size": "31",
+      "stock": 32,
+      "sku": "SKU-1064-5417"
+    },
+    {
+      "variant_id": 5418,
+      "product_id": 1064,
+      "color": "White",
+      "size": "38",
+      "stock": 25,
+      "sku": "SKU-1064-5418"
+    },
+    {
+      "variant_id": 5419,
+      "product_id": 1064,
+      "color": "Pink",
+      "size": "28",
+      "stock": 10,
+      "sku": "SKU-1064-5419"
+    },
+    {
+      "variant_id": 5420,
+      "product_id": 1064,
+      "color": "Pink",
+      "size": "43",
+      "stock": 39,
+      "sku": "SKU-1064-5420"
+    },
+    {
+      "variant_id": 5421,
+      "product_id": 1064,
+      "color": "Pink",
+      "size": "30",
+      "stock": 35,
+      "sku": "SKU-1064-5421"
+    },
+    {
+      "variant_id": 5422,
+      "product_id": 1064,
+      "color": "Pink",
+      "size": "31",
+      "stock": 29,
+      "sku": "SKU-1064-5422"
+    },
+    {
+      "variant_id": 5423,
+      "product_id": 1064,
+      "color": "Pink",
+      "size": "38",
+      "stock": 5,
+      "sku": "SKU-1064-5423"
+    },
+    {
+      "variant_id": 5424,
+      "product_id": 1065,
+      "color": "Grey",
+      "size": "31",
+      "stock": 0,
+      "sku": "SKU-1065-5424"
+    },
+    {
+      "variant_id": 5425,
+      "product_id": 1065,
+      "color": "Grey",
+      "size": "36",
+      "stock": 44,
+      "sku": "SKU-1065-5425"
+    },
+    {
+      "variant_id": 5426,
+      "product_id": 1066,
+      "color": "Black",
+      "size": "31",
+      "stock": 42,
+      "sku": "SKU-1066-5426"
+    },
+    {
+      "variant_id": 5427,
+      "product_id": 1066,
+      "color": "Black",
+      "size": "37",
+      "stock": 30,
+      "sku": "SKU-1066-5427"
+    },
+    {
+      "variant_id": 5428,
+      "product_id": 1066,
+      "color": "Black",
+      "size": "38",
+      "stock": 6,
+      "sku": "SKU-1066-5428"
+    },
+    {
+      "variant_id": 5429,
+      "product_id": 1066,
+      "color": "Black",
+      "size": "28",
+      "stock": 24,
+      "sku": "SKU-1066-5429"
+    },
+    {
+      "variant_id": 5430,
+      "product_id": 1066,
+      "color": "Grey",
+      "size": "31",
+      "stock": 20,
+      "sku": "SKU-1066-5430"
+    },
+    {
+      "variant_id": 5431,
+      "product_id": 1066,
+      "color": "Grey",
+      "size": "37",
+      "stock": 14,
+      "sku": "SKU-1066-5431"
+    },
+    {
+      "variant_id": 5432,
+      "product_id": 1066,
+      "color": "Grey",
+      "size": "38",
+      "stock": 7,
+      "sku": "SKU-1066-5432"
+    },
+    {
+      "variant_id": 5433,
+      "product_id": 1066,
+      "color": "Grey",
+      "size": "28",
+      "stock": 10,
+      "sku": "SKU-1066-5433"
+    },
+    {
+      "variant_id": 5434,
+      "product_id": 1067,
+      "color": "White",
+      "size": "31",
+      "stock": 39,
+      "sku": "SKU-1067-5434"
+    },
+    {
+      "variant_id": 5435,
+      "product_id": 1067,
+      "color": "White",
+      "size": "36",
+      "stock": 21,
+      "sku": "SKU-1067-5435"
+    },
+    {
+      "variant_id": 5436,
+      "product_id": 1067,
+      "color": "White",
+      "size": "29",
+      "stock": 9,
+      "sku": "SKU-1067-5436"
+    },
+    {
+      "variant_id": 5437,
+      "product_id": 1067,
+      "color": "White",
+      "size": "32",
+      "stock": 22,
+      "sku": "SKU-1067-5437"
+    },
+    {
+      "variant_id": 5438,
+      "product_id": 1067,
+      "color": "White",
+      "size": "40",
+      "stock": 41,
+      "sku": "SKU-1067-5438"
+    },
+    {
+      "variant_id": 5439,
+      "product_id": 1068,
+      "color": "Pink",
+      "size": "30",
+      "stock": 17,
+      "sku": "SKU-1068-5439"
+    },
+    {
+      "variant_id": 5440,
+      "product_id": 1068,
+      "color": "Pink",
+      "size": "32",
+      "stock": 41,
+      "sku": "SKU-1068-5440"
+    },
+    {
+      "variant_id": 5441,
+      "product_id": 1068,
+      "color": "Pink",
+      "size": "29",
+      "stock": 27,
+      "sku": "SKU-1068-5441"
+    },
+    {
+      "variant_id": 5442,
+      "product_id": 1068,
+      "color": "Black",
+      "size": "30",
+      "stock": 49,
+      "sku": "SKU-1068-5442"
+    },
+    {
+      "variant_id": 5443,
+      "product_id": 1068,
+      "color": "Black",
+      "size": "32",
+      "stock": 25,
+      "sku": "SKU-1068-5443"
+    },
+    {
+      "variant_id": 5444,
+      "product_id": 1068,
+      "color": "Black",
+      "size": "29",
+      "stock": 13,
+      "sku": "SKU-1068-5444"
+    },
+    {
+      "variant_id": 5445,
+      "product_id": 1068,
+      "color": "Green",
+      "size": "30",
+      "stock": 49,
+      "sku": "SKU-1068-5445"
+    },
+    {
+      "variant_id": 5446,
+      "product_id": 1068,
+      "color": "Green",
+      "size": "32",
+      "stock": 2,
+      "sku": "SKU-1068-5446"
+    },
+    {
+      "variant_id": 5447,
+      "product_id": 1068,
+      "color": "Green",
+      "size": "29",
+      "stock": 31,
+      "sku": "SKU-1068-5447"
+    },
+    {
+      "variant_id": 5448,
+      "product_id": 1069,
+      "color": "White",
+      "size": "29",
+      "stock": 36,
+      "sku": "SKU-1069-5448"
+    },
+    {
+      "variant_id": 5449,
+      "product_id": 1069,
+      "color": "White",
+      "size": "40",
+      "stock": 2,
+      "sku": "SKU-1069-5449"
+    },
+    {
+      "variant_id": 5450,
+      "product_id": 1069,
+      "color": "White",
+      "size": "36",
+      "stock": 42,
+      "sku": "SKU-1069-5450"
+    },
+    {
+      "variant_id": 5451,
+      "product_id": 1069,
+      "color": "White",
+      "size": "30",
+      "stock": 18,
+      "sku": "SKU-1069-5451"
+    },
+    {
+      "variant_id": 5452,
+      "product_id": 1069,
+      "color": "Green",
+      "size": "29",
+      "stock": 14,
+      "sku": "SKU-1069-5452"
+    },
+    {
+      "variant_id": 5453,
+      "product_id": 1069,
+      "color": "Green",
+      "size": "40",
+      "stock": 10,
+      "sku": "SKU-1069-5453"
+    },
+    {
+      "variant_id": 5454,
+      "product_id": 1069,
+      "color": "Green",
+      "size": "36",
+      "stock": 36,
+      "sku": "SKU-1069-5454"
+    },
+    {
+      "variant_id": 5455,
+      "product_id": 1069,
+      "color": "Green",
+      "size": "30",
+      "stock": 47,
+      "sku": "SKU-1069-5455"
+    },
+    {
+      "variant_id": 5456,
+      "product_id": 1070,
+      "color": "Green",
+      "size": "39",
+      "stock": 49,
+      "sku": "SKU-1070-5456"
+    },
+    {
+      "variant_id": 5457,
+      "product_id": 1070,
+      "color": "Green",
+      "size": "29",
+      "stock": 22,
+      "sku": "SKU-1070-5457"
+    },
+    {
+      "variant_id": 5458,
+      "product_id": 1070,
+      "color": "Green",
+      "size": "30",
+      "stock": 20,
+      "sku": "SKU-1070-5458"
+    },
+    {
+      "variant_id": 5459,
+      "product_id": 1070,
+      "color": "White",
+      "size": "39",
+      "stock": 22,
+      "sku": "SKU-1070-5459"
+    },
+    {
+      "variant_id": 5460,
+      "product_id": 1070,
+      "color": "White",
+      "size": "29",
+      "stock": 26,
+      "sku": "SKU-1070-5460"
+    },
+    {
+      "variant_id": 5461,
+      "product_id": 1070,
+      "color": "White",
+      "size": "30",
+      "stock": 36,
+      "sku": "SKU-1070-5461"
+    },
+    {
+      "variant_id": 5462,
+      "product_id": 1070,
+      "color": "Pink",
+      "size": "39",
+      "stock": 46,
+      "sku": "SKU-1070-5462"
+    },
+    {
+      "variant_id": 5463,
+      "product_id": 1070,
+      "color": "Pink",
+      "size": "29",
+      "stock": 27,
+      "sku": "SKU-1070-5463"
+    },
+    {
+      "variant_id": 5464,
+      "product_id": 1070,
+      "color": "Pink",
+      "size": "30",
+      "stock": 37,
+      "sku": "SKU-1070-5464"
+    },
+    {
+      "variant_id": 5465,
+      "product_id": 1071,
+      "color": "White",
+      "size": "44",
+      "stock": 21,
+      "sku": "SKU-1071-5465"
+    },
+    {
+      "variant_id": 5466,
+      "product_id": 1071,
+      "color": "White",
+      "size": "41",
+      "stock": 49,
+      "sku": "SKU-1071-5466"
+    },
+    {
+      "variant_id": 5467,
+      "product_id": 1071,
+      "color": "White",
+      "size": "42",
+      "stock": 0,
+      "sku": "SKU-1071-5467"
+    },
+    {
+      "variant_id": 5468,
+      "product_id": 1071,
+      "color": "White",
+      "size": "37",
+      "stock": 26,
+      "sku": "SKU-1071-5468"
+    },
+    {
+      "variant_id": 5469,
+      "product_id": 1071,
+      "color": "Grey",
+      "size": "44",
+      "stock": 46,
+      "sku": "SKU-1071-5469"
+    },
+    {
+      "variant_id": 5470,
+      "product_id": 1071,
+      "color": "Grey",
+      "size": "41",
+      "stock": 25,
+      "sku": "SKU-1071-5470"
+    },
+    {
+      "variant_id": 5471,
+      "product_id": 1071,
+      "color": "Grey",
+      "size": "42",
+      "stock": 45,
+      "sku": "SKU-1071-5471"
+    },
+    {
+      "variant_id": 5472,
+      "product_id": 1071,
+      "color": "Grey",
+      "size": "37",
+      "stock": 28,
+      "sku": "SKU-1071-5472"
+    },
+    {
+      "variant_id": 5473,
+      "product_id": 1071,
+      "color": "Pink",
+      "size": "44",
+      "stock": 24,
+      "sku": "SKU-1071-5473"
+    },
+    {
+      "variant_id": 5474,
+      "product_id": 1071,
+      "color": "Pink",
+      "size": "41",
+      "stock": 2,
+      "sku": "SKU-1071-5474"
+    },
+    {
+      "variant_id": 5475,
+      "product_id": 1071,
+      "color": "Pink",
+      "size": "42",
+      "stock": 36,
+      "sku": "SKU-1071-5475"
+    },
+    {
+      "variant_id": 5476,
+      "product_id": 1071,
+      "color": "Pink",
+      "size": "37",
+      "stock": 48,
+      "sku": "SKU-1071-5476"
+    },
+    {
+      "variant_id": 5477,
+      "product_id": 1072,
+      "color": "Grey",
+      "size": "32",
+      "stock": 2,
+      "sku": "SKU-1072-5477"
+    },
+    {
+      "variant_id": 5478,
+      "product_id": 1072,
+      "color": "Grey",
+      "size": "29",
+      "stock": 50,
+      "sku": "SKU-1072-5478"
+    },
+    {
+      "variant_id": 5479,
+      "product_id": 1072,
+      "color": "Green",
+      "size": "32",
+      "stock": 34,
+      "sku": "SKU-1072-5479"
+    },
+    {
+      "variant_id": 5480,
+      "product_id": 1072,
+      "color": "Green",
+      "size": "29",
+      "stock": 48,
+      "sku": "SKU-1072-5480"
+    },
+    {
+      "variant_id": 5481,
+      "product_id": 1072,
+      "color": "Pink",
+      "size": "32",
+      "stock": 36,
+      "sku": "SKU-1072-5481"
+    },
+    {
+      "variant_id": 5482,
+      "product_id": 1072,
+      "color": "Pink",
+      "size": "29",
+      "stock": 42,
+      "sku": "SKU-1072-5482"
+    },
+    {
+      "variant_id": 5483,
+      "product_id": 1073,
+      "color": "Grey",
+      "size": "28",
+      "stock": 12,
+      "sku": "SKU-1073-5483"
+    },
+    {
+      "variant_id": 5484,
+      "product_id": 1073,
+      "color": "Grey",
+      "size": "43",
+      "stock": 45,
+      "sku": "SKU-1073-5484"
+    },
+    {
+      "variant_id": 5485,
+      "product_id": 1073,
+      "color": "Grey",
+      "size": "31",
+      "stock": 9,
+      "sku": "SKU-1073-5485"
+    },
+    {
+      "variant_id": 5486,
+      "product_id": 1073,
+      "color": "Grey",
+      "size": "29",
+      "stock": 20,
+      "sku": "SKU-1073-5486"
+    },
+    {
+      "variant_id": 5487,
+      "product_id": 1073,
+      "color": "Blue",
+      "size": "28",
+      "stock": 4,
+      "sku": "SKU-1073-5487"
+    },
+    {
+      "variant_id": 5488,
+      "product_id": 1073,
+      "color": "Blue",
+      "size": "43",
+      "stock": 36,
+      "sku": "SKU-1073-5488"
+    },
+    {
+      "variant_id": 5489,
+      "product_id": 1073,
+      "color": "Blue",
+      "size": "31",
+      "stock": 45,
+      "sku": "SKU-1073-5489"
+    },
+    {
+      "variant_id": 5490,
+      "product_id": 1073,
+      "color": "Blue",
+      "size": "29",
+      "stock": 7,
+      "sku": "SKU-1073-5490"
+    },
+    {
+      "variant_id": 5491,
+      "product_id": 1073,
+      "color": "Black",
+      "size": "28",
+      "stock": 18,
+      "sku": "SKU-1073-5491"
+    },
+    {
+      "variant_id": 5492,
+      "product_id": 1073,
+      "color": "Black",
+      "size": "43",
+      "stock": 47,
+      "sku": "SKU-1073-5492"
+    },
+    {
+      "variant_id": 5493,
+      "product_id": 1073,
+      "color": "Black",
+      "size": "31",
+      "stock": 43,
+      "sku": "SKU-1073-5493"
+    },
+    {
+      "variant_id": 5494,
+      "product_id": 1073,
+      "color": "Black",
+      "size": "29",
+      "stock": 4,
+      "sku": "SKU-1073-5494"
+    },
+    {
+      "variant_id": 5495,
+      "product_id": 1074,
+      "color": "White",
+      "size": "40",
+      "stock": 8,
+      "sku": "SKU-1074-5495"
+    },
+    {
+      "variant_id": 5496,
+      "product_id": 1074,
+      "color": "White",
+      "size": "38",
+      "stock": 47,
+      "sku": "SKU-1074-5496"
+    },
+    {
+      "variant_id": 5497,
+      "product_id": 1074,
+      "color": "White",
+      "size": "29",
+      "stock": 37,
+      "sku": "SKU-1074-5497"
+    },
+    {
+      "variant_id": 5498,
+      "product_id": 1075,
+      "color": "Green",
+      "size": "28",
+      "stock": 18,
+      "sku": "SKU-1075-5498"
+    },
+    {
+      "variant_id": 5499,
+      "product_id": 1075,
+      "color": "Green",
+      "size": "38",
+      "stock": 9,
+      "sku": "SKU-1075-5499"
+    },
+    {
+      "variant_id": 5500,
+      "product_id": 1075,
+      "color": "Red",
+      "size": "28",
+      "stock": 21,
+      "sku": "SKU-1075-5500"
+    },
+    {
+      "variant_id": 5501,
+      "product_id": 1075,
+      "color": "Red",
+      "size": "38",
+      "stock": 45,
+      "sku": "SKU-1075-5501"
+    },
+    {
+      "variant_id": 5502,
+      "product_id": 1076,
+      "color": "White",
+      "size": "44",
+      "stock": 45,
+      "sku": "SKU-1076-5502"
+    },
+    {
+      "variant_id": 5503,
+      "product_id": 1076,
+      "color": "White",
+      "size": "40",
+      "stock": 47,
+      "sku": "SKU-1076-5503"
+    },
+    {
+      "variant_id": 5504,
+      "product_id": 1076,
+      "color": "Green",
+      "size": "44",
+      "stock": 4,
+      "sku": "SKU-1076-5504"
+    },
+    {
+      "variant_id": 5505,
+      "product_id": 1076,
+      "color": "Green",
+      "size": "40",
+      "stock": 50,
+      "sku": "SKU-1076-5505"
+    },
+    {
+      "variant_id": 5506,
+      "product_id": 1076,
+      "color": "Grey",
+      "size": "44",
+      "stock": 50,
+      "sku": "SKU-1076-5506"
+    },
+    {
+      "variant_id": 5507,
+      "product_id": 1076,
+      "color": "Grey",
+      "size": "40",
+      "stock": 16,
+      "sku": "SKU-1076-5507"
+    },
+    {
+      "variant_id": 5508,
+      "product_id": 1077,
+      "color": "Grey",
+      "size": "43",
+      "stock": 37,
+      "sku": "SKU-1077-5508"
+    },
+    {
+      "variant_id": 5509,
+      "product_id": 1077,
+      "color": "Grey",
+      "size": "44",
+      "stock": 8,
+      "sku": "SKU-1077-5509"
+    },
+    {
+      "variant_id": 5510,
+      "product_id": 1077,
+      "color": "Black",
+      "size": "43",
+      "stock": 15,
+      "sku": "SKU-1077-5510"
+    },
+    {
+      "variant_id": 5511,
+      "product_id": 1077,
+      "color": "Black",
+      "size": "44",
+      "stock": 5,
+      "sku": "SKU-1077-5511"
+    },
+    {
+      "variant_id": 5512,
+      "product_id": 1078,
+      "color": "Black",
+      "size": "40",
+      "stock": 28,
+      "sku": "SKU-1078-5512"
+    },
+    {
+      "variant_id": 5513,
+      "product_id": 1078,
+      "color": "Black",
+      "size": "28",
+      "stock": 20,
+      "sku": "SKU-1078-5513"
+    },
+    {
+      "variant_id": 5514,
+      "product_id": 1078,
+      "color": "Black",
+      "size": "36",
+      "stock": 14,
+      "sku": "SKU-1078-5514"
+    },
+    {
+      "variant_id": 5515,
+      "product_id": 1078,
+      "color": "Black",
+      "size": "44",
+      "stock": 43,
+      "sku": "SKU-1078-5515"
+    },
+    {
+      "variant_id": 5516,
+      "product_id": 1079,
+      "color": "Black",
+      "size": "28",
+      "stock": 49,
+      "sku": "SKU-1079-5516"
+    },
+    {
+      "variant_id": 5517,
+      "product_id": 1079,
+      "color": "Black",
+      "size": "29",
+      "stock": 14,
+      "sku": "SKU-1079-5517"
+    },
+    {
+      "variant_id": 5518,
+      "product_id": 1079,
+      "color": "Pink",
+      "size": "28",
+      "stock": 32,
+      "sku": "SKU-1079-5518"
+    },
+    {
+      "variant_id": 5519,
+      "product_id": 1079,
+      "color": "Pink",
+      "size": "29",
+      "stock": 17,
+      "sku": "SKU-1079-5519"
+    }
+  ],
+  "brands": [
+    {
+      "brand_id": 5,
+      "name": "Brand 5",
+      "description": null
+    },
+    {
+      "brand_id": 3,
+      "name": "Brand 3",
+      "description": null
+    },
+    {
+      "brand_id": 2,
+      "name": "Brand 2",
+      "description": null
+    },
+    {
+      "brand_id": 4,
+      "name": "Brand 4",
+      "description": null
+    },
+    {
+      "brand_id": 1,
+      "name": "Brand 1",
+      "description": null
+    }
+  ],
+  "categories": [
+    {
+      "category_id": 100,
+      "name": "Men",
+      "parent_id": null
+    },
+    {
+      "category_id": 101,
+      "name": "Women",
+      "parent_id": null
+    },
+    {
+      "category_id": 102,
+      "name": "Kids",
+      "parent_id": null
+    },
+    {
+      "category_id": 5,
+      "name": "Category 5",
+      "description": null,
+      "parent_id": 100,
+      "slug": "category-5"
+    },
+    {
+      "category_id": 10,
+      "name": "Category 10",
+      "description": null,
+      "parent_id": 101,
+      "slug": "category-10"
+    },
+    {
+      "category_id": 9,
+      "name": "Category 9",
+      "description": null,
+      "parent_id": 102,
+      "slug": "category-9"
+    },
+    {
+      "category_id": 7,
+      "name": "Category 7",
+      "description": null,
+      "parent_id": 100,
+      "slug": "category-7"
+    },
+    {
+      "category_id": 12,
+      "name": "Category 12",
+      "description": null,
+      "parent_id": 101,
+      "slug": "category-12"
+    },
+    {
+      "category_id": 6,
+      "name": "Category 6",
+      "description": null,
+      "parent_id": 102,
+      "slug": "category-6"
+    },
+    {
+      "category_id": 8,
+      "name": "Category 8",
+      "description": null,
+      "parent_id": 100,
+      "slug": "category-8"
+    },
+    {
+      "category_id": 4,
+      "name": "Category 4",
+      "description": null,
+      "parent_id": 101,
+      "slug": "category-4"
+    },
+    {
+      "category_id": 11,
+      "name": "Category 11",
+      "description": null,
+      "parent_id": 102,
+      "slug": "category-11"
     }
   ]
 }

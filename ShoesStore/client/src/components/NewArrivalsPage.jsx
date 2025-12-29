@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ChevronRight } from "lucide-react";
 import { SlidersHorizontal } from "lucide-react";
 import ProductCard from "./ProductCard.jsx";
+import { getProducts } from "../ultilities/api";
 export default function NewArrivalsPage() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -13,9 +14,8 @@ export default function NewArrivalsPage() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const res = await fetch("http://localhost:5000/products?isHot=true");
-        const data = await res.json();
-        setProducts(data);
+        const all = await getProducts();
+        setProducts(all.filter((p) => p.isHot));
       } catch (err) {
         console.error("Error fetching products:", err);
       } finally {

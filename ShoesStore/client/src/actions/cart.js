@@ -1,16 +1,18 @@
 // actions/cart.js
-export const addToCart = (id, info) => {
+export const addToCart = (item) => {
     return {
         type: "ADD_TO_CART",
-        id: id,
-        info: info,
+        payload: item,
     };
-}
-export const updateQuantity = (id, quantity = 1) => {
+};
+
+export const updateQuantity = (id, quantity) => {
     return {
         type: "UPDATE_QUANTITY",
-        id: id,
-        info: info,
-        quantity: quantity
+        payload: { id, quantity },
     };
-}
+};
+
+export const removeItem = (id) => ({ type: 'REMOVE_ITEM', payload: { id } });
+
+export const clearCart = () => ({ type: 'CLEAR_CART' });

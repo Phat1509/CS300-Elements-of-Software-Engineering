@@ -1,8 +1,14 @@
-// src/components/Header.jsx
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Header() {
+  const count = useSelector((state) =>
+    state.cart && state.cart.items
+      ? state.cart.items.reduce((s, i) => s + (i.quantity || 0), 0)
+      : 0
+  );
+
   return (
     <header className="hd">
       <div className="container hd-in">
@@ -41,7 +47,11 @@ export default function Header() {
 
         {/* Actions (right) */}
         <div className="actions">
-          <Link to="/wishlist" className="btn btn-outline" aria-label="Wishlist">
+          <Link
+            to="/wishlist"
+            className="btn btn-outline"
+            aria-label="Wishlist"
+          >
             ♡
           </Link>
 
@@ -54,7 +64,7 @@ export default function Header() {
             <Link to="/cart" className="btn btn-outline" aria-label="Cart">
               🛒
             </Link>
-            <span className="badge cart-badge">3</span>
+            <span className="badge cart-badge">{count}</span>
           </div>
         </div>
       </div>

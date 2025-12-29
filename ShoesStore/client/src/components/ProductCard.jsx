@@ -3,22 +3,17 @@ import { useSelector, useDispatch } from "react-redux";
 import React from "react";
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "lucide-react";
-import { addToCart,updateQuantity } from "../actions/cart.js";
+import { addToCart, updateQuantity } from "../actions/cart.js";
 
 export default function ProductCard({ id, image, name, price, extra }) {
-  const cart = useSelector((state) => state.cartReducer);
+  const cart = useSelector((state) => state.cart.items);
 
   const dispatch = useDispatch();
 
   const handleAddToCart = (e) => {
-    if(cart.some(item => item.id === id)) {
-      dispatch(updateQuantity(id, 1)); 
-    }
-    else{
-      dispatch(addToCart({ id, name, price, image }));
-    }
-    e.preventDefault(); 
-    e.stopPropagation(); 
+    dispatch(addToCart({ id, name, price, image }));
+    e.preventDefault();
+    e.stopPropagation();
   };
 
   const CardInner = (

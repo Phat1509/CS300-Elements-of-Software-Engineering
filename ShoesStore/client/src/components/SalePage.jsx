@@ -1,6 +1,7 @@
 // src/components/SalePage.js
 import React, { useEffect, useState, useMemo } from "react";
 import ProductCard from "./ProductCard";
+import { getProducts } from "../ultilities/api";
 
 export default function SalePage() {
   const [products, setProducts] = useState([]);
@@ -11,10 +12,9 @@ export default function SalePage() {
   // Fetch từ JSON Server
   useEffect(() => {
     setLoading(true);
-    fetch("http://localhost:5000/products?discountPercent=20&_sort=discount&_order=desc")
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(data);
+    getProducts()
+      .then((all) => {
+        setProducts(all.filter((p) => (p.discountPercent || 0) >= 20));
         setLoading(false);
       })
       .catch((err) => {
@@ -25,7 +25,10 @@ export default function SalePage() {
 
   // Filter theo price
   const filteredProducts = useMemo(
-    () => products.filter((p) => typeof p.price === "number" && p.price <= maxPrice),
+    () =>
+      products.filter(
+        (p) => typeof p.price === "number" && p.price <= maxPrice
+      ),
     [products, maxPrice]
   );
 
@@ -54,7 +57,9 @@ export default function SalePage() {
       {/* Breadcrumb */}
       <section className="men-bc">
         <div className="container">
-          <a href="/" className="men-bc-link">Home</a>
+          <a href="/" className="men-bc-link">
+            Home
+          </a>
           <span className="men-bc-sep">›</span>
           <span>Sale</span>
         </div>
@@ -65,7 +70,8 @@ export default function SalePage() {
         <div className="container">
           <h1 className="men-title">Sale — Up to 30% Off</h1>
           <p className="men-sub">
-            Don't miss out on amazing deals! Shop our sale collection and save big on premium footwear.
+            Don't miss out on amazing deals! Shop our sale collection and save
+            big on premium footwear.
           </p>
         </div>
       </section>
@@ -77,7 +83,13 @@ export default function SalePage() {
           <div className="men-card">
             <div className="men-card-top">
               <h3>Filters</h3>
-              <button className="link-btn" type="button" onClick={handleClearAll}>Clear All</button>
+              <button
+                className="link-btn"
+                type="button"
+                onClick={handleClearAll}
+              >
+                Clear All
+              </button>
             </div>
 
             {/* Price range */}
@@ -92,7 +104,10 @@ export default function SalePage() {
                 onChange={(e) => setMaxPrice(Number(e.target.value))}
                 aria-label="Filter by maximum price"
               />
-              <div className="men-range"><span>$0</span><span>${maxPrice}</span></div>
+              <div className="men-range">
+                <span>$0</span>
+                <span>${maxPrice}</span>
+              </div>
             </div>
           </div>
         </aside>
@@ -101,11 +116,16 @@ export default function SalePage() {
         <div className="men-main">
           <div className="men-toolbar">
             <p className="muted">
-              {loading ? "Loading products..." : `Showing ${filteredProducts.length} products on sale`}
+              {loading
+                ? "Loading products..."
+                : `Showing ${filteredProducts.length} products on sale`}
             </p>
             <div className="men-sort">
               <span className="muted">Sort by:</span>
-              <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+              >
                 <option value="discount">Biggest Discount</option>
                 <option value="price-low">Price: Low to High</option>
                 <option value="price-high">Price: High to Low</option>
@@ -116,11 +136,25 @@ export default function SalePage() {
           </div>
 
           <div className="men-grid">
-            {!loading && sortedProducts.map((p) => <ProductCard key={p.id} {...p} />)}
+            {!loading &&
+              sortedProducts.map((p) => (
+                <ProductCard
+                  key={p.id}
+                  id={p.id}
+                  image={p.image}
+                  name={p.name}
+                  price={p.price}
+                  extra={
+                    p.discountPercent ? `-${p.discountPercent}%` : undefined
+                  }
+                />
+              ))}
           </div>
 
           <div className="men-load">
-            <button className="outline-btn" type="button">Load More Products</button>
+            <button className="outline-btn" type="button">
+              Load More Products
+            </button>
           </div>
         </div>
       </section>

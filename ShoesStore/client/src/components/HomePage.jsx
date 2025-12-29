@@ -1,21 +1,25 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
+import { getProducts } from "../ultilities/api";
 
 export default function HomePage() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/products?isHot=true")
-      .then(res => res.json())
-      .then(data => {
-        setProducts(data);
+    let mounted = true;
+    getProducts()
+      .then((data) => {
+        if (!mounted) return;
+        // show featured / hot products by default
+        setProducts(data.filter((p) => p.isHot));
         setLoading(false);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Error fetching products:", err);
         setLoading(false);
       });
+    return () => (mounted = false);
   }, []);
 
   if (loading) {
@@ -28,12 +32,24 @@ export default function HomePage() {
       <section className="cats">
         <div className="container">
           <nav className="cat-nav">
-            <a className="cat-item active" href="#">All Shoes</a>
-            <a className="cat-item" href="#">Running</a>
-            <a className="cat-item" href="#">Casual</a>
-            <a className="cat-item" href="#">Athletic</a>
-            <a className="cat-item" href="#">Basketball</a>
-            <a className="cat-item" href="#">Lifestyle</a>
+            <a className="cat-item active" href="#">
+              All Shoes
+            </a>
+            <a className="cat-item" href="#">
+              Running
+            </a>
+            <a className="cat-item" href="#">
+              Casual
+            </a>
+            <a className="cat-item" href="#">
+              Athletic
+            </a>
+            <a className="cat-item" href="#">
+              Basketball
+            </a>
+            <a className="cat-item" href="#">
+              Lifestyle
+            </a>
           </nav>
         </div>
       </section>
@@ -54,19 +70,28 @@ export default function HomePage() {
           </div>
 
           <div className="grid-products">
-            {products.map(product => (
+            {products.map((product) => (
               <ProductCard
                 key={product.id}
+                id={product.id}
                 image={product.image}
                 name={product.name}
                 price={product.price}
-                extra={product.discountPercent ? `-${product.discountPercent}%` : product.isNew ? "NEW" : ""}
+                extra={
+                  product.discountPercent
+                    ? `-${product.discountPercent}%`
+                    : product.isNew
+                    ? "NEW"
+                    : ""
+                }
               />
             ))}
           </div>
 
           <div className="center">
-            <button className="btn btn-outline btn-lg">Load More Products</button>
+            <button className="btn btn-outline btn-lg">
+              Load More Products
+            </button>
           </div>
         </div>
       </section>
