@@ -11,9 +11,9 @@ export default function ProductCard({ id, image, name, price, extra }) {
   const dispatch = useDispatch();
 
   const handleAddToCart = (e) => {
-    dispatch(addToCart({ id, name, price, image }));
     e.preventDefault();
     e.stopPropagation();
+    dispatch(addToCart({ id, name, price, image, quantity: 1 }));
   };
 
   const CardInner = (

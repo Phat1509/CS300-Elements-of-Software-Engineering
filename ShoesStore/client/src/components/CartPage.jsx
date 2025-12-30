@@ -27,6 +27,13 @@ export default function CartPage() {
     }
   };
 
+  const handleCheckout = async () => {
+    if (items.length === 0) return;
+    // For now, do not write to db.json from client. Checkout will clear local cart only.
+    dispatch(clearCart());
+    alert("Checkout simulated locally. Admin will process orders.");
+  };
+
   const handleRemove = (id) => {
     dispatch(removeItem(id));
   };
@@ -220,6 +227,7 @@ export default function CartPage() {
                   <button
                     className="btn btn-primary btn-lg"
                     style={{ marginTop: 12 }}
+                    onClick={handleCheckout}
                   >
                     Checkout
                   </button>

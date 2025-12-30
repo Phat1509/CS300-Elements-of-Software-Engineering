@@ -29,12 +29,24 @@ export default function ProductDetailPage() {
     getProductById(id).then((p) => {
       if (!mounted) return;
       if (!p) return;
-      const colors = (p.colors || []).map((c) => ({
-        name: c,
-        value: "",
-        image: p.images && p.images[0] ? p.images[0] : p.image,
-      }));
-      const sizes = p.sizes || [];
+      const rawColors = p.colors || [];
+      const colors = rawColors.length
+        ? rawColors.map((c, idx) => ({
+            name: c,
+            value: "",
+            image:
+              (p.images && p.images[idx]) ||
+              (p.images && p.images[0]) ||
+              p.image,
+          }))
+        : [
+            {
+              name: "Default",
+              value: "",
+              image: (p.images && p.images[0]) || p.image || null,
+            },
+          ];
+      const sizes = Array.isArray(p.sizes) ? p.sizes : [];
       const features = [
         "Lightweight build",
         "Comfort padding",
@@ -51,16 +63,18 @@ export default function ProductDetailPage() {
         rating: p.rating,
         reviews: p.reviews,
         isNew: p.isNew,
-        inStock: p.stock > 0,
+        inStock: Number.isFinite(p.stock) ? p.stock > 0 : true,
         description: p.description,
         features,
         sizes,
         colors,
         specifications,
-        images: p.images || (p.image ? [p.image] : []),
+        images:
+          p.images && p.images.length ? p.images : p.image ? [p.image] : [],
       };
       setProductData(mapped);
-      setMainImage(mapped.images[0]);
+      setMainImage(mapped.images[0] || (colors[0] && colors[0].image) || null);
+      if (sizes.length > 0) setSelectedSize(sizes[0]);
     });
     return () => {
       mounted = false;
@@ -69,14 +83,23 @@ export default function ProductDetailPage() {
 
   const handleColorChange = (index) => {
     setSelectedColor(index);
-    if (productData && productData.images && productData.images[index])
-      setMainImage(productData.images[index]);
+    if (productData) {
+      const colorImage =
+        productData.colors &&
+        productData.colors[index] &&
+        productData.colors[index].image;
+      const img =
+        colorImage ||
+        (productData.images && productData.images[index]) ||
+        productData.images[0];
+      if (img) setMainImage(img);
+    }
   };
 
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
-    if (!selectedSize) {
+    if (productData.sizes && productData.sizes.length > 0 && !selectedSize) {
       alert("Please select a size");
       return;
     }
@@ -86,7 +109,7 @@ export default function ProductDetailPage() {
       price: productData.price,
       image: productData.images && productData.images[0],
       size: selectedSize,
-      color: productData.colors[selectedColor]?.name,
+      color: productData.colors[selectedColor]?.name || null,
       quantity,
     };
     dispatch(addToCart(payload));
@@ -187,13 +210,13 @@ export default function ProductDetailPage() {
             <div className="pd-row">
               <span className="pd-label">Color</span>
               <span className="muted">
-                {productData.colors[selectedColor].name}
+                {productData.colors[selectedColor]?.name || ""}
               </span>
             </div>
             <div className="pd-colors">
               {productData.colors.map((c, i) => (
                 <button
-                  key={c.name}
+                  key={`${c.name}-${i}`}
                   title={c.name}
                   onClick={() => handleColorChange(i)}
                   className={`pd-color ${i === selectedColor ? "active" : ""}`}
