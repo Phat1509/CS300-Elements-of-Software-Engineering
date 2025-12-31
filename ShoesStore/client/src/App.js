@@ -14,6 +14,8 @@ import ProductDetailPage from "./components/user/ProductDetailPage";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import ProductsAdmin from "./components/admin/ProductsAdmin";
 import OrdersAdmin from "./components/admin/OrdersAdmin";
+import AdminLogin from "./components/admin/AdminLogin";
+import RequireAdmin from "./components/admin/RequireAdmin";
 import NewArrivalsPage from "./components/user/NewArrivalsPage";
 import SignInPage from "./components/user/SignInPage";
 import SignUpPage from "./components/user/SignUpPage";
@@ -43,9 +45,10 @@ export default function App() {
         <Route path="/wishlist" element={<WishlistPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/product/:id" element={<ProductDetailPage />} />
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/admin/products" element={<ProductsAdmin />} />
-        <Route path="/admin/orders" element={<OrdersAdmin />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin" element={<RequireAdmin><AdminDashboard /></RequireAdmin>} />
+        <Route path="/admin/products" element={<RequireAdmin><ProductsAdmin /></RequireAdmin>} />
+        <Route path="/admin/orders" element={<RequireAdmin><OrdersAdmin /></RequireAdmin>} />
 
         {/* Auth */}
         <Route path="/signin" element={<SignInPage />} />
