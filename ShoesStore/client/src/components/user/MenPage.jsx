@@ -4,18 +4,31 @@ import { getProducts } from "../../ultilities/api";
 
 export default function MenPage() {
   const [products, setProducts] = useState([]);
-  const [maxPrice, setMaxPrice] = useState(200);
+  const [maxPrice, setMaxPrice] = useState(4000000);
   const [sortBy, setSortBy] = useState("popular");
 
   // Fetch data from API
   useEffect(() => {
-    getProducts()
-      .then((all) => setProducts(all.filter((p) => p.gender === "men")))
-      .catch((err) => console.error(err));
+    const fetchProducts = async () => {
+      try {
+        const all = await getProducts();
+
+        // category_id = 3 → Men
+        const menProducts = all.filter(
+          (p) => p.category_id === 3 && p.is_active
+        );
+        console.log(menProducts);
+        setProducts(menProducts);
+      } catch (err) {
+        console.error("Error fetching men products:", err);
+      }
+    };
+
+    fetchProducts();
   }, []);
 
   const filteredProducts = useMemo(
-    () => products.filter((p) => p.isActive && p.price <= maxPrice),
+    () => products.filter((p) => p.price <= maxPrice),
     [products, maxPrice]
   );
 
@@ -26,17 +39,17 @@ export default function MenPage() {
         return arr.sort((a, b) => a.price - b.price);
       case "price-high":
         return arr.sort((a, b) => b.price - a.price);
-      case "rating":
-        return arr.sort((a, b) => (b.rating || 0) - (a.rating || 0));
       case "newest":
-        return arr.sort((a, b) => b.id - a.id);
+        return arr.sort(
+          (a, b) => new Date(b.created_at) - new Date(a.created_at)
+        );
       case "popular":
       default:
-        return arr.sort((a, b) => (b.reviews || 0) - (a.reviews || 0));
+        return arr;
     }
   }, [filteredProducts, sortBy]);
 
-  const handleClearAll = () => setMaxPrice(200);
+  const handleClearAll = () => setMaxPrice(4000000);
 
   return (
     <main className="men-wrap">
@@ -64,33 +77,9 @@ export default function MenPage() {
           <div className="men-card">
             <div className="men-card-top">
               <h3>Filters</h3>
-              <button
-                className="link-btn"
-                type="button"
-                onClick={handleClearAll}
-              >
+              <button className="link-btn" onClick={handleClearAll}>
                 Clear All
               </button>
-            </div>
-
-            <div className="men-block">
-              <h4>Category</h4>
-              <div className="men-checks">
-                {[
-                  "All",
-                  "Running",
-                  "Athletic",
-                  "Casual",
-                  "Basketball",
-                  "Dress Shoes",
-                  "Boots",
-                ].map((c) => (
-                  <label key={c} className="men-check">
-                    <input type="checkbox" />
-                    <span>{c}</span>
-                  </label>
-                ))}
-              </div>
             </div>
 
             <div className="men-block">
@@ -98,14 +87,14 @@ export default function MenPage() {
               <input
                 type="range"
                 min="0"
-                max="200"
-                step="10"
+                max="4000000"
+                step="100000"
                 value={maxPrice}
                 onChange={(e) => setMaxPrice(Number(e.target.value))}
               />
               <div className="men-range">
-                <span>$0</span>
-                <span>${maxPrice}</span>
+                <span>0₫</span>
+                <span>{maxPrice.toLocaleString()}₫</span>
               </div>
             </div>
           </div>
@@ -120,11 +109,10 @@ export default function MenPage() {
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
               >
-                <option value="popular">Most Popular</option>
+                <option value="popular">Default</option>
                 <option value="newest">Newest First</option>
                 <option value="price-low">Price: Low to High</option>
                 <option value="price-high">Price: High to Low</option>
-                <option value="rating">Highest Rated</option>
               </select>
             </div>
           </div>
@@ -134,16 +122,16 @@ export default function MenPage() {
               <ProductCard
                 key={p.id}
                 id={p.id}
-                image={p.image}
+                image={p.image_url}
                 name={p.name}
                 price={p.price}
-                extra={p.discountPercent ? `-${p.discountPercent}%` : undefined}
+                extra={
+                  p.discount_percentage
+                    ? `-${p.discount_percentage}%`
+                    : undefined
+                }
               />
             ))}
-          </div>
-
-          <div className="men-load">
-            <button className="outline-btn">Load More Products</button>
           </div>
         </div>
       </section>

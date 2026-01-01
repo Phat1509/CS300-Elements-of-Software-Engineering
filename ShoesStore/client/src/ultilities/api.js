@@ -1,9 +1,7 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:3001";
-
 const api = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: "http://localhost:3001",
   headers: {
     "Content-Type": "application/json"
   }
@@ -11,87 +9,87 @@ const api = axios.create({
 
 /* ===================== PRODUCTS ===================== */
 
-// Lấy toàn bộ product (có thể filter)
-export const getProducts = (params = {}) => {
-  return api.get("/products", { params });
+// Lấy toàn bộ products
+export const getProducts = async (params = {}) => {
+  const res = await api.get("/products", { params });
+  return res.data; // ✅ ARRAY
 };
 
 // Lấy product theo slug
 export const getProductBySlug = async (slug) => {
-  const res = await api.get("/products", {
-    params: { slug }
-  });
-  return res.data[0]; // json-server trả về array
+  const res = await api.get("/products", { params: { slug } });
+  return res.data[0] || null; // ✅ OBJECT
 };
 
 // Lấy variants theo product_id
-export const getProductVariants = (productId) => {
-  return api.get("/product_variants", {
+export const getProductVariants = async (productId) => {
+  const res = await api.get("/product_variants", {
     params: { product_id: productId }
   });
+  return res.data; // ✅ ARRAY
 };
 
-// Lấy product + variants (dùng cho ProductDetail)
+// Product detail (product + variants)
 export const getProductDetail = async (slug) => {
   const product = await getProductBySlug(slug);
   if (!product) return null;
 
-  const variantsRes = await getProductVariants(product.product_id);
+  const variants = await getProductVariants(product.product_id);
 
   return {
     ...product,
-    variants: variantsRes.data
+    variants
   };
 };
 
 /* ===================== CATEGORIES ===================== */
 
-export const getCategories = () => api.get("/categories");
+export const getCategories = async () => {
+  const res = await api.get("/categories");
+  return res.data;
+};
 
 /* ===================== CART ===================== */
 
-// Lấy cart của user
 export const getCartByUserId = async (userId) => {
   const res = await api.get("/cart", {
     params: { user_id: userId }
   });
-  return res.data[0];
+  return res.data[0] || null;
 };
 
-// Lấy cart items theo cart_id
-export const getCartItems = (cartId) => {
-  return api.get("/cart_item", {
+export const getCartItems = async (cartId) => {
+  const res = await api.get("/cart_item", {
     params: { cart_id: cartId }
   });
+  return res.data;
 };
 
-// Add item vào cart (THEO VARIANT)
 export const addToCart = async ({ cartId, variantId, quantity }) => {
-  return api.post("/cart_item", {
+  const res = await api.post("/cart_item", {
     cart_id: cartId,
     variant_id: variantId,
     quantity
   });
+  return res.data;
 };
 
-// Update quantity
-export const updateCartItem = (id, quantity) => {
-  return api.patch(`/cart_item/${id}`, { quantity });
+export const updateCartItem = async (id, quantity) => {
+  const res = await api.patch(`/cart_item/${id}`, { quantity });
+  return res.data;
 };
 
-// Remove item
-export const removeCartItem = (id) => {
-  return api.delete(`/cart_item/${id}`);
+export const removeCartItem = async (id) => {
+  const res = await api.delete(`/cart_item/${id}`);
+  return res.data;
 };
 
 /* ===================== ORDERS ===================== */
 
 export const createOrder = async (order, orderItems) => {
-  // 1. tạo order
   const orderRes = await api.post("/orders", order);
   const orderId = orderRes.data.order_id;
 
-  // 2. tạo order_item
   await Promise.all(
     orderItems.map((item) =>
       api.post("/order_item", {
@@ -106,7 +104,10 @@ export const createOrder = async (order, orderItems) => {
   return orderRes.data;
 };
 
-export const getOrders = () => api.get("/orders");
+export const getOrders = async () => {
+  const res = await api.get("/orders");
+  return res.data;
+};
 
 /* ===================== AUTH (MOCK) ===================== */
 
@@ -117,27 +118,42 @@ export const login = async ({ email, password }) => {
   return res.data[0] || null;
 };
 
-export const register = (user) => {
-  return api.post("/users", user);
+export const register = async (user) => {
+  const res = await api.post("/users", user);
+  return res.data;
 };
 
 /* ===================== WISHLIST ===================== */
 
-export const getWishlist = (userId) =>
-  api.get("/wishlists", { params: { user_id: userId } });
+export const getWishlist = async (userId) => {
+  const res = await api.get("/wishlists", {
+    params: { user_id: userId }
+  });
+  return res.data;
+};
 
-export const addWishlist = (data) =>
-  api.post("/wishlists", data);
+export const addWishlist = async (data) => {
+  const res = await api.post("/wishlists", data);
+  return res.data;
+};
 
-export const removeWishlist = (id) =>
-  api.delete(`/wishlists/${id}`);
+export const removeWishlist = async (id) => {
+  const res = await api.delete(`/wishlists/${id}`);
+  return res.data;
+};
 
 /* ===================== REVIEWS ===================== */
 
-export const getReviewsByProduct = (productId) =>
-  api.get("/reviews", { params: { product_id: productId } });
+export const getReviewsByProduct = async (productId) => {
+  const res = await api.get("/reviews", {
+    params: { product_id: productId }
+  });
+  return res.data;
+};
 
-export const addReview = (review) =>
-  api.post("/reviews", review);
+export const addReview = async (review) => {
+  const res = await api.post("/reviews", review);
+  return res.data;
+};
 
 export default api;
