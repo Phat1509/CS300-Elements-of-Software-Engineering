@@ -17,10 +17,9 @@ export default function NewArrivalsPage() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const res = await getProducts();
-        console.log("PRODUCTS:", res.data);
-        // KHÔNG filter is_active khi mock
-        setProducts(res.data);
+        const data = await getProducts(); // ✅ ARRAY
+        console.log("PRODUCTS:", data);
+        setProducts(data);
       } catch (err) {
         console.error("Error fetching products:", err);
       } finally {
@@ -46,7 +45,7 @@ export default function NewArrivalsPage() {
       case "price-high":
         return arr.sort((a, b) => b.price - a.price);
       default:
-        // newest (mock): product_id lớn hơn = mới hơn
+        // newest: product_id lớn hơn = mới hơn
         return arr.sort((a, b) => b.product_id - a.product_id);
     }
   }, [displayed, sortBy]);

@@ -13,9 +13,9 @@ export default function MenPage() {
       try {
         const all = await getProducts();
 
-        // category_id = 3 → Men
+        // category_id = 1 → Men
         const menProducts = all.filter(
-          (p) => p.category_id === 3 && p.is_active
+          (p) => p.category_id === 1 && p.is_active
         );
         console.log(menProducts);
         setProducts(menProducts);
