@@ -12,7 +12,7 @@ const api = axios.create({
 // Lấy toàn bộ products
 export const getProducts = async (params = {}) => {
   const res = await api.get("/products", { params });
-  return res.data; // ✅ ARRAY
+  return res.data;
 };
 
 // Lấy product theo slug

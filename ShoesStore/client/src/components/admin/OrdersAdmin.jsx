@@ -1,47 +1,87 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import adminApi from "../../ultilities/adminApi";
+import AdminLayout from "./AdminLayout";
 
 export default function OrdersAdmin() {
   const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let mounted = true;
+    setLoading(true);
+
     adminApi
       .getOrders()
       .then((o) => {
         if (mounted) setOrders(o || []);
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => mounted && setLoading(false));
+
     return () => {
       mounted = false;
     };
   }, []);
 
+  const stats = useMemo(() => {
+    const total = orders.length;
+    const items = orders.reduce((acc, o) => acc + ((o.items && o.items.length) || 0), 0);
+    return { total, items };
+  }, [orders]);
+
   return (
-    <div className="container" style={{ padding: 24 }}>
-      <h1>Orders (Admin)</h1>
-      {orders.length === 0 ? (
-        <p>No orders found</p>
+    <AdminLayout title="Orders">
+      {/* Header stats */}
+      <div className="admin-stats">
+        <div className="admin-stat-card">
+          <div className="admin-stat-label">Total orders</div>
+          <div className="admin-stat-value">{stats.total}</div>
+        </div>
+        <div className="admin-stat-card">
+          <div className="admin-stat-label">Total items</div>
+          <div className="admin-stat-value">{stats.items}</div>
+        </div>
+      </div>
+
+      {/* Content */}
+      {loading ? (
+        <div className="muted">Loading orders...</div>
+      ) : orders.length === 0 ? (
+        <div className="admin-empty">
+          <h3 style={{ marginTop: 0 }}>No orders found</h3>
+          <p className="muted" style={{ margin: 0 }}>
+            When customers check out, orders will appear here.
+          </p>
+        </div>
       ) : (
-        <div style={{ display: "grid", gap: 8 }}>
-          {orders.map((o) => (
-            <div
-              key={o.id}
-              style={{ border: "1px solid #eee", padding: 12, borderRadius: 8 }}
-            >
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div>
-                  <strong>Order #{o.id}</strong>
-                  <div className="muted">
-                    Items: {o.items && o.items.length}
-                  </div>
-                </div>
-                <div className="muted">{o.created_at}</div>
-              </div>
-            </div>
-          ))}
+        <div className="admin-table-wrap">
+          <table className="admin-table">
+            <thead>
+              <tr>
+                <th style={{ width: 120 }}>Order</th>
+                <th style={{ width: 120 }}>Items</th>
+                <th>Created</th>
+                <th style={{ width: 140 }}>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {orders.map((o) => (
+                <tr key={o.id}>
+                  <td>
+                    <strong>#{o.id}</strong>
+                  </td>
+                  <td className="muted">{(o.items && o.items.length) || 0}</td>
+                  <td className="muted">{o.created_at || "-"}</td>
+                  <td>
+                    {}
+                    <span className="admin-badge admin-badge-warn">Pending</span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
-    </div>
+    </AdminLayout>
   );
 }

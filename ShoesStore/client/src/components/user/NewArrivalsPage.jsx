@@ -1,3 +1,4 @@
+// client/src/components/user/NewArrivalsPage.jsx
 import React, { useEffect, useState, useMemo } from "react";
 import { ChevronRight, SlidersHorizontal } from "lucide-react";
 import ProductCard from "./ProductCard";

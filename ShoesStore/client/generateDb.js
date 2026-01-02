@@ -6,7 +6,7 @@ const VARIANT_PER_PRODUCT = 6;
 const sizes = ["39", "40", "41", "42", "43"];
 const colors = ["White", "Black", "Red"];
 
-const orderStatus = ["PENDING", "PAID", "SHIPPED", "DELIVERED"];
+const orderStatus = ["PENDING", "PAID", "SHIPPED", "DELIVERED", "CANCELLED"];
 const paymentMethods = ["COD", "STRIPE", "PAYSTACK"];
 
 const db = {
