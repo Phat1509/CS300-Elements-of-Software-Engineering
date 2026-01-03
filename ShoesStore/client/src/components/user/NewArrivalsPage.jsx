@@ -168,9 +168,9 @@ export default function NewArrivalsPage() {
             </div>
 
             <div className="center">
-              <button className="btn btn-outline btn-lg">
+              {/* <button className="btn btn-outline btn-lg">
                 Load More Products
-              </button>
+              </button> */}
             </div>
           </main>
         </div>

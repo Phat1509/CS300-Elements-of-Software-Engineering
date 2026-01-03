@@ -1,10 +1,11 @@
+// client/src/ultilities/api.js
 import axios from "axios";
 
+const API_URL = "http://localhost:3001"; // Lưu ý: Port này phải khớp với json-server đang chạy
+
 const api = axios.create({
-  baseURL: "http://localhost:3001",
-  headers: {
-    "Content-Type": "application/json"
-  }
+  baseURL: API_URL,
+  headers: { "Content-Type": "application/json" },
 });
 
 /* ===================== PRODUCTS ===================== */
@@ -49,7 +50,7 @@ export const getCategories = async () => {
   return res.data;
 };
 
-/* ===================== CART ===================== */
+/* ===================== CART (CORE LOGIC) ===================== */
 
 export const getCartByUserId = async (userId) => {
   const res = await api.get("/cart", {
@@ -58,11 +59,47 @@ export const getCartByUserId = async (userId) => {
   return res.data[0] || null;
 };
 
+// Hàm này đã được nâng cấp để Manual JOIN data
 export const getCartItems = async (cartId) => {
-  const res = await api.get("/cart_item", {
-    params: { cart_id: cartId }
-  });
-  return res.data;
+  try {
+    const res = await api.get("/cart_item", {
+      params: { cart_id: cartId }
+    });
+    const items = res.data;
+
+    // Lấy chi tiết từng item (Variant + Product info)
+    const detailedItems = await Promise.all(
+      items.map(async (item) => {
+        // 1. Lấy thông tin Variant (Size, Color)
+        const variantRes = await api.get(`/product_variants?variant_id=${item.variant_id}`);
+        const variant = variantRes.data[0];
+
+        if (!variant) return null; // Nếu variant bị xóa thì bỏ qua
+
+        // 2. Lấy thông tin Product (Name, Image, Price)
+        const productRes = await api.get(`/products?product_id=${variant.product_id}`);
+        const product = productRes.data[0];
+
+        if (!product) return null;
+
+        return {
+          ...item, // Giữ lại id, quantity của cart_item
+          product_name: product.name,
+          price: product.price,
+          image: product.image_url,
+          size: variant.size,
+          color: variant.color,
+          slug: product.slug, // Để link tới trang detail
+          totalPrice: product.price * item.quantity,
+        };
+      })
+    );
+
+    return detailedItems.filter((i) => i !== null);
+  } catch (error) {
+    console.error("Error getting cart details:", error);
+    return [];
+  }
 };
 
 export const addToCart = async ({ cartId, variantId, quantity }) => {
@@ -109,17 +146,32 @@ export const getOrders = async () => {
   return res.data;
 };
 
-/* ===================== AUTH (MOCK) ===================== */
+/* ===================== AUTH (REAL MOCK) ===================== */
 
-export const login = async ({ email, password }) => {
+// Đổi tên thành loginUser để rõ ràng
+export const loginUser = async (email, password) => {
   const res = await api.get("/users", {
     params: { email, password }
   });
   return res.data[0] || null;
 };
 
-export const register = async (user) => {
-  const res = await api.post("/users", user);
+// Đổi tên thành registerUser và thêm check trùng email
+export const registerUser = async (user) => {
+  // 1. Check tồn tại
+  const check = await api.get("/users", { params: { email: user.email } });
+  if (check.data.length > 0) {
+    throw new Error("Email already exists");
+  }
+
+  // 2. Tạo mới
+  const newUser = {
+    ...user,
+    roles: ["USER"], // Mặc định là user thường
+    created_at: new Date().toISOString()
+  };
+
+  const res = await api.post("/users", newUser);
   return res.data;
 };
 

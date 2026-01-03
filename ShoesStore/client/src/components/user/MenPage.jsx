@@ -13,9 +13,9 @@ export default function MenPage() {
       try {
         const all = await getProducts();
 
-        // category_id = 1 → Men
+        // category_id = 3 → Men
         const menProducts = all.filter(
-          (p) => p.category_id === 1 && p.is_active
+          (p) => p.category_id === 3 && p.is_active
         );
         console.log(menProducts);
         setProducts(menProducts);
@@ -120,8 +120,8 @@ export default function MenPage() {
           <div className="men-grid">
             {sortedProducts.map((p) => (
               <ProductCard
-                key={p.id}
-                id={p.id}
+                key={p.product_id}
+                id={p.product_id}
                 image={p.image_url}
                 name={p.name}
                 price={p.price}

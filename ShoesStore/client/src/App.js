@@ -1,6 +1,8 @@
+// client/src/App.js 
 import React from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-
+import { AuthProvider } from "./context/AuthContext";
+import { CartProvider } from "./context/CartContext";
 import Header from "./components/user/Header";
 import Footer from "./components/user/Footer";
 import Hero from "./components/user/Hero";
@@ -16,6 +18,8 @@ import NewArrivalsPage from "./components/user/NewArrivalsPage";
 import SignInPage from "./components/user/SignInPage";
 import SignUpPage from "./components/user/SignUpPage";
 import LegalPage from "./components/user/LegalPage";
+import OrderDetailPage from "./components/user/OrderDetailPage";
+import OrdersTrackingPage from "./components/user/OrdersTrackingPage";
 
 import AdminDashboard from "./components/admin/AdminDashboard";
 import ProductsAdmin from "./components/admin/ProductsAdmin";
@@ -54,7 +58,8 @@ function AppRoutes() {
         <Route path="/wishlist" element={<WishlistPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/product/:id" element={<ProductDetailPage />} />
-
+        <Route path="/orders" element={<OrdersTrackingPage />} />
+        <Route path="/order/:id" element={<OrderDetailPage />} />
         {/* Auth (user) */}
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
@@ -96,7 +101,11 @@ function AppRoutes() {
 export default function App() {
   return (
     <BrowserRouter>
-      <AppRoutes />
+      <AuthProvider>
+        <CartProvider>
+          <AppRoutes />
+        </CartProvider>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

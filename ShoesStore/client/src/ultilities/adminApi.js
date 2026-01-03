@@ -1,3 +1,4 @@
+// client/src/ultilities/adminApi.js
 const BASE = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
 async function safeJson(res) {

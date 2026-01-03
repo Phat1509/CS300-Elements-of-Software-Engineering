@@ -3,22 +3,22 @@
     {
       "brand_id": 1,
       "name": "Nike",
-      "description": "Nike brand"
+      "description": "Nike represents generic sport fashion."
     },
     {
       "brand_id": 2,
       "name": "Adidas",
-      "description": "Adidas brand"
+      "description": "Adidas represents generic sport fashion."
     },
     {
       "brand_id": 3,
       "name": "Puma",
-      "description": "Puma brand"
+      "description": "Puma represents generic sport fashion."
     },
     {
       "brand_id": 4,
       "name": "Converse",
-      "description": "Converse brand"
+      "description": "Converse represents generic sport fashion."
     }
   ],
   "categories": [
@@ -26,21 +26,21 @@
       "category_id": 1,
       "name": "Men",
       "slug": "men",
-      "description": null,
+      "description": "Men's Fashion",
       "parent_id": null
     },
     {
       "category_id": 2,
       "name": "Women",
       "slug": "women",
-      "description": null,
+      "description": "Women's Fashion",
       "parent_id": null
     },
     {
       "category_id": 3,
       "name": "Sneakers",
       "slug": "sneakers",
-      "description": null,
+      "description": "All Sneakers",
       "parent_id": 1
     }
   ],
@@ -49,651 +49,651 @@
       "product_id": 1,
       "name": "Sneaker Model 1",
       "slug": "sneaker-model-1",
-      "description": "High quality sneaker number 1",
+      "description": "High quality sneaker number 1. Breathable material, perfect for running and casual wear.",
       "price": 1550000,
       "discount_percentage": null,
       "image_url": "/images/product-1.jpg",
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.619Z"
+      "created_at": "2026-01-03T05:44:10.297Z"
     },
     {
       "product_id": 2,
       "name": "Sneaker Model 2",
       "slug": "sneaker-model-2",
-      "description": "High quality sneaker number 2",
+      "description": "High quality sneaker number 2. Breathable material, perfect for running and casual wear.",
       "price": 1600000,
       "discount_percentage": null,
       "image_url": "/images/product-2.jpg",
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 3,
       "name": "Sneaker Model 3",
       "slug": "sneaker-model-3",
-      "description": "High quality sneaker number 3",
+      "description": "High quality sneaker number 3. Breathable material, perfect for running and casual wear.",
       "price": 1650000,
       "discount_percentage": null,
       "image_url": "/images/product-3.jpg",
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 4,
       "name": "Sneaker Model 4",
       "slug": "sneaker-model-4",
-      "description": "High quality sneaker number 4",
+      "description": "High quality sneaker number 4. Breathable material, perfect for running and casual wear.",
       "price": 1700000,
       "discount_percentage": null,
       "image_url": "/images/product-4.jpg",
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 5,
       "name": "Sneaker Model 5",
       "slug": "sneaker-model-5",
-      "description": "High quality sneaker number 5",
+      "description": "High quality sneaker number 5. Breathable material, perfect for running and casual wear.",
       "price": 1750000,
       "discount_percentage": 10,
       "image_url": "/images/product-5.jpg",
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 6,
       "name": "Sneaker Model 6",
       "slug": "sneaker-model-6",
-      "description": "High quality sneaker number 6",
+      "description": "High quality sneaker number 6. Breathable material, perfect for running and casual wear.",
       "price": 1800000,
       "discount_percentage": null,
       "image_url": "/images/product-6.jpg",
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 7,
       "name": "Sneaker Model 7",
       "slug": "sneaker-model-7",
-      "description": "High quality sneaker number 7",
+      "description": "High quality sneaker number 7. Breathable material, perfect for running and casual wear.",
       "price": 1850000,
       "discount_percentage": null,
       "image_url": "/images/product-7.jpg",
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 8,
       "name": "Sneaker Model 8",
       "slug": "sneaker-model-8",
-      "description": "High quality sneaker number 8",
+      "description": "High quality sneaker number 8. Breathable material, perfect for running and casual wear.",
       "price": 1900000,
       "discount_percentage": null,
       "image_url": "/images/product-8.jpg",
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 9,
       "name": "Sneaker Model 9",
       "slug": "sneaker-model-9",
-      "description": "High quality sneaker number 9",
+      "description": "High quality sneaker number 9. Breathable material, perfect for running and casual wear.",
       "price": 1950000,
       "discount_percentage": null,
       "image_url": "/images/product-9.jpg",
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 10,
       "name": "Sneaker Model 10",
       "slug": "sneaker-model-10",
-      "description": "High quality sneaker number 10",
+      "description": "High quality sneaker number 10. Breathable material, perfect for running and casual wear.",
       "price": 2000000,
       "discount_percentage": 10,
       "image_url": "/images/product-10.jpg",
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 11,
       "name": "Sneaker Model 11",
       "slug": "sneaker-model-11",
-      "description": "High quality sneaker number 11",
+      "description": "High quality sneaker number 11. Breathable material, perfect for running and casual wear.",
       "price": 2050000,
       "discount_percentage": null,
       "image_url": "/images/product-11.jpg",
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 12,
       "name": "Sneaker Model 12",
       "slug": "sneaker-model-12",
-      "description": "High quality sneaker number 12",
+      "description": "High quality sneaker number 12. Breathable material, perfect for running and casual wear.",
       "price": 2100000,
       "discount_percentage": null,
       "image_url": "/images/product-12.jpg",
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 13,
       "name": "Sneaker Model 13",
       "slug": "sneaker-model-13",
-      "description": "High quality sneaker number 13",
+      "description": "High quality sneaker number 13. Breathable material, perfect for running and casual wear.",
       "price": 2150000,
       "discount_percentage": null,
       "image_url": "/images/product-13.jpg",
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 14,
       "name": "Sneaker Model 14",
       "slug": "sneaker-model-14",
-      "description": "High quality sneaker number 14",
+      "description": "High quality sneaker number 14. Breathable material, perfect for running and casual wear.",
       "price": 2200000,
       "discount_percentage": null,
       "image_url": "/images/product-14.jpg",
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 15,
       "name": "Sneaker Model 15",
       "slug": "sneaker-model-15",
-      "description": "High quality sneaker number 15",
+      "description": "High quality sneaker number 15. Breathable material, perfect for running and casual wear.",
       "price": 2250000,
       "discount_percentage": 10,
       "image_url": "/images/product-15.jpg",
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 16,
       "name": "Sneaker Model 16",
       "slug": "sneaker-model-16",
-      "description": "High quality sneaker number 16",
+      "description": "High quality sneaker number 16. Breathable material, perfect for running and casual wear.",
       "price": 2300000,
       "discount_percentage": null,
       "image_url": "/images/product-16.jpg",
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 17,
       "name": "Sneaker Model 17",
       "slug": "sneaker-model-17",
-      "description": "High quality sneaker number 17",
+      "description": "High quality sneaker number 17. Breathable material, perfect for running and casual wear.",
       "price": 2350000,
       "discount_percentage": null,
       "image_url": "/images/product-17.jpg",
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 18,
       "name": "Sneaker Model 18",
       "slug": "sneaker-model-18",
-      "description": "High quality sneaker number 18",
+      "description": "High quality sneaker number 18. Breathable material, perfect for running and casual wear.",
       "price": 2400000,
       "discount_percentage": null,
       "image_url": "/images/product-18.jpg",
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 19,
       "name": "Sneaker Model 19",
       "slug": "sneaker-model-19",
-      "description": "High quality sneaker number 19",
+      "description": "High quality sneaker number 19. Breathable material, perfect for running and casual wear.",
       "price": 2450000,
       "discount_percentage": null,
       "image_url": "/images/product-19.jpg",
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 20,
       "name": "Sneaker Model 20",
       "slug": "sneaker-model-20",
-      "description": "High quality sneaker number 20",
+      "description": "High quality sneaker number 20. Breathable material, perfect for running and casual wear.",
       "price": 2500000,
       "discount_percentage": 10,
       "image_url": "/images/product-20.jpg",
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 21,
       "name": "Sneaker Model 21",
       "slug": "sneaker-model-21",
-      "description": "High quality sneaker number 21",
+      "description": "High quality sneaker number 21. Breathable material, perfect for running and casual wear.",
       "price": 2550000,
       "discount_percentage": null,
       "image_url": "/images/product-21.jpg",
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 22,
       "name": "Sneaker Model 22",
       "slug": "sneaker-model-22",
-      "description": "High quality sneaker number 22",
+      "description": "High quality sneaker number 22. Breathable material, perfect for running and casual wear.",
       "price": 2600000,
       "discount_percentage": null,
       "image_url": "/images/product-22.jpg",
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 23,
       "name": "Sneaker Model 23",
       "slug": "sneaker-model-23",
-      "description": "High quality sneaker number 23",
+      "description": "High quality sneaker number 23. Breathable material, perfect for running and casual wear.",
       "price": 2650000,
       "discount_percentage": null,
       "image_url": "/images/product-23.jpg",
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 24,
       "name": "Sneaker Model 24",
       "slug": "sneaker-model-24",
-      "description": "High quality sneaker number 24",
+      "description": "High quality sneaker number 24. Breathable material, perfect for running and casual wear.",
       "price": 2700000,
       "discount_percentage": null,
       "image_url": "/images/product-24.jpg",
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 25,
       "name": "Sneaker Model 25",
       "slug": "sneaker-model-25",
-      "description": "High quality sneaker number 25",
+      "description": "High quality sneaker number 25. Breathable material, perfect for running and casual wear.",
       "price": 2750000,
       "discount_percentage": 10,
       "image_url": "/images/product-25.jpg",
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 26,
       "name": "Sneaker Model 26",
       "slug": "sneaker-model-26",
-      "description": "High quality sneaker number 26",
+      "description": "High quality sneaker number 26. Breathable material, perfect for running and casual wear.",
       "price": 2800000,
       "discount_percentage": null,
       "image_url": "/images/product-26.jpg",
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 27,
       "name": "Sneaker Model 27",
       "slug": "sneaker-model-27",
-      "description": "High quality sneaker number 27",
+      "description": "High quality sneaker number 27. Breathable material, perfect for running and casual wear.",
       "price": 2850000,
       "discount_percentage": null,
       "image_url": "/images/product-27.jpg",
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 28,
       "name": "Sneaker Model 28",
       "slug": "sneaker-model-28",
-      "description": "High quality sneaker number 28",
+      "description": "High quality sneaker number 28. Breathable material, perfect for running and casual wear.",
       "price": 2900000,
       "discount_percentage": null,
       "image_url": "/images/product-28.jpg",
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 29,
       "name": "Sneaker Model 29",
       "slug": "sneaker-model-29",
-      "description": "High quality sneaker number 29",
+      "description": "High quality sneaker number 29. Breathable material, perfect for running and casual wear.",
       "price": 2950000,
       "discount_percentage": null,
       "image_url": "/images/product-29.jpg",
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 30,
       "name": "Sneaker Model 30",
       "slug": "sneaker-model-30",
-      "description": "High quality sneaker number 30",
+      "description": "High quality sneaker number 30. Breathable material, perfect for running and casual wear.",
       "price": 3000000,
       "discount_percentage": 10,
       "image_url": "/images/product-30.jpg",
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 31,
       "name": "Sneaker Model 31",
       "slug": "sneaker-model-31",
-      "description": "High quality sneaker number 31",
+      "description": "High quality sneaker number 31. Breathable material, perfect for running and casual wear.",
       "price": 3050000,
       "discount_percentage": null,
       "image_url": "/images/product-31.jpg",
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 32,
       "name": "Sneaker Model 32",
       "slug": "sneaker-model-32",
-      "description": "High quality sneaker number 32",
+      "description": "High quality sneaker number 32. Breathable material, perfect for running and casual wear.",
       "price": 3100000,
       "discount_percentage": null,
       "image_url": "/images/product-32.jpg",
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 33,
       "name": "Sneaker Model 33",
       "slug": "sneaker-model-33",
-      "description": "High quality sneaker number 33",
+      "description": "High quality sneaker number 33. Breathable material, perfect for running and casual wear.",
       "price": 3150000,
       "discount_percentage": null,
       "image_url": "/images/product-33.jpg",
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 34,
       "name": "Sneaker Model 34",
       "slug": "sneaker-model-34",
-      "description": "High quality sneaker number 34",
+      "description": "High quality sneaker number 34. Breathable material, perfect for running and casual wear.",
       "price": 3200000,
       "discount_percentage": null,
       "image_url": "/images/product-34.jpg",
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 35,
       "name": "Sneaker Model 35",
       "slug": "sneaker-model-35",
-      "description": "High quality sneaker number 35",
+      "description": "High quality sneaker number 35. Breathable material, perfect for running and casual wear.",
       "price": 3250000,
       "discount_percentage": 10,
       "image_url": "/images/product-35.jpg",
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 36,
       "name": "Sneaker Model 36",
       "slug": "sneaker-model-36",
-      "description": "High quality sneaker number 36",
+      "description": "High quality sneaker number 36. Breathable material, perfect for running and casual wear.",
       "price": 3300000,
       "discount_percentage": null,
       "image_url": "/images/product-36.jpg",
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 37,
       "name": "Sneaker Model 37",
       "slug": "sneaker-model-37",
-      "description": "High quality sneaker number 37",
+      "description": "High quality sneaker number 37. Breathable material, perfect for running and casual wear.",
       "price": 3350000,
       "discount_percentage": null,
       "image_url": "/images/product-37.jpg",
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 38,
       "name": "Sneaker Model 38",
       "slug": "sneaker-model-38",
-      "description": "High quality sneaker number 38",
+      "description": "High quality sneaker number 38. Breathable material, perfect for running and casual wear.",
       "price": 3400000,
       "discount_percentage": null,
       "image_url": "/images/product-38.jpg",
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 39,
       "name": "Sneaker Model 39",
       "slug": "sneaker-model-39",
-      "description": "High quality sneaker number 39",
+      "description": "High quality sneaker number 39. Breathable material, perfect for running and casual wear.",
       "price": 3450000,
       "discount_percentage": null,
       "image_url": "/images/product-39.jpg",
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 40,
       "name": "Sneaker Model 40",
       "slug": "sneaker-model-40",
-      "description": "High quality sneaker number 40",
+      "description": "High quality sneaker number 40. Breathable material, perfect for running and casual wear.",
       "price": 3500000,
       "discount_percentage": 10,
       "image_url": "/images/product-40.jpg",
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 41,
       "name": "Sneaker Model 41",
       "slug": "sneaker-model-41",
-      "description": "High quality sneaker number 41",
+      "description": "High quality sneaker number 41. Breathable material, perfect for running and casual wear.",
       "price": 3550000,
       "discount_percentage": null,
       "image_url": "/images/product-41.jpg",
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 42,
       "name": "Sneaker Model 42",
       "slug": "sneaker-model-42",
-      "description": "High quality sneaker number 42",
+      "description": "High quality sneaker number 42. Breathable material, perfect for running and casual wear.",
       "price": 3600000,
       "discount_percentage": null,
       "image_url": "/images/product-42.jpg",
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 43,
       "name": "Sneaker Model 43",
       "slug": "sneaker-model-43",
-      "description": "High quality sneaker number 43",
+      "description": "High quality sneaker number 43. Breathable material, perfect for running and casual wear.",
       "price": 3650000,
       "discount_percentage": null,
       "image_url": "/images/product-43.jpg",
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 44,
       "name": "Sneaker Model 44",
       "slug": "sneaker-model-44",
-      "description": "High quality sneaker number 44",
+      "description": "High quality sneaker number 44. Breathable material, perfect for running and casual wear.",
       "price": 3700000,
       "discount_percentage": null,
       "image_url": "/images/product-44.jpg",
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 45,
       "name": "Sneaker Model 45",
       "slug": "sneaker-model-45",
-      "description": "High quality sneaker number 45",
+      "description": "High quality sneaker number 45. Breathable material, perfect for running and casual wear.",
       "price": 3750000,
       "discount_percentage": 10,
       "image_url": "/images/product-45.jpg",
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 46,
       "name": "Sneaker Model 46",
       "slug": "sneaker-model-46",
-      "description": "High quality sneaker number 46",
+      "description": "High quality sneaker number 46. Breathable material, perfect for running and casual wear.",
       "price": 3800000,
       "discount_percentage": null,
       "image_url": "/images/product-46.jpg",
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 47,
       "name": "Sneaker Model 47",
       "slug": "sneaker-model-47",
-      "description": "High quality sneaker number 47",
+      "description": "High quality sneaker number 47. Breathable material, perfect for running and casual wear.",
       "price": 3850000,
       "discount_percentage": null,
       "image_url": "/images/product-47.jpg",
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 48,
       "name": "Sneaker Model 48",
       "slug": "sneaker-model-48",
-      "description": "High quality sneaker number 48",
+      "description": "High quality sneaker number 48. Breathable material, perfect for running and casual wear.",
       "price": 3900000,
       "discount_percentage": null,
       "image_url": "/images/product-48.jpg",
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 49,
       "name": "Sneaker Model 49",
       "slug": "sneaker-model-49",
-      "description": "High quality sneaker number 49",
+      "description": "High quality sneaker number 49. Breathable material, perfect for running and casual wear.",
       "price": 3950000,
       "discount_percentage": null,
       "image_url": "/images/product-49.jpg",
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "product_id": 50,
       "name": "Sneaker Model 50",
       "slug": "sneaker-model-50",
-      "description": "High quality sneaker number 50",
+      "description": "High quality sneaker number 50. Breathable material, perfect for running and casual wear.",
       "price": 4000000,
       "discount_percentage": 10,
       "image_url": "/images/product-50.jpg",
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     }
   ],
   "product_variants": [
@@ -703,7 +703,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-1-0",
-      "stock": 22
+      "stock": 24
     },
     {
       "variant_id": 2,
@@ -711,7 +711,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-1-1",
-      "stock": 11
+      "stock": 13
     },
     {
       "variant_id": 3,
@@ -727,7 +727,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-1-3",
-      "stock": 19
+      "stock": 18
     },
     {
       "variant_id": 5,
@@ -735,7 +735,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-1-4",
-      "stock": 29
+      "stock": 1
     },
     {
       "variant_id": 6,
@@ -743,7 +743,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-1-5",
-      "stock": 1
+      "stock": 22
     },
     {
       "variant_id": 7,
@@ -751,7 +751,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-2-0",
-      "stock": 17
+      "stock": 22
     },
     {
       "variant_id": 8,
@@ -759,7 +759,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-2-1",
-      "stock": 23
+      "stock": 21
     },
     {
       "variant_id": 9,
@@ -767,7 +767,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-2-2",
-      "stock": 20
+      "stock": 0
     },
     {
       "variant_id": 10,
@@ -775,7 +775,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-2-3",
-      "stock": 16
+      "stock": 20
     },
     {
       "variant_id": 11,
@@ -783,7 +783,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-2-4",
-      "stock": 17
+      "stock": 14
     },
     {
       "variant_id": 12,
@@ -791,7 +791,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-2-5",
-      "stock": 17
+      "stock": 5
     },
     {
       "variant_id": 13,
@@ -799,7 +799,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-3-0",
-      "stock": 5
+      "stock": 7
     },
     {
       "variant_id": 14,
@@ -807,7 +807,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-3-1",
-      "stock": 0
+      "stock": 8
     },
     {
       "variant_id": 15,
@@ -815,7 +815,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-3-2",
-      "stock": 9
+      "stock": 1
     },
     {
       "variant_id": 16,
@@ -823,7 +823,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-3-3",
-      "stock": 2
+      "stock": 26
     },
     {
       "variant_id": 17,
@@ -831,7 +831,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-3-4",
-      "stock": 20
+      "stock": 13
     },
     {
       "variant_id": 18,
@@ -839,7 +839,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-3-5",
-      "stock": 13
+      "stock": 15
     },
     {
       "variant_id": 19,
@@ -847,7 +847,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-4-0",
-      "stock": 18
+      "stock": 6
     },
     {
       "variant_id": 20,
@@ -855,7 +855,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-4-1",
-      "stock": 12
+      "stock": 29
     },
     {
       "variant_id": 21,
@@ -863,7 +863,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-4-2",
-      "stock": 29
+      "stock": 14
     },
     {
       "variant_id": 22,
@@ -871,7 +871,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-4-3",
-      "stock": 11
+      "stock": 13
     },
     {
       "variant_id": 23,
@@ -879,7 +879,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-4-4",
-      "stock": 19
+      "stock": 28
     },
     {
       "variant_id": 24,
@@ -895,7 +895,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-5-0",
-      "stock": 24
+      "stock": 11
     },
     {
       "variant_id": 26,
@@ -903,7 +903,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-5-1",
-      "stock": 28
+      "stock": 20
     },
     {
       "variant_id": 27,
@@ -911,7 +911,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-5-2",
-      "stock": 7
+      "stock": 0
     },
     {
       "variant_id": 28,
@@ -919,7 +919,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-5-3",
-      "stock": 6
+      "stock": 20
     },
     {
       "variant_id": 29,
@@ -927,7 +927,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-5-4",
-      "stock": 23
+      "stock": 2
     },
     {
       "variant_id": 30,
@@ -935,7 +935,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-5-5",
-      "stock": 14
+      "stock": 9
     },
     {
       "variant_id": 31,
@@ -943,7 +943,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-6-0",
-      "stock": 11
+      "stock": 2
     },
     {
       "variant_id": 32,
@@ -959,7 +959,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-6-2",
-      "stock": 5
+      "stock": 20
     },
     {
       "variant_id": 34,
@@ -967,7 +967,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-6-3",
-      "stock": 10
+      "stock": 8
     },
     {
       "variant_id": 35,
@@ -975,7 +975,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-6-4",
-      "stock": 6
+      "stock": 26
     },
     {
       "variant_id": 36,
@@ -983,7 +983,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-6-5",
-      "stock": 7
+      "stock": 12
     },
     {
       "variant_id": 37,
@@ -991,7 +991,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-7-0",
-      "stock": 27
+      "stock": 20
     },
     {
       "variant_id": 38,
@@ -999,7 +999,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-7-1",
-      "stock": 28
+      "stock": 4
     },
     {
       "variant_id": 39,
@@ -1007,7 +1007,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-7-2",
-      "stock": 0
+      "stock": 24
     },
     {
       "variant_id": 40,
@@ -1015,7 +1015,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-7-3",
-      "stock": 12
+      "stock": 13
     },
     {
       "variant_id": 41,
@@ -1023,7 +1023,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-7-4",
-      "stock": 10
+      "stock": 6
     },
     {
       "variant_id": 42,
@@ -1031,7 +1031,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-7-5",
-      "stock": 9
+      "stock": 8
     },
     {
       "variant_id": 43,
@@ -1039,7 +1039,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-8-0",
-      "stock": 17
+      "stock": 3
     },
     {
       "variant_id": 44,
@@ -1047,7 +1047,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-8-1",
-      "stock": 25
+      "stock": 28
     },
     {
       "variant_id": 45,
@@ -1055,7 +1055,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-8-2",
-      "stock": 7
+      "stock": 20
     },
     {
       "variant_id": 46,
@@ -1063,7 +1063,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-8-3",
-      "stock": 0
+      "stock": 19
     },
     {
       "variant_id": 47,
@@ -1071,7 +1071,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-8-4",
-      "stock": 4
+      "stock": 23
     },
     {
       "variant_id": 48,
@@ -1079,7 +1079,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-8-5",
-      "stock": 24
+      "stock": 26
     },
     {
       "variant_id": 49,
@@ -1087,7 +1087,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-9-0",
-      "stock": 16
+      "stock": 9
     },
     {
       "variant_id": 50,
@@ -1095,7 +1095,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-9-1",
-      "stock": 28
+      "stock": 7
     },
     {
       "variant_id": 51,
@@ -1103,7 +1103,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-9-2",
-      "stock": 1
+      "stock": 8
     },
     {
       "variant_id": 52,
@@ -1111,7 +1111,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-9-3",
-      "stock": 15
+      "stock": 10
     },
     {
       "variant_id": 53,
@@ -1119,7 +1119,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-9-4",
-      "stock": 20
+      "stock": 22
     },
     {
       "variant_id": 54,
@@ -1127,7 +1127,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-9-5",
-      "stock": 24
+      "stock": 2
     },
     {
       "variant_id": 55,
@@ -1135,7 +1135,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-10-0",
-      "stock": 18
+      "stock": 1
     },
     {
       "variant_id": 56,
@@ -1143,7 +1143,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-10-1",
-      "stock": 9
+      "stock": 29
     },
     {
       "variant_id": 57,
@@ -1151,7 +1151,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-10-2",
-      "stock": 26
+      "stock": 11
     },
     {
       "variant_id": 58,
@@ -1159,7 +1159,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-10-3",
-      "stock": 7
+      "stock": 4
     },
     {
       "variant_id": 59,
@@ -1167,7 +1167,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-10-4",
-      "stock": 5
+      "stock": 25
     },
     {
       "variant_id": 60,
@@ -1175,7 +1175,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-10-5",
-      "stock": 19
+      "stock": 22
     },
     {
       "variant_id": 61,
@@ -1183,7 +1183,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-11-0",
-      "stock": 1
+      "stock": 19
     },
     {
       "variant_id": 62,
@@ -1191,7 +1191,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-11-1",
-      "stock": 12
+      "stock": 15
     },
     {
       "variant_id": 63,
@@ -1199,7 +1199,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-11-2",
-      "stock": 11
+      "stock": 19
     },
     {
       "variant_id": 64,
@@ -1207,7 +1207,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-11-3",
-      "stock": 2
+      "stock": 7
     },
     {
       "variant_id": 65,
@@ -1215,7 +1215,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-11-4",
-      "stock": 8
+      "stock": 21
     },
     {
       "variant_id": 66,
@@ -1223,7 +1223,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-11-5",
-      "stock": 13
+      "stock": 3
     },
     {
       "variant_id": 67,
@@ -1231,7 +1231,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-12-0",
-      "stock": 28
+      "stock": 7
     },
     {
       "variant_id": 68,
@@ -1239,7 +1239,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-12-1",
-      "stock": 20
+      "stock": 27
     },
     {
       "variant_id": 69,
@@ -1247,7 +1247,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-12-2",
-      "stock": 10
+      "stock": 9
     },
     {
       "variant_id": 70,
@@ -1255,7 +1255,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-12-3",
-      "stock": 18
+      "stock": 9
     },
     {
       "variant_id": 71,
@@ -1271,7 +1271,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-12-5",
-      "stock": 2
+      "stock": 18
     },
     {
       "variant_id": 73,
@@ -1279,7 +1279,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-13-0",
-      "stock": 24
+      "stock": 25
     },
     {
       "variant_id": 74,
@@ -1287,7 +1287,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-13-1",
-      "stock": 23
+      "stock": 2
     },
     {
       "variant_id": 75,
@@ -1295,7 +1295,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-13-2",
-      "stock": 12
+      "stock": 10
     },
     {
       "variant_id": 76,
@@ -1303,7 +1303,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-13-3",
-      "stock": 13
+      "stock": 6
     },
     {
       "variant_id": 77,
@@ -1311,7 +1311,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-13-4",
-      "stock": 3
+      "stock": 12
     },
     {
       "variant_id": 78,
@@ -1319,7 +1319,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-13-5",
-      "stock": 17
+      "stock": 29
     },
     {
       "variant_id": 79,
@@ -1327,7 +1327,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-14-0",
-      "stock": 5
+      "stock": 16
     },
     {
       "variant_id": 80,
@@ -1335,7 +1335,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-14-1",
-      "stock": 28
+      "stock": 3
     },
     {
       "variant_id": 81,
@@ -1343,7 +1343,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-14-2",
-      "stock": 16
+      "stock": 25
     },
     {
       "variant_id": 82,
@@ -1351,7 +1351,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-14-3",
-      "stock": 25
+      "stock": 26
     },
     {
       "variant_id": 83,
@@ -1359,7 +1359,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-14-4",
-      "stock": 2
+      "stock": 0
     },
     {
       "variant_id": 84,
@@ -1367,7 +1367,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-14-5",
-      "stock": 20
+      "stock": 6
     },
     {
       "variant_id": 85,
@@ -1375,7 +1375,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-15-0",
-      "stock": 29
+      "stock": 17
     },
     {
       "variant_id": 86,
@@ -1383,7 +1383,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-15-1",
-      "stock": 20
+      "stock": 23
     },
     {
       "variant_id": 87,
@@ -1391,7 +1391,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-15-2",
-      "stock": 15
+      "stock": 16
     },
     {
       "variant_id": 88,
@@ -1399,7 +1399,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-15-3",
-      "stock": 26
+      "stock": 1
     },
     {
       "variant_id": 89,
@@ -1407,7 +1407,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-15-4",
-      "stock": 7
+      "stock": 6
     },
     {
       "variant_id": 90,
@@ -1415,7 +1415,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-15-5",
-      "stock": 20
+      "stock": 19
     },
     {
       "variant_id": 91,
@@ -1423,7 +1423,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-16-0",
-      "stock": 4
+      "stock": 16
     },
     {
       "variant_id": 92,
@@ -1431,7 +1431,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-16-1",
-      "stock": 19
+      "stock": 5
     },
     {
       "variant_id": 93,
@@ -1439,7 +1439,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-16-2",
-      "stock": 24
+      "stock": 18
     },
     {
       "variant_id": 94,
@@ -1447,7 +1447,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-16-3",
-      "stock": 2
+      "stock": 21
     },
     {
       "variant_id": 95,
@@ -1455,7 +1455,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-16-4",
-      "stock": 12
+      "stock": 26
     },
     {
       "variant_id": 96,
@@ -1463,7 +1463,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-16-5",
-      "stock": 9
+      "stock": 4
     },
     {
       "variant_id": 97,
@@ -1471,7 +1471,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-17-0",
-      "stock": 18
+      "stock": 14
     },
     {
       "variant_id": 98,
@@ -1479,7 +1479,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-17-1",
-      "stock": 9
+      "stock": 17
     },
     {
       "variant_id": 99,
@@ -1487,7 +1487,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-17-2",
-      "stock": 0
+      "stock": 26
     },
     {
       "variant_id": 100,
@@ -1495,7 +1495,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-17-3",
-      "stock": 15
+      "stock": 20
     },
     {
       "variant_id": 101,
@@ -1503,7 +1503,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-17-4",
-      "stock": 5
+      "stock": 25
     },
     {
       "variant_id": 102,
@@ -1511,7 +1511,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-17-5",
-      "stock": 9
+      "stock": 20
     },
     {
       "variant_id": 103,
@@ -1519,7 +1519,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-18-0",
-      "stock": 21
+      "stock": 4
     },
     {
       "variant_id": 104,
@@ -1527,7 +1527,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-18-1",
-      "stock": 5
+      "stock": 21
     },
     {
       "variant_id": 105,
@@ -1535,7 +1535,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-18-2",
-      "stock": 26
+      "stock": 14
     },
     {
       "variant_id": 106,
@@ -1543,7 +1543,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-18-3",
-      "stock": 1
+      "stock": 27
     },
     {
       "variant_id": 107,
@@ -1551,7 +1551,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-18-4",
-      "stock": 16
+      "stock": 7
     },
     {
       "variant_id": 108,
@@ -1559,7 +1559,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-18-5",
-      "stock": 4
+      "stock": 25
     },
     {
       "variant_id": 109,
@@ -1567,7 +1567,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-19-0",
-      "stock": 15
+      "stock": 17
     },
     {
       "variant_id": 110,
@@ -1575,7 +1575,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-19-1",
-      "stock": 3
+      "stock": 29
     },
     {
       "variant_id": 111,
@@ -1583,7 +1583,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-19-2",
-      "stock": 4
+      "stock": 15
     },
     {
       "variant_id": 112,
@@ -1591,7 +1591,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-19-3",
-      "stock": 26
+      "stock": 10
     },
     {
       "variant_id": 113,
@@ -1599,7 +1599,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-19-4",
-      "stock": 2
+      "stock": 13
     },
     {
       "variant_id": 114,
@@ -1607,7 +1607,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-19-5",
-      "stock": 11
+      "stock": 0
     },
     {
       "variant_id": 115,
@@ -1615,7 +1615,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-20-0",
-      "stock": 19
+      "stock": 15
     },
     {
       "variant_id": 116,
@@ -1623,7 +1623,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-20-1",
-      "stock": 11
+      "stock": 14
     },
     {
       "variant_id": 117,
@@ -1631,7 +1631,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-20-2",
-      "stock": 27
+      "stock": 14
     },
     {
       "variant_id": 118,
@@ -1639,7 +1639,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-20-3",
-      "stock": 20
+      "stock": 10
     },
     {
       "variant_id": 119,
@@ -1647,7 +1647,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-20-4",
-      "stock": 1
+      "stock": 27
     },
     {
       "variant_id": 120,
@@ -1655,7 +1655,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-20-5",
-      "stock": 13
+      "stock": 28
     },
     {
       "variant_id": 121,
@@ -1663,7 +1663,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-21-0",
-      "stock": 17
+      "stock": 21
     },
     {
       "variant_id": 122,
@@ -1671,7 +1671,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-21-1",
-      "stock": 29
+      "stock": 2
     },
     {
       "variant_id": 123,
@@ -1679,7 +1679,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-21-2",
-      "stock": 12
+      "stock": 22
     },
     {
       "variant_id": 124,
@@ -1687,7 +1687,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-21-3",
-      "stock": 4
+      "stock": 28
     },
     {
       "variant_id": 125,
@@ -1695,7 +1695,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-21-4",
-      "stock": 26
+      "stock": 20
     },
     {
       "variant_id": 126,
@@ -1703,7 +1703,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-21-5",
-      "stock": 9
+      "stock": 11
     },
     {
       "variant_id": 127,
@@ -1711,7 +1711,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-22-0",
-      "stock": 28
+      "stock": 26
     },
     {
       "variant_id": 128,
@@ -1719,7 +1719,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-22-1",
-      "stock": 18
+      "stock": 17
     },
     {
       "variant_id": 129,
@@ -1727,7 +1727,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-22-2",
-      "stock": 0
+      "stock": 9
     },
     {
       "variant_id": 130,
@@ -1735,7 +1735,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-22-3",
-      "stock": 12
+      "stock": 6
     },
     {
       "variant_id": 131,
@@ -1743,7 +1743,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-22-4",
-      "stock": 22
+      "stock": 13
     },
     {
       "variant_id": 132,
@@ -1751,7 +1751,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-22-5",
-      "stock": 11
+      "stock": 27
     },
     {
       "variant_id": 133,
@@ -1759,7 +1759,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-23-0",
-      "stock": 8
+      "stock": 4
     },
     {
       "variant_id": 134,
@@ -1767,7 +1767,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-23-1",
-      "stock": 26
+      "stock": 8
     },
     {
       "variant_id": 135,
@@ -1775,7 +1775,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-23-2",
-      "stock": 19
+      "stock": 23
     },
     {
       "variant_id": 136,
@@ -1783,7 +1783,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-23-3",
-      "stock": 20
+      "stock": 16
     },
     {
       "variant_id": 137,
@@ -1791,7 +1791,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-23-4",
-      "stock": 19
+      "stock": 21
     },
     {
       "variant_id": 138,
@@ -1799,7 +1799,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-23-5",
-      "stock": 9
+      "stock": 2
     },
     {
       "variant_id": 139,
@@ -1815,7 +1815,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-24-1",
-      "stock": 16
+      "stock": 7
     },
     {
       "variant_id": 141,
@@ -1823,7 +1823,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-24-2",
-      "stock": 10
+      "stock": 12
     },
     {
       "variant_id": 142,
@@ -1831,7 +1831,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-24-3",
-      "stock": 0
+      "stock": 29
     },
     {
       "variant_id": 143,
@@ -1839,7 +1839,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-24-4",
-      "stock": 2
+      "stock": 16
     },
     {
       "variant_id": 144,
@@ -1847,7 +1847,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-24-5",
-      "stock": 18
+      "stock": 13
     },
     {
       "variant_id": 145,
@@ -1855,7 +1855,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-25-0",
-      "stock": 6
+      "stock": 9
     },
     {
       "variant_id": 146,
@@ -1863,7 +1863,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-25-1",
-      "stock": 7
+      "stock": 17
     },
     {
       "variant_id": 147,
@@ -1871,7 +1871,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-25-2",
-      "stock": 3
+      "stock": 6
     },
     {
       "variant_id": 148,
@@ -1879,7 +1879,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-25-3",
-      "stock": 4
+      "stock": 1
     },
     {
       "variant_id": 149,
@@ -1887,7 +1887,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-25-4",
-      "stock": 29
+      "stock": 10
     },
     {
       "variant_id": 150,
@@ -1895,7 +1895,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-25-5",
-      "stock": 22
+      "stock": 25
     },
     {
       "variant_id": 151,
@@ -1903,7 +1903,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-26-0",
-      "stock": 11
+      "stock": 14
     },
     {
       "variant_id": 152,
@@ -1911,7 +1911,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-26-1",
-      "stock": 1
+      "stock": 26
     },
     {
       "variant_id": 153,
@@ -1919,7 +1919,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-26-2",
-      "stock": 27
+      "stock": 2
     },
     {
       "variant_id": 154,
@@ -1927,7 +1927,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-26-3",
-      "stock": 22
+      "stock": 5
     },
     {
       "variant_id": 155,
@@ -1935,7 +1935,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-26-4",
-      "stock": 28
+      "stock": 11
     },
     {
       "variant_id": 156,
@@ -1943,7 +1943,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-26-5",
-      "stock": 16
+      "stock": 12
     },
     {
       "variant_id": 157,
@@ -1951,7 +1951,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-27-0",
-      "stock": 15
+      "stock": 17
     },
     {
       "variant_id": 158,
@@ -1959,7 +1959,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-27-1",
-      "stock": 0
+      "stock": 26
     },
     {
       "variant_id": 159,
@@ -1967,7 +1967,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-27-2",
-      "stock": 5
+      "stock": 13
     },
     {
       "variant_id": 160,
@@ -1975,7 +1975,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-27-3",
-      "stock": 25
+      "stock": 12
     },
     {
       "variant_id": 161,
@@ -1991,7 +1991,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-27-5",
-      "stock": 9
+      "stock": 24
     },
     {
       "variant_id": 163,
@@ -1999,7 +1999,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-28-0",
-      "stock": 29
+      "stock": 6
     },
     {
       "variant_id": 164,
@@ -2015,7 +2015,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-28-2",
-      "stock": 17
+      "stock": 0
     },
     {
       "variant_id": 166,
@@ -2023,7 +2023,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-28-3",
-      "stock": 16
+      "stock": 8
     },
     {
       "variant_id": 167,
@@ -2031,7 +2031,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-28-4",
-      "stock": 29
+      "stock": 8
     },
     {
       "variant_id": 168,
@@ -2039,7 +2039,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-28-5",
-      "stock": 22
+      "stock": 8
     },
     {
       "variant_id": 169,
@@ -2047,7 +2047,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-29-0",
-      "stock": 14
+      "stock": 10
     },
     {
       "variant_id": 170,
@@ -2055,7 +2055,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-29-1",
-      "stock": 17
+      "stock": 25
     },
     {
       "variant_id": 171,
@@ -2063,7 +2063,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-29-2",
-      "stock": 1
+      "stock": 4
     },
     {
       "variant_id": 172,
@@ -2079,7 +2079,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-29-4",
-      "stock": 5
+      "stock": 21
     },
     {
       "variant_id": 174,
@@ -2087,7 +2087,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-29-5",
-      "stock": 11
+      "stock": 19
     },
     {
       "variant_id": 175,
@@ -2095,7 +2095,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-30-0",
-      "stock": 25
+      "stock": 28
     },
     {
       "variant_id": 176,
@@ -2103,7 +2103,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-30-1",
-      "stock": 22
+      "stock": 9
     },
     {
       "variant_id": 177,
@@ -2119,7 +2119,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-30-3",
-      "stock": 7
+      "stock": 0
     },
     {
       "variant_id": 179,
@@ -2127,7 +2127,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-30-4",
-      "stock": 23
+      "stock": 21
     },
     {
       "variant_id": 180,
@@ -2135,7 +2135,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-30-5",
-      "stock": 7
+      "stock": 1
     },
     {
       "variant_id": 181,
@@ -2143,7 +2143,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-31-0",
-      "stock": 8
+      "stock": 13
     },
     {
       "variant_id": 182,
@@ -2151,7 +2151,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-31-1",
-      "stock": 8
+      "stock": 7
     },
     {
       "variant_id": 183,
@@ -2159,7 +2159,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-31-2",
-      "stock": 27
+      "stock": 6
     },
     {
       "variant_id": 184,
@@ -2167,7 +2167,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-31-3",
-      "stock": 13
+      "stock": 21
     },
     {
       "variant_id": 185,
@@ -2175,7 +2175,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-31-4",
-      "stock": 11
+      "stock": 5
     },
     {
       "variant_id": 186,
@@ -2183,7 +2183,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-31-5",
-      "stock": 27
+      "stock": 8
     },
     {
       "variant_id": 187,
@@ -2191,7 +2191,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-32-0",
-      "stock": 27
+      "stock": 16
     },
     {
       "variant_id": 188,
@@ -2199,7 +2199,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-32-1",
-      "stock": 9
+      "stock": 28
     },
     {
       "variant_id": 189,
@@ -2207,7 +2207,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-32-2",
-      "stock": 3
+      "stock": 19
     },
     {
       "variant_id": 190,
@@ -2215,7 +2215,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-32-3",
-      "stock": 24
+      "stock": 20
     },
     {
       "variant_id": 191,
@@ -2223,7 +2223,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-32-4",
-      "stock": 9
+      "stock": 2
     },
     {
       "variant_id": 192,
@@ -2231,7 +2231,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-32-5",
-      "stock": 11
+      "stock": 1
     },
     {
       "variant_id": 193,
@@ -2239,7 +2239,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-33-0",
-      "stock": 28
+      "stock": 15
     },
     {
       "variant_id": 194,
@@ -2247,7 +2247,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-33-1",
-      "stock": 8
+      "stock": 5
     },
     {
       "variant_id": 195,
@@ -2255,7 +2255,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-33-2",
-      "stock": 16
+      "stock": 10
     },
     {
       "variant_id": 196,
@@ -2263,7 +2263,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-33-3",
-      "stock": 29
+      "stock": 24
     },
     {
       "variant_id": 197,
@@ -2271,7 +2271,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-33-4",
-      "stock": 10
+      "stock": 19
     },
     {
       "variant_id": 198,
@@ -2279,7 +2279,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-33-5",
-      "stock": 0
+      "stock": 19
     },
     {
       "variant_id": 199,
@@ -2287,7 +2287,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-34-0",
-      "stock": 12
+      "stock": 5
     },
     {
       "variant_id": 200,
@@ -2295,7 +2295,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-34-1",
-      "stock": 1
+      "stock": 11
     },
     {
       "variant_id": 201,
@@ -2303,7 +2303,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-34-2",
-      "stock": 26
+      "stock": 0
     },
     {
       "variant_id": 202,
@@ -2311,7 +2311,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-34-3",
-      "stock": 27
+      "stock": 15
     },
     {
       "variant_id": 203,
@@ -2319,7 +2319,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-34-4",
-      "stock": 23
+      "stock": 15
     },
     {
       "variant_id": 204,
@@ -2327,7 +2327,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-34-5",
-      "stock": 10
+      "stock": 8
     },
     {
       "variant_id": 205,
@@ -2335,7 +2335,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-35-0",
-      "stock": 3
+      "stock": 23
     },
     {
       "variant_id": 206,
@@ -2343,7 +2343,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-35-1",
-      "stock": 3
+      "stock": 14
     },
     {
       "variant_id": 207,
@@ -2351,7 +2351,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-35-2",
-      "stock": 3
+      "stock": 13
     },
     {
       "variant_id": 208,
@@ -2359,7 +2359,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-35-3",
-      "stock": 28
+      "stock": 24
     },
     {
       "variant_id": 209,
@@ -2367,7 +2367,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-35-4",
-      "stock": 10
+      "stock": 0
     },
     {
       "variant_id": 210,
@@ -2375,7 +2375,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-35-5",
-      "stock": 18
+      "stock": 13
     },
     {
       "variant_id": 211,
@@ -2383,7 +2383,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-36-0",
-      "stock": 3
+      "stock": 10
     },
     {
       "variant_id": 212,
@@ -2391,7 +2391,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-36-1",
-      "stock": 13
+      "stock": 21
     },
     {
       "variant_id": 213,
@@ -2399,7 +2399,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-36-2",
-      "stock": 17
+      "stock": 22
     },
     {
       "variant_id": 214,
@@ -2407,7 +2407,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-36-3",
-      "stock": 19
+      "stock": 16
     },
     {
       "variant_id": 215,
@@ -2415,7 +2415,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-36-4",
-      "stock": 0
+      "stock": 10
     },
     {
       "variant_id": 216,
@@ -2423,7 +2423,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-36-5",
-      "stock": 8
+      "stock": 7
     },
     {
       "variant_id": 217,
@@ -2431,7 +2431,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-37-0",
-      "stock": 5
+      "stock": 9
     },
     {
       "variant_id": 218,
@@ -2439,7 +2439,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-37-1",
-      "stock": 14
+      "stock": 19
     },
     {
       "variant_id": 219,
@@ -2447,7 +2447,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-37-2",
-      "stock": 23
+      "stock": 9
     },
     {
       "variant_id": 220,
@@ -2455,7 +2455,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-37-3",
-      "stock": 21
+      "stock": 13
     },
     {
       "variant_id": 221,
@@ -2463,7 +2463,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-37-4",
-      "stock": 27
+      "stock": 23
     },
     {
       "variant_id": 222,
@@ -2471,7 +2471,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-37-5",
-      "stock": 17
+      "stock": 28
     },
     {
       "variant_id": 223,
@@ -2479,7 +2479,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-38-0",
-      "stock": 26
+      "stock": 28
     },
     {
       "variant_id": 224,
@@ -2487,7 +2487,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-38-1",
-      "stock": 24
+      "stock": 11
     },
     {
       "variant_id": 225,
@@ -2495,7 +2495,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-38-2",
-      "stock": 29
+      "stock": 16
     },
     {
       "variant_id": 226,
@@ -2511,7 +2511,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-38-4",
-      "stock": 25
+      "stock": 15
     },
     {
       "variant_id": 228,
@@ -2519,7 +2519,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-38-5",
-      "stock": 27
+      "stock": 24
     },
     {
       "variant_id": 229,
@@ -2527,7 +2527,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-39-0",
-      "stock": 3
+      "stock": 29
     },
     {
       "variant_id": 230,
@@ -2535,7 +2535,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-39-1",
-      "stock": 22
+      "stock": 14
     },
     {
       "variant_id": 231,
@@ -2543,7 +2543,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-39-2",
-      "stock": 8
+      "stock": 3
     },
     {
       "variant_id": 232,
@@ -2551,7 +2551,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-39-3",
-      "stock": 22
+      "stock": 1
     },
     {
       "variant_id": 233,
@@ -2559,7 +2559,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-39-4",
-      "stock": 8
+      "stock": 23
     },
     {
       "variant_id": 234,
@@ -2567,7 +2567,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-39-5",
-      "stock": 20
+      "stock": 28
     },
     {
       "variant_id": 235,
@@ -2575,7 +2575,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-40-0",
-      "stock": 28
+      "stock": 19
     },
     {
       "variant_id": 236,
@@ -2583,7 +2583,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-40-1",
-      "stock": 10
+      "stock": 14
     },
     {
       "variant_id": 237,
@@ -2591,7 +2591,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-40-2",
-      "stock": 16
+      "stock": 19
     },
     {
       "variant_id": 238,
@@ -2599,7 +2599,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-40-3",
-      "stock": 10
+      "stock": 1
     },
     {
       "variant_id": 239,
@@ -2607,7 +2607,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-40-4",
-      "stock": 7
+      "stock": 4
     },
     {
       "variant_id": 240,
@@ -2615,7 +2615,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-40-5",
-      "stock": 24
+      "stock": 6
     },
     {
       "variant_id": 241,
@@ -2623,7 +2623,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-41-0",
-      "stock": 23
+      "stock": 21
     },
     {
       "variant_id": 242,
@@ -2631,7 +2631,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-41-1",
-      "stock": 5
+      "stock": 9
     },
     {
       "variant_id": 243,
@@ -2639,7 +2639,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-41-2",
-      "stock": 7
+      "stock": 9
     },
     {
       "variant_id": 244,
@@ -2647,7 +2647,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-41-3",
-      "stock": 3
+      "stock": 7
     },
     {
       "variant_id": 245,
@@ -2655,7 +2655,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-41-4",
-      "stock": 3
+      "stock": 0
     },
     {
       "variant_id": 246,
@@ -2663,7 +2663,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-41-5",
-      "stock": 21
+      "stock": 16
     },
     {
       "variant_id": 247,
@@ -2671,7 +2671,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-42-0",
-      "stock": 8
+      "stock": 3
     },
     {
       "variant_id": 248,
@@ -2679,7 +2679,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-42-1",
-      "stock": 13
+      "stock": 8
     },
     {
       "variant_id": 249,
@@ -2687,7 +2687,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-42-2",
-      "stock": 4
+      "stock": 27
     },
     {
       "variant_id": 250,
@@ -2695,7 +2695,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-42-3",
-      "stock": 1
+      "stock": 28
     },
     {
       "variant_id": 251,
@@ -2703,7 +2703,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-42-4",
-      "stock": 14
+      "stock": 9
     },
     {
       "variant_id": 252,
@@ -2711,7 +2711,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-42-5",
-      "stock": 23
+      "stock": 29
     },
     {
       "variant_id": 253,
@@ -2719,7 +2719,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-43-0",
-      "stock": 2
+      "stock": 0
     },
     {
       "variant_id": 254,
@@ -2727,7 +2727,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-43-1",
-      "stock": 23
+      "stock": 15
     },
     {
       "variant_id": 255,
@@ -2735,7 +2735,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-43-2",
-      "stock": 18
+      "stock": 19
     },
     {
       "variant_id": 256,
@@ -2743,7 +2743,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-43-3",
-      "stock": 16
+      "stock": 11
     },
     {
       "variant_id": 257,
@@ -2751,7 +2751,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-43-4",
-      "stock": 14
+      "stock": 10
     },
     {
       "variant_id": 258,
@@ -2759,7 +2759,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-43-5",
-      "stock": 5
+      "stock": 2
     },
     {
       "variant_id": 259,
@@ -2767,7 +2767,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-44-0",
-      "stock": 17
+      "stock": 2
     },
     {
       "variant_id": 260,
@@ -2775,7 +2775,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-44-1",
-      "stock": 22
+      "stock": 24
     },
     {
       "variant_id": 261,
@@ -2783,7 +2783,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-44-2",
-      "stock": 25
+      "stock": 17
     },
     {
       "variant_id": 262,
@@ -2791,7 +2791,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-44-3",
-      "stock": 25
+      "stock": 26
     },
     {
       "variant_id": 263,
@@ -2799,7 +2799,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-44-4",
-      "stock": 23
+      "stock": 5
     },
     {
       "variant_id": 264,
@@ -2807,7 +2807,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-44-5",
-      "stock": 12
+      "stock": 14
     },
     {
       "variant_id": 265,
@@ -2815,7 +2815,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-45-0",
-      "stock": 12
+      "stock": 18
     },
     {
       "variant_id": 266,
@@ -2823,7 +2823,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-45-1",
-      "stock": 23
+      "stock": 0
     },
     {
       "variant_id": 267,
@@ -2831,7 +2831,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-45-2",
-      "stock": 0
+      "stock": 15
     },
     {
       "variant_id": 268,
@@ -2839,7 +2839,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-45-3",
-      "stock": 4
+      "stock": 9
     },
     {
       "variant_id": 269,
@@ -2847,7 +2847,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-45-4",
-      "stock": 12
+      "stock": 2
     },
     {
       "variant_id": 270,
@@ -2855,7 +2855,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-45-5",
-      "stock": 25
+      "stock": 11
     },
     {
       "variant_id": 271,
@@ -2863,7 +2863,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-46-0",
-      "stock": 1
+      "stock": 2
     },
     {
       "variant_id": 272,
@@ -2871,7 +2871,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-46-1",
-      "stock": 22
+      "stock": 23
     },
     {
       "variant_id": 273,
@@ -2879,7 +2879,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-46-2",
-      "stock": 9
+      "stock": 25
     },
     {
       "variant_id": 274,
@@ -2887,7 +2887,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-46-3",
-      "stock": 6
+      "stock": 24
     },
     {
       "variant_id": 275,
@@ -2895,7 +2895,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-46-4",
-      "stock": 18
+      "stock": 29
     },
     {
       "variant_id": 276,
@@ -2903,7 +2903,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-46-5",
-      "stock": 0
+      "stock": 28
     },
     {
       "variant_id": 277,
@@ -2919,7 +2919,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-47-1",
-      "stock": 18
+      "stock": 13
     },
     {
       "variant_id": 279,
@@ -2927,7 +2927,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-47-2",
-      "stock": 12
+      "stock": 11
     },
     {
       "variant_id": 280,
@@ -2935,7 +2935,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-47-3",
-      "stock": 0
+      "stock": 16
     },
     {
       "variant_id": 281,
@@ -2943,7 +2943,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-47-4",
-      "stock": 4
+      "stock": 23
     },
     {
       "variant_id": 282,
@@ -2951,7 +2951,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-47-5",
-      "stock": 8
+      "stock": 19
     },
     {
       "variant_id": 283,
@@ -2959,7 +2959,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-48-0",
-      "stock": 7
+      "stock": 22
     },
     {
       "variant_id": 284,
@@ -2967,7 +2967,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-48-1",
-      "stock": 15
+      "stock": 14
     },
     {
       "variant_id": 285,
@@ -2975,7 +2975,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-48-2",
-      "stock": 4
+      "stock": 22
     },
     {
       "variant_id": 286,
@@ -2983,7 +2983,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-48-3",
-      "stock": 7
+      "stock": 11
     },
     {
       "variant_id": 287,
@@ -2991,7 +2991,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-48-4",
-      "stock": 13
+      "stock": 17
     },
     {
       "variant_id": 288,
@@ -2999,7 +2999,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-48-5",
-      "stock": 6
+      "stock": 27
     },
     {
       "variant_id": 289,
@@ -3007,7 +3007,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-49-0",
-      "stock": 16
+      "stock": 4
     },
     {
       "variant_id": 290,
@@ -3015,7 +3015,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-49-1",
-      "stock": 3
+      "stock": 26
     },
     {
       "variant_id": 291,
@@ -3023,7 +3023,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-49-2",
-      "stock": 5
+      "stock": 29
     },
     {
       "variant_id": 292,
@@ -3031,7 +3031,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-49-3",
-      "stock": 29
+      "stock": 1
     },
     {
       "variant_id": 293,
@@ -3039,7 +3039,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-49-4",
-      "stock": 5
+      "stock": 10
     },
     {
       "variant_id": 294,
@@ -3047,7 +3047,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-49-5",
-      "stock": 2
+      "stock": 12
     },
     {
       "variant_id": 295,
@@ -3055,7 +3055,7 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-50-0",
-      "stock": 25
+      "stock": 0
     },
     {
       "variant_id": 296,
@@ -3063,7 +3063,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-50-1",
-      "stock": 8
+      "stock": 7
     },
     {
       "variant_id": 297,
@@ -3079,7 +3079,7 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-50-3",
-      "stock": 24
+      "stock": 28
     },
     {
       "variant_id": 299,
@@ -3087,7 +3087,7 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-50-4",
-      "stock": 24
+      "stock": 4
     },
     {
       "variant_id": 300,
@@ -3095,7 +3095,7 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-50-5",
-      "stock": 28
+      "stock": 8
     }
   ],
   "users": [
@@ -3103,8 +3103,8 @@
       "user_id": 1,
       "username": "admin",
       "email": "admin@gmail.com",
-      "password": "123456",
-      "fullname": "Admin User",
+      "password": "123",
+      "fullname": "Super Admin",
       "roles": [
         "ADMIN"
       ],
@@ -3115,32 +3115,32 @@
       "phone": null,
       "gender": null,
       "google_id": null,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     },
     {
       "user_id": 2,
       "username": "user01",
       "email": "user@gmail.com",
-      "password": "123456",
-      "fullname": "Normal User",
+      "password": "123",
+      "fullname": "Nguyen Van A",
       "roles": [
         "USER"
       ],
-      "address": "HCM City",
-      "city": "HCM",
+      "address": "123 Le Loi Street",
+      "city": "Ho Chi Minh",
       "country": "VN",
-      "state": null,
-      "phone": "0123456789",
+      "state": "District 1",
+      "phone": "0909123456",
       "gender": "male",
       "google_id": null,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     }
   ],
   "cart": [
     {
       "cart_id": 1,
       "user_id": 2,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "created_at": "2026-01-03T05:44:10.298Z"
     }
   ],
   "cart_item": [
@@ -3149,17 +3149,23 @@
       "cart_id": 1,
       "variant_id": 1,
       "quantity": 2
+    },
+    {
+      "id": 2,
+      "cart_id": 1,
+      "variant_id": 8,
+      "quantity": 1
     }
   ],
   "orders": [
     {
       "order_id": 1,
       "user_id": 2,
-      "status": "PENDING",
+      "status": "DELIVERED",
       "payment": "COD",
-      "shipping_address": "Ho Chi Minh City",
-      "total_amount": 3000000,
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "shipping_address": "123 Le Loi, HCM",
+      "total_amount": 3100000,
+      "created_at": "2026-01-02T05:44:10.298Z"
     }
   ],
   "order_item": [
@@ -3167,7 +3173,7 @@
       "id": 1,
       "order_id": 1,
       "variant_id": 1,
-      "price": 1500000,
+      "price": 1550000,
       "quantity": 2
     }
   ],
@@ -3175,7 +3181,7 @@
     {
       "id": 1,
       "user_id": 2,
-      "product_id": 1
+      "product_id": 5
     }
   ],
   "reviews": [
@@ -3184,8 +3190,8 @@
       "product_id": 1,
       "user_id": 2,
       "rating": 5,
-      "content": "Very good quality!",
-      "created_at": "2025-12-31T06:18:01.620Z"
+      "content": "Giày đi rất êm, giao hàng nhanh!",
+      "created_at": "2026-01-03T05:44:10.298Z"
     }
   ],
   "sessions": [],
