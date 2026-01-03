@@ -1,478 +1,573 @@
-// client/src/components/user/OrdersTrackingPage.jsx
 import React, { useEffect, useMemo, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-
-const API_BASE =
-  process.env.REACT_APP_API_URL ||
-  import.meta?.env?.VITE_API_URL ||
-  "http://localhost:3001";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { CheckCircle2, Truck, MapPin, ReceiptText, Star, RotateCcw } from "lucide-react";
 
 function formatMoneyVND(n) {
   const num = Number(n) || 0;
-  return num.toLocaleString("vi-VN") + "₫";
+  return num.toLocaleString("vi-VN") + "đ";
 }
 
 function formatDate(iso) {
-  if (!iso) return "-";
+  if (!iso) return "—";
   const d = new Date(iso);
   return d.toLocaleString("vi-VN");
 }
 
-function statusLabel(status) {
-  const s = (status || "").toUpperCase();
-  if (s === "PENDING") return "Pending";
-  if (s === "PAID") return "Paid";
-  if (s === "SHIPPED") return "Shipped";
-  if (s === "DELIVERED") return "Delivered";
-  // fallback (CartPage payload có thể là "Placed")
-  if (s === "PLACED") return "Placed";
-  return status || "Pending";
+function normalizeStatus(s) {
+  const v = String(s || "").toLowerCase();
+  if (v.includes("deliver")) return "DELIVERED";
+  if (v.includes("ship")) return "SHIPPED";
+  if (v.includes("process")) return "PROCESSING";
+  if (v.includes("paid")) return "PAID";
+  if (v.includes("pend")) return "PENDING";
+  return v ? v.toUpperCase() : "PENDING";
 }
 
-function statusStepIndex(status) {
-  const s = (status || "").toUpperCase();
-  // map theo db generateDb.js: PENDING -> PAID -> SHIPPED -> DELIVERED
-  if (s === "PENDING" || s === "PLACED") return 0;
-  if (s === "PAID") return 1;
-  if (s === "SHIPPED") return 2;
-  if (s === "DELIVERED") return 3;
-  return 0;
+function statusLabel(s) {
+  const v = normalizeStatus(s);
+  if (v === "DELIVERED") return "Delivered";
+  if (v === "SHIPPED") return "Shipped";
+  if (v === "PROCESSING") return "Processing";
+  if (v === "PAID") return "Paid";
+  return "Pending";
 }
 
 export default function OrderDetailPage() {
   const { id } = useParams();
+  const nav = useNavigate();
 
   const [loading, setLoading] = useState(true);
-  const [err, setErr] = useState("");
   const [order, setOrder] = useState(null);
-  const [items, setItems] = useState([]); // enriched items
+  const [items, setItems] = useState([]);
+  const [err, setErr] = useState("");
 
+  // fetch order + items (giữ logic cũ của bạn)
   useEffect(() => {
-    let mounted = true;
+    let alive = true;
 
-    async function fetchJson(url) {
-      const res = await fetch(url);
-      if (!res.ok) throw new Error(`Request failed: ${res.status}`);
-      return res.json();
-    }
-
-    async function fetchOrder() {
+    const run = async () => {
       setLoading(true);
       setErr("");
-      setOrder(null);
-      setItems([]);
-
       try {
-        let ord = null;
+        // Bạn đang chạy json-server (localhost:3001) theo terminal screenshot
+        const orderRes = await fetch(`http://localhost:3001/orders/${id}`);
+        if (!orderRes.ok) throw new Error("Order not found");
+        const orderJson = await orderRes.json();
 
+        // order_items: tùy data bạn map, mình giữ kiểu an toàn
+        let itemsJson = [];
         try {
-          ord = await fetchJson(`${API_BASE}/orders/${encodeURIComponent(id)}`);
+          const itemsRes = await fetch(`http://localhost:3001/order_item?order_id=${id}`);
+          if (itemsRes.ok) itemsJson = await itemsRes.json();
         } catch {
-          ord = null;
+          // ignore
         }
 
-        // 2) If not found, try query by order_id (numeric)
-        if (!ord || !ord.order_id) {
-          const maybeNum = Number(id);
-          if (!Number.isNaN(maybeNum)) {
-            const list = await fetchJson(
-              `${API_BASE}/orders?order_id=${maybeNum}`
-            );
-            ord = Array.isArray(list) ? list[0] : null;
-          }
-        }
-
-        // 3) If still not found, bail
-        if (!ord) throw new Error("Không tìm thấy đơn hàng này 😵");
-
-        if (!mounted) return;
-        setOrder(ord);
-
-        // Fetch order items by order_id (numeric)
-        const orderIdNum = ord.order_id ?? Number(id);
-        const rawItems = await fetchJson(
-          `${API_BASE}/order_item?order_id=${orderIdNum}`
-        );
-
-        // Enrich: variant -> product
-        const enriched = await Promise.all(
-          (rawItems || []).map(async (it) => {
-            let variant = null;
-            let product = null;
-
-            try {
-              const vList = await fetchJson(
-                `${API_BASE}/product_variants?variant_id=${it.variant_id}`
-              );
-              variant = Array.isArray(vList) ? vList[0] : null;
-            } catch {}
-
-            try {
-              const productId = variant?.product_id;
-              if (productId) {
-                const pList = await fetchJson(
-                  `${API_BASE}/products?product_id=${productId}`
-                );
-                product = Array.isArray(pList) ? pList[0] : null;
-              }
-            } catch {}
-
-            const name = product?.name || `Variant #${it.variant_id}`;
-            const image = product?.image_url
-              ? product.image_url.startsWith("http")
-                ? product.image_url
-                : product.image_url
-              : "";
-
-            return {
-              ...it,
-              name,
-              image,
-              size: variant?.size || "-",
-              color: variant?.color || "-",
-              lineTotal: (Number(it.price) || 0) * (Number(it.quantity) || 0),
-            };
-          })
-        );
-
-        if (!mounted) return;
-        setItems(enriched || []);
+        if (!alive) return;
+        setOrder(orderJson);
+        setItems(Array.isArray(itemsJson) ? itemsJson.map((x) => ({
+          id: x.id ?? x.order_item_id,
+          name: x.product_name ?? x.name ?? "Sneaker",
+          image: x.image_url ?? x.image ?? "https://via.placeholder.com/150",
+          qty: Number(x.quantity ?? x.qty ?? 1),
+          size: x.size ?? x.variant_size ?? x.shoe_size ?? "",
+          price: Number(x.unit_price ?? x.price ?? 0),
+          variant_id: x.variant_id ?? x.product_variant_id ?? "",
+        })) : []);
       } catch (e) {
-        if (!mounted) return;
-        setErr(e?.message || "Có lỗi xảy ra");
+        if (!alive) return;
+        setErr(e?.message || "Something went wrong");
       } finally {
-        if (!mounted) return;
+        if (!alive) return;
         setLoading(false);
       }
-    }
+    };
 
-    fetchOrder();
-
+    run();
     return () => {
-      mounted = false;
+      alive = false;
     };
   }, [id]);
 
-  const stepIdx = useMemo(() => statusStepIndex(order?.status), [order?.status]);
+  const subtotal = useMemo(() => {
+    if (!items?.length) return 0;
+    return items.reduce((sum, it) => sum + (Number(it.price) || 0) * (Number(it.qty) || 0), 0);
+  }, [items]);
 
-  const computedTotal = useMemo(() => {
-    // ưu tiên total_amount từ order (db.json có)
+  const shipping = useMemo(() => {
+    const v = order?.shipping_fee ?? order?.shippingFee ?? 0;
+    return Number(v) || 0;
+  }, [order]);
+
+  const tax = useMemo(() => {
+    const v = order?.tax ?? order?.vat ?? 0;
+    return Number(v) || 0;
+  }, [order]);
+
+  const total = useMemo(() => {
     if (order?.total_amount != null) return Number(order.total_amount) || 0;
-    // fallback: sum items
-    return (items || []).reduce((acc, it) => acc + (it.lineTotal || 0), 0);
-  }, [order, items]);
+    return subtotal + shipping + tax;
+  }, [order, subtotal, shipping, tax]);
 
-  const copyLink = async () => {
+  const trackingCode =
+    order?.tracking_code || order?.trackingCode || order?.tracking_number || order?.trackingNumber || "";
+
+  const displayId = order?.order_id ?? order?.id ?? id;
+
+  // ===== Leave Review (no backend): stored in localStorage by order id =====
+  const reviewStorageKey = useMemo(() => `stepstyle_review_${String(displayId)}`, [displayId]);
+
+  const [isReviewOpen, setIsReviewOpen] = useState(false);
+  const [rating, setRating] = useState(0);
+  const [reviewText, setReviewText] = useState("");
+  const [savedReview, setSavedReview] = useState(null); // { rating, text, savedAt }
+
+  useEffect(() => {
     try {
-      await navigator.clipboard.writeText(window.location.href);
-      alert("Copy link tracking xong rồi nè ✅");
+      const raw = localStorage.getItem(reviewStorageKey);
+      if (!raw) return;
+      const parsed = JSON.parse(raw);
+      if (parsed && typeof parsed === "object") {
+        setSavedReview(parsed);
+        setRating(Number(parsed.rating) || 0);
+        setReviewText(parsed.text || "");
+      }
     } catch {
-      alert("Copy không được (browser chặn). M tự copy URL trên thanh địa chỉ nha.");
+      // ignore bad storage
     }
+  }, [reviewStorageKey]);
+
+  const openReview = () => setIsReviewOpen(true);
+  const closeReview = () => setIsReviewOpen(false);
+
+  const saveReview = () => {
+    const payload = {
+      rating: Math.max(1, Math.min(5, Number(rating) || 0)),
+      text: (reviewText || "").trim(),
+      savedAt: new Date().toISOString(),
+    };
+    try {
+      localStorage.setItem(reviewStorageKey, JSON.stringify(payload));
+    } catch {
+      // ignore
+    }
+    setSavedReview(payload);
+    setIsReviewOpen(false);
   };
+
+  const clearReview = () => {
+    try {
+      localStorage.removeItem(reviewStorageKey);
+    } catch {
+      // ignore
+    }
+    setSavedReview(null);
+    setRating(0);
+    setReviewText("");
+    setIsReviewOpen(false);
+  };
+
+  const onBuyAgain = () => {
+    // tuỳ bạn muốn điều hướng đâu
+    nav("/");
+  };
+
+  const StatusIcon = CheckCircle2;
 
   if (loading) {
     return (
-      <main className="men-wrap">
-        <section className="container" style={{ padding: "28px 0 60px" }}>
-          <h1 className="men-title" style={{ marginBottom: 8 }}>
-            Order Tracking
-          </h1>
-          <p className="muted">Đang load đơn hàng...</p>
-        </section>
+      <main style={{ padding: "48px 0" }}>
+        <div className="container">
+          <div className="od-card" style={{ padding: 24 }}>
+            Loading…
+          </div>
+        </div>
       </main>
     );
   }
 
   if (err) {
     return (
-      <main className="men-wrap">
-        <section className="container" style={{ padding: "28px 0 60px" }}>
-          <h1 className="men-title" style={{ marginBottom: 8 }}>
-            Order Tracking
-          </h1>
-          <div
-            style={{
-              border: "1px solid #fee2e2",
-              background: "#fff1f2",
-              borderRadius: 12,
-              padding: 16,
-            }}
-          >
-            <strong>Oops:</strong> <span>{err}</span>
+      <main style={{ padding: "48px 0" }}>
+        <div className="container">
+          <div className="od-card" style={{ padding: 24 }}>
+            <strong>Oops:</strong> {err}
+            <div style={{ marginTop: 12, display: "flex", gap: 10, flexWrap: "wrap" }}>
+              <Link to="/orders" className="od-btnGhost">Back to Orders</Link>
+              <Link to="/" className="od-btnSolid">Home</Link>
+            </div>
           </div>
-
-          <div style={{ marginTop: 16, display: "flex", gap: 10 }}>
-            <Link to="/" className="btn btn-primary">
-              Back to Home
-            </Link>
-            <Link to="/cart" className="btn btn-outline">
-              Back to Cart
-            </Link>
-          </div>
-        </section>
+        </div>
       </main>
     );
   }
 
   return (
-    <main className="men-wrap">
-      {/* Breadcrumb */}
-      <section className="men-bc">
+    <>
+      <main style={{ padding: "28px 0 60px" }}>
         <div className="container">
-          <Link to="/" className="men-bc-link">
-            Home
-          </Link>
-          <span className="men-bc-sep">›</span>
-          <Link to="/orders" className="men-bc-link">
-            Orders
-          </Link>
-          <span className="men-bc-sep">›</span>
-          <span>Tracking</span>
-        </div>
-      </section>
+          <div className="od-card">
+            {/* header */}
+            <div className="od-head">
+              <div className="od-head-left">
+                <div className="od-statusIcon">
+                  <StatusIcon size={22} color="#16a34a" />
+                </div>
 
-      {/* Header */}
-      <section className="men-head">
-        <div className="container">
-          <h1 className="men-title">Order Tracking</h1>
-          <p className="men-sub">
-            Theo dõi đơn hàng của bạn theo thời gian thực-ish 😎
-          </p>
-        </div>
-      </section>
+                <div>
+                  <div className="od-titleRow">
+                    <p className="od-orderId">#{displayId}</p>
+                    <span className="od-badge">{statusLabel(order?.status)}</span>
+                  </div>
 
-      <section className="container" style={{ padding: "18px 0 64px" }}>
-        {/* Top card */}
-        <div
-          style={{
-            border: "1px solid #e5e7eb",
-            borderRadius: 12,
-            padding: 16,
-            background: "#fff",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: 12,
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <div>
-              <div className="muted" style={{ fontSize: 13 }}>
-                Order
-              </div>
-              <div style={{ fontSize: 20, fontWeight: 800 }}>
-                #{order?.order_id ?? order?.id ?? id}
-              </div>
-              <div className="muted" style={{ marginTop: 6 }}>
-                Created: {formatDate(order?.created_at || order?.createdAt)}
-              </div>
-            </div>
+                  <div className="od-meta">
+                    <span>🗓 {formatDate(order?.created_at || order?.createdAt)}</span>
+                    <span className="dot" />
+                    <span>📦 {items.length} items</span>
+                  </div>
 
-            <div style={{ textAlign: "right" }}>
-              <div
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                  padding: "8px 12px",
-                  borderRadius: 999,
-                  border: "1px solid #e5e7eb",
-                  background: "#f8fafc",
-                  fontWeight: 700,
-                }}
-              >
-                Status: {statusLabel(order?.status)}
-              </div>
-
-              <div style={{ marginTop: 10, display: "flex", gap: 10, justifyContent: "flex-end" }}>
-                <button className="btn btn-outline" onClick={copyLink} type="button">
-                  Copy tracking link
-                </button>
-                <Link to="/orders" className="btn btn-outline">
-                  View all orders
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* Timeline */}
-          <div style={{ marginTop: 18 }}>
-            {["Placed", "Paid", "Shipped", "Delivered"].map((label, idx) => {
-              const done = idx <= stepIdx;
-              return (
-                <div
-                  key={label}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 12,
-                    marginTop: 10,
-                  }}
-                >
-                  <div
-                    style={{
-                      width: 14,
-                      height: 14,
-                      borderRadius: 999,
-                      border: "2px solid #111827",
-                      background: done ? "#111827" : "transparent",
-                      flex: "0 0 auto",
-                    }}
-                  />
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontWeight: 700 }}>{label}</div>
-                    <div className="muted" style={{ fontSize: 13 }}>
-                      {idx === stepIdx ? "Đang ở bước này nè" : done ? "Đã xong" : "Chưa tới"}
+                  {savedReview?.rating ? (
+                    <div className="od-savedReview">
+                      <Star size={14} style={{ marginRight: 6, verticalAlign: "middle" }} />
+                      Saved Review: {savedReview.rating}/5
                     </div>
+                  ) : null}
+                </div>
+              </div>
+
+              <div className="od-head-right">
+                <div className="small">Total Amount</div>
+                <div className="total">{formatMoneyVND(total)}</div>
+              </div>
+            </div>
+
+            {/* items */}
+            <div className="od-section">
+              <p className="od-sectionTitle">ORDER ITEMS</p>
+
+              {items.length === 0 ? (
+                <p className="muted" style={{ margin: 0 }}>
+                  Order items will show here when the API is ready.
+                </p>
+              ) : (
+                <div className="od-items">
+                  {items.map((it, idx) => (
+                    <div className="od-itemRow" key={it.id || `${it.variant_id}-${idx}`}>
+                      <div className="od-imgWrap">
+                        <img src={it.image} alt={it.name} />
+                        <div className="od-qtyBubble">{it.qty}</div>
+                      </div>
+
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <div className="od-itemName">{it.name}</div>
+                        <div className="muted" style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+                          {!!it.size && <span>Size: {it.size}</span>}
+                          <span>Qty: {it.qty}</span>
+                        </div>
+                      </div>
+
+                      <div className="od-itemPrice">{formatMoneyVND((Number(it.price) || 0) * (Number(it.qty) || 0))}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* address + breakdown */}
+            <div className="od-grid2">
+              <div className="od-box">
+                <div className="od-boxTitle">
+                  <MapPin size={16} style={{ marginRight: 8, verticalAlign: "middle" }} />
+                  SHIPPING ADDRESS
+                </div>
+                <div className="muted" style={{ marginTop: 10 }}>
+                  {order?.shipping_address || order?.address || "—"}
+                </div>
+              </div>
+
+              <div className="od-box">
+                <div className="od-boxTitle">
+                  <ReceiptText size={16} style={{ marginRight: 8, verticalAlign: "middle" }} />
+                  PRICE BREAKDOWN
+                </div>
+                <div className="od-breakdown">
+                  <div className="od-row">
+                    <span className="muted">Subtotal</span>
+                    <span>{formatMoneyVND(subtotal)}</span>
+                  </div>
+                  <div className="od-row">
+                    <span className="muted">Shipping</span>
+                    <span>{formatMoneyVND(shipping)}</span>
+                  </div>
+                  <div className="od-row">
+                    <span className="muted">Tax</span>
+                    <span>{formatMoneyVND(tax)}</span>
+                  </div>
+                  <div className="od-divider" />
+                  <div className="od-row od-rowTotal">
+                    <span>Total</span>
+                    <span>{formatMoneyVND(total)}</span>
                   </div>
                 </div>
-              );
-            })}
-          </div>
-        </div>
+              </div>
+            </div>
 
-        {/* Items + summary */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr",
-            gap: 16,
-            marginTop: 16,
-          }}
-        >
-          {/* Items */}
-          <div
-            style={{
-              border: "1px solid #e5e7eb",
-              borderRadius: 12,
-              padding: 16,
-              background: "#fff",
-            }}
-          >
-            <h3 style={{ marginTop: 0, marginBottom: 12 }}>Items</h3>
-
-            {items.length === 0 ? (
-              <p className="muted" style={{ margin: 0 }}>
-                Đơn này chưa có item (hoặc data chưa map đúng).
-              </p>
-            ) : (
-              <div style={{ display: "grid", gap: 12 }}>
-                {items.map((it) => (
-                  <div
-                    key={it.id || `${it.variant_id}-${it.order_id}`}
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "72px 1fr auto",
-                      gap: 12,
-                      alignItems: "center",
-                      border: "1px solid #e5e7eb",
-                      borderRadius: 12,
-                      padding: 10,
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: 72,
-                        height: 72,
-                        borderRadius: 10,
-                        overflow: "hidden",
-                        background: "#f3f4f6",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      {it.image ? (
-                        <img
-                          src={it.image}
-                          alt={it.name}
-                          style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                        />
-                      ) : (
-                        <span className="muted" style={{ fontSize: 12 }}>
-                          No image
-                        </span>
-                      )}
-                    </div>
-
-                    <div>
-                      <div style={{ fontWeight: 800 }}>{it.name}</div>
-                      <div className="muted" style={{ fontSize: 13, marginTop: 4 }}>
-                        Variant: {it.size} / {it.color} · Qty: {it.quantity}
-                      </div>
-                      <div className="muted" style={{ fontSize: 13, marginTop: 2 }}>
-                        Price: {formatMoneyVND(it.price)}
-                      </div>
-                    </div>
-
-                    <div style={{ fontWeight: 900 }}>
-                      {formatMoneyVND(it.lineTotal)}
-                    </div>
+            {/* delivered banner */}
+            <div className="od-banner">
+              <div className="od-bannerLeft">
+                <div className="od-bannerIcon">
+                  <Truck size={18} color="#16a34a" />
+                </div>
+                <div>
+                  <div style={{ fontWeight: 900, color: "#065f46" }}>
+                    {normalizeStatus(order?.status) === "DELIVERED" ? "Delivered on" : "Latest update"}
                   </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Summary */}
-          <div
-            style={{
-              border: "1px solid #e5e7eb",
-              borderRadius: 12,
-              padding: 16,
-              background: "#fff",
-            }}
-          >
-            <h3 style={{ marginTop: 0, marginBottom: 12 }}>Summary</h3>
-            <div style={{ display: "grid", gap: 8 }}>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <span className="muted">Payment</span>
-                <span style={{ fontWeight: 700 }}>{order?.payment || "—"}</span>
-              </div>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <span className="muted">Shipping address</span>
-                <span style={{ fontWeight: 700 }}>
-                  {order?.shipping_address || "—"}
-                </span>
+                  <div style={{ color: "#065f46" }}>
+                    <strong>Tracking:</strong>{" "}
+                    {trackingCode ? trackingCode : "Not available"}{" "}
+                    • {formatDate(order?.updated_at || order?.updatedAt || order?.created_at || order?.createdAt)}
+                  </div>
+                </div>
               </div>
 
-              <hr />
-
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  fontWeight: 900,
-                  fontSize: 18,
-                }}
-              >
-                <span>Total</span>
-                <span>{formatMoneyVND(computedTotal)}</span>
-              </div>
-
-              <div style={{ display: "flex", gap: 10, marginTop: 10 }}>
-                <Link to="/" className="btn btn-primary">
-                  Continue shopping
-                </Link>
-                <Link to="/cart" className="btn btn-outline">
-                  Back to cart
-                </Link>
-              </div>
+              <button className="od-btnGhost" type="button">
+                Track Package
+              </button>
             </div>
           </div>
         </div>
+      </main>
 
-        {/* Tiny note */}
-        <p className="muted" style={{ marginTop: 14, fontSize: 12 }}>
-          Nếu m đang chạy json-server: nhớ bật đúng port (default mình set {API_BASE}).
-          Cần đổi thì set env: <code>REACT_APP_API_URL</code> hoặc <code>VITE_API_URL</code>.
-        </p>
-      </section>
-    </main>
+      {/* Review Modal (inline styles so it always looks good) */}
+{isReviewOpen && (
+  <div
+    style={{
+      position: "fixed",
+      inset: 0,
+      background: "rgba(2,6,23,.55)",
+      backdropFilter: "blur(6px)",
+      display: "grid",
+      placeItems: "center",
+      zIndex: 9999,
+      padding: 16,
+    }}
+    onMouseDown={(e) => {
+      // click outside to close
+      if (e.target === e.currentTarget) closeReview();
+    }}
+    role="dialog"
+    aria-modal="true"
+  >
+    <div
+      style={{
+        width: "min(560px, 100%)",
+        background: "#fff",
+        borderRadius: 16,
+        boxShadow: "0 30px 70px rgba(15,23,42,.25)",
+        overflow: "hidden",
+        border: "1px solid rgba(0,0,0,.08)",
+      }}
+      onMouseDown={(e) => e.stopPropagation()}
+    >
+      {/* Header */}
+      <div
+        style={{
+          padding: "14px 16px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          borderBottom: "1px solid rgba(0,0,0,.06)",
+          background: "#f8fafc",
+        }}
+      >
+        <div>
+          <div style={{ fontWeight: 900, fontSize: 18, color: "#0f172a" }}>
+            Leave a review
+          </div>
+          <div style={{ fontSize: 13, color: "#64748b", marginTop: 2 }}>
+            Order <b>#{String(displayId)}</b>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          onClick={closeReview}
+          style={{
+            width: 36,
+            height: 36,
+            borderRadius: 10,
+            border: "1px solid rgba(0,0,0,.08)",
+            background: "#fff",
+            cursor: "pointer",
+            fontWeight: 900,
+            lineHeight: 1,
+          }}
+          aria-label="Close"
+          title="Close"
+        >
+          ×
+        </button>
+      </div>
+
+      {/* Body */}
+      <div style={{ padding: 16 }}>
+        {/* Stars */}
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <div style={{ minWidth: 64, fontSize: 13, color: "#64748b", fontWeight: 800 }}>
+            Rating
+          </div>
+
+          <div style={{ display: "flex", gap: 8 }}>
+            {[1, 2, 3, 4, 5].map((n) => (
+              <button
+                key={n}
+                type="button"
+                onClick={() => setRating(n)}
+                style={{
+                  width: 40,
+                  height: 40,
+                  borderRadius: 12,
+                  border: "1px solid rgba(0,0,0,.08)",
+                  background: n <= rating ? "rgba(250,204,21,.25)" : "#fff",
+                  cursor: "pointer",
+                  display: "grid",
+                  placeItems: "center",
+                }}
+                aria-label={`${n} star`}
+                title={`${n} star`}
+              >
+                <Star
+                  size={18}
+                  color={n <= rating ? "#0f172a" : "#94a3b8"}
+                  fill={n <= rating ? "#0f172a" : "transparent"}
+                />
+              </button>
+            ))}
+          </div>
+
+          <div style={{ marginLeft: "auto", fontSize: 13, color: "#64748b", fontWeight: 800 }}>
+            {rating ? `${rating}/5` : "—"}
+          </div>
+        </div>
+
+        {/* Textarea */}
+        <div style={{ marginTop: 14 }}>
+          <div style={{ fontSize: 13, color: "#64748b", fontWeight: 800, marginBottom: 6 }}>
+            Comment
+          </div>
+
+          <textarea
+            value={reviewText}
+            onChange={(e) => setReviewText(e.target.value)}
+            rows={4}
+            placeholder="Optional… what did you think?"
+            style={{
+              width: "100%",
+              borderRadius: 14,
+              border: "1px solid rgba(0,0,0,.10)",
+              padding: "12px 12px",
+              outline: "none",
+              fontFamily: "inherit",
+              fontSize: 14,
+              resize: "vertical",
+            }}
+            onFocus={(e) => {
+              e.currentTarget.style.boxShadow = "0 0 0 4px rgba(59,130,246,.15)";
+              e.currentTarget.style.borderColor = "rgba(59,130,246,.55)";
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.boxShadow = "none";
+              e.currentTarget.style.borderColor = "rgba(0,0,0,.10)";
+            }}
+          />
+
+          <div style={{ marginTop: 8, fontSize: 12, color: "#64748b" }}>
+            Saved on this browser only (no backend).
+          </div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <div
+        style={{
+          padding: "14px 16px",
+          borderTop: "1px solid rgba(0,0,0,.06)",
+          display: "flex",
+          gap: 10,
+          justifyContent: "flex-end",
+          background: "#fff",
+        }}
+      >
+        <button
+          type="button"
+          onClick={clearReview}
+          style={{
+            borderRadius: 14,
+            padding: "10px 14px",
+            fontWeight: 900,
+            border: "1px solid rgba(0,0,0,.10)",
+            background: "#fff",
+            cursor: "pointer",
+          }}
+        >
+          Clear
+        </button>
+
+        <button
+          type="button"
+          onClick={closeReview}
+          style={{
+            borderRadius: 14,
+            padding: "10px 14px",
+            fontWeight: 900,
+            border: "1px solid rgba(0,0,0,.10)",
+            background: "#fff",
+            cursor: "pointer",
+          }}
+        >
+          Cancel
+        </button>
+
+        <button
+          type="button"
+          onClick={saveReview}
+          disabled={!rating}
+          style={{
+            borderRadius: 14,
+            padding: "10px 14px",
+            fontWeight: 900,
+            border: "none",
+            background: !rating ? "#94a3b8" : "#0f172a",
+            color: "#fff",
+            cursor: !rating ? "not-allowed" : "pointer",
+          }}
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
+
+      {/* actions bar bottom */}
+      <div className="od-actionsBar">
+        <div className="container od-actionsInner">
+          <Link to="/orders" className="od-btnGhost">
+            Back
+          </Link>
+
+          <button className="od-btnGhost" type="button" onClick={openReview}>
+            <Star size={16} style={{ marginRight: 8, verticalAlign: "middle" }} />
+            Leave Review
+          </button>
+
+          <button className="od-btnSolid" type="button" onClick={onBuyAgain}>
+            <RotateCcw size={16} style={{ marginRight: 8, verticalAlign: "middle" }} />
+            Buy Again
+          </button>
+        </div>
+      </div>
+    </>
   );
 }
