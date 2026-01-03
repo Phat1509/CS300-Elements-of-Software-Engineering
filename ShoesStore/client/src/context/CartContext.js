@@ -1,3 +1,4 @@
+// client/src/context/CartContext.js
 import React, { createContext, useState, useEffect, useContext } from "react";
 import api, { getCartItems } from "../ultilities/api";
 import { useAuth } from "./AuthContext";

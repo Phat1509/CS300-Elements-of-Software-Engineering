@@ -4,25 +4,25 @@
       "brand_id": 1,
       "name": "Nike",
       "description": "Nike represents generic sport fashion.",
-      "id": "0d6b"
+      "id": "a2eb"
     },
     {
       "brand_id": 2,
       "name": "Adidas",
       "description": "Adidas represents generic sport fashion.",
-      "id": "d1a2"
+      "id": "c352"
     },
     {
       "brand_id": 3,
       "name": "Puma",
       "description": "Puma represents generic sport fashion.",
-      "id": "a2de"
+      "id": "f758"
     },
     {
       "brand_id": 4,
       "name": "Converse",
       "description": "Converse represents generic sport fashion.",
-      "id": "e3e1"
+      "id": "be7a"
     }
   ],
   "categories": [
@@ -32,7 +32,7 @@
       "slug": "men",
       "description": "Men's Fashion",
       "parent_id": null,
-      "id": "ee21"
+      "id": "e1b6"
     },
     {
       "category_id": 2,
@@ -40,7 +40,7 @@
       "slug": "women",
       "description": "Women's Fashion",
       "parent_id": null,
-      "id": "a864"
+      "id": "da8e"
     },
     {
       "category_id": 3,
@@ -48,7 +48,7 @@
       "slug": "sneakers",
       "description": "All Sneakers",
       "parent_id": 1,
-      "id": "b76a"
+      "id": "e0fb"
     }
   ],
   "products": [
@@ -63,8 +63,8 @@
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.297Z",
-      "id": "0f3c"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "2b92"
     },
     {
       "product_id": 2,
@@ -77,8 +77,8 @@
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "4347"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "f42f"
     },
     {
       "product_id": 3,
@@ -91,8 +91,8 @@
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "11e4"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "2de0"
     },
     {
       "product_id": 4,
@@ -105,8 +105,8 @@
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "3c35"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "81fb"
     },
     {
       "product_id": 5,
@@ -119,8 +119,8 @@
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "e773"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "4fb4"
     },
     {
       "product_id": 6,
@@ -133,8 +133,8 @@
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "473d"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "f7ed"
     },
     {
       "product_id": 7,
@@ -147,8 +147,8 @@
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "afbb"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "a469"
     },
     {
       "product_id": 8,
@@ -161,8 +161,8 @@
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "f5b3"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "6e28"
     },
     {
       "product_id": 9,
@@ -175,8 +175,8 @@
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "2910"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "6106"
     },
     {
       "product_id": 10,
@@ -189,8 +189,8 @@
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "651f"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "ef54"
     },
     {
       "product_id": 11,
@@ -203,8 +203,8 @@
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "4156"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "2b43"
     },
     {
       "product_id": 12,
@@ -217,8 +217,8 @@
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "8ad5"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "8b6a"
     },
     {
       "product_id": 13,
@@ -231,8 +231,8 @@
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "89b8"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "18fd"
     },
     {
       "product_id": 14,
@@ -245,8 +245,8 @@
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "7801"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "d119"
     },
     {
       "product_id": 15,
@@ -259,8 +259,8 @@
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "3802"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "ef4c"
     },
     {
       "product_id": 16,
@@ -273,8 +273,8 @@
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "4c30"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "4723"
     },
     {
       "product_id": 17,
@@ -287,8 +287,8 @@
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "cc79"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "d8b7"
     },
     {
       "product_id": 18,
@@ -301,8 +301,8 @@
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "038e"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "e986"
     },
     {
       "product_id": 19,
@@ -315,8 +315,8 @@
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "a81d"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "ed43"
     },
     {
       "product_id": 20,
@@ -329,8 +329,8 @@
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "5104"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "da15"
     },
     {
       "product_id": 21,
@@ -343,8 +343,8 @@
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "343a"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "21b9"
     },
     {
       "product_id": 22,
@@ -357,8 +357,8 @@
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "687f"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "d9eb"
     },
     {
       "product_id": 23,
@@ -371,8 +371,8 @@
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "ebcb"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "0e09"
     },
     {
       "product_id": 24,
@@ -385,8 +385,8 @@
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "d2e0"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "2050"
     },
     {
       "product_id": 25,
@@ -399,8 +399,8 @@
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "1f2c"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "e1c2"
     },
     {
       "product_id": 26,
@@ -413,8 +413,8 @@
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "7888"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "8b01"
     },
     {
       "product_id": 27,
@@ -427,8 +427,8 @@
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "bf14"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "f58d"
     },
     {
       "product_id": 28,
@@ -441,8 +441,8 @@
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "3e99"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "0efd"
     },
     {
       "product_id": 29,
@@ -455,8 +455,8 @@
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "43d8"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "1bc6"
     },
     {
       "product_id": 30,
@@ -469,8 +469,8 @@
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "daee"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "4239"
     },
     {
       "product_id": 31,
@@ -483,8 +483,8 @@
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "3132"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "1df3"
     },
     {
       "product_id": 32,
@@ -497,8 +497,8 @@
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "d22e"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "d3cd"
     },
     {
       "product_id": 33,
@@ -511,8 +511,8 @@
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "7da7"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "43d6"
     },
     {
       "product_id": 34,
@@ -525,8 +525,8 @@
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "5caa"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "1a10"
     },
     {
       "product_id": 35,
@@ -539,8 +539,8 @@
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "e03b"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "cd04"
     },
     {
       "product_id": 36,
@@ -553,8 +553,8 @@
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "2ec9"
+      "created_at": "2026-01-03T06:55:38.401Z",
+      "id": "cd03"
     },
     {
       "product_id": 37,
@@ -567,8 +567,8 @@
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "41fa"
+      "created_at": "2026-01-03T06:55:38.402Z",
+      "id": "0230"
     },
     {
       "product_id": 38,
@@ -581,8 +581,8 @@
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "2888"
+      "created_at": "2026-01-03T06:55:38.402Z",
+      "id": "b045"
     },
     {
       "product_id": 39,
@@ -595,8 +595,8 @@
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "f73a"
+      "created_at": "2026-01-03T06:55:38.402Z",
+      "id": "ffd5"
     },
     {
       "product_id": 40,
@@ -609,8 +609,8 @@
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "fbf0"
+      "created_at": "2026-01-03T06:55:38.402Z",
+      "id": "614b"
     },
     {
       "product_id": 41,
@@ -623,8 +623,8 @@
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "1042"
+      "created_at": "2026-01-03T06:55:38.402Z",
+      "id": "19b5"
     },
     {
       "product_id": 42,
@@ -637,8 +637,8 @@
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "85b0"
+      "created_at": "2026-01-03T06:55:38.402Z",
+      "id": "0238"
     },
     {
       "product_id": 43,
@@ -651,8 +651,8 @@
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "197a"
+      "created_at": "2026-01-03T06:55:38.402Z",
+      "id": "e177"
     },
     {
       "product_id": 44,
@@ -665,8 +665,8 @@
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "3415"
+      "created_at": "2026-01-03T06:55:38.402Z",
+      "id": "dc32"
     },
     {
       "product_id": 45,
@@ -679,8 +679,8 @@
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "42ea"
+      "created_at": "2026-01-03T06:55:38.402Z",
+      "id": "e4f9"
     },
     {
       "product_id": 46,
@@ -693,8 +693,8 @@
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "fa86"
+      "created_at": "2026-01-03T06:55:38.402Z",
+      "id": "e7a5"
     },
     {
       "product_id": 47,
@@ -707,8 +707,8 @@
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "053d"
+      "created_at": "2026-01-03T06:55:38.402Z",
+      "id": "49a5"
     },
     {
       "product_id": 48,
@@ -721,8 +721,8 @@
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "4a5d"
+      "created_at": "2026-01-03T06:55:38.402Z",
+      "id": "2b60"
     },
     {
       "product_id": 49,
@@ -735,8 +735,8 @@
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "c3a8"
+      "created_at": "2026-01-03T06:55:38.402Z",
+      "id": "ad00"
     },
     {
       "product_id": 50,
@@ -749,8 +749,8 @@
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "5264"
+      "created_at": "2026-01-03T06:55:38.402Z",
+      "id": "cf97"
     }
   ],
   "product_variants": [
@@ -759,2700 +759,6750 @@
       "product_id": 1,
       "size": "39",
       "color": "White",
-      "sku": "SKU-1-0",
-      "stock": 24,
-      "id": "138b"
+      "sku": "SKU-1-39-White",
+      "stock": 13,
+      "id": "3b5c"
     },
     {
       "variant_id": 2,
       "product_id": 1,
-      "size": "40",
+      "size": "39",
       "color": "Black",
-      "sku": "SKU-1-1",
-      "stock": 13,
-      "id": "da54"
+      "sku": "SKU-1-39-Black",
+      "stock": 29,
+      "id": "28a3"
     },
     {
       "variant_id": 3,
       "product_id": 1,
-      "size": "41",
+      "size": "39",
       "color": "Red",
-      "sku": "SKU-1-2",
-      "stock": 20,
-      "id": "b2eb"
+      "sku": "SKU-1-39-Red",
+      "stock": 14,
+      "id": "30df"
     },
     {
       "variant_id": 4,
       "product_id": 1,
-      "size": "42",
+      "size": "40",
       "color": "White",
-      "sku": "SKU-1-3",
-      "stock": 18,
-      "id": "b9a1"
+      "sku": "SKU-1-40-White",
+      "stock": 13,
+      "id": "de23"
     },
     {
       "variant_id": 5,
       "product_id": 1,
-      "size": "43",
+      "size": "40",
       "color": "Black",
-      "sku": "SKU-1-4",
-      "stock": 1,
-      "id": "cd7f"
+      "sku": "SKU-1-40-Black",
+      "stock": 30,
+      "id": "bd98"
     },
     {
       "variant_id": 6,
       "product_id": 1,
-      "size": "39",
+      "size": "40",
       "color": "Red",
-      "sku": "SKU-1-5",
-      "stock": 22,
-      "id": "737e"
+      "sku": "SKU-1-40-Red",
+      "stock": 7,
+      "id": "2664"
     },
     {
       "variant_id": 7,
-      "product_id": 2,
-      "size": "39",
+      "product_id": 1,
+      "size": "41",
       "color": "White",
-      "sku": "SKU-2-0",
-      "stock": 22,
-      "id": "32fd"
+      "sku": "SKU-1-41-White",
+      "stock": 34,
+      "id": "ea57"
     },
     {
       "variant_id": 8,
-      "product_id": 2,
-      "size": "40",
+      "product_id": 1,
+      "size": "41",
       "color": "Black",
-      "sku": "SKU-2-1",
-      "stock": 21,
-      "id": "1db2"
+      "sku": "SKU-1-41-Black",
+      "stock": 5,
+      "id": "404f"
     },
     {
       "variant_id": 9,
-      "product_id": 2,
+      "product_id": 1,
       "size": "41",
       "color": "Red",
-      "sku": "SKU-2-2",
-      "stock": 0,
-      "id": "f997"
+      "sku": "SKU-1-41-Red",
+      "stock": 31,
+      "id": "bc0a"
     },
     {
       "variant_id": 10,
-      "product_id": 2,
+      "product_id": 1,
       "size": "42",
       "color": "White",
-      "sku": "SKU-2-3",
-      "stock": 20,
-      "id": "b72d"
+      "sku": "SKU-1-42-White",
+      "stock": 16,
+      "id": "c1cb"
     },
     {
       "variant_id": 11,
-      "product_id": 2,
-      "size": "43",
+      "product_id": 1,
+      "size": "42",
       "color": "Black",
-      "sku": "SKU-2-4",
-      "stock": 14,
-      "id": "14b9"
+      "sku": "SKU-1-42-Black",
+      "stock": 33,
+      "id": "944b"
     },
     {
       "variant_id": 12,
-      "product_id": 2,
-      "size": "39",
+      "product_id": 1,
+      "size": "42",
       "color": "Red",
-      "sku": "SKU-2-5",
-      "stock": 5,
-      "id": "dd64"
+      "sku": "SKU-1-42-Red",
+      "stock": 20,
+      "id": "ae52"
     },
     {
       "variant_id": 13,
-      "product_id": 3,
-      "size": "39",
+      "product_id": 1,
+      "size": "43",
       "color": "White",
-      "sku": "SKU-3-0",
-      "stock": 7,
-      "id": "0ec5"
+      "sku": "SKU-1-43-White",
+      "stock": 14,
+      "id": "c617"
     },
     {
       "variant_id": 14,
-      "product_id": 3,
-      "size": "40",
+      "product_id": 1,
+      "size": "43",
       "color": "Black",
-      "sku": "SKU-3-1",
-      "stock": 8,
-      "id": "db00"
+      "sku": "SKU-1-43-Black",
+      "stock": 31,
+      "id": "f3d5"
     },
     {
       "variant_id": 15,
-      "product_id": 3,
-      "size": "41",
+      "product_id": 1,
+      "size": "43",
       "color": "Red",
-      "sku": "SKU-3-2",
-      "stock": 1,
-      "id": "7ef5"
+      "sku": "SKU-1-43-Red",
+      "stock": 34,
+      "id": "513a"
     },
     {
       "variant_id": 16,
-      "product_id": 3,
-      "size": "42",
+      "product_id": 2,
+      "size": "39",
       "color": "White",
-      "sku": "SKU-3-3",
-      "stock": 26,
-      "id": "3f7d"
+      "sku": "SKU-2-39-White",
+      "stock": 28,
+      "id": "eeee"
     },
     {
       "variant_id": 17,
-      "product_id": 3,
-      "size": "43",
+      "product_id": 2,
+      "size": "39",
       "color": "Black",
-      "sku": "SKU-3-4",
-      "stock": 13,
-      "id": "5ccf"
+      "sku": "SKU-2-39-Black",
+      "stock": 34,
+      "id": "33ab"
     },
     {
       "variant_id": 18,
-      "product_id": 3,
+      "product_id": 2,
       "size": "39",
       "color": "Red",
-      "sku": "SKU-3-5",
-      "stock": 15,
-      "id": "9f12"
+      "sku": "SKU-2-39-Red",
+      "stock": 21,
+      "id": "12c2"
     },
     {
       "variant_id": 19,
-      "product_id": 4,
-      "size": "39",
+      "product_id": 2,
+      "size": "40",
       "color": "White",
-      "sku": "SKU-4-0",
+      "sku": "SKU-2-40-White",
       "stock": 6,
-      "id": "defe"
+      "id": "bde0"
     },
     {
       "variant_id": 20,
-      "product_id": 4,
+      "product_id": 2,
       "size": "40",
       "color": "Black",
-      "sku": "SKU-4-1",
-      "stock": 29,
-      "id": "9ad5"
+      "sku": "SKU-2-40-Black",
+      "stock": 10,
+      "id": "1abc"
     },
     {
       "variant_id": 21,
-      "product_id": 4,
-      "size": "41",
+      "product_id": 2,
+      "size": "40",
       "color": "Red",
-      "sku": "SKU-4-2",
-      "stock": 14,
-      "id": "faac"
+      "sku": "SKU-2-40-Red",
+      "stock": 8,
+      "id": "497d"
     },
     {
       "variant_id": 22,
-      "product_id": 4,
-      "size": "42",
+      "product_id": 2,
+      "size": "41",
       "color": "White",
-      "sku": "SKU-4-3",
-      "stock": 13,
-      "id": "d7f3"
+      "sku": "SKU-2-41-White",
+      "stock": 23,
+      "id": "d1a7"
     },
     {
       "variant_id": 23,
-      "product_id": 4,
-      "size": "43",
+      "product_id": 2,
+      "size": "41",
       "color": "Black",
-      "sku": "SKU-4-4",
-      "stock": 28,
-      "id": "d1ed"
+      "sku": "SKU-2-41-Black",
+      "stock": 26,
+      "id": "1931"
     },
     {
       "variant_id": 24,
-      "product_id": 4,
-      "size": "39",
+      "product_id": 2,
+      "size": "41",
       "color": "Red",
-      "sku": "SKU-4-5",
-      "stock": 15,
-      "id": "65ab"
+      "sku": "SKU-2-41-Red",
+      "stock": 8,
+      "id": "9a89"
     },
     {
       "variant_id": 25,
-      "product_id": 5,
-      "size": "39",
+      "product_id": 2,
+      "size": "42",
       "color": "White",
-      "sku": "SKU-5-0",
-      "stock": 11,
-      "id": "801c"
+      "sku": "SKU-2-42-White",
+      "stock": 10,
+      "id": "f32f"
     },
     {
       "variant_id": 26,
-      "product_id": 5,
-      "size": "40",
+      "product_id": 2,
+      "size": "42",
       "color": "Black",
-      "sku": "SKU-5-1",
-      "stock": 20,
-      "id": "fc23"
+      "sku": "SKU-2-42-Black",
+      "stock": 8,
+      "id": "0cea"
     },
     {
       "variant_id": 27,
-      "product_id": 5,
-      "size": "41",
+      "product_id": 2,
+      "size": "42",
       "color": "Red",
-      "sku": "SKU-5-2",
-      "stock": 0,
-      "id": "a4f5"
+      "sku": "SKU-2-42-Red",
+      "stock": 27,
+      "id": "2e67"
     },
     {
       "variant_id": 28,
-      "product_id": 5,
-      "size": "42",
+      "product_id": 2,
+      "size": "43",
       "color": "White",
-      "sku": "SKU-5-3",
-      "stock": 20,
-      "id": "9c02"
+      "sku": "SKU-2-43-White",
+      "stock": 7,
+      "id": "f418"
     },
     {
       "variant_id": 29,
-      "product_id": 5,
+      "product_id": 2,
       "size": "43",
       "color": "Black",
-      "sku": "SKU-5-4",
-      "stock": 2,
-      "id": "f487"
+      "sku": "SKU-2-43-Black",
+      "stock": 14,
+      "id": "904a"
     },
     {
       "variant_id": 30,
-      "product_id": 5,
-      "size": "39",
+      "product_id": 2,
+      "size": "43",
       "color": "Red",
-      "sku": "SKU-5-5",
-      "stock": 9,
-      "id": "3e4c"
+      "sku": "SKU-2-43-Red",
+      "stock": 8,
+      "id": "64bd"
     },
     {
       "variant_id": 31,
-      "product_id": 6,
+      "product_id": 3,
       "size": "39",
       "color": "White",
-      "sku": "SKU-6-0",
-      "stock": 2,
-      "id": "801a"
+      "sku": "SKU-3-39-White",
+      "stock": 34,
+      "id": "2f31"
     },
     {
       "variant_id": 32,
-      "product_id": 6,
-      "size": "40",
+      "product_id": 3,
+      "size": "39",
       "color": "Black",
-      "sku": "SKU-6-1",
-      "stock": 2,
-      "id": "476a"
+      "sku": "SKU-3-39-Black",
+      "stock": 22,
+      "id": "ab37"
     },
     {
       "variant_id": 33,
-      "product_id": 6,
-      "size": "41",
+      "product_id": 3,
+      "size": "39",
       "color": "Red",
-      "sku": "SKU-6-2",
-      "stock": 20,
-      "id": "2489"
+      "sku": "SKU-3-39-Red",
+      "stock": 26,
+      "id": "132b"
     },
     {
       "variant_id": 34,
-      "product_id": 6,
-      "size": "42",
+      "product_id": 3,
+      "size": "40",
       "color": "White",
-      "sku": "SKU-6-3",
+      "sku": "SKU-3-40-White",
       "stock": 8,
-      "id": "fe06"
+      "id": "7b40"
     },
     {
       "variant_id": 35,
-      "product_id": 6,
-      "size": "43",
+      "product_id": 3,
+      "size": "40",
       "color": "Black",
-      "sku": "SKU-6-4",
-      "stock": 26,
-      "id": "22b7"
+      "sku": "SKU-3-40-Black",
+      "stock": 9,
+      "id": "fb2a"
     },
     {
       "variant_id": 36,
-      "product_id": 6,
-      "size": "39",
+      "product_id": 3,
+      "size": "40",
       "color": "Red",
-      "sku": "SKU-6-5",
-      "stock": 12,
-      "id": "89cc"
+      "sku": "SKU-3-40-Red",
+      "stock": 26,
+      "id": "4671"
     },
     {
       "variant_id": 37,
-      "product_id": 7,
-      "size": "39",
+      "product_id": 3,
+      "size": "41",
       "color": "White",
-      "sku": "SKU-7-0",
-      "stock": 20,
-      "id": "163b"
+      "sku": "SKU-3-41-White",
+      "stock": 29,
+      "id": "e882"
     },
     {
       "variant_id": 38,
-      "product_id": 7,
-      "size": "40",
+      "product_id": 3,
+      "size": "41",
       "color": "Black",
-      "sku": "SKU-7-1",
-      "stock": 4,
-      "id": "3240"
+      "sku": "SKU-3-41-Black",
+      "stock": 9,
+      "id": "fb7f"
     },
     {
       "variant_id": 39,
-      "product_id": 7,
+      "product_id": 3,
       "size": "41",
       "color": "Red",
-      "sku": "SKU-7-2",
-      "stock": 24,
-      "id": "c097"
+      "sku": "SKU-3-41-Red",
+      "stock": 7,
+      "id": "0813"
     },
     {
       "variant_id": 40,
-      "product_id": 7,
+      "product_id": 3,
       "size": "42",
       "color": "White",
-      "sku": "SKU-7-3",
-      "stock": 13,
-      "id": "6d16"
+      "sku": "SKU-3-42-White",
+      "stock": 9,
+      "id": "3063"
     },
     {
       "variant_id": 41,
-      "product_id": 7,
-      "size": "43",
+      "product_id": 3,
+      "size": "42",
       "color": "Black",
-      "sku": "SKU-7-4",
+      "sku": "SKU-3-42-Black",
       "stock": 6,
-      "id": "9aa3"
+      "id": "3854"
     },
     {
       "variant_id": 42,
-      "product_id": 7,
-      "size": "39",
+      "product_id": 3,
+      "size": "42",
       "color": "Red",
-      "sku": "SKU-7-5",
-      "stock": 8,
-      "id": "d5ba"
+      "sku": "SKU-3-42-Red",
+      "stock": 15,
+      "id": "c785"
     },
     {
       "variant_id": 43,
-      "product_id": 8,
-      "size": "39",
+      "product_id": 3,
+      "size": "43",
       "color": "White",
-      "sku": "SKU-8-0",
-      "stock": 3,
-      "id": "2146"
+      "sku": "SKU-3-43-White",
+      "stock": 32,
+      "id": "aa6d"
     },
     {
       "variant_id": 44,
-      "product_id": 8,
-      "size": "40",
+      "product_id": 3,
+      "size": "43",
       "color": "Black",
-      "sku": "SKU-8-1",
-      "stock": 28,
-      "id": "3799"
+      "sku": "SKU-3-43-Black",
+      "stock": 25,
+      "id": "1b88"
     },
     {
       "variant_id": 45,
-      "product_id": 8,
-      "size": "41",
+      "product_id": 3,
+      "size": "43",
       "color": "Red",
-      "sku": "SKU-8-2",
-      "stock": 20,
-      "id": "d2d7"
+      "sku": "SKU-3-43-Red",
+      "stock": 11,
+      "id": "45c2"
     },
     {
       "variant_id": 46,
-      "product_id": 8,
-      "size": "42",
+      "product_id": 4,
+      "size": "39",
       "color": "White",
-      "sku": "SKU-8-3",
-      "stock": 19,
-      "id": "ff8b"
+      "sku": "SKU-4-39-White",
+      "stock": 14,
+      "id": "27a8"
     },
     {
       "variant_id": 47,
-      "product_id": 8,
-      "size": "43",
+      "product_id": 4,
+      "size": "39",
       "color": "Black",
-      "sku": "SKU-8-4",
-      "stock": 23,
-      "id": "8658"
+      "sku": "SKU-4-39-Black",
+      "stock": 19,
+      "id": "a57a"
     },
     {
       "variant_id": 48,
-      "product_id": 8,
+      "product_id": 4,
       "size": "39",
       "color": "Red",
-      "sku": "SKU-8-5",
-      "stock": 26,
-      "id": "5f45"
+      "sku": "SKU-4-39-Red",
+      "stock": 13,
+      "id": "1ad1"
     },
     {
       "variant_id": 49,
-      "product_id": 9,
-      "size": "39",
+      "product_id": 4,
+      "size": "40",
       "color": "White",
-      "sku": "SKU-9-0",
-      "stock": 9,
-      "id": "42bc"
+      "sku": "SKU-4-40-White",
+      "stock": 25,
+      "id": "ba80"
     },
     {
       "variant_id": 50,
-      "product_id": 9,
+      "product_id": 4,
       "size": "40",
       "color": "Black",
-      "sku": "SKU-9-1",
-      "stock": 7,
-      "id": "522c"
+      "sku": "SKU-4-40-Black",
+      "stock": 16,
+      "id": "c19d"
     },
     {
       "variant_id": 51,
-      "product_id": 9,
-      "size": "41",
+      "product_id": 4,
+      "size": "40",
       "color": "Red",
-      "sku": "SKU-9-2",
-      "stock": 8,
-      "id": "9825"
+      "sku": "SKU-4-40-Red",
+      "stock": 23,
+      "id": "1d09"
     },
     {
       "variant_id": 52,
-      "product_id": 9,
-      "size": "42",
+      "product_id": 4,
+      "size": "41",
       "color": "White",
-      "sku": "SKU-9-3",
-      "stock": 10,
-      "id": "1eaf"
+      "sku": "SKU-4-41-White",
+      "stock": 23,
+      "id": "7eff"
     },
     {
       "variant_id": 53,
-      "product_id": 9,
-      "size": "43",
+      "product_id": 4,
+      "size": "41",
       "color": "Black",
-      "sku": "SKU-9-4",
-      "stock": 22,
-      "id": "18b2"
+      "sku": "SKU-4-41-Black",
+      "stock": 11,
+      "id": "de27"
     },
     {
       "variant_id": 54,
-      "product_id": 9,
-      "size": "39",
+      "product_id": 4,
+      "size": "41",
       "color": "Red",
-      "sku": "SKU-9-5",
-      "stock": 2,
-      "id": "737e"
+      "sku": "SKU-4-41-Red",
+      "stock": 7,
+      "id": "7637"
     },
     {
       "variant_id": 55,
-      "product_id": 10,
-      "size": "39",
+      "product_id": 4,
+      "size": "42",
       "color": "White",
-      "sku": "SKU-10-0",
-      "stock": 1,
-      "id": "7fe9"
+      "sku": "SKU-4-42-White",
+      "stock": 28,
+      "id": "8054"
     },
     {
       "variant_id": 56,
-      "product_id": 10,
-      "size": "40",
+      "product_id": 4,
+      "size": "42",
       "color": "Black",
-      "sku": "SKU-10-1",
-      "stock": 29,
-      "id": "baf3"
+      "sku": "SKU-4-42-Black",
+      "stock": 24,
+      "id": "2278"
     },
     {
       "variant_id": 57,
-      "product_id": 10,
-      "size": "41",
+      "product_id": 4,
+      "size": "42",
       "color": "Red",
-      "sku": "SKU-10-2",
-      "stock": 11,
-      "id": "e1c8"
+      "sku": "SKU-4-42-Red",
+      "stock": 24,
+      "id": "c125"
     },
     {
       "variant_id": 58,
-      "product_id": 10,
-      "size": "42",
+      "product_id": 4,
+      "size": "43",
       "color": "White",
-      "sku": "SKU-10-3",
-      "stock": 4,
-      "id": "3933"
+      "sku": "SKU-4-43-White",
+      "stock": 17,
+      "id": "eecc"
     },
     {
       "variant_id": 59,
-      "product_id": 10,
+      "product_id": 4,
       "size": "43",
       "color": "Black",
-      "sku": "SKU-10-4",
-      "stock": 25,
-      "id": "ec8d"
+      "sku": "SKU-4-43-Black",
+      "stock": 21,
+      "id": "2762"
     },
     {
       "variant_id": 60,
-      "product_id": 10,
-      "size": "39",
+      "product_id": 4,
+      "size": "43",
       "color": "Red",
-      "sku": "SKU-10-5",
-      "stock": 22,
-      "id": "5e19"
+      "sku": "SKU-4-43-Red",
+      "stock": 12,
+      "id": "510f"
     },
     {
       "variant_id": 61,
-      "product_id": 11,
+      "product_id": 5,
       "size": "39",
       "color": "White",
-      "sku": "SKU-11-0",
-      "stock": 19,
-      "id": "3d66"
+      "sku": "SKU-5-39-White",
+      "stock": 15,
+      "id": "dd26"
     },
     {
       "variant_id": 62,
-      "product_id": 11,
-      "size": "40",
+      "product_id": 5,
+      "size": "39",
       "color": "Black",
-      "sku": "SKU-11-1",
-      "stock": 15,
-      "id": "9e1a"
+      "sku": "SKU-5-39-Black",
+      "stock": 33,
+      "id": "5c8b"
     },
     {
       "variant_id": 63,
-      "product_id": 11,
-      "size": "41",
+      "product_id": 5,
+      "size": "39",
       "color": "Red",
-      "sku": "SKU-11-2",
-      "stock": 19,
-      "id": "21ce"
+      "sku": "SKU-5-39-Red",
+      "stock": 10,
+      "id": "2839"
     },
     {
       "variant_id": 64,
-      "product_id": 11,
-      "size": "42",
+      "product_id": 5,
+      "size": "40",
       "color": "White",
-      "sku": "SKU-11-3",
-      "stock": 7,
-      "id": "4588"
+      "sku": "SKU-5-40-White",
+      "stock": 10,
+      "id": "bd4c"
     },
     {
       "variant_id": 65,
-      "product_id": 11,
-      "size": "43",
+      "product_id": 5,
+      "size": "40",
       "color": "Black",
-      "sku": "SKU-11-4",
-      "stock": 21,
-      "id": "0d85"
+      "sku": "SKU-5-40-Black",
+      "stock": 28,
+      "id": "90fa"
     },
     {
       "variant_id": 66,
-      "product_id": 11,
-      "size": "39",
+      "product_id": 5,
+      "size": "40",
       "color": "Red",
-      "sku": "SKU-11-5",
-      "stock": 3,
-      "id": "f6db"
+      "sku": "SKU-5-40-Red",
+      "stock": 10,
+      "id": "135d"
     },
     {
       "variant_id": 67,
-      "product_id": 12,
-      "size": "39",
+      "product_id": 5,
+      "size": "41",
       "color": "White",
-      "sku": "SKU-12-0",
+      "sku": "SKU-5-41-White",
       "stock": 7,
-      "id": "6d35"
+      "id": "f6f0"
     },
     {
       "variant_id": 68,
-      "product_id": 12,
-      "size": "40",
+      "product_id": 5,
+      "size": "41",
       "color": "Black",
-      "sku": "SKU-12-1",
-      "stock": 27,
-      "id": "4661"
+      "sku": "SKU-5-41-Black",
+      "stock": 32,
+      "id": "96d3"
     },
     {
       "variant_id": 69,
-      "product_id": 12,
+      "product_id": 5,
       "size": "41",
       "color": "Red",
-      "sku": "SKU-12-2",
+      "sku": "SKU-5-41-Red",
       "stock": 9,
-      "id": "a96b"
+      "id": "bc1f"
     },
     {
       "variant_id": 70,
-      "product_id": 12,
+      "product_id": 5,
       "size": "42",
       "color": "White",
-      "sku": "SKU-12-3",
-      "stock": 9,
-      "id": "7a6b"
+      "sku": "SKU-5-42-White",
+      "stock": 6,
+      "id": "fdff"
     },
     {
       "variant_id": 71,
-      "product_id": 12,
-      "size": "43",
+      "product_id": 5,
+      "size": "42",
       "color": "Black",
-      "sku": "SKU-12-4",
-      "stock": 22,
-      "id": "9c9a"
+      "sku": "SKU-5-42-Black",
+      "stock": 8,
+      "id": "8e74"
     },
     {
       "variant_id": 72,
-      "product_id": 12,
-      "size": "39",
+      "product_id": 5,
+      "size": "42",
       "color": "Red",
-      "sku": "SKU-12-5",
-      "stock": 18,
-      "id": "d10a"
+      "sku": "SKU-5-42-Red",
+      "stock": 32,
+      "id": "2bfa"
     },
     {
       "variant_id": 73,
-      "product_id": 13,
-      "size": "39",
+      "product_id": 5,
+      "size": "43",
       "color": "White",
-      "sku": "SKU-13-0",
-      "stock": 25,
-      "id": "468d"
+      "sku": "SKU-5-43-White",
+      "stock": 23,
+      "id": "1584"
     },
     {
       "variant_id": 74,
-      "product_id": 13,
-      "size": "40",
+      "product_id": 5,
+      "size": "43",
       "color": "Black",
-      "sku": "SKU-13-1",
-      "stock": 2,
-      "id": "837f"
+      "sku": "SKU-5-43-Black",
+      "stock": 26,
+      "id": "f610"
     },
     {
       "variant_id": 75,
-      "product_id": 13,
-      "size": "41",
+      "product_id": 5,
+      "size": "43",
       "color": "Red",
-      "sku": "SKU-13-2",
-      "stock": 10,
-      "id": "82cb"
+      "sku": "SKU-5-43-Red",
+      "stock": 5,
+      "id": "cc9d"
     },
     {
       "variant_id": 76,
-      "product_id": 13,
-      "size": "42",
+      "product_id": 6,
+      "size": "39",
       "color": "White",
-      "sku": "SKU-13-3",
-      "stock": 6,
-      "id": "0ecb"
+      "sku": "SKU-6-39-White",
+      "stock": 34,
+      "id": "451a"
     },
     {
       "variant_id": 77,
-      "product_id": 13,
-      "size": "43",
+      "product_id": 6,
+      "size": "39",
       "color": "Black",
-      "sku": "SKU-13-4",
-      "stock": 12,
-      "id": "2a82"
+      "sku": "SKU-6-39-Black",
+      "stock": 31,
+      "id": "c3c6"
     },
     {
       "variant_id": 78,
-      "product_id": 13,
+      "product_id": 6,
       "size": "39",
       "color": "Red",
-      "sku": "SKU-13-5",
-      "stock": 29,
-      "id": "4a85"
+      "sku": "SKU-6-39-Red",
+      "stock": 12,
+      "id": "2d1d"
     },
     {
       "variant_id": 79,
-      "product_id": 14,
-      "size": "39",
+      "product_id": 6,
+      "size": "40",
       "color": "White",
-      "sku": "SKU-14-0",
-      "stock": 16,
-      "id": "6dac"
+      "sku": "SKU-6-40-White",
+      "stock": 15,
+      "id": "a986"
     },
     {
       "variant_id": 80,
-      "product_id": 14,
+      "product_id": 6,
       "size": "40",
       "color": "Black",
-      "sku": "SKU-14-1",
-      "stock": 3,
-      "id": "cf82"
+      "sku": "SKU-6-40-Black",
+      "stock": 34,
+      "id": "39db"
     },
     {
       "variant_id": 81,
-      "product_id": 14,
-      "size": "41",
+      "product_id": 6,
+      "size": "40",
       "color": "Red",
-      "sku": "SKU-14-2",
-      "stock": 25,
-      "id": "f1ad"
+      "sku": "SKU-6-40-Red",
+      "stock": 28,
+      "id": "7257"
     },
     {
       "variant_id": 82,
-      "product_id": 14,
-      "size": "42",
+      "product_id": 6,
+      "size": "41",
       "color": "White",
-      "sku": "SKU-14-3",
-      "stock": 26,
-      "id": "cbe7"
+      "sku": "SKU-6-41-White",
+      "stock": 19,
+      "id": "49eb"
     },
     {
       "variant_id": 83,
-      "product_id": 14,
-      "size": "43",
+      "product_id": 6,
+      "size": "41",
       "color": "Black",
-      "sku": "SKU-14-4",
-      "stock": 0,
-      "id": "59bb"
+      "sku": "SKU-6-41-Black",
+      "stock": 16,
+      "id": "6559"
     },
     {
       "variant_id": 84,
-      "product_id": 14,
-      "size": "39",
+      "product_id": 6,
+      "size": "41",
       "color": "Red",
-      "sku": "SKU-14-5",
-      "stock": 6,
-      "id": "0fb2"
+      "sku": "SKU-6-41-Red",
+      "stock": 15,
+      "id": "a9f8"
     },
     {
       "variant_id": 85,
-      "product_id": 15,
-      "size": "39",
+      "product_id": 6,
+      "size": "42",
       "color": "White",
-      "sku": "SKU-15-0",
-      "stock": 17,
-      "id": "a8c7"
+      "sku": "SKU-6-42-White",
+      "stock": 15,
+      "id": "64f3"
     },
     {
       "variant_id": 86,
-      "product_id": 15,
-      "size": "40",
+      "product_id": 6,
+      "size": "42",
       "color": "Black",
-      "sku": "SKU-15-1",
-      "stock": 23,
-      "id": "2b65"
+      "sku": "SKU-6-42-Black",
+      "stock": 29,
+      "id": "babc"
     },
     {
       "variant_id": 87,
-      "product_id": 15,
-      "size": "41",
+      "product_id": 6,
+      "size": "42",
       "color": "Red",
-      "sku": "SKU-15-2",
-      "stock": 16,
-      "id": "af1e"
+      "sku": "SKU-6-42-Red",
+      "stock": 14,
+      "id": "36d4"
     },
     {
       "variant_id": 88,
-      "product_id": 15,
-      "size": "42",
+      "product_id": 6,
+      "size": "43",
       "color": "White",
-      "sku": "SKU-15-3",
-      "stock": 1,
-      "id": "bb1d"
+      "sku": "SKU-6-43-White",
+      "stock": 7,
+      "id": "18b8"
     },
     {
       "variant_id": 89,
-      "product_id": 15,
+      "product_id": 6,
       "size": "43",
       "color": "Black",
-      "sku": "SKU-15-4",
-      "stock": 6,
-      "id": "42aa"
+      "sku": "SKU-6-43-Black",
+      "stock": 26,
+      "id": "97b0"
     },
     {
       "variant_id": 90,
-      "product_id": 15,
-      "size": "39",
+      "product_id": 6,
+      "size": "43",
       "color": "Red",
-      "sku": "SKU-15-5",
-      "stock": 19,
-      "id": "0d29"
+      "sku": "SKU-6-43-Red",
+      "stock": 34,
+      "id": "c81f"
     },
     {
       "variant_id": 91,
-      "product_id": 16,
+      "product_id": 7,
       "size": "39",
       "color": "White",
-      "sku": "SKU-16-0",
-      "stock": 16,
-      "id": "d904"
+      "sku": "SKU-7-39-White",
+      "stock": 33,
+      "id": "1979"
     },
     {
       "variant_id": 92,
-      "product_id": 16,
-      "size": "40",
+      "product_id": 7,
+      "size": "39",
       "color": "Black",
-      "sku": "SKU-16-1",
-      "stock": 5,
-      "id": "c2b4"
+      "sku": "SKU-7-39-Black",
+      "stock": 25,
+      "id": "35e6"
     },
     {
       "variant_id": 93,
-      "product_id": 16,
-      "size": "41",
+      "product_id": 7,
+      "size": "39",
       "color": "Red",
-      "sku": "SKU-16-2",
-      "stock": 18,
-      "id": "ebda"
+      "sku": "SKU-7-39-Red",
+      "stock": 25,
+      "id": "971a"
     },
     {
       "variant_id": 94,
-      "product_id": 16,
-      "size": "42",
+      "product_id": 7,
+      "size": "40",
       "color": "White",
-      "sku": "SKU-16-3",
-      "stock": 21,
-      "id": "7517"
+      "sku": "SKU-7-40-White",
+      "stock": 33,
+      "id": "5c93"
     },
     {
       "variant_id": 95,
-      "product_id": 16,
-      "size": "43",
+      "product_id": 7,
+      "size": "40",
       "color": "Black",
-      "sku": "SKU-16-4",
-      "stock": 26,
-      "id": "baec"
+      "sku": "SKU-7-40-Black",
+      "stock": 28,
+      "id": "549f"
     },
     {
       "variant_id": 96,
-      "product_id": 16,
-      "size": "39",
+      "product_id": 7,
+      "size": "40",
       "color": "Red",
-      "sku": "SKU-16-5",
-      "stock": 4,
-      "id": "6b62"
+      "sku": "SKU-7-40-Red",
+      "stock": 26,
+      "id": "abdb"
     },
     {
       "variant_id": 97,
-      "product_id": 17,
-      "size": "39",
+      "product_id": 7,
+      "size": "41",
       "color": "White",
-      "sku": "SKU-17-0",
-      "stock": 14,
-      "id": "2562"
+      "sku": "SKU-7-41-White",
+      "stock": 12,
+      "id": "01c7"
     },
     {
       "variant_id": 98,
-      "product_id": 17,
-      "size": "40",
+      "product_id": 7,
+      "size": "41",
       "color": "Black",
-      "sku": "SKU-17-1",
-      "stock": 17,
-      "id": "7464"
+      "sku": "SKU-7-41-Black",
+      "stock": 29,
+      "id": "0843"
     },
     {
       "variant_id": 99,
-      "product_id": 17,
+      "product_id": 7,
       "size": "41",
       "color": "Red",
-      "sku": "SKU-17-2",
-      "stock": 26,
-      "id": "57a1"
+      "sku": "SKU-7-41-Red",
+      "stock": 8,
+      "id": "01c9"
     },
     {
       "variant_id": 100,
-      "product_id": 17,
+      "product_id": 7,
       "size": "42",
       "color": "White",
-      "sku": "SKU-17-3",
+      "sku": "SKU-7-42-White",
       "stock": 20,
-      "id": "c336"
+      "id": "c520"
     },
     {
       "variant_id": 101,
-      "product_id": 17,
-      "size": "43",
+      "product_id": 7,
+      "size": "42",
       "color": "Black",
-      "sku": "SKU-17-4",
-      "stock": 25,
-      "id": "685f"
+      "sku": "SKU-7-42-Black",
+      "stock": 10,
+      "id": "cffd"
     },
     {
       "variant_id": 102,
-      "product_id": 17,
-      "size": "39",
+      "product_id": 7,
+      "size": "42",
       "color": "Red",
-      "sku": "SKU-17-5",
-      "stock": 20,
-      "id": "0aba"
+      "sku": "SKU-7-42-Red",
+      "stock": 15,
+      "id": "26a2"
     },
     {
       "variant_id": 103,
-      "product_id": 18,
-      "size": "39",
+      "product_id": 7,
+      "size": "43",
       "color": "White",
-      "sku": "SKU-18-0",
-      "stock": 4,
-      "id": "db13"
+      "sku": "SKU-7-43-White",
+      "stock": 13,
+      "id": "e5ae"
     },
     {
       "variant_id": 104,
-      "product_id": 18,
-      "size": "40",
+      "product_id": 7,
+      "size": "43",
       "color": "Black",
-      "sku": "SKU-18-1",
-      "stock": 21,
-      "id": "da9f"
+      "sku": "SKU-7-43-Black",
+      "stock": 30,
+      "id": "1c42"
     },
     {
       "variant_id": 105,
-      "product_id": 18,
-      "size": "41",
+      "product_id": 7,
+      "size": "43",
       "color": "Red",
-      "sku": "SKU-18-2",
-      "stock": 14,
-      "id": "9780"
+      "sku": "SKU-7-43-Red",
+      "stock": 24,
+      "id": "ce68"
     },
     {
       "variant_id": 106,
-      "product_id": 18,
-      "size": "42",
+      "product_id": 8,
+      "size": "39",
       "color": "White",
-      "sku": "SKU-18-3",
+      "sku": "SKU-8-39-White",
       "stock": 27,
-      "id": "f919"
+      "id": "7cd4"
     },
     {
       "variant_id": 107,
-      "product_id": 18,
-      "size": "43",
+      "product_id": 8,
+      "size": "39",
       "color": "Black",
-      "sku": "SKU-18-4",
+      "sku": "SKU-8-39-Black",
       "stock": 7,
-      "id": "47c2"
+      "id": "8d5b"
     },
     {
       "variant_id": 108,
-      "product_id": 18,
+      "product_id": 8,
       "size": "39",
       "color": "Red",
-      "sku": "SKU-18-5",
-      "stock": 25,
-      "id": "ffae"
+      "sku": "SKU-8-39-Red",
+      "stock": 28,
+      "id": "5f33"
     },
     {
       "variant_id": 109,
-      "product_id": 19,
-      "size": "39",
+      "product_id": 8,
+      "size": "40",
       "color": "White",
-      "sku": "SKU-19-0",
-      "stock": 17,
-      "id": "bfb7"
+      "sku": "SKU-8-40-White",
+      "stock": 29,
+      "id": "3519"
     },
     {
       "variant_id": 110,
-      "product_id": 19,
+      "product_id": 8,
       "size": "40",
       "color": "Black",
-      "sku": "SKU-19-1",
-      "stock": 29,
-      "id": "e5b4"
+      "sku": "SKU-8-40-Black",
+      "stock": 8,
+      "id": "272c"
     },
     {
       "variant_id": 111,
-      "product_id": 19,
-      "size": "41",
+      "product_id": 8,
+      "size": "40",
       "color": "Red",
-      "sku": "SKU-19-2",
-      "stock": 15,
-      "id": "3f11"
+      "sku": "SKU-8-40-Red",
+      "stock": 6,
+      "id": "949d"
     },
     {
       "variant_id": 112,
-      "product_id": 19,
-      "size": "42",
+      "product_id": 8,
+      "size": "41",
       "color": "White",
-      "sku": "SKU-19-3",
-      "stock": 10,
-      "id": "e82a"
+      "sku": "SKU-8-41-White",
+      "stock": 23,
+      "id": "2425"
     },
     {
       "variant_id": 113,
-      "product_id": 19,
-      "size": "43",
+      "product_id": 8,
+      "size": "41",
       "color": "Black",
-      "sku": "SKU-19-4",
-      "stock": 13,
-      "id": "3cca"
+      "sku": "SKU-8-41-Black",
+      "stock": 25,
+      "id": "70fb"
     },
     {
       "variant_id": 114,
-      "product_id": 19,
-      "size": "39",
+      "product_id": 8,
+      "size": "41",
       "color": "Red",
-      "sku": "SKU-19-5",
-      "stock": 0,
-      "id": "461c"
+      "sku": "SKU-8-41-Red",
+      "stock": 21,
+      "id": "dc3e"
     },
     {
       "variant_id": 115,
-      "product_id": 20,
-      "size": "39",
+      "product_id": 8,
+      "size": "42",
       "color": "White",
-      "sku": "SKU-20-0",
-      "stock": 15,
-      "id": "e5aa"
+      "sku": "SKU-8-42-White",
+      "stock": 21,
+      "id": "00e9"
     },
     {
       "variant_id": 116,
-      "product_id": 20,
-      "size": "40",
+      "product_id": 8,
+      "size": "42",
       "color": "Black",
-      "sku": "SKU-20-1",
-      "stock": 14,
-      "id": "1682"
+      "sku": "SKU-8-42-Black",
+      "stock": 15,
+      "id": "b1c2"
     },
     {
       "variant_id": 117,
-      "product_id": 20,
-      "size": "41",
+      "product_id": 8,
+      "size": "42",
       "color": "Red",
-      "sku": "SKU-20-2",
-      "stock": 14,
-      "id": "dbe9"
+      "sku": "SKU-8-42-Red",
+      "stock": 17,
+      "id": "a158"
     },
     {
       "variant_id": 118,
-      "product_id": 20,
-      "size": "42",
+      "product_id": 8,
+      "size": "43",
       "color": "White",
-      "sku": "SKU-20-3",
-      "stock": 10,
-      "id": "be0b"
+      "sku": "SKU-8-43-White",
+      "stock": 23,
+      "id": "d09a"
     },
     {
       "variant_id": 119,
-      "product_id": 20,
+      "product_id": 8,
       "size": "43",
       "color": "Black",
-      "sku": "SKU-20-4",
-      "stock": 27,
-      "id": "e351"
+      "sku": "SKU-8-43-Black",
+      "stock": 15,
+      "id": "0fd2"
     },
     {
       "variant_id": 120,
-      "product_id": 20,
-      "size": "39",
+      "product_id": 8,
+      "size": "43",
       "color": "Red",
-      "sku": "SKU-20-5",
-      "stock": 28,
-      "id": "35d5"
+      "sku": "SKU-8-43-Red",
+      "stock": 30,
+      "id": "fc7e"
     },
     {
       "variant_id": 121,
-      "product_id": 21,
+      "product_id": 9,
       "size": "39",
       "color": "White",
-      "sku": "SKU-21-0",
-      "stock": 21,
-      "id": "2b9c"
+      "sku": "SKU-9-39-White",
+      "stock": 22,
+      "id": "80a1"
     },
     {
       "variant_id": 122,
-      "product_id": 21,
-      "size": "40",
+      "product_id": 9,
+      "size": "39",
       "color": "Black",
-      "sku": "SKU-21-1",
-      "stock": 2,
-      "id": "c91c"
+      "sku": "SKU-9-39-Black",
+      "stock": 24,
+      "id": "e6de"
     },
     {
       "variant_id": 123,
-      "product_id": 21,
-      "size": "41",
+      "product_id": 9,
+      "size": "39",
       "color": "Red",
-      "sku": "SKU-21-2",
-      "stock": 22,
-      "id": "cfbb"
+      "sku": "SKU-9-39-Red",
+      "stock": 25,
+      "id": "c7c3"
     },
     {
       "variant_id": 124,
-      "product_id": 21,
-      "size": "42",
+      "product_id": 9,
+      "size": "40",
       "color": "White",
-      "sku": "SKU-21-3",
-      "stock": 28,
-      "id": "2d97"
+      "sku": "SKU-9-40-White",
+      "stock": 9,
+      "id": "9768"
     },
     {
       "variant_id": 125,
-      "product_id": 21,
-      "size": "43",
+      "product_id": 9,
+      "size": "40",
       "color": "Black",
-      "sku": "SKU-21-4",
-      "stock": 20,
-      "id": "c531"
+      "sku": "SKU-9-40-Black",
+      "stock": 5,
+      "id": "7808"
     },
     {
       "variant_id": 126,
-      "product_id": 21,
-      "size": "39",
+      "product_id": 9,
+      "size": "40",
       "color": "Red",
-      "sku": "SKU-21-5",
-      "stock": 11,
-      "id": "3259"
+      "sku": "SKU-9-40-Red",
+      "stock": 27,
+      "id": "b155"
     },
     {
       "variant_id": 127,
-      "product_id": 22,
-      "size": "39",
+      "product_id": 9,
+      "size": "41",
       "color": "White",
-      "sku": "SKU-22-0",
-      "stock": 26,
-      "id": "21bb"
+      "sku": "SKU-9-41-White",
+      "stock": 31,
+      "id": "998f"
     },
     {
       "variant_id": 128,
-      "product_id": 22,
-      "size": "40",
+      "product_id": 9,
+      "size": "41",
       "color": "Black",
-      "sku": "SKU-22-1",
-      "stock": 17,
-      "id": "5549"
+      "sku": "SKU-9-41-Black",
+      "stock": 9,
+      "id": "f41f"
     },
     {
       "variant_id": 129,
-      "product_id": 22,
+      "product_id": 9,
       "size": "41",
       "color": "Red",
-      "sku": "SKU-22-2",
-      "stock": 9,
-      "id": "5742"
+      "sku": "SKU-9-41-Red",
+      "stock": 22,
+      "id": "b2ae"
     },
     {
       "variant_id": 130,
-      "product_id": 22,
+      "product_id": 9,
       "size": "42",
       "color": "White",
-      "sku": "SKU-22-3",
-      "stock": 6,
-      "id": "60d9"
+      "sku": "SKU-9-42-White",
+      "stock": 18,
+      "id": "c09b"
     },
     {
       "variant_id": 131,
-      "product_id": 22,
-      "size": "43",
+      "product_id": 9,
+      "size": "42",
       "color": "Black",
-      "sku": "SKU-22-4",
-      "stock": 13,
-      "id": "81d3"
+      "sku": "SKU-9-42-Black",
+      "stock": 20,
+      "id": "dfec"
     },
     {
       "variant_id": 132,
-      "product_id": 22,
-      "size": "39",
+      "product_id": 9,
+      "size": "42",
       "color": "Red",
-      "sku": "SKU-22-5",
-      "stock": 27,
-      "id": "f32d"
+      "sku": "SKU-9-42-Red",
+      "stock": 34,
+      "id": "f776"
     },
     {
       "variant_id": 133,
-      "product_id": 23,
-      "size": "39",
+      "product_id": 9,
+      "size": "43",
       "color": "White",
-      "sku": "SKU-23-0",
-      "stock": 4,
-      "id": "cd38"
+      "sku": "SKU-9-43-White",
+      "stock": 5,
+      "id": "e68a"
     },
     {
       "variant_id": 134,
-      "product_id": 23,
-      "size": "40",
+      "product_id": 9,
+      "size": "43",
       "color": "Black",
-      "sku": "SKU-23-1",
-      "stock": 8,
-      "id": "d5bf"
+      "sku": "SKU-9-43-Black",
+      "stock": 22,
+      "id": "fa2c"
     },
     {
       "variant_id": 135,
-      "product_id": 23,
-      "size": "41",
+      "product_id": 9,
+      "size": "43",
       "color": "Red",
-      "sku": "SKU-23-2",
-      "stock": 23,
-      "id": "337f"
+      "sku": "SKU-9-43-Red",
+      "stock": 33,
+      "id": "4b24"
     },
     {
       "variant_id": 136,
-      "product_id": 23,
-      "size": "42",
+      "product_id": 10,
+      "size": "39",
       "color": "White",
-      "sku": "SKU-23-3",
-      "stock": 16,
-      "id": "0c9b"
+      "sku": "SKU-10-39-White",
+      "stock": 10,
+      "id": "604a"
     },
     {
       "variant_id": 137,
-      "product_id": 23,
-      "size": "43",
+      "product_id": 10,
+      "size": "39",
       "color": "Black",
-      "sku": "SKU-23-4",
-      "stock": 21,
-      "id": "c73f"
+      "sku": "SKU-10-39-Black",
+      "stock": 33,
+      "id": "d0ca"
     },
     {
       "variant_id": 138,
-      "product_id": 23,
+      "product_id": 10,
       "size": "39",
       "color": "Red",
-      "sku": "SKU-23-5",
-      "stock": 2,
-      "id": "bab3"
+      "sku": "SKU-10-39-Red",
+      "stock": 27,
+      "id": "881a"
     },
     {
       "variant_id": 139,
-      "product_id": 24,
-      "size": "39",
+      "product_id": 10,
+      "size": "40",
       "color": "White",
-      "sku": "SKU-24-0",
-      "stock": 27,
-      "id": "8d05"
+      "sku": "SKU-10-40-White",
+      "stock": 33,
+      "id": "ab0c"
     },
     {
       "variant_id": 140,
-      "product_id": 24,
+      "product_id": 10,
       "size": "40",
       "color": "Black",
-      "sku": "SKU-24-1",
-      "stock": 7,
-      "id": "1999"
+      "sku": "SKU-10-40-Black",
+      "stock": 24,
+      "id": "6f01"
     },
     {
       "variant_id": 141,
-      "product_id": 24,
-      "size": "41",
+      "product_id": 10,
+      "size": "40",
       "color": "Red",
-      "sku": "SKU-24-2",
-      "stock": 12,
-      "id": "5064"
+      "sku": "SKU-10-40-Red",
+      "stock": 29,
+      "id": "40cc"
     },
     {
       "variant_id": 142,
-      "product_id": 24,
-      "size": "42",
+      "product_id": 10,
+      "size": "41",
       "color": "White",
-      "sku": "SKU-24-3",
-      "stock": 29,
-      "id": "9fc7"
+      "sku": "SKU-10-41-White",
+      "stock": 28,
+      "id": "c6f2"
     },
     {
       "variant_id": 143,
-      "product_id": 24,
-      "size": "43",
+      "product_id": 10,
+      "size": "41",
       "color": "Black",
-      "sku": "SKU-24-4",
-      "stock": 16,
-      "id": "480a"
+      "sku": "SKU-10-41-Black",
+      "stock": 25,
+      "id": "aab7"
     },
     {
       "variant_id": 144,
-      "product_id": 24,
-      "size": "39",
+      "product_id": 10,
+      "size": "41",
       "color": "Red",
-      "sku": "SKU-24-5",
-      "stock": 13,
-      "id": "eaec"
+      "sku": "SKU-10-41-Red",
+      "stock": 6,
+      "id": "b83e"
     },
     {
       "variant_id": 145,
-      "product_id": 25,
-      "size": "39",
+      "product_id": 10,
+      "size": "42",
       "color": "White",
-      "sku": "SKU-25-0",
-      "stock": 9,
-      "id": "d334"
+      "sku": "SKU-10-42-White",
+      "stock": 20,
+      "id": "8d93"
     },
     {
       "variant_id": 146,
-      "product_id": 25,
-      "size": "40",
+      "product_id": 10,
+      "size": "42",
       "color": "Black",
-      "sku": "SKU-25-1",
-      "stock": 17,
-      "id": "37b1"
+      "sku": "SKU-10-42-Black",
+      "stock": 16,
+      "id": "ebf5"
     },
     {
       "variant_id": 147,
-      "product_id": 25,
-      "size": "41",
+      "product_id": 10,
+      "size": "42",
       "color": "Red",
-      "sku": "SKU-25-2",
-      "stock": 6,
-      "id": "bc54"
+      "sku": "SKU-10-42-Red",
+      "stock": 33,
+      "id": "7dbd"
     },
     {
       "variant_id": 148,
-      "product_id": 25,
-      "size": "42",
+      "product_id": 10,
+      "size": "43",
       "color": "White",
-      "sku": "SKU-25-3",
-      "stock": 1,
-      "id": "abfb"
+      "sku": "SKU-10-43-White",
+      "stock": 5,
+      "id": "c68d"
     },
     {
       "variant_id": 149,
-      "product_id": 25,
+      "product_id": 10,
       "size": "43",
       "color": "Black",
-      "sku": "SKU-25-4",
-      "stock": 10,
-      "id": "dd1a"
+      "sku": "SKU-10-43-Black",
+      "stock": 20,
+      "id": "21bc"
     },
     {
       "variant_id": 150,
-      "product_id": 25,
-      "size": "39",
+      "product_id": 10,
+      "size": "43",
       "color": "Red",
-      "sku": "SKU-25-5",
-      "stock": 25,
-      "id": "db7a"
+      "sku": "SKU-10-43-Red",
+      "stock": 12,
+      "id": "8389"
     },
     {
       "variant_id": 151,
-      "product_id": 26,
+      "product_id": 11,
       "size": "39",
       "color": "White",
-      "sku": "SKU-26-0",
-      "stock": 14,
-      "id": "c8be"
+      "sku": "SKU-11-39-White",
+      "stock": 9,
+      "id": "f947"
     },
     {
       "variant_id": 152,
-      "product_id": 26,
-      "size": "40",
+      "product_id": 11,
+      "size": "39",
       "color": "Black",
-      "sku": "SKU-26-1",
-      "stock": 26,
-      "id": "e140"
+      "sku": "SKU-11-39-Black",
+      "stock": 7,
+      "id": "b4a1"
     },
     {
       "variant_id": 153,
-      "product_id": 26,
-      "size": "41",
+      "product_id": 11,
+      "size": "39",
       "color": "Red",
-      "sku": "SKU-26-2",
-      "stock": 2,
-      "id": "ca09"
+      "sku": "SKU-11-39-Red",
+      "stock": 8,
+      "id": "dcff"
     },
     {
       "variant_id": 154,
-      "product_id": 26,
-      "size": "42",
+      "product_id": 11,
+      "size": "40",
       "color": "White",
-      "sku": "SKU-26-3",
-      "stock": 5,
-      "id": "c907"
+      "sku": "SKU-11-40-White",
+      "stock": 18,
+      "id": "3e4a"
     },
     {
       "variant_id": 155,
-      "product_id": 26,
-      "size": "43",
+      "product_id": 11,
+      "size": "40",
       "color": "Black",
-      "sku": "SKU-26-4",
-      "stock": 11,
-      "id": "5250"
+      "sku": "SKU-11-40-Black",
+      "stock": 20,
+      "id": "fc89"
     },
     {
       "variant_id": 156,
-      "product_id": 26,
-      "size": "39",
+      "product_id": 11,
+      "size": "40",
       "color": "Red",
-      "sku": "SKU-26-5",
-      "stock": 12,
-      "id": "1041"
+      "sku": "SKU-11-40-Red",
+      "stock": 29,
+      "id": "424f"
     },
     {
       "variant_id": 157,
-      "product_id": 27,
-      "size": "39",
+      "product_id": 11,
+      "size": "41",
       "color": "White",
-      "sku": "SKU-27-0",
-      "stock": 17,
-      "id": "753a"
+      "sku": "SKU-11-41-White",
+      "stock": 31,
+      "id": "d881"
     },
     {
       "variant_id": 158,
-      "product_id": 27,
-      "size": "40",
+      "product_id": 11,
+      "size": "41",
       "color": "Black",
-      "sku": "SKU-27-1",
-      "stock": 26,
-      "id": "31e7"
+      "sku": "SKU-11-41-Black",
+      "stock": 19,
+      "id": "7bc2"
     },
     {
       "variant_id": 159,
-      "product_id": 27,
+      "product_id": 11,
       "size": "41",
       "color": "Red",
-      "sku": "SKU-27-2",
+      "sku": "SKU-11-41-Red",
       "stock": 13,
-      "id": "801a"
+      "id": "5f79"
     },
     {
       "variant_id": 160,
-      "product_id": 27,
+      "product_id": 11,
       "size": "42",
       "color": "White",
-      "sku": "SKU-27-3",
-      "stock": 12,
-      "id": "c516"
+      "sku": "SKU-11-42-White",
+      "stock": 31,
+      "id": "29b5"
     },
     {
       "variant_id": 161,
-      "product_id": 27,
-      "size": "43",
+      "product_id": 11,
+      "size": "42",
       "color": "Black",
-      "sku": "SKU-27-4",
-      "stock": 24,
-      "id": "8391"
+      "sku": "SKU-11-42-Black",
+      "stock": 10,
+      "id": "d69e"
     },
     {
       "variant_id": 162,
-      "product_id": 27,
-      "size": "39",
+      "product_id": 11,
+      "size": "42",
       "color": "Red",
-      "sku": "SKU-27-5",
-      "stock": 24,
-      "id": "e108"
+      "sku": "SKU-11-42-Red",
+      "stock": 31,
+      "id": "1eba"
     },
     {
       "variant_id": 163,
-      "product_id": 28,
-      "size": "39",
+      "product_id": 11,
+      "size": "43",
       "color": "White",
-      "sku": "SKU-28-0",
+      "sku": "SKU-11-43-White",
       "stock": 6,
-      "id": "2ca0"
+      "id": "ffe3"
     },
     {
       "variant_id": 164,
-      "product_id": 28,
-      "size": "40",
+      "product_id": 11,
+      "size": "43",
       "color": "Black",
-      "sku": "SKU-28-1",
-      "stock": 22,
-      "id": "954d"
+      "sku": "SKU-11-43-Black",
+      "stock": 14,
+      "id": "cc7b"
     },
     {
       "variant_id": 165,
-      "product_id": 28,
-      "size": "41",
+      "product_id": 11,
+      "size": "43",
       "color": "Red",
-      "sku": "SKU-28-2",
-      "stock": 0,
-      "id": "f52d"
+      "sku": "SKU-11-43-Red",
+      "stock": 16,
+      "id": "c467"
     },
     {
       "variant_id": 166,
-      "product_id": 28,
-      "size": "42",
+      "product_id": 12,
+      "size": "39",
       "color": "White",
-      "sku": "SKU-28-3",
-      "stock": 8,
-      "id": "4695"
+      "sku": "SKU-12-39-White",
+      "stock": 27,
+      "id": "11ee"
     },
     {
       "variant_id": 167,
-      "product_id": 28,
-      "size": "43",
+      "product_id": 12,
+      "size": "39",
       "color": "Black",
-      "sku": "SKU-28-4",
-      "stock": 8,
-      "id": "d685"
+      "sku": "SKU-12-39-Black",
+      "stock": 34,
+      "id": "8522"
     },
     {
       "variant_id": 168,
-      "product_id": 28,
+      "product_id": 12,
       "size": "39",
       "color": "Red",
-      "sku": "SKU-28-5",
-      "stock": 8,
-      "id": "881f"
+      "sku": "SKU-12-39-Red",
+      "stock": 31,
+      "id": "305b"
     },
     {
       "variant_id": 169,
-      "product_id": 29,
-      "size": "39",
+      "product_id": 12,
+      "size": "40",
       "color": "White",
-      "sku": "SKU-29-0",
-      "stock": 10,
-      "id": "88eb"
+      "sku": "SKU-12-40-White",
+      "stock": 34,
+      "id": "1d20"
     },
     {
       "variant_id": 170,
-      "product_id": 29,
+      "product_id": 12,
       "size": "40",
       "color": "Black",
-      "sku": "SKU-29-1",
-      "stock": 25,
-      "id": "06db"
+      "sku": "SKU-12-40-Black",
+      "stock": 29,
+      "id": "f1fc"
     },
     {
       "variant_id": 171,
-      "product_id": 29,
-      "size": "41",
+      "product_id": 12,
+      "size": "40",
       "color": "Red",
-      "sku": "SKU-29-2",
-      "stock": 4,
-      "id": "3562"
+      "sku": "SKU-12-40-Red",
+      "stock": 27,
+      "id": "b7f1"
     },
     {
       "variant_id": 172,
-      "product_id": 29,
-      "size": "42",
+      "product_id": 12,
+      "size": "41",
       "color": "White",
-      "sku": "SKU-29-3",
-      "stock": 17,
-      "id": "e0d7"
+      "sku": "SKU-12-41-White",
+      "stock": 28,
+      "id": "5a19"
     },
     {
       "variant_id": 173,
-      "product_id": 29,
-      "size": "43",
+      "product_id": 12,
+      "size": "41",
       "color": "Black",
-      "sku": "SKU-29-4",
-      "stock": 21,
-      "id": "1e77"
+      "sku": "SKU-12-41-Black",
+      "stock": 6,
+      "id": "40dc"
     },
     {
       "variant_id": 174,
-      "product_id": 29,
-      "size": "39",
+      "product_id": 12,
+      "size": "41",
       "color": "Red",
-      "sku": "SKU-29-5",
-      "stock": 19,
-      "id": "b2f8"
+      "sku": "SKU-12-41-Red",
+      "stock": 25,
+      "id": "0dc4"
     },
     {
       "variant_id": 175,
-      "product_id": 30,
-      "size": "39",
+      "product_id": 12,
+      "size": "42",
       "color": "White",
-      "sku": "SKU-30-0",
-      "stock": 28,
-      "id": "ee53"
+      "sku": "SKU-12-42-White",
+      "stock": 8,
+      "id": "df5c"
     },
     {
       "variant_id": 176,
-      "product_id": 30,
-      "size": "40",
+      "product_id": 12,
+      "size": "42",
       "color": "Black",
-      "sku": "SKU-30-1",
-      "stock": 9,
-      "id": "8009"
+      "sku": "SKU-12-42-Black",
+      "stock": 18,
+      "id": "9f05"
     },
     {
       "variant_id": 177,
-      "product_id": 30,
-      "size": "41",
+      "product_id": 12,
+      "size": "42",
       "color": "Red",
-      "sku": "SKU-30-2",
-      "stock": 1,
-      "id": "1b9c"
+      "sku": "SKU-12-42-Red",
+      "stock": 7,
+      "id": "f812"
     },
     {
       "variant_id": 178,
-      "product_id": 30,
-      "size": "42",
+      "product_id": 12,
+      "size": "43",
       "color": "White",
-      "sku": "SKU-30-3",
-      "stock": 0,
-      "id": "85dd"
+      "sku": "SKU-12-43-White",
+      "stock": 5,
+      "id": "f631"
     },
     {
       "variant_id": 179,
-      "product_id": 30,
+      "product_id": 12,
       "size": "43",
       "color": "Black",
-      "sku": "SKU-30-4",
-      "stock": 21,
-      "id": "5ea7"
+      "sku": "SKU-12-43-Black",
+      "stock": 27,
+      "id": "aac9"
     },
     {
       "variant_id": 180,
-      "product_id": 30,
-      "size": "39",
+      "product_id": 12,
+      "size": "43",
       "color": "Red",
-      "sku": "SKU-30-5",
-      "stock": 1,
-      "id": "8519"
+      "sku": "SKU-12-43-Red",
+      "stock": 14,
+      "id": "928d"
     },
     {
       "variant_id": 181,
-      "product_id": 31,
+      "product_id": 13,
       "size": "39",
       "color": "White",
-      "sku": "SKU-31-0",
-      "stock": 13,
-      "id": "2f2a"
+      "sku": "SKU-13-39-White",
+      "stock": 34,
+      "id": "7346"
     },
     {
       "variant_id": 182,
-      "product_id": 31,
-      "size": "40",
+      "product_id": 13,
+      "size": "39",
       "color": "Black",
-      "sku": "SKU-31-1",
-      "stock": 7,
-      "id": "4f60"
+      "sku": "SKU-13-39-Black",
+      "stock": 25,
+      "id": "a45c"
     },
     {
       "variant_id": 183,
-      "product_id": 31,
-      "size": "41",
+      "product_id": 13,
+      "size": "39",
       "color": "Red",
-      "sku": "SKU-31-2",
-      "stock": 6,
-      "id": "47cd"
+      "sku": "SKU-13-39-Red",
+      "stock": 9,
+      "id": "a436"
     },
     {
       "variant_id": 184,
-      "product_id": 31,
-      "size": "42",
+      "product_id": 13,
+      "size": "40",
       "color": "White",
-      "sku": "SKU-31-3",
-      "stock": 21,
-      "id": "dd8d"
+      "sku": "SKU-13-40-White",
+      "stock": 26,
+      "id": "b9f0"
     },
     {
       "variant_id": 185,
-      "product_id": 31,
-      "size": "43",
+      "product_id": 13,
+      "size": "40",
       "color": "Black",
-      "sku": "SKU-31-4",
-      "stock": 5,
-      "id": "4729"
+      "sku": "SKU-13-40-Black",
+      "stock": 23,
+      "id": "9736"
     },
     {
       "variant_id": 186,
-      "product_id": 31,
-      "size": "39",
+      "product_id": 13,
+      "size": "40",
       "color": "Red",
-      "sku": "SKU-31-5",
-      "stock": 8,
-      "id": "4c38"
+      "sku": "SKU-13-40-Red",
+      "stock": 12,
+      "id": "7c6d"
     },
     {
       "variant_id": 187,
-      "product_id": 32,
-      "size": "39",
+      "product_id": 13,
+      "size": "41",
       "color": "White",
-      "sku": "SKU-32-0",
-      "stock": 16,
-      "id": "cd13"
+      "sku": "SKU-13-41-White",
+      "stock": 31,
+      "id": "13e5"
     },
     {
       "variant_id": 188,
-      "product_id": 32,
-      "size": "40",
+      "product_id": 13,
+      "size": "41",
       "color": "Black",
-      "sku": "SKU-32-1",
-      "stock": 28,
-      "id": "720a"
+      "sku": "SKU-13-41-Black",
+      "stock": 21,
+      "id": "3137"
     },
     {
       "variant_id": 189,
-      "product_id": 32,
+      "product_id": 13,
       "size": "41",
       "color": "Red",
-      "sku": "SKU-32-2",
+      "sku": "SKU-13-41-Red",
       "stock": 19,
-      "id": "206b"
+      "id": "6dc3"
     },
     {
       "variant_id": 190,
-      "product_id": 32,
+      "product_id": 13,
       "size": "42",
       "color": "White",
-      "sku": "SKU-32-3",
-      "stock": 20,
-      "id": "fae3"
+      "sku": "SKU-13-42-White",
+      "stock": 8,
+      "id": "0330"
     },
     {
       "variant_id": 191,
-      "product_id": 32,
-      "size": "43",
+      "product_id": 13,
+      "size": "42",
       "color": "Black",
-      "sku": "SKU-32-4",
-      "stock": 2,
-      "id": "6cbc"
+      "sku": "SKU-13-42-Black",
+      "stock": 25,
+      "id": "3e61"
     },
     {
       "variant_id": 192,
-      "product_id": 32,
-      "size": "39",
+      "product_id": 13,
+      "size": "42",
       "color": "Red",
-      "sku": "SKU-32-5",
-      "stock": 1,
-      "id": "46bf"
+      "sku": "SKU-13-42-Red",
+      "stock": 5,
+      "id": "0f2f"
     },
     {
       "variant_id": 193,
-      "product_id": 33,
-      "size": "39",
+      "product_id": 13,
+      "size": "43",
       "color": "White",
-      "sku": "SKU-33-0",
-      "stock": 15,
-      "id": "fe79"
+      "sku": "SKU-13-43-White",
+      "stock": 34,
+      "id": "2ffc"
     },
     {
       "variant_id": 194,
-      "product_id": 33,
-      "size": "40",
+      "product_id": 13,
+      "size": "43",
       "color": "Black",
-      "sku": "SKU-33-1",
-      "stock": 5,
-      "id": "3a6d"
+      "sku": "SKU-13-43-Black",
+      "stock": 13,
+      "id": "554a"
     },
     {
       "variant_id": 195,
-      "product_id": 33,
-      "size": "41",
+      "product_id": 13,
+      "size": "43",
       "color": "Red",
-      "sku": "SKU-33-2",
-      "stock": 10,
-      "id": "2129"
+      "sku": "SKU-13-43-Red",
+      "stock": 27,
+      "id": "95ae"
     },
     {
       "variant_id": 196,
-      "product_id": 33,
-      "size": "42",
+      "product_id": 14,
+      "size": "39",
       "color": "White",
-      "sku": "SKU-33-3",
-      "stock": 24,
-      "id": "71b9"
+      "sku": "SKU-14-39-White",
+      "stock": 9,
+      "id": "fe77"
     },
     {
       "variant_id": 197,
-      "product_id": 33,
-      "size": "43",
+      "product_id": 14,
+      "size": "39",
       "color": "Black",
-      "sku": "SKU-33-4",
-      "stock": 19,
-      "id": "5f0b"
+      "sku": "SKU-14-39-Black",
+      "stock": 28,
+      "id": "9874"
     },
     {
       "variant_id": 198,
-      "product_id": 33,
+      "product_id": 14,
       "size": "39",
       "color": "Red",
-      "sku": "SKU-33-5",
-      "stock": 19,
-      "id": "4ad3"
+      "sku": "SKU-14-39-Red",
+      "stock": 8,
+      "id": "cb54"
     },
     {
       "variant_id": 199,
-      "product_id": 34,
-      "size": "39",
+      "product_id": 14,
+      "size": "40",
       "color": "White",
-      "sku": "SKU-34-0",
-      "stock": 5,
-      "id": "e8fb"
+      "sku": "SKU-14-40-White",
+      "stock": 25,
+      "id": "159a"
     },
     {
       "variant_id": 200,
-      "product_id": 34,
+      "product_id": 14,
       "size": "40",
       "color": "Black",
-      "sku": "SKU-34-1",
-      "stock": 11,
-      "id": "b26c"
+      "sku": "SKU-14-40-Black",
+      "stock": 28,
+      "id": "350c"
     },
     {
       "variant_id": 201,
-      "product_id": 34,
-      "size": "41",
+      "product_id": 14,
+      "size": "40",
       "color": "Red",
-      "sku": "SKU-34-2",
-      "stock": 0,
-      "id": "7b86"
+      "sku": "SKU-14-40-Red",
+      "stock": 12,
+      "id": "160c"
     },
     {
       "variant_id": 202,
-      "product_id": 34,
-      "size": "42",
+      "product_id": 14,
+      "size": "41",
       "color": "White",
-      "sku": "SKU-34-3",
-      "stock": 15,
-      "id": "b862"
+      "sku": "SKU-14-41-White",
+      "stock": 8,
+      "id": "456e"
     },
     {
       "variant_id": 203,
-      "product_id": 34,
-      "size": "43",
+      "product_id": 14,
+      "size": "41",
       "color": "Black",
-      "sku": "SKU-34-4",
-      "stock": 15,
-      "id": "54d4"
+      "sku": "SKU-14-41-Black",
+      "stock": 5,
+      "id": "275c"
     },
     {
       "variant_id": 204,
-      "product_id": 34,
-      "size": "39",
+      "product_id": 14,
+      "size": "41",
       "color": "Red",
-      "sku": "SKU-34-5",
-      "stock": 8,
-      "id": "32e2"
+      "sku": "SKU-14-41-Red",
+      "stock": 14,
+      "id": "7222"
     },
     {
       "variant_id": 205,
-      "product_id": 35,
-      "size": "39",
+      "product_id": 14,
+      "size": "42",
       "color": "White",
-      "sku": "SKU-35-0",
-      "stock": 23,
-      "id": "8c79"
+      "sku": "SKU-14-42-White",
+      "stock": 15,
+      "id": "55f5"
     },
     {
       "variant_id": 206,
-      "product_id": 35,
-      "size": "40",
+      "product_id": 14,
+      "size": "42",
       "color": "Black",
-      "sku": "SKU-35-1",
-      "stock": 14,
-      "id": "7123"
+      "sku": "SKU-14-42-Black",
+      "stock": 7,
+      "id": "5c75"
     },
     {
       "variant_id": 207,
-      "product_id": 35,
-      "size": "41",
+      "product_id": 14,
+      "size": "42",
       "color": "Red",
-      "sku": "SKU-35-2",
-      "stock": 13,
-      "id": "9869"
+      "sku": "SKU-14-42-Red",
+      "stock": 32,
+      "id": "1b88"
     },
     {
       "variant_id": 208,
-      "product_id": 35,
-      "size": "42",
+      "product_id": 14,
+      "size": "43",
       "color": "White",
-      "sku": "SKU-35-3",
-      "stock": 24,
-      "id": "d9a0"
+      "sku": "SKU-14-43-White",
+      "stock": 22,
+      "id": "8097"
     },
     {
       "variant_id": 209,
-      "product_id": 35,
+      "product_id": 14,
       "size": "43",
       "color": "Black",
-      "sku": "SKU-35-4",
-      "stock": 0,
-      "id": "aeba"
+      "sku": "SKU-14-43-Black",
+      "stock": 26,
+      "id": "976a"
     },
     {
       "variant_id": 210,
-      "product_id": 35,
-      "size": "39",
+      "product_id": 14,
+      "size": "43",
       "color": "Red",
-      "sku": "SKU-35-5",
-      "stock": 13,
-      "id": "f96f"
+      "sku": "SKU-14-43-Red",
+      "stock": 29,
+      "id": "2e12"
     },
     {
       "variant_id": 211,
-      "product_id": 36,
+      "product_id": 15,
       "size": "39",
       "color": "White",
-      "sku": "SKU-36-0",
-      "stock": 10,
-      "id": "e686"
+      "sku": "SKU-15-39-White",
+      "stock": 33,
+      "id": "8d64"
     },
     {
       "variant_id": 212,
-      "product_id": 36,
-      "size": "40",
+      "product_id": 15,
+      "size": "39",
       "color": "Black",
-      "sku": "SKU-36-1",
-      "stock": 21,
-      "id": "dea0"
+      "sku": "SKU-15-39-Black",
+      "stock": 16,
+      "id": "92f4"
     },
     {
       "variant_id": 213,
-      "product_id": 36,
-      "size": "41",
+      "product_id": 15,
+      "size": "39",
       "color": "Red",
-      "sku": "SKU-36-2",
-      "stock": 22,
-      "id": "934d"
+      "sku": "SKU-15-39-Red",
+      "stock": 27,
+      "id": "97a0"
     },
     {
       "variant_id": 214,
-      "product_id": 36,
-      "size": "42",
+      "product_id": 15,
+      "size": "40",
       "color": "White",
-      "sku": "SKU-36-3",
-      "stock": 16,
-      "id": "f4fe"
+      "sku": "SKU-15-40-White",
+      "stock": 9,
+      "id": "2072"
     },
     {
       "variant_id": 215,
-      "product_id": 36,
-      "size": "43",
+      "product_id": 15,
+      "size": "40",
       "color": "Black",
-      "sku": "SKU-36-4",
-      "stock": 10,
-      "id": "6083"
+      "sku": "SKU-15-40-Black",
+      "stock": 7,
+      "id": "9365"
     },
     {
       "variant_id": 216,
-      "product_id": 36,
-      "size": "39",
+      "product_id": 15,
+      "size": "40",
       "color": "Red",
-      "sku": "SKU-36-5",
-      "stock": 7,
-      "id": "ba06"
+      "sku": "SKU-15-40-Red",
+      "stock": 27,
+      "id": "2074"
     },
     {
       "variant_id": 217,
-      "product_id": 37,
-      "size": "39",
+      "product_id": 15,
+      "size": "41",
       "color": "White",
-      "sku": "SKU-37-0",
-      "stock": 9,
-      "id": "f961"
+      "sku": "SKU-15-41-White",
+      "stock": 31,
+      "id": "32a9"
     },
     {
       "variant_id": 218,
-      "product_id": 37,
-      "size": "40",
+      "product_id": 15,
+      "size": "41",
       "color": "Black",
-      "sku": "SKU-37-1",
-      "stock": 19,
-      "id": "9714"
+      "sku": "SKU-15-41-Black",
+      "stock": 26,
+      "id": "4044"
     },
     {
       "variant_id": 219,
-      "product_id": 37,
+      "product_id": 15,
       "size": "41",
       "color": "Red",
-      "sku": "SKU-37-2",
-      "stock": 9,
-      "id": "d5e4"
+      "sku": "SKU-15-41-Red",
+      "stock": 24,
+      "id": "dcb5"
     },
     {
       "variant_id": 220,
-      "product_id": 37,
+      "product_id": 15,
       "size": "42",
       "color": "White",
-      "sku": "SKU-37-3",
-      "stock": 13,
-      "id": "c983"
+      "sku": "SKU-15-42-White",
+      "stock": 25,
+      "id": "256b"
     },
     {
       "variant_id": 221,
-      "product_id": 37,
-      "size": "43",
+      "product_id": 15,
+      "size": "42",
       "color": "Black",
-      "sku": "SKU-37-4",
-      "stock": 23,
-      "id": "2570"
+      "sku": "SKU-15-42-Black",
+      "stock": 9,
+      "id": "f0c1"
     },
     {
       "variant_id": 222,
-      "product_id": 37,
-      "size": "39",
+      "product_id": 15,
+      "size": "42",
       "color": "Red",
-      "sku": "SKU-37-5",
-      "stock": 28,
-      "id": "394a"
+      "sku": "SKU-15-42-Red",
+      "stock": 24,
+      "id": "3771"
     },
     {
       "variant_id": 223,
-      "product_id": 38,
-      "size": "39",
+      "product_id": 15,
+      "size": "43",
       "color": "White",
-      "sku": "SKU-38-0",
-      "stock": 28,
-      "id": "6800"
+      "sku": "SKU-15-43-White",
+      "stock": 16,
+      "id": "bf55"
     },
     {
       "variant_id": 224,
-      "product_id": 38,
-      "size": "40",
+      "product_id": 15,
+      "size": "43",
       "color": "Black",
-      "sku": "SKU-38-1",
-      "stock": 11,
-      "id": "9a0b"
+      "sku": "SKU-15-43-Black",
+      "stock": 17,
+      "id": "bd81"
     },
     {
       "variant_id": 225,
-      "product_id": 38,
-      "size": "41",
+      "product_id": 15,
+      "size": "43",
       "color": "Red",
-      "sku": "SKU-38-2",
-      "stock": 16,
-      "id": "8826"
+      "sku": "SKU-15-43-Red",
+      "stock": 23,
+      "id": "483a"
     },
     {
       "variant_id": 226,
-      "product_id": 38,
-      "size": "42",
+      "product_id": 16,
+      "size": "39",
       "color": "White",
-      "sku": "SKU-38-3",
-      "stock": 19,
-      "id": "94a8"
+      "sku": "SKU-16-39-White",
+      "stock": 7,
+      "id": "4c37"
     },
     {
       "variant_id": 227,
-      "product_id": 38,
-      "size": "43",
+      "product_id": 16,
+      "size": "39",
       "color": "Black",
-      "sku": "SKU-38-4",
-      "stock": 15,
-      "id": "21f6"
+      "sku": "SKU-16-39-Black",
+      "stock": 31,
+      "id": "27eb"
     },
     {
       "variant_id": 228,
-      "product_id": 38,
+      "product_id": 16,
       "size": "39",
       "color": "Red",
-      "sku": "SKU-38-5",
-      "stock": 24,
-      "id": "724c"
+      "sku": "SKU-16-39-Red",
+      "stock": 17,
+      "id": "e46a"
     },
     {
       "variant_id": 229,
-      "product_id": 39,
-      "size": "39",
+      "product_id": 16,
+      "size": "40",
       "color": "White",
-      "sku": "SKU-39-0",
-      "stock": 29,
-      "id": "0ce9"
+      "sku": "SKU-16-40-White",
+      "stock": 32,
+      "id": "10b8"
     },
     {
       "variant_id": 230,
-      "product_id": 39,
+      "product_id": 16,
       "size": "40",
       "color": "Black",
-      "sku": "SKU-39-1",
-      "stock": 14,
-      "id": "7c9e"
+      "sku": "SKU-16-40-Black",
+      "stock": 17,
+      "id": "da6a"
     },
     {
       "variant_id": 231,
-      "product_id": 39,
-      "size": "41",
+      "product_id": 16,
+      "size": "40",
       "color": "Red",
-      "sku": "SKU-39-2",
-      "stock": 3,
-      "id": "fe7e"
+      "sku": "SKU-16-40-Red",
+      "stock": 23,
+      "id": "d536"
     },
     {
       "variant_id": 232,
-      "product_id": 39,
-      "size": "42",
+      "product_id": 16,
+      "size": "41",
       "color": "White",
-      "sku": "SKU-39-3",
-      "stock": 1,
-      "id": "6031"
+      "sku": "SKU-16-41-White",
+      "stock": 16,
+      "id": "ce4a"
     },
     {
       "variant_id": 233,
-      "product_id": 39,
-      "size": "43",
+      "product_id": 16,
+      "size": "41",
       "color": "Black",
-      "sku": "SKU-39-4",
-      "stock": 23,
-      "id": "af9c"
+      "sku": "SKU-16-41-Black",
+      "stock": 6,
+      "id": "ad33"
     },
     {
       "variant_id": 234,
-      "product_id": 39,
-      "size": "39",
+      "product_id": 16,
+      "size": "41",
       "color": "Red",
-      "sku": "SKU-39-5",
-      "stock": 28,
-      "id": "edc2"
+      "sku": "SKU-16-41-Red",
+      "stock": 32,
+      "id": "787f"
     },
     {
       "variant_id": 235,
-      "product_id": 40,
-      "size": "39",
+      "product_id": 16,
+      "size": "42",
       "color": "White",
-      "sku": "SKU-40-0",
-      "stock": 19,
-      "id": "c448"
+      "sku": "SKU-16-42-White",
+      "stock": 17,
+      "id": "d0ce"
     },
     {
       "variant_id": 236,
-      "product_id": 40,
-      "size": "40",
+      "product_id": 16,
+      "size": "42",
       "color": "Black",
-      "sku": "SKU-40-1",
-      "stock": 14,
-      "id": "e9a3"
+      "sku": "SKU-16-42-Black",
+      "stock": 8,
+      "id": "9ee8"
     },
     {
       "variant_id": 237,
-      "product_id": 40,
-      "size": "41",
+      "product_id": 16,
+      "size": "42",
       "color": "Red",
-      "sku": "SKU-40-2",
-      "stock": 19,
-      "id": "1e23"
+      "sku": "SKU-16-42-Red",
+      "stock": 22,
+      "id": "2f63"
     },
     {
       "variant_id": 238,
-      "product_id": 40,
-      "size": "42",
+      "product_id": 16,
+      "size": "43",
       "color": "White",
-      "sku": "SKU-40-3",
-      "stock": 1,
-      "id": "b57f"
+      "sku": "SKU-16-43-White",
+      "stock": 11,
+      "id": "9a63"
     },
     {
       "variant_id": 239,
-      "product_id": 40,
+      "product_id": 16,
       "size": "43",
       "color": "Black",
-      "sku": "SKU-40-4",
-      "stock": 4,
-      "id": "4d2f"
+      "sku": "SKU-16-43-Black",
+      "stock": 33,
+      "id": "5040"
     },
     {
       "variant_id": 240,
-      "product_id": 40,
-      "size": "39",
+      "product_id": 16,
+      "size": "43",
       "color": "Red",
-      "sku": "SKU-40-5",
-      "stock": 6,
-      "id": "a9e3"
+      "sku": "SKU-16-43-Red",
+      "stock": 30,
+      "id": "7880"
     },
     {
       "variant_id": 241,
-      "product_id": 41,
+      "product_id": 17,
       "size": "39",
       "color": "White",
-      "sku": "SKU-41-0",
-      "stock": 21,
-      "id": "76d6"
+      "sku": "SKU-17-39-White",
+      "stock": 32,
+      "id": "3dfd"
     },
     {
       "variant_id": 242,
-      "product_id": 41,
-      "size": "40",
+      "product_id": 17,
+      "size": "39",
       "color": "Black",
-      "sku": "SKU-41-1",
-      "stock": 9,
-      "id": "b4cf"
+      "sku": "SKU-17-39-Black",
+      "stock": 11,
+      "id": "5f3f"
     },
     {
       "variant_id": 243,
-      "product_id": 41,
-      "size": "41",
+      "product_id": 17,
+      "size": "39",
       "color": "Red",
-      "sku": "SKU-41-2",
-      "stock": 9,
-      "id": "081c"
+      "sku": "SKU-17-39-Red",
+      "stock": 19,
+      "id": "3943"
     },
     {
       "variant_id": 244,
-      "product_id": 41,
-      "size": "42",
+      "product_id": 17,
+      "size": "40",
       "color": "White",
-      "sku": "SKU-41-3",
-      "stock": 7,
-      "id": "e8e1"
+      "sku": "SKU-17-40-White",
+      "stock": 16,
+      "id": "c76e"
     },
     {
       "variant_id": 245,
-      "product_id": 41,
-      "size": "43",
+      "product_id": 17,
+      "size": "40",
       "color": "Black",
-      "sku": "SKU-41-4",
-      "stock": 0,
-      "id": "e09a"
+      "sku": "SKU-17-40-Black",
+      "stock": 5,
+      "id": "df18"
     },
     {
       "variant_id": 246,
-      "product_id": 41,
-      "size": "39",
+      "product_id": 17,
+      "size": "40",
       "color": "Red",
-      "sku": "SKU-41-5",
-      "stock": 16,
-      "id": "3023"
+      "sku": "SKU-17-40-Red",
+      "stock": 22,
+      "id": "b4fe"
     },
     {
       "variant_id": 247,
-      "product_id": 42,
-      "size": "39",
+      "product_id": 17,
+      "size": "41",
       "color": "White",
-      "sku": "SKU-42-0",
-      "stock": 3,
-      "id": "28ee"
+      "sku": "SKU-17-41-White",
+      "stock": 14,
+      "id": "9846"
     },
     {
       "variant_id": 248,
-      "product_id": 42,
-      "size": "40",
+      "product_id": 17,
+      "size": "41",
       "color": "Black",
-      "sku": "SKU-42-1",
-      "stock": 8,
-      "id": "40bd"
+      "sku": "SKU-17-41-Black",
+      "stock": 7,
+      "id": "637e"
     },
     {
       "variant_id": 249,
-      "product_id": 42,
+      "product_id": 17,
       "size": "41",
       "color": "Red",
-      "sku": "SKU-42-2",
-      "stock": 27,
-      "id": "d3d0"
+      "sku": "SKU-17-41-Red",
+      "stock": 28,
+      "id": "6b14"
     },
     {
       "variant_id": 250,
-      "product_id": 42,
+      "product_id": 17,
       "size": "42",
       "color": "White",
-      "sku": "SKU-42-3",
-      "stock": 28,
-      "id": "6a55"
+      "sku": "SKU-17-42-White",
+      "stock": 15,
+      "id": "7873"
     },
     {
       "variant_id": 251,
-      "product_id": 42,
-      "size": "43",
+      "product_id": 17,
+      "size": "42",
       "color": "Black",
-      "sku": "SKU-42-4",
-      "stock": 9,
-      "id": "9ee3"
+      "sku": "SKU-17-42-Black",
+      "stock": 8,
+      "id": "feff"
     },
     {
       "variant_id": 252,
-      "product_id": 42,
-      "size": "39",
+      "product_id": 17,
+      "size": "42",
       "color": "Red",
-      "sku": "SKU-42-5",
-      "stock": 29,
-      "id": "58c1"
+      "sku": "SKU-17-42-Red",
+      "stock": 28,
+      "id": "67c3"
     },
     {
       "variant_id": 253,
-      "product_id": 43,
-      "size": "39",
+      "product_id": 17,
+      "size": "43",
       "color": "White",
-      "sku": "SKU-43-0",
-      "stock": 0,
-      "id": "8f35"
+      "sku": "SKU-17-43-White",
+      "stock": 10,
+      "id": "fcb7"
     },
     {
       "variant_id": 254,
-      "product_id": 43,
-      "size": "40",
+      "product_id": 17,
+      "size": "43",
       "color": "Black",
-      "sku": "SKU-43-1",
-      "stock": 15,
-      "id": "8754"
+      "sku": "SKU-17-43-Black",
+      "stock": 12,
+      "id": "121d"
     },
     {
       "variant_id": 255,
-      "product_id": 43,
-      "size": "41",
+      "product_id": 17,
+      "size": "43",
       "color": "Red",
-      "sku": "SKU-43-2",
-      "stock": 19,
-      "id": "81d1"
+      "sku": "SKU-17-43-Red",
+      "stock": 13,
+      "id": "14e1"
     },
     {
       "variant_id": 256,
-      "product_id": 43,
-      "size": "42",
+      "product_id": 18,
+      "size": "39",
       "color": "White",
-      "sku": "SKU-43-3",
-      "stock": 11,
-      "id": "1eab"
+      "sku": "SKU-18-39-White",
+      "stock": 33,
+      "id": "eca7"
     },
     {
       "variant_id": 257,
-      "product_id": 43,
-      "size": "43",
+      "product_id": 18,
+      "size": "39",
       "color": "Black",
-      "sku": "SKU-43-4",
-      "stock": 10,
-      "id": "4811"
+      "sku": "SKU-18-39-Black",
+      "stock": 19,
+      "id": "dba8"
     },
     {
       "variant_id": 258,
-      "product_id": 43,
+      "product_id": 18,
       "size": "39",
       "color": "Red",
-      "sku": "SKU-43-5",
-      "stock": 2,
-      "id": "8d87"
+      "sku": "SKU-18-39-Red",
+      "stock": 27,
+      "id": "d7e6"
     },
     {
       "variant_id": 259,
-      "product_id": 44,
-      "size": "39",
+      "product_id": 18,
+      "size": "40",
       "color": "White",
-      "sku": "SKU-44-0",
-      "stock": 2,
-      "id": "400c"
+      "sku": "SKU-18-40-White",
+      "stock": 16,
+      "id": "4a58"
     },
     {
       "variant_id": 260,
-      "product_id": 44,
+      "product_id": 18,
       "size": "40",
       "color": "Black",
-      "sku": "SKU-44-1",
-      "stock": 24,
-      "id": "0f2d"
+      "sku": "SKU-18-40-Black",
+      "stock": 11,
+      "id": "5e64"
     },
     {
       "variant_id": 261,
-      "product_id": 44,
-      "size": "41",
+      "product_id": 18,
+      "size": "40",
       "color": "Red",
-      "sku": "SKU-44-2",
-      "stock": 17,
-      "id": "259d"
+      "sku": "SKU-18-40-Red",
+      "stock": 30,
+      "id": "0ab5"
     },
     {
       "variant_id": 262,
-      "product_id": 44,
-      "size": "42",
+      "product_id": 18,
+      "size": "41",
       "color": "White",
-      "sku": "SKU-44-3",
-      "stock": 26,
-      "id": "0f72"
+      "sku": "SKU-18-41-White",
+      "stock": 10,
+      "id": "8cd4"
     },
     {
       "variant_id": 263,
-      "product_id": 44,
-      "size": "43",
+      "product_id": 18,
+      "size": "41",
       "color": "Black",
-      "sku": "SKU-44-4",
-      "stock": 5,
-      "id": "cc45"
+      "sku": "SKU-18-41-Black",
+      "stock": 13,
+      "id": "5791"
     },
     {
       "variant_id": 264,
-      "product_id": 44,
-      "size": "39",
+      "product_id": 18,
+      "size": "41",
       "color": "Red",
-      "sku": "SKU-44-5",
-      "stock": 14,
-      "id": "3411"
+      "sku": "SKU-18-41-Red",
+      "stock": 17,
+      "id": "4214"
     },
     {
       "variant_id": 265,
-      "product_id": 45,
-      "size": "39",
+      "product_id": 18,
+      "size": "42",
       "color": "White",
-      "sku": "SKU-45-0",
-      "stock": 18,
-      "id": "5eb9"
+      "sku": "SKU-18-42-White",
+      "stock": 31,
+      "id": "f68c"
     },
     {
       "variant_id": 266,
-      "product_id": 45,
-      "size": "40",
+      "product_id": 18,
+      "size": "42",
       "color": "Black",
-      "sku": "SKU-45-1",
-      "stock": 0,
-      "id": "febe"
+      "sku": "SKU-18-42-Black",
+      "stock": 8,
+      "id": "017f"
     },
     {
       "variant_id": 267,
-      "product_id": 45,
-      "size": "41",
+      "product_id": 18,
+      "size": "42",
       "color": "Red",
-      "sku": "SKU-45-2",
-      "stock": 15,
-      "id": "3c93"
+      "sku": "SKU-18-42-Red",
+      "stock": 18,
+      "id": "7b4e"
     },
     {
       "variant_id": 268,
-      "product_id": 45,
-      "size": "42",
+      "product_id": 18,
+      "size": "43",
       "color": "White",
-      "sku": "SKU-45-3",
-      "stock": 9,
-      "id": "15f4"
+      "sku": "SKU-18-43-White",
+      "stock": 33,
+      "id": "ff20"
     },
     {
       "variant_id": 269,
-      "product_id": 45,
+      "product_id": 18,
       "size": "43",
       "color": "Black",
-      "sku": "SKU-45-4",
-      "stock": 2,
-      "id": "8e46"
+      "sku": "SKU-18-43-Black",
+      "stock": 16,
+      "id": "235f"
     },
     {
       "variant_id": 270,
-      "product_id": 45,
-      "size": "39",
+      "product_id": 18,
+      "size": "43",
       "color": "Red",
-      "sku": "SKU-45-5",
-      "stock": 11,
-      "id": "5b58"
+      "sku": "SKU-18-43-Red",
+      "stock": 25,
+      "id": "5a29"
     },
     {
       "variant_id": 271,
-      "product_id": 46,
+      "product_id": 19,
       "size": "39",
       "color": "White",
-      "sku": "SKU-46-0",
-      "stock": 2,
-      "id": "4c58"
+      "sku": "SKU-19-39-White",
+      "stock": 25,
+      "id": "d410"
     },
     {
       "variant_id": 272,
-      "product_id": 46,
-      "size": "40",
+      "product_id": 19,
+      "size": "39",
       "color": "Black",
-      "sku": "SKU-46-1",
-      "stock": 23,
-      "id": "2629"
+      "sku": "SKU-19-39-Black",
+      "stock": 18,
+      "id": "6db6"
     },
     {
       "variant_id": 273,
-      "product_id": 46,
-      "size": "41",
+      "product_id": 19,
+      "size": "39",
       "color": "Red",
-      "sku": "SKU-46-2",
-      "stock": 25,
-      "id": "2ff0"
+      "sku": "SKU-19-39-Red",
+      "stock": 10,
+      "id": "4a7b"
     },
     {
       "variant_id": 274,
-      "product_id": 46,
-      "size": "42",
+      "product_id": 19,
+      "size": "40",
       "color": "White",
-      "sku": "SKU-46-3",
+      "sku": "SKU-19-40-White",
       "stock": 24,
-      "id": "f617"
+      "id": "9c1e"
     },
     {
       "variant_id": 275,
-      "product_id": 46,
-      "size": "43",
+      "product_id": 19,
+      "size": "40",
       "color": "Black",
-      "sku": "SKU-46-4",
-      "stock": 29,
-      "id": "d96a"
+      "sku": "SKU-19-40-Black",
+      "stock": 30,
+      "id": "0500"
     },
     {
       "variant_id": 276,
-      "product_id": 46,
-      "size": "39",
+      "product_id": 19,
+      "size": "40",
       "color": "Red",
-      "sku": "SKU-46-5",
-      "stock": 28,
-      "id": "fab6"
+      "sku": "SKU-19-40-Red",
+      "stock": 34,
+      "id": "c90b"
     },
     {
       "variant_id": 277,
-      "product_id": 47,
-      "size": "39",
+      "product_id": 19,
+      "size": "41",
       "color": "White",
-      "sku": "SKU-47-0",
-      "stock": 13,
-      "id": "5e0e"
+      "sku": "SKU-19-41-White",
+      "stock": 22,
+      "id": "d00b"
     },
     {
       "variant_id": 278,
-      "product_id": 47,
-      "size": "40",
+      "product_id": 19,
+      "size": "41",
       "color": "Black",
-      "sku": "SKU-47-1",
-      "stock": 13,
-      "id": "9ffb"
+      "sku": "SKU-19-41-Black",
+      "stock": 8,
+      "id": "d896"
     },
     {
       "variant_id": 279,
-      "product_id": 47,
+      "product_id": 19,
       "size": "41",
       "color": "Red",
-      "sku": "SKU-47-2",
-      "stock": 11,
-      "id": "ead8"
+      "sku": "SKU-19-41-Red",
+      "stock": 23,
+      "id": "8c42"
     },
     {
       "variant_id": 280,
-      "product_id": 47,
+      "product_id": 19,
       "size": "42",
       "color": "White",
-      "sku": "SKU-47-3",
-      "stock": 16,
-      "id": "4e39"
+      "sku": "SKU-19-42-White",
+      "stock": 30,
+      "id": "0b63"
     },
     {
       "variant_id": 281,
-      "product_id": 47,
-      "size": "43",
+      "product_id": 19,
+      "size": "42",
       "color": "Black",
-      "sku": "SKU-47-4",
-      "stock": 23,
-      "id": "fe11"
+      "sku": "SKU-19-42-Black",
+      "stock": 18,
+      "id": "7f32"
     },
     {
       "variant_id": 282,
-      "product_id": 47,
-      "size": "39",
+      "product_id": 19,
+      "size": "42",
       "color": "Red",
-      "sku": "SKU-47-5",
-      "stock": 19,
-      "id": "2d60"
+      "sku": "SKU-19-42-Red",
+      "stock": 5,
+      "id": "746c"
     },
     {
       "variant_id": 283,
-      "product_id": 48,
-      "size": "39",
+      "product_id": 19,
+      "size": "43",
       "color": "White",
-      "sku": "SKU-48-0",
-      "stock": 22,
-      "id": "192d"
+      "sku": "SKU-19-43-White",
+      "stock": 8,
+      "id": "b753"
     },
     {
       "variant_id": 284,
-      "product_id": 48,
-      "size": "40",
+      "product_id": 19,
+      "size": "43",
       "color": "Black",
-      "sku": "SKU-48-1",
-      "stock": 14,
-      "id": "8fe6"
+      "sku": "SKU-19-43-Black",
+      "stock": 17,
+      "id": "bc09"
     },
     {
       "variant_id": 285,
-      "product_id": 48,
-      "size": "41",
+      "product_id": 19,
+      "size": "43",
       "color": "Red",
-      "sku": "SKU-48-2",
-      "stock": 22,
-      "id": "b97f"
+      "sku": "SKU-19-43-Red",
+      "stock": 27,
+      "id": "7383"
     },
     {
       "variant_id": 286,
-      "product_id": 48,
-      "size": "42",
+      "product_id": 20,
+      "size": "39",
       "color": "White",
-      "sku": "SKU-48-3",
-      "stock": 11,
-      "id": "b331"
+      "sku": "SKU-20-39-White",
+      "stock": 24,
+      "id": "2627"
     },
     {
       "variant_id": 287,
-      "product_id": 48,
-      "size": "43",
+      "product_id": 20,
+      "size": "39",
       "color": "Black",
-      "sku": "SKU-48-4",
-      "stock": 17,
-      "id": "d66b"
+      "sku": "SKU-20-39-Black",
+      "stock": 9,
+      "id": "6306"
     },
     {
       "variant_id": 288,
-      "product_id": 48,
+      "product_id": 20,
       "size": "39",
       "color": "Red",
-      "sku": "SKU-48-5",
-      "stock": 27,
-      "id": "6ee4"
+      "sku": "SKU-20-39-Red",
+      "stock": 9,
+      "id": "3452"
     },
     {
       "variant_id": 289,
-      "product_id": 49,
-      "size": "39",
+      "product_id": 20,
+      "size": "40",
       "color": "White",
-      "sku": "SKU-49-0",
-      "stock": 4,
-      "id": "2039"
+      "sku": "SKU-20-40-White",
+      "stock": 7,
+      "id": "46fe"
     },
     {
       "variant_id": 290,
-      "product_id": 49,
+      "product_id": 20,
       "size": "40",
       "color": "Black",
-      "sku": "SKU-49-1",
-      "stock": 26,
-      "id": "2f5f"
+      "sku": "SKU-20-40-Black",
+      "stock": 30,
+      "id": "cf8b"
     },
     {
       "variant_id": 291,
-      "product_id": 49,
-      "size": "41",
+      "product_id": 20,
+      "size": "40",
       "color": "Red",
-      "sku": "SKU-49-2",
-      "stock": 29,
-      "id": "0078"
+      "sku": "SKU-20-40-Red",
+      "stock": 6,
+      "id": "d30d"
     },
     {
       "variant_id": 292,
-      "product_id": 49,
-      "size": "42",
+      "product_id": 20,
+      "size": "41",
       "color": "White",
-      "sku": "SKU-49-3",
-      "stock": 1,
-      "id": "f97e"
+      "sku": "SKU-20-41-White",
+      "stock": 24,
+      "id": "9cd4"
     },
     {
       "variant_id": 293,
-      "product_id": 49,
-      "size": "43",
+      "product_id": 20,
+      "size": "41",
       "color": "Black",
-      "sku": "SKU-49-4",
-      "stock": 10,
-      "id": "8b2d"
+      "sku": "SKU-20-41-Black",
+      "stock": 12,
+      "id": "3647"
     },
     {
       "variant_id": 294,
-      "product_id": 49,
-      "size": "39",
+      "product_id": 20,
+      "size": "41",
       "color": "Red",
-      "sku": "SKU-49-5",
-      "stock": 12,
-      "id": "0523"
+      "sku": "SKU-20-41-Red",
+      "stock": 14,
+      "id": "4036"
     },
     {
       "variant_id": 295,
-      "product_id": 50,
-      "size": "39",
+      "product_id": 20,
+      "size": "42",
       "color": "White",
-      "sku": "SKU-50-0",
-      "stock": 0,
-      "id": "c8c9"
+      "sku": "SKU-20-42-White",
+      "stock": 33,
+      "id": "04a3"
     },
     {
       "variant_id": 296,
-      "product_id": 50,
-      "size": "40",
+      "product_id": 20,
+      "size": "42",
       "color": "Black",
-      "sku": "SKU-50-1",
-      "stock": 7,
-      "id": "bc46"
+      "sku": "SKU-20-42-Black",
+      "stock": 26,
+      "id": "5d42"
     },
     {
       "variant_id": 297,
-      "product_id": 50,
-      "size": "41",
+      "product_id": 20,
+      "size": "42",
       "color": "Red",
-      "sku": "SKU-50-2",
-      "stock": 11,
-      "id": "a6c9"
+      "sku": "SKU-20-42-Red",
+      "stock": 31,
+      "id": "8650"
     },
     {
       "variant_id": 298,
-      "product_id": 50,
-      "size": "42",
+      "product_id": 20,
+      "size": "43",
       "color": "White",
-      "sku": "SKU-50-3",
-      "stock": 28,
-      "id": "2719"
+      "sku": "SKU-20-43-White",
+      "stock": 9,
+      "id": "8c6a"
     },
     {
       "variant_id": 299,
-      "product_id": 50,
+      "product_id": 20,
       "size": "43",
       "color": "Black",
-      "sku": "SKU-50-4",
-      "stock": 4,
-      "id": "c226"
+      "sku": "SKU-20-43-Black",
+      "stock": 16,
+      "id": "394f"
     },
     {
       "variant_id": 300,
+      "product_id": 20,
+      "size": "43",
+      "color": "Red",
+      "sku": "SKU-20-43-Red",
+      "stock": 30,
+      "id": "6338"
+    },
+    {
+      "variant_id": 301,
+      "product_id": 21,
+      "size": "39",
+      "color": "White",
+      "sku": "SKU-21-39-White",
+      "stock": 24,
+      "id": "7b22"
+    },
+    {
+      "variant_id": 302,
+      "product_id": 21,
+      "size": "39",
+      "color": "Black",
+      "sku": "SKU-21-39-Black",
+      "stock": 14,
+      "id": "484c"
+    },
+    {
+      "variant_id": 303,
+      "product_id": 21,
+      "size": "39",
+      "color": "Red",
+      "sku": "SKU-21-39-Red",
+      "stock": 32,
+      "id": "1d5e"
+    },
+    {
+      "variant_id": 304,
+      "product_id": 21,
+      "size": "40",
+      "color": "White",
+      "sku": "SKU-21-40-White",
+      "stock": 15,
+      "id": "19b2"
+    },
+    {
+      "variant_id": 305,
+      "product_id": 21,
+      "size": "40",
+      "color": "Black",
+      "sku": "SKU-21-40-Black",
+      "stock": 13,
+      "id": "31f2"
+    },
+    {
+      "variant_id": 306,
+      "product_id": 21,
+      "size": "40",
+      "color": "Red",
+      "sku": "SKU-21-40-Red",
+      "stock": 8,
+      "id": "a6a2"
+    },
+    {
+      "variant_id": 307,
+      "product_id": 21,
+      "size": "41",
+      "color": "White",
+      "sku": "SKU-21-41-White",
+      "stock": 26,
+      "id": "60d9"
+    },
+    {
+      "variant_id": 308,
+      "product_id": 21,
+      "size": "41",
+      "color": "Black",
+      "sku": "SKU-21-41-Black",
+      "stock": 28,
+      "id": "2b0c"
+    },
+    {
+      "variant_id": 309,
+      "product_id": 21,
+      "size": "41",
+      "color": "Red",
+      "sku": "SKU-21-41-Red",
+      "stock": 13,
+      "id": "a46f"
+    },
+    {
+      "variant_id": 310,
+      "product_id": 21,
+      "size": "42",
+      "color": "White",
+      "sku": "SKU-21-42-White",
+      "stock": 26,
+      "id": "f7eb"
+    },
+    {
+      "variant_id": 311,
+      "product_id": 21,
+      "size": "42",
+      "color": "Black",
+      "sku": "SKU-21-42-Black",
+      "stock": 34,
+      "id": "6437"
+    },
+    {
+      "variant_id": 312,
+      "product_id": 21,
+      "size": "42",
+      "color": "Red",
+      "sku": "SKU-21-42-Red",
+      "stock": 5,
+      "id": "2422"
+    },
+    {
+      "variant_id": 313,
+      "product_id": 21,
+      "size": "43",
+      "color": "White",
+      "sku": "SKU-21-43-White",
+      "stock": 30,
+      "id": "cca1"
+    },
+    {
+      "variant_id": 314,
+      "product_id": 21,
+      "size": "43",
+      "color": "Black",
+      "sku": "SKU-21-43-Black",
+      "stock": 20,
+      "id": "3b6c"
+    },
+    {
+      "variant_id": 315,
+      "product_id": 21,
+      "size": "43",
+      "color": "Red",
+      "sku": "SKU-21-43-Red",
+      "stock": 10,
+      "id": "ce72"
+    },
+    {
+      "variant_id": 316,
+      "product_id": 22,
+      "size": "39",
+      "color": "White",
+      "sku": "SKU-22-39-White",
+      "stock": 21,
+      "id": "dde4"
+    },
+    {
+      "variant_id": 317,
+      "product_id": 22,
+      "size": "39",
+      "color": "Black",
+      "sku": "SKU-22-39-Black",
+      "stock": 6,
+      "id": "43ed"
+    },
+    {
+      "variant_id": 318,
+      "product_id": 22,
+      "size": "39",
+      "color": "Red",
+      "sku": "SKU-22-39-Red",
+      "stock": 16,
+      "id": "b033"
+    },
+    {
+      "variant_id": 319,
+      "product_id": 22,
+      "size": "40",
+      "color": "White",
+      "sku": "SKU-22-40-White",
+      "stock": 15,
+      "id": "33a5"
+    },
+    {
+      "variant_id": 320,
+      "product_id": 22,
+      "size": "40",
+      "color": "Black",
+      "sku": "SKU-22-40-Black",
+      "stock": 16,
+      "id": "41b1"
+    },
+    {
+      "variant_id": 321,
+      "product_id": 22,
+      "size": "40",
+      "color": "Red",
+      "sku": "SKU-22-40-Red",
+      "stock": 26,
+      "id": "d9f1"
+    },
+    {
+      "variant_id": 322,
+      "product_id": 22,
+      "size": "41",
+      "color": "White",
+      "sku": "SKU-22-41-White",
+      "stock": 23,
+      "id": "3e79"
+    },
+    {
+      "variant_id": 323,
+      "product_id": 22,
+      "size": "41",
+      "color": "Black",
+      "sku": "SKU-22-41-Black",
+      "stock": 25,
+      "id": "c568"
+    },
+    {
+      "variant_id": 324,
+      "product_id": 22,
+      "size": "41",
+      "color": "Red",
+      "sku": "SKU-22-41-Red",
+      "stock": 10,
+      "id": "7d42"
+    },
+    {
+      "variant_id": 325,
+      "product_id": 22,
+      "size": "42",
+      "color": "White",
+      "sku": "SKU-22-42-White",
+      "stock": 5,
+      "id": "3e14"
+    },
+    {
+      "variant_id": 326,
+      "product_id": 22,
+      "size": "42",
+      "color": "Black",
+      "sku": "SKU-22-42-Black",
+      "stock": 5,
+      "id": "45e5"
+    },
+    {
+      "variant_id": 327,
+      "product_id": 22,
+      "size": "42",
+      "color": "Red",
+      "sku": "SKU-22-42-Red",
+      "stock": 33,
+      "id": "9217"
+    },
+    {
+      "variant_id": 328,
+      "product_id": 22,
+      "size": "43",
+      "color": "White",
+      "sku": "SKU-22-43-White",
+      "stock": 12,
+      "id": "ff64"
+    },
+    {
+      "variant_id": 329,
+      "product_id": 22,
+      "size": "43",
+      "color": "Black",
+      "sku": "SKU-22-43-Black",
+      "stock": 5,
+      "id": "36ce"
+    },
+    {
+      "variant_id": 330,
+      "product_id": 22,
+      "size": "43",
+      "color": "Red",
+      "sku": "SKU-22-43-Red",
+      "stock": 10,
+      "id": "4e3d"
+    },
+    {
+      "variant_id": 331,
+      "product_id": 23,
+      "size": "39",
+      "color": "White",
+      "sku": "SKU-23-39-White",
+      "stock": 29,
+      "id": "8967"
+    },
+    {
+      "variant_id": 332,
+      "product_id": 23,
+      "size": "39",
+      "color": "Black",
+      "sku": "SKU-23-39-Black",
+      "stock": 30,
+      "id": "986d"
+    },
+    {
+      "variant_id": 333,
+      "product_id": 23,
+      "size": "39",
+      "color": "Red",
+      "sku": "SKU-23-39-Red",
+      "stock": 16,
+      "id": "bede"
+    },
+    {
+      "variant_id": 334,
+      "product_id": 23,
+      "size": "40",
+      "color": "White",
+      "sku": "SKU-23-40-White",
+      "stock": 25,
+      "id": "5bf0"
+    },
+    {
+      "variant_id": 335,
+      "product_id": 23,
+      "size": "40",
+      "color": "Black",
+      "sku": "SKU-23-40-Black",
+      "stock": 8,
+      "id": "36b2"
+    },
+    {
+      "variant_id": 336,
+      "product_id": 23,
+      "size": "40",
+      "color": "Red",
+      "sku": "SKU-23-40-Red",
+      "stock": 6,
+      "id": "117b"
+    },
+    {
+      "variant_id": 337,
+      "product_id": 23,
+      "size": "41",
+      "color": "White",
+      "sku": "SKU-23-41-White",
+      "stock": 18,
+      "id": "2553"
+    },
+    {
+      "variant_id": 338,
+      "product_id": 23,
+      "size": "41",
+      "color": "Black",
+      "sku": "SKU-23-41-Black",
+      "stock": 11,
+      "id": "58c5"
+    },
+    {
+      "variant_id": 339,
+      "product_id": 23,
+      "size": "41",
+      "color": "Red",
+      "sku": "SKU-23-41-Red",
+      "stock": 28,
+      "id": "c3fb"
+    },
+    {
+      "variant_id": 340,
+      "product_id": 23,
+      "size": "42",
+      "color": "White",
+      "sku": "SKU-23-42-White",
+      "stock": 19,
+      "id": "dca4"
+    },
+    {
+      "variant_id": 341,
+      "product_id": 23,
+      "size": "42",
+      "color": "Black",
+      "sku": "SKU-23-42-Black",
+      "stock": 29,
+      "id": "b688"
+    },
+    {
+      "variant_id": 342,
+      "product_id": 23,
+      "size": "42",
+      "color": "Red",
+      "sku": "SKU-23-42-Red",
+      "stock": 11,
+      "id": "8acc"
+    },
+    {
+      "variant_id": 343,
+      "product_id": 23,
+      "size": "43",
+      "color": "White",
+      "sku": "SKU-23-43-White",
+      "stock": 29,
+      "id": "f135"
+    },
+    {
+      "variant_id": 344,
+      "product_id": 23,
+      "size": "43",
+      "color": "Black",
+      "sku": "SKU-23-43-Black",
+      "stock": 6,
+      "id": "b8f3"
+    },
+    {
+      "variant_id": 345,
+      "product_id": 23,
+      "size": "43",
+      "color": "Red",
+      "sku": "SKU-23-43-Red",
+      "stock": 5,
+      "id": "ac02"
+    },
+    {
+      "variant_id": 346,
+      "product_id": 24,
+      "size": "39",
+      "color": "White",
+      "sku": "SKU-24-39-White",
+      "stock": 26,
+      "id": "5c53"
+    },
+    {
+      "variant_id": 347,
+      "product_id": 24,
+      "size": "39",
+      "color": "Black",
+      "sku": "SKU-24-39-Black",
+      "stock": 12,
+      "id": "c45e"
+    },
+    {
+      "variant_id": 348,
+      "product_id": 24,
+      "size": "39",
+      "color": "Red",
+      "sku": "SKU-24-39-Red",
+      "stock": 8,
+      "id": "a5e9"
+    },
+    {
+      "variant_id": 349,
+      "product_id": 24,
+      "size": "40",
+      "color": "White",
+      "sku": "SKU-24-40-White",
+      "stock": 7,
+      "id": "c2df"
+    },
+    {
+      "variant_id": 350,
+      "product_id": 24,
+      "size": "40",
+      "color": "Black",
+      "sku": "SKU-24-40-Black",
+      "stock": 12,
+      "id": "f196"
+    },
+    {
+      "variant_id": 351,
+      "product_id": 24,
+      "size": "40",
+      "color": "Red",
+      "sku": "SKU-24-40-Red",
+      "stock": 31,
+      "id": "6c51"
+    },
+    {
+      "variant_id": 352,
+      "product_id": 24,
+      "size": "41",
+      "color": "White",
+      "sku": "SKU-24-41-White",
+      "stock": 10,
+      "id": "220e"
+    },
+    {
+      "variant_id": 353,
+      "product_id": 24,
+      "size": "41",
+      "color": "Black",
+      "sku": "SKU-24-41-Black",
+      "stock": 28,
+      "id": "3426"
+    },
+    {
+      "variant_id": 354,
+      "product_id": 24,
+      "size": "41",
+      "color": "Red",
+      "sku": "SKU-24-41-Red",
+      "stock": 10,
+      "id": "ef38"
+    },
+    {
+      "variant_id": 355,
+      "product_id": 24,
+      "size": "42",
+      "color": "White",
+      "sku": "SKU-24-42-White",
+      "stock": 13,
+      "id": "12dd"
+    },
+    {
+      "variant_id": 356,
+      "product_id": 24,
+      "size": "42",
+      "color": "Black",
+      "sku": "SKU-24-42-Black",
+      "stock": 26,
+      "id": "af9a"
+    },
+    {
+      "variant_id": 357,
+      "product_id": 24,
+      "size": "42",
+      "color": "Red",
+      "sku": "SKU-24-42-Red",
+      "stock": 11,
+      "id": "354d"
+    },
+    {
+      "variant_id": 358,
+      "product_id": 24,
+      "size": "43",
+      "color": "White",
+      "sku": "SKU-24-43-White",
+      "stock": 12,
+      "id": "df0c"
+    },
+    {
+      "variant_id": 359,
+      "product_id": 24,
+      "size": "43",
+      "color": "Black",
+      "sku": "SKU-24-43-Black",
+      "stock": 34,
+      "id": "e5fc"
+    },
+    {
+      "variant_id": 360,
+      "product_id": 24,
+      "size": "43",
+      "color": "Red",
+      "sku": "SKU-24-43-Red",
+      "stock": 13,
+      "id": "ce20"
+    },
+    {
+      "variant_id": 361,
+      "product_id": 25,
+      "size": "39",
+      "color": "White",
+      "sku": "SKU-25-39-White",
+      "stock": 31,
+      "id": "b654"
+    },
+    {
+      "variant_id": 362,
+      "product_id": 25,
+      "size": "39",
+      "color": "Black",
+      "sku": "SKU-25-39-Black",
+      "stock": 23,
+      "id": "c801"
+    },
+    {
+      "variant_id": 363,
+      "product_id": 25,
+      "size": "39",
+      "color": "Red",
+      "sku": "SKU-25-39-Red",
+      "stock": 27,
+      "id": "05e9"
+    },
+    {
+      "variant_id": 364,
+      "product_id": 25,
+      "size": "40",
+      "color": "White",
+      "sku": "SKU-25-40-White",
+      "stock": 14,
+      "id": "5656"
+    },
+    {
+      "variant_id": 365,
+      "product_id": 25,
+      "size": "40",
+      "color": "Black",
+      "sku": "SKU-25-40-Black",
+      "stock": 19,
+      "id": "aa03"
+    },
+    {
+      "variant_id": 366,
+      "product_id": 25,
+      "size": "40",
+      "color": "Red",
+      "sku": "SKU-25-40-Red",
+      "stock": 7,
+      "id": "ba1e"
+    },
+    {
+      "variant_id": 367,
+      "product_id": 25,
+      "size": "41",
+      "color": "White",
+      "sku": "SKU-25-41-White",
+      "stock": 19,
+      "id": "93e1"
+    },
+    {
+      "variant_id": 368,
+      "product_id": 25,
+      "size": "41",
+      "color": "Black",
+      "sku": "SKU-25-41-Black",
+      "stock": 14,
+      "id": "f950"
+    },
+    {
+      "variant_id": 369,
+      "product_id": 25,
+      "size": "41",
+      "color": "Red",
+      "sku": "SKU-25-41-Red",
+      "stock": 32,
+      "id": "879c"
+    },
+    {
+      "variant_id": 370,
+      "product_id": 25,
+      "size": "42",
+      "color": "White",
+      "sku": "SKU-25-42-White",
+      "stock": 13,
+      "id": "176f"
+    },
+    {
+      "variant_id": 371,
+      "product_id": 25,
+      "size": "42",
+      "color": "Black",
+      "sku": "SKU-25-42-Black",
+      "stock": 33,
+      "id": "5ce4"
+    },
+    {
+      "variant_id": 372,
+      "product_id": 25,
+      "size": "42",
+      "color": "Red",
+      "sku": "SKU-25-42-Red",
+      "stock": 7,
+      "id": "4018"
+    },
+    {
+      "variant_id": 373,
+      "product_id": 25,
+      "size": "43",
+      "color": "White",
+      "sku": "SKU-25-43-White",
+      "stock": 28,
+      "id": "ed4c"
+    },
+    {
+      "variant_id": 374,
+      "product_id": 25,
+      "size": "43",
+      "color": "Black",
+      "sku": "SKU-25-43-Black",
+      "stock": 31,
+      "id": "48fd"
+    },
+    {
+      "variant_id": 375,
+      "product_id": 25,
+      "size": "43",
+      "color": "Red",
+      "sku": "SKU-25-43-Red",
+      "stock": 16,
+      "id": "ce9c"
+    },
+    {
+      "variant_id": 376,
+      "product_id": 26,
+      "size": "39",
+      "color": "White",
+      "sku": "SKU-26-39-White",
+      "stock": 32,
+      "id": "120d"
+    },
+    {
+      "variant_id": 377,
+      "product_id": 26,
+      "size": "39",
+      "color": "Black",
+      "sku": "SKU-26-39-Black",
+      "stock": 5,
+      "id": "5071"
+    },
+    {
+      "variant_id": 378,
+      "product_id": 26,
+      "size": "39",
+      "color": "Red",
+      "sku": "SKU-26-39-Red",
+      "stock": 11,
+      "id": "8601"
+    },
+    {
+      "variant_id": 379,
+      "product_id": 26,
+      "size": "40",
+      "color": "White",
+      "sku": "SKU-26-40-White",
+      "stock": 20,
+      "id": "c3e2"
+    },
+    {
+      "variant_id": 380,
+      "product_id": 26,
+      "size": "40",
+      "color": "Black",
+      "sku": "SKU-26-40-Black",
+      "stock": 14,
+      "id": "b49a"
+    },
+    {
+      "variant_id": 381,
+      "product_id": 26,
+      "size": "40",
+      "color": "Red",
+      "sku": "SKU-26-40-Red",
+      "stock": 15,
+      "id": "632f"
+    },
+    {
+      "variant_id": 382,
+      "product_id": 26,
+      "size": "41",
+      "color": "White",
+      "sku": "SKU-26-41-White",
+      "stock": 9,
+      "id": "70e1"
+    },
+    {
+      "variant_id": 383,
+      "product_id": 26,
+      "size": "41",
+      "color": "Black",
+      "sku": "SKU-26-41-Black",
+      "stock": 16,
+      "id": "b9af"
+    },
+    {
+      "variant_id": 384,
+      "product_id": 26,
+      "size": "41",
+      "color": "Red",
+      "sku": "SKU-26-41-Red",
+      "stock": 9,
+      "id": "8bfc"
+    },
+    {
+      "variant_id": 385,
+      "product_id": 26,
+      "size": "42",
+      "color": "White",
+      "sku": "SKU-26-42-White",
+      "stock": 27,
+      "id": "4807"
+    },
+    {
+      "variant_id": 386,
+      "product_id": 26,
+      "size": "42",
+      "color": "Black",
+      "sku": "SKU-26-42-Black",
+      "stock": 23,
+      "id": "1011"
+    },
+    {
+      "variant_id": 387,
+      "product_id": 26,
+      "size": "42",
+      "color": "Red",
+      "sku": "SKU-26-42-Red",
+      "stock": 21,
+      "id": "c1f4"
+    },
+    {
+      "variant_id": 388,
+      "product_id": 26,
+      "size": "43",
+      "color": "White",
+      "sku": "SKU-26-43-White",
+      "stock": 34,
+      "id": "c7c6"
+    },
+    {
+      "variant_id": 389,
+      "product_id": 26,
+      "size": "43",
+      "color": "Black",
+      "sku": "SKU-26-43-Black",
+      "stock": 6,
+      "id": "b4fd"
+    },
+    {
+      "variant_id": 390,
+      "product_id": 26,
+      "size": "43",
+      "color": "Red",
+      "sku": "SKU-26-43-Red",
+      "stock": 9,
+      "id": "b0d1"
+    },
+    {
+      "variant_id": 391,
+      "product_id": 27,
+      "size": "39",
+      "color": "White",
+      "sku": "SKU-27-39-White",
+      "stock": 5,
+      "id": "7496"
+    },
+    {
+      "variant_id": 392,
+      "product_id": 27,
+      "size": "39",
+      "color": "Black",
+      "sku": "SKU-27-39-Black",
+      "stock": 26,
+      "id": "0504"
+    },
+    {
+      "variant_id": 393,
+      "product_id": 27,
+      "size": "39",
+      "color": "Red",
+      "sku": "SKU-27-39-Red",
+      "stock": 19,
+      "id": "aace"
+    },
+    {
+      "variant_id": 394,
+      "product_id": 27,
+      "size": "40",
+      "color": "White",
+      "sku": "SKU-27-40-White",
+      "stock": 22,
+      "id": "dbf4"
+    },
+    {
+      "variant_id": 395,
+      "product_id": 27,
+      "size": "40",
+      "color": "Black",
+      "sku": "SKU-27-40-Black",
+      "stock": 30,
+      "id": "0437"
+    },
+    {
+      "variant_id": 396,
+      "product_id": 27,
+      "size": "40",
+      "color": "Red",
+      "sku": "SKU-27-40-Red",
+      "stock": 10,
+      "id": "853f"
+    },
+    {
+      "variant_id": 397,
+      "product_id": 27,
+      "size": "41",
+      "color": "White",
+      "sku": "SKU-27-41-White",
+      "stock": 19,
+      "id": "2119"
+    },
+    {
+      "variant_id": 398,
+      "product_id": 27,
+      "size": "41",
+      "color": "Black",
+      "sku": "SKU-27-41-Black",
+      "stock": 23,
+      "id": "7e7a"
+    },
+    {
+      "variant_id": 399,
+      "product_id": 27,
+      "size": "41",
+      "color": "Red",
+      "sku": "SKU-27-41-Red",
+      "stock": 10,
+      "id": "868c"
+    },
+    {
+      "variant_id": 400,
+      "product_id": 27,
+      "size": "42",
+      "color": "White",
+      "sku": "SKU-27-42-White",
+      "stock": 29,
+      "id": "a675"
+    },
+    {
+      "variant_id": 401,
+      "product_id": 27,
+      "size": "42",
+      "color": "Black",
+      "sku": "SKU-27-42-Black",
+      "stock": 7,
+      "id": "dd06"
+    },
+    {
+      "variant_id": 402,
+      "product_id": 27,
+      "size": "42",
+      "color": "Red",
+      "sku": "SKU-27-42-Red",
+      "stock": 19,
+      "id": "82af"
+    },
+    {
+      "variant_id": 403,
+      "product_id": 27,
+      "size": "43",
+      "color": "White",
+      "sku": "SKU-27-43-White",
+      "stock": 13,
+      "id": "8a7c"
+    },
+    {
+      "variant_id": 404,
+      "product_id": 27,
+      "size": "43",
+      "color": "Black",
+      "sku": "SKU-27-43-Black",
+      "stock": 32,
+      "id": "56ef"
+    },
+    {
+      "variant_id": 405,
+      "product_id": 27,
+      "size": "43",
+      "color": "Red",
+      "sku": "SKU-27-43-Red",
+      "stock": 12,
+      "id": "7596"
+    },
+    {
+      "variant_id": 406,
+      "product_id": 28,
+      "size": "39",
+      "color": "White",
+      "sku": "SKU-28-39-White",
+      "stock": 27,
+      "id": "dcb4"
+    },
+    {
+      "variant_id": 407,
+      "product_id": 28,
+      "size": "39",
+      "color": "Black",
+      "sku": "SKU-28-39-Black",
+      "stock": 11,
+      "id": "2058"
+    },
+    {
+      "variant_id": 408,
+      "product_id": 28,
+      "size": "39",
+      "color": "Red",
+      "sku": "SKU-28-39-Red",
+      "stock": 15,
+      "id": "9ea7"
+    },
+    {
+      "variant_id": 409,
+      "product_id": 28,
+      "size": "40",
+      "color": "White",
+      "sku": "SKU-28-40-White",
+      "stock": 12,
+      "id": "e51f"
+    },
+    {
+      "variant_id": 410,
+      "product_id": 28,
+      "size": "40",
+      "color": "Black",
+      "sku": "SKU-28-40-Black",
+      "stock": 17,
+      "id": "48b9"
+    },
+    {
+      "variant_id": 411,
+      "product_id": 28,
+      "size": "40",
+      "color": "Red",
+      "sku": "SKU-28-40-Red",
+      "stock": 12,
+      "id": "f1a3"
+    },
+    {
+      "variant_id": 412,
+      "product_id": 28,
+      "size": "41",
+      "color": "White",
+      "sku": "SKU-28-41-White",
+      "stock": 6,
+      "id": "a3c5"
+    },
+    {
+      "variant_id": 413,
+      "product_id": 28,
+      "size": "41",
+      "color": "Black",
+      "sku": "SKU-28-41-Black",
+      "stock": 7,
+      "id": "94e5"
+    },
+    {
+      "variant_id": 414,
+      "product_id": 28,
+      "size": "41",
+      "color": "Red",
+      "sku": "SKU-28-41-Red",
+      "stock": 22,
+      "id": "c8db"
+    },
+    {
+      "variant_id": 415,
+      "product_id": 28,
+      "size": "42",
+      "color": "White",
+      "sku": "SKU-28-42-White",
+      "stock": 32,
+      "id": "8e8d"
+    },
+    {
+      "variant_id": 416,
+      "product_id": 28,
+      "size": "42",
+      "color": "Black",
+      "sku": "SKU-28-42-Black",
+      "stock": 32,
+      "id": "1d07"
+    },
+    {
+      "variant_id": 417,
+      "product_id": 28,
+      "size": "42",
+      "color": "Red",
+      "sku": "SKU-28-42-Red",
+      "stock": 6,
+      "id": "5873"
+    },
+    {
+      "variant_id": 418,
+      "product_id": 28,
+      "size": "43",
+      "color": "White",
+      "sku": "SKU-28-43-White",
+      "stock": 5,
+      "id": "fbc3"
+    },
+    {
+      "variant_id": 419,
+      "product_id": 28,
+      "size": "43",
+      "color": "Black",
+      "sku": "SKU-28-43-Black",
+      "stock": 18,
+      "id": "ba17"
+    },
+    {
+      "variant_id": 420,
+      "product_id": 28,
+      "size": "43",
+      "color": "Red",
+      "sku": "SKU-28-43-Red",
+      "stock": 9,
+      "id": "dc23"
+    },
+    {
+      "variant_id": 421,
+      "product_id": 29,
+      "size": "39",
+      "color": "White",
+      "sku": "SKU-29-39-White",
+      "stock": 9,
+      "id": "3439"
+    },
+    {
+      "variant_id": 422,
+      "product_id": 29,
+      "size": "39",
+      "color": "Black",
+      "sku": "SKU-29-39-Black",
+      "stock": 14,
+      "id": "ab89"
+    },
+    {
+      "variant_id": 423,
+      "product_id": 29,
+      "size": "39",
+      "color": "Red",
+      "sku": "SKU-29-39-Red",
+      "stock": 24,
+      "id": "2c63"
+    },
+    {
+      "variant_id": 424,
+      "product_id": 29,
+      "size": "40",
+      "color": "White",
+      "sku": "SKU-29-40-White",
+      "stock": 22,
+      "id": "f34b"
+    },
+    {
+      "variant_id": 425,
+      "product_id": 29,
+      "size": "40",
+      "color": "Black",
+      "sku": "SKU-29-40-Black",
+      "stock": 29,
+      "id": "9de6"
+    },
+    {
+      "variant_id": 426,
+      "product_id": 29,
+      "size": "40",
+      "color": "Red",
+      "sku": "SKU-29-40-Red",
+      "stock": 24,
+      "id": "ef21"
+    },
+    {
+      "variant_id": 427,
+      "product_id": 29,
+      "size": "41",
+      "color": "White",
+      "sku": "SKU-29-41-White",
+      "stock": 33,
+      "id": "2a0a"
+    },
+    {
+      "variant_id": 428,
+      "product_id": 29,
+      "size": "41",
+      "color": "Black",
+      "sku": "SKU-29-41-Black",
+      "stock": 15,
+      "id": "d466"
+    },
+    {
+      "variant_id": 429,
+      "product_id": 29,
+      "size": "41",
+      "color": "Red",
+      "sku": "SKU-29-41-Red",
+      "stock": 10,
+      "id": "70b0"
+    },
+    {
+      "variant_id": 430,
+      "product_id": 29,
+      "size": "42",
+      "color": "White",
+      "sku": "SKU-29-42-White",
+      "stock": 32,
+      "id": "ce13"
+    },
+    {
+      "variant_id": 431,
+      "product_id": 29,
+      "size": "42",
+      "color": "Black",
+      "sku": "SKU-29-42-Black",
+      "stock": 13,
+      "id": "abc0"
+    },
+    {
+      "variant_id": 432,
+      "product_id": 29,
+      "size": "42",
+      "color": "Red",
+      "sku": "SKU-29-42-Red",
+      "stock": 6,
+      "id": "23e7"
+    },
+    {
+      "variant_id": 433,
+      "product_id": 29,
+      "size": "43",
+      "color": "White",
+      "sku": "SKU-29-43-White",
+      "stock": 15,
+      "id": "6fb1"
+    },
+    {
+      "variant_id": 434,
+      "product_id": 29,
+      "size": "43",
+      "color": "Black",
+      "sku": "SKU-29-43-Black",
+      "stock": 25,
+      "id": "911c"
+    },
+    {
+      "variant_id": 435,
+      "product_id": 29,
+      "size": "43",
+      "color": "Red",
+      "sku": "SKU-29-43-Red",
+      "stock": 31,
+      "id": "ae3a"
+    },
+    {
+      "variant_id": 436,
+      "product_id": 30,
+      "size": "39",
+      "color": "White",
+      "sku": "SKU-30-39-White",
+      "stock": 16,
+      "id": "4ec8"
+    },
+    {
+      "variant_id": 437,
+      "product_id": 30,
+      "size": "39",
+      "color": "Black",
+      "sku": "SKU-30-39-Black",
+      "stock": 28,
+      "id": "da76"
+    },
+    {
+      "variant_id": 438,
+      "product_id": 30,
+      "size": "39",
+      "color": "Red",
+      "sku": "SKU-30-39-Red",
+      "stock": 34,
+      "id": "1fed"
+    },
+    {
+      "variant_id": 439,
+      "product_id": 30,
+      "size": "40",
+      "color": "White",
+      "sku": "SKU-30-40-White",
+      "stock": 11,
+      "id": "4bac"
+    },
+    {
+      "variant_id": 440,
+      "product_id": 30,
+      "size": "40",
+      "color": "Black",
+      "sku": "SKU-30-40-Black",
+      "stock": 7,
+      "id": "d526"
+    },
+    {
+      "variant_id": 441,
+      "product_id": 30,
+      "size": "40",
+      "color": "Red",
+      "sku": "SKU-30-40-Red",
+      "stock": 20,
+      "id": "292d"
+    },
+    {
+      "variant_id": 442,
+      "product_id": 30,
+      "size": "41",
+      "color": "White",
+      "sku": "SKU-30-41-White",
+      "stock": 14,
+      "id": "95d6"
+    },
+    {
+      "variant_id": 443,
+      "product_id": 30,
+      "size": "41",
+      "color": "Black",
+      "sku": "SKU-30-41-Black",
+      "stock": 32,
+      "id": "0fcc"
+    },
+    {
+      "variant_id": 444,
+      "product_id": 30,
+      "size": "41",
+      "color": "Red",
+      "sku": "SKU-30-41-Red",
+      "stock": 11,
+      "id": "6321"
+    },
+    {
+      "variant_id": 445,
+      "product_id": 30,
+      "size": "42",
+      "color": "White",
+      "sku": "SKU-30-42-White",
+      "stock": 21,
+      "id": "e30a"
+    },
+    {
+      "variant_id": 446,
+      "product_id": 30,
+      "size": "42",
+      "color": "Black",
+      "sku": "SKU-30-42-Black",
+      "stock": 31,
+      "id": "ce5f"
+    },
+    {
+      "variant_id": 447,
+      "product_id": 30,
+      "size": "42",
+      "color": "Red",
+      "sku": "SKU-30-42-Red",
+      "stock": 7,
+      "id": "6aa9"
+    },
+    {
+      "variant_id": 448,
+      "product_id": 30,
+      "size": "43",
+      "color": "White",
+      "sku": "SKU-30-43-White",
+      "stock": 10,
+      "id": "61dd"
+    },
+    {
+      "variant_id": 449,
+      "product_id": 30,
+      "size": "43",
+      "color": "Black",
+      "sku": "SKU-30-43-Black",
+      "stock": 21,
+      "id": "3ed5"
+    },
+    {
+      "variant_id": 450,
+      "product_id": 30,
+      "size": "43",
+      "color": "Red",
+      "sku": "SKU-30-43-Red",
+      "stock": 34,
+      "id": "8f7e"
+    },
+    {
+      "variant_id": 451,
+      "product_id": 31,
+      "size": "39",
+      "color": "White",
+      "sku": "SKU-31-39-White",
+      "stock": 22,
+      "id": "8b4d"
+    },
+    {
+      "variant_id": 452,
+      "product_id": 31,
+      "size": "39",
+      "color": "Black",
+      "sku": "SKU-31-39-Black",
+      "stock": 24,
+      "id": "f54e"
+    },
+    {
+      "variant_id": 453,
+      "product_id": 31,
+      "size": "39",
+      "color": "Red",
+      "sku": "SKU-31-39-Red",
+      "stock": 12,
+      "id": "bc39"
+    },
+    {
+      "variant_id": 454,
+      "product_id": 31,
+      "size": "40",
+      "color": "White",
+      "sku": "SKU-31-40-White",
+      "stock": 5,
+      "id": "e039"
+    },
+    {
+      "variant_id": 455,
+      "product_id": 31,
+      "size": "40",
+      "color": "Black",
+      "sku": "SKU-31-40-Black",
+      "stock": 29,
+      "id": "d688"
+    },
+    {
+      "variant_id": 456,
+      "product_id": 31,
+      "size": "40",
+      "color": "Red",
+      "sku": "SKU-31-40-Red",
+      "stock": 29,
+      "id": "f51d"
+    },
+    {
+      "variant_id": 457,
+      "product_id": 31,
+      "size": "41",
+      "color": "White",
+      "sku": "SKU-31-41-White",
+      "stock": 5,
+      "id": "e896"
+    },
+    {
+      "variant_id": 458,
+      "product_id": 31,
+      "size": "41",
+      "color": "Black",
+      "sku": "SKU-31-41-Black",
+      "stock": 25,
+      "id": "55fd"
+    },
+    {
+      "variant_id": 459,
+      "product_id": 31,
+      "size": "41",
+      "color": "Red",
+      "sku": "SKU-31-41-Red",
+      "stock": 17,
+      "id": "aa66"
+    },
+    {
+      "variant_id": 460,
+      "product_id": 31,
+      "size": "42",
+      "color": "White",
+      "sku": "SKU-31-42-White",
+      "stock": 32,
+      "id": "933c"
+    },
+    {
+      "variant_id": 461,
+      "product_id": 31,
+      "size": "42",
+      "color": "Black",
+      "sku": "SKU-31-42-Black",
+      "stock": 25,
+      "id": "f63e"
+    },
+    {
+      "variant_id": 462,
+      "product_id": 31,
+      "size": "42",
+      "color": "Red",
+      "sku": "SKU-31-42-Red",
+      "stock": 21,
+      "id": "691e"
+    },
+    {
+      "variant_id": 463,
+      "product_id": 31,
+      "size": "43",
+      "color": "White",
+      "sku": "SKU-31-43-White",
+      "stock": 7,
+      "id": "9f31"
+    },
+    {
+      "variant_id": 464,
+      "product_id": 31,
+      "size": "43",
+      "color": "Black",
+      "sku": "SKU-31-43-Black",
+      "stock": 28,
+      "id": "1c9c"
+    },
+    {
+      "variant_id": 465,
+      "product_id": 31,
+      "size": "43",
+      "color": "Red",
+      "sku": "SKU-31-43-Red",
+      "stock": 7,
+      "id": "655d"
+    },
+    {
+      "variant_id": 466,
+      "product_id": 32,
+      "size": "39",
+      "color": "White",
+      "sku": "SKU-32-39-White",
+      "stock": 5,
+      "id": "76c7"
+    },
+    {
+      "variant_id": 467,
+      "product_id": 32,
+      "size": "39",
+      "color": "Black",
+      "sku": "SKU-32-39-Black",
+      "stock": 20,
+      "id": "4c27"
+    },
+    {
+      "variant_id": 468,
+      "product_id": 32,
+      "size": "39",
+      "color": "Red",
+      "sku": "SKU-32-39-Red",
+      "stock": 30,
+      "id": "9788"
+    },
+    {
+      "variant_id": 469,
+      "product_id": 32,
+      "size": "40",
+      "color": "White",
+      "sku": "SKU-32-40-White",
+      "stock": 18,
+      "id": "10e4"
+    },
+    {
+      "variant_id": 470,
+      "product_id": 32,
+      "size": "40",
+      "color": "Black",
+      "sku": "SKU-32-40-Black",
+      "stock": 19,
+      "id": "7b0c"
+    },
+    {
+      "variant_id": 471,
+      "product_id": 32,
+      "size": "40",
+      "color": "Red",
+      "sku": "SKU-32-40-Red",
+      "stock": 13,
+      "id": "07f6"
+    },
+    {
+      "variant_id": 472,
+      "product_id": 32,
+      "size": "41",
+      "color": "White",
+      "sku": "SKU-32-41-White",
+      "stock": 27,
+      "id": "2942"
+    },
+    {
+      "variant_id": 473,
+      "product_id": 32,
+      "size": "41",
+      "color": "Black",
+      "sku": "SKU-32-41-Black",
+      "stock": 32,
+      "id": "6229"
+    },
+    {
+      "variant_id": 474,
+      "product_id": 32,
+      "size": "41",
+      "color": "Red",
+      "sku": "SKU-32-41-Red",
+      "stock": 32,
+      "id": "c710"
+    },
+    {
+      "variant_id": 475,
+      "product_id": 32,
+      "size": "42",
+      "color": "White",
+      "sku": "SKU-32-42-White",
+      "stock": 30,
+      "id": "01ed"
+    },
+    {
+      "variant_id": 476,
+      "product_id": 32,
+      "size": "42",
+      "color": "Black",
+      "sku": "SKU-32-42-Black",
+      "stock": 22,
+      "id": "8064"
+    },
+    {
+      "variant_id": 477,
+      "product_id": 32,
+      "size": "42",
+      "color": "Red",
+      "sku": "SKU-32-42-Red",
+      "stock": 21,
+      "id": "efa5"
+    },
+    {
+      "variant_id": 478,
+      "product_id": 32,
+      "size": "43",
+      "color": "White",
+      "sku": "SKU-32-43-White",
+      "stock": 11,
+      "id": "24c2"
+    },
+    {
+      "variant_id": 479,
+      "product_id": 32,
+      "size": "43",
+      "color": "Black",
+      "sku": "SKU-32-43-Black",
+      "stock": 26,
+      "id": "9ee1"
+    },
+    {
+      "variant_id": 480,
+      "product_id": 32,
+      "size": "43",
+      "color": "Red",
+      "sku": "SKU-32-43-Red",
+      "stock": 8,
+      "id": "fb25"
+    },
+    {
+      "variant_id": 481,
+      "product_id": 33,
+      "size": "39",
+      "color": "White",
+      "sku": "SKU-33-39-White",
+      "stock": 21,
+      "id": "494e"
+    },
+    {
+      "variant_id": 482,
+      "product_id": 33,
+      "size": "39",
+      "color": "Black",
+      "sku": "SKU-33-39-Black",
+      "stock": 6,
+      "id": "61cb"
+    },
+    {
+      "variant_id": 483,
+      "product_id": 33,
+      "size": "39",
+      "color": "Red",
+      "sku": "SKU-33-39-Red",
+      "stock": 29,
+      "id": "81e7"
+    },
+    {
+      "variant_id": 484,
+      "product_id": 33,
+      "size": "40",
+      "color": "White",
+      "sku": "SKU-33-40-White",
+      "stock": 24,
+      "id": "9cc5"
+    },
+    {
+      "variant_id": 485,
+      "product_id": 33,
+      "size": "40",
+      "color": "Black",
+      "sku": "SKU-33-40-Black",
+      "stock": 21,
+      "id": "8252"
+    },
+    {
+      "variant_id": 486,
+      "product_id": 33,
+      "size": "40",
+      "color": "Red",
+      "sku": "SKU-33-40-Red",
+      "stock": 21,
+      "id": "fc69"
+    },
+    {
+      "variant_id": 487,
+      "product_id": 33,
+      "size": "41",
+      "color": "White",
+      "sku": "SKU-33-41-White",
+      "stock": 20,
+      "id": "c573"
+    },
+    {
+      "variant_id": 488,
+      "product_id": 33,
+      "size": "41",
+      "color": "Black",
+      "sku": "SKU-33-41-Black",
+      "stock": 29,
+      "id": "d577"
+    },
+    {
+      "variant_id": 489,
+      "product_id": 33,
+      "size": "41",
+      "color": "Red",
+      "sku": "SKU-33-41-Red",
+      "stock": 10,
+      "id": "46b7"
+    },
+    {
+      "variant_id": 490,
+      "product_id": 33,
+      "size": "42",
+      "color": "White",
+      "sku": "SKU-33-42-White",
+      "stock": 33,
+      "id": "dbc0"
+    },
+    {
+      "variant_id": 491,
+      "product_id": 33,
+      "size": "42",
+      "color": "Black",
+      "sku": "SKU-33-42-Black",
+      "stock": 25,
+      "id": "2ec8"
+    },
+    {
+      "variant_id": 492,
+      "product_id": 33,
+      "size": "42",
+      "color": "Red",
+      "sku": "SKU-33-42-Red",
+      "stock": 7,
+      "id": "0d42"
+    },
+    {
+      "variant_id": 493,
+      "product_id": 33,
+      "size": "43",
+      "color": "White",
+      "sku": "SKU-33-43-White",
+      "stock": 32,
+      "id": "64d0"
+    },
+    {
+      "variant_id": 494,
+      "product_id": 33,
+      "size": "43",
+      "color": "Black",
+      "sku": "SKU-33-43-Black",
+      "stock": 16,
+      "id": "a247"
+    },
+    {
+      "variant_id": 495,
+      "product_id": 33,
+      "size": "43",
+      "color": "Red",
+      "sku": "SKU-33-43-Red",
+      "stock": 6,
+      "id": "7718"
+    },
+    {
+      "variant_id": 496,
+      "product_id": 34,
+      "size": "39",
+      "color": "White",
+      "sku": "SKU-34-39-White",
+      "stock": 26,
+      "id": "f8e0"
+    },
+    {
+      "variant_id": 497,
+      "product_id": 34,
+      "size": "39",
+      "color": "Black",
+      "sku": "SKU-34-39-Black",
+      "stock": 5,
+      "id": "6499"
+    },
+    {
+      "variant_id": 498,
+      "product_id": 34,
+      "size": "39",
+      "color": "Red",
+      "sku": "SKU-34-39-Red",
+      "stock": 15,
+      "id": "04e9"
+    },
+    {
+      "variant_id": 499,
+      "product_id": 34,
+      "size": "40",
+      "color": "White",
+      "sku": "SKU-34-40-White",
+      "stock": 18,
+      "id": "16ff"
+    },
+    {
+      "variant_id": 500,
+      "product_id": 34,
+      "size": "40",
+      "color": "Black",
+      "sku": "SKU-34-40-Black",
+      "stock": 7,
+      "id": "bbd9"
+    },
+    {
+      "variant_id": 501,
+      "product_id": 34,
+      "size": "40",
+      "color": "Red",
+      "sku": "SKU-34-40-Red",
+      "stock": 23,
+      "id": "475b"
+    },
+    {
+      "variant_id": 502,
+      "product_id": 34,
+      "size": "41",
+      "color": "White",
+      "sku": "SKU-34-41-White",
+      "stock": 17,
+      "id": "22c5"
+    },
+    {
+      "variant_id": 503,
+      "product_id": 34,
+      "size": "41",
+      "color": "Black",
+      "sku": "SKU-34-41-Black",
+      "stock": 16,
+      "id": "c871"
+    },
+    {
+      "variant_id": 504,
+      "product_id": 34,
+      "size": "41",
+      "color": "Red",
+      "sku": "SKU-34-41-Red",
+      "stock": 26,
+      "id": "b1e7"
+    },
+    {
+      "variant_id": 505,
+      "product_id": 34,
+      "size": "42",
+      "color": "White",
+      "sku": "SKU-34-42-White",
+      "stock": 11,
+      "id": "a36f"
+    },
+    {
+      "variant_id": 506,
+      "product_id": 34,
+      "size": "42",
+      "color": "Black",
+      "sku": "SKU-34-42-Black",
+      "stock": 13,
+      "id": "d8af"
+    },
+    {
+      "variant_id": 507,
+      "product_id": 34,
+      "size": "42",
+      "color": "Red",
+      "sku": "SKU-34-42-Red",
+      "stock": 24,
+      "id": "d01e"
+    },
+    {
+      "variant_id": 508,
+      "product_id": 34,
+      "size": "43",
+      "color": "White",
+      "sku": "SKU-34-43-White",
+      "stock": 5,
+      "id": "859c"
+    },
+    {
+      "variant_id": 509,
+      "product_id": 34,
+      "size": "43",
+      "color": "Black",
+      "sku": "SKU-34-43-Black",
+      "stock": 31,
+      "id": "f228"
+    },
+    {
+      "variant_id": 510,
+      "product_id": 34,
+      "size": "43",
+      "color": "Red",
+      "sku": "SKU-34-43-Red",
+      "stock": 6,
+      "id": "542c"
+    },
+    {
+      "variant_id": 511,
+      "product_id": 35,
+      "size": "39",
+      "color": "White",
+      "sku": "SKU-35-39-White",
+      "stock": 12,
+      "id": "beae"
+    },
+    {
+      "variant_id": 512,
+      "product_id": 35,
+      "size": "39",
+      "color": "Black",
+      "sku": "SKU-35-39-Black",
+      "stock": 20,
+      "id": "208f"
+    },
+    {
+      "variant_id": 513,
+      "product_id": 35,
+      "size": "39",
+      "color": "Red",
+      "sku": "SKU-35-39-Red",
+      "stock": 22,
+      "id": "1bb0"
+    },
+    {
+      "variant_id": 514,
+      "product_id": 35,
+      "size": "40",
+      "color": "White",
+      "sku": "SKU-35-40-White",
+      "stock": 10,
+      "id": "72a4"
+    },
+    {
+      "variant_id": 515,
+      "product_id": 35,
+      "size": "40",
+      "color": "Black",
+      "sku": "SKU-35-40-Black",
+      "stock": 17,
+      "id": "85cb"
+    },
+    {
+      "variant_id": 516,
+      "product_id": 35,
+      "size": "40",
+      "color": "Red",
+      "sku": "SKU-35-40-Red",
+      "stock": 7,
+      "id": "41be"
+    },
+    {
+      "variant_id": 517,
+      "product_id": 35,
+      "size": "41",
+      "color": "White",
+      "sku": "SKU-35-41-White",
+      "stock": 30,
+      "id": "ded2"
+    },
+    {
+      "variant_id": 518,
+      "product_id": 35,
+      "size": "41",
+      "color": "Black",
+      "sku": "SKU-35-41-Black",
+      "stock": 26,
+      "id": "39e6"
+    },
+    {
+      "variant_id": 519,
+      "product_id": 35,
+      "size": "41",
+      "color": "Red",
+      "sku": "SKU-35-41-Red",
+      "stock": 34,
+      "id": "94c5"
+    },
+    {
+      "variant_id": 520,
+      "product_id": 35,
+      "size": "42",
+      "color": "White",
+      "sku": "SKU-35-42-White",
+      "stock": 10,
+      "id": "cd9e"
+    },
+    {
+      "variant_id": 521,
+      "product_id": 35,
+      "size": "42",
+      "color": "Black",
+      "sku": "SKU-35-42-Black",
+      "stock": 33,
+      "id": "ea77"
+    },
+    {
+      "variant_id": 522,
+      "product_id": 35,
+      "size": "42",
+      "color": "Red",
+      "sku": "SKU-35-42-Red",
+      "stock": 31,
+      "id": "05e5"
+    },
+    {
+      "variant_id": 523,
+      "product_id": 35,
+      "size": "43",
+      "color": "White",
+      "sku": "SKU-35-43-White",
+      "stock": 11,
+      "id": "de7e"
+    },
+    {
+      "variant_id": 524,
+      "product_id": 35,
+      "size": "43",
+      "color": "Black",
+      "sku": "SKU-35-43-Black",
+      "stock": 15,
+      "id": "1055"
+    },
+    {
+      "variant_id": 525,
+      "product_id": 35,
+      "size": "43",
+      "color": "Red",
+      "sku": "SKU-35-43-Red",
+      "stock": 27,
+      "id": "b771"
+    },
+    {
+      "variant_id": 526,
+      "product_id": 36,
+      "size": "39",
+      "color": "White",
+      "sku": "SKU-36-39-White",
+      "stock": 18,
+      "id": "a4ae"
+    },
+    {
+      "variant_id": 527,
+      "product_id": 36,
+      "size": "39",
+      "color": "Black",
+      "sku": "SKU-36-39-Black",
+      "stock": 30,
+      "id": "b6f9"
+    },
+    {
+      "variant_id": 528,
+      "product_id": 36,
+      "size": "39",
+      "color": "Red",
+      "sku": "SKU-36-39-Red",
+      "stock": 7,
+      "id": "2885"
+    },
+    {
+      "variant_id": 529,
+      "product_id": 36,
+      "size": "40",
+      "color": "White",
+      "sku": "SKU-36-40-White",
+      "stock": 8,
+      "id": "6053"
+    },
+    {
+      "variant_id": 530,
+      "product_id": 36,
+      "size": "40",
+      "color": "Black",
+      "sku": "SKU-36-40-Black",
+      "stock": 23,
+      "id": "da62"
+    },
+    {
+      "variant_id": 531,
+      "product_id": 36,
+      "size": "40",
+      "color": "Red",
+      "sku": "SKU-36-40-Red",
+      "stock": 15,
+      "id": "942e"
+    },
+    {
+      "variant_id": 532,
+      "product_id": 36,
+      "size": "41",
+      "color": "White",
+      "sku": "SKU-36-41-White",
+      "stock": 22,
+      "id": "c9fc"
+    },
+    {
+      "variant_id": 533,
+      "product_id": 36,
+      "size": "41",
+      "color": "Black",
+      "sku": "SKU-36-41-Black",
+      "stock": 29,
+      "id": "af3a"
+    },
+    {
+      "variant_id": 534,
+      "product_id": 36,
+      "size": "41",
+      "color": "Red",
+      "sku": "SKU-36-41-Red",
+      "stock": 26,
+      "id": "c823"
+    },
+    {
+      "variant_id": 535,
+      "product_id": 36,
+      "size": "42",
+      "color": "White",
+      "sku": "SKU-36-42-White",
+      "stock": 33,
+      "id": "1288"
+    },
+    {
+      "variant_id": 536,
+      "product_id": 36,
+      "size": "42",
+      "color": "Black",
+      "sku": "SKU-36-42-Black",
+      "stock": 5,
+      "id": "9f14"
+    },
+    {
+      "variant_id": 537,
+      "product_id": 36,
+      "size": "42",
+      "color": "Red",
+      "sku": "SKU-36-42-Red",
+      "stock": 6,
+      "id": "8d1d"
+    },
+    {
+      "variant_id": 538,
+      "product_id": 36,
+      "size": "43",
+      "color": "White",
+      "sku": "SKU-36-43-White",
+      "stock": 13,
+      "id": "a1b0"
+    },
+    {
+      "variant_id": 539,
+      "product_id": 36,
+      "size": "43",
+      "color": "Black",
+      "sku": "SKU-36-43-Black",
+      "stock": 28,
+      "id": "bb88"
+    },
+    {
+      "variant_id": 540,
+      "product_id": 36,
+      "size": "43",
+      "color": "Red",
+      "sku": "SKU-36-43-Red",
+      "stock": 14,
+      "id": "3f3a"
+    },
+    {
+      "variant_id": 541,
+      "product_id": 37,
+      "size": "39",
+      "color": "White",
+      "sku": "SKU-37-39-White",
+      "stock": 31,
+      "id": "ac30"
+    },
+    {
+      "variant_id": 542,
+      "product_id": 37,
+      "size": "39",
+      "color": "Black",
+      "sku": "SKU-37-39-Black",
+      "stock": 19,
+      "id": "ee23"
+    },
+    {
+      "variant_id": 543,
+      "product_id": 37,
+      "size": "39",
+      "color": "Red",
+      "sku": "SKU-37-39-Red",
+      "stock": 32,
+      "id": "31f9"
+    },
+    {
+      "variant_id": 544,
+      "product_id": 37,
+      "size": "40",
+      "color": "White",
+      "sku": "SKU-37-40-White",
+      "stock": 7,
+      "id": "75e5"
+    },
+    {
+      "variant_id": 545,
+      "product_id": 37,
+      "size": "40",
+      "color": "Black",
+      "sku": "SKU-37-40-Black",
+      "stock": 30,
+      "id": "3743"
+    },
+    {
+      "variant_id": 546,
+      "product_id": 37,
+      "size": "40",
+      "color": "Red",
+      "sku": "SKU-37-40-Red",
+      "stock": 14,
+      "id": "9c59"
+    },
+    {
+      "variant_id": 547,
+      "product_id": 37,
+      "size": "41",
+      "color": "White",
+      "sku": "SKU-37-41-White",
+      "stock": 25,
+      "id": "932b"
+    },
+    {
+      "variant_id": 548,
+      "product_id": 37,
+      "size": "41",
+      "color": "Black",
+      "sku": "SKU-37-41-Black",
+      "stock": 17,
+      "id": "f537"
+    },
+    {
+      "variant_id": 549,
+      "product_id": 37,
+      "size": "41",
+      "color": "Red",
+      "sku": "SKU-37-41-Red",
+      "stock": 19,
+      "id": "6b83"
+    },
+    {
+      "variant_id": 550,
+      "product_id": 37,
+      "size": "42",
+      "color": "White",
+      "sku": "SKU-37-42-White",
+      "stock": 34,
+      "id": "7f8f"
+    },
+    {
+      "variant_id": 551,
+      "product_id": 37,
+      "size": "42",
+      "color": "Black",
+      "sku": "SKU-37-42-Black",
+      "stock": 30,
+      "id": "293b"
+    },
+    {
+      "variant_id": 552,
+      "product_id": 37,
+      "size": "42",
+      "color": "Red",
+      "sku": "SKU-37-42-Red",
+      "stock": 21,
+      "id": "eed6"
+    },
+    {
+      "variant_id": 553,
+      "product_id": 37,
+      "size": "43",
+      "color": "White",
+      "sku": "SKU-37-43-White",
+      "stock": 21,
+      "id": "f196"
+    },
+    {
+      "variant_id": 554,
+      "product_id": 37,
+      "size": "43",
+      "color": "Black",
+      "sku": "SKU-37-43-Black",
+      "stock": 11,
+      "id": "7600"
+    },
+    {
+      "variant_id": 555,
+      "product_id": 37,
+      "size": "43",
+      "color": "Red",
+      "sku": "SKU-37-43-Red",
+      "stock": 9,
+      "id": "0a50"
+    },
+    {
+      "variant_id": 556,
+      "product_id": 38,
+      "size": "39",
+      "color": "White",
+      "sku": "SKU-38-39-White",
+      "stock": 26,
+      "id": "4e9f"
+    },
+    {
+      "variant_id": 557,
+      "product_id": 38,
+      "size": "39",
+      "color": "Black",
+      "sku": "SKU-38-39-Black",
+      "stock": 28,
+      "id": "2b62"
+    },
+    {
+      "variant_id": 558,
+      "product_id": 38,
+      "size": "39",
+      "color": "Red",
+      "sku": "SKU-38-39-Red",
+      "stock": 15,
+      "id": "2c4c"
+    },
+    {
+      "variant_id": 559,
+      "product_id": 38,
+      "size": "40",
+      "color": "White",
+      "sku": "SKU-38-40-White",
+      "stock": 20,
+      "id": "17b7"
+    },
+    {
+      "variant_id": 560,
+      "product_id": 38,
+      "size": "40",
+      "color": "Black",
+      "sku": "SKU-38-40-Black",
+      "stock": 17,
+      "id": "9d26"
+    },
+    {
+      "variant_id": 561,
+      "product_id": 38,
+      "size": "40",
+      "color": "Red",
+      "sku": "SKU-38-40-Red",
+      "stock": 21,
+      "id": "0718"
+    },
+    {
+      "variant_id": 562,
+      "product_id": 38,
+      "size": "41",
+      "color": "White",
+      "sku": "SKU-38-41-White",
+      "stock": 34,
+      "id": "29a6"
+    },
+    {
+      "variant_id": 563,
+      "product_id": 38,
+      "size": "41",
+      "color": "Black",
+      "sku": "SKU-38-41-Black",
+      "stock": 16,
+      "id": "2ee6"
+    },
+    {
+      "variant_id": 564,
+      "product_id": 38,
+      "size": "41",
+      "color": "Red",
+      "sku": "SKU-38-41-Red",
+      "stock": 5,
+      "id": "a9fd"
+    },
+    {
+      "variant_id": 565,
+      "product_id": 38,
+      "size": "42",
+      "color": "White",
+      "sku": "SKU-38-42-White",
+      "stock": 15,
+      "id": "a06a"
+    },
+    {
+      "variant_id": 566,
+      "product_id": 38,
+      "size": "42",
+      "color": "Black",
+      "sku": "SKU-38-42-Black",
+      "stock": 12,
+      "id": "6aec"
+    },
+    {
+      "variant_id": 567,
+      "product_id": 38,
+      "size": "42",
+      "color": "Red",
+      "sku": "SKU-38-42-Red",
+      "stock": 14,
+      "id": "cb01"
+    },
+    {
+      "variant_id": 568,
+      "product_id": 38,
+      "size": "43",
+      "color": "White",
+      "sku": "SKU-38-43-White",
+      "stock": 31,
+      "id": "02d6"
+    },
+    {
+      "variant_id": 569,
+      "product_id": 38,
+      "size": "43",
+      "color": "Black",
+      "sku": "SKU-38-43-Black",
+      "stock": 33,
+      "id": "519b"
+    },
+    {
+      "variant_id": 570,
+      "product_id": 38,
+      "size": "43",
+      "color": "Red",
+      "sku": "SKU-38-43-Red",
+      "stock": 12,
+      "id": "4ffa"
+    },
+    {
+      "variant_id": 571,
+      "product_id": 39,
+      "size": "39",
+      "color": "White",
+      "sku": "SKU-39-39-White",
+      "stock": 19,
+      "id": "7a98"
+    },
+    {
+      "variant_id": 572,
+      "product_id": 39,
+      "size": "39",
+      "color": "Black",
+      "sku": "SKU-39-39-Black",
+      "stock": 17,
+      "id": "3073"
+    },
+    {
+      "variant_id": 573,
+      "product_id": 39,
+      "size": "39",
+      "color": "Red",
+      "sku": "SKU-39-39-Red",
+      "stock": 31,
+      "id": "15d5"
+    },
+    {
+      "variant_id": 574,
+      "product_id": 39,
+      "size": "40",
+      "color": "White",
+      "sku": "SKU-39-40-White",
+      "stock": 17,
+      "id": "cdd6"
+    },
+    {
+      "variant_id": 575,
+      "product_id": 39,
+      "size": "40",
+      "color": "Black",
+      "sku": "SKU-39-40-Black",
+      "stock": 29,
+      "id": "06cb"
+    },
+    {
+      "variant_id": 576,
+      "product_id": 39,
+      "size": "40",
+      "color": "Red",
+      "sku": "SKU-39-40-Red",
+      "stock": 16,
+      "id": "a637"
+    },
+    {
+      "variant_id": 577,
+      "product_id": 39,
+      "size": "41",
+      "color": "White",
+      "sku": "SKU-39-41-White",
+      "stock": 5,
+      "id": "1b99"
+    },
+    {
+      "variant_id": 578,
+      "product_id": 39,
+      "size": "41",
+      "color": "Black",
+      "sku": "SKU-39-41-Black",
+      "stock": 24,
+      "id": "6ae5"
+    },
+    {
+      "variant_id": 579,
+      "product_id": 39,
+      "size": "41",
+      "color": "Red",
+      "sku": "SKU-39-41-Red",
+      "stock": 11,
+      "id": "0fb8"
+    },
+    {
+      "variant_id": 580,
+      "product_id": 39,
+      "size": "42",
+      "color": "White",
+      "sku": "SKU-39-42-White",
+      "stock": 30,
+      "id": "d33e"
+    },
+    {
+      "variant_id": 581,
+      "product_id": 39,
+      "size": "42",
+      "color": "Black",
+      "sku": "SKU-39-42-Black",
+      "stock": 16,
+      "id": "d136"
+    },
+    {
+      "variant_id": 582,
+      "product_id": 39,
+      "size": "42",
+      "color": "Red",
+      "sku": "SKU-39-42-Red",
+      "stock": 24,
+      "id": "2153"
+    },
+    {
+      "variant_id": 583,
+      "product_id": 39,
+      "size": "43",
+      "color": "White",
+      "sku": "SKU-39-43-White",
+      "stock": 23,
+      "id": "6fef"
+    },
+    {
+      "variant_id": 584,
+      "product_id": 39,
+      "size": "43",
+      "color": "Black",
+      "sku": "SKU-39-43-Black",
+      "stock": 29,
+      "id": "ea5f"
+    },
+    {
+      "variant_id": 585,
+      "product_id": 39,
+      "size": "43",
+      "color": "Red",
+      "sku": "SKU-39-43-Red",
+      "stock": 34,
+      "id": "2a20"
+    },
+    {
+      "variant_id": 586,
+      "product_id": 40,
+      "size": "39",
+      "color": "White",
+      "sku": "SKU-40-39-White",
+      "stock": 23,
+      "id": "9e9a"
+    },
+    {
+      "variant_id": 587,
+      "product_id": 40,
+      "size": "39",
+      "color": "Black",
+      "sku": "SKU-40-39-Black",
+      "stock": 33,
+      "id": "efee"
+    },
+    {
+      "variant_id": 588,
+      "product_id": 40,
+      "size": "39",
+      "color": "Red",
+      "sku": "SKU-40-39-Red",
+      "stock": 8,
+      "id": "063d"
+    },
+    {
+      "variant_id": 589,
+      "product_id": 40,
+      "size": "40",
+      "color": "White",
+      "sku": "SKU-40-40-White",
+      "stock": 10,
+      "id": "0832"
+    },
+    {
+      "variant_id": 590,
+      "product_id": 40,
+      "size": "40",
+      "color": "Black",
+      "sku": "SKU-40-40-Black",
+      "stock": 13,
+      "id": "3c18"
+    },
+    {
+      "variant_id": 591,
+      "product_id": 40,
+      "size": "40",
+      "color": "Red",
+      "sku": "SKU-40-40-Red",
+      "stock": 5,
+      "id": "aa57"
+    },
+    {
+      "variant_id": 592,
+      "product_id": 40,
+      "size": "41",
+      "color": "White",
+      "sku": "SKU-40-41-White",
+      "stock": 28,
+      "id": "52d6"
+    },
+    {
+      "variant_id": 593,
+      "product_id": 40,
+      "size": "41",
+      "color": "Black",
+      "sku": "SKU-40-41-Black",
+      "stock": 23,
+      "id": "5f0b"
+    },
+    {
+      "variant_id": 594,
+      "product_id": 40,
+      "size": "41",
+      "color": "Red",
+      "sku": "SKU-40-41-Red",
+      "stock": 26,
+      "id": "a663"
+    },
+    {
+      "variant_id": 595,
+      "product_id": 40,
+      "size": "42",
+      "color": "White",
+      "sku": "SKU-40-42-White",
+      "stock": 25,
+      "id": "7a04"
+    },
+    {
+      "variant_id": 596,
+      "product_id": 40,
+      "size": "42",
+      "color": "Black",
+      "sku": "SKU-40-42-Black",
+      "stock": 17,
+      "id": "cd78"
+    },
+    {
+      "variant_id": 597,
+      "product_id": 40,
+      "size": "42",
+      "color": "Red",
+      "sku": "SKU-40-42-Red",
+      "stock": 27,
+      "id": "3042"
+    },
+    {
+      "variant_id": 598,
+      "product_id": 40,
+      "size": "43",
+      "color": "White",
+      "sku": "SKU-40-43-White",
+      "stock": 11,
+      "id": "72c6"
+    },
+    {
+      "variant_id": 599,
+      "product_id": 40,
+      "size": "43",
+      "color": "Black",
+      "sku": "SKU-40-43-Black",
+      "stock": 22,
+      "id": "6685"
+    },
+    {
+      "variant_id": 600,
+      "product_id": 40,
+      "size": "43",
+      "color": "Red",
+      "sku": "SKU-40-43-Red",
+      "stock": 6,
+      "id": "96d3"
+    },
+    {
+      "variant_id": 601,
+      "product_id": 41,
+      "size": "39",
+      "color": "White",
+      "sku": "SKU-41-39-White",
+      "stock": 33,
+      "id": "0f2f"
+    },
+    {
+      "variant_id": 602,
+      "product_id": 41,
+      "size": "39",
+      "color": "Black",
+      "sku": "SKU-41-39-Black",
+      "stock": 17,
+      "id": "eab2"
+    },
+    {
+      "variant_id": 603,
+      "product_id": 41,
+      "size": "39",
+      "color": "Red",
+      "sku": "SKU-41-39-Red",
+      "stock": 30,
+      "id": "d359"
+    },
+    {
+      "variant_id": 604,
+      "product_id": 41,
+      "size": "40",
+      "color": "White",
+      "sku": "SKU-41-40-White",
+      "stock": 27,
+      "id": "b423"
+    },
+    {
+      "variant_id": 605,
+      "product_id": 41,
+      "size": "40",
+      "color": "Black",
+      "sku": "SKU-41-40-Black",
+      "stock": 31,
+      "id": "e9e6"
+    },
+    {
+      "variant_id": 606,
+      "product_id": 41,
+      "size": "40",
+      "color": "Red",
+      "sku": "SKU-41-40-Red",
+      "stock": 19,
+      "id": "7e1e"
+    },
+    {
+      "variant_id": 607,
+      "product_id": 41,
+      "size": "41",
+      "color": "White",
+      "sku": "SKU-41-41-White",
+      "stock": 19,
+      "id": "e00a"
+    },
+    {
+      "variant_id": 608,
+      "product_id": 41,
+      "size": "41",
+      "color": "Black",
+      "sku": "SKU-41-41-Black",
+      "stock": 14,
+      "id": "683a"
+    },
+    {
+      "variant_id": 609,
+      "product_id": 41,
+      "size": "41",
+      "color": "Red",
+      "sku": "SKU-41-41-Red",
+      "stock": 29,
+      "id": "4768"
+    },
+    {
+      "variant_id": 610,
+      "product_id": 41,
+      "size": "42",
+      "color": "White",
+      "sku": "SKU-41-42-White",
+      "stock": 13,
+      "id": "a546"
+    },
+    {
+      "variant_id": 611,
+      "product_id": 41,
+      "size": "42",
+      "color": "Black",
+      "sku": "SKU-41-42-Black",
+      "stock": 24,
+      "id": "5f79"
+    },
+    {
+      "variant_id": 612,
+      "product_id": 41,
+      "size": "42",
+      "color": "Red",
+      "sku": "SKU-41-42-Red",
+      "stock": 33,
+      "id": "2d8e"
+    },
+    {
+      "variant_id": 613,
+      "product_id": 41,
+      "size": "43",
+      "color": "White",
+      "sku": "SKU-41-43-White",
+      "stock": 10,
+      "id": "d3f1"
+    },
+    {
+      "variant_id": 614,
+      "product_id": 41,
+      "size": "43",
+      "color": "Black",
+      "sku": "SKU-41-43-Black",
+      "stock": 6,
+      "id": "e7d7"
+    },
+    {
+      "variant_id": 615,
+      "product_id": 41,
+      "size": "43",
+      "color": "Red",
+      "sku": "SKU-41-43-Red",
+      "stock": 15,
+      "id": "219b"
+    },
+    {
+      "variant_id": 616,
+      "product_id": 42,
+      "size": "39",
+      "color": "White",
+      "sku": "SKU-42-39-White",
+      "stock": 7,
+      "id": "3f00"
+    },
+    {
+      "variant_id": 617,
+      "product_id": 42,
+      "size": "39",
+      "color": "Black",
+      "sku": "SKU-42-39-Black",
+      "stock": 28,
+      "id": "7310"
+    },
+    {
+      "variant_id": 618,
+      "product_id": 42,
+      "size": "39",
+      "color": "Red",
+      "sku": "SKU-42-39-Red",
+      "stock": 24,
+      "id": "1332"
+    },
+    {
+      "variant_id": 619,
+      "product_id": 42,
+      "size": "40",
+      "color": "White",
+      "sku": "SKU-42-40-White",
+      "stock": 31,
+      "id": "5202"
+    },
+    {
+      "variant_id": 620,
+      "product_id": 42,
+      "size": "40",
+      "color": "Black",
+      "sku": "SKU-42-40-Black",
+      "stock": 30,
+      "id": "7fd4"
+    },
+    {
+      "variant_id": 621,
+      "product_id": 42,
+      "size": "40",
+      "color": "Red",
+      "sku": "SKU-42-40-Red",
+      "stock": 29,
+      "id": "15a3"
+    },
+    {
+      "variant_id": 622,
+      "product_id": 42,
+      "size": "41",
+      "color": "White",
+      "sku": "SKU-42-41-White",
+      "stock": 29,
+      "id": "b82f"
+    },
+    {
+      "variant_id": 623,
+      "product_id": 42,
+      "size": "41",
+      "color": "Black",
+      "sku": "SKU-42-41-Black",
+      "stock": 27,
+      "id": "bbe7"
+    },
+    {
+      "variant_id": 624,
+      "product_id": 42,
+      "size": "41",
+      "color": "Red",
+      "sku": "SKU-42-41-Red",
+      "stock": 34,
+      "id": "923d"
+    },
+    {
+      "variant_id": 625,
+      "product_id": 42,
+      "size": "42",
+      "color": "White",
+      "sku": "SKU-42-42-White",
+      "stock": 22,
+      "id": "b997"
+    },
+    {
+      "variant_id": 626,
+      "product_id": 42,
+      "size": "42",
+      "color": "Black",
+      "sku": "SKU-42-42-Black",
+      "stock": 15,
+      "id": "df89"
+    },
+    {
+      "variant_id": 627,
+      "product_id": 42,
+      "size": "42",
+      "color": "Red",
+      "sku": "SKU-42-42-Red",
+      "stock": 27,
+      "id": "9dd0"
+    },
+    {
+      "variant_id": 628,
+      "product_id": 42,
+      "size": "43",
+      "color": "White",
+      "sku": "SKU-42-43-White",
+      "stock": 25,
+      "id": "4a18"
+    },
+    {
+      "variant_id": 629,
+      "product_id": 42,
+      "size": "43",
+      "color": "Black",
+      "sku": "SKU-42-43-Black",
+      "stock": 27,
+      "id": "4033"
+    },
+    {
+      "variant_id": 630,
+      "product_id": 42,
+      "size": "43",
+      "color": "Red",
+      "sku": "SKU-42-43-Red",
+      "stock": 9,
+      "id": "bd05"
+    },
+    {
+      "variant_id": 631,
+      "product_id": 43,
+      "size": "39",
+      "color": "White",
+      "sku": "SKU-43-39-White",
+      "stock": 28,
+      "id": "a9ac"
+    },
+    {
+      "variant_id": 632,
+      "product_id": 43,
+      "size": "39",
+      "color": "Black",
+      "sku": "SKU-43-39-Black",
+      "stock": 10,
+      "id": "b6fa"
+    },
+    {
+      "variant_id": 633,
+      "product_id": 43,
+      "size": "39",
+      "color": "Red",
+      "sku": "SKU-43-39-Red",
+      "stock": 19,
+      "id": "0e45"
+    },
+    {
+      "variant_id": 634,
+      "product_id": 43,
+      "size": "40",
+      "color": "White",
+      "sku": "SKU-43-40-White",
+      "stock": 11,
+      "id": "341a"
+    },
+    {
+      "variant_id": 635,
+      "product_id": 43,
+      "size": "40",
+      "color": "Black",
+      "sku": "SKU-43-40-Black",
+      "stock": 19,
+      "id": "0c0c"
+    },
+    {
+      "variant_id": 636,
+      "product_id": 43,
+      "size": "40",
+      "color": "Red",
+      "sku": "SKU-43-40-Red",
+      "stock": 25,
+      "id": "3f2a"
+    },
+    {
+      "variant_id": 637,
+      "product_id": 43,
+      "size": "41",
+      "color": "White",
+      "sku": "SKU-43-41-White",
+      "stock": 30,
+      "id": "33d0"
+    },
+    {
+      "variant_id": 638,
+      "product_id": 43,
+      "size": "41",
+      "color": "Black",
+      "sku": "SKU-43-41-Black",
+      "stock": 23,
+      "id": "626b"
+    },
+    {
+      "variant_id": 639,
+      "product_id": 43,
+      "size": "41",
+      "color": "Red",
+      "sku": "SKU-43-41-Red",
+      "stock": 29,
+      "id": "b670"
+    },
+    {
+      "variant_id": 640,
+      "product_id": 43,
+      "size": "42",
+      "color": "White",
+      "sku": "SKU-43-42-White",
+      "stock": 34,
+      "id": "9d52"
+    },
+    {
+      "variant_id": 641,
+      "product_id": 43,
+      "size": "42",
+      "color": "Black",
+      "sku": "SKU-43-42-Black",
+      "stock": 13,
+      "id": "560c"
+    },
+    {
+      "variant_id": 642,
+      "product_id": 43,
+      "size": "42",
+      "color": "Red",
+      "sku": "SKU-43-42-Red",
+      "stock": 25,
+      "id": "feff"
+    },
+    {
+      "variant_id": 643,
+      "product_id": 43,
+      "size": "43",
+      "color": "White",
+      "sku": "SKU-43-43-White",
+      "stock": 17,
+      "id": "e16f"
+    },
+    {
+      "variant_id": 644,
+      "product_id": 43,
+      "size": "43",
+      "color": "Black",
+      "sku": "SKU-43-43-Black",
+      "stock": 21,
+      "id": "dd05"
+    },
+    {
+      "variant_id": 645,
+      "product_id": 43,
+      "size": "43",
+      "color": "Red",
+      "sku": "SKU-43-43-Red",
+      "stock": 6,
+      "id": "a6e4"
+    },
+    {
+      "variant_id": 646,
+      "product_id": 44,
+      "size": "39",
+      "color": "White",
+      "sku": "SKU-44-39-White",
+      "stock": 6,
+      "id": "1178"
+    },
+    {
+      "variant_id": 647,
+      "product_id": 44,
+      "size": "39",
+      "color": "Black",
+      "sku": "SKU-44-39-Black",
+      "stock": 27,
+      "id": "f480"
+    },
+    {
+      "variant_id": 648,
+      "product_id": 44,
+      "size": "39",
+      "color": "Red",
+      "sku": "SKU-44-39-Red",
+      "stock": 9,
+      "id": "36dd"
+    },
+    {
+      "variant_id": 649,
+      "product_id": 44,
+      "size": "40",
+      "color": "White",
+      "sku": "SKU-44-40-White",
+      "stock": 30,
+      "id": "cdb4"
+    },
+    {
+      "variant_id": 650,
+      "product_id": 44,
+      "size": "40",
+      "color": "Black",
+      "sku": "SKU-44-40-Black",
+      "stock": 20,
+      "id": "d3a5"
+    },
+    {
+      "variant_id": 651,
+      "product_id": 44,
+      "size": "40",
+      "color": "Red",
+      "sku": "SKU-44-40-Red",
+      "stock": 32,
+      "id": "5c0d"
+    },
+    {
+      "variant_id": 652,
+      "product_id": 44,
+      "size": "41",
+      "color": "White",
+      "sku": "SKU-44-41-White",
+      "stock": 6,
+      "id": "04dd"
+    },
+    {
+      "variant_id": 653,
+      "product_id": 44,
+      "size": "41",
+      "color": "Black",
+      "sku": "SKU-44-41-Black",
+      "stock": 19,
+      "id": "6869"
+    },
+    {
+      "variant_id": 654,
+      "product_id": 44,
+      "size": "41",
+      "color": "Red",
+      "sku": "SKU-44-41-Red",
+      "stock": 20,
+      "id": "f400"
+    },
+    {
+      "variant_id": 655,
+      "product_id": 44,
+      "size": "42",
+      "color": "White",
+      "sku": "SKU-44-42-White",
+      "stock": 28,
+      "id": "c3a1"
+    },
+    {
+      "variant_id": 656,
+      "product_id": 44,
+      "size": "42",
+      "color": "Black",
+      "sku": "SKU-44-42-Black",
+      "stock": 20,
+      "id": "b29f"
+    },
+    {
+      "variant_id": 657,
+      "product_id": 44,
+      "size": "42",
+      "color": "Red",
+      "sku": "SKU-44-42-Red",
+      "stock": 24,
+      "id": "2025"
+    },
+    {
+      "variant_id": 658,
+      "product_id": 44,
+      "size": "43",
+      "color": "White",
+      "sku": "SKU-44-43-White",
+      "stock": 20,
+      "id": "34dc"
+    },
+    {
+      "variant_id": 659,
+      "product_id": 44,
+      "size": "43",
+      "color": "Black",
+      "sku": "SKU-44-43-Black",
+      "stock": 29,
+      "id": "d17e"
+    },
+    {
+      "variant_id": 660,
+      "product_id": 44,
+      "size": "43",
+      "color": "Red",
+      "sku": "SKU-44-43-Red",
+      "stock": 20,
+      "id": "4a3b"
+    },
+    {
+      "variant_id": 661,
+      "product_id": 45,
+      "size": "39",
+      "color": "White",
+      "sku": "SKU-45-39-White",
+      "stock": 16,
+      "id": "55aa"
+    },
+    {
+      "variant_id": 662,
+      "product_id": 45,
+      "size": "39",
+      "color": "Black",
+      "sku": "SKU-45-39-Black",
+      "stock": 11,
+      "id": "6eff"
+    },
+    {
+      "variant_id": 663,
+      "product_id": 45,
+      "size": "39",
+      "color": "Red",
+      "sku": "SKU-45-39-Red",
+      "stock": 15,
+      "id": "6750"
+    },
+    {
+      "variant_id": 664,
+      "product_id": 45,
+      "size": "40",
+      "color": "White",
+      "sku": "SKU-45-40-White",
+      "stock": 34,
+      "id": "4c4a"
+    },
+    {
+      "variant_id": 665,
+      "product_id": 45,
+      "size": "40",
+      "color": "Black",
+      "sku": "SKU-45-40-Black",
+      "stock": 33,
+      "id": "e9da"
+    },
+    {
+      "variant_id": 666,
+      "product_id": 45,
+      "size": "40",
+      "color": "Red",
+      "sku": "SKU-45-40-Red",
+      "stock": 29,
+      "id": "95b2"
+    },
+    {
+      "variant_id": 667,
+      "product_id": 45,
+      "size": "41",
+      "color": "White",
+      "sku": "SKU-45-41-White",
+      "stock": 25,
+      "id": "601f"
+    },
+    {
+      "variant_id": 668,
+      "product_id": 45,
+      "size": "41",
+      "color": "Black",
+      "sku": "SKU-45-41-Black",
+      "stock": 11,
+      "id": "2a72"
+    },
+    {
+      "variant_id": 669,
+      "product_id": 45,
+      "size": "41",
+      "color": "Red",
+      "sku": "SKU-45-41-Red",
+      "stock": 25,
+      "id": "d6ff"
+    },
+    {
+      "variant_id": 670,
+      "product_id": 45,
+      "size": "42",
+      "color": "White",
+      "sku": "SKU-45-42-White",
+      "stock": 21,
+      "id": "e054"
+    },
+    {
+      "variant_id": 671,
+      "product_id": 45,
+      "size": "42",
+      "color": "Black",
+      "sku": "SKU-45-42-Black",
+      "stock": 27,
+      "id": "ca39"
+    },
+    {
+      "variant_id": 672,
+      "product_id": 45,
+      "size": "42",
+      "color": "Red",
+      "sku": "SKU-45-42-Red",
+      "stock": 31,
+      "id": "bf73"
+    },
+    {
+      "variant_id": 673,
+      "product_id": 45,
+      "size": "43",
+      "color": "White",
+      "sku": "SKU-45-43-White",
+      "stock": 30,
+      "id": "b011"
+    },
+    {
+      "variant_id": 674,
+      "product_id": 45,
+      "size": "43",
+      "color": "Black",
+      "sku": "SKU-45-43-Black",
+      "stock": 14,
+      "id": "1a99"
+    },
+    {
+      "variant_id": 675,
+      "product_id": 45,
+      "size": "43",
+      "color": "Red",
+      "sku": "SKU-45-43-Red",
+      "stock": 22,
+      "id": "98ba"
+    },
+    {
+      "variant_id": 676,
+      "product_id": 46,
+      "size": "39",
+      "color": "White",
+      "sku": "SKU-46-39-White",
+      "stock": 10,
+      "id": "05a7"
+    },
+    {
+      "variant_id": 677,
+      "product_id": 46,
+      "size": "39",
+      "color": "Black",
+      "sku": "SKU-46-39-Black",
+      "stock": 18,
+      "id": "3956"
+    },
+    {
+      "variant_id": 678,
+      "product_id": 46,
+      "size": "39",
+      "color": "Red",
+      "sku": "SKU-46-39-Red",
+      "stock": 9,
+      "id": "137b"
+    },
+    {
+      "variant_id": 679,
+      "product_id": 46,
+      "size": "40",
+      "color": "White",
+      "sku": "SKU-46-40-White",
+      "stock": 14,
+      "id": "4f3d"
+    },
+    {
+      "variant_id": 680,
+      "product_id": 46,
+      "size": "40",
+      "color": "Black",
+      "sku": "SKU-46-40-Black",
+      "stock": 15,
+      "id": "39ce"
+    },
+    {
+      "variant_id": 681,
+      "product_id": 46,
+      "size": "40",
+      "color": "Red",
+      "sku": "SKU-46-40-Red",
+      "stock": 6,
+      "id": "3c69"
+    },
+    {
+      "variant_id": 682,
+      "product_id": 46,
+      "size": "41",
+      "color": "White",
+      "sku": "SKU-46-41-White",
+      "stock": 15,
+      "id": "a03a"
+    },
+    {
+      "variant_id": 683,
+      "product_id": 46,
+      "size": "41",
+      "color": "Black",
+      "sku": "SKU-46-41-Black",
+      "stock": 20,
+      "id": "00e1"
+    },
+    {
+      "variant_id": 684,
+      "product_id": 46,
+      "size": "41",
+      "color": "Red",
+      "sku": "SKU-46-41-Red",
+      "stock": 19,
+      "id": "5015"
+    },
+    {
+      "variant_id": 685,
+      "product_id": 46,
+      "size": "42",
+      "color": "White",
+      "sku": "SKU-46-42-White",
+      "stock": 19,
+      "id": "b640"
+    },
+    {
+      "variant_id": 686,
+      "product_id": 46,
+      "size": "42",
+      "color": "Black",
+      "sku": "SKU-46-42-Black",
+      "stock": 19,
+      "id": "098c"
+    },
+    {
+      "variant_id": 687,
+      "product_id": 46,
+      "size": "42",
+      "color": "Red",
+      "sku": "SKU-46-42-Red",
+      "stock": 22,
+      "id": "f62e"
+    },
+    {
+      "variant_id": 688,
+      "product_id": 46,
+      "size": "43",
+      "color": "White",
+      "sku": "SKU-46-43-White",
+      "stock": 27,
+      "id": "517b"
+    },
+    {
+      "variant_id": 689,
+      "product_id": 46,
+      "size": "43",
+      "color": "Black",
+      "sku": "SKU-46-43-Black",
+      "stock": 25,
+      "id": "4387"
+    },
+    {
+      "variant_id": 690,
+      "product_id": 46,
+      "size": "43",
+      "color": "Red",
+      "sku": "SKU-46-43-Red",
+      "stock": 19,
+      "id": "2e92"
+    },
+    {
+      "variant_id": 691,
+      "product_id": 47,
+      "size": "39",
+      "color": "White",
+      "sku": "SKU-47-39-White",
+      "stock": 11,
+      "id": "ca55"
+    },
+    {
+      "variant_id": 692,
+      "product_id": 47,
+      "size": "39",
+      "color": "Black",
+      "sku": "SKU-47-39-Black",
+      "stock": 30,
+      "id": "bfc6"
+    },
+    {
+      "variant_id": 693,
+      "product_id": 47,
+      "size": "39",
+      "color": "Red",
+      "sku": "SKU-47-39-Red",
+      "stock": 13,
+      "id": "f72c"
+    },
+    {
+      "variant_id": 694,
+      "product_id": 47,
+      "size": "40",
+      "color": "White",
+      "sku": "SKU-47-40-White",
+      "stock": 21,
+      "id": "17e2"
+    },
+    {
+      "variant_id": 695,
+      "product_id": 47,
+      "size": "40",
+      "color": "Black",
+      "sku": "SKU-47-40-Black",
+      "stock": 25,
+      "id": "ee11"
+    },
+    {
+      "variant_id": 696,
+      "product_id": 47,
+      "size": "40",
+      "color": "Red",
+      "sku": "SKU-47-40-Red",
+      "stock": 31,
+      "id": "0de0"
+    },
+    {
+      "variant_id": 697,
+      "product_id": 47,
+      "size": "41",
+      "color": "White",
+      "sku": "SKU-47-41-White",
+      "stock": 6,
+      "id": "34dc"
+    },
+    {
+      "variant_id": 698,
+      "product_id": 47,
+      "size": "41",
+      "color": "Black",
+      "sku": "SKU-47-41-Black",
+      "stock": 12,
+      "id": "a0be"
+    },
+    {
+      "variant_id": 699,
+      "product_id": 47,
+      "size": "41",
+      "color": "Red",
+      "sku": "SKU-47-41-Red",
+      "stock": 28,
+      "id": "4cdb"
+    },
+    {
+      "variant_id": 700,
+      "product_id": 47,
+      "size": "42",
+      "color": "White",
+      "sku": "SKU-47-42-White",
+      "stock": 33,
+      "id": "2313"
+    },
+    {
+      "variant_id": 701,
+      "product_id": 47,
+      "size": "42",
+      "color": "Black",
+      "sku": "SKU-47-42-Black",
+      "stock": 22,
+      "id": "efba"
+    },
+    {
+      "variant_id": 702,
+      "product_id": 47,
+      "size": "42",
+      "color": "Red",
+      "sku": "SKU-47-42-Red",
+      "stock": 21,
+      "id": "785f"
+    },
+    {
+      "variant_id": 703,
+      "product_id": 47,
+      "size": "43",
+      "color": "White",
+      "sku": "SKU-47-43-White",
+      "stock": 5,
+      "id": "eed0"
+    },
+    {
+      "variant_id": 704,
+      "product_id": 47,
+      "size": "43",
+      "color": "Black",
+      "sku": "SKU-47-43-Black",
+      "stock": 7,
+      "id": "5cc6"
+    },
+    {
+      "variant_id": 705,
+      "product_id": 47,
+      "size": "43",
+      "color": "Red",
+      "sku": "SKU-47-43-Red",
+      "stock": 9,
+      "id": "914d"
+    },
+    {
+      "variant_id": 706,
+      "product_id": 48,
+      "size": "39",
+      "color": "White",
+      "sku": "SKU-48-39-White",
+      "stock": 16,
+      "id": "85e0"
+    },
+    {
+      "variant_id": 707,
+      "product_id": 48,
+      "size": "39",
+      "color": "Black",
+      "sku": "SKU-48-39-Black",
+      "stock": 20,
+      "id": "9dd9"
+    },
+    {
+      "variant_id": 708,
+      "product_id": 48,
+      "size": "39",
+      "color": "Red",
+      "sku": "SKU-48-39-Red",
+      "stock": 31,
+      "id": "cc4a"
+    },
+    {
+      "variant_id": 709,
+      "product_id": 48,
+      "size": "40",
+      "color": "White",
+      "sku": "SKU-48-40-White",
+      "stock": 21,
+      "id": "fde8"
+    },
+    {
+      "variant_id": 710,
+      "product_id": 48,
+      "size": "40",
+      "color": "Black",
+      "sku": "SKU-48-40-Black",
+      "stock": 24,
+      "id": "48c2"
+    },
+    {
+      "variant_id": 711,
+      "product_id": 48,
+      "size": "40",
+      "color": "Red",
+      "sku": "SKU-48-40-Red",
+      "stock": 22,
+      "id": "d227"
+    },
+    {
+      "variant_id": 712,
+      "product_id": 48,
+      "size": "41",
+      "color": "White",
+      "sku": "SKU-48-41-White",
+      "stock": 7,
+      "id": "0b6a"
+    },
+    {
+      "variant_id": 713,
+      "product_id": 48,
+      "size": "41",
+      "color": "Black",
+      "sku": "SKU-48-41-Black",
+      "stock": 5,
+      "id": "206f"
+    },
+    {
+      "variant_id": 714,
+      "product_id": 48,
+      "size": "41",
+      "color": "Red",
+      "sku": "SKU-48-41-Red",
+      "stock": 27,
+      "id": "adc1"
+    },
+    {
+      "variant_id": 715,
+      "product_id": 48,
+      "size": "42",
+      "color": "White",
+      "sku": "SKU-48-42-White",
+      "stock": 29,
+      "id": "01a0"
+    },
+    {
+      "variant_id": 716,
+      "product_id": 48,
+      "size": "42",
+      "color": "Black",
+      "sku": "SKU-48-42-Black",
+      "stock": 29,
+      "id": "bf01"
+    },
+    {
+      "variant_id": 717,
+      "product_id": 48,
+      "size": "42",
+      "color": "Red",
+      "sku": "SKU-48-42-Red",
+      "stock": 31,
+      "id": "b19e"
+    },
+    {
+      "variant_id": 718,
+      "product_id": 48,
+      "size": "43",
+      "color": "White",
+      "sku": "SKU-48-43-White",
+      "stock": 10,
+      "id": "cf5e"
+    },
+    {
+      "variant_id": 719,
+      "product_id": 48,
+      "size": "43",
+      "color": "Black",
+      "sku": "SKU-48-43-Black",
+      "stock": 9,
+      "id": "cdba"
+    },
+    {
+      "variant_id": 720,
+      "product_id": 48,
+      "size": "43",
+      "color": "Red",
+      "sku": "SKU-48-43-Red",
+      "stock": 19,
+      "id": "c2a0"
+    },
+    {
+      "variant_id": 721,
+      "product_id": 49,
+      "size": "39",
+      "color": "White",
+      "sku": "SKU-49-39-White",
+      "stock": 7,
+      "id": "bdab"
+    },
+    {
+      "variant_id": 722,
+      "product_id": 49,
+      "size": "39",
+      "color": "Black",
+      "sku": "SKU-49-39-Black",
+      "stock": 27,
+      "id": "6d04"
+    },
+    {
+      "variant_id": 723,
+      "product_id": 49,
+      "size": "39",
+      "color": "Red",
+      "sku": "SKU-49-39-Red",
+      "stock": 5,
+      "id": "ef78"
+    },
+    {
+      "variant_id": 724,
+      "product_id": 49,
+      "size": "40",
+      "color": "White",
+      "sku": "SKU-49-40-White",
+      "stock": 21,
+      "id": "8563"
+    },
+    {
+      "variant_id": 725,
+      "product_id": 49,
+      "size": "40",
+      "color": "Black",
+      "sku": "SKU-49-40-Black",
+      "stock": 26,
+      "id": "999c"
+    },
+    {
+      "variant_id": 726,
+      "product_id": 49,
+      "size": "40",
+      "color": "Red",
+      "sku": "SKU-49-40-Red",
+      "stock": 34,
+      "id": "b4b2"
+    },
+    {
+      "variant_id": 727,
+      "product_id": 49,
+      "size": "41",
+      "color": "White",
+      "sku": "SKU-49-41-White",
+      "stock": 13,
+      "id": "af29"
+    },
+    {
+      "variant_id": 728,
+      "product_id": 49,
+      "size": "41",
+      "color": "Black",
+      "sku": "SKU-49-41-Black",
+      "stock": 16,
+      "id": "3803"
+    },
+    {
+      "variant_id": 729,
+      "product_id": 49,
+      "size": "41",
+      "color": "Red",
+      "sku": "SKU-49-41-Red",
+      "stock": 26,
+      "id": "9b84"
+    },
+    {
+      "variant_id": 730,
+      "product_id": 49,
+      "size": "42",
+      "color": "White",
+      "sku": "SKU-49-42-White",
+      "stock": 15,
+      "id": "ab00"
+    },
+    {
+      "variant_id": 731,
+      "product_id": 49,
+      "size": "42",
+      "color": "Black",
+      "sku": "SKU-49-42-Black",
+      "stock": 10,
+      "id": "2176"
+    },
+    {
+      "variant_id": 732,
+      "product_id": 49,
+      "size": "42",
+      "color": "Red",
+      "sku": "SKU-49-42-Red",
+      "stock": 23,
+      "id": "c9e1"
+    },
+    {
+      "variant_id": 733,
+      "product_id": 49,
+      "size": "43",
+      "color": "White",
+      "sku": "SKU-49-43-White",
+      "stock": 5,
+      "id": "7253"
+    },
+    {
+      "variant_id": 734,
+      "product_id": 49,
+      "size": "43",
+      "color": "Black",
+      "sku": "SKU-49-43-Black",
+      "stock": 14,
+      "id": "ba5c"
+    },
+    {
+      "variant_id": 735,
+      "product_id": 49,
+      "size": "43",
+      "color": "Red",
+      "sku": "SKU-49-43-Red",
+      "stock": 11,
+      "id": "baf7"
+    },
+    {
+      "variant_id": 736,
+      "product_id": 50,
+      "size": "39",
+      "color": "White",
+      "sku": "SKU-50-39-White",
+      "stock": 20,
+      "id": "61da"
+    },
+    {
+      "variant_id": 737,
+      "product_id": 50,
+      "size": "39",
+      "color": "Black",
+      "sku": "SKU-50-39-Black",
+      "stock": 27,
+      "id": "d870"
+    },
+    {
+      "variant_id": 738,
       "product_id": 50,
       "size": "39",
       "color": "Red",
-      "sku": "SKU-50-5",
-      "stock": 8,
-      "id": "5f0c"
+      "sku": "SKU-50-39-Red",
+      "stock": 25,
+      "id": "4608"
+    },
+    {
+      "variant_id": 739,
+      "product_id": 50,
+      "size": "40",
+      "color": "White",
+      "sku": "SKU-50-40-White",
+      "stock": 32,
+      "id": "407f"
+    },
+    {
+      "variant_id": 740,
+      "product_id": 50,
+      "size": "40",
+      "color": "Black",
+      "sku": "SKU-50-40-Black",
+      "stock": 32,
+      "id": "d089"
+    },
+    {
+      "variant_id": 741,
+      "product_id": 50,
+      "size": "40",
+      "color": "Red",
+      "sku": "SKU-50-40-Red",
+      "stock": 33,
+      "id": "43b7"
+    },
+    {
+      "variant_id": 742,
+      "product_id": 50,
+      "size": "41",
+      "color": "White",
+      "sku": "SKU-50-41-White",
+      "stock": 16,
+      "id": "f777"
+    },
+    {
+      "variant_id": 743,
+      "product_id": 50,
+      "size": "41",
+      "color": "Black",
+      "sku": "SKU-50-41-Black",
+      "stock": 26,
+      "id": "d25a"
+    },
+    {
+      "variant_id": 744,
+      "product_id": 50,
+      "size": "41",
+      "color": "Red",
+      "sku": "SKU-50-41-Red",
+      "stock": 14,
+      "id": "17f3"
+    },
+    {
+      "variant_id": 745,
+      "product_id": 50,
+      "size": "42",
+      "color": "White",
+      "sku": "SKU-50-42-White",
+      "stock": 21,
+      "id": "1dae"
+    },
+    {
+      "variant_id": 746,
+      "product_id": 50,
+      "size": "42",
+      "color": "Black",
+      "sku": "SKU-50-42-Black",
+      "stock": 12,
+      "id": "9827"
+    },
+    {
+      "variant_id": 747,
+      "product_id": 50,
+      "size": "42",
+      "color": "Red",
+      "sku": "SKU-50-42-Red",
+      "stock": 5,
+      "id": "270d"
+    },
+    {
+      "variant_id": 748,
+      "product_id": 50,
+      "size": "43",
+      "color": "White",
+      "sku": "SKU-50-43-White",
+      "stock": 27,
+      "id": "9a7b"
+    },
+    {
+      "variant_id": 749,
+      "product_id": 50,
+      "size": "43",
+      "color": "Black",
+      "sku": "SKU-50-43-Black",
+      "stock": 27,
+      "id": "2eac"
+    },
+    {
+      "variant_id": 750,
+      "product_id": 50,
+      "size": "43",
+      "color": "Red",
+      "sku": "SKU-50-43-Red",
+      "stock": 16,
+      "id": "0857"
     }
   ],
   "users": [
@@ -3472,8 +7522,8 @@
       "phone": null,
       "gender": null,
       "google_id": null,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "3538"
+      "created_at": "2026-01-03T06:55:38.402Z",
+      "id": "4fe1"
     },
     {
       "user_id": 2,
@@ -3491,16 +7541,16 @@
       "phone": "0909123456",
       "gender": "male",
       "google_id": null,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "25bb"
+      "created_at": "2026-01-03T06:55:38.402Z",
+      "id": "57e8"
     }
   ],
   "cart": [
     {
       "cart_id": 1,
       "user_id": 2,
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "ccb3"
+      "created_at": "2026-01-03T06:55:38.402Z",
+      "id": "5fcf"
     }
   ],
   "cart_item": [
@@ -3508,12 +7558,18 @@
       "id": "1",
       "cart_id": 1,
       "variant_id": 1,
-      "quantity": 3
+      "quantity": 4
     },
     {
       "id": "2",
       "cart_id": 1,
-      "variant_id": 8,
+      "variant_id": 16,
+      "quantity": 1
+    },
+    {
+      "id": "b1f3",
+      "cart_id": 1,
+      "variant_id": 6,
       "quantity": 1
     }
   ],
@@ -3525,8 +7581,8 @@
       "payment": "COD",
       "shipping_address": "123 Le Loi, HCM",
       "total_amount": 3100000,
-      "created_at": "2026-01-02T05:44:10.298Z",
-      "id": "fdb9"
+      "created_at": "2026-01-02T06:55:38.402Z",
+      "id": "40a3"
     }
   ],
   "order_item": [
@@ -3552,8 +7608,8 @@
       "user_id": 2,
       "rating": 5,
       "content": "Giày đi rất êm, giao hàng nhanh!",
-      "created_at": "2026-01-03T05:44:10.298Z",
-      "id": "b03d"
+      "created_at": "2026-01-03T06:55:38.402Z",
+      "id": "2adc"
     }
   ],
   "sessions": [],
