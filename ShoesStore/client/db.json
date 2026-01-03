@@ -7411,7 +7411,7 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-50-40-Black",
-      "stock": 32,
+      "stock": 31,
       "id": "d089"
     },
     {
@@ -7420,7 +7420,7 @@
       "size": "40",
       "color": "Red",
       "sku": "SKU-50-40-Red",
-      "stock": 33,
+      "stock": 31,
       "id": "43b7"
     },
     {
@@ -7447,7 +7447,7 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-50-41-Red",
-      "stock": 14,
+      "stock": 13,
       "id": "17f3"
     },
     {
@@ -7553,26 +7553,7 @@
       "id": "5fcf"
     }
   ],
-  "cart_item": [
-    {
-      "id": "1",
-      "cart_id": 1,
-      "variant_id": 1,
-      "quantity": 4
-    },
-    {
-      "id": "2",
-      "cart_id": 1,
-      "variant_id": 16,
-      "quantity": 1
-    },
-    {
-      "id": "b1f3",
-      "cart_id": 1,
-      "variant_id": 6,
-      "quantity": 1
-    }
-  ],
+  "cart_item": [],
   "orders": [
     {
       "order_id": 1,
@@ -7593,6 +7574,86 @@
       "customer_note": "Standard Shipping",
       "shipping_fee": 10,
       "tax": 748000
+    },
+    {
+      "id": "94c2",
+      "user_id": "57e8",
+      "status": "PENDING",
+      "total_amount": 10098010,
+      "created_at": "2026-01-03T07:48:33.247Z",
+      "customer_note": "Standard Shipping",
+      "shipping_fee": 10,
+      "tax": 748000
+    },
+    {
+      "id": "1722",
+      "user_id": "57e8",
+      "status": "PENDING",
+      "total_amount": 10098010,
+      "created_at": "2026-01-03T07:54:56.110Z",
+      "customer_note": "Standard Shipping",
+      "shipping_fee": 10,
+      "tax": 748000
+    },
+    {
+      "id": "fb88",
+      "user_id": "57e8",
+      "status": "PENDING",
+      "total_amount": 10098010,
+      "created_at": "2026-01-03T07:56:19.496Z",
+      "customer_note": "Standard Shipping",
+      "shipping_fee": 10,
+      "tax": 748000
+    },
+    {
+      "id": "b8de",
+      "user_id": "57e8",
+      "status": "PENDING",
+      "total_amount": 10098010,
+      "created_at": "2026-01-03T07:59:40.777Z",
+      "customer_note": "Standard Shipping",
+      "shipping_fee": 10,
+      "tax": 748000
+    },
+    {
+      "id": "dda2",
+      "user_id": "57e8",
+      "status": "PENDING",
+      "total_amount": 4320010,
+      "created_at": "2026-01-03T08:02:15.208Z",
+      "customer_note": "Standard Shipping",
+      "shipping_fee": 10,
+      "tax": 320000
+    },
+    {
+      "id": "df37",
+      "user_id": "57e8",
+      "status": "PENDING",
+      "total_amount": 4320010,
+      "created_at": "2026-01-03T08:04:34.518Z",
+      "customer_note": "Standard Shipping",
+      "shipping_fee": 10,
+      "tax": 320000
+    },
+    {
+      "id": "b240",
+      "user_id": "57e8",
+      "status": "PENDING",
+      "total_amount": 4320010,
+      "created_at": "2026-01-03T08:15:12.444Z",
+      "customer_note": "Standard Shipping",
+      "shipping_fee": 10,
+      "tax": 320000
+    },
+    {
+      "id": "3a32",
+      "user_id": "57e8",
+      "status": "PENDING",
+      "total_amount": 4320010,
+      "created_at": "2026-01-03T08:30:42.767Z",
+      "customer_note": "Standard Shipping",
+      "shipping_fee": 10,
+      "tax": 320000
     }
   ],
   "order_item": [
@@ -7604,25 +7665,53 @@
       "quantity": 2
     },
     {
-      "id": "eb8f",
-      "order_id": "9a2c",
+      "id": "54a4",
+      "order_id": "1722",
       "variant_id": 1,
       "quantity": 4,
       "price": 1550000
     },
     {
-      "id": "9f57",
-      "order_id": "9a2c",
+      "id": "989b",
+      "order_id": "1722",
       "variant_id": 16,
       "quantity": 1,
       "price": 1600000
     },
     {
-      "id": "1c7b",
-      "order_id": "9a2c",
+      "id": "df4c",
+      "order_id": "1722",
       "variant_id": 6,
       "quantity": 1,
       "price": 1550000
+    },
+    {
+      "id": "cac8",
+      "order_id": "dda2",
+      "variant_id": 741,
+      "quantity": 1,
+      "price": 4000000
+    },
+    {
+      "id": "7d69",
+      "order_id": "df37",
+      "variant_id": 741,
+      "quantity": 1,
+      "price": 4000000
+    },
+    {
+      "id": "99c6",
+      "order_id": "b240",
+      "variant_id": 744,
+      "quantity": 1,
+      "price": 4000000
+    },
+    {
+      "id": "c850",
+      "order_id": "3a32",
+      "variant_id": 740,
+      "quantity": 1,
+      "price": 4000000
     }
   ],
   "wishlists": [

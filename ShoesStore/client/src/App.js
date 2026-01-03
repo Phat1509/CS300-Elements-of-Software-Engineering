@@ -18,8 +18,8 @@ import NewArrivalsPage from "./components/user/NewArrivalsPage";
 import SignInPage from "./components/user/SignInPage";
 import SignUpPage from "./components/user/SignUpPage";
 import LegalPage from "./components/user/LegalPage";
+import OrderHistoryPage from "./components/user/OrderHistoryPage";
 import OrderDetailPage from "./components/user/OrderDetailPage";
-import OrdersTrackingPage from "./components/user/OrdersTrackingPage";
 
 import AdminDashboard from "./components/admin/AdminDashboard";
 import ProductsAdmin from "./components/admin/ProductsAdmin";
@@ -57,8 +57,9 @@ function AppRoutes() {
         <Route path="/sale" element={<SalePage />} />
         <Route path="/wishlist" element={<WishlistPage />} />
         <Route path="/cart" element={<CartPage />} />
-        <Route path="/product/:slug" element={<ProductDetailPage />} />        <Route path="/orders" element={<OrdersTrackingPage />} />
-        <Route path="/order/:id" element={<OrderDetailPage />} />
+        <Route path="/product/:slug" element={<ProductDetailPage />} />
+        <Route path="/orders" element={<OrderHistoryPage />} />
+        <Route path="/orders/:id" element={<OrderDetailPage />} />
         {/* Auth (user) */}
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/signup" element={<SignUpPage />} />

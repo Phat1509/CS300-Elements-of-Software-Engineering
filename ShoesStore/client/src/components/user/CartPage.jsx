@@ -4,11 +4,11 @@ import { Link, useNavigate } from "react-router-dom"; // Thêm useNavigate
 import { ChevronRight, Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import { useCart } from "../../context/CartContext";
 
-import { 
-  createOrder, 
-  addOrderItem, 
-  updateProductStock, 
-  deleteCartItem 
+import {
+  createOrder,
+  addOrderItem,
+  updateProductStock,
+  deleteCartItem,
 } from "../../ultilities/api";
 
 export default function CartPage() {
@@ -60,13 +60,16 @@ export default function CartPage() {
     // 2. Validate Stock lần cuối
     for (const item of cartItems) {
       if (item.quantity > item.stock) {
-        alert(`Product "${item.product_name}" is out of stock (Available: ${item.stock}). Please update quantity.`);
+        alert(
+          `Product "${item.product_name}" is out of stock (Available: ${item.stock}). Please update quantity.`
+        );
         return;
       }
     }
 
     // 3. Confirm
-    if (!window.confirm(`Confirm payment of $${finalTotal.toFixed(2)}?`)) return;
+    if (!window.confirm(`Confirm payment of $${finalTotal.toFixed(2)}?`))
+      return;
 
     setLoading(true);
 
@@ -79,7 +82,7 @@ export default function CartPage() {
         created_at: new Date().toISOString(),
         customer_note: "Standard Shipping",
         shipping_fee: shipping,
-        tax: tax
+        tax: tax,
       };
 
       const newOrder = await createOrder(orderData);
@@ -93,7 +96,7 @@ export default function CartPage() {
             order_id: orderId,
             variant_id: item.variant_id,
             quantity: item.quantity,
-            price: item.price
+            price: item.price,
           });
 
           // 2. Trừ tồn kho (Stock)
@@ -108,11 +111,10 @@ export default function CartPage() {
 
       // BƯỚC C: Hoàn tất
       alert("Order placed successfully!");
-      
+
       // Force reload hoặc điều hướng để làm mới Context giỏ hàng
       // Vì Context hiện tại chưa biết DB đã bị xóa sạch
-      window.location.href = "/"; // Hoặc navigate('/profile') để xem lịch sử đơn
-      
+      window.location.href = "/orders";
     } catch (error) {
       console.error("Checkout Error:", error);
       alert("Checkout failed. Please try again.");
@@ -125,76 +127,155 @@ export default function CartPage() {
     <>
       <section className="men-bc">
         <div className="container" style={{ display: "flex", gap: 8 }}>
-          <Link to="/" className="men-bc-link">Home</Link>
-          <span className="men-bc-sep"><ChevronRight size={16} /></span>
+          <Link to="/" className="men-bc-link">
+            Home
+          </Link>
+          <span className="men-bc-sep">
+            <ChevronRight size={16} />
+          </span>
           <span>Cart</span>
         </div>
       </section>
 
       <section className="container" style={{ padding: "24px 0 40px" }}>
-        <h1 className="men-title" style={{ marginBottom: 8 }}>Your Cart</h1>
+        <h1 className="men-title" style={{ marginBottom: 8 }}>
+          Your Cart
+        </h1>
         <p className="muted" style={{ marginBottom: 24 }}>
           {cartItems.length} item(s) · Free returns within 30 days
         </p>
 
         {cartItems.length === 0 ? (
-          <div style={{
-            border: "1px solid #e5e7eb", borderRadius: 12, padding: 24,
-            textAlign: "center", background: "#f8fafc",
-          }}>
+          <div
+            style={{
+              border: "1px solid #e5e7eb",
+              borderRadius: 12,
+              padding: 24,
+              textAlign: "center",
+              background: "#f8fafc",
+            }}
+          >
             <ShoppingBag className="h-16 w-16 mx-auto" />
-            <h3 style={{ marginTop: 12, marginBottom: 8 }}>Your cart is empty</h3>
-            <p className="muted" style={{ marginBottom: 16 }}>Start exploring our latest collections.</p>
-            <Link to="/" className="btn btn-primary">Continue Shopping</Link>
+            <h3 style={{ marginTop: 12, marginBottom: 8 }}>
+              Your cart is empty
+            </h3>
+            <p className="muted" style={{ marginBottom: 16 }}>
+              Start exploring our latest collections.
+            </p>
+            <Link to="/" className="btn btn-primary">
+              Continue Shopping
+            </Link>
           </div>
         ) : (
-          <div style={{ display: "grid", gap: 24, gridTemplateColumns: "1fr" }}> {/* Mobile first layout, consider media queries for desktop */}
-            <div style={{ display: "grid", gap: 24, gridTemplateColumns: "1fr" }}>
-              
+          <div style={{ display: "grid", gap: 24, gridTemplateColumns: "1fr" }}>
+            {" "}
+            {/* Mobile first layout, consider media queries for desktop */}
+            <div
+              style={{ display: "grid", gap: 24, gridTemplateColumns: "1fr" }}
+            >
               {/* LIST ITEMS */}
               <div style={{ display: "grid", gap: 16 }}>
                 {cartItems.map((it) => (
-                  <div key={it.id} style={{
-                      display: "grid", gridTemplateColumns: "96px 1fr", gap: 16,
-                      alignItems: "start", border: "1px solid #e5e7eb", borderRadius: 12, padding: 12,
-                    }}>
-                    
+                  <div
+                    key={it.id}
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "96px 1fr",
+                      gap: 16,
+                      alignItems: "start",
+                      border: "1px solid #e5e7eb",
+                      borderRadius: 12,
+                      padding: 12,
+                    }}
+                  >
                     {/* Image */}
-                    <img src={it.image} alt={it.product_name} style={{
-                        width: 96, height: 96, objectFit: "cover", borderRadius: 8,
-                      }} />
-                    
+                    <img
+                      src={it.image}
+                      alt={it.product_name}
+                      style={{
+                        width: 96,
+                        height: 96,
+                        objectFit: "cover",
+                        borderRadius: 8,
+                      }}
+                    />
+
                     {/* Content */}
                     <div>
-                      <div style={{ display: "flex", justifyContent: "space-between", gap: 12 }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          gap: 12,
+                        }}
+                      >
                         <div>
-                          <h4 style={{ margin: 0, fontSize: '1rem' }}>{it.product_name}</h4>
-                          <div className="muted" style={{ marginTop: 4, fontSize: '0.875rem' }}>
-                            Size: {it.size} | Color: {it.color} <br/>
-                            <span style={{color: it.quantity > it.stock ? 'red' : 'green', fontSize: '0.75rem'}}>
-                                (In Stock: {it.stock})
+                          <h4 style={{ margin: 0, fontSize: "1rem" }}>
+                            {it.product_name}
+                          </h4>
+                          <div
+                            className="muted"
+                            style={{ marginTop: 4, fontSize: "0.875rem" }}
+                          >
+                            Size: {it.size} | Color: {it.color} <br />
+                            <span
+                              style={{
+                                color: it.quantity > it.stock ? "red" : "green",
+                                fontSize: "0.75rem",
+                              }}
+                            >
+                              (In Stock: {it.stock})
                             </span>
                           </div>
                         </div>
-                        <strong style={{fontSize: '1rem'}}>${(it.price * it.quantity).toFixed(2)}</strong>
+                        <strong style={{ fontSize: "1rem" }}>
+                          ${(it.price * it.quantity).toFixed(2)}
+                        </strong>
                       </div>
 
-                      <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 12 }}>
-                        <button className="btn btn-outline" onClick={() => decreaseQty(it)} disabled={it.quantity <= 1}>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 8,
+                          marginTop: 12,
+                        }}
+                      >
+                        <button
+                          className="btn btn-outline"
+                          onClick={() => decreaseQty(it)}
+                          disabled={it.quantity <= 1}
+                        >
                           <Minus size={14} />
                         </button>
-                        
-                        <div style={{ minWidth: 30, textAlign: "center", fontWeight: 600 }}>
+
+                        <div
+                          style={{
+                            minWidth: 30,
+                            textAlign: "center",
+                            fontWeight: 600,
+                          }}
+                        >
                           {it.quantity}
                         </div>
 
-                        <button className="btn btn-outline" onClick={() => increaseQty(it)} disabled={it.quantity >= it.stock}>
+                        <button
+                          className="btn btn-outline"
+                          onClick={() => increaseQty(it)}
+                          disabled={it.quantity >= it.stock}
+                        >
                           <Plus size={14} />
                         </button>
 
-                        <button className="btn btn-outline" 
-                          style={{ marginLeft: "auto", color: "#ef4444", borderColor: "#fee2e2" }}
-                          onClick={() => handleRemove(it.id)}>
+                        <button
+                          className="btn btn-outline"
+                          style={{
+                            marginLeft: "auto",
+                            color: "#ef4444",
+                            borderColor: "#fee2e2",
+                          }}
+                          onClick={() => handleRemove(it.id)}
+                        >
                           <Trash2 size={16} />
                         </button>
                       </div>
@@ -204,32 +285,58 @@ export default function CartPage() {
               </div>
 
               {/* ORDER SUMMARY */}
-              <div style={{ border: "1px solid #e5e7eb", borderRadius: 12, padding: 16, height: "fit-content" }}>
-                <h3 style={{ marginTop: 0, marginBottom: 12 }}>Order Summary</h3>
+              <div
+                style={{
+                  border: "1px solid #e5e7eb",
+                  borderRadius: 12,
+                  padding: 16,
+                  height: "fit-content",
+                }}
+              >
+                <h3 style={{ marginTop: 0, marginBottom: 12 }}>
+                  Order Summary
+                </h3>
                 <div style={{ display: "grid", gap: 8 }}>
-                  <div style={{ display: "flex", justifyContent: "space-between" }}>
+                  <div
+                    style={{ display: "flex", justifyContent: "space-between" }}
+                  >
                     <span className="muted">Subtotal</span>
                     <span>${subtotal.toFixed(2)}</span>
                   </div>
-                  <div style={{ display: "flex", justifyContent: "space-between" }}>
+                  <div
+                    style={{ display: "flex", justifyContent: "space-between" }}
+                  >
                     <span className="muted">Shipping</span>
                     <span>${shipping.toFixed(2)}</span>
                   </div>
-                  <div style={{ display: "flex", justifyContent: "space-between" }}>
+                  <div
+                    style={{ display: "flex", justifyContent: "space-between" }}
+                  >
                     <span className="muted">Tax (8%)</span>
                     <span>${tax.toFixed(2)}</span>
                   </div>
 
                   <hr style={{ margin: "12px 0", borderColor: "#e5e7eb" }} />
 
-                  <div style={{ display: "flex", justifyContent: "space-between", fontWeight: 800, fontSize: "1.1rem" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      fontWeight: 800,
+                      fontSize: "1.1rem",
+                    }}
+                  >
                     <span>Total</span>
                     <span>${finalTotal.toFixed(2)}</span>
                   </div>
 
                   <button
                     className="btn btn-primary btn-lg"
-                    style={{ marginTop: 16, width: "100%", opacity: loading ? 0.7 : 1 }}
+                    style={{
+                      marginTop: 16,
+                      width: "100%",
+                      opacity: loading ? 0.7 : 1,
+                    }}
                     onClick={handleCheckout}
                     disabled={loading}
                   >
@@ -238,15 +345,52 @@ export default function CartPage() {
                 </div>
 
                 <div style={{ marginTop: 24 }}>
-                  <p style={{ marginBottom: 8, fontWeight: 600, fontSize: '0.9rem' }}>Payment methods</p>
+                  <p
+                    style={{
+                      marginBottom: 8,
+                      fontWeight: 600,
+                      fontSize: "0.9rem",
+                    }}
+                  >
+                    Payment methods
+                  </p>
                   <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                    <span className="badge" style={{background: '#f1f5f9', padding: '4px 8px', borderRadius: 4, fontSize: '0.75rem'}}>Visa</span>
-                    <span className="badge" style={{background: '#f1f5f9', padding: '4px 8px', borderRadius: 4, fontSize: '0.75rem'}}>Mastercard</span>
-                    <span className="badge" style={{background: '#f1f5f9', padding: '4px 8px', borderRadius: 4, fontSize: '0.75rem'}}>PayPal</span>
+                    <span
+                      className="badge"
+                      style={{
+                        background: "#f1f5f9",
+                        padding: "4px 8px",
+                        borderRadius: 4,
+                        fontSize: "0.75rem",
+                      }}
+                    >
+                      Visa
+                    </span>
+                    <span
+                      className="badge"
+                      style={{
+                        background: "#f1f5f9",
+                        padding: "4px 8px",
+                        borderRadius: 4,
+                        fontSize: "0.75rem",
+                      }}
+                    >
+                      Mastercard
+                    </span>
+                    <span
+                      className="badge"
+                      style={{
+                        background: "#f1f5f9",
+                        padding: "4px 8px",
+                        borderRadius: 4,
+                        fontSize: "0.75rem",
+                      }}
+                    >
+                      PayPal
+                    </span>
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         )}

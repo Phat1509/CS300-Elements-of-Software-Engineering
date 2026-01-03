@@ -1,6 +1,6 @@
-// client/src/components/user/OrderDetailPage.jsx
+// client/src/components/user/OrdersTrackingPage.jsx
 import React, { useEffect, useMemo, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const API_BASE =
   process.env.REACT_APP_API_URL ||
@@ -24,19 +24,28 @@ function statusLabel(status) {
   if (s === "PAID") return "Paid";
   if (s === "SHIPPED") return "Shipped";
   if (s === "DELIVERED") return "Delivered";
+  // fallback (CartPage payload có thể là "Placed")
   if (s === "PLACED") return "Placed";
   return status || "Pending";
 }
 
-export default function OrderDetailPage() {
-  const navigate = useNavigate();
+function statusStepIndex(status) {
+  const s = (status || "").toUpperCase();
+  // map theo db generateDb.js: PENDING -> PAID -> SHIPPED -> DELIVERED
+  if (s === "PENDING" || s === "PLACED") return 0;
+  if (s === "PAID") return 1;
+  if (s === "SHIPPED") return 2;
+  if (s === "DELIVERED") return 3;
+  return 0;
+}
 
-  // MOCK user (match db.json + ProductDetail mock)
-  const userId = 2;
+export default function OrderDetailPage() {
+  const { id } = useParams();
 
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState("");
-  const [orders, setOrders] = useState([]);
+  const [order, setOrder] = useState(null);
+  const [items, setItems] = useState([]); // enriched items
 
   useEffect(() => {
     let mounted = true;
@@ -47,81 +56,141 @@ export default function OrderDetailPage() {
       return res.json();
     }
 
-    async function load() {
+    async function fetchOrder() {
       setLoading(true);
       setErr("");
+      setOrder(null);
+      setItems([]);
 
       try {
-        // json-server: orders có field user_id :contentReference[oaicite:2]{index=2}
-        let list = await fetchJson(`${API_BASE}/orders?user_id=${userId}`);
+        let ord = null;
 
-        // fallback nếu backend dùng key khác (cho chắc)
-        if (!Array.isArray(list) || list.length === 0) {
-          try {
-            list = await fetchJson(`${API_BASE}/orders?userId=${userId}`);
-          } catch {
-            // ignore
+        try {
+          ord = await fetchJson(`${API_BASE}/orders/${encodeURIComponent(id)}`);
+        } catch {
+          ord = null;
+        }
+
+        // 2) If not found, try query by order_id (numeric)
+        if (!ord || !ord.order_id) {
+          const maybeNum = Number(id);
+          if (!Number.isNaN(maybeNum)) {
+            const list = await fetchJson(
+              `${API_BASE}/orders?order_id=${maybeNum}`
+            );
+            ord = Array.isArray(list) ? list[0] : null;
           }
         }
 
-        if (!mounted) return;
+        // 3) If still not found, bail
+        if (!ord) throw new Error("Không tìm thấy đơn hàng này 😵");
 
-        setOrders(Array.isArray(list) ? list : []);
+        if (!mounted) return;
+        setOrder(ord);
+
+        // Fetch order items by order_id (numeric)
+        const orderIdNum = ord.order_id ?? Number(id);
+        const rawItems = await fetchJson(
+          `${API_BASE}/order_item?order_id=${orderIdNum}`
+        );
+
+        // Enrich: variant -> product
+        const enriched = await Promise.all(
+          (rawItems || []).map(async (it) => {
+            let variant = null;
+            let product = null;
+
+            try {
+              const vList = await fetchJson(
+                `${API_BASE}/product_variants?variant_id=${it.variant_id}`
+              );
+              variant = Array.isArray(vList) ? vList[0] : null;
+            } catch {}
+
+            try {
+              const productId = variant?.product_id;
+              if (productId) {
+                const pList = await fetchJson(
+                  `${API_BASE}/products?product_id=${productId}`
+                );
+                product = Array.isArray(pList) ? pList[0] : null;
+              }
+            } catch {}
+
+            const name = product?.name || `Variant #${it.variant_id}`;
+            const image = product?.image_url
+              ? product.image_url.startsWith("http")
+                ? product.image_url
+                : product.image_url
+              : "";
+
+            return {
+              ...it,
+              name,
+              image,
+              size: variant?.size || "-",
+              color: variant?.color || "-",
+              lineTotal: (Number(it.price) || 0) * (Number(it.quantity) || 0),
+            };
+          })
+        );
+
+        if (!mounted) return;
+        setItems(enriched || []);
       } catch (e) {
         if (!mounted) return;
-        setErr(e?.message || "Có lỗi khi load orders");
+        setErr(e?.message || "Có lỗi xảy ra");
       } finally {
         if (!mounted) return;
         setLoading(false);
       }
     }
 
-    load();
+    fetchOrder();
 
     return () => {
       mounted = false;
     };
-  }, []);
+  }, [id]);
 
-  const sorted = useMemo(() => {
-    const arr = [...(orders || [])];
-    // sort mới nhất trước: created_at ISO string trong db generator :contentReference[oaicite:3]{index=3}
-    return arr.sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
-  }, [orders]);
+  const stepIdx = useMemo(() => statusStepIndex(order?.status), [order?.status]);
 
-  const openOrder = (o) => {
-    // Route của m: /orders/:id :contentReference[oaicite:4]{index=4}
-    // Ưu tiên order_id (numeric) để khớp tracking page fetch theo order_id
-    const id = o?.order_id ?? o?.id;
-    if (id == null) return;
-    navigate(`/orders/${id}`);
+  const computedTotal = useMemo(() => {
+    // ưu tiên total_amount từ order (db.json có)
+    if (order?.total_amount != null) return Number(order.total_amount) || 0;
+    // fallback: sum items
+    return (items || []).reduce((acc, it) => acc + (it.lineTotal || 0), 0);
+  }, [order, items]);
+
+  const copyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      alert("Copy link tracking xong rồi nè ✅");
+    } catch {
+      alert("Copy không được (browser chặn). M tự copy URL trên thanh địa chỉ nha.");
+    }
   };
 
-  return (
-    <main className="men-wrap">
-      {/* Breadcrumb */}
-      <section className="men-bc">
-        <div className="container">
-          <Link to="/" className="men-bc-link">
-            Home
-          </Link>
-          <span className="men-bc-sep">›</span>
-          <span>Orders</span>
-        </div>
-      </section>
-
-      {/* Header */}
-      <section className="men-head">
-        <div className="container">
-          <h1 className="men-title">My Orders</h1>
-          <p className="men-sub">Tổng hợp tất cả đơn hàng của bạn ở đây nha.</p>
-        </div>
-      </section>
-
-      <section className="container" style={{ padding: "18px 0 64px" }}>
-        {loading ? (
+  if (loading) {
+    return (
+      <main className="men-wrap">
+        <section className="container" style={{ padding: "28px 0 60px" }}>
+          <h1 className="men-title" style={{ marginBottom: 8 }}>
+            Order Tracking
+          </h1>
           <p className="muted">Đang load đơn hàng...</p>
-        ) : err ? (
+        </section>
+      </main>
+    );
+  }
+
+  if (err) {
+    return (
+      <main className="men-wrap">
+        <section className="container" style={{ padding: "28px 0 60px" }}>
+          <h1 className="men-title" style={{ marginBottom: 8 }}>
+            Order Tracking
+          </h1>
           <div
             style={{
               border: "1px solid #fee2e2",
@@ -132,102 +201,277 @@ export default function OrderDetailPage() {
           >
             <strong>Oops:</strong> <span>{err}</span>
           </div>
-        ) : sorted.length === 0 ? (
-          <div
-            style={{
-              border: "1px solid #e5e7eb",
-              borderRadius: 12,
-              padding: 24,
-              textAlign: "center",
-              background: "#f8fafc",
-            }}
-          >
-            <h3 style={{ marginTop: 0 }}>Chưa có đơn nào</h3>
-            <p className="muted" style={{ marginTop: 6, marginBottom: 16 }}>
-              Checkout thử 1 đơn rồi quay lại đây sẽ thấy liền.
-            </p>
+
+          <div style={{ marginTop: 16, display: "flex", gap: 10 }}>
             <Link to="/" className="btn btn-primary">
-              Go shopping
+              Back to Home
+            </Link>
+            <Link to="/cart" className="btn btn-outline">
+              Back to Cart
             </Link>
           </div>
-        ) : (
-          <div style={{ display: "grid", gap: 12 }}>
-            {sorted.map((o) => {
-              const code = o?.order_id ?? o?.id;
+        </section>
+      </main>
+    );
+  }
+
+  return (
+    <main className="men-wrap">
+      {/* Breadcrumb */}
+      <section className="men-bc">
+        <div className="container">
+          <Link to="/" className="men-bc-link">
+            Home
+          </Link>
+          <span className="men-bc-sep">›</span>
+          <Link to="/orders" className="men-bc-link">
+            Orders
+          </Link>
+          <span className="men-bc-sep">›</span>
+          <span>Tracking</span>
+        </div>
+      </section>
+
+      {/* Header */}
+      <section className="men-head">
+        <div className="container">
+          <h1 className="men-title">Order Tracking</h1>
+          <p className="men-sub">
+            Theo dõi đơn hàng của bạn theo thời gian thực-ish 😎
+          </p>
+        </div>
+      </section>
+
+      <section className="container" style={{ padding: "18px 0 64px" }}>
+        {/* Top card */}
+        <div
+          style={{
+            border: "1px solid #e5e7eb",
+            borderRadius: 12,
+            padding: 16,
+            background: "#fff",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 12,
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <div>
+              <div className="muted" style={{ fontSize: 13 }}>
+                Order
+              </div>
+              <div style={{ fontSize: 20, fontWeight: 800 }}>
+                #{order?.order_id ?? order?.id ?? id}
+              </div>
+              <div className="muted" style={{ marginTop: 6 }}>
+                Created: {formatDate(order?.created_at || order?.createdAt)}
+              </div>
+            </div>
+
+            <div style={{ textAlign: "right" }}>
+              <div
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  padding: "8px 12px",
+                  borderRadius: 999,
+                  border: "1px solid #e5e7eb",
+                  background: "#f8fafc",
+                  fontWeight: 700,
+                }}
+              >
+                Status: {statusLabel(order?.status)}
+              </div>
+
+              <div style={{ marginTop: 10, display: "flex", gap: 10, justifyContent: "flex-end" }}>
+                <button className="btn btn-outline" onClick={copyLink} type="button">
+                  Copy tracking link
+                </button>
+                <Link to="/orders" className="btn btn-outline">
+                  View all orders
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Timeline */}
+          <div style={{ marginTop: 18 }}>
+            {["Placed", "Paid", "Shipped", "Delivered"].map((label, idx) => {
+              const done = idx <= stepIdx;
               return (
-                <button
-                  key={code}
-                  onClick={() => openOrder(o)}
-                  type="button"
-                  className="card"
+                <div
+                  key={label}
                   style={{
-                    textAlign: "left",
-                    padding: 16,
-                    cursor: "pointer",
-                    background: "#fff",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 12,
+                    marginTop: 10,
                   }}
                 >
                   <div
                     style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "flex-start",
-                      gap: 12,
+                      width: 14,
+                      height: 14,
+                      borderRadius: 999,
+                      border: "2px solid #111827",
+                      background: done ? "#111827" : "transparent",
+                      flex: "0 0 auto",
                     }}
-                  >
-                    <div>
-                      <div className="muted" style={{ fontSize: 13 }}>
-                        Order
-                      </div>
-                      <div style={{ fontSize: 18, fontWeight: 900 }}>
-                        #{code}
-                      </div>
-
-                      <div className="muted" style={{ marginTop: 6, fontSize: 13 }}>
-                        Created: {formatDate(o?.created_at || o?.createdAt)}
-                      </div>
-
-                      <div className="muted" style={{ marginTop: 4, fontSize: 13 }}>
-                        Payment: <strong>{o?.payment || "—"}</strong>
-                      </div>
-                    </div>
-
-                    <div style={{ textAlign: "right" }}>
-                      <div
-                        style={{
-                          display: "inline-flex",
-                          alignItems: "center",
-                          padding: "6px 10px",
-                          borderRadius: 999,
-                          border: "1px solid #e5e7eb",
-                          background: "#f8fafc",
-                          fontWeight: 800,
-                          fontSize: 13,
-                        }}
-                      >
-                        {statusLabel(o?.status)}
-                      </div>
-
-                      <div style={{ marginTop: 10, fontWeight: 900, fontSize: 16 }}>
-                        {formatMoneyVND(o?.total_amount)}
-                      </div>
-
-                      <div className="muted" style={{ marginTop: 6, fontSize: 13 }}>
-                        Tap to track →
-                      </div>
+                  />
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontWeight: 700 }}>{label}</div>
+                    <div className="muted" style={{ fontSize: 13 }}>
+                      {idx === stepIdx ? "Đang ở bước này nè" : done ? "Đã xong" : "Chưa tới"}
                     </div>
                   </div>
-
-                  {o?.shipping_address ? (
-                    <div className="muted" style={{ marginTop: 10, fontSize: 13 }}>
-                      Ship to: {o.shipping_address}
-                    </div>
-                  ) : null}
-                </button>
+                </div>
               );
             })}
           </div>
-        )}
+        </div>
+
+        {/* Items + summary */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr",
+            gap: 16,
+            marginTop: 16,
+          }}
+        >
+          {/* Items */}
+          <div
+            style={{
+              border: "1px solid #e5e7eb",
+              borderRadius: 12,
+              padding: 16,
+              background: "#fff",
+            }}
+          >
+            <h3 style={{ marginTop: 0, marginBottom: 12 }}>Items</h3>
+
+            {items.length === 0 ? (
+              <p className="muted" style={{ margin: 0 }}>
+                Đơn này chưa có item (hoặc data chưa map đúng).
+              </p>
+            ) : (
+              <div style={{ display: "grid", gap: 12 }}>
+                {items.map((it) => (
+                  <div
+                    key={it.id || `${it.variant_id}-${it.order_id}`}
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "72px 1fr auto",
+                      gap: 12,
+                      alignItems: "center",
+                      border: "1px solid #e5e7eb",
+                      borderRadius: 12,
+                      padding: 10,
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: 72,
+                        height: 72,
+                        borderRadius: 10,
+                        overflow: "hidden",
+                        background: "#f3f4f6",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {it.image ? (
+                        <img
+                          src={it.image}
+                          alt={it.name}
+                          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                        />
+                      ) : (
+                        <span className="muted" style={{ fontSize: 12 }}>
+                          No image
+                        </span>
+                      )}
+                    </div>
+
+                    <div>
+                      <div style={{ fontWeight: 800 }}>{it.name}</div>
+                      <div className="muted" style={{ fontSize: 13, marginTop: 4 }}>
+                        Variant: {it.size} / {it.color} · Qty: {it.quantity}
+                      </div>
+                      <div className="muted" style={{ fontSize: 13, marginTop: 2 }}>
+                        Price: {formatMoneyVND(it.price)}
+                      </div>
+                    </div>
+
+                    <div style={{ fontWeight: 900 }}>
+                      {formatMoneyVND(it.lineTotal)}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Summary */}
+          <div
+            style={{
+              border: "1px solid #e5e7eb",
+              borderRadius: 12,
+              padding: 16,
+              background: "#fff",
+            }}
+          >
+            <h3 style={{ marginTop: 0, marginBottom: 12 }}>Summary</h3>
+            <div style={{ display: "grid", gap: 8 }}>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <span className="muted">Payment</span>
+                <span style={{ fontWeight: 700 }}>{order?.payment || "—"}</span>
+              </div>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <span className="muted">Shipping address</span>
+                <span style={{ fontWeight: 700 }}>
+                  {order?.shipping_address || "—"}
+                </span>
+              </div>
+
+              <hr />
+
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  fontWeight: 900,
+                  fontSize: 18,
+                }}
+              >
+                <span>Total</span>
+                <span>{formatMoneyVND(computedTotal)}</span>
+              </div>
+
+              <div style={{ display: "flex", gap: 10, marginTop: 10 }}>
+                <Link to="/" className="btn btn-primary">
+                  Continue shopping
+                </Link>
+                <Link to="/cart" className="btn btn-outline">
+                  Back to cart
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Tiny note */}
+        <p className="muted" style={{ marginTop: 14, fontSize: 12 }}>
+          Nếu m đang chạy json-server: nhớ bật đúng port (default mình set {API_BASE}).
+          Cần đổi thì set env: <code>REACT_APP_API_URL</code> hoặc <code>VITE_API_URL</code>.
+        </p>
       </section>
     </main>
   );
