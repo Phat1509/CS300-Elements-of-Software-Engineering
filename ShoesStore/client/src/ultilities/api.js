@@ -17,9 +17,18 @@ export const getProducts = async (params = {}) => {
 };
 
 // Lấy product theo slug
-export const getProductBySlug = async (slug) => {
-  const res = await api.get("/products", { params: { slug } });
-  return res.data[0] || null; // ✅ OBJECT
+const getProductByIdOrSlug = async (identifier) => {
+  // 1. Thử tìm theo slug trước
+  let res = await api.get("/products", { params: { slug: identifier } });
+  if (res.data && res.data.length > 0) return res.data[0];
+
+  // 2. Nếu không thấy và identifier là số (hoặc chuỗi số), thử tìm theo id
+  // Lưu ý: json-server dùng id là string hay number đều được
+  res = await api.get("/products", { params: { id: identifier } });
+  if (res.data && res.data.length > 0) return res.data[0];
+    res = await api.get("/products", { params: { product_id: identifier } });
+  
+  return res.data[0] || null;
 };
 
 // Lấy variants theo product_id
@@ -31,11 +40,16 @@ export const getProductVariants = async (productId) => {
 };
 
 // Product detail (product + variants)
-export const getProductDetail = async (slug) => {
-  const product = await getProductBySlug(slug);
+export const getProductDetail = async (identifier) => {
+  // Thay vì chỉ gọi getProductBySlug, ta gọi hàm đa năng ở trên
+  const product = await getProductByIdOrSlug(identifier);
+  
   if (!product) return null;
 
-  const variants = await getProductVariants(product.product_id);
+  // Lấy variants (giữ nguyên logic cũ của bạn)
+  // Lưu ý: dùng product.id hoặc product.product_id tùy vào DB của bạn
+  const pId = product.product_id || product.id; 
+  const variants = await getProductVariants(pId);
 
   return {
     ...product,

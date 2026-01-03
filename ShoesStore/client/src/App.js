@@ -57,8 +57,7 @@ function AppRoutes() {
         <Route path="/sale" element={<SalePage />} />
         <Route path="/wishlist" element={<WishlistPage />} />
         <Route path="/cart" element={<CartPage />} />
-        <Route path="/product/:id" element={<ProductDetailPage />} />
-        <Route path="/orders" element={<OrdersTrackingPage />} />
+        <Route path="/product/:slug" element={<ProductDetailPage />} />        <Route path="/orders" element={<OrdersTrackingPage />} />
         <Route path="/order/:id" element={<OrderDetailPage />} />
         {/* Auth (user) */}
         <Route path="/signin" element={<SignInPage />} />

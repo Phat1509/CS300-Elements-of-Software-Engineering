@@ -1,54 +1,51 @@
 // client/src/components/user/CartPage.jsx
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom"; 
 import { ChevronRight, Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
-import { updateQuantity, removeItem, clearCart } from "../../actions/cart";
+import { useCart } from "../../context/CartContext"; // Import Context
 
 export default function CartPage() {
-  const dispatch = useDispatch();
+  // Lấy dữ liệu và hàm từ CartContext
+  const { cartItems, total, addToCart, removeFromCart } = useCart();
 
-  const items = useSelector((state) => state.cart.items);
-
-  const subtotal = items.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
-  const shipping = items.length > 0 ? 10 : 0;
+  // Tính toán phí vận chuyển và thuế dựa trên total từ Context
+  const subtotal = total;
+  const shipping = cartItems.length > 0 ? 10 : 0;
   const tax = subtotal * 0.08;
-  const total = subtotal + shipping + tax;
+  const finalTotal = subtotal + shipping + tax;
 
+  // Xử lý tăng số lượng (+1)
   const increaseQty = (item) => {
-    dispatch(updateQuantity(item.id, item.quantity + 1));
+    // Gọi hàm addToCart với số lượng dương để cộng dồn
+    addToCart(item.variant_id, 1);
   };
 
+  // Xử lý giảm số lượng (-1)
   const decreaseQty = (item) => {
     if (item.quantity > 1) {
-      dispatch(updateQuantity(item.id, item.quantity - 1));
+      // Gọi hàm addToCart với số lượng âm để trừ đi
+      addToCart(item.variant_id, -1);
     }
   };
 
-  const handleCheckout = async () => {
-    if (items.length === 0) return;
-    // For now, do not write to db.json from client. Checkout will clear local cart only.
-    dispatch(clearCart());
-    alert("Checkout simulated locally. Admin will process orders.");
-  };
-
+  // Xử lý xóa sản phẩm
   const handleRemove = (id) => {
-    dispatch(removeItem(id));
+    // id ở đây là id của cart_item
+    removeFromCart(id);
   };
 
-  const handleClear = () => {
-    dispatch(clearCart());
+  const handleCheckout = () => {
+    if (cartItems.length === 0) return;
+    alert("Proceeding to checkout... (Feature coming soon)");
   };
 
   return (
     <>
       <section className="men-bc">
         <div className="container" style={{ display: "flex", gap: 8 }}>
-          <a href="/" className="men-bc-link">
+          <Link to="/" className="men-bc-link">
             Home
-          </a>
+          </Link>
           <span className="men-bc-sep">
             <ChevronRight size={16} />
           </span>
@@ -61,10 +58,10 @@ export default function CartPage() {
           Your Cart
         </h1>
         <p className="muted" style={{ marginBottom: 24 }}>
-          {items.length} item(s) · Free returns within 30 days
+          {cartItems.length} item(s) · Free returns within 30 days
         </p>
 
-        {items.length === 0 ? (
+        {cartItems.length === 0 ? (
           <div
             style={{
               border: "1px solid #e5e7eb",
@@ -81,9 +78,9 @@ export default function CartPage() {
             <p className="muted" style={{ marginBottom: 16 }}>
               Start exploring our latest collections.
             </p>
-            <a href="/" className="btn btn-primary">
+            <Link to="/" className="btn btn-primary">
               Continue Shopping
-            </a>
+            </Link>
           </div>
         ) : (
           <div style={{ display: "grid", gap: 24, gridTemplateColumns: "1fr" }}>
@@ -93,7 +90,7 @@ export default function CartPage() {
               <div
                 style={{ display: "grid", gap: 16, gridTemplateColumns: "1fr" }}
               >
-                {items.map((it) => (
+                {cartItems.map((it) => (
                   <div
                     key={it.id}
                     style={{
@@ -106,9 +103,10 @@ export default function CartPage() {
                       padding: 12,
                     }}
                   >
+                    {/* Ảnh sản phẩm */}
                     <img
                       src={it.image}
-                      alt={it.name}
+                      alt={it.product_name}
                       style={{
                         width: 96,
                         height: 96,
@@ -125,12 +123,12 @@ export default function CartPage() {
                         }}
                       >
                         <div>
-                          <h4 style={{ margin: 0 }}>{it.name}</h4>
-                          {it.size && (
-                            <div className="muted" style={{ marginTop: 4 }}>
-                              Size: {it.size}
-                            </div>
-                          )}
+                          {/* Tên sản phẩm */}
+                          <h4 style={{ margin: 0 }}>{it.product_name}</h4>
+                          <div className="muted" style={{ marginTop: 4 }}>
+                            {/* Hiển thị Size / Color */}
+                            Size: {it.size} | Color: {it.color}
+                          </div>
                         </div>
                         <strong>${it.price.toFixed(2)}</strong>
                       </div>
@@ -143,13 +141,17 @@ export default function CartPage() {
                           marginTop: 12,
                         }}
                       >
+                        {/* Nút Giảm */}
                         <button
                           className="btn btn-outline"
                           onClick={() => decreaseQty(it)}
+                          disabled={it.quantity <= 1} // Disable nếu chỉ còn 1
                           aria-label="Decrease quantity"
                         >
                           <Minus size={16} />
                         </button>
+                        
+                        {/* Số lượng */}
                         <div
                           style={{
                             minWidth: 40,
@@ -159,6 +161,8 @@ export default function CartPage() {
                         >
                           {it.quantity}
                         </div>
+
+                        {/* Nút Tăng */}
                         <button
                           className="btn btn-outline"
                           onClick={() => increaseQty(it)}
@@ -166,9 +170,11 @@ export default function CartPage() {
                         >
                           <Plus size={16} />
                         </button>
+
+                        {/* Nút Xóa */}
                         <button
                           className="btn btn-outline"
-                          style={{ marginLeft: "auto" }}
+                          style={{ marginLeft: "auto", color: "red", borderColor: "#fee2e2" }}
                           onClick={() => handleRemove(it.id)}
                           aria-label="Remove item"
                         >
@@ -218,10 +224,11 @@ export default function CartPage() {
                       display: "flex",
                       justifyContent: "space-between",
                       fontWeight: 800,
+                      fontSize: "1.1rem"
                     }}
                   >
                     <span>Total</span>
-                    <span>${total.toFixed(2)}</span>
+                    <span>${finalTotal.toFixed(2)}</span>
                   </div>
 
                   <button
@@ -230,13 +237,6 @@ export default function CartPage() {
                     onClick={handleCheckout}
                   >
                     Checkout
-                  </button>
-                  <button
-                    className="btn btn-outline"
-                    type="button"
-                    onClick={handleClear}
-                  >
-                    Clear Cart
                   </button>
                 </div>
 

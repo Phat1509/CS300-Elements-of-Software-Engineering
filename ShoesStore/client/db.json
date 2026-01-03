@@ -3,22 +3,26 @@
     {
       "brand_id": 1,
       "name": "Nike",
-      "description": "Nike represents generic sport fashion."
+      "description": "Nike represents generic sport fashion.",
+      "id": "0d6b"
     },
     {
       "brand_id": 2,
       "name": "Adidas",
-      "description": "Adidas represents generic sport fashion."
+      "description": "Adidas represents generic sport fashion.",
+      "id": "d1a2"
     },
     {
       "brand_id": 3,
       "name": "Puma",
-      "description": "Puma represents generic sport fashion."
+      "description": "Puma represents generic sport fashion.",
+      "id": "a2de"
     },
     {
       "brand_id": 4,
       "name": "Converse",
-      "description": "Converse represents generic sport fashion."
+      "description": "Converse represents generic sport fashion.",
+      "id": "e3e1"
     }
   ],
   "categories": [
@@ -27,21 +31,24 @@
       "name": "Men",
       "slug": "men",
       "description": "Men's Fashion",
-      "parent_id": null
+      "parent_id": null,
+      "id": "ee21"
     },
     {
       "category_id": 2,
       "name": "Women",
       "slug": "women",
       "description": "Women's Fashion",
-      "parent_id": null
+      "parent_id": null,
+      "id": "a864"
     },
     {
       "category_id": 3,
       "name": "Sneakers",
       "slug": "sneakers",
       "description": "All Sneakers",
-      "parent_id": 1
+      "parent_id": 1,
+      "id": "b76a"
     }
   ],
   "products": [
@@ -56,7 +63,8 @@
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.297Z"
+      "created_at": "2026-01-03T05:44:10.297Z",
+      "id": "0f3c"
     },
     {
       "product_id": 2,
@@ -69,7 +77,8 @@
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "4347"
     },
     {
       "product_id": 3,
@@ -82,7 +91,8 @@
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "11e4"
     },
     {
       "product_id": 4,
@@ -95,7 +105,8 @@
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "3c35"
     },
     {
       "product_id": 5,
@@ -108,7 +119,8 @@
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "e773"
     },
     {
       "product_id": 6,
@@ -121,7 +133,8 @@
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "473d"
     },
     {
       "product_id": 7,
@@ -134,7 +147,8 @@
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "afbb"
     },
     {
       "product_id": 8,
@@ -147,7 +161,8 @@
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "f5b3"
     },
     {
       "product_id": 9,
@@ -160,7 +175,8 @@
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "2910"
     },
     {
       "product_id": 10,
@@ -173,7 +189,8 @@
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "651f"
     },
     {
       "product_id": 11,
@@ -186,7 +203,8 @@
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "4156"
     },
     {
       "product_id": 12,
@@ -199,7 +217,8 @@
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "8ad5"
     },
     {
       "product_id": 13,
@@ -212,7 +231,8 @@
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "89b8"
     },
     {
       "product_id": 14,
@@ -225,7 +245,8 @@
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "7801"
     },
     {
       "product_id": 15,
@@ -238,7 +259,8 @@
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "3802"
     },
     {
       "product_id": 16,
@@ -251,7 +273,8 @@
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "4c30"
     },
     {
       "product_id": 17,
@@ -264,7 +287,8 @@
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "cc79"
     },
     {
       "product_id": 18,
@@ -277,7 +301,8 @@
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "038e"
     },
     {
       "product_id": 19,
@@ -290,7 +315,8 @@
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "a81d"
     },
     {
       "product_id": 20,
@@ -303,7 +329,8 @@
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "5104"
     },
     {
       "product_id": 21,
@@ -316,7 +343,8 @@
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "343a"
     },
     {
       "product_id": 22,
@@ -329,7 +357,8 @@
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "687f"
     },
     {
       "product_id": 23,
@@ -342,7 +371,8 @@
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "ebcb"
     },
     {
       "product_id": 24,
@@ -355,7 +385,8 @@
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "d2e0"
     },
     {
       "product_id": 25,
@@ -368,7 +399,8 @@
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "1f2c"
     },
     {
       "product_id": 26,
@@ -381,7 +413,8 @@
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "7888"
     },
     {
       "product_id": 27,
@@ -394,7 +427,8 @@
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "bf14"
     },
     {
       "product_id": 28,
@@ -407,7 +441,8 @@
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "3e99"
     },
     {
       "product_id": 29,
@@ -420,7 +455,8 @@
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "43d8"
     },
     {
       "product_id": 30,
@@ -433,7 +469,8 @@
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "daee"
     },
     {
       "product_id": 31,
@@ -446,7 +483,8 @@
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "3132"
     },
     {
       "product_id": 32,
@@ -459,7 +497,8 @@
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "d22e"
     },
     {
       "product_id": 33,
@@ -472,7 +511,8 @@
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "7da7"
     },
     {
       "product_id": 34,
@@ -485,7 +525,8 @@
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "5caa"
     },
     {
       "product_id": 35,
@@ -498,7 +539,8 @@
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "e03b"
     },
     {
       "product_id": 36,
@@ -511,7 +553,8 @@
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "2ec9"
     },
     {
       "product_id": 37,
@@ -524,7 +567,8 @@
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "41fa"
     },
     {
       "product_id": 38,
@@ -537,7 +581,8 @@
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "2888"
     },
     {
       "product_id": 39,
@@ -550,7 +595,8 @@
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "f73a"
     },
     {
       "product_id": 40,
@@ -563,7 +609,8 @@
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "fbf0"
     },
     {
       "product_id": 41,
@@ -576,7 +623,8 @@
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "1042"
     },
     {
       "product_id": 42,
@@ -589,7 +637,8 @@
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "85b0"
     },
     {
       "product_id": 43,
@@ -602,7 +651,8 @@
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "197a"
     },
     {
       "product_id": 44,
@@ -615,7 +665,8 @@
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "3415"
     },
     {
       "product_id": 45,
@@ -628,7 +679,8 @@
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "42ea"
     },
     {
       "product_id": 46,
@@ -641,7 +693,8 @@
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "fa86"
     },
     {
       "product_id": 47,
@@ -654,7 +707,8 @@
       "brand_id": 4,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "053d"
     },
     {
       "product_id": 48,
@@ -667,7 +721,8 @@
       "brand_id": 1,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "4a5d"
     },
     {
       "product_id": 49,
@@ -680,7 +735,8 @@
       "brand_id": 2,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "c3a8"
     },
     {
       "product_id": 50,
@@ -693,7 +749,8 @@
       "brand_id": 3,
       "category_id": 3,
       "is_active": true,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "5264"
     }
   ],
   "product_variants": [
@@ -703,7 +760,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-1-0",
-      "stock": 24
+      "stock": 24,
+      "id": "138b"
     },
     {
       "variant_id": 2,
@@ -711,7 +769,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-1-1",
-      "stock": 13
+      "stock": 13,
+      "id": "da54"
     },
     {
       "variant_id": 3,
@@ -719,7 +778,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-1-2",
-      "stock": 20
+      "stock": 20,
+      "id": "b2eb"
     },
     {
       "variant_id": 4,
@@ -727,7 +787,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-1-3",
-      "stock": 18
+      "stock": 18,
+      "id": "b9a1"
     },
     {
       "variant_id": 5,
@@ -735,7 +796,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-1-4",
-      "stock": 1
+      "stock": 1,
+      "id": "cd7f"
     },
     {
       "variant_id": 6,
@@ -743,7 +805,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-1-5",
-      "stock": 22
+      "stock": 22,
+      "id": "737e"
     },
     {
       "variant_id": 7,
@@ -751,7 +814,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-2-0",
-      "stock": 22
+      "stock": 22,
+      "id": "32fd"
     },
     {
       "variant_id": 8,
@@ -759,7 +823,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-2-1",
-      "stock": 21
+      "stock": 21,
+      "id": "1db2"
     },
     {
       "variant_id": 9,
@@ -767,7 +832,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-2-2",
-      "stock": 0
+      "stock": 0,
+      "id": "f997"
     },
     {
       "variant_id": 10,
@@ -775,7 +841,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-2-3",
-      "stock": 20
+      "stock": 20,
+      "id": "b72d"
     },
     {
       "variant_id": 11,
@@ -783,7 +850,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-2-4",
-      "stock": 14
+      "stock": 14,
+      "id": "14b9"
     },
     {
       "variant_id": 12,
@@ -791,7 +859,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-2-5",
-      "stock": 5
+      "stock": 5,
+      "id": "dd64"
     },
     {
       "variant_id": 13,
@@ -799,7 +868,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-3-0",
-      "stock": 7
+      "stock": 7,
+      "id": "0ec5"
     },
     {
       "variant_id": 14,
@@ -807,7 +877,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-3-1",
-      "stock": 8
+      "stock": 8,
+      "id": "db00"
     },
     {
       "variant_id": 15,
@@ -815,7 +886,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-3-2",
-      "stock": 1
+      "stock": 1,
+      "id": "7ef5"
     },
     {
       "variant_id": 16,
@@ -823,7 +895,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-3-3",
-      "stock": 26
+      "stock": 26,
+      "id": "3f7d"
     },
     {
       "variant_id": 17,
@@ -831,7 +904,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-3-4",
-      "stock": 13
+      "stock": 13,
+      "id": "5ccf"
     },
     {
       "variant_id": 18,
@@ -839,7 +913,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-3-5",
-      "stock": 15
+      "stock": 15,
+      "id": "9f12"
     },
     {
       "variant_id": 19,
@@ -847,7 +922,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-4-0",
-      "stock": 6
+      "stock": 6,
+      "id": "defe"
     },
     {
       "variant_id": 20,
@@ -855,7 +931,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-4-1",
-      "stock": 29
+      "stock": 29,
+      "id": "9ad5"
     },
     {
       "variant_id": 21,
@@ -863,7 +940,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-4-2",
-      "stock": 14
+      "stock": 14,
+      "id": "faac"
     },
     {
       "variant_id": 22,
@@ -871,7 +949,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-4-3",
-      "stock": 13
+      "stock": 13,
+      "id": "d7f3"
     },
     {
       "variant_id": 23,
@@ -879,7 +958,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-4-4",
-      "stock": 28
+      "stock": 28,
+      "id": "d1ed"
     },
     {
       "variant_id": 24,
@@ -887,7 +967,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-4-5",
-      "stock": 15
+      "stock": 15,
+      "id": "65ab"
     },
     {
       "variant_id": 25,
@@ -895,7 +976,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-5-0",
-      "stock": 11
+      "stock": 11,
+      "id": "801c"
     },
     {
       "variant_id": 26,
@@ -903,7 +985,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-5-1",
-      "stock": 20
+      "stock": 20,
+      "id": "fc23"
     },
     {
       "variant_id": 27,
@@ -911,7 +994,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-5-2",
-      "stock": 0
+      "stock": 0,
+      "id": "a4f5"
     },
     {
       "variant_id": 28,
@@ -919,7 +1003,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-5-3",
-      "stock": 20
+      "stock": 20,
+      "id": "9c02"
     },
     {
       "variant_id": 29,
@@ -927,7 +1012,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-5-4",
-      "stock": 2
+      "stock": 2,
+      "id": "f487"
     },
     {
       "variant_id": 30,
@@ -935,7 +1021,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-5-5",
-      "stock": 9
+      "stock": 9,
+      "id": "3e4c"
     },
     {
       "variant_id": 31,
@@ -943,7 +1030,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-6-0",
-      "stock": 2
+      "stock": 2,
+      "id": "801a"
     },
     {
       "variant_id": 32,
@@ -951,7 +1039,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-6-1",
-      "stock": 2
+      "stock": 2,
+      "id": "476a"
     },
     {
       "variant_id": 33,
@@ -959,7 +1048,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-6-2",
-      "stock": 20
+      "stock": 20,
+      "id": "2489"
     },
     {
       "variant_id": 34,
@@ -967,7 +1057,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-6-3",
-      "stock": 8
+      "stock": 8,
+      "id": "fe06"
     },
     {
       "variant_id": 35,
@@ -975,7 +1066,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-6-4",
-      "stock": 26
+      "stock": 26,
+      "id": "22b7"
     },
     {
       "variant_id": 36,
@@ -983,7 +1075,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-6-5",
-      "stock": 12
+      "stock": 12,
+      "id": "89cc"
     },
     {
       "variant_id": 37,
@@ -991,7 +1084,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-7-0",
-      "stock": 20
+      "stock": 20,
+      "id": "163b"
     },
     {
       "variant_id": 38,
@@ -999,7 +1093,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-7-1",
-      "stock": 4
+      "stock": 4,
+      "id": "3240"
     },
     {
       "variant_id": 39,
@@ -1007,7 +1102,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-7-2",
-      "stock": 24
+      "stock": 24,
+      "id": "c097"
     },
     {
       "variant_id": 40,
@@ -1015,7 +1111,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-7-3",
-      "stock": 13
+      "stock": 13,
+      "id": "6d16"
     },
     {
       "variant_id": 41,
@@ -1023,7 +1120,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-7-4",
-      "stock": 6
+      "stock": 6,
+      "id": "9aa3"
     },
     {
       "variant_id": 42,
@@ -1031,7 +1129,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-7-5",
-      "stock": 8
+      "stock": 8,
+      "id": "d5ba"
     },
     {
       "variant_id": 43,
@@ -1039,7 +1138,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-8-0",
-      "stock": 3
+      "stock": 3,
+      "id": "2146"
     },
     {
       "variant_id": 44,
@@ -1047,7 +1147,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-8-1",
-      "stock": 28
+      "stock": 28,
+      "id": "3799"
     },
     {
       "variant_id": 45,
@@ -1055,7 +1156,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-8-2",
-      "stock": 20
+      "stock": 20,
+      "id": "d2d7"
     },
     {
       "variant_id": 46,
@@ -1063,7 +1165,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-8-3",
-      "stock": 19
+      "stock": 19,
+      "id": "ff8b"
     },
     {
       "variant_id": 47,
@@ -1071,7 +1174,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-8-4",
-      "stock": 23
+      "stock": 23,
+      "id": "8658"
     },
     {
       "variant_id": 48,
@@ -1079,7 +1183,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-8-5",
-      "stock": 26
+      "stock": 26,
+      "id": "5f45"
     },
     {
       "variant_id": 49,
@@ -1087,7 +1192,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-9-0",
-      "stock": 9
+      "stock": 9,
+      "id": "42bc"
     },
     {
       "variant_id": 50,
@@ -1095,7 +1201,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-9-1",
-      "stock": 7
+      "stock": 7,
+      "id": "522c"
     },
     {
       "variant_id": 51,
@@ -1103,7 +1210,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-9-2",
-      "stock": 8
+      "stock": 8,
+      "id": "9825"
     },
     {
       "variant_id": 52,
@@ -1111,7 +1219,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-9-3",
-      "stock": 10
+      "stock": 10,
+      "id": "1eaf"
     },
     {
       "variant_id": 53,
@@ -1119,7 +1228,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-9-4",
-      "stock": 22
+      "stock": 22,
+      "id": "18b2"
     },
     {
       "variant_id": 54,
@@ -1127,7 +1237,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-9-5",
-      "stock": 2
+      "stock": 2,
+      "id": "737e"
     },
     {
       "variant_id": 55,
@@ -1135,7 +1246,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-10-0",
-      "stock": 1
+      "stock": 1,
+      "id": "7fe9"
     },
     {
       "variant_id": 56,
@@ -1143,7 +1255,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-10-1",
-      "stock": 29
+      "stock": 29,
+      "id": "baf3"
     },
     {
       "variant_id": 57,
@@ -1151,7 +1264,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-10-2",
-      "stock": 11
+      "stock": 11,
+      "id": "e1c8"
     },
     {
       "variant_id": 58,
@@ -1159,7 +1273,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-10-3",
-      "stock": 4
+      "stock": 4,
+      "id": "3933"
     },
     {
       "variant_id": 59,
@@ -1167,7 +1282,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-10-4",
-      "stock": 25
+      "stock": 25,
+      "id": "ec8d"
     },
     {
       "variant_id": 60,
@@ -1175,7 +1291,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-10-5",
-      "stock": 22
+      "stock": 22,
+      "id": "5e19"
     },
     {
       "variant_id": 61,
@@ -1183,7 +1300,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-11-0",
-      "stock": 19
+      "stock": 19,
+      "id": "3d66"
     },
     {
       "variant_id": 62,
@@ -1191,7 +1309,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-11-1",
-      "stock": 15
+      "stock": 15,
+      "id": "9e1a"
     },
     {
       "variant_id": 63,
@@ -1199,7 +1318,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-11-2",
-      "stock": 19
+      "stock": 19,
+      "id": "21ce"
     },
     {
       "variant_id": 64,
@@ -1207,7 +1327,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-11-3",
-      "stock": 7
+      "stock": 7,
+      "id": "4588"
     },
     {
       "variant_id": 65,
@@ -1215,7 +1336,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-11-4",
-      "stock": 21
+      "stock": 21,
+      "id": "0d85"
     },
     {
       "variant_id": 66,
@@ -1223,7 +1345,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-11-5",
-      "stock": 3
+      "stock": 3,
+      "id": "f6db"
     },
     {
       "variant_id": 67,
@@ -1231,7 +1354,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-12-0",
-      "stock": 7
+      "stock": 7,
+      "id": "6d35"
     },
     {
       "variant_id": 68,
@@ -1239,7 +1363,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-12-1",
-      "stock": 27
+      "stock": 27,
+      "id": "4661"
     },
     {
       "variant_id": 69,
@@ -1247,7 +1372,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-12-2",
-      "stock": 9
+      "stock": 9,
+      "id": "a96b"
     },
     {
       "variant_id": 70,
@@ -1255,7 +1381,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-12-3",
-      "stock": 9
+      "stock": 9,
+      "id": "7a6b"
     },
     {
       "variant_id": 71,
@@ -1263,7 +1390,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-12-4",
-      "stock": 22
+      "stock": 22,
+      "id": "9c9a"
     },
     {
       "variant_id": 72,
@@ -1271,7 +1399,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-12-5",
-      "stock": 18
+      "stock": 18,
+      "id": "d10a"
     },
     {
       "variant_id": 73,
@@ -1279,7 +1408,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-13-0",
-      "stock": 25
+      "stock": 25,
+      "id": "468d"
     },
     {
       "variant_id": 74,
@@ -1287,7 +1417,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-13-1",
-      "stock": 2
+      "stock": 2,
+      "id": "837f"
     },
     {
       "variant_id": 75,
@@ -1295,7 +1426,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-13-2",
-      "stock": 10
+      "stock": 10,
+      "id": "82cb"
     },
     {
       "variant_id": 76,
@@ -1303,7 +1435,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-13-3",
-      "stock": 6
+      "stock": 6,
+      "id": "0ecb"
     },
     {
       "variant_id": 77,
@@ -1311,7 +1444,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-13-4",
-      "stock": 12
+      "stock": 12,
+      "id": "2a82"
     },
     {
       "variant_id": 78,
@@ -1319,7 +1453,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-13-5",
-      "stock": 29
+      "stock": 29,
+      "id": "4a85"
     },
     {
       "variant_id": 79,
@@ -1327,7 +1462,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-14-0",
-      "stock": 16
+      "stock": 16,
+      "id": "6dac"
     },
     {
       "variant_id": 80,
@@ -1335,7 +1471,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-14-1",
-      "stock": 3
+      "stock": 3,
+      "id": "cf82"
     },
     {
       "variant_id": 81,
@@ -1343,7 +1480,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-14-2",
-      "stock": 25
+      "stock": 25,
+      "id": "f1ad"
     },
     {
       "variant_id": 82,
@@ -1351,7 +1489,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-14-3",
-      "stock": 26
+      "stock": 26,
+      "id": "cbe7"
     },
     {
       "variant_id": 83,
@@ -1359,7 +1498,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-14-4",
-      "stock": 0
+      "stock": 0,
+      "id": "59bb"
     },
     {
       "variant_id": 84,
@@ -1367,7 +1507,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-14-5",
-      "stock": 6
+      "stock": 6,
+      "id": "0fb2"
     },
     {
       "variant_id": 85,
@@ -1375,7 +1516,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-15-0",
-      "stock": 17
+      "stock": 17,
+      "id": "a8c7"
     },
     {
       "variant_id": 86,
@@ -1383,7 +1525,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-15-1",
-      "stock": 23
+      "stock": 23,
+      "id": "2b65"
     },
     {
       "variant_id": 87,
@@ -1391,7 +1534,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-15-2",
-      "stock": 16
+      "stock": 16,
+      "id": "af1e"
     },
     {
       "variant_id": 88,
@@ -1399,7 +1543,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-15-3",
-      "stock": 1
+      "stock": 1,
+      "id": "bb1d"
     },
     {
       "variant_id": 89,
@@ -1407,7 +1552,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-15-4",
-      "stock": 6
+      "stock": 6,
+      "id": "42aa"
     },
     {
       "variant_id": 90,
@@ -1415,7 +1561,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-15-5",
-      "stock": 19
+      "stock": 19,
+      "id": "0d29"
     },
     {
       "variant_id": 91,
@@ -1423,7 +1570,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-16-0",
-      "stock": 16
+      "stock": 16,
+      "id": "d904"
     },
     {
       "variant_id": 92,
@@ -1431,7 +1579,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-16-1",
-      "stock": 5
+      "stock": 5,
+      "id": "c2b4"
     },
     {
       "variant_id": 93,
@@ -1439,7 +1588,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-16-2",
-      "stock": 18
+      "stock": 18,
+      "id": "ebda"
     },
     {
       "variant_id": 94,
@@ -1447,7 +1597,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-16-3",
-      "stock": 21
+      "stock": 21,
+      "id": "7517"
     },
     {
       "variant_id": 95,
@@ -1455,7 +1606,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-16-4",
-      "stock": 26
+      "stock": 26,
+      "id": "baec"
     },
     {
       "variant_id": 96,
@@ -1463,7 +1615,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-16-5",
-      "stock": 4
+      "stock": 4,
+      "id": "6b62"
     },
     {
       "variant_id": 97,
@@ -1471,7 +1624,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-17-0",
-      "stock": 14
+      "stock": 14,
+      "id": "2562"
     },
     {
       "variant_id": 98,
@@ -1479,7 +1633,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-17-1",
-      "stock": 17
+      "stock": 17,
+      "id": "7464"
     },
     {
       "variant_id": 99,
@@ -1487,7 +1642,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-17-2",
-      "stock": 26
+      "stock": 26,
+      "id": "57a1"
     },
     {
       "variant_id": 100,
@@ -1495,7 +1651,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-17-3",
-      "stock": 20
+      "stock": 20,
+      "id": "c336"
     },
     {
       "variant_id": 101,
@@ -1503,7 +1660,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-17-4",
-      "stock": 25
+      "stock": 25,
+      "id": "685f"
     },
     {
       "variant_id": 102,
@@ -1511,7 +1669,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-17-5",
-      "stock": 20
+      "stock": 20,
+      "id": "0aba"
     },
     {
       "variant_id": 103,
@@ -1519,7 +1678,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-18-0",
-      "stock": 4
+      "stock": 4,
+      "id": "db13"
     },
     {
       "variant_id": 104,
@@ -1527,7 +1687,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-18-1",
-      "stock": 21
+      "stock": 21,
+      "id": "da9f"
     },
     {
       "variant_id": 105,
@@ -1535,7 +1696,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-18-2",
-      "stock": 14
+      "stock": 14,
+      "id": "9780"
     },
     {
       "variant_id": 106,
@@ -1543,7 +1705,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-18-3",
-      "stock": 27
+      "stock": 27,
+      "id": "f919"
     },
     {
       "variant_id": 107,
@@ -1551,7 +1714,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-18-4",
-      "stock": 7
+      "stock": 7,
+      "id": "47c2"
     },
     {
       "variant_id": 108,
@@ -1559,7 +1723,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-18-5",
-      "stock": 25
+      "stock": 25,
+      "id": "ffae"
     },
     {
       "variant_id": 109,
@@ -1567,7 +1732,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-19-0",
-      "stock": 17
+      "stock": 17,
+      "id": "bfb7"
     },
     {
       "variant_id": 110,
@@ -1575,7 +1741,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-19-1",
-      "stock": 29
+      "stock": 29,
+      "id": "e5b4"
     },
     {
       "variant_id": 111,
@@ -1583,7 +1750,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-19-2",
-      "stock": 15
+      "stock": 15,
+      "id": "3f11"
     },
     {
       "variant_id": 112,
@@ -1591,7 +1759,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-19-3",
-      "stock": 10
+      "stock": 10,
+      "id": "e82a"
     },
     {
       "variant_id": 113,
@@ -1599,7 +1768,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-19-4",
-      "stock": 13
+      "stock": 13,
+      "id": "3cca"
     },
     {
       "variant_id": 114,
@@ -1607,7 +1777,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-19-5",
-      "stock": 0
+      "stock": 0,
+      "id": "461c"
     },
     {
       "variant_id": 115,
@@ -1615,7 +1786,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-20-0",
-      "stock": 15
+      "stock": 15,
+      "id": "e5aa"
     },
     {
       "variant_id": 116,
@@ -1623,7 +1795,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-20-1",
-      "stock": 14
+      "stock": 14,
+      "id": "1682"
     },
     {
       "variant_id": 117,
@@ -1631,7 +1804,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-20-2",
-      "stock": 14
+      "stock": 14,
+      "id": "dbe9"
     },
     {
       "variant_id": 118,
@@ -1639,7 +1813,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-20-3",
-      "stock": 10
+      "stock": 10,
+      "id": "be0b"
     },
     {
       "variant_id": 119,
@@ -1647,7 +1822,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-20-4",
-      "stock": 27
+      "stock": 27,
+      "id": "e351"
     },
     {
       "variant_id": 120,
@@ -1655,7 +1831,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-20-5",
-      "stock": 28
+      "stock": 28,
+      "id": "35d5"
     },
     {
       "variant_id": 121,
@@ -1663,7 +1840,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-21-0",
-      "stock": 21
+      "stock": 21,
+      "id": "2b9c"
     },
     {
       "variant_id": 122,
@@ -1671,7 +1849,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-21-1",
-      "stock": 2
+      "stock": 2,
+      "id": "c91c"
     },
     {
       "variant_id": 123,
@@ -1679,7 +1858,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-21-2",
-      "stock": 22
+      "stock": 22,
+      "id": "cfbb"
     },
     {
       "variant_id": 124,
@@ -1687,7 +1867,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-21-3",
-      "stock": 28
+      "stock": 28,
+      "id": "2d97"
     },
     {
       "variant_id": 125,
@@ -1695,7 +1876,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-21-4",
-      "stock": 20
+      "stock": 20,
+      "id": "c531"
     },
     {
       "variant_id": 126,
@@ -1703,7 +1885,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-21-5",
-      "stock": 11
+      "stock": 11,
+      "id": "3259"
     },
     {
       "variant_id": 127,
@@ -1711,7 +1894,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-22-0",
-      "stock": 26
+      "stock": 26,
+      "id": "21bb"
     },
     {
       "variant_id": 128,
@@ -1719,7 +1903,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-22-1",
-      "stock": 17
+      "stock": 17,
+      "id": "5549"
     },
     {
       "variant_id": 129,
@@ -1727,7 +1912,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-22-2",
-      "stock": 9
+      "stock": 9,
+      "id": "5742"
     },
     {
       "variant_id": 130,
@@ -1735,7 +1921,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-22-3",
-      "stock": 6
+      "stock": 6,
+      "id": "60d9"
     },
     {
       "variant_id": 131,
@@ -1743,7 +1930,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-22-4",
-      "stock": 13
+      "stock": 13,
+      "id": "81d3"
     },
     {
       "variant_id": 132,
@@ -1751,7 +1939,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-22-5",
-      "stock": 27
+      "stock": 27,
+      "id": "f32d"
     },
     {
       "variant_id": 133,
@@ -1759,7 +1948,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-23-0",
-      "stock": 4
+      "stock": 4,
+      "id": "cd38"
     },
     {
       "variant_id": 134,
@@ -1767,7 +1957,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-23-1",
-      "stock": 8
+      "stock": 8,
+      "id": "d5bf"
     },
     {
       "variant_id": 135,
@@ -1775,7 +1966,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-23-2",
-      "stock": 23
+      "stock": 23,
+      "id": "337f"
     },
     {
       "variant_id": 136,
@@ -1783,7 +1975,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-23-3",
-      "stock": 16
+      "stock": 16,
+      "id": "0c9b"
     },
     {
       "variant_id": 137,
@@ -1791,7 +1984,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-23-4",
-      "stock": 21
+      "stock": 21,
+      "id": "c73f"
     },
     {
       "variant_id": 138,
@@ -1799,7 +1993,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-23-5",
-      "stock": 2
+      "stock": 2,
+      "id": "bab3"
     },
     {
       "variant_id": 139,
@@ -1807,7 +2002,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-24-0",
-      "stock": 27
+      "stock": 27,
+      "id": "8d05"
     },
     {
       "variant_id": 140,
@@ -1815,7 +2011,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-24-1",
-      "stock": 7
+      "stock": 7,
+      "id": "1999"
     },
     {
       "variant_id": 141,
@@ -1823,7 +2020,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-24-2",
-      "stock": 12
+      "stock": 12,
+      "id": "5064"
     },
     {
       "variant_id": 142,
@@ -1831,7 +2029,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-24-3",
-      "stock": 29
+      "stock": 29,
+      "id": "9fc7"
     },
     {
       "variant_id": 143,
@@ -1839,7 +2038,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-24-4",
-      "stock": 16
+      "stock": 16,
+      "id": "480a"
     },
     {
       "variant_id": 144,
@@ -1847,7 +2047,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-24-5",
-      "stock": 13
+      "stock": 13,
+      "id": "eaec"
     },
     {
       "variant_id": 145,
@@ -1855,7 +2056,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-25-0",
-      "stock": 9
+      "stock": 9,
+      "id": "d334"
     },
     {
       "variant_id": 146,
@@ -1863,7 +2065,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-25-1",
-      "stock": 17
+      "stock": 17,
+      "id": "37b1"
     },
     {
       "variant_id": 147,
@@ -1871,7 +2074,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-25-2",
-      "stock": 6
+      "stock": 6,
+      "id": "bc54"
     },
     {
       "variant_id": 148,
@@ -1879,7 +2083,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-25-3",
-      "stock": 1
+      "stock": 1,
+      "id": "abfb"
     },
     {
       "variant_id": 149,
@@ -1887,7 +2092,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-25-4",
-      "stock": 10
+      "stock": 10,
+      "id": "dd1a"
     },
     {
       "variant_id": 150,
@@ -1895,7 +2101,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-25-5",
-      "stock": 25
+      "stock": 25,
+      "id": "db7a"
     },
     {
       "variant_id": 151,
@@ -1903,7 +2110,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-26-0",
-      "stock": 14
+      "stock": 14,
+      "id": "c8be"
     },
     {
       "variant_id": 152,
@@ -1911,7 +2119,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-26-1",
-      "stock": 26
+      "stock": 26,
+      "id": "e140"
     },
     {
       "variant_id": 153,
@@ -1919,7 +2128,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-26-2",
-      "stock": 2
+      "stock": 2,
+      "id": "ca09"
     },
     {
       "variant_id": 154,
@@ -1927,7 +2137,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-26-3",
-      "stock": 5
+      "stock": 5,
+      "id": "c907"
     },
     {
       "variant_id": 155,
@@ -1935,7 +2146,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-26-4",
-      "stock": 11
+      "stock": 11,
+      "id": "5250"
     },
     {
       "variant_id": 156,
@@ -1943,7 +2155,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-26-5",
-      "stock": 12
+      "stock": 12,
+      "id": "1041"
     },
     {
       "variant_id": 157,
@@ -1951,7 +2164,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-27-0",
-      "stock": 17
+      "stock": 17,
+      "id": "753a"
     },
     {
       "variant_id": 158,
@@ -1959,7 +2173,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-27-1",
-      "stock": 26
+      "stock": 26,
+      "id": "31e7"
     },
     {
       "variant_id": 159,
@@ -1967,7 +2182,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-27-2",
-      "stock": 13
+      "stock": 13,
+      "id": "801a"
     },
     {
       "variant_id": 160,
@@ -1975,7 +2191,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-27-3",
-      "stock": 12
+      "stock": 12,
+      "id": "c516"
     },
     {
       "variant_id": 161,
@@ -1983,7 +2200,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-27-4",
-      "stock": 24
+      "stock": 24,
+      "id": "8391"
     },
     {
       "variant_id": 162,
@@ -1991,7 +2209,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-27-5",
-      "stock": 24
+      "stock": 24,
+      "id": "e108"
     },
     {
       "variant_id": 163,
@@ -1999,7 +2218,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-28-0",
-      "stock": 6
+      "stock": 6,
+      "id": "2ca0"
     },
     {
       "variant_id": 164,
@@ -2007,7 +2227,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-28-1",
-      "stock": 22
+      "stock": 22,
+      "id": "954d"
     },
     {
       "variant_id": 165,
@@ -2015,7 +2236,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-28-2",
-      "stock": 0
+      "stock": 0,
+      "id": "f52d"
     },
     {
       "variant_id": 166,
@@ -2023,7 +2245,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-28-3",
-      "stock": 8
+      "stock": 8,
+      "id": "4695"
     },
     {
       "variant_id": 167,
@@ -2031,7 +2254,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-28-4",
-      "stock": 8
+      "stock": 8,
+      "id": "d685"
     },
     {
       "variant_id": 168,
@@ -2039,7 +2263,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-28-5",
-      "stock": 8
+      "stock": 8,
+      "id": "881f"
     },
     {
       "variant_id": 169,
@@ -2047,7 +2272,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-29-0",
-      "stock": 10
+      "stock": 10,
+      "id": "88eb"
     },
     {
       "variant_id": 170,
@@ -2055,7 +2281,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-29-1",
-      "stock": 25
+      "stock": 25,
+      "id": "06db"
     },
     {
       "variant_id": 171,
@@ -2063,7 +2290,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-29-2",
-      "stock": 4
+      "stock": 4,
+      "id": "3562"
     },
     {
       "variant_id": 172,
@@ -2071,7 +2299,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-29-3",
-      "stock": 17
+      "stock": 17,
+      "id": "e0d7"
     },
     {
       "variant_id": 173,
@@ -2079,7 +2308,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-29-4",
-      "stock": 21
+      "stock": 21,
+      "id": "1e77"
     },
     {
       "variant_id": 174,
@@ -2087,7 +2317,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-29-5",
-      "stock": 19
+      "stock": 19,
+      "id": "b2f8"
     },
     {
       "variant_id": 175,
@@ -2095,7 +2326,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-30-0",
-      "stock": 28
+      "stock": 28,
+      "id": "ee53"
     },
     {
       "variant_id": 176,
@@ -2103,7 +2335,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-30-1",
-      "stock": 9
+      "stock": 9,
+      "id": "8009"
     },
     {
       "variant_id": 177,
@@ -2111,7 +2344,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-30-2",
-      "stock": 1
+      "stock": 1,
+      "id": "1b9c"
     },
     {
       "variant_id": 178,
@@ -2119,7 +2353,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-30-3",
-      "stock": 0
+      "stock": 0,
+      "id": "85dd"
     },
     {
       "variant_id": 179,
@@ -2127,7 +2362,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-30-4",
-      "stock": 21
+      "stock": 21,
+      "id": "5ea7"
     },
     {
       "variant_id": 180,
@@ -2135,7 +2371,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-30-5",
-      "stock": 1
+      "stock": 1,
+      "id": "8519"
     },
     {
       "variant_id": 181,
@@ -2143,7 +2380,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-31-0",
-      "stock": 13
+      "stock": 13,
+      "id": "2f2a"
     },
     {
       "variant_id": 182,
@@ -2151,7 +2389,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-31-1",
-      "stock": 7
+      "stock": 7,
+      "id": "4f60"
     },
     {
       "variant_id": 183,
@@ -2159,7 +2398,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-31-2",
-      "stock": 6
+      "stock": 6,
+      "id": "47cd"
     },
     {
       "variant_id": 184,
@@ -2167,7 +2407,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-31-3",
-      "stock": 21
+      "stock": 21,
+      "id": "dd8d"
     },
     {
       "variant_id": 185,
@@ -2175,7 +2416,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-31-4",
-      "stock": 5
+      "stock": 5,
+      "id": "4729"
     },
     {
       "variant_id": 186,
@@ -2183,7 +2425,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-31-5",
-      "stock": 8
+      "stock": 8,
+      "id": "4c38"
     },
     {
       "variant_id": 187,
@@ -2191,7 +2434,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-32-0",
-      "stock": 16
+      "stock": 16,
+      "id": "cd13"
     },
     {
       "variant_id": 188,
@@ -2199,7 +2443,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-32-1",
-      "stock": 28
+      "stock": 28,
+      "id": "720a"
     },
     {
       "variant_id": 189,
@@ -2207,7 +2452,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-32-2",
-      "stock": 19
+      "stock": 19,
+      "id": "206b"
     },
     {
       "variant_id": 190,
@@ -2215,7 +2461,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-32-3",
-      "stock": 20
+      "stock": 20,
+      "id": "fae3"
     },
     {
       "variant_id": 191,
@@ -2223,7 +2470,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-32-4",
-      "stock": 2
+      "stock": 2,
+      "id": "6cbc"
     },
     {
       "variant_id": 192,
@@ -2231,7 +2479,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-32-5",
-      "stock": 1
+      "stock": 1,
+      "id": "46bf"
     },
     {
       "variant_id": 193,
@@ -2239,7 +2488,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-33-0",
-      "stock": 15
+      "stock": 15,
+      "id": "fe79"
     },
     {
       "variant_id": 194,
@@ -2247,7 +2497,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-33-1",
-      "stock": 5
+      "stock": 5,
+      "id": "3a6d"
     },
     {
       "variant_id": 195,
@@ -2255,7 +2506,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-33-2",
-      "stock": 10
+      "stock": 10,
+      "id": "2129"
     },
     {
       "variant_id": 196,
@@ -2263,7 +2515,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-33-3",
-      "stock": 24
+      "stock": 24,
+      "id": "71b9"
     },
     {
       "variant_id": 197,
@@ -2271,7 +2524,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-33-4",
-      "stock": 19
+      "stock": 19,
+      "id": "5f0b"
     },
     {
       "variant_id": 198,
@@ -2279,7 +2533,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-33-5",
-      "stock": 19
+      "stock": 19,
+      "id": "4ad3"
     },
     {
       "variant_id": 199,
@@ -2287,7 +2542,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-34-0",
-      "stock": 5
+      "stock": 5,
+      "id": "e8fb"
     },
     {
       "variant_id": 200,
@@ -2295,7 +2551,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-34-1",
-      "stock": 11
+      "stock": 11,
+      "id": "b26c"
     },
     {
       "variant_id": 201,
@@ -2303,7 +2560,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-34-2",
-      "stock": 0
+      "stock": 0,
+      "id": "7b86"
     },
     {
       "variant_id": 202,
@@ -2311,7 +2569,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-34-3",
-      "stock": 15
+      "stock": 15,
+      "id": "b862"
     },
     {
       "variant_id": 203,
@@ -2319,7 +2578,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-34-4",
-      "stock": 15
+      "stock": 15,
+      "id": "54d4"
     },
     {
       "variant_id": 204,
@@ -2327,7 +2587,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-34-5",
-      "stock": 8
+      "stock": 8,
+      "id": "32e2"
     },
     {
       "variant_id": 205,
@@ -2335,7 +2596,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-35-0",
-      "stock": 23
+      "stock": 23,
+      "id": "8c79"
     },
     {
       "variant_id": 206,
@@ -2343,7 +2605,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-35-1",
-      "stock": 14
+      "stock": 14,
+      "id": "7123"
     },
     {
       "variant_id": 207,
@@ -2351,7 +2614,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-35-2",
-      "stock": 13
+      "stock": 13,
+      "id": "9869"
     },
     {
       "variant_id": 208,
@@ -2359,7 +2623,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-35-3",
-      "stock": 24
+      "stock": 24,
+      "id": "d9a0"
     },
     {
       "variant_id": 209,
@@ -2367,7 +2632,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-35-4",
-      "stock": 0
+      "stock": 0,
+      "id": "aeba"
     },
     {
       "variant_id": 210,
@@ -2375,7 +2641,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-35-5",
-      "stock": 13
+      "stock": 13,
+      "id": "f96f"
     },
     {
       "variant_id": 211,
@@ -2383,7 +2650,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-36-0",
-      "stock": 10
+      "stock": 10,
+      "id": "e686"
     },
     {
       "variant_id": 212,
@@ -2391,7 +2659,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-36-1",
-      "stock": 21
+      "stock": 21,
+      "id": "dea0"
     },
     {
       "variant_id": 213,
@@ -2399,7 +2668,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-36-2",
-      "stock": 22
+      "stock": 22,
+      "id": "934d"
     },
     {
       "variant_id": 214,
@@ -2407,7 +2677,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-36-3",
-      "stock": 16
+      "stock": 16,
+      "id": "f4fe"
     },
     {
       "variant_id": 215,
@@ -2415,7 +2686,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-36-4",
-      "stock": 10
+      "stock": 10,
+      "id": "6083"
     },
     {
       "variant_id": 216,
@@ -2423,7 +2695,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-36-5",
-      "stock": 7
+      "stock": 7,
+      "id": "ba06"
     },
     {
       "variant_id": 217,
@@ -2431,7 +2704,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-37-0",
-      "stock": 9
+      "stock": 9,
+      "id": "f961"
     },
     {
       "variant_id": 218,
@@ -2439,7 +2713,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-37-1",
-      "stock": 19
+      "stock": 19,
+      "id": "9714"
     },
     {
       "variant_id": 219,
@@ -2447,7 +2722,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-37-2",
-      "stock": 9
+      "stock": 9,
+      "id": "d5e4"
     },
     {
       "variant_id": 220,
@@ -2455,7 +2731,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-37-3",
-      "stock": 13
+      "stock": 13,
+      "id": "c983"
     },
     {
       "variant_id": 221,
@@ -2463,7 +2740,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-37-4",
-      "stock": 23
+      "stock": 23,
+      "id": "2570"
     },
     {
       "variant_id": 222,
@@ -2471,7 +2749,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-37-5",
-      "stock": 28
+      "stock": 28,
+      "id": "394a"
     },
     {
       "variant_id": 223,
@@ -2479,7 +2758,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-38-0",
-      "stock": 28
+      "stock": 28,
+      "id": "6800"
     },
     {
       "variant_id": 224,
@@ -2487,7 +2767,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-38-1",
-      "stock": 11
+      "stock": 11,
+      "id": "9a0b"
     },
     {
       "variant_id": 225,
@@ -2495,7 +2776,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-38-2",
-      "stock": 16
+      "stock": 16,
+      "id": "8826"
     },
     {
       "variant_id": 226,
@@ -2503,7 +2785,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-38-3",
-      "stock": 19
+      "stock": 19,
+      "id": "94a8"
     },
     {
       "variant_id": 227,
@@ -2511,7 +2794,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-38-4",
-      "stock": 15
+      "stock": 15,
+      "id": "21f6"
     },
     {
       "variant_id": 228,
@@ -2519,7 +2803,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-38-5",
-      "stock": 24
+      "stock": 24,
+      "id": "724c"
     },
     {
       "variant_id": 229,
@@ -2527,7 +2812,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-39-0",
-      "stock": 29
+      "stock": 29,
+      "id": "0ce9"
     },
     {
       "variant_id": 230,
@@ -2535,7 +2821,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-39-1",
-      "stock": 14
+      "stock": 14,
+      "id": "7c9e"
     },
     {
       "variant_id": 231,
@@ -2543,7 +2830,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-39-2",
-      "stock": 3
+      "stock": 3,
+      "id": "fe7e"
     },
     {
       "variant_id": 232,
@@ -2551,7 +2839,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-39-3",
-      "stock": 1
+      "stock": 1,
+      "id": "6031"
     },
     {
       "variant_id": 233,
@@ -2559,7 +2848,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-39-4",
-      "stock": 23
+      "stock": 23,
+      "id": "af9c"
     },
     {
       "variant_id": 234,
@@ -2567,7 +2857,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-39-5",
-      "stock": 28
+      "stock": 28,
+      "id": "edc2"
     },
     {
       "variant_id": 235,
@@ -2575,7 +2866,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-40-0",
-      "stock": 19
+      "stock": 19,
+      "id": "c448"
     },
     {
       "variant_id": 236,
@@ -2583,7 +2875,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-40-1",
-      "stock": 14
+      "stock": 14,
+      "id": "e9a3"
     },
     {
       "variant_id": 237,
@@ -2591,7 +2884,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-40-2",
-      "stock": 19
+      "stock": 19,
+      "id": "1e23"
     },
     {
       "variant_id": 238,
@@ -2599,7 +2893,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-40-3",
-      "stock": 1
+      "stock": 1,
+      "id": "b57f"
     },
     {
       "variant_id": 239,
@@ -2607,7 +2902,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-40-4",
-      "stock": 4
+      "stock": 4,
+      "id": "4d2f"
     },
     {
       "variant_id": 240,
@@ -2615,7 +2911,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-40-5",
-      "stock": 6
+      "stock": 6,
+      "id": "a9e3"
     },
     {
       "variant_id": 241,
@@ -2623,7 +2920,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-41-0",
-      "stock": 21
+      "stock": 21,
+      "id": "76d6"
     },
     {
       "variant_id": 242,
@@ -2631,7 +2929,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-41-1",
-      "stock": 9
+      "stock": 9,
+      "id": "b4cf"
     },
     {
       "variant_id": 243,
@@ -2639,7 +2938,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-41-2",
-      "stock": 9
+      "stock": 9,
+      "id": "081c"
     },
     {
       "variant_id": 244,
@@ -2647,7 +2947,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-41-3",
-      "stock": 7
+      "stock": 7,
+      "id": "e8e1"
     },
     {
       "variant_id": 245,
@@ -2655,7 +2956,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-41-4",
-      "stock": 0
+      "stock": 0,
+      "id": "e09a"
     },
     {
       "variant_id": 246,
@@ -2663,7 +2965,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-41-5",
-      "stock": 16
+      "stock": 16,
+      "id": "3023"
     },
     {
       "variant_id": 247,
@@ -2671,7 +2974,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-42-0",
-      "stock": 3
+      "stock": 3,
+      "id": "28ee"
     },
     {
       "variant_id": 248,
@@ -2679,7 +2983,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-42-1",
-      "stock": 8
+      "stock": 8,
+      "id": "40bd"
     },
     {
       "variant_id": 249,
@@ -2687,7 +2992,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-42-2",
-      "stock": 27
+      "stock": 27,
+      "id": "d3d0"
     },
     {
       "variant_id": 250,
@@ -2695,7 +3001,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-42-3",
-      "stock": 28
+      "stock": 28,
+      "id": "6a55"
     },
     {
       "variant_id": 251,
@@ -2703,7 +3010,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-42-4",
-      "stock": 9
+      "stock": 9,
+      "id": "9ee3"
     },
     {
       "variant_id": 252,
@@ -2711,7 +3019,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-42-5",
-      "stock": 29
+      "stock": 29,
+      "id": "58c1"
     },
     {
       "variant_id": 253,
@@ -2719,7 +3028,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-43-0",
-      "stock": 0
+      "stock": 0,
+      "id": "8f35"
     },
     {
       "variant_id": 254,
@@ -2727,7 +3037,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-43-1",
-      "stock": 15
+      "stock": 15,
+      "id": "8754"
     },
     {
       "variant_id": 255,
@@ -2735,7 +3046,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-43-2",
-      "stock": 19
+      "stock": 19,
+      "id": "81d1"
     },
     {
       "variant_id": 256,
@@ -2743,7 +3055,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-43-3",
-      "stock": 11
+      "stock": 11,
+      "id": "1eab"
     },
     {
       "variant_id": 257,
@@ -2751,7 +3064,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-43-4",
-      "stock": 10
+      "stock": 10,
+      "id": "4811"
     },
     {
       "variant_id": 258,
@@ -2759,7 +3073,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-43-5",
-      "stock": 2
+      "stock": 2,
+      "id": "8d87"
     },
     {
       "variant_id": 259,
@@ -2767,7 +3082,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-44-0",
-      "stock": 2
+      "stock": 2,
+      "id": "400c"
     },
     {
       "variant_id": 260,
@@ -2775,7 +3091,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-44-1",
-      "stock": 24
+      "stock": 24,
+      "id": "0f2d"
     },
     {
       "variant_id": 261,
@@ -2783,7 +3100,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-44-2",
-      "stock": 17
+      "stock": 17,
+      "id": "259d"
     },
     {
       "variant_id": 262,
@@ -2791,7 +3109,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-44-3",
-      "stock": 26
+      "stock": 26,
+      "id": "0f72"
     },
     {
       "variant_id": 263,
@@ -2799,7 +3118,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-44-4",
-      "stock": 5
+      "stock": 5,
+      "id": "cc45"
     },
     {
       "variant_id": 264,
@@ -2807,7 +3127,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-44-5",
-      "stock": 14
+      "stock": 14,
+      "id": "3411"
     },
     {
       "variant_id": 265,
@@ -2815,7 +3136,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-45-0",
-      "stock": 18
+      "stock": 18,
+      "id": "5eb9"
     },
     {
       "variant_id": 266,
@@ -2823,7 +3145,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-45-1",
-      "stock": 0
+      "stock": 0,
+      "id": "febe"
     },
     {
       "variant_id": 267,
@@ -2831,7 +3154,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-45-2",
-      "stock": 15
+      "stock": 15,
+      "id": "3c93"
     },
     {
       "variant_id": 268,
@@ -2839,7 +3163,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-45-3",
-      "stock": 9
+      "stock": 9,
+      "id": "15f4"
     },
     {
       "variant_id": 269,
@@ -2847,7 +3172,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-45-4",
-      "stock": 2
+      "stock": 2,
+      "id": "8e46"
     },
     {
       "variant_id": 270,
@@ -2855,7 +3181,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-45-5",
-      "stock": 11
+      "stock": 11,
+      "id": "5b58"
     },
     {
       "variant_id": 271,
@@ -2863,7 +3190,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-46-0",
-      "stock": 2
+      "stock": 2,
+      "id": "4c58"
     },
     {
       "variant_id": 272,
@@ -2871,7 +3199,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-46-1",
-      "stock": 23
+      "stock": 23,
+      "id": "2629"
     },
     {
       "variant_id": 273,
@@ -2879,7 +3208,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-46-2",
-      "stock": 25
+      "stock": 25,
+      "id": "2ff0"
     },
     {
       "variant_id": 274,
@@ -2887,7 +3217,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-46-3",
-      "stock": 24
+      "stock": 24,
+      "id": "f617"
     },
     {
       "variant_id": 275,
@@ -2895,7 +3226,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-46-4",
-      "stock": 29
+      "stock": 29,
+      "id": "d96a"
     },
     {
       "variant_id": 276,
@@ -2903,7 +3235,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-46-5",
-      "stock": 28
+      "stock": 28,
+      "id": "fab6"
     },
     {
       "variant_id": 277,
@@ -2911,7 +3244,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-47-0",
-      "stock": 13
+      "stock": 13,
+      "id": "5e0e"
     },
     {
       "variant_id": 278,
@@ -2919,7 +3253,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-47-1",
-      "stock": 13
+      "stock": 13,
+      "id": "9ffb"
     },
     {
       "variant_id": 279,
@@ -2927,7 +3262,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-47-2",
-      "stock": 11
+      "stock": 11,
+      "id": "ead8"
     },
     {
       "variant_id": 280,
@@ -2935,7 +3271,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-47-3",
-      "stock": 16
+      "stock": 16,
+      "id": "4e39"
     },
     {
       "variant_id": 281,
@@ -2943,7 +3280,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-47-4",
-      "stock": 23
+      "stock": 23,
+      "id": "fe11"
     },
     {
       "variant_id": 282,
@@ -2951,7 +3289,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-47-5",
-      "stock": 19
+      "stock": 19,
+      "id": "2d60"
     },
     {
       "variant_id": 283,
@@ -2959,7 +3298,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-48-0",
-      "stock": 22
+      "stock": 22,
+      "id": "192d"
     },
     {
       "variant_id": 284,
@@ -2967,7 +3307,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-48-1",
-      "stock": 14
+      "stock": 14,
+      "id": "8fe6"
     },
     {
       "variant_id": 285,
@@ -2975,7 +3316,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-48-2",
-      "stock": 22
+      "stock": 22,
+      "id": "b97f"
     },
     {
       "variant_id": 286,
@@ -2983,7 +3325,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-48-3",
-      "stock": 11
+      "stock": 11,
+      "id": "b331"
     },
     {
       "variant_id": 287,
@@ -2991,7 +3334,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-48-4",
-      "stock": 17
+      "stock": 17,
+      "id": "d66b"
     },
     {
       "variant_id": 288,
@@ -2999,7 +3343,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-48-5",
-      "stock": 27
+      "stock": 27,
+      "id": "6ee4"
     },
     {
       "variant_id": 289,
@@ -3007,7 +3352,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-49-0",
-      "stock": 4
+      "stock": 4,
+      "id": "2039"
     },
     {
       "variant_id": 290,
@@ -3015,7 +3361,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-49-1",
-      "stock": 26
+      "stock": 26,
+      "id": "2f5f"
     },
     {
       "variant_id": 291,
@@ -3023,7 +3370,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-49-2",
-      "stock": 29
+      "stock": 29,
+      "id": "0078"
     },
     {
       "variant_id": 292,
@@ -3031,7 +3379,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-49-3",
-      "stock": 1
+      "stock": 1,
+      "id": "f97e"
     },
     {
       "variant_id": 293,
@@ -3039,7 +3388,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-49-4",
-      "stock": 10
+      "stock": 10,
+      "id": "8b2d"
     },
     {
       "variant_id": 294,
@@ -3047,7 +3397,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-49-5",
-      "stock": 12
+      "stock": 12,
+      "id": "0523"
     },
     {
       "variant_id": 295,
@@ -3055,7 +3406,8 @@
       "size": "39",
       "color": "White",
       "sku": "SKU-50-0",
-      "stock": 0
+      "stock": 0,
+      "id": "c8c9"
     },
     {
       "variant_id": 296,
@@ -3063,7 +3415,8 @@
       "size": "40",
       "color": "Black",
       "sku": "SKU-50-1",
-      "stock": 7
+      "stock": 7,
+      "id": "bc46"
     },
     {
       "variant_id": 297,
@@ -3071,7 +3424,8 @@
       "size": "41",
       "color": "Red",
       "sku": "SKU-50-2",
-      "stock": 11
+      "stock": 11,
+      "id": "a6c9"
     },
     {
       "variant_id": 298,
@@ -3079,7 +3433,8 @@
       "size": "42",
       "color": "White",
       "sku": "SKU-50-3",
-      "stock": 28
+      "stock": 28,
+      "id": "2719"
     },
     {
       "variant_id": 299,
@@ -3087,7 +3442,8 @@
       "size": "43",
       "color": "Black",
       "sku": "SKU-50-4",
-      "stock": 4
+      "stock": 4,
+      "id": "c226"
     },
     {
       "variant_id": 300,
@@ -3095,7 +3451,8 @@
       "size": "39",
       "color": "Red",
       "sku": "SKU-50-5",
-      "stock": 8
+      "stock": 8,
+      "id": "5f0c"
     }
   ],
   "users": [
@@ -3115,7 +3472,8 @@
       "phone": null,
       "gender": null,
       "google_id": null,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "3538"
     },
     {
       "user_id": 2,
@@ -3133,25 +3491,27 @@
       "phone": "0909123456",
       "gender": "male",
       "google_id": null,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "25bb"
     }
   ],
   "cart": [
     {
       "cart_id": 1,
       "user_id": 2,
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "ccb3"
     }
   ],
   "cart_item": [
     {
-      "id": 1,
+      "id": "1",
       "cart_id": 1,
       "variant_id": 1,
-      "quantity": 2
+      "quantity": 3
     },
     {
-      "id": 2,
+      "id": "2",
       "cart_id": 1,
       "variant_id": 8,
       "quantity": 1
@@ -3165,12 +3525,13 @@
       "payment": "COD",
       "shipping_address": "123 Le Loi, HCM",
       "total_amount": 3100000,
-      "created_at": "2026-01-02T05:44:10.298Z"
+      "created_at": "2026-01-02T05:44:10.298Z",
+      "id": "fdb9"
     }
   ],
   "order_item": [
     {
-      "id": 1,
+      "id": "1",
       "order_id": 1,
       "variant_id": 1,
       "price": 1550000,
@@ -3179,7 +3540,7 @@
   ],
   "wishlists": [
     {
-      "id": 1,
+      "id": "1",
       "user_id": 2,
       "product_id": 5
     }
@@ -3191,7 +3552,8 @@
       "user_id": 2,
       "rating": 5,
       "content": "Giày đi rất êm, giao hàng nhanh!",
-      "created_at": "2026-01-03T05:44:10.298Z"
+      "created_at": "2026-01-03T05:44:10.298Z",
+      "id": "b03d"
     }
   ],
   "sessions": [],
