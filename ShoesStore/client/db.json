@@ -7583,6 +7583,16 @@
       "total_amount": 3100000,
       "created_at": "2026-01-02T06:55:38.402Z",
       "id": "40a3"
+    },
+    {
+      "id": "9a2c",
+      "user_id": "57e8",
+      "status": "PENDING",
+      "total_amount": 10098010,
+      "created_at": "2026-01-03T07:39:22.523Z",
+      "customer_note": "Standard Shipping",
+      "shipping_fee": 10,
+      "tax": 748000
     }
   ],
   "order_item": [
@@ -7592,6 +7602,27 @@
       "variant_id": 1,
       "price": 1550000,
       "quantity": 2
+    },
+    {
+      "id": "eb8f",
+      "order_id": "9a2c",
+      "variant_id": 1,
+      "quantity": 4,
+      "price": 1550000
+    },
+    {
+      "id": "9f57",
+      "order_id": "9a2c",
+      "variant_id": 16,
+      "quantity": 1,
+      "price": 1600000
+    },
+    {
+      "id": "1c7b",
+      "order_id": "9a2c",
+      "variant_id": 6,
+      "quantity": 1,
+      "price": 1550000
     }
   ],
   "wishlists": [

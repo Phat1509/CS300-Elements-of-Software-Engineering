@@ -1,15 +1,6 @@
+// client/src/components/user/OrdersTrackingPage.jsx
 import React, { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-
-/**
- * OrderTrackingPage
- * - Works with json-server style:
- *   GET /orders/:id (id is json-server string)
- *   OR GET /orders?order_id=:num (order_id numeric)
- *   GET /order_item?order_id=:order_id
- *   GET /product_variants?variant_id=:id
- *   GET /products?product_id=:id
- */
 
 const API_BASE =
   process.env.REACT_APP_API_URL ||

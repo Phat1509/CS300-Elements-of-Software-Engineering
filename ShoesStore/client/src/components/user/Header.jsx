@@ -6,11 +6,14 @@ import { useCart } from "../../context/CartContext"; // Import CartContext
 
 export default function Header() {
   const { user, logout } = useAuth(); // Lấy user info và hàm logout
-  const { cartItems } = useCart();    // Lấy giỏ hàng
+  const { cartItems } = useCart(); // Lấy giỏ hàng
   const navigate = useNavigate();
 
   // Tính tổng số lượng item trong giỏ
-  const count = cartItems.reduce((total, item) => total + (item.quantity || 0), 0);
+  const count = cartItems.reduce(
+    (total, item) => total + (item.quantity || 0),
+    0
+  );
 
   const handleLogout = () => {
     logout();
@@ -28,11 +31,21 @@ export default function Header() {
 
         {/* Nav */}
         <nav className="nav">
-          <NavLink to="/new" className="nav-link">New Arrivals</NavLink>
-          <NavLink to="/men" className="nav-link">Men</NavLink>
-          <NavLink to="/women" className="nav-link">Women</NavLink>
-          <NavLink to="/kids" className="nav-link">Kids</NavLink>
-          <NavLink to="/sale" className="nav-link">Sale</NavLink>
+          <NavLink to="/new" className="nav-link">
+            New Arrivals
+          </NavLink>
+          <NavLink to="/men" className="nav-link">
+            Men
+          </NavLink>
+          <NavLink to="/women" className="nav-link">
+            Women
+          </NavLink>
+          <NavLink to="/kids" className="nav-link">
+            Kids
+          </NavLink>
+          <NavLink to="/sale" className="nav-link">
+            Sale
+          </NavLink>
 
           {/* Logic hiển thị: Nếu CHƯA login thì hiện Sign in/Join us */}
           {!user && (
@@ -50,22 +63,49 @@ export default function Header() {
         {/* Actions (right) */}
         <div className="actions">
           {/* Wishlist */}
-          <Link to="/wishlist" className="btn btn-outline" aria-label="Wishlist">
+          <Link
+            to="/wishlist"
+            className="btn btn-outline"
+            aria-label="Wishlist"
+          >
             ♡
           </Link>
 
           {/* User Actions */}
           {user ? (
-            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+              {/* [MỚI] Link xem lịch sử đơn hàng */}
+              <Link
+                to="/orders"
+                style={{
+                  fontSize: "14px",
+                  fontWeight: "500",
+                  textDecoration: "none",
+                  color: "inherit",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "4px",
+                }}
+              >
+                📦 Orders
+              </Link>
+              <div
+                style={{ width: "1px", height: "14px", background: "#ccc" }}
+              ></div>{" "}
+              {/* Đường kẻ dọc ngăn cách */}
               {/* Hiển thị tên User */}
               <span style={{ fontSize: "14px", fontWeight: "500" }}>
                 Hi, {user.username}
               </span>
               {/* Nút Logout */}
-              <button 
-                onClick={handleLogout} 
+              <button
+                onClick={handleLogout}
                 className="btn btn-outline"
-                style={{ fontSize: "12px", padding: "4px 8px" }}
+                style={{
+                  fontSize: "12px",
+                  padding: "4px 8px",
+                  marginLeft: "4px",
+                }}
               >
                 Logout
               </button>
