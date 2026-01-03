@@ -9,7 +9,7 @@ import {
   addOrderItem,
   updateProductStock,
   deleteCartItem,
-} from "../../ultilities/api";
+} from "../../utilities/api";
 
 export default function CartPage() {
   const { cartItems, total, addToCart, removeFromCart } = useCart();

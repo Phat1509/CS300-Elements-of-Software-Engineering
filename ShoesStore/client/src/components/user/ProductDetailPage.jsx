@@ -1,8 +1,15 @@
 // client/src/components/user/ProductDetailPage.jsx
 import React, { useEffect, useState, useMemo } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { ChevronRight, Star, Minus, Plus, ShoppingCart } from "lucide-react";
-import { getProductDetail } from "../../ultilities/api";
+import {
+  ChevronRight,
+  Star,
+  Minus,
+  Plus,
+  ShoppingCart,
+  Heart,
+} from "lucide-react";
+import { getProductDetail } from "../../utilities/api"; // Chú ý đường dẫn import api
 import { useAuth } from "../../context/AuthContext";
 import { useCart } from "../../context/CartContext";
 
@@ -10,19 +17,18 @@ const ProductDetail = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
 
-  // Lấy User và hàm AddToCart từ Context
   const { user } = useAuth();
-  const { addToCart } = useCart();
+  const { addToCart } = useCart(); // Giả sử Context xử lý việc gọi API
 
   const [product, setProduct] = useState(null);
   const [variants, setVariants] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // State cho lựa chọn của user
+  // State cho lựa chọn
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
   const [quantity, setQuantity] = useState(1);
-  const [isAdding, setIsAdding] = useState(false); // Hiệu ứng loading nút bấm
+  const [isAdding, setIsAdding] = useState(false);
 
   /* ================= LOAD DATA ================= */
   useEffect(() => {
@@ -30,14 +36,20 @@ const ProductDetail = () => {
       setLoading(true);
       try {
         const data = await getProductDetail(slug);
+
         if (data) {
           setProduct(data);
-          setVariants(data.variants || []);
 
-          // Tự động chọn size/color đầu tiên nếu có để user đỡ phải bấm
-          if (data.variants && data.variants.length > 0) {
-            // Logic: Lấy các option unique
-            // (Để đơn giản, ở đây user vẫn tự chọn, chỉ set variants)
+          // --- [ĐÃ SỬA] Lấy variants thật từ DB ---
+          // Code api.js đã xử lý việc gộp variants vào đây rồi
+          const realVariants = data.variants || data.product_variants || [];
+          setVariants(realVariants);
+
+          // Tự động chọn size/màu đầu tiên còn hàng
+          const firstAvailable = realVariants.find((v) => v.stock > 0);
+          if (firstAvailable) {
+            setSelectedSize(firstAvailable.size);
+            setSelectedColor(firstAvailable.color);
           }
         }
       } catch (error) {
@@ -52,58 +64,80 @@ const ProductDetail = () => {
 
   /* ================= CALCULATE OPTIONS ================= */
   const sizes = useMemo(() => {
-    return [...new Set(variants.map((v) => v.size).filter(Boolean))].sort();
+    return [...new Set(variants.map((v) => v.size))].sort();
   }, [variants]);
 
   const colors = useMemo(() => {
-    return [...new Set(variants.map((v) => v.color).filter(Boolean))];
+    return [...new Set(variants.map((v) => v.color))];
   }, [variants]);
 
-  // Tìm variant cụ thể dựa trên size và color đã chọn
   const selectedVariant = useMemo(() => {
     return variants.find((v) => {
-      // Chuyển tất cả về String và Lowercase để so sánh chính xác nhất
-      const sizeMatch = String(v.size) === String(selectedSize);
-      const colorMatch = v.color.toLowerCase() === selectedColor.toLowerCase();
-
-      return sizeMatch && colorMatch;
+      return v.size === selectedSize && v.color === selectedColor;
     });
   }, [variants, selectedSize, selectedColor]);
 
+  /* ================= PRICE CALCULATION ================= */
+  const finalPrice = useMemo(() => {
+    if (!product) return 0;
+    const price = Number(product.price) || 0;
+    const discount = Number(product.discount_percentage) || 0;
+
+    if (discount > 0) {
+      return price * (1 - discount / 100);
+    }
+    return price;
+  }, [product]);
+
   /* ================= HANDLER ================= */
   const handleAddToCart = async () => {
-    // 1. Check Login
     if (!user) {
-      alert("Please sign in to add items to your cart.");
+      alert("Vui lòng đăng nhập để thêm vào giỏ hàng.");
       navigate("/signin");
       return;
     }
 
-    // 2. Validate selection
     if (!selectedSize || !selectedColor) {
-      alert("Please select a Size and a Color.");
+      alert("Vui lòng chọn Size và Màu sắc.");
       return;
     }
 
     if (!selectedVariant) {
-      alert("This combination is currently unavailable.");
+      alert("Phiên bản này hiện không khả dụng.");
       return;
     }
 
     if (selectedVariant.stock < quantity) {
-      alert(`Only ${selectedVariant.stock} items left in stock.`);
+      alert(`Chỉ còn lại ${selectedVariant.stock} sản phẩm trong kho.`);
       return;
     }
 
-    // 3. Call Context Action
     setIsAdding(true);
     try {
-      // Hàm này từ CartContext sẽ tự update State và gọi API
-      await addToCart(selectedVariant.variant_id, quantity);
-      alert("Added to cart successfully!");
+      // --- [QUAN TRỌNG] Tạo object Item chuẩn ---
+      const cartItemData = {
+        // IDs quan trọng nhất để lưu xuống DB
+        product_id: product.product_id || product.id,
+        variant_id: selectedVariant.variant_id || selectedVariant.id, // Phải có cái này!
+
+        // Các thông tin hiển thị (cho UI Context render ngay lập tức)
+        name: product.name,
+        price: finalPrice,
+        image: product.image_url,
+        size: selectedSize,
+        color: selectedColor,
+        stock: selectedVariant.stock, // Để check max quantity trong giỏ
+        quantity: quantity,
+      };
+
+      // Gọi hàm từ Context.
+      // Lưu ý: Đảm bảo CartContext của bạn truyền đúng tham số xuống api.addToCart
+      await addToCart(cartItemData, quantity);
+
+      alert("Đã thêm vào giỏ hàng thành công!");
     } catch (error) {
       console.error("Failed to add to cart", error);
-      alert("Failed to add to cart.");
+      alert("Lỗi khi thêm vào giỏ hàng.");
     } finally {
       setIsAdding(false);
     }
@@ -111,44 +145,63 @@ const ProductDetail = () => {
 
   if (loading)
     return (
-      <div className="container" style={{ padding: "40px" }}>
-        Loading product...
+      <div
+        className="container"
+        style={{ padding: "100px 0", textAlign: "center" }}
+      >
+        Đang tải...
       </div>
     );
   if (!product)
     return (
-      <div className="container" style={{ padding: "40px" }}>
-        Product not found.
+      <div
+        className="container"
+        style={{ padding: "100px 0", textAlign: "center" }}
+      >
+        Không tìm thấy sản phẩm.
       </div>
     );
 
   return (
-    <>
+    <main className="men-wrap">
       {/* Breadcrumbs */}
       <section className="men-bc">
-        <div className="container" style={{ display: "flex", gap: 8 }}>
+        <div
+          className="container"
+          style={{ display: "flex", alignItems: "center", gap: 8 }}
+        >
           <Link to="/" className="men-bc-link">
-            Home
+            Trang chủ
           </Link>
-          <span className="men-bc-sep">
-            <ChevronRight size={16} />
-          </span>
-          <Link to="/men" className="men-bc-link">
-            Products
+          <ChevronRight size={14} className="muted" />
+          <Link
+            to={
+              product.category_id === 1
+                ? "/men"
+                : product.category_id === 2
+                ? "/women"
+                : "/kids"
+            }
+            className="men-bc-link"
+          >
+            {product.category_id === 1
+              ? "Nam"
+              : product.category_id === 2
+              ? "Nữ"
+              : "Trẻ em"}
           </Link>
-          <span className="men-bc-sep">
-            <ChevronRight size={16} />
-          </span>
-          <span style={{ color: "#111" }}>{product.name}</span>
+          <ChevronRight size={14} className="muted" />
+          <span style={{ color: "#111", fontWeight: 500 }}>{product.name}</span>
         </div>
       </section>
 
       {/* Main Content */}
       <section className="container" style={{ padding: "40px 0 80px" }}>
         <div
+          className="product-layout"
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 1fr",
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
             gap: "48px",
           }}
         >
@@ -156,19 +209,37 @@ const ProductDetail = () => {
           <div
             className="product-image-wrapper"
             style={{
-              background: "#f8f8f8",
+              background: "#f5f5f5",
               borderRadius: "16px",
               overflow: "hidden",
+              position: "relative",
             }}
           >
+            {product.discount_percentage > 0 && (
+              <div
+                style={{
+                  position: "absolute",
+                  top: 16,
+                  left: 16,
+                  background: "#ef4444",
+                  color: "white",
+                  padding: "4px 12px",
+                  borderRadius: "4px",
+                  fontWeight: "bold",
+                }}
+              >
+                -{product.discount_percentage}%
+              </div>
+            )}
             <img
               src={product.image_url}
               alt={product.name}
               style={{
                 width: "100%",
                 height: "100%",
-                objectFit: "cover",
+                objectFit: "contain",
                 display: "block",
+                minHeight: "400px",
               }}
             />
           </div>
@@ -195,15 +266,33 @@ const ProductDetail = () => {
                 marginBottom: "24px",
               }}
             >
-              <span
-                style={{
-                  fontSize: "24px",
-                  fontWeight: "600",
-                  color: "#2563eb",
-                }}
+              <div
+                style={{ display: "flex", alignItems: "baseline", gap: "8px" }}
               >
-                ${product.price.toFixed(2)}
-              </span>
+                <span
+                  style={{
+                    fontSize: "28px",
+                    fontWeight: "700",
+                    color: "#ef4444",
+                  }}
+                >
+                  {finalPrice.toLocaleString()}₫
+                </span>
+                {product.discount_percentage > 0 && (
+                  <span
+                    style={{
+                      fontSize: "18px",
+                      textDecoration: "line-through",
+                      color: "#9ca3af",
+                    }}
+                  >
+                    {product.price.toLocaleString()}₫
+                  </span>
+                )}
+              </div>
+              <div
+                style={{ width: "1px", height: "24px", background: "#e5e7eb" }}
+              ></div>
               <div
                 style={{
                   display: "flex",
@@ -213,8 +302,8 @@ const ProductDetail = () => {
                 }}
               >
                 <Star size={16} fill="#fbbf24" stroke="#fbbf24" />
-                <strong>4.8</strong>
-                <span className="muted">(120 reviews)</span>
+                <strong>4.8</strong>{" "}
+                <span className="muted">(120 đánh giá)</span>
               </div>
             </div>
 
@@ -222,8 +311,7 @@ const ProductDetail = () => {
               className="muted"
               style={{ lineHeight: "1.6", marginBottom: "32px" }}
             >
-              {product.description ||
-                "Experience premium comfort and style with our latest collection. Perfect for everyday wear."}
+              {product.description || "Mô tả đang cập nhật..."}
             </p>
 
             {/* OPTIONS: SIZE */}
@@ -236,30 +324,44 @@ const ProductDetail = () => {
                 }}
               >
                 <label style={{ fontWeight: "600", fontSize: "14px" }}>
-                  Select Size
+                  Chọn Size
                 </label>
-                <span className="link-btn" style={{ fontSize: "14px" }}>
-                  Size Guide
-                </span>
+                <button
+                  className="link-btn"
+                  style={{ fontSize: "14px", color: "#666" }}
+                >
+                  Hướng dẫn chọn size
+                </button>
               </div>
-              <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-                {sizes.map((size) => (
-                  <button
-                    key={size}
-                    onClick={() => setSelectedSize(size)}
-                    className={`btn btn-outline ${
-                      selectedSize === size ? "btn-active" : ""
-                    }`}
-                    style={{
-                      minWidth: "48px",
-                      borderColor: selectedSize === size ? "#111" : "#e5e7eb",
-                      background: selectedSize === size ? "#111" : "white",
-                      color: selectedSize === size ? "white" : "#111",
-                    }}
-                  >
-                    {size}
-                  </button>
-                ))}
+              <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+                {sizes.length > 0 ? (
+                  sizes.map((size) => (
+                    <button
+                      key={size}
+                      onClick={() => setSelectedSize(size)}
+                      className={`size-option ${
+                        selectedSize === size ? "active" : ""
+                      }`}
+                      style={{
+                        minWidth: "48px",
+                        height: "48px",
+                        border:
+                          selectedSize === size
+                            ? "2px solid #111"
+                            : "1px solid #e5e7eb",
+                        background: selectedSize === size ? "#111" : "white",
+                        color: selectedSize === size ? "white" : "#111",
+                        borderRadius: "8px",
+                        cursor: "pointer",
+                        fontWeight: 500,
+                      }}
+                    >
+                      {size}
+                    </button>
+                  ))
+                ) : (
+                  <p>Hết hàng toàn bộ các size</p>
+                )}
               </div>
             </div>
 
@@ -273,7 +375,7 @@ const ProductDetail = () => {
                   marginBottom: "8px",
                 }}
               >
-                Select Color:{" "}
+                Màu sắc:{" "}
                 <span style={{ fontWeight: 400 }}>{selectedColor}</span>
               </label>
               <div style={{ display: "flex", gap: "12px" }}>
@@ -282,10 +384,13 @@ const ProductDetail = () => {
                     key={color}
                     onClick={() => setSelectedColor(color)}
                     style={{
-                      width: "32px",
-                      height: "32px",
+                      width: "36px",
+                      height: "36px",
                       borderRadius: "50%",
-                      background: color.toLowerCase(), // Giả sử tên màu là mã CSS hợp lệ (Red, Blue...)
+                      background:
+                        color.toLowerCase() === "white"
+                          ? "#fff"
+                          : color.toLowerCase(),
                       border:
                         selectedColor === color
                           ? "2px solid #111"
@@ -295,7 +400,6 @@ const ProductDetail = () => {
                           ? "0 0 0 2px white inset"
                           : "none",
                       cursor: "pointer",
-                      position: "relative",
                     }}
                     title={color}
                   />
@@ -312,16 +416,29 @@ const ProductDetail = () => {
                     color: "#d97706",
                     fontSize: "14px",
                     marginBottom: "16px",
+                    fontWeight: 500,
                   }}
                 >
-                  Only {selectedVariant.stock} left in stock!
+                  🔥 Chỉ còn {selectedVariant.stock} sản phẩm!
                 </p>
               )}
 
-            {/* ACTIONS: QTY & ADD BTN */}
-            <div style={{ display: "flex", gap: "16px", height: "50px" }}>
+            {selectedVariant && selectedVariant.stock === 0 && (
+              <p
+                style={{
+                  color: "#ef4444",
+                  fontSize: "14px",
+                  marginBottom: "16px",
+                  fontWeight: 500,
+                }}
+              >
+                Hết hàng tạm thời
+              </p>
+            )}
+
+            {/* ACTIONS */}
+            <div style={{ display: "flex", gap: "16px", height: "56px" }}>
               <div
-                className="btn-group"
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -364,7 +481,6 @@ const ProductDetail = () => {
               </div>
 
               <button
-                className="btn btn-primary"
                 style={{
                   flex: 1,
                   display: "flex",
@@ -372,26 +488,58 @@ const ProductDetail = () => {
                   alignItems: "center",
                   gap: "8px",
                   fontSize: "16px",
+                  fontWeight: 600,
+                  background: "#111",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "8px",
+                  cursor:
+                    isAdding || !selectedVariant || selectedVariant.stock === 0
+                      ? "not-allowed"
+                      : "pointer",
+                  opacity:
+                    isAdding || !selectedVariant || selectedVariant.stock === 0
+                      ? 0.7
+                      : 1,
                 }}
                 onClick={handleAddToCart}
                 disabled={
-                  isAdding || (selectedVariant && selectedVariant.stock === 0)
+                  isAdding || !selectedVariant || selectedVariant.stock === 0
                 }
               >
                 {isAdding ? (
-                  "Adding..."
+                  "Đang xử lý..."
                 ) : (
                   <>
                     <ShoppingCart size={20} />
-                    Add to Cart - ${(product.price * quantity).toFixed(2)}
+                    {!selectedVariant || selectedVariant.stock === 0
+                      ? "Hết hàng"
+                      : `Thêm vào giỏ - ${(
+                          finalPrice * quantity
+                        ).toLocaleString()}₫`}
                   </>
                 )}
+              </button>
+
+              <button
+                style={{
+                  width: "56px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  border: "1px solid #e5e7eb",
+                  borderRadius: "8px",
+                  background: "white",
+                  cursor: "pointer",
+                }}
+              >
+                <Heart size={24} color="#111" />
               </button>
             </div>
           </div>
         </div>
       </section>
-    </>
+    </main>
   );
 };
 

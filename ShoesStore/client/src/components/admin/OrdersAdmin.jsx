@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { getOrders, updateOrderStatus } from '../../ultilities/adminApi';
+import React, { useEffect, useState } from "react";
+import { getOrders, updateOrderStatus } from "../../utilities/adminApi";
 
 const OrdersAdmin = () => {
   const [orders, setOrders] = useState([]);
@@ -32,43 +32,54 @@ const OrdersAdmin = () => {
           </tr>
         </thead>
         <tbody>
-          {orders.map(order => (
+          {orders.map((order) => (
             <tr key={order.id || order.order_id}>
               <td className="border p-2">{order.id || order.order_id}</td>
-              <td className="border p-2">{new Date(order.created_at).toLocaleString()}</td>
-              <td className="border p-2">{order.total_amount?.toLocaleString()} đ</td>
               <td className="border p-2">
-                <span className={`px-2 py-1 rounded text-sm font-bold 
-                  ${order.status === 'PENDING' ? 'bg-yellow-200 text-yellow-800' : 
-                    order.status === 'COMPLETED' ? 'bg-green-200 text-green-800' : 'bg-gray-200'}`}>
+                {new Date(order.created_at).toLocaleString()}
+              </td>
+              <td className="border p-2">
+                {order.total_amount?.toLocaleString()} đ
+              </td>
+              <td className="border p-2">
+                <span
+                  className={`px-2 py-1 rounded text-sm font-bold 
+                  ${
+                    order.status === "PENDING"
+                      ? "bg-yellow-200 text-yellow-800"
+                      : order.status === "COMPLETED"
+                      ? "bg-green-200 text-green-800"
+                      : "bg-gray-200"
+                  }`}
+                >
                   {order.status}
                 </span>
               </td>
               <td className="border p-2 space-x-2">
-                {order.status === 'PENDING' && (
+                {order.status === "PENDING" && (
                   <>
-                    <button 
-                      onClick={() => handleStatusChange(order.id, 'SHIPPING')}
+                    <button
+                      onClick={() => handleStatusChange(order.id, "SHIPPING")}
                       className="bg-blue-500 text-white px-2 py-1 rounded text-sm"
                     >
                       Ship
                     </button>
-                    <button 
-                      onClick={() => handleStatusChange(order.id, 'COMPLETED')}
+                    <button
+                      onClick={() => handleStatusChange(order.id, "COMPLETED")}
                       className="bg-green-500 text-white px-2 py-1 rounded text-sm"
                     >
                       Hoàn tất
                     </button>
                   </>
                 )}
-                 {order.status === 'SHIPPING' && (
-                    <button 
-                      onClick={() => handleStatusChange(order.id, 'COMPLETED')}
-                      className="bg-green-500 text-white px-2 py-1 rounded text-sm"
-                    >
-                      Đã giao
-                    </button>
-                 )}
+                {order.status === "SHIPPING" && (
+                  <button
+                    onClick={() => handleStatusChange(order.id, "COMPLETED")}
+                    className="bg-green-500 text-white px-2 py-1 rounded text-sm"
+                  >
+                    Đã giao
+                  </button>
+                )}
               </td>
             </tr>
           ))}

@@ -1,22 +1,43 @@
+// client/src/components/user/WomenPage.jsx
 import React, { useState, useEffect, useMemo } from "react";
+import { Link } from "react-router-dom"; // Sửa: Dùng Link cho chuẩn Router
 import ProductCard from "./ProductCard";
-import { getProducts } from "../../ultilities/api";
+import { getProducts } from "../../utilities/api";
 
 export default function WomenPage() {
   const [products, setProducts] = useState([]);
-  const [maxPrice, setMaxPrice] = useState(200);
+  const [loading, setLoading] = useState(true); // Thêm loading
+  const [maxPrice, setMaxPrice] = useState(4000000); // Sửa: Về tiền Việt (4tr)
   const [sortBy, setSortBy] = useState("popular");
 
   // Fetch từ API
   useEffect(() => {
-    getProducts()
-      .then((all) => setProducts(all.filter((p) => p.gender === "women")))
-      .catch((err) => console.error(err));
+    const fetchProducts = async () => {
+      setLoading(true);
+      try {
+        const all = await getProducts();
+
+        // ⚠️ LƯU Ý: Kiểm tra lại db.json xem Women ID là bao nhiêu?
+        // Ở đây mình đang giả định Women có category_id = 2
+        // Và dùng 'is_active' (snake_case) thay vì 'isActive'
+        const womenProducts = all.filter(
+          (p) => Number(p.category_id) === 2 && p.is_active
+        );
+
+        setProducts(womenProducts);
+      } catch (err) {
+        console.error("Lỗi fetch women:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
   }, []);
 
   // Filter products theo giá
   const filteredProducts = useMemo(
-    () => products.filter((p) => p.isActive && p.price <= maxPrice),
+    () => products.filter((p) => p.price <= maxPrice),
     [products, maxPrice]
   );
 
@@ -28,26 +49,38 @@ export default function WomenPage() {
         return arr.sort((a, b) => a.price - b.price);
       case "price-high":
         return arr.sort((a, b) => b.price - a.price);
-      case "rating":
-        return arr.sort((a, b) => (b.rating || 0) - (a.rating || 0));
       case "newest":
-        return arr.sort((a, b) => b.id - a.id);
+        return arr.sort(
+          (a, b) => new Date(b.created_at) - new Date(a.created_at)
+        );
       case "popular":
       default:
-        return arr.sort((a, b) => (b.reviews || 0) - (a.reviews || 0));
+        return arr;
     }
   }, [filteredProducts, sortBy]);
 
-  const handleClearAll = () => setMaxPrice(200);
+  const handleClearAll = () => setMaxPrice(4000000);
+
+  // --- UI Loading ---
+  if (loading) {
+    return (
+      <main
+        className="men-wrap"
+        style={{ minHeight: "60vh", paddingTop: 100, textAlign: "center" }}
+      >
+        <p>Đang tải bộ sưu tập...</p>
+      </main>
+    );
+  }
 
   return (
     <main className="men-wrap">
       {/* Breadcrumb */}
       <section className="men-bc">
         <div className="container">
-          <a href="/" className="men-bc-link">
+          <Link to="/" className="men-bc-link">
             Home
-          </a>
+          </Link>
           <span className="men-bc-sep">›</span>
           <span>Women</span>
         </div>
@@ -58,15 +91,14 @@ export default function WomenPage() {
         <div className="container">
           <h1 className="men-title">Women&apos;s Collection</h1>
           <p className="men-sub">
-            Discover elegant and comfortable footwear designed for the modern
-            woman.
+            Khám phá vẻ đẹp thanh lịch và sự thoải mái cho phái nữ.
           </p>
         </div>
       </section>
 
       {/* Content */}
       <section className="container men-content">
-        {/* Sidebar */}
+        {/* Sidebar - Giữ nguyên HTML tĩnh của bạn (chưa có logic filter nâng cao) */}
         <aside className="men-side">
           <div className="men-card">
             <div className="men-card-top">
@@ -80,113 +112,74 @@ export default function WomenPage() {
               </button>
             </div>
 
-            <div className="men-block">
-              <h4>Category</h4>
-              <div className="men-checks">
-                {[
-                  "All",
-                  "Heels",
-                  "Sneakers",
-                  "Boots",
-                  "Athletic",
-                  "Running",
-                  "Casual",
-                  "Lifestyle",
-                ].map((c) => (
-                  <label key={c} className="men-check">
-                    <input type="checkbox" />
-                    <span>{c}</span>
-                  </label>
-                ))}
-              </div>
-            </div>
-
+            {/* Price Filter - Đã sửa lại scale VND */}
             <div className="men-block">
               <h4>Price Range</h4>
               <input
                 type="range"
                 min="0"
-                max="200"
-                step="10"
+                max="4000000"
+                step="100000"
                 value={maxPrice}
                 onChange={(e) => setMaxPrice(Number(e.target.value))}
               />
               <div className="men-range">
-                <span>$0</span>
-                <span>${maxPrice}</span>
+                <span>0₫</span>
+                <span>{maxPrice.toLocaleString()}₫</span>
               </div>
             </div>
 
-            <div className="men-block">
-              <h4>Size (US)</h4>
-              <div className="men-sizes">
-                {["5", "5.5", "6", "6.5", "7", "7.5", "8", "8.5", "9"].map(
-                  (s) => (
-                    <button key={s} type="button" className="size-btn">
-                      {s}
-                    </button>
-                  )
-                )}
-              </div>
-            </div>
-
-            <div className="men-block">
-              <h4>Heel Height</h4>
-              <div className="men-checks">
-                {[
-                  "Flat",
-                  'Low (1-2")',
-                  'Mid (2-3")',
-                  'High (3-4")',
-                  'Very High (4+")',
-                ].map((h) => (
-                  <label key={h} className="men-check">
-                    <input type="checkbox" />
-                    <span>{h}</span>
-                  </label>
-                ))}
-              </div>
-            </div>
+            {/* Các filter khác (Category, Size...) bạn có thể giữ làm UI tĩnh
+                hoặc ẩn đi nếu chưa code logic backend */}
           </div>
         </aside>
 
         {/* Main */}
         <div className="men-main">
           <div className="men-toolbar">
-            <p className="muted">Showing {filteredProducts.length} products</p>
+            <p className="muted">Showing {sortedProducts.length} products</p>
             <div className="men-sort">
               <span className="muted">Sort by:</span>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
               >
-                <option value="popular">Most Popular</option>
-                <option value="newest">Newest First</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
-                <option value="rating">Highest Rated</option>
+                <option value="popular">Phổ biến</option>
+                <option value="newest">Mới nhất</option>
+                <option value="price-low">Giá: Thấp đến cao</option>
+                <option value="price-high">Giá: Cao đến thấp</option>
               </select>
             </div>
           </div>
 
-          <div className="men-grid">
-            {sortedProducts.map((p) => (
-              <ProductCard
-                key={p.id}
-                id={p.id}
-                image={p.image}
-                name={p.name}
-                price={p.price}
-                extra={p.discountPercent ? `-${p.discountPercent}%` : undefined}
-              />
-            ))}
-          </div>
-
-          <div className="men-load">
-            <button className="outline-btn" type="button">
-              Load More Products
-            </button>
-          </div>
+          {sortedProducts.length === 0 ? (
+            <div
+              style={{ padding: "40px", textAlign: "center", width: "100%" }}
+            >
+              <h3>Không tìm thấy sản phẩm</h3>
+              <p>Vui lòng thử khoảng giá khác.</p>
+            </div>
+          ) : (
+            <div className="men-grid">
+              {sortedProducts.map((p) => (
+                <ProductCard
+                  // Fallback ID để tránh lỗi duplicate key
+                  key={p.product_id || p.id}
+                  id={p.product_id || p.id}
+                  // Sửa: Map đúng tên trường trong DB
+                  image={p.image_url} // DB là image_url, không phải image
+                  name={p.name}
+                  price={p.price}
+                  // Sửa: DB là discount_percentage
+                  extra={
+                    p.discount_percentage
+                      ? `-${p.discount_percentage}%`
+                      : undefined
+                  }
+                />
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </main>

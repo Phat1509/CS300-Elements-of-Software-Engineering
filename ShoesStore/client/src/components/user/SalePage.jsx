@@ -1,28 +1,41 @@
+// client/src/components/user/SalePage.jsx
 import React, { useEffect, useState, useMemo } from "react";
+import { Link } from "react-router-dom"; // Import Link
 import ProductCard from "./ProductCard";
-import { getProducts } from "../../ultilities/api";
+import { getProducts } from "../../utilities/api";
 
 export default function SalePage() {
   const [products, setProducts] = useState([]);
-  const [maxPrice, setMaxPrice] = useState(200);
+  const [maxPrice, setMaxPrice] = useState(4000000); // Sửa: Max 4 triệu VND
   const [sortBy, setSortBy] = useState("discount");
   const [loading, setLoading] = useState(true);
 
-  // Fetch từ JSON Server
+  // Fetch từ API
   useEffect(() => {
-    setLoading(true);
-    getProducts()
-      .then((all) => {
-        setProducts(all.filter((p) => (p.discountPercent || 0) >= 20));
+    const fetchProducts = async () => {
+      setLoading(true);
+      try {
+        const all = await getProducts();
+
+        // --- LOGIC LỌC SẢN PHẨM SALE ---
+        // 1. Phải đang active
+        // 2. Phải có discount_percentage > 0
+        const saleItems = all.filter(
+          (p) => p.is_active && (p.discount_percentage || 0) > 0
+        );
+
+        setProducts(saleItems);
+      } catch (err) {
+        console.error("Error fetching sale products:", err);
+      } finally {
         setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching products:", err);
-        setLoading(false);
-      });
+      }
+    };
+
+    fetchProducts();
   }, []);
 
-  // Filter theo price
+  // Filter theo price (VND)
   const filteredProducts = useMemo(
     () =>
       products.filter(
@@ -31,7 +44,7 @@ export default function SalePage() {
     [products, maxPrice]
   );
 
-  // Sort theo chọn của user
+  // Sort logic
   const sortedProducts = useMemo(() => {
     const arr = [...filteredProducts];
     switch (sortBy) {
@@ -39,26 +52,41 @@ export default function SalePage() {
         return arr.sort((a, b) => a.price - b.price);
       case "price-high":
         return arr.sort((a, b) => b.price - a.price);
-      case "popular":
-        return arr.sort((a, b) => (b.reviews || 0) - (a.reviews || 0));
-      case "rating":
-        return arr.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+      case "newest":
+        return arr.sort(
+          (a, b) => new Date(b.created_at) - new Date(a.created_at)
+        );
       case "discount":
       default:
-        return arr.sort((a, b) => (b.discount || 0) - (a.discount || 0));
+        // Sửa: Dùng discount_percentage để sort
+        return arr.sort(
+          (a, b) => (b.discount_percentage || 0) - (a.discount_percentage || 0)
+        );
     }
   }, [filteredProducts, sortBy]);
 
-  const handleClearAll = () => setMaxPrice(200);
+  const handleClearAll = () => setMaxPrice(4000000);
+
+  // UI Loading
+  if (loading) {
+    return (
+      <main
+        className="men-wrap"
+        style={{ minHeight: "60vh", paddingTop: 100, textAlign: "center" }}
+      >
+        <p>Đang tìm kiếm các ưu đãi tốt nhất...</p>
+      </main>
+    );
+  }
 
   return (
     <main className="men-wrap">
       {/* Breadcrumb */}
       <section className="men-bc">
         <div className="container">
-          <a href="/" className="men-bc-link">
+          <Link to="/" className="men-bc-link">
             Home
-          </a>
+          </Link>
           <span className="men-bc-sep">›</span>
           <span>Sale</span>
         </div>
@@ -67,17 +95,17 @@ export default function SalePage() {
       {/* Header */}
       <section className="men-head">
         <div className="container">
-          <h1 className="men-title">Sale — Up to 30% Off</h1>
+          <h1 className="men-title">Sale Collection</h1>
           <p className="men-sub">
-            Don't miss out on amazing deals! Shop our sale collection and save
-            big on premium footwear.
+            Đừng bỏ lỡ những deal hời nhất! Săn ngay các mẫu giày cao cấp với
+            mức giá ưu đãi.
           </p>
         </div>
       </section>
 
       {/* Content */}
       <section className="container men-content">
-        {/* Sidebar (tĩnh, filter tạm thời chưa dynamic) */}
+        {/* Sidebar */}
         <aside className="men-side">
           <div className="men-card">
             <div className="men-card-top">
@@ -91,21 +119,20 @@ export default function SalePage() {
               </button>
             </div>
 
-            {/* Price range */}
+            {/* Price Range (VND) */}
             <div className="men-block">
-              <h4>Price Range</h4>
+              <h4>Mức giá</h4>
               <input
                 type="range"
                 min="0"
-                max="200"
-                step="10"
+                max="4000000"
+                step="100000"
                 value={maxPrice}
                 onChange={(e) => setMaxPrice(Number(e.target.value))}
-                aria-label="Filter by maximum price"
               />
               <div className="men-range">
-                <span>$0</span>
-                <span>${maxPrice}</span>
+                <span>0₫</span>
+                <span>{maxPrice.toLocaleString()}₫</span>
               </div>
             </div>
           </div>
@@ -115,46 +142,48 @@ export default function SalePage() {
         <div className="men-main">
           <div className="men-toolbar">
             <p className="muted">
-              {loading
-                ? "Loading products..."
-                : `Showing ${filteredProducts.length} products on sale`}
+              Tìm thấy {sortedProducts.length} sản phẩm giảm giá
             </p>
             <div className="men-sort">
-              <span className="muted">Sort by:</span>
+              <span className="muted">Sắp xếp:</span>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
               >
-                <option value="discount">Biggest Discount</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
-                <option value="popular">Most Popular</option>
-                <option value="rating">Highest Rated</option>
+                <option value="discount">Giảm nhiều nhất</option>
+                <option value="price-low">Giá: Thấp đến cao</option>
+                <option value="price-high">Giá: Cao đến thấp</option>
+                <option value="newest">Mới nhất</option>
               </select>
             </div>
           </div>
 
-          <div className="men-grid">
-            {!loading &&
-              sortedProducts.map((p) => (
+          {sortedProducts.length === 0 ? (
+            <div
+              style={{ padding: "40px", textAlign: "center", width: "100%" }}
+            >
+              <h3>Hiện chưa có sản phẩm giảm giá trong tầm giá này</h3>
+            </div>
+          ) : (
+            <div className="men-grid">
+              {sortedProducts.map((p) => (
                 <ProductCard
-                  key={p.id}
-                  id={p.id}
-                  image={p.image}
+                  key={p.product_id || p.id}
+                  id={p.product_id || p.id}
+                  // Map đúng trường dữ liệu
+                  image={p.image_url}
                   name={p.name}
                   price={p.price}
+                  // Hiển thị phần trăm giảm
                   extra={
-                    p.discountPercent ? `-${p.discountPercent}%` : undefined
+                    p.discount_percentage
+                      ? `-${p.discount_percentage}%`
+                      : undefined
                   }
                 />
               ))}
-          </div>
-
-          <div className="men-load">
-            <button className="outline-btn" type="button">
-              Load More Products
-            </button>
-          </div>
+            </div>
+          )}
         </div>
       </section>
     </main>

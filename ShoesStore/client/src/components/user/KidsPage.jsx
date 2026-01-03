@@ -1,24 +1,46 @@
+// client/src/components/user/KidsPage.jsx
 import React, { useState, useEffect, useMemo } from "react";
+import { Link } from "react-router-dom"; // Nhớ import Link
 import ProductCard from "./ProductCard";
-import { getProducts } from "../../ultilities/api";
+import { getProducts } from "../../utilities/api";
 
 export default function KidsPage() {
   const [products, setProducts] = useState([]);
-  const [maxPrice, setMaxPrice] = useState(100);
+  const [loading, setLoading] = useState(true);
+  const [maxPrice, setMaxPrice] = useState(4000000); // 4 triệu VND
   const [sortBy, setSortBy] = useState("popular");
 
   // Fetch từ API
   useEffect(() => {
-    getProducts()
-      .then((all) => setProducts(all.filter((p) => p.gender === "kids")))
-      .catch((err) => console.error(err));
+    const fetchProducts = async () => {
+      setLoading(true);
+      try {
+        const all = await getProducts();
+
+        // --- LOGIC: Lấy category_id = 4 (Kids) ---
+        // (Chúng ta sẽ thêm ID 4 vào db.json ở Bước 2)
+        const kidsProducts = all.filter(
+          (p) => Number(p.category_id) === 4 && p.is_active
+        );
+
+        setProducts(kidsProducts);
+      } catch (err) {
+        console.error("Lỗi fetch Kids:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
   }, []);
 
+  // Filter products
   const filteredProducts = useMemo(
-    () => products.filter((p) => p.isActive && p.price <= maxPrice),
+    () => products.filter((p) => p.price <= maxPrice),
     [products, maxPrice]
   );
 
+  // Sort products
   const sortedProducts = useMemo(() => {
     const arr = [...filteredProducts];
     switch (sortBy) {
@@ -26,26 +48,38 @@ export default function KidsPage() {
         return arr.sort((a, b) => a.price - b.price);
       case "price-high":
         return arr.sort((a, b) => b.price - a.price);
-      case "rating":
-        return arr.sort((a, b) => (b.rating || 0) - (a.rating || 0));
       case "newest":
-        return arr.sort((a, b) => b.id - a.id);
+        return arr.sort(
+          (a, b) => new Date(b.created_at) - new Date(a.created_at)
+        );
       case "popular":
       default:
-        return arr.sort((a, b) => (b.reviews || 0) - (a.reviews || 0));
+        return arr;
     }
   }, [filteredProducts, sortBy]);
 
-  const handleClearAll = () => setMaxPrice(100);
+  const handleClearAll = () => setMaxPrice(4000000);
+
+  // Loading UI
+  if (loading) {
+    return (
+      <main
+        className="men-wrap"
+        style={{ minHeight: "60vh", paddingTop: 100, textAlign: "center" }}
+      >
+        <p>Đang tải sản phẩm cho bé...</p>
+      </main>
+    );
+  }
 
   return (
     <main className="men-wrap">
       {/* Breadcrumb */}
       <section className="men-bc">
         <div className="container">
-          <a href="/" className="men-bc-link">
+          <Link to="/" className="men-bc-link">
             Home
-          </a>
+          </Link>
           <span className="men-bc-sep">›</span>
           <span>Kids</span>
         </div>
@@ -56,8 +90,8 @@ export default function KidsPage() {
         <div className="container">
           <h1 className="men-title">Kids&apos; Collection</h1>
           <p className="men-sub">
-            Fun and comfortable footwear for active kids. Durable designs that
-            keep up with their adventures.
+            Thoải mái vui chơi, vận động với bộ sưu tập giày bền bỉ dành cho trẻ
+            em.
           </p>
         </div>
       </section>
@@ -78,111 +112,71 @@ export default function KidsPage() {
               </button>
             </div>
 
-            <div className="men-block">
-              <h4>Age Group</h4>
-              <div className="men-checks">
-                {[
-                  "All Ages",
-                  "Toddler (1-3)",
-                  "Little Kid (4-7)",
-                  "Big Kid (8-12)",
-                ].map((a) => (
-                  <label key={a} className="men-check">
-                    <input type="checkbox" />
-                    <span>{a}</span>
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            <div className="men-block">
-              <h4>Category</h4>
-              <div className="men-checks">
-                {[
-                  "All",
-                  "Running",
-                  "Athletic",
-                  "Casual",
-                  "Basketball",
-                  "Lifestyle",
-                  "Boots",
-                ].map((c) => (
-                  <label key={c} className="men-check">
-                    <input type="checkbox" />
-                    <span>{c}</span>
-                  </label>
-                ))}
-              </div>
-            </div>
-
+            {/* Price Filter (VND) */}
             <div className="men-block">
               <h4>Price Range</h4>
               <input
                 type="range"
                 min="0"
-                max="100"
-                step="5"
+                max="4000000"
+                step="100000"
                 value={maxPrice}
                 onChange={(e) => setMaxPrice(Number(e.target.value))}
               />
               <div className="men-range">
-                <span>$0</span>
-                <span>${maxPrice}</span>
+                <span>0₫</span>
+                <span>{maxPrice.toLocaleString()}₫</span>
               </div>
             </div>
 
-            <div className="men-block">
-              <h4>Size (US)</h4>
-              <div className="men-sizes">
-                {["10C", "11C", "12C", "13C", "1Y", "2Y", "3Y", "4Y", "5Y"].map(
-                  (s) => (
-                    <button key={s} type="button" className="size-btn">
-                      {s}
-                    </button>
-                  )
-                )}
-              </div>
-            </div>
+            {/* Các filter tĩnh khác giữ nguyên hoặc ẩn đi tùy bạn */}
           </div>
         </aside>
 
         {/* Main */}
         <div className="men-main">
           <div className="men-toolbar">
-            <p className="muted">Showing {filteredProducts.length} products</p>
+            <p className="muted">Showing {sortedProducts.length} products</p>
             <div className="men-sort">
               <span className="muted">Sort by:</span>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
               >
-                <option value="popular">Most Popular</option>
-                <option value="newest">Newest First</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
-                <option value="rating">Highest Rated</option>
+                <option value="popular">Phổ biến</option>
+                <option value="newest">Mới nhất</option>
+                <option value="price-low">Giá thấp đến cao</option>
+                <option value="price-high">Giá cao đến thấp</option>
               </select>
             </div>
           </div>
 
-          <div className="men-grid">
-            {sortedProducts.map((p) => (
-              <ProductCard
-                key={p.id}
-                id={p.id}
-                image={p.image}
-                name={p.name}
-                price={p.price}
-                extra={p.discountPercent ? `-${p.discountPercent}%` : undefined}
-              />
-            ))}
-          </div>
-
-          <div className="men-load">
-            <button className="outline-btn" type="button">
-              Load More Products
-            </button>
-          </div>
+          {sortedProducts.length === 0 ? (
+            <div
+              style={{ padding: "40px", textAlign: "center", width: "100%" }}
+            >
+              <h3>Chưa có sản phẩm nào</h3>
+              <p>Vui lòng quay lại sau.</p>
+            </div>
+          ) : (
+            <div className="men-grid">
+              {sortedProducts.map((p) => (
+                <ProductCard
+                  key={p.product_id || p.id}
+                  id={p.product_id || p.id}
+                  // Sửa các trường cho khớp DB
+                  image={p.image_url}
+                  name={p.name}
+                  price={p.price}
+                  extra={
+                    p.discount_percentage
+                      ? `-${p.discount_percentage}%`
+                      : undefined
+                  }
+                />
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </main>

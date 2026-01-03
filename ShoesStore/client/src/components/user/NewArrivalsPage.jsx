@@ -1,9 +1,9 @@
 // client/src/components/user/NewArrivalsPage.jsx
 import React, { useEffect, useState, useMemo } from "react";
 import { ChevronRight, SlidersHorizontal } from "lucide-react";
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
 import ProductCard from "./ProductCard"; // Đã có file này ở trên
-import { getProducts } from "../../ultilities/api";
+import { getProducts } from "../../utilities/api";
 
 export default function NewArrivalsPage() {
   const [products, setProducts] = useState([]);
@@ -19,7 +19,7 @@ export default function NewArrivalsPage() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const data = await getProducts(); 
+        const data = await getProducts();
         setProducts(data || []); // Fallback array rỗng nếu api lỗi
       } catch (err) {
         console.error("Error fetching products:", err);
@@ -32,9 +32,7 @@ export default function NewArrivalsPage() {
 
   /* ================= FILTER ================= */
   const displayed = useMemo(() => {
-    return products.filter(
-      (p) => p.price >= minPrice && p.price <= maxPrice
-    );
+    return products.filter((p) => p.price >= minPrice && p.price <= maxPrice);
   }, [products, minPrice, maxPrice]);
 
   /* ================= SORT ================= */
@@ -53,7 +51,10 @@ export default function NewArrivalsPage() {
 
   if (loading) {
     return (
-      <div className="container" style={{ padding: "40px", textAlign: "center" }}>
+      <div
+        className="container"
+        style={{ padding: "40px", textAlign: "center" }}
+      >
         Loading products...
       </div>
     );
@@ -64,7 +65,9 @@ export default function NewArrivalsPage() {
       {/* ================= BREADCRUMB ================= */}
       <section className="na-bc">
         <div className="container na-bc-in">
-          <Link to="/" className="na-bc-link">Home</Link>
+          <Link to="/" className="na-bc-link">
+            Home
+          </Link>
           <ChevronRight className="na-bc-sep" size={16} />
           <span>New Arrivals</span>
         </div>
@@ -83,7 +86,6 @@ export default function NewArrivalsPage() {
       {/* ================= CONTENT ================= */}
       <section className="na-wrap">
         <div className="container na-grid">
-          
           {/* ============ FILTER SIDEBAR ============ */}
           <aside className={`na-side ${showFilters ? "open" : ""}`}>
             <div className="na-card">
@@ -105,16 +107,16 @@ export default function NewArrivalsPage() {
 
                 {/* Range Slider đơn giản */}
                 <div style={{ padding: "0 10px" }}>
-                    <input
-                      type="range"
-                      className="range-input"
-                      min="0"
-                      max="10000000"
-                      step="100000"
-                      value={maxPrice}
-                      onChange={(e) => setMaxPrice(Number(e.target.value))}
-                      style={{ width: "100%", marginBottom: "12px" }}
-                    />
+                  <input
+                    type="range"
+                    className="range-input"
+                    min="0"
+                    max="10000000"
+                    step="100000"
+                    value={maxPrice}
+                    onChange={(e) => setMaxPrice(Number(e.target.value))}
+                    style={{ width: "100%", marginBottom: "12px" }}
+                  />
                 </div>
 
                 <div className="na-range">
@@ -123,14 +125,14 @@ export default function NewArrivalsPage() {
                 </div>
               </div>
             </div>
-            
+
             {/* Nút đóng filter trên mobile */}
-            <button 
-                className="btn btn-outline lg-hidden" 
-                style={{marginTop: 16, width: "100%"}}
-                onClick={() => setShowFilters(false)}
+            <button
+              className="btn btn-outline lg-hidden"
+              style={{ marginTop: 16, width: "100%" }}
+              onClick={() => setShowFilters(false)}
             >
-                Close Filters
+              Close Filters
             </button>
           </aside>
 
@@ -165,18 +167,17 @@ export default function NewArrivalsPage() {
 
             {/* Grid Sản Phẩm */}
             {sortedDisplayed.length > 0 ? (
-                <div className="na-products">
-                  {sortedDisplayed.map((p) => (
-                    <ProductCard
-                      key={p.product_id}
-                      {...p}
-                    />
-                  ))}
-                </div>
+              <div className="na-products">
+                {sortedDisplayed.map((p) => (
+                  <ProductCard key={p.product_id} {...p} />
+                ))}
+              </div>
             ) : (
-                <div style={{ textAlign: "center", padding: "40px", color: "#666" }}>
-                    No products match your filter.
-                </div>
+              <div
+                style={{ textAlign: "center", padding: "40px", color: "#666" }}
+              >
+                No products match your filter.
+              </div>
             )}
           </main>
         </div>

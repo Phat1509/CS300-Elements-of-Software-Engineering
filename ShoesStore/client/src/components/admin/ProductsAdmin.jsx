@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { getProducts } from "../../ultilities/api";
-import adminApi from "../../ultilities/adminApi";
+import { getProducts } from "../../utilities/api";
+import adminApi from "../../utilities/adminApi";
 import ProductForm from "./ProductForm";
 import AdminLayout from "./AdminLayout";
 
@@ -50,7 +50,9 @@ export default function ProductsAdmin() {
     if (!window.confirm("Delete this product?")) return;
     try {
       await adminApi.deleteProduct(id);
-      setProducts((s) => (s || []).filter((x) => (x.product_id || x.id) !== id));
+      setProducts((s) =>
+        (s || []).filter((x) => (x.product_id || x.id) !== id)
+      );
     } catch (e) {
       console.error(e);
       alert("Delete failed");
@@ -124,7 +126,9 @@ export default function ProductsAdmin() {
           <div className="admin-panel-top">
             <div>
               <strong>
-                {showNew ? "Create product" : `Edit: ${editing?._name || editing?.name || ""}`}
+                {showNew
+                  ? "Create product"
+                  : `Edit: ${editing?._name || editing?.name || ""}`}
               </strong>
               <div className="muted" style={{ fontSize: 12 }}>
                 Fill in the fields and hit Save.

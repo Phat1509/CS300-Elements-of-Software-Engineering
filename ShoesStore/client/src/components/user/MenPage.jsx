@@ -1,26 +1,37 @@
+// client/src/components/user/MenPage.jsx
 import React, { useState, useEffect, useMemo } from "react";
+import { Link } from "react-router-dom"; // <--- 1. Import Link
 import ProductCard from "./ProductCard";
-import { getProducts } from "../../ultilities/api";
+import { getProducts } from "../../utilities/api";
 
 export default function MenPage() {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true); // <--- 2. Thêm loading state
+  const [error, setError] = useState(null); // <--- 3. Thêm error state
+
   const [maxPrice, setMaxPrice] = useState(4000000);
   const [sortBy, setSortBy] = useState("popular");
 
-  // Fetch data from API
+  // Fetch data
   useEffect(() => {
     const fetchProducts = async () => {
+      setLoading(true);
+      setError(null);
       try {
         const all = await getProducts();
 
-        // category_id = 3 → Men
         const menProducts = all.filter(
-          (p) => p.category_id === 3 && p.is_active
+          (p) =>
+            (Number(p.category_id) === 1 || Number(p.category_id) === 3) &&
+            p.is_active
         );
-        console.log(menProducts);
+
         setProducts(menProducts);
       } catch (err) {
         console.error("Error fetching men products:", err);
+        setError("Không thể tải danh sách sản phẩm. Vui lòng thử lại sau.");
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -45,19 +56,50 @@ export default function MenPage() {
         );
       case "popular":
       default:
+        // Nếu API trả về đã sort theo độ phổ biến thì giữ nguyên
         return arr;
     }
   }, [filteredProducts, sortBy]);
 
   const handleClearAll = () => setMaxPrice(4000000);
 
+  // --- RENDER LOADING / ERROR ---
+  if (loading) {
+    return (
+      <main
+        className="men-wrap"
+        style={{ minHeight: "60vh", paddingTop: 100, textAlign: "center" }}
+      >
+        <p>Đang tải sản phẩm...</p>
+      </main>
+    );
+  }
+
+  if (error) {
+    return (
+      <main
+        className="men-wrap"
+        style={{ minHeight: "60vh", paddingTop: 100, textAlign: "center" }}
+      >
+        <p style={{ color: "red" }}>{error}</p>
+        <button
+          onClick={() => window.location.reload()}
+          className="btn btn-outline"
+        >
+          Thử lại
+        </button>
+      </main>
+    );
+  }
+
   return (
     <main className="men-wrap">
       <section className="men-bc">
         <div className="container">
-          <a href="/" className="men-bc-link">
+          {/* 4. Dùng Link thay vì a href */}
+          <Link to="/" className="men-bc-link">
             Home
-          </a>
+          </Link>
           <span className="men-bc-sep">›</span>
           <span>Men</span>
         </div>
@@ -67,7 +109,7 @@ export default function MenPage() {
         <div className="container">
           <h1 className="men-title">Men&apos;s Collection</h1>
           <p className="men-sub">
-            Explore our curated selection of men's footwear.
+            Khám phá bộ sưu tập giày nam mới nhất và chất lượng nhất.
           </p>
         </div>
       </section>
@@ -102,7 +144,7 @@ export default function MenPage() {
 
         <div className="men-main">
           <div className="men-toolbar">
-            <p className="muted">Showing {filteredProducts.length} products</p>
+            <p className="muted">Showing {sortedProducts.length} products</p>
             <div className="men-sort">
               <span className="muted">Sort by:</span>
               <select
@@ -117,22 +159,32 @@ export default function MenPage() {
             </div>
           </div>
 
-          <div className="men-grid">
-            {sortedProducts.map((p) => (
-              <ProductCard
-                key={p.product_id}
-                id={p.product_id}
-                image={p.image_url}
-                name={p.name}
-                price={p.price}
-                extra={
-                  p.discount_percentage
-                    ? `-${p.discount_percentage}%`
-                    : undefined
-                }
-              />
-            ))}
-          </div>
+          {/* 5. Handle Empty State */}
+          {sortedProducts.length === 0 ? (
+            <div
+              style={{ padding: "40px 0", textAlign: "center", width: "100%" }}
+            >
+              <h3>Không tìm thấy sản phẩm nào</h3>
+              <p className="muted">Thử điều chỉnh bộ lọc giá xem sao nhé.</p>
+            </div>
+          ) : (
+            <div className="men-grid">
+              {sortedProducts.map((p) => (
+                <ProductCard
+                  key={p.product_id || p.id} // Fallback id
+                  id={p.product_id || p.id}
+                  image={p.image_url}
+                  name={p.name}
+                  price={p.price}
+                  extra={
+                    p.discount_percentage
+                      ? `-${p.discount_percentage}%`
+                      : undefined
+                  }
+                />
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </main>

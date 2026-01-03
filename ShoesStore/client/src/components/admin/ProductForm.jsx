@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import adminApi from "../../ultilities/adminApi";
+import adminApi from "../../utilities/adminApi";
 
 export default function ProductForm({ initial = null, onSaved, onCancel }) {
   const [form, setForm] = useState({
