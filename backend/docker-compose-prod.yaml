@@ -20,7 +20,7 @@ services:
       - "shoes-store-valkey:/data"
 
   server:
-    image: "ghcr.io/beer-psi/shoes-store-api:trunk"
+    image: "ghcr.io/phat1509/shoes-store-backend:main"
     volumes:
       - "./config:/app/config"
     depends_on:
