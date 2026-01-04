@@ -1,0 +1,16 @@
+- id: 1
+  user_id: 1
+  status: Paid
+  amount: 120
+  payment_method: Stripe
+  shipping_address: 123 Main St, Hanoi
+  created_at: "2023-11-12T12:34:56.789Z"
+  updated_at: "2023-11-12T12:34:56.789Z"
+- id: 2
+  user_id: 2
+  status: Pending
+  amount: 150
+  payment_method: Cod
+  shipping_address: 456 Le Loi, Ho Chi Minh City
+  created_at: "2023-11-12T12:34:56.789Z"
+  updated_at: "2023-11-12T12:34:56.789Z"
