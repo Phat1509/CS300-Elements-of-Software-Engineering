@@ -3,15 +3,15 @@ name: "Docker"
 on:
   push:
     paths:
-      - "migration/**"
-      - "src/**"
-      - ".dockerignore"
-      - "build.rs"
-      - "Cargo.lock"
-      - "Cargo.toml"
-      - "Dockerfile"
+      - "backend/migration/**"
+      - "backend/src/**"
+      - "backend/.dockerignore"
+      - "backend/build.rs"
+      - "backend/Cargo.lock"
+      - "backend/Cargo.toml"
+      - "backend/Dockerfile"
     branches:
-      - "trunk"
+      - "main"
   workflow_dispatch:
 
 jobs:
