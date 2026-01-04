@@ -3,8 +3,8 @@ services:
     image: "postgres:18"
     restart: "unless-stopped"
     shm_size: "128mb"
-    ports:
-      - "5432:5432"
+    expose:
+      - "5432"
     volumes:
       - "shoes-store-db:/var/lib/postgresql"
       - "./docker/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
@@ -14,8 +14,8 @@ services:
     image: "valkey/valkey:9-alpine"
     command: "valkey-server --bind * -::* --save 60 1 --loglevel warning"
     restart: "unless-stopped"
-    ports:
-      - "6379:6379"
+    expose:
+      - "6379"
     volumes:
       - "shoes-store-valkey:/data"
 
