@@ -200,6 +200,27 @@ export const createOrder = async (orderData) => {
   return res.data; 
 };
 
+export const getOrderDetail = async (id) => {
+  try {
+    const response = await api.get(`/orders/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching order detail:", error);
+    throw error;
+  }
+};
+
+export const getOrderItems = async (orderId) => {
+  try {
+    // Gọi endpoint: /order_item?order_id=...
+    const response = await api.get(`/order_item?order_id=${orderId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching order items:", error);
+    return []; // Trả về mảng rỗng để không sập app nếu lỗi
+  }
+};
+
 export const addOrderItem = async (itemData) => {
   // Lưu ý: db.json dùng "order_item" hay "order_items"?
   const res = await api.post("/order_item", itemData);
@@ -215,6 +236,22 @@ export const getOrders = async (userId) => {
       } 
   });
   return res.data;
+};
+
+export const getOrdersByUserId = async (userId) => {
+  try {
+    // Thử gọi user_id (chuẩn database thường dùng)
+    const res = await api.get(`/orders?user_id=${userId}`);
+    // Nếu JSON server trả về mảng rỗng, thử gọi fallback userId (đề phòng db dùng camelCase)
+    if (!res.data || res.data.length === 0) {
+       const resFallback = await api.get(`/orders?userId=${userId}`);
+       return resFallback.data;
+    }
+    return res.data;
+  } catch (error) {
+    console.error("Lỗi lấy danh sách đơn hàng:", error);
+    return [];
+  }
 };
 
 export const loginUser = async (email, password) => {
