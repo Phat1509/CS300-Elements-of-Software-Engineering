@@ -255,48 +255,97 @@ export const getOrdersByUserId = async (userId) => {
 };
 
 export const loginUser = async (email, password) => {
-  const res = await api.get("/users", { params: { email, password } });
-  return res.data[0] || null;
+  const res = await api.get("/users", { params: { email } });
+
+  if (!res.data || res.data.length === 0) {
+    return { success: false, message: "Email không tồn tại" };
+  }
+
+  const user = res.data[0];
+
+  if (user.password !== password) {
+    return { success: false, message: "Sai mật khẩu" };
+  }
+
+  localStorage.setItem("user", JSON.stringify(user));
+  return { success: true, user };
 };
 
+/**
+ * REGISTER (có authority/roles):
+ * - Check email
+ * - Generate user_id tăng dần
+ * - roles = [authority] (USER/ADMIN)
+ * - Return {success, message, user}
+ */
 export const registerUser = async (user) => {
-  const check = await api.get("/users", { params: { email: user.email } });
-  if (check.data.length > 0) throw new Error("Email already exists");
-  
-  const newUser = { 
-      ...user, 
-      roles: ["USER"], 
-      created_at: new Date().toISOString() 
+  const email = String(user?.email || "").trim().toLowerCase();
+  const password = String(user?.password || "");
+  const fullname = String(user?.fullname || "").trim();
+  const username = String(user?.username || "").trim();
+  const authority = String(user?.authority || "USER").toUpperCase();
+
+  if (!fullname || !email || !password) {
+    return { success: false, message: "Vui lòng nhập đầy đủ thông tin" };
+  }
+
+  // 1) Check trùng email
+  const check = await api.get("/users", { params: { email } });
+  if (check.data.length > 0) {
+    return { success: false, message: "Email đã tồn tại" };
+  }
+
+  // 2) Generate user_id tăng dần
+  const all = await api.get("/users");
+  const maxUserId = (all.data || []).reduce(
+    (max, u) => Math.max(max, Number(u.user_id) || 0),
+    0
+  );
+
+  // 3) roles theo authority
+  const role = authority === "ADMIN" ? "ADMIN" : "USER";
+
+  const newUser = {
+    user_id: maxUserId + 1,
+    username: username || email.split("@")[0],
+    fullname,
+    email,
+    password,
+    roles: [role],
+    created_at: new Date().toISOString(),
   };
+
   const res = await api.post("/users", newUser);
-  return res.data;
+
+  localStorage.setItem("user", JSON.stringify(res.data));
+  return { success: true, user: res.data };
 };
 
 /* ===================== WISHLIST & REVIEWS ===================== */
 
 export const getWishlist = async (userId) => {
-    const res = await api.get("/wishlists", { params: { user_id: userId } });
-    return res.data;
+  const res = await api.get("/wishlists", { params: { user_id: userId } });
+  return res.data;
 };
 
 export const addWishlist = async (data) => {
-    const res = await api.post("/wishlists", data);
-    return res.data;
+  const res = await api.post("/wishlists", data);
+  return res.data;
 };
 
 export const removeWishlist = async (id) => {
-    const res = await api.delete(`/wishlists/${id}`);
-    return res.data;
+  const res = await api.delete(`/wishlists/${id}`);
+  return res.data;
 };
 
 export const getReviewsByProduct = async (productId) => {
-    const res = await api.get("/reviews", { params: { product_id: productId } });
-    return res.data;
+  const res = await api.get("/reviews", { params: { product_id: productId } });
+  return res.data;
 };
 
 export const addReview = async (review) => {
-    const res = await api.post("/reviews", review);
-    return res.data;
+  const res = await api.post("/reviews", review);
+  return res.data;
 };
-  
+
 export default api;
