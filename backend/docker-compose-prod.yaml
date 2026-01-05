@@ -1,0 +1,54 @@
+services:
+  postgres:
+    image: "postgres:18"
+    restart: "unless-stopped"
+    shm_size: "128mb"
+    expose:
+      - "5432"
+    volumes:
+      - "shoes-store-db:/var/lib/postgresql"
+      - "./docker/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
+    env_file: ".env" # POSTGRES_PASSWORD
+
+  valkey:
+    image: "valkey/valkey:9-alpine"
+    command: "valkey-server --bind * -::* --save 60 1 --loglevel warning"
+    restart: "unless-stopped"
+    expose:
+      - "6379"
+    volumes:
+      - "shoes-store-valkey:/data"
+
+  server:
+    image: "ghcr.io/phat1509/shoes-store-backend:main"
+    volumes:
+      - "./config:/app/config"
+    depends_on:
+      postgres:
+        condition: "service_started"
+      valkey:
+        condition: "service_started"
+    expose:
+      - "5150"
+    links:
+      - "postgres"
+      - "valkey"
+    env_file: ".env"
+
+  tunnel:
+    image: "cloudflare/cloudflared:latest"
+    command: "tunnel --post-quantum --no-autoupdate run"
+    restart: "unless-stopped"
+    links:
+      - "server"
+    deploy:
+      resources:
+        limits:
+          memory: 40MB
+    env_file: ".env" # TUNNEL_TOKEN
+    environment:
+      TUNNEL_TRANSPORT_PROTOCOL: "quic"
+
+volumes:
+  shoes-store-db:
+  shoes-store-valkey:

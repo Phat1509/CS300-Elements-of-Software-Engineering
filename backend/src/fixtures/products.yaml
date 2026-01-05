@@ -1,0 +1,60 @@
+- id: 1
+  brand_id: 1
+  category_id: 4
+  name: Nike Air Zoom Pegasus 40
+  slug: nike-air-zoom-pegasus-40
+  description: Lightweight running shoes for men
+  price: 120
+  image_url: https://example.com/nike_pegasus.jpg
+  discount_percentage: 0
+  is_active: true
+  created_at: "2023-11-12T12:34:56.789Z"
+  updated_at: "2023-11-12T12:34:56.789Z"
+- id: 2
+  brand_id: 2
+  category_id: 5
+  name: Adidas Ultraboost 23
+  slug: adidas-ultraboost-23
+  description: High-performance men sneakers
+  price: 150
+  image_url: https://example.com/adidas_ultraboost.jpg'
+  discount_percentage: 0
+  is_active: true
+  created_at: "2023-11-12T12:34:56.789Z"
+  updated_at: "2023-11-12T12:34:56.789Z"
+- id: 3
+  brand_id: 1
+  category_id: 7
+  name: Nike Air Zoom Winflo 10
+  slug: nike-air-zoom-winflo-10
+  description: Running shoes for women
+  price: 110
+  image_url: https://example.com/nike_winflo.jpg
+  discount_percentage: 0
+  is_active: true
+  created_at: "2023-11-12T12:34:56.789Z"
+  updated_at: "2023-11-12T12:34:56.789Z"
+- id: 4
+  brand_id: 3
+  category_id: 9
+  name: Converse Chuck Taylor All Star
+  slug: converse-chuck-taylor-all-star
+  description: Classic canvas sneakers for women
+  price: 75
+  image_url: https://example.com/converse_chuck.jpg
+  discount_percentage: 0
+  is_active: true
+  created_at: "2023-11-12T12:34:56.789Z"
+  updated_at: "2023-11-12T12:34:56.789Z"
+- id: 5
+  brand_id: 2
+  category_id: 11
+  name: Adidas Kids Superstar
+  slug: adidas-kids-superstar
+  description: Comfortable sneakers for kids
+  price: 65
+  image_url: https://example.com/adidas_kids_superstar.jpg
+  discount_percentage: 0
+  is_active: true
+  created_at: "2023-11-12T12:34:56.789Z"
+  updated_at: "2023-11-12T12:34:56.789Z"
