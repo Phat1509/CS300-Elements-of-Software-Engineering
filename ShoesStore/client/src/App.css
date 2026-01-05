@@ -1574,8 +1574,9 @@ npm
 }
 
 .admin-main {
-  padding: 18px;
+  padding: 0 18px 18px; 
 }
+
 
 .admin-topbar {
   background: #fff;
