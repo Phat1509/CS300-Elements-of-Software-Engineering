@@ -1,6 +1,5 @@
 // client/src/ultilities/adminApi.js
 
-// 
 const BASE = process.env.REACT_APP_API_URL || 'http://localhost:3001'; 
 
 async function safeJson(res) {
@@ -53,4 +52,8 @@ export async function getOrderItems(orderId) {
     return request(`/order_item?order_id=${orderId}`) || [];
 }
 
-export default { createProduct, updateProduct, deleteProduct, getOrders, updateOrderStatus, getOrderItems };
+export async function getAllProducts() {
+    return request('/products'); 
+}
+
+export default { createProduct, updateProduct,getAllProducts,  deleteProduct, getOrders, updateOrderStatus, getOrderItems };

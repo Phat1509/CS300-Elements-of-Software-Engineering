@@ -1,95 +1,117 @@
-// import React, { useState } from "react";
-// import { useNavigate, Link } from "react-router-dom";
-// import auth from "../../ultilities/auth";
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 
-// export default function AdminLogin() {
-//   const [username, setUsername] = useState("admin");
-//   const [password, setPassword] = useState("");
-//   const [error, setError] = useState(null);
-//   const [loading, setLoading] = useState(false);
+// Lấy URL từ biến môi trường hoặc fallback về localhost
+const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:3001";
 
-//   const navigate = useNavigate();
+export default function AdminLogin() {
+  const [username, setUsername] = useState("admin"); // Mặc định để test cho nhanh
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-//   const handleLogin = async (e) => {
-//     e.preventDefault();
-//     setError(null);
-//     setLoading(true);
-//     try {
-//       await auth.login(username, password);
-//       navigate("/admin");
-//     } catch (err) {
-//       console.error(err);
-//       setError("Invalid credentials or server error.");
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
+  const navigate = useNavigate();
 
-//   return (
-//     <main className="admin-auth">
-//       <div className="admin-auth-card">
-//         {/* Brand */}
-//         <div className="admin-auth-brand">
-//           <div className="admin-auth-dot">S</div>
-//           <div>
-//             <div className="admin-auth-name">StepStyle</div>
-//             <div className="admin-auth-sub">Admin Panel</div>
-//           </div>
-//         </div>
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
 
-//         <p className="muted" style={{ marginTop: 10, marginBottom: 18 }}>
-//           Sign in to manage products and orders.
-//         </p>
+    try {
+      // 1. Gọi API tìm user theo username
+      const res = await fetch(`${API_BASE}/users?username=${username}`);
+      if (!res.ok) throw new Error("Lỗi kết nối server");
+      
+      const users = await res.json();
+      const user = users[0]; // Json-server trả về mảng, lấy phần tử đầu tiên
 
-//         <form onSubmit={handleLogin} className="admin-auth-form">
-//           <div className="form-group">
-//             <label className="muted">Username</label>
-//             <input
-//               className="input"
-//               value={username}
-//               onChange={(e) => setUsername(e.target.value)}
-//               placeholder="admin"
-//               autoComplete="username"
-//             />
-//           </div>
+      // 2. Kiểm tra logic đăng nhập
+      if (!user) {
+        setError("Tài khoản không tồn tại.");
+      } else if (user.password !== password) {
+        setError("Sai mật khẩu.");
+      } else if (!user.roles || !user.roles.includes("ADMIN")) {
+        // Quan trọng: Chặn nếu không phải admin
+        setError("Tài khoản này không có quyền truy cập Admin.");
+      } else {
+        // 3. Đăng nhập thành công
+        // Lưu thông tin user vào localStorage để các trang khác nhận diện
+        localStorage.setItem("user", JSON.stringify(user));
+        
+        // Chuyển hướng vào trang Dashboard
+        navigate("/admin");
+      }
 
-//           <div className="form-group" style={{ marginTop: 10 }}>
-//             <label className="muted">Password</label>
-//             <input
-//               className="input"
-//               type="password"
-//               value={password}
-//               onChange={(e) => setPassword(e.target.value)}
-//               placeholder="••••••••"
-//               autoComplete="current-password"
-//             />
-//           </div>
+    } catch (err) {
+      console.error(err);
+      setError("Có lỗi xảy ra, vui lòng thử lại sau.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-//           {error && (
-//             <div className="admin-auth-error" role="alert">
-//               {error}
-//             </div>
-//           )}
+  return (
+    <main className="admin-auth">
+      <div className="admin-auth-card">
+        {/* Brand */}
+        <div className="admin-auth-brand">
+          <div className="admin-auth-dot">S</div>
+          <div>
+            <div className="admin-auth-name">StepStyle</div>
+            <div className="admin-auth-sub">Admin Panel</div>
+          </div>
+        </div>
 
-//           <button
-//             className="btn btn-primary btn-lg"
-//             style={{ width: "100%", marginTop: 14 }}
-//             type="submit"
-//             disabled={loading}
-//           >
-//             {loading ? "Signing in..." : "Sign in"}
-//           </button>
+        <p className="muted" style={{ marginTop: 10, marginBottom: 18 }}>
+          Sign in to manage products and orders.
+        </p>
 
-//           <div className="admin-auth-links">
-//             <Link to="/" className="link-btn">
-//               ← Back to store
-//             </Link>
-//             <span className="muted" style={{ fontSize: 12 }}>
-//               Demo account: admin
-//             </span>
-//           </div>
-//         </form>
-//       </div>
-//     </main>
-//   );
-// }
+        <form onSubmit={handleLogin} className="admin-auth-form">
+          <div className="form-group">
+            <label className="muted">Username</label>
+            <input
+              className="input"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="admin"
+              autoComplete="username"
+            />
+          </div>
+
+          <div className="form-group" style={{ marginTop: 10 }}>
+            <label className="muted">Password</label>
+            <input
+              className="input"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Nhập password admin..."
+              autoComplete="current-password"
+            />
+          </div>
+
+          {error && (
+            <div className="admin-auth-error" role="alert">
+              {error}
+            </div>
+          )}
+
+          <button
+            className="btn btn-primary btn-lg"
+            style={{ width: "100%", marginTop: 14 }}
+            type="submit"
+            disabled={loading}
+          >
+            {loading ? "Signing in..." : "Sign in"}
+          </button>
+
+          <div className="admin-auth-links">
+            <Link to="/" className="link-btn">
+              ← Back to store
+            </Link>
+          </div>
+        </form>
+      </div>
+    </main>
+  );
+}

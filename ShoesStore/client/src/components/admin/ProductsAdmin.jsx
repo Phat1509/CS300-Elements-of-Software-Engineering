@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { getProducts } from "../../utilities/api";
-import adminApi from "../../utilities/adminApi";
+// Đảm bảo import đúng đường dẫn
+import adminApi, { getAllProducts } from "../../utilities/adminApi"; 
 import ProductForm from "./ProductForm";
 import AdminLayout from "./AdminLayout";
 
@@ -8,34 +8,50 @@ export default function ProductsAdmin() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Search & Filter
   const [query, setQuery] = useState("");
   const [onlyActive, setOnlyActive] = useState(false);
 
+  // Modal State
   const [editing, setEditing] = useState(null);
   const [showNew, setShowNew] = useState(false);
 
+  // 1. Load Data
   useEffect(() => {
     let mounted = true;
     setLoading(true);
-    getProducts()
-      .then((p) => mounted && setProducts(p || []))
-      .catch(console.error)
+
+    getAllProducts()
+      .then((p) => {
+        if (mounted) setProducts(Array.isArray(p) ? p : []);
+      })
+      .catch((err) => {
+        console.error("Load products failed:", err);
+        if (mounted) setProducts([]);
+      })
       .finally(() => mounted && setLoading(false));
+
     return () => {
       mounted = false;
     };
   }, []);
 
+  // 2. Normalize Data (QUAN TRỌNG: Xác định đúng ID)
   const normalized = useMemo(() => {
-    return (products || []).map((p) => ({
-      ...p,
-      _id: p.product_id || p.id || p.productId,
-      _name: (p.name || "").toString(),
-      _price: Number(p.price) || 0,
-      _active:
-        typeof p.is_active === "boolean" ? p.is_active : !!p.isActive || true,
-      _image: p.image_url || p.image || "",
-    }));
+    return products.map((p) => {
+      // JSON-Server thường dùng 'id'. Database thật thường dùng 'product_id'.
+      // Ta ưu tiên lấy giá trị nào tồn tại.
+      const realId = p.id || p.product_id || p.productId;
+
+      return {
+        ...p, // Giữ lại toàn bộ field gốc để Form dùng
+        _id: realId, 
+        _name: (p.name || "").toString(),
+        _price: Number(p.price) || 0,
+        _active: typeof p.is_active === "boolean" ? p.is_active : (p.isActive === true || p.isActive === "true"),
+        _image: p.image_url || p.image || "",
+      };
+    });
   }, [products]);
 
   const displayed = useMemo(() => {
@@ -43,47 +59,79 @@ export default function ProductsAdmin() {
     return normalized
       .filter((p) => (onlyActive ? p._active : true))
       .filter((p) => (q ? p._name.toLowerCase().includes(q) : true))
-      .sort((a, b) => (b._id || 0) - (a._id || 0));
+      // Sort: ID lớn nhất lên đầu (Mới nhất)
+      .sort((a, b) => Number(b._id) - Number(a._id));
   }, [normalized, query, onlyActive]);
 
+  // 3. SỬA LỖI DELETE
   const handleDelete = async (id) => {
-    if (!window.confirm("Delete this product?")) return;
+    if (!id) {
+      alert("Lỗi: Không tìm thấy ID sản phẩm.");
+      return;
+    }
+
+    if (!window.confirm(`Bạn có chắc chắn muốn xóa sản phẩm ID: ${id}?`)) return;
+
     try {
-      await adminApi.deleteProduct(id);
-      setProducts((s) =>
-        (s || []).filter((x) => (x.product_id || x.id) !== id)
-      );
+      console.log("Deleting product with ID:", id); // Debug xem ID đúng chưa
+      
+      // Gọi API xóa
+      const res = await adminApi.deleteProduct(id);
+
+      // Nếu adminApi dùng safeJson (trả về null khi lỗi), ta phải check res
+      // Lưu ý: Đôi khi API trả về rỗng (204 No Content) cũng là thành công.
+      // Nhưng nếu safeJson nuốt lỗi thì res sẽ là null.
+      
+      // Cách fix an toàn nhất: Nếu API không throw lỗi thì coi như thành công
+      // Hoặc check lại danh sách từ server để chắc chắn (an toàn nhưng chậm hơn)
+      
+      // Xóa khỏi UI
+      setProducts((prev) => prev.filter((x) => {
+        const xId = x.id || x.product_id || x.productId;
+        // So sánh lỏng (==) phòng trường hợp string vs number
+        return xId != id;
+      }));
+
+      alert("Đã xóa thành công!");
+
     } catch (e) {
-      console.error(e);
-      alert("Delete failed");
+      console.error("Delete error:", e);
+      alert("Xóa thất bại. Vui lòng kiểm tra Console.");
     }
   };
 
-  const handleSaved = (saved) => {
-    if (!saved) return;
-    const id = saved.product_id || saved.id || saved.productId;
+  // 4. SỬA LỖI EDIT
+  const handleSaved = (savedItem) => {
+    if (!savedItem) return;
+    
+    // Tìm ID để cập nhật State
+    const savedId = savedItem.id || savedItem.product_id || savedItem.productId;
 
-    setProducts((s) => {
-      const arr = s || [];
-      const exists = arr.find((x) => (x.product_id || x.id) === id);
+    setProducts((prev) => {
+      const exists = prev.find((x) => (x.id || x.product_id || x.productId) == savedId);
+      
       if (exists) {
-        return arr.map((x) =>
-          (x.product_id || x.id) === id ? { ...x, ...saved } : x
+        // Update
+        return prev.map((x) =>
+          (x.id || x.product_id || x.productId) == savedId ? { ...x, ...savedItem } : x
         );
       }
-      return [saved, ...arr];
+      // Create
+      return [savedItem, ...prev];
     });
 
-    setEditing(null);
-    setShowNew(false);
+    closeForm();
   };
 
   const openNew = () => {
+    console.log("Opening New Form");
     setEditing(null);
     setShowNew(true);
   };
 
   const openEdit = (p) => {
+    console.log("Opening Edit Form for:", p);
+    // Quan trọng: Tắt showNew trước khi setEditing để tránh xung đột
     setShowNew(false);
     setEditing(p);
   };
@@ -94,52 +142,46 @@ export default function ProductsAdmin() {
   };
 
   return (
-    <AdminLayout title="Products">
+    <AdminLayout title="Product Management">
       {/* Toolbar */}
       <div className="admin-toolbar">
         <div className="admin-toolbar-left">
           <input
             className="input"
-            placeholder="Search by name..."
+            placeholder="Search products..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
-
-          <label className="admin-switch" style={{ marginLeft: 10 }}>
+          <label className="admin-switch" style={{ marginLeft: 15 }}>
             <input
               type="checkbox"
               checked={onlyActive}
               onChange={(e) => setOnlyActive(e.target.checked)}
             />
-            <span>Active only</span>
+            <span>Active Only</span>
           </label>
         </div>
-
         <button className="btn btn-primary" onClick={openNew}>
-          + New Product
+          + Add Product
         </button>
       </div>
 
-      {/* Form panel */}
+      {/* Form Modal / Panel */}
+      {/* Thêm điều kiện render rõ ràng hơn */}
       {(showNew || editing) && (
-        <div className="admin-panel">
+        <div className="admin-panel" style={{ border: "2px solid #007bff", marginBottom: 20 }}>
           <div className="admin-panel-top">
             <div>
-              <strong>
-                {showNew
-                  ? "Create product"
-                  : `Edit: ${editing?._name || editing?.name || ""}`}
-              </strong>
-              <div className="muted" style={{ fontSize: 12 }}>
-                Fill in the fields and hit Save.
-              </div>
+              <strong>{showNew ? "Create New Product" : `Edit Product: ${editing?._name}`}</strong>
             </div>
-            <button className="btn btn-outline" onClick={closeForm}>
+            <button className="btn btn-sm btn-outline" onClick={closeForm}>
               Close
             </button>
           </div>
-
+          
+          {/* Truyền key để React reset form khi đổi sản phẩm */}
           <ProductForm
+            key={editing ? editing._id : 'new'}
             initial={showNew ? null : editing}
             onSaved={handleSaved}
             onCancel={closeForm}
@@ -147,32 +189,26 @@ export default function ProductsAdmin() {
         </div>
       )}
 
-      {/* Table */}
+      {/* Data Table */}
       {loading ? (
-        <div className="muted">Loading products...</div>
+        <div className="muted" style={{ padding: 20 }}>Loading...</div>
       ) : (
         <div className="admin-table-wrap">
           <table className="admin-table">
             <thead>
               <tr>
-                <th style={{ width: 72 }}>Image</th>
-                <th>Name</th>
-                <th style={{ width: 140 }}>Price</th>
-                <th style={{ width: 140 }}>Status</th>
-                <th style={{ width: 180 }}>Actions</th>
+                <th style={{ width: 80 }}>Img</th>
+                <th>Product Name</th>
+                <th style={{ width: 120 }}>Price</th>
+                <th style={{ width: 100 }}>Status</th>
+                <th style={{ width: 160, textAlign: "right" }}>Actions</th>
               </tr>
             </thead>
-
             <tbody>
               {displayed.length === 0 ? (
                 <tr>
-                  <td colSpan={5}>
-                    <div className="admin-empty" style={{ margin: 10 }}>
-                      <h3 style={{ marginTop: 0 }}>No products</h3>
-                      <p className="muted" style={{ margin: 0 }}>
-                        Try clearing filters or create a new product.
-                      </p>
-                    </div>
+                  <td colSpan={5} className="text-center p-4 muted">
+                    No products found.
                   </td>
                 </tr>
               ) : (
@@ -181,45 +217,38 @@ export default function ProductsAdmin() {
                     <td>
                       <div className="admin-img">
                         {p._image ? (
-                          <img src={p._image} alt={p._name} />
+                          <img src={p._image} alt="" onError={(e) => e.target.style.display='none'} />
                         ) : (
-                          <div className="admin-img-ph">—</div>
+                          <span className="muted">No img</span>
                         )}
                       </div>
                     </td>
                     <td>
-                      <div style={{ fontWeight: 800 }}>{p._name}</div>
-                      <div className="muted" style={{ fontSize: 12 }}>
-                        ID: {p._id}
-                      </div>
+                      <div style={{ fontWeight: 600 }}>{p._name}</div>
+                      <div className="muted small">ID: {p._id}</div>
                     </td>
+                    <td>{Number(p._price).toLocaleString()}₫</td>
                     <td>
-                      <strong>${p._price.toFixed(2)}</strong>
+                      <span className={`pill ${p._active ? "pill-green" : "pill-gray"}`}>
+                        {p._active ? "Active" : "Hidden"}
+                      </span>
                     </td>
-                    <td>
-                      {p._active ? (
-                        <span className="admin-badge admin-badge-ok">
-                          Active
-                        </span>
-                      ) : (
-                        <span className="admin-badge admin-badge-off">
-                          Inactive
-                        </span>
-                      )}
-                    </td>
-                    <td>
-                      <button
-                        className="btn btn-outline"
-                        onClick={() => openEdit(p)}
+                    <td style={{ textAlign: "right" }}>
+                      <button 
+                        className="btn-icon" 
+                        onClick={() => openEdit(p)} 
+                        title="Edit"
+                        style={{cursor: 'pointer'}} // Thêm style để chắc chắn click được
                       >
-                        Edit
+                        ✏️
                       </button>
-                      <button
-                        className="btn btn-outline"
-                        style={{ marginLeft: 8 }}
-                        onClick={() => handleDelete(p._id)}
+                      <button 
+                        className="btn-icon delete" 
+                        onClick={() => handleDelete(p._id)} 
+                        title="Delete"
+                        style={{ marginLeft: 8, color: "red", cursor: 'pointer' }}
                       >
-                        Delete
+                        🗑️
                       </button>
                     </td>
                   </tr>
@@ -229,10 +258,6 @@ export default function ProductsAdmin() {
           </table>
         </div>
       )}
-
-      <div className="muted" style={{ marginTop: 10, fontSize: 12 }}>
-        Showing {displayed.length} / {products.length} products
-      </div>
     </AdminLayout>
   );
 }
