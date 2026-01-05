@@ -25,7 +25,6 @@ import AdminDashboard from "./components/admin/AdminDashboard";
 import ProductsAdmin from "./components/admin/ProductsAdmin";
 import OrdersAdmin from "./components/admin/OrdersAdmin";
 import AdminLogin from "./components/admin/AdminLogin";
-import RequireAdmin from "./components/admin/RequireAdmin";
 
 import "./App.css";
 
@@ -70,25 +69,19 @@ function AppRoutes() {
         <Route
           path="/admin"
           element={
-            <RequireAdmin>
               <AdminDashboard />
-            </RequireAdmin>
           }
         />
         <Route
           path="/admin/products"
           element={
-            <RequireAdmin>
               <ProductsAdmin />
-            </RequireAdmin>
           }
         />
         <Route
           path="/admin/orders"
           element={
-            <RequireAdmin>
               <OrdersAdmin />
-            </RequireAdmin>
           }
         />
       </Routes>
