@@ -1487,9 +1487,10 @@ npm
   color: #e5e7eb;
   padding: 18px 14px;
   position: sticky;
-  top: 64px; /* header height */
-  height: calc(100vh - 64px);
+  top: 0;       
+  height: 100vh; 
 }
+
 
 @media (max-width: 1024px) {
   .admin-side {
