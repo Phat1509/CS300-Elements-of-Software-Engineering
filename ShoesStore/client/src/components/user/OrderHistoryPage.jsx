@@ -1,15 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  Search,
-  Package,
-  Truck,
-  CheckCircle2,
-  Clock,
-  Star,
-} from "lucide-react";
+import { Search, Package, Truck, CheckCircle2, Clock, Star } from "lucide-react";
 import { getOrdersByUserId } from "../../utilities/api";
-
 
 const moneyVND = (n) => (Number(n) || 0).toLocaleString("vi-VN") + "₫";
 const fmtDate = (iso) => (iso ? new Date(iso).toLocaleString("vi-VN") : "-");
@@ -46,16 +38,13 @@ function statusIcon(s) {
   return Clock;
 }
 
-async function fetchJson(url) {
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`Request failed: ${res.status}`);
-  return res.json();
-}
-
 export default function OrderHistoryPage() {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
-  const userId = user ? user.id || user.user_id : null;
+
+  // ✅ FIX: ưu tiên user.user_id trước (number), fallback user.id (string)
+  const userIdPrimary = user ? user.user_id ?? user.id : null;
+  const userIdAlt = user ? user.id : null;
 
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState("");
@@ -65,7 +54,7 @@ export default function OrderHistoryPage() {
   const [filter, setFilter] = useState("all");
 
   useEffect(() => {
-    if (!userId) {
+    if (!userIdPrimary) {
       setLoading(false);
       return;
     }
@@ -77,8 +66,8 @@ export default function OrderHistoryPage() {
       setErr("");
 
       try {
-        const list = await getOrdersByUserId(userId);
-
+        // ✅ FIX: fetch theo cả 2 kiểu id để không bị lẫn db cũ
+        const list = await getOrdersByUserId(userIdPrimary, userIdAlt);
         if (!mounted) return;
         setOrders(Array.isArray(list) ? list : []);
       } catch (e) {
@@ -93,24 +82,24 @@ export default function OrderHistoryPage() {
     return () => {
       mounted = false;
     };
-  }, [userId]);
+  }, [userIdPrimary, userIdAlt]);
 
   const sorted = useMemo(() => {
     const arr = [...orders];
     return arr.sort(
-      (a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0)
+      (a, b) => new Date(b.created_at || b.createdAt || 0) - new Date(a.created_at || a.createdAt || 0)
     );
   }, [orders]);
 
   const filtered = useMemo(() => {
     const text = q.trim().toLowerCase();
     return sorted.filter((o) => {
-      const id = String(o.order_id || o.id || "").toLowerCase();
+      const shownId = String(o.order_id ?? o.id ?? "").toLowerCase();
       const st = statusText(o.status).toLowerCase();
       const total = String(o.total_amount || "").toLowerCase();
 
       const matchText =
-        !text || id.includes(text) || st.includes(text) || total.includes(text);
+        !text || shownId.includes(text) || st.includes(text) || total.includes(text);
 
       const s = normalizeStatus(o.status);
       const matchFilter =
@@ -126,25 +115,13 @@ export default function OrderHistoryPage() {
 
   const stats = useMemo(() => {
     const all = sorted;
-    const delivered = all.filter(
-      (o) => normalizeStatus(o.status) === "DELIVERED"
-    ).length;
+    const delivered = all.filter((o) => normalizeStatus(o.status) === "DELIVERED").length;
     const inProgress = all.filter((o) =>
-      ["PENDING", "PROCESSING", "PAID", "SHIPPED"].includes(
-        normalizeStatus(o.status)
-      )
+      ["PENDING", "PROCESSING", "PAID", "SHIPPED"].includes(normalizeStatus(o.status))
     ).length;
-    const totalSpent = all.reduce(
-      (sum, o) => sum + (Number(o.total_amount) || 0),
-      0
-    );
+    const totalSpent = all.reduce((sum, o) => sum + (Number(o.total_amount) || 0), 0);
 
-    return {
-      total: all.length,
-      delivered,
-      inProgress,
-      totalSpent,
-    };
+    return { total: all.length, delivered, inProgress, totalSpent };
   }, [sorted]);
 
   if (!user) {
@@ -167,9 +144,7 @@ export default function OrderHistoryPage() {
       <section className="orders-hero">
         <div className="container orders-hero-inner">
           <h1 className="orders-hero-title">My Orders</h1>
-          <p className="orders-hero-sub">
-            Track and manage all your orders in one place
-          </p>
+          <p className="orders-hero-sub">Track and manage all your orders in one place</p>
 
           <div className="orders-stats">
             <div className="orders-stat">
@@ -206,10 +181,7 @@ export default function OrderHistoryPage() {
               </div>
 
               <div className="orders-filter">
-                <select
-                  value={filter}
-                  onChange={(e) => setFilter(e.target.value)}
-                >
+                <select value={filter} onChange={(e) => setFilter(e.target.value)}>
                   <option value="all">All Orders</option>
                   <option value="pending">Pending</option>
                   <option value="processing">Processing</option>
@@ -243,12 +215,12 @@ export default function OrderHistoryPage() {
               </div>
             ) : (
               filtered.map((o) => {
-                const oid = o.order_id ?? o.id;
+                const shownId = o.order_id ?? o.id; // để hiển thị
                 const pill = statusPillClass(o.status);
                 const Icon = statusIcon(o.status);
 
                 return (
-                  <div className="orders-card" key={oid}>
+                  <div className="orders-card" key={o.id ?? shownId}>
                     <div className="order-head">
                       <div className="order-left">
                         <div className="order-iconbox">
@@ -257,7 +229,7 @@ export default function OrderHistoryPage() {
 
                         <div>
                           <div className="order-title-row">
-                            <p className="order-id">#{oid}</p>
+                            <p className="order-id">#{shownId}</p>
                             <span className={`pill ${pill}`}>
                               <span className="dot" />
                               {statusText(o.status)}
@@ -272,13 +244,15 @@ export default function OrderHistoryPage() {
 
                       <div className="order-right">
                         <div className="small">Total Amount</div>
-                        <div className="total">
-                          {moneyVND(o.total_amount)}
-                        </div>
+                        <div className="total">{moneyVND(o.total_amount)}</div>
+
                         <button
                           className="btn-solid"
                           style={{ marginTop: 10 }}
-                          onClick={() => navigate(`/orders/${oid}`)}
+                          // ✅ FIX: route theo json-server id để khỏi "Order not found"
+                          onClick={() => navigate(`/orders/${o.id}`)}
+                          disabled={!o.id}
+                          title={!o.id ? "Missing order id" : "Track"}
                         >
                           Track →
                         </button>

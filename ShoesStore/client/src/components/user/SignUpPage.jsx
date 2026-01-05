@@ -131,9 +131,7 @@ export default function SignUpPage() {
                 <option value="USER">USER</option>
                 <option value="ADMIN">ADMIN</option>
               </select>
-              <p className="muted" style={{ fontSize: 12, marginTop: 8 }}>
-                (Dev mode) Chọn role để test phân quyền.
-              </p>
+              
             </div>
 
             <div className="form-group">

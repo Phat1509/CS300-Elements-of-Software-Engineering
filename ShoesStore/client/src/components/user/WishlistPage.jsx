@@ -1,146 +1,114 @@
-import React from "react";
+// client/src/components/user/WishlistPage.jsx
+import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronRight, Heart } from "lucide-react";
 import ProductCard from "./ProductCard";
-
-const wishlistProducts = [
-  {
-    id: 201,
-    name: "Premium Running Shoes",
-    price: 129.99,
-    image:
-      "https://images.unsplash.com/photo-1719523677291-a395426c1a87?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-  },
-  {
-    id: 202,
-    name: "Urban Casual Sneakers",
-    price: 99.99,
-    image:
-      "https://images.unsplash.com/photo-1759542890353-35f5568c1c90?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-  },
-  {
-    id: 203,
-    name: "Lifestyle Comfort Plus",
-    price: 119.99,
-    image:
-      "https://images.unsplash.com/photo-1602504786849-b325e183168b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-  },
-  {
-    id: 204,
-    name: "Classic Basketball Pro",
-    price: 139.99,
-    image:
-      "https://images.unsplash.com/photo-1605348532760-6753d2c43329?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-  },
-  {
-    id: 205,
-    name: "Athletic Pro Trainer",
-    price: 124.99,
-    image:
-      "https://images.unsplash.com/photo-1639619287843-da4b297d7672?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-  },
-  {
-    id: 206,
-    name: "Classic White Sneaker",
-    price: 74.99,
-    image:
-      "https://images.unsplash.com/photo-1631482665588-d3a6f88e65f0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-  },
-  {
-    id: 207,
-    name: "Street Fashion X",
-    price: 109.99,
-    image:
-      "https://images.unsplash.com/photo-1597081206405-5a13f38c5f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-  },
-  {
-    id: 208,
-    name: "Premium Leather Boots",
-    price: 149.99,
-    image:
-      "https://images.unsplash.com/photo-1761052720710-32349209f6b4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-  },
-];
+import { useAuth } from "../../context/AuthContext";
+import { useWishlist } from "../../context/WishlistContext";
+import { getProductDetail } from "../../utilities/api";
 
 export default function WishlistPage() {
+  const { user } = useAuth();
+  const { wishlistEntries, wishlistLoading, refreshWishlist } = useWishlist();
+
+  const [products, setProducts] = useState([]);
+  const [loadingProducts, setLoadingProducts] = useState(false);
+
+  const userId = user ? (user.id || user.user_id) : null;
+
+  // Map wishlistEntries -> list product_id (unique)
+  const productIds = useMemo(() => {
+    const ids = wishlistEntries.map((w) => w.product_id);
+    return Array.from(new Set(ids.map((x) => String(x))));
+  }, [wishlistEntries]);
+
+  useEffect(() => {
+    // Nếu chưa login thì clear UI
+    if (!userId) {
+      setProducts([]);
+      return;
+    }
+
+    const load = async () => {
+      setLoadingProducts(true);
+      try {
+        const list = await Promise.all(
+          productIds.map(async (pid) => {
+            try {
+              return await getProductDetail(pid);
+            } catch (e) {
+              console.error("getProductDetail error:", pid, e);
+              return null;
+            }
+          })
+        );
+        setProducts(list.filter(Boolean));
+      } finally {
+        setLoadingProducts(false);
+      }
+    };
+
+    load();
+  }, [userId, productIds]);
+
+  // Khi mới vào trang, refresh lại wishlist để chắc chắn sync (đỡ bị stale)
+  useEffect(() => {
+    if (userId) refreshWishlist(userId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userId]);
+
+  const isEmpty = !wishlistLoading && !loadingProducts && products.length === 0;
+
   return (
     <>
-      {/* Breadcrumb */}
-      <section className="bg-slate-50 py-6 border-b">
+      <div className="breadcrumb">
         <div className="container">
-          <div className="flex items-center gap-2 text-sm muted">
-            <Link to="/" className="hover:text-blue-600">
-              Home
-            </Link>
-            <ChevronRight size={16} />
-            <span className="text-foreground">Wishlist</span>
-          </div>
+          <Link to="/">Home</Link> <ChevronRight size={16} /> <span>Wishlist</span>
         </div>
-      </section>
+      </div>
 
-      {/* Header */}
-      <section className="men-head">
-        <div className="container">
-          <div
-            className="flex items-center gap-3"
-            style={{ padding: "24px 0" }}
-          >
-            <Heart size={28} className="text-[#111827]" />
-            <h1 className="men-title" style={{ margin: 0 }}>
-              My Wishlist
-            </h1>
-          </div>
-          <p className="men-sub">
-            {wishlistProducts.length} items saved for later
-          </p>
+      <section className="container" style={{ padding: "30px 0 60px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
+          <Heart size={22} />
+          <h2 style={{ margin: 0 }}>Your Wishlist</h2>
         </div>
-      </section>
 
-      {/* Grid products */}
-      <section className="container" style={{ padding: "32px 0" }}>
-        {wishlistProducts.length === 0 ? (
-          <div
-            className="center"
-            style={{ background: "#fff", borderRadius: 12, padding: 48 }}
-          >
-            <Heart size={56} className="muted" />
-            <h3 style={{ marginTop: 12, marginBottom: 8 }}>
-              Your wishlist is empty
-            </h3>
-            <p className="muted" style={{ marginBottom: 16 }}>
-              Save your favorite items to your wishlist
+        {!userId ? (
+          <div className="card" style={{ padding: 18 }}>
+            <p style={{ marginTop: 0 }}>
+              Bạn cần <b>Sign in</b> để dùng Wishlist nha.
             </p>
-            <Link to="/" className="btn btn-primary">
-              Start Shopping
+            <Link to="/signin" className="btn btn-primary" style={{ width: "fit-content" }}>
+              Go to Sign in
+            </Link>
+          </div>
+        ) : wishlistLoading || loadingProducts ? (
+          <div className="card" style={{ padding: 18 }}>
+            <p style={{ margin: 0 }}>Loading wishlist...</p>
+          </div>
+        ) : isEmpty ? (
+          <div className="card" style={{ padding: 18 }}>
+            <p style={{ marginTop: 0 }}>Wishlist của bạn đang trống 👀</p>
+            <Link to="/new" className="btn btn-primary" style={{ width: "fit-content" }}>
+              Browse new arrivals
             </Link>
           </div>
         ) : (
-          <>
-            <div
-              className="flex"
-              style={{
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginBottom: 16,
-              }}
-            >
-              <p className="muted">
-                Showing {wishlistProducts.length} products
-              </p>
-              <button className="outline-btn">Add All to Cart</button>
-            </div>
-
-            <div className="men-grid">
-              {wishlistProducts.map((p) => (
-                <ProductCard
-                  key={p.id}
-                  image={p.image}
-                  name={p.name}
-                  price={p.price}
-                />
-              ))}
-            </div>
-          </>
+          <div className="grid products-grid">
+            {products.map((p) => (
+              <ProductCard
+                key={p.id || p.product_id || p.slug}
+                id={p.id}
+                product_id={p.product_id}
+                image={p.image}
+                image_url={p.image_url}
+                name={p.name}
+                price={p.price}
+                extra={p.extra}
+                slug={p.slug}
+              />
+            ))}
+          </div>
         )}
       </section>
     </>
