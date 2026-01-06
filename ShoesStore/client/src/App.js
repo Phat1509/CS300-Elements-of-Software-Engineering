@@ -1,11 +1,15 @@
-// client/src/App.js 
+// client/src/App.js
 import React from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+
 import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
+import { WishlistProvider } from "./context/WishlistContext";
+
 import Header from "./components/user/Header";
 import Footer from "./components/user/Footer";
 import Hero from "./components/user/Hero";
+
 import HomePage from "./components/user/HomePage";
 import MenPage from "./components/user/MenPage";
 import WomenPage from "./components/user/WomenPage";
@@ -59,6 +63,7 @@ function AppRoutes() {
         <Route path="/product/:slug" element={<ProductDetailPage />} />
         <Route path="/orders" element={<OrderHistoryPage />} />
         <Route path="/orders/:id" element={<OrderDetailPage />} />
+
         {/* Auth (user) */}
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
@@ -66,24 +71,9 @@ function AppRoutes() {
 
         {/* Admin */}
         <Route path="/admin/login" element={<AdminLogin />} />
-        <Route
-          path="/admin"
-          element={
-              <AdminDashboard />
-          }
-        />
-        <Route
-          path="/admin/products"
-          element={
-              <ProductsAdmin />
-          }
-        />
-        <Route
-          path="/admin/orders"
-          element={
-              <OrdersAdmin />
-          }
-        />
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/products" element={<ProductsAdmin />} />
+        <Route path="/admin/orders" element={<OrdersAdmin />} />
       </Routes>
 
       {!isAdminRoute && <Footer />}
@@ -96,7 +86,9 @@ export default function App() {
     <BrowserRouter>
       <AuthProvider>
         <CartProvider>
-          <AppRoutes />
+          <WishlistProvider>
+            <AppRoutes />
+          </WishlistProvider>
         </CartProvider>
       </AuthProvider>
     </BrowserRouter>

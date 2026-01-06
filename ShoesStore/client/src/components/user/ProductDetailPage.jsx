@@ -12,6 +12,7 @@ import {
 import { getProductDetail } from "../../utilities/api"; // Chú ý đường dẫn import api
 import { useAuth } from "../../context/AuthContext";
 import { useCart } from "../../context/CartContext";
+import { useWishlist } from "../../context/WishlistContext";
 
 const ProductDetail = () => {
   const { slug } = useParams();
@@ -19,6 +20,7 @@ const ProductDetail = () => {
 
   const { user } = useAuth();
   const { addToCart } = useCart(); // Giả sử Context xử lý việc gọi API
+  const { toggleWishlist, isInWishlist } = useWishlist();
 
   const [product, setProduct] = useState(null);
   const [variants, setVariants] = useState([]);
@@ -36,24 +38,20 @@ const ProductDetail = () => {
       setLoading(true);
       try {
         const data = await getProductDetail(slug);
+        setProduct(data);
 
-        if (data) {
-          setProduct(data);
-
-          // --- [ĐÃ SỬA] Lấy variants thật từ DB ---
-          // Code api.js đã xử lý việc gộp variants vào đây rồi
-          const realVariants = data.variants || data.product_variants || [];
-          setVariants(realVariants);
-
-          // Tự động chọn size/màu đầu tiên còn hàng
-          const firstAvailable = realVariants.find((v) => v.stock > 0);
-          if (firstAvailable) {
-            setSelectedSize(firstAvailable.size);
-            setSelectedColor(firstAvailable.color);
-          }
-        }
-      } catch (error) {
-        console.error("Error loading product:", error);
+        // Variants có thể nằm ở nhiều key -> normalize
+        const v =
+          data?.variants ||
+          data?.product_variants ||
+          data?.variant ||
+          data?.product_variant ||
+          [];
+        setVariants(Array.isArray(v) ? v : []);
+      } catch (e) {
+        console.error("getProductDetail error:", e);
+        setProduct(null);
+        setVariants([]);
       } finally {
         setLoading(false);
       }
@@ -62,53 +60,62 @@ const ProductDetail = () => {
     fetchData();
   }, [slug]);
 
-  /* ================= CALCULATE OPTIONS ================= */
+  /* ================= DERIVED ================= */
   const sizes = useMemo(() => {
-    return [...new Set(variants.map((v) => v.size))].sort();
+    const s = new Set();
+    variants.forEach((v) => {
+      if (v.size) s.add(v.size);
+    });
+    return Array.from(s);
   }, [variants]);
 
   const colors = useMemo(() => {
-    return [...new Set(variants.map((v) => v.color))];
+    const c = new Set();
+    variants.forEach((v) => {
+      if (v.color) c.add(v.color);
+    });
+    return Array.from(c);
   }, [variants]);
 
   const selectedVariant = useMemo(() => {
-    return variants.find((v) => {
-      return v.size === selectedSize && v.color === selectedColor;
-    });
+    if (!selectedSize || !selectedColor) return null;
+    return (
+      variants.find(
+        (v) =>
+          String(v.size).toLowerCase() === String(selectedSize).toLowerCase() &&
+          String(v.color).toLowerCase() === String(selectedColor).toLowerCase()
+      ) || null
+    );
   }, [variants, selectedSize, selectedColor]);
 
-  /* ================= PRICE CALCULATION ================= */
-  const finalPrice = useMemo(() => {
-    if (!product) return 0;
-    const price = Number(product.price) || 0;
-    const discount = Number(product.discount_percentage) || 0;
+  const productId = product ? (product.product_id || product.id) : null;
+  const inWishlist = productId ? isInWishlist(productId) : false;
 
-    if (discount > 0) {
-      return price * (1 - discount / 100);
+  /* ================= HANDLERS ================= */
+  const handleToggleWishlist = async () => {
+    if (!productId) return;
+    try {
+      await toggleWishlist(productId);
+    } catch (e) {
+      // Nếu chưa login thì đá qua sign in
+      if (String(e?.message || e) === "NOT_LOGGED_IN") {
+        navigate("/signin");
+        return;
+      }
+      console.error("toggleWishlist error:", e);
     }
-    return price;
-  }, [product]);
+  };
 
-  /* ================= HANDLER ================= */
   const handleAddToCart = async () => {
-    if (!user) {
-      alert("Vui lòng đăng nhập để thêm vào giỏ hàng.");
-      navigate("/signin");
-      return;
-    }
-
-    if (!selectedSize || !selectedColor) {
-      alert("Vui lòng chọn Size và Màu sắc.");
-      return;
-    }
-
+    // check variant chọn đủ chưa
     if (!selectedVariant) {
-      alert("Phiên bản này hiện không khả dụng.");
+      alert("Please select size & color before adding to cart!");
       return;
     }
 
-    if (selectedVariant.stock < quantity) {
-      alert(`Chỉ còn lại ${selectedVariant.stock} sản phẩm trong kho.`);
+    // check stock
+    if (selectedVariant.stock === 0) {
+      alert("This variant is out of stock!");
       return;
     }
 
@@ -122,217 +129,146 @@ const ProductDetail = () => {
 
         // Các thông tin hiển thị (cho UI Context render ngay lập tức)
         name: product.name,
-        price: finalPrice,
-        image: product.image_url,
-        size: selectedSize,
-        color: selectedColor,
-        stock: selectedVariant.stock, // Để check max quantity trong giỏ
+        image: product.image || product.image_url,
+        price: Number(product.price || 0),
+        size: selectedVariant.size,
+        color: selectedVariant.color,
         quantity: quantity,
+
+        // Một số field phụ nếu cần
+        slug: product.slug,
       };
 
-      // Gọi hàm từ Context.
-      // Lưu ý: Đảm bảo CartContext của bạn truyền đúng tham số xuống api.addToCart
-      await addToCart(cartItemData, quantity);
+      await addToCart(cartItemData);
 
-      alert("Đã thêm vào giỏ hàng thành công!");
-    } catch (error) {
-      console.error("Failed to add to cart", error);
-      alert("Lỗi khi thêm vào giỏ hàng.");
+      // Reset quantity
+      setQuantity(1);
+
+      alert("Added to cart successfully!");
+    } catch (err) {
+      console.error("Add to cart error:", err);
+      alert("Failed to add to cart!");
     } finally {
       setIsAdding(false);
     }
   };
 
-  if (loading)
+  /* ================= UI ================= */
+  if (loading) {
     return (
-      <div
-        className="container"
-        style={{ padding: "100px 0", textAlign: "center" }}
-      >
-        Đang tải...
+      <div className="container" style={{ padding: "40px 0" }}>
+        <p>Loading...</p>
       </div>
     );
-  if (!product)
+  }
+
+  if (!product) {
     return (
-      <div
-        className="container"
-        style={{ padding: "100px 0", textAlign: "center" }}
-      >
-        Không tìm thấy sản phẩm.
+      <div className="container" style={{ padding: "40px 0" }}>
+        <p>Product not found.</p>
+        <Link to="/" className="btn btn-primary">
+          Go Home
+        </Link>
       </div>
     );
+  }
+
+  // Price tính theo variant nếu có
+  const displayPrice = (() => {
+    if (!product) return 0;
+    const price = Number(product.price || 0);
+    return price;
+  })();
+
+  const rating = Number(product.rating || 4.8);
+  const reviewsCount = Number(product.reviews || 12);
 
   return (
-    <main className="men-wrap">
-      {/* Breadcrumbs */}
-      <section className="men-bc">
-        <div
-          className="container"
-          style={{ display: "flex", alignItems: "center", gap: 8 }}
-        >
-          <Link to="/" className="men-bc-link">
-            Trang chủ
-          </Link>
-          <ChevronRight size={14} className="muted" />
-          <Link
-            to={
-              product.category_id === 1
-                ? "/men"
-                : product.category_id === 2
-                ? "/women"
-                : "/kids"
-            }
-            className="men-bc-link"
-          >
-            {product.category_id === 1
-              ? "Nam"
-              : product.category_id === 2
-              ? "Nữ"
-              : "Trẻ em"}
-          </Link>
-          <ChevronRight size={14} className="muted" />
-          <span style={{ color: "#111", fontWeight: 500 }}>{product.name}</span>
+    <>
+      {/* Breadcrumb */}
+      <div className="breadcrumb">
+        <div className="container">
+          <Link to="/">Home</Link> <ChevronRight size={16} />{" "}
+          <span>{product.name}</span>
         </div>
-      </section>
+      </div>
 
-      {/* Main Content */}
-      <section className="container" style={{ padding: "40px 0 80px" }}>
+      <section className="container" style={{ padding: "30px 0 60px" }}>
         <div
-          className="product-layout"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: "48px",
+            gridTemplateColumns: "1.1fr 0.9fr",
+            gap: "40px",
+            alignItems: "start",
           }}
         >
           {/* LEFT: IMAGE */}
-          <div
-            className="product-image-wrapper"
-            style={{
-              background: "#f5f5f5",
-              borderRadius: "16px",
-              overflow: "hidden",
-              position: "relative",
-            }}
-          >
-            {product.discount_percentage > 0 && (
-              <div
-                style={{
-                  position: "absolute",
-                  top: 16,
-                  left: 16,
-                  background: "#ef4444",
-                  color: "white",
-                  padding: "4px 12px",
-                  borderRadius: "4px",
-                  fontWeight: "bold",
-                }}
-              >
-                -{product.discount_percentage}%
-              </div>
-            )}
+          <div className="card" style={{ padding: 18 }}>
             <img
-              src={product.image_url}
+              src={
+                product.image ||
+                product.image_url ||
+                "https://via.placeholder.com/900"
+              }
               alt={product.name}
               style={{
                 width: "100%",
-                height: "100%",
-                objectFit: "contain",
-                display: "block",
-                minHeight: "400px",
+                height: "520px",
+                objectFit: "cover",
+                borderRadius: "12px",
               }}
             />
           </div>
 
           {/* RIGHT: INFO */}
-          <div className="product-info">
-            <h1
-              style={{
-                fontSize: "32px",
-                fontWeight: "800",
-                marginBottom: "12px",
-                lineHeight: 1.2,
-              }}
-            >
+          <div>
+            <h1 style={{ margin: "0 0 12px", fontSize: "28px" }}>
               {product.name}
             </h1>
 
-            {/* Price & Rating */}
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "16px",
-                marginBottom: "24px",
-              }}
-            >
-              <div
-                style={{ display: "flex", alignItems: "baseline", gap: "8px" }}
-              >
-                <span
-                  style={{
-                    fontSize: "28px",
-                    fontWeight: "700",
-                    color: "#ef4444",
-                  }}
-                >
-                  {finalPrice.toLocaleString()}₫
-                </span>
-                {product.discount_percentage > 0 && (
-                  <span
-                    style={{
-                      fontSize: "18px",
-                      textDecoration: "line-through",
-                      color: "#9ca3af",
-                    }}
-                  >
-                    {product.price.toLocaleString()}₫
-                  </span>
-                )}
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+                <Star size={18} />
+                <span style={{ fontWeight: 600 }}>{rating.toFixed(1)}</span>
               </div>
-              <div
-                style={{ width: "1px", height: "24px", background: "#e5e7eb" }}
-              ></div>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "4px",
-                  fontSize: "14px",
-                }}
-              >
-                <Star size={16} fill="#fbbf24" stroke="#fbbf24" />
-                <strong>4.8</strong>{" "}
-                <span className="muted">(120 đánh giá)</span>
-              </div>
+              <span style={{ color: "#666" }}>
+                ({reviewsCount} reviews)
+              </span>
             </div>
 
-            <p
-              className="muted"
-              style={{ lineHeight: "1.6", marginBottom: "32px" }}
-            >
-              {product.description || "Mô tả đang cập nhật..."}
-            </p>
+            <div style={{ marginTop: 14, marginBottom: 18 }}>
+              <span style={{ fontSize: "26px", fontWeight: 700 }}>
+                ${Number(displayPrice).toLocaleString()}
+              </span>
+            </div>
+
+            {product.description && (
+              <p style={{ lineHeight: 1.6, color: "#444" }}>
+                {product.description}
+              </p>
+            )}
 
             {/* OPTIONS: SIZE */}
-            <div style={{ marginBottom: "24px" }}>
+            <div style={{ marginTop: "26px", marginBottom: "22px" }}>
               <div
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
-                  marginBottom: "8px",
+                  alignItems: "center",
+                  marginBottom: "10px",
                 }}
               >
                 <label style={{ fontWeight: "600", fontSize: "14px" }}>
-                  Chọn Size
+                  Select size
                 </label>
                 <button
-                  className="link-btn"
-                  style={{ fontSize: "14px", color: "#666" }}
+                  type="button"
+                  style={{ background: "none", border: "none", cursor: "pointer", fontSize: "14px", color: "#666" }}
                 >
                   Hướng dẫn chọn size
                 </button>
               </div>
+
               <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
                 {sizes.length > 0 ? (
                   sizes.map((size) => (
@@ -344,7 +280,7 @@ const ProductDetail = () => {
                       }`}
                       style={{
                         minWidth: "48px",
-                        height: "48px",
+                        padding: "10px 14px",
                         border:
                           selectedSize === size
                             ? "2px solid #111"
@@ -375,10 +311,10 @@ const ProductDetail = () => {
                   marginBottom: "8px",
                 }}
               >
-                Màu sắc:{" "}
-                <span style={{ fontWeight: 400 }}>{selectedColor}</span>
+                Select color
               </label>
-              <div style={{ display: "flex", gap: "12px" }}>
+
+              <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
                 {colors.map((color) => (
                   <button
                     key={color}
@@ -396,9 +332,7 @@ const ProductDetail = () => {
                           ? "2px solid #111"
                           : "1px solid #e5e7eb",
                       boxShadow:
-                        selectedColor === color
-                          ? "0 0 0 2px white inset"
-                          : "none",
+                        selectedColor === color ? "0 0 0 2px white inset" : "none",
                       cursor: "pointer",
                     }}
                     title={color}
@@ -411,27 +345,13 @@ const ProductDetail = () => {
             {selectedVariant &&
               selectedVariant.stock < 10 &&
               selectedVariant.stock > 0 && (
-                <p
-                  style={{
-                    color: "#d97706",
-                    fontSize: "14px",
-                    marginBottom: "16px",
-                    fontWeight: 500,
-                  }}
-                >
-                  🔥 Chỉ còn {selectedVariant.stock} sản phẩm!
+                <p style={{ marginBottom: 12, color: "#b45309" }}>
+                  Low stock: only {selectedVariant.stock} left!
                 </p>
               )}
 
             {selectedVariant && selectedVariant.stock === 0 && (
-              <p
-                style={{
-                  color: "#ef4444",
-                  fontSize: "14px",
-                  marginBottom: "16px",
-                  fontWeight: 500,
-                }}
-              >
+              <p style={{ marginBottom: 12, color: "#dc2626" }}>
                 Hết hàng tạm thời
               </p>
             )}
@@ -458,15 +378,11 @@ const ProductDetail = () => {
                 >
                   <Minus size={16} />
                 </button>
-                <span
-                  style={{
-                    width: "32px",
-                    textAlign: "center",
-                    fontWeight: "600",
-                  }}
-                >
+
+                <span style={{ width: 32, textAlign: "center", fontWeight: 600 }}>
                   {quantity}
                 </span>
+
                 <button
                   onClick={() => setQuantity((q) => q + 1)}
                   style={{
@@ -507,21 +423,13 @@ const ProductDetail = () => {
                   isAdding || !selectedVariant || selectedVariant.stock === 0
                 }
               >
-                {isAdding ? (
-                  "Đang xử lý..."
-                ) : (
-                  <>
-                    <ShoppingCart size={20} />
-                    {!selectedVariant || selectedVariant.stock === 0
-                      ? "Hết hàng"
-                      : `Thêm vào giỏ - ${(
-                          finalPrice * quantity
-                        ).toLocaleString()}₫`}
-                  </>
-                )}
+                <ShoppingCart size={18} />
+                {isAdding ? "Adding..." : "Add to Cart"}
               </button>
 
               <button
+                onClick={handleToggleWishlist}
+                aria-label="Toggle wishlist"
                 style={{
                   width: "56px",
                   display: "flex",
@@ -533,13 +441,13 @@ const ProductDetail = () => {
                   cursor: "pointer",
                 }}
               >
-                <Heart size={24} color="#111" />
+                <Heart size={24} color="#111" fill={inWishlist ? "#111" : "none"} />
               </button>
             </div>
           </div>
         </div>
       </section>
-    </main>
+    </>
   );
 };
 

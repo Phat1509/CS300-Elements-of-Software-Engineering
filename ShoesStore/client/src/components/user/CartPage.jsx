@@ -51,7 +51,7 @@ export default function CartPage() {
     // 1. Validate User
     if (!user) {
       alert("Please login to checkout!");
-      navigate("/login");
+      navigate("/signin");
       return;
     }
 
@@ -68,15 +68,20 @@ export default function CartPage() {
     }
 
     // 3. Confirm
-    if (!window.confirm(`Confirm payment of $${finalTotal.toFixed(2)}?`))
-      return;
+    if (!window.confirm(`Confirm payment of $${finalTotal.toFixed(2)}?`)) return;
 
     setLoading(true);
 
     try {
+      // ✅ FIX: ưu tiên user.user_id (number) trước, fallback mới tới user.id (string)
+      const primaryUserId = user?.user_id ?? user?.id;
+      if (!primaryUserId) {
+        throw new Error("Missing user id (user_id / id).");
+      }
+
       // BƯỚC A: Tạo Order Header
       const orderData = {
-        user_id: user.id || user.user_id, // Fallback id
+        user_id: primaryUserId, // ✅ QUAN TRỌNG
         status: "PENDING",
         total_amount: finalTotal,
         created_at: new Date().toISOString(),
@@ -86,7 +91,12 @@ export default function CartPage() {
       };
 
       const newOrder = await createOrder(orderData);
-      const orderId = newOrder.id || newOrder.order_id;
+
+      // ✅ FIX issue 3: CHỈ dùng json-server `id` để route + order_item FK (không dùng order_id)
+      const orderId = newOrder?.id;
+      if (!orderId) {
+        throw new Error("Order created but missing `id`.");
+      }
 
       // BƯỚC B: Xử lý từng item (Song song)
       await Promise.all(

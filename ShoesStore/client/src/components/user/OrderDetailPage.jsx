@@ -1,3 +1,4 @@
+// client/src/components/user/OrderDetailPage.jsx
 import React, { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
@@ -698,7 +699,48 @@ export default function OrderDetailPage() {
                 </div>
               </div>
             </div>
+            <div style={{ gridColumn: "1 / -1", marginTop: 10, borderTop: "1px solid #f1f5f9", paddingTop: 16 }}>
+                <h4 style={{ fontSize: 16, fontWeight: 800, color: "#0f172a", marginBottom: 12 }}>
+                  Order Items ({ (order?.items || order?.order_items || []).length })
+                </h4>
+                <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                  {(() => {
+                    // Lấy list item, ưu tiên các key phổ biến
+                    const items = order?.items || order?.order_items || order?.products || [];
+                    if (!items.length) return <p className="muted">No item details.</p>;
 
+                    return items.map((item, idx) => {
+                      // Lấy thông tin từng món
+                      const iName = item.product_name || item.name || "Product";
+                      const iImg = item.image || item.image_url || "https://placehold.co/60";
+                      const iQty = item.quantity || item.qty || 1;
+                      const iPrice = Number(item.price || item.unit_price || 0);
+                      const iSize = item.size ? `Size: ${item.size}` : "";
+                      const iColor = item.color ? `Color: ${item.color}` : "";
+                      
+                      return (
+                        <div key={idx} style={{ display: "flex", gap: 12, alignItems: "center" }}>
+                          <img 
+                            src={iImg} 
+                            alt={iName} 
+                            style={{ width: 60, height: 60, borderRadius: 8, objectFit: "cover", border: "1px solid #e2e8f0" }} 
+                          />
+                          <div style={{ flex: 1 }}>
+                            <div style={{ fontWeight: 600, color: "#334155" }}>{iName}</div>
+                            <div style={{ fontSize: 13, color: "#64748b" }}>
+                              {[iSize, iColor].filter(Boolean).join(" • ")}
+                            </div>
+                          </div>
+                          <div style={{ textAlign: "right" }}>
+                            <div style={{ fontSize: 13, color: "#64748b" }}>{money(iPrice)} x {iQty}</div>
+                            <div style={{ fontWeight: 700, color: "#0f172a" }}>{money(iPrice * iQty)}</div>
+                          </div>
+                        </div>
+                      );
+                    });
+                  })()}
+                </div>
+              </div>
             {/* Bottom actions */}
             <div
               style={{
