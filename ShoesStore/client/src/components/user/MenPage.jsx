@@ -7,7 +7,7 @@ import { getProducts } from "../../utilities/api";
 export default function MenPage() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null); 
+  const [error, setError] = useState(null);
 
   const [maxPrice, setMaxPrice] = useState(4000000);
   const [sortBy, setSortBy] = useState("popular");
@@ -20,16 +20,19 @@ export default function MenPage() {
       try {
         const all = await getProducts();
 
-        const menProducts = all.filter(
-          (p) =>
-            (Number(p.category_id) === 1 || Number(p.category_id) === 3) &&
-            p.is_active
-        );
+        // HOẶC sản phẩm thuộc danh mục con có parent_id là 1 (như Running, Sneakers của nam)
+        const menProducts = all.filter((p) => {
+          const catId = Number(p.category_id);
+          const parentId = p.category ? Number(p.category.parent_id) : null;
+
+          // Lấy nếu là Men (1) hoặc con của Men (parent_id = 1)
+          return (catId === 1 || parentId === 1) && p.is_active;
+        });
 
         setProducts(menProducts);
       } catch (err) {
         console.error("Error fetching men products:", err);
-        setError("Không thể tải danh sách sản phẩm. Vui lòng thử lại sau.");
+        setError("Không thể tải danh sách sản phẩm.");
       } finally {
         setLoading(false);
       }

@@ -1,15 +1,14 @@
 // client/src/components/user/KidsPage.jsx
 import React, { useState, useEffect, useMemo } from "react";
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
 import ProductCard from "./ProductCard";
 import { getProducts } from "../../utilities/api";
 
 export default function KidsPage() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [maxPrice, setMaxPrice] = useState(4000000); 
+  const [maxPrice, setMaxPrice] = useState(4000000);
   const [sortBy, setSortBy] = useState("popular");
-
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -17,10 +16,13 @@ export default function KidsPage() {
       try {
         const all = await getProducts();
 
+        const kidsProducts = all.filter((p) => {
+          const catId = Number(p.category_id);
+          const parentId = p.category ? Number(p.category.parent_id) : null;
 
-        const kidsProducts = all.filter(
-          (p) => Number(p.category_id) === 4 && p.is_active
-        );
+          // Lấy nếu là Kids (3) hoặc con của Kids (parent_id = 3)
+          return (catId === 3 || parentId === 3) && p.is_active;
+        });
 
         setProducts(kidsProducts);
       } catch (err) {
@@ -127,7 +129,6 @@ export default function KidsPage() {
                 <span>{maxPrice.toLocaleString()}₫</span>
               </div>
             </div>
-
           </div>
         </aside>
 

@@ -7,7 +7,7 @@ import { getProducts } from "../../utilities/api";
 export default function WomenPage() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true); // Thêm loading
-  const [maxPrice, setMaxPrice] = useState(4000000); 
+  const [maxPrice, setMaxPrice] = useState(4000000);
   const [sortBy, setSortBy] = useState("popular");
 
   useEffect(() => {
@@ -16,10 +16,12 @@ export default function WomenPage() {
       try {
         const all = await getProducts();
 
+        const womenProducts = all.filter((p) => {
+          const catId = Number(p.category_id);
+          const parentId = p.category ? Number(p.category.parent_id) : null;
 
-        const womenProducts = all.filter(
-          (p) => Number(p.category_id) === 2 && p.is_active
-        );
+          return (catId === 2 || parentId === 2) && p.is_active;
+        });
 
         setProducts(womenProducts);
       } catch (err) {
@@ -120,8 +122,6 @@ export default function WomenPage() {
                 <span>{maxPrice.toLocaleString()}₫</span>
               </div>
             </div>
-
-
           </div>
         </aside>
 
@@ -156,7 +156,7 @@ export default function WomenPage() {
                 <ProductCard
                   key={p.product_id || p.id}
                   id={p.product_id || p.id}
-                  image={p.image_url} 
+                  image={p.image_url}
                   name={p.name}
                   price={p.price}
                   extra={

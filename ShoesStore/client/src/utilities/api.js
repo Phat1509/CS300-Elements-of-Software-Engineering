@@ -1,23 +1,89 @@
 import axios from "axios";
 
-const API_URL = "";
+// 1. Cấu hình server thật
+const API_URL = "https://shoes-store.beerpsi.cc/api";
 
 const api = axios.create({
   baseURL: API_URL,
   headers: { "Content-Type": "application/json" },
 });
 
+// 2. Tự động gắn Token (để dùng cho các chức năng sau này)
+api.interceptors.request.use(
+  (config) => {
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    const token = user.token || localStorage.getItem("accessToken");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+/* ===================== MAPPER (QUAN TRỌNG) ===================== */
+// Hàm này giúp biến dữ liệu từ API thành dạng mà giao diện của bạn hiểu
+const mapProduct = (p) => {
+  // Kiểm tra xem link ảnh có phải link "dỏm" example.com không
+  const isDummyLink = p.image_url && p.image_url.includes("example.com");
+  
+  return {
+    ...p,
+    id: p.id,
+    product_id: p.id,
+    name: p.name,
+    // Nếu link ảnh là example.com hoặc không có ảnh -> dùng ảnh placeholder
+    image: isDummyLink || !p.image_url 
+           ? "https://placehold.co/400?text=No+Image" 
+           : p.image_url,
+    price: Number(p.price) || 0,
+    // Lấy luôn tên brand và category từ object con (nếu cần hiển thị)
+    brandName: p.brand?.name || "",
+    categoryName: p.category?.name || "",
+  };
+};
+
 /* ===================== PRODUCTS ===================== */
 
 export const getProducts = async (params = {}) => {
   try {
     const res = await api.get("/products", { params });
-    return res.data;
+    
+    // API trả về object có chứa mảng 'items'
+    const rawData = res.data.items || [];
+    
+    // Map dữ liệu
+    return rawData.map(mapProduct);
   } catch (error) {
     console.error("Error fetching products:", error);
     return [];
   }
 };
+
+
+export const getProductById = async (id) => {
+  try {
+    const res = await api.get(`/products/${id}`);
+    
+    // Kiểm tra cấu trúc trả về. 
+    // Thông thường API chi tiết trả về thẳng object sản phẩm trong res.data
+    // Hoặc res.data.data. Ở đây mình xử lý an toàn:
+    const rawData = res.data.data || res.data; 
+
+    // Tái sử dụng hàm mapProduct để xử lý ảnh lỗi/placeholder y hệt danh sách
+    return mapProduct(rawData);
+  } catch (error) {
+    console.error("Error fetching product detail:", error);
+    return null;
+  }
+};
+
+
+
+// ... CÁC HÀM KHÁC GIỮ NGUYÊN HOẶC SẼ SỬA SAU ...
+// (Bạn giữ nguyên phần còn lại của file api.js cũ để tránh lỗi các trang khác)
+
+
 
 const getProductByIdOrSlug = async (identifier) => {
   try {
@@ -84,7 +150,7 @@ export const updateProductStock = async (variantId, newStock) => {
 export const getCategories = async () => {
   try {
     const res = await api.get("/categories");
-    return res.data;
+    return res.data; // API categories thường trả về mảng luôn, hoặc bạn check log tương tự products
   } catch (error) {
     return [];
   }

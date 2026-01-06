@@ -11,53 +11,87 @@ export default function ProductCard({
   name,
   price,
   extra,
-  slug,
+  slug, // Vẫn nhận nhưng không dùng làm ID chính
 }) {
   const navigate = useNavigate();
 
-  const finalId = slug || id || product_id;
+  // 1. QUAN TRỌNG: Ưu tiên lấy ID (số) để khớp với API getProductById
+  const finalId = id || product_id;
 
-  const finalImage = image || image_url || "https://via.placeholder.com/300";
+  // 2. Ưu tiên lấy image_url (theo API JSON bạn gửi)
+  const displayImage = image_url || image || "https://placehold.co/400x400?text=No+Image";
 
-  const goDetail = () => {
-    if (!finalId) return;
-    navigate(`/product/${finalId}`);
+  // Hàm chuyển hướng (dùng cho nút Add to Cart)
+  const handleAddToCart = (e) => {
+    e.preventDefault(); // Chặn sự kiện click của Link bao ngoài (nếu có)
+    if (finalId) {
+      navigate(`/product/${finalId}`);
+    }
   };
 
-  const handleAddToCartClick = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    goDetail();
-  };
-
-  const CardInner = (
-    <div className="card" role="button" tabIndex={0} onKeyDown={(e) => e.key === "Enter" && goDetail()}>
-      <img className="card-img" src={finalImage} alt={name} />
-      <div className="card-body">
-        <h4 className="card-title">{name}</h4>
-
-        <div className="card-row">
-          <span className="price">${Number(price || 0).toLocaleString()}</span>
-          {extra && <span className="pill-sm">{extra}</span>}
-        </div>
-
-        <button
-          type="button"
-          className="btn btn-primary pd-add"
-          onClick={handleAddToCartClick}
-          disabled={!finalId}
-        >
-          <ShoppingCart size={18} /> Add to Cart
-        </button>
-      </div>
-    </div>
-  );
-
-  if (!finalId) return CardInner;
+  // Nếu không có ID thì không render gì cả để tránh lỗi
+  if (!finalId) return null;
 
   return (
-    <Link to={`/product/${finalId}`} style={{ textDecoration: "none", color: "inherit" }}>
-      {CardInner}
-    </Link>
+    /* Bọc toàn bộ Card bằng Link để click vào đâu cũng vào chi tiết.
+       Sử dụng thẻ div class="card" bên trong để giữ nguyên giao diện cũ.
+    */
+    <div className="card-wrapper" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+      <Link 
+        to={`/product/${finalId}`} 
+        className="card" 
+        style={{ textDecoration: "none", color: "inherit", height: '100%', display: 'flex', flexDirection: 'column' }}
+      >
+        {/* Phần Ảnh */}
+        <div style={{ position: "relative", overflow: "hidden" }}>
+            <img 
+                className="card-img" 
+                src={displayImage} 
+                alt={name} 
+                style={{ width: "100%", aspectRatio: "1/1", objectFit: "cover" }}
+                onError={(e) => { e.target.src = "https://placehold.co/400?text=Error"; }}
+            />
+            {/* Hiển thị nhãn Extra (VD: Sale, New) nếu có */}
+            {extra && (
+                <span className="pill-sm" style={{ position: "absolute", top: 10, left: 10, background: "black", color: "white", padding: "4px 8px", borderRadius: 4, fontSize: 12 }}>
+                    {extra}
+                </span>
+            )}
+        </div>
+
+        {/* Phần Body */}
+        <div className="card-body" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+          <h4 className="card-title" style={{ marginTop: 10, marginBottom: 5, fontSize: 16, fontWeight: 600 }}>
+            {name}
+          </h4>
+
+          <div className="card-row" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 15 }}>
+            <span className="price" style={{ fontSize: 16, fontWeight: 700 }}>
+                ${Number(price || 0).toLocaleString()}
+            </span>
+          </div>
+
+          {/* Nút Add to Cart - Thực chất là nút điều hướng sang trang chi tiết để chọn size */}
+          <button
+            type="button"
+            className="btn btn-primary pd-add"
+            onClick={handleAddToCart}
+            style={{ 
+                marginTop: "auto", 
+                width: "100%", 
+                display: "flex", 
+                alignItems: "center", 
+                justifyContent: "center", 
+                gap: 8,
+                padding: "10px",
+                cursor: "pointer",
+                zIndex: 2 // Đảm bảo nút này nằm trên layer Link
+            }}
+          >
+            <ShoppingCart size={16} /> Select Options
+          </button>
+        </div>
+      </Link>
+    </div>
   );
 }

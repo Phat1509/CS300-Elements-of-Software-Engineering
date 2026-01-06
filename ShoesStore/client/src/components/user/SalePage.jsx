@@ -1,12 +1,11 @@
-// client/src/components/user/SalePage.jsx
 import React, { useEffect, useState, useMemo } from "react";
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
 import ProductCard from "./ProductCard";
 import { getProducts } from "../../utilities/api";
 
 export default function SalePage() {
   const [products, setProducts] = useState([]);
-  const [maxPrice, setMaxPrice] = useState(4000000); 
+  const [maxPrice, setMaxPrice] = useState(4000000);
   const [sortBy, setSortBy] = useState("discount");
   const [loading, setLoading] = useState(true);
 
@@ -16,7 +15,7 @@ export default function SalePage() {
       try {
         const all = await getProducts();
 
-     
+        // Lọc những sản phẩm có discount_percentage > 0
         const saleItems = all.filter(
           (p) => p.is_active && (p.discount_percentage || 0) > 0
         );
@@ -53,6 +52,7 @@ export default function SalePage() {
         );
       case "discount":
       default:
+        // Sắp xếp giảm giá nhiều nhất lên đầu
         return arr.sort(
           (a, b) => (b.discount_percentage || 0) - (a.discount_percentage || 0)
         );
@@ -61,13 +61,9 @@ export default function SalePage() {
 
   const handleClearAll = () => setMaxPrice(4000000);
 
-
   if (loading) {
     return (
-      <main
-        className="men-wrap"
-        style={{ minHeight: "60vh", paddingTop: 100, textAlign: "center" }}
-      >
+      <main className="men-wrap" style={{ minHeight: "60vh", paddingTop: 100, textAlign: "center" }}>
         <p>Đang tìm kiếm các ưu đãi tốt nhất...</p>
       </main>
     );
@@ -78,9 +74,7 @@ export default function SalePage() {
       {/* Breadcrumb */}
       <section className="men-bc">
         <div className="container">
-          <Link to="/" className="men-bc-link">
-            Home
-          </Link>
+          <Link to="/" className="men-bc-link">Home</Link>
           <span className="men-bc-sep">›</span>
           <span>Sale</span>
         </div>
@@ -91,8 +85,7 @@ export default function SalePage() {
         <div className="container">
           <h1 className="men-title">Sale Collection</h1>
           <p className="men-sub">
-            Đừng bỏ lỡ những deal hời nhất! Săn ngay các mẫu giày cao cấp với
-            mức giá ưu đãi.
+            Đừng bỏ lỡ những deal hời nhất! Săn ngay các mẫu giày cao cấp với mức giá ưu đãi.
           </p>
         </div>
       </section>
@@ -104,13 +97,7 @@ export default function SalePage() {
           <div className="men-card">
             <div className="men-card-top">
               <h3>Filters</h3>
-              <button
-                className="link-btn"
-                type="button"
-                onClick={handleClearAll}
-              >
-                Clear All
-              </button>
+              <button className="link-btn" type="button" onClick={handleClearAll}>Clear All</button>
             </div>
 
             {/* Price Range (VND) */}
@@ -140,10 +127,7 @@ export default function SalePage() {
             </p>
             <div className="men-sort">
               <span className="muted">Sắp xếp:</span>
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-              >
+              <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
                 <option value="discount">Giảm nhiều nhất</option>
                 <option value="price-low">Giá: Thấp đến cao</option>
                 <option value="price-high">Giá: Cao đến thấp</option>
@@ -153,10 +137,11 @@ export default function SalePage() {
           </div>
 
           {sortedProducts.length === 0 ? (
-            <div
-              style={{ padding: "40px", textAlign: "center", width: "100%" }}
-            >
+            <div style={{ padding: "40px", textAlign: "center", width: "100%" }}>
               <h3>Hiện chưa có sản phẩm giảm giá trong tầm giá này</h3>
+              <p className="muted">
+                 Có thể Database của bạn chưa set trường <b>discount_percentage</b> cho sản phẩm nào.
+              </p>
             </div>
           ) : (
             <div className="men-grid">
@@ -164,8 +149,8 @@ export default function SalePage() {
                 <ProductCard
                   key={p.product_id || p.id}
                   id={p.product_id || p.id}
-                  // Map đúng trường dữ liệu
-                  image={p.image_url}
+                  // QUAN TRỌNG: Sửa p.image_url thành p.image để dùng ảnh placeholder nếu lỗi
+                  image={p.image} 
                   name={p.name}
                   price={p.price}
                   extra={

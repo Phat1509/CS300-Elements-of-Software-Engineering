@@ -17,7 +17,7 @@ import KidsPage from "./components/user/KidsPage";
 import SalePage from "./components/user/SalePage";
 import WishlistPage from "./components/user/WishlistPage";
 import CartPage from "./components/user/CartPage";
-import ProductDetailPage from "./components/user/ProductDetailPage";
+import ProductDetail from "./components/user/ProductDetailPage";
 import NewArrivalsPage from "./components/user/NewArrivalsPage";
 import SignInPage from "./components/user/SignInPage";
 import SignUpPage from "./components/user/SignUpPage";
@@ -60,8 +60,7 @@ function AppRoutes() {
         <Route path="/sale" element={<SalePage />} />
         <Route path="/wishlist" element={<WishlistPage />} />
         <Route path="/cart" element={<CartPage />} />
-        <Route path="/product/:slug" element={<ProductDetailPage />} />
-        <Route path="/orders" element={<OrderHistoryPage />} />
+        <Route path="/product/:id" element={<ProductDetail />} />        <Route path="/orders" element={<OrderHistoryPage />} />
         <Route path="/orders/:id" element={<OrderDetailPage />} />
 
         {/* Auth (user) */}
