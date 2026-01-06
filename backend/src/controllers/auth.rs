@@ -78,8 +78,7 @@ async fn register(
         .into_active_model()
         .set_email_verification_sent(&ctx.db)
         .await?;
-
-    AuthMailer::send_welcome(&ctx, &user).await?;
+    user.into_active_model().verified(&ctx.db).await?;
 
     format::json(())
 }
