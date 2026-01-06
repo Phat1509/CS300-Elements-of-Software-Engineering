@@ -1,6 +1,6 @@
 // client/src/components/user/CartPage.jsx
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; // Thêm useNavigate
+import { Link, useNavigate } from "react-router-dom"; 
 import { ChevronRight, Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import { useCart } from "../../context/CartContext";
 
@@ -16,19 +16,15 @@ export default function CartPage() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
-  // Lấy user từ localStorage (giả sử bạn lưu user khi login)
   const user = JSON.parse(localStorage.getItem("user"));
 
-  // Tính toán phí
   const subtotal = total;
-  const shipping = cartItems.length > 0 ? 10 : 0; // Phí ship cố định 10$
-  const tax = subtotal * 0.08; // Thuế 8%
+  const shipping = cartItems.length > 0 ? 10 : 0; 
+  const tax = subtotal * 0.08; 
   const finalTotal = subtotal + shipping + tax;
 
-  // --- HANDLERS ---
 
   const increaseQty = (item) => {
-    // Kiểm tra tồn kho trước khi tăng
     if (item.quantity >= item.stock) {
       alert(`Only ${item.stock} items left in stock!`);
       return;
@@ -46,9 +42,7 @@ export default function CartPage() {
     removeFromCart(id);
   };
 
-  // --- CORE CHECKOUT LOGIC ---
   const handleCheckout = async () => {
-    // 1. Validate User
     if (!user) {
       alert("Please login to checkout!");
       navigate("/signin");
@@ -57,7 +51,6 @@ export default function CartPage() {
 
     if (cartItems.length === 0) return;
 
-    // 2. Validate Stock lần cuối
     for (const item of cartItems) {
       if (item.quantity > item.stock) {
         alert(
@@ -67,21 +60,18 @@ export default function CartPage() {
       }
     }
 
-    // 3. Confirm
     if (!window.confirm(`Confirm payment of $${finalTotal.toFixed(2)}?`)) return;
 
     setLoading(true);
 
     try {
-      // ✅ FIX: ưu tiên user.user_id (number) trước, fallback mới tới user.id (string)
       const primaryUserId = user?.user_id ?? user?.id;
       if (!primaryUserId) {
         throw new Error("Missing user id (user_id / id).");
       }
 
-      // BƯỚC A: Tạo Order Header
       const orderData = {
-        user_id: primaryUserId, // ✅ QUAN TRỌNG
+        user_id: primaryUserId,
         status: "PENDING",
         total_amount: finalTotal,
         created_at: new Date().toISOString(),
@@ -92,16 +82,13 @@ export default function CartPage() {
 
       const newOrder = await createOrder(orderData);
 
-      // ✅ FIX issue 3: CHỈ dùng json-server `id` để route + order_item FK (không dùng order_id)
       const orderId = newOrder?.id;
       if (!orderId) {
         throw new Error("Order created but missing `id`.");
       }
 
-      // BƯỚC B: Xử lý từng item (Song song)
       await Promise.all(
         cartItems.map(async (item) => {
-          // 1. Thêm vào bảng Order Item
           await addOrderItem({
             order_id: orderId,
             variant_id: item.variant_id,
@@ -109,21 +96,15 @@ export default function CartPage() {
             price: item.price,
           });
 
-          // 2. Trừ tồn kho (Stock)
           const newStock = item.stock - item.quantity;
           await updateProductStock(item.variant_id, newStock);
 
-          // 3. Xóa khỏi DB Giỏ hàng
-          // Lưu ý: item.id ở đây là id của dòng trong bảng cart_items
           await deleteCartItem(item.id);
         })
       );
 
-      // BƯỚC C: Hoàn tất
       alert("Order placed successfully!");
 
-      // Force reload hoặc điều hướng để làm mới Context giỏ hàng
-      // Vì Context hiện tại chưa biết DB đã bị xóa sạch
       window.location.href = "/orders";
     } catch (error) {
       console.error("Checkout Error:", error);
@@ -179,7 +160,6 @@ export default function CartPage() {
         ) : (
           <div style={{ display: "grid", gap: 24, gridTemplateColumns: "1fr" }}>
             {" "}
-            {/* Mobile first layout, consider media queries for desktop */}
             <div
               style={{ display: "grid", gap: 24, gridTemplateColumns: "1fr" }}
             >

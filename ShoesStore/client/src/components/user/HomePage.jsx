@@ -11,7 +11,6 @@ export default function HomePage() {
     getProducts()
       .then((data) => {
         if (!mounted) return;
-        // show featured / hot products by default
         setProducts(data.filter((p) => p.isHot));
         setLoading(false);
       })

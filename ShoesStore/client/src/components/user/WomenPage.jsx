@@ -1,25 +1,22 @@
 // client/src/components/user/WomenPage.jsx
 import React, { useState, useEffect, useMemo } from "react";
-import { Link } from "react-router-dom"; // Sửa: Dùng Link cho chuẩn Router
+import { Link } from "react-router-dom";
 import ProductCard from "./ProductCard";
 import { getProducts } from "../../utilities/api";
 
 export default function WomenPage() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true); // Thêm loading
-  const [maxPrice, setMaxPrice] = useState(4000000); // Sửa: Về tiền Việt (4tr)
+  const [maxPrice, setMaxPrice] = useState(4000000); 
   const [sortBy, setSortBy] = useState("popular");
 
-  // Fetch từ API
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
       try {
         const all = await getProducts();
 
-        // ⚠️ LƯU Ý: Kiểm tra lại db.json xem Women ID là bao nhiêu?
-        // Ở đây mình đang giả định Women có category_id = 2
-        // Và dùng 'is_active' (snake_case) thay vì 'isActive'
+
         const womenProducts = all.filter(
           (p) => Number(p.category_id) === 2 && p.is_active
         );
@@ -35,13 +32,11 @@ export default function WomenPage() {
     fetchProducts();
   }, []);
 
-  // Filter products theo giá
   const filteredProducts = useMemo(
     () => products.filter((p) => p.price <= maxPrice),
     [products, maxPrice]
   );
 
-  // Sort products
   const sortedProducts = useMemo(() => {
     const arr = [...filteredProducts];
     switch (sortBy) {
@@ -61,7 +56,6 @@ export default function WomenPage() {
 
   const handleClearAll = () => setMaxPrice(4000000);
 
-  // --- UI Loading ---
   if (loading) {
     return (
       <main
@@ -98,7 +92,6 @@ export default function WomenPage() {
 
       {/* Content */}
       <section className="container men-content">
-        {/* Sidebar - Giữ nguyên HTML tĩnh của bạn (chưa có logic filter nâng cao) */}
         <aside className="men-side">
           <div className="men-card">
             <div className="men-card-top">
@@ -112,7 +105,6 @@ export default function WomenPage() {
               </button>
             </div>
 
-            {/* Price Filter - Đã sửa lại scale VND */}
             <div className="men-block">
               <h4>Price Range</h4>
               <input
@@ -129,8 +121,7 @@ export default function WomenPage() {
               </div>
             </div>
 
-            {/* Các filter khác (Category, Size...) bạn có thể giữ làm UI tĩnh
-                hoặc ẩn đi nếu chưa code logic backend */}
+
           </div>
         </aside>
 
@@ -163,14 +154,11 @@ export default function WomenPage() {
             <div className="men-grid">
               {sortedProducts.map((p) => (
                 <ProductCard
-                  // Fallback ID để tránh lỗi duplicate key
                   key={p.product_id || p.id}
                   id={p.product_id || p.id}
-                  // Sửa: Map đúng tên trường trong DB
-                  image={p.image_url} // DB là image_url, không phải image
+                  image={p.image_url} 
                   name={p.name}
                   price={p.price}
-                  // Sửa: DB là discount_percentage
                   extra={
                     p.discount_percentage
                       ? `-${p.discount_percentage}%`

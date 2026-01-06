@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from "react";
-// Đảm bảo import đúng đường dẫn
 import adminApi, { getAllProducts } from "../../utilities/adminApi"; 
 import ProductForm from "./ProductForm";
 import AdminLayout from "./AdminLayout";
@@ -8,15 +7,12 @@ export default function ProductsAdmin() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Search & Filter
   const [query, setQuery] = useState("");
   const [onlyActive, setOnlyActive] = useState(false);
 
-  // Modal State
   const [editing, setEditing] = useState(null);
   const [showNew, setShowNew] = useState(false);
 
-  // 1. Load Data
   useEffect(() => {
     let mounted = true;
     setLoading(true);
@@ -36,15 +32,12 @@ export default function ProductsAdmin() {
     };
   }, []);
 
-  // 2. Normalize Data (QUAN TRỌNG: Xác định đúng ID)
   const normalized = useMemo(() => {
     return products.map((p) => {
-      // JSON-Server thường dùng 'id'. Database thật thường dùng 'product_id'.
-      // Ta ưu tiên lấy giá trị nào tồn tại.
       const realId = p.id || p.product_id || p.productId;
 
       return {
-        ...p, // Giữ lại toàn bộ field gốc để Form dùng
+        ...p, 
         _id: realId, 
         _name: (p.name || "").toString(),
         _price: Number(p.price) || 0,
@@ -59,11 +52,9 @@ export default function ProductsAdmin() {
     return normalized
       .filter((p) => (onlyActive ? p._active : true))
       .filter((p) => (q ? p._name.toLowerCase().includes(q) : true))
-      // Sort: ID lớn nhất lên đầu (Mới nhất)
       .sort((a, b) => Number(b._id) - Number(a._id));
   }, [normalized, query, onlyActive]);
 
-  // 3. SỬA LỖI DELETE
   const handleDelete = async (id) => {
     if (!id) {
       alert("Lỗi: Không tìm thấy ID sản phẩm.");
@@ -73,22 +64,12 @@ export default function ProductsAdmin() {
     if (!window.confirm(`Bạn có chắc chắn muốn xóa sản phẩm ID: ${id}?`)) return;
 
     try {
-      console.log("Deleting product with ID:", id); // Debug xem ID đúng chưa
+      console.log("Deleting product with ID:", id); 
       
-      // Gọi API xóa
       const res = await adminApi.deleteProduct(id);
 
-      // Nếu adminApi dùng safeJson (trả về null khi lỗi), ta phải check res
-      // Lưu ý: Đôi khi API trả về rỗng (204 No Content) cũng là thành công.
-      // Nhưng nếu safeJson nuốt lỗi thì res sẽ là null.
-      
-      // Cách fix an toàn nhất: Nếu API không throw lỗi thì coi như thành công
-      // Hoặc check lại danh sách từ server để chắc chắn (an toàn nhưng chậm hơn)
-      
-      // Xóa khỏi UI
       setProducts((prev) => prev.filter((x) => {
         const xId = x.id || x.product_id || x.productId;
-        // So sánh lỏng (==) phòng trường hợp string vs number
         return xId != id;
       }));
 
@@ -100,23 +81,19 @@ export default function ProductsAdmin() {
     }
   };
 
-  // 4. SỬA LỖI EDIT
   const handleSaved = (savedItem) => {
     if (!savedItem) return;
     
-    // Tìm ID để cập nhật State
     const savedId = savedItem.id || savedItem.product_id || savedItem.productId;
 
     setProducts((prev) => {
       const exists = prev.find((x) => (x.id || x.product_id || x.productId) == savedId);
       
       if (exists) {
-        // Update
         return prev.map((x) =>
           (x.id || x.product_id || x.productId) == savedId ? { ...x, ...savedItem } : x
         );
       }
-      // Create
       return [savedItem, ...prev];
     });
 
@@ -131,7 +108,6 @@ export default function ProductsAdmin() {
 
   const openEdit = (p) => {
     console.log("Opening Edit Form for:", p);
-    // Quan trọng: Tắt showNew trước khi setEditing để tránh xung đột
     setShowNew(false);
     setEditing(p);
   };
@@ -143,7 +119,6 @@ export default function ProductsAdmin() {
 
   return (
     <AdminLayout title="Product Management">
-      {/* Toolbar */}
       <div className="admin-toolbar">
         <div className="admin-toolbar-left">
           <input
@@ -166,8 +141,6 @@ export default function ProductsAdmin() {
         </button>
       </div>
 
-      {/* Form Modal / Panel */}
-      {/* Thêm điều kiện render rõ ràng hơn */}
       {(showNew || editing) && (
         <div className="admin-panel" style={{ border: "2px solid #007bff", marginBottom: 20 }}>
           <div className="admin-panel-top">
@@ -179,7 +152,6 @@ export default function ProductsAdmin() {
             </button>
           </div>
           
-          {/* Truyền key để React reset form khi đổi sản phẩm */}
           <ProductForm
             key={editing ? editing._id : 'new'}
             initial={showNew ? null : editing}
@@ -189,7 +161,6 @@ export default function ProductsAdmin() {
         </div>
       )}
 
-      {/* Data Table */}
       {loading ? (
         <div className="muted" style={{ padding: 20 }}>Loading...</div>
       ) : (
@@ -238,7 +209,7 @@ export default function ProductsAdmin() {
                         className="btn-icon" 
                         onClick={() => openEdit(p)} 
                         title="Edit"
-                        style={{cursor: 'pointer'}} // Thêm style để chắc chắn click được
+                        style={{cursor: 'pointer'}}
                       >
                         ✏️
                       </button>

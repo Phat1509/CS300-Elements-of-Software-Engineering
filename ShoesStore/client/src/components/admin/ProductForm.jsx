@@ -11,24 +11,18 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
   });
   const [saving, setSaving] = useState(false);
 
-  // Load dữ liệu khi mở form Edit
   useEffect(() => {
     if (initial) {
-      // Vì ProductsAdmin đã chuẩn hóa dữ liệu thành _name, _price, _image...
-      // Nên ta phải map ngược lại vào state của form
       setForm({
         name: initial.name || initial._name || "",
         price: initial.price || initial._price || 0,
         description: initial.description || "",
-        // Kiểm tra cả field 'image' và 'image_url' và '_image'
         image_url: initial.image_url || initial.image || initial._image || "",
-        // Kiểm tra logic active
         is_active: initial.hasOwnProperty("_active") 
           ? initial._active 
           : (initial.is_active ?? true),
       });
     } else {
-      // Reset form khi tạo mới
       setForm({
         name: "",
         price: "",
@@ -52,43 +46,33 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
     setSaving(true);
 
     try {
-      // 1. Chuẩn bị dữ liệu gửi lên Server (Payload)
-      // Backend cần field tên gì thì phải để đúng tên đó (ví dụ: image_url hay image)
       const payload = {
         name: form.name,
         price: Number(form.price),
         description: form.description,
-        image_url: form.image_url, // Nếu DB của bạn tên là 'image' thì sửa dòng này thành image: form.image_url
+        image_url: form.image_url, 
         is_active: !!form.is_active,
       };
 
       console.log("Submitting Payload:", payload);
 
-      // 2. Lấy ID chuẩn xác
-      // ProductsAdmin đã gán id vào _id, nên ta ưu tiên lấy _id
       const id = initial ? (initial._id || initial.product_id || initial.id) : null;
 
       console.log("Target ID:", id);
 
       let result;
       if (id) {
-        // --- UPDATE ---
         console.log("Action: UPDATE");
-        // Gọi API update
         result = await adminApi.updateProduct(id, payload);
       } else {
-        // --- CREATE ---
         console.log("Action: CREATE");
         result = await adminApi.createProduct(payload);
       }
 
-      // 3. Xử lý kết quả để cập nhật UI
-      // Nếu API trả về object kết quả thì dùng, nếu không thì dùng payload + id
       const savedData = result && typeof result === 'object' 
         ? result 
-        : { ...payload, id: id, product_id: id }; // Fallback
+        : { ...payload, id: id, product_id: id }; 
 
-      // Gọi callback để ProductsAdmin cập nhật list
       onSaved(savedData);
       
       alert("Đã lưu thành công!");
@@ -103,7 +87,6 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
 
   return (
     <form onSubmit={handleSubmit} className="admin-form-grid">
-      {/* Cột trái: Input fields */}
       <div className="admin-form-left">
         <div className="form-group">
           <label>Product Name</label>
@@ -185,7 +168,6 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
         </div>
       </div>
 
-      {/* Cột phải: Preview ảnh */}
       <div className="admin-form-right">
         <label>Preview</label>
         <div className="admin-preview-box">

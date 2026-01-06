@@ -1,15 +1,14 @@
 // client/src/components/user/Header.jsx
 import React from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext"; // Import AuthContext
-import { useCart } from "../../context/CartContext"; // Import CartContext
+import { useAuth } from "../../context/AuthContext"; 
+import { useCart } from "../../context/CartContext"; 
 
 export default function Header() {
-  const { user, logout } = useAuth(); // Lấy user info và hàm logout
-  const { cartItems } = useCart(); // Lấy giỏ hàng
+  const { user, logout } = useAuth(); 
+  const { cartItems } = useCart(); 
   const navigate = useNavigate();
 
-  // Tính tổng số lượng item trong giỏ
   const count = cartItems.reduce(
     (total, item) => total + (item.quantity || 0),
     0

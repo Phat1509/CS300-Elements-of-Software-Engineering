@@ -16,14 +16,12 @@ export default function WishlistPage() {
 
   const userId = user ? (user.id || user.user_id) : null;
 
-  // Map wishlistEntries -> list product_id (unique)
   const productIds = useMemo(() => {
     const ids = wishlistEntries.map((w) => w.product_id);
     return Array.from(new Set(ids.map((x) => String(x))));
   }, [wishlistEntries]);
 
   useEffect(() => {
-    // Nếu chưa login thì clear UI
     if (!userId) {
       setProducts([]);
       return;
@@ -51,10 +49,8 @@ export default function WishlistPage() {
     load();
   }, [userId, productIds]);
 
-  // Khi mới vào trang, refresh lại wishlist để chắc chắn sync (đỡ bị stale)
   useEffect(() => {
     if (userId) refreshWishlist(userId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
   const isEmpty = !wishlistLoading && !loadingProducts && products.length === 0;

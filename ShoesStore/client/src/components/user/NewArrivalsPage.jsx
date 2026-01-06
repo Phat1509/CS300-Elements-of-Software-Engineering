@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { ChevronRight, SlidersHorizontal } from "lucide-react";
 import { Link } from "react-router-dom";
-import ProductCard from "./ProductCard"; // Đã có file này ở trên
+import ProductCard from "./ProductCard"; 
 import { getProducts } from "../../utilities/api";
 
 export default function NewArrivalsPage() {
@@ -10,7 +10,6 @@ export default function NewArrivalsPage() {
   const [loading, setLoading] = useState(true);
   const [showFilters, setShowFilters] = useState(false);
 
-  // PRICE RANGE (VND) - Mặc định max 10 triệu cho thoải mái
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(10_000_000);
 
@@ -20,7 +19,7 @@ export default function NewArrivalsPage() {
     async function fetchProducts() {
       try {
         const data = await getProducts();
-        setProducts(data || []); // Fallback array rỗng nếu api lỗi
+        setProducts(data || []);
       } catch (err) {
         console.error("Error fetching products:", err);
       } finally {
@@ -30,12 +29,10 @@ export default function NewArrivalsPage() {
     fetchProducts();
   }, []);
 
-  /* ================= FILTER ================= */
   const displayed = useMemo(() => {
     return products.filter((p) => p.price >= minPrice && p.price <= maxPrice);
   }, [products, minPrice, maxPrice]);
 
-  /* ================= SORT ================= */
   const sortedDisplayed = useMemo(() => {
     const arr = [...displayed];
     switch (sortBy) {
@@ -44,7 +41,6 @@ export default function NewArrivalsPage() {
       case "price-high":
         return arr.sort((a, b) => b.price - a.price);
       default:
-        // newest: product_id lớn hơn = mới hơn
         return arr.sort((a, b) => b.product_id - a.product_id);
     }
   }, [displayed, sortBy]);

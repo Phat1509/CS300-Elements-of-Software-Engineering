@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
-// Lấy URL từ biến môi trường hoặc fallback về localhost
 const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:3001";
 
 export default function AdminLogin() {
@@ -18,27 +17,21 @@ export default function AdminLogin() {
     setLoading(true);
 
     try {
-      // 1. Gọi API tìm user theo username
       const res = await fetch(`${API_BASE}/users?username=${username}`);
       if (!res.ok) throw new Error("Lỗi kết nối server");
       
       const users = await res.json();
-      const user = users[0]; // Json-server trả về mảng, lấy phần tử đầu tiên
+      const user = users[0]; 
 
-      // 2. Kiểm tra logic đăng nhập
       if (!user) {
         setError("Tài khoản không tồn tại.");
       } else if (user.password !== password) {
         setError("Sai mật khẩu.");
       } else if (!user.roles || !user.roles.includes("ADMIN")) {
-        // Quan trọng: Chặn nếu không phải admin
         setError("Tài khoản này không có quyền truy cập Admin.");
       } else {
-        // 3. Đăng nhập thành công
-        // Lưu thông tin user vào localStorage để các trang khác nhận diện
         localStorage.setItem("user", JSON.stringify(user));
         
-        // Chuyển hướng vào trang Dashboard
         navigate("/admin");
       }
 

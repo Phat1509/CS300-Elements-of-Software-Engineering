@@ -15,10 +15,8 @@ export default function ProductCard({
 }) {
   const navigate = useNavigate();
 
-  // Ưu tiên slug -> id -> product_id
   const finalId = slug || id || product_id;
 
-  // Ưu tiên image -> image_url
   const finalImage = image || image_url || "https://via.placeholder.com/300";
 
   const goDetail = () => {
@@ -27,7 +25,6 @@ export default function ProductCard({
   };
 
   const handleAddToCartClick = (e) => {
-    // ✅ chặn Link bọc ngoài (tránh navigate 2 lần)
     e.preventDefault();
     e.stopPropagation();
     goDetail();

@@ -14,7 +14,6 @@ const OrdersAdmin = () => {
     setLoading(true);
     try {
       const data = await getOrders();
-      // Đảm bảo data là mảng
       setOrders(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error("Failed to load orders", error);
@@ -24,7 +23,6 @@ const OrdersAdmin = () => {
   };
 
   const handleStatusChange = async (orderId, newStatus) => {
-    // Hỏi xác nhận trước khi đổi trạng thái quan trọng
     const confirmMsg = 
       newStatus === 'COMPLETED' ? "Xác nhận đơn hàng đã hoàn thành?" :
       newStatus === 'SHIPPING' ? "Xác nhận bắt đầu giao hàng?" : 
@@ -34,7 +32,6 @@ const OrdersAdmin = () => {
 
     try {
       await updateOrderStatus(orderId, newStatus);
-      // Reload lại danh sách sau khi update thành công
       await loadOrders(); 
       alert("Cập nhật trạng thái thành công!");
     } catch (error) {
@@ -43,17 +40,16 @@ const OrdersAdmin = () => {
     }
   };
 
-  // Helper để render màu sắc trạng thái (dùng class giống ProductAdmin)
   const renderStatusBadge = (status) => {
-    let colorClass = "pill-gray"; // Mặc định
+    let colorClass = "pill-gray"; 
     let label = status;
 
     switch (status) {
       case "PENDING":
-        colorClass = "pill-yellow"; // Bạn có thể thêm class này vào CSS hoặc dùng style inline
+        colorClass = "pill-yellow"; 
         break;
       case "SHIPPING":
-        colorClass = "pill-blue"; // Cần define thêm hoặc dùng style
+        colorClass = "pill-blue"; 
         break;
       case "COMPLETED":
         colorClass = "pill-green";
@@ -65,7 +61,6 @@ const OrdersAdmin = () => {
         break;
     }
 
-    // Map style inline cho nhanh nếu chưa có class CSS tương ứng
     const styleMap = {
       PENDING: { backgroundColor: '#fff3cd', color: '#856404' },
       SHIPPING: { backgroundColor: '#cce5ff', color: '#004085' },
@@ -82,7 +77,6 @@ const OrdersAdmin = () => {
 
   return (
     <AdminLayout title="Order Management">
-      {/* Toolbar (nếu cần filter sau này) */}
       <div className="admin-toolbar" style={{ justifyContent: 'flex-end' }}>
          <button className="btn btn-outline" onClick={loadOrders}>
             🔄 Refresh
@@ -133,7 +127,6 @@ const OrdersAdmin = () => {
                       <td style={{ textAlign: "right" }}>
                         <div style={{ display: 'flex', gap: 5, justifyContent: 'flex-end' }}>
                           
-                          {/* Nút Ship: Chỉ hiện khi Pending */}
                           {order.status === "PENDING" && (
                             <button
                               onClick={() => handleStatusChange(realId, "SHIPPING")}
@@ -145,7 +138,6 @@ const OrdersAdmin = () => {
                             </button>
                           )}
 
-                          {/* Nút Complete: Hiện khi Pending hoặc Shipping */}
                           {(order.status === "PENDING" || order.status === "SHIPPING") && (
                             <button
                               onClick={() => handleStatusChange(realId, "COMPLETED")}
@@ -153,11 +145,9 @@ const OrdersAdmin = () => {
                               style={{ backgroundColor: '#28a745', color: 'white', border: 'none' }}
                               title="Mark as Completed"
                             >
-                              ✅ Done
                             </button>
                           )}
                           
-                          {/* Nếu đã xong thì hiện text */}
                           {order.status === "COMPLETED" && (
                             <span className="muted small">Archived</span>
                           )}

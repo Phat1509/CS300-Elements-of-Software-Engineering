@@ -67,7 +67,6 @@ function clamp(n, a, b) {
   return Math.max(a, Math.min(b, n));
 }
 
-/** Modal nhỏ để leave rating/comment */
 function ReviewModal({
   open,
   onClose,
@@ -337,7 +336,6 @@ export default function OrderDetailPage() {
   const [loading, setLoading] = useState(true);
   const [order, setOrder] = useState(null);
 
-  // Note: file CartPage đang lưu user ở localStorage key "user"
   const user = useMemo(() => {
     try {
       return JSON.parse(localStorage.getItem("user"));
@@ -346,7 +344,6 @@ export default function OrderDetailPage() {
     }
   }, []);
 
-  // fetch orders rồi tìm order theo id param
   useEffect(() => {
     const run = async () => {
       setLoading(true);
@@ -393,7 +390,6 @@ export default function OrderDetailPage() {
   );
   const canLeaveReview = statusNormalized === "DELIVERED";
 
-  // ===== Leave Review (no backend): stored in localStorage by order id =====
   const reviewStorageKey = useMemo(
     () => `stepstyle_review_${String(displayId)}`,
     [displayId]
@@ -418,7 +414,6 @@ export default function OrderDetailPage() {
   }, [reviewStorageKey]);
 
   const openReview = () => {
-    // ✅ chỉ cho review khi DELIVERED
     if (!canLeaveReview) return;
     setIsReviewOpen(true);
   };
@@ -705,7 +700,6 @@ export default function OrderDetailPage() {
                 </h4>
                 <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                   {(() => {
-                    // Lấy list item, ưu tiên các key phổ biến
                     const items = order?.items || order?.order_items || order?.products || [];
                     if (!items.length) return <p className="muted">No item details.</p>;
 
@@ -751,7 +745,6 @@ export default function OrderDetailPage() {
                 marginTop: 16,
               }}
             >
-              {/* ✅ Leave Review chỉ dành cho DELIVERED */}
               {canLeaveReview && (
                 <button className="od-btnGhost" type="button" onClick={openReview}>
                   <Star size={16} style={{ marginRight: 8, verticalAlign: "middle" }} />

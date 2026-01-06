@@ -9,7 +9,7 @@ export default function SignUpPage() {
   const [fullname, setFullname] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [authority, setAuthority] = useState("USER"); // USER | ADMIN
+  const [authority, setAuthority] = useState("USER");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
 
@@ -43,7 +43,7 @@ export default function SignUpPage() {
         username,
         email,
         password,
-        authority, // <- đây nè
+        authority, 
       });
 
       if (result.success) {
@@ -120,7 +120,6 @@ export default function SignUpPage() {
               />
             </div>
 
-            {/* AUTHORITY / ROLE */}
             <div className="form-group">
               <label className="auth-label">Authority</label>
               <select

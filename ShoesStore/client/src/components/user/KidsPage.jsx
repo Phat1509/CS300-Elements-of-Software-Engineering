@@ -1,24 +1,23 @@
 // client/src/components/user/KidsPage.jsx
 import React, { useState, useEffect, useMemo } from "react";
-import { Link } from "react-router-dom"; // Nhớ import Link
+import { Link } from "react-router-dom"; 
 import ProductCard from "./ProductCard";
 import { getProducts } from "../../utilities/api";
 
 export default function KidsPage() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [maxPrice, setMaxPrice] = useState(4000000); // 4 triệu VND
+  const [maxPrice, setMaxPrice] = useState(4000000); 
   const [sortBy, setSortBy] = useState("popular");
 
-  // Fetch từ API
+
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
       try {
         const all = await getProducts();
 
-        // --- LOGIC: Lấy category_id = 4 (Kids) ---
-        // (Chúng ta sẽ thêm ID 4 vào db.json ở Bước 2)
+
         const kidsProducts = all.filter(
           (p) => Number(p.category_id) === 4 && p.is_active
         );
@@ -129,7 +128,6 @@ export default function KidsPage() {
               </div>
             </div>
 
-            {/* Các filter tĩnh khác giữ nguyên hoặc ẩn đi tùy bạn */}
           </div>
         </aside>
 
@@ -164,7 +162,6 @@ export default function KidsPage() {
                 <ProductCard
                   key={p.product_id || p.id}
                   id={p.product_id || p.id}
-                  // Sửa các trường cho khớp DB
                   image={p.image_url}
                   name={p.name}
                   price={p.price}

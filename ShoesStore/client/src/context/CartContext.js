@@ -11,19 +11,17 @@ export const CartProvider = ({ children }) => {
   const [cartId, setCartId] = useState(null);
   const [total, setTotal] = useState(0);
 
-  // Khi User thay đổi -> Load lại giỏ hàng của User đó
   useEffect(() => {
     if (user) {
       fetchCart(user.user_id);
     } else {
-      setCartItems([]); // Logout thì xóa giỏ hàng trên UI
+      setCartItems([]); 
       setTotal(0);
       setCartId(null);
     }
   }, [user]);
 
   const getNextCartId = async () => {
-    // Lấy tất cả cart để tìm max cart_id (đảm bảo cart_id luôn tồn tại)
     const all = await api.get("/cart");
     const carts = all.data || [];
     const maxId = carts.reduce((mx, c) => {
@@ -35,12 +33,10 @@ export const CartProvider = ({ children }) => {
 
   const fetchCart = async (userId) => {
     try {
-      // Tìm cart cũ hoặc tạo mới
       const cartRes = await api.get(`/cart?user_id=${userId}`);
       let currentCartId;
 
       if (cartRes.data.length === 0) {
-        // ✅ FIX: tạo cart mới nhưng PHẢI có cart_id (vì cart_item đang join theo cart_id)
         const newCartId = await getNextCartId();
         const newCart = await api.post("/cart", {
           cart_id: newCartId,
@@ -80,7 +76,7 @@ export const CartProvider = ({ children }) => {
       } else {
         await api.post("/cart_item", { cart_id: cartId, variant_id: variantId, quantity });
       }
-      await fetchCart(user.user_id); // Refresh lại UI ngay lập tức
+      await fetchCart(user.user_id);
       alert("Added to cart!");
     } catch (error) {
       console.error("Add failed:", error);

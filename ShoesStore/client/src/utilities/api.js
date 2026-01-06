@@ -1,6 +1,5 @@
 import axios from "axios";
 
-// 1. URL rỗng để sử dụng Proxy trong package.json ("proxy": "http://localhost:3001")
 const API_URL = "";
 
 const api = axios.create({
@@ -22,23 +21,18 @@ export const getProducts = async (params = {}) => {
 
 const getProductByIdOrSlug = async (identifier) => {
   try {
-    // Ưu tiên 1: Tìm theo slug
     let res = await api.get("/products", { params: { slug: identifier } });
     if (res.data && res.data.length > 0) return res.data[0];
 
-    // Ưu tiên 2: Tìm theo id (của json-server)
     try {
       res = await api.get(`/products/${identifier}`);
       if (res.data) return res.data;
     } catch (e) {
-      // Bỏ qua lỗi 404 nếu tìm theo ID thất bại
     }
 
-    // Ưu tiên 3: Tìm theo id (dạng query param nếu id là string tùy chỉnh)
     res = await api.get("/products", { params: { id: identifier } });
     if (res.data && res.data.length > 0) return res.data[0];
 
-    // Ưu tiên 4: Tìm theo product_id (trường custom)
     res = await api.get("/products", { params: { product_id: identifier } });
     return res.data[0] || null;
   } catch (error) {
@@ -49,7 +43,6 @@ const getProductByIdOrSlug = async (identifier) => {
 
 export const getProductVariants = async (productId) => {
   try {
-    // Tìm các biến thể có product_id trùng khớp
     const res = await api.get("/product_variants", {
       params: { product_id: productId },
     });
@@ -64,22 +57,17 @@ export const getProductDetail = async (identifier) => {
   const product = await getProductByIdOrSlug(identifier);
   if (!product) return null;
 
-  // Lấy ID chuẩn để tìm variant
   const pId = product.product_id || product.id;
 
-  // Fetch thủ công variants (an toàn hơn _embed nếu db chưa chuẩn relations)
   const variants = await getProductVariants(pId);
 
   return { ...product, variants };
 };
 
-// [QUAN TRỌNG] Update kho an toàn
 export const updateProductStock = async (variantId, newStock) => {
   try {
-    // Cách 1: Thử update trực tiếp theo ID (nếu variantId trùng với id của json-server)
     await api.patch(`/product_variants/${variantId}`, { stock: newStock });
   } catch (e) {
-    // Cách 2: Nếu lỗi (do variantId là custom ID), tìm record trước rồi mới update
     console.warn(`Direct patch failed for ${variantId}, trying lookup...`);
     const res = await api.get(`/product_variants?variant_id=${variantId}`);
 
@@ -115,41 +103,32 @@ export const getCartByUserId = async (userId) => {
 
 export const getCartItems = async (cartId) => {
   try {
-    // Lưu ý: Kiểm tra db.json xem tên bảng là "cart_item" hay "cart_items"
     const res = await api.get("/cart_item", { params: { cart_id: cartId } });
     const items = res.data;
 
-    // "Hydrate" dữ liệu: Từ ID lấy ra thông tin chi tiết (ảnh, tên, giá)
     const detailedItems = await Promise.all(
       items.map(async (item) => {
-        // 1. Lấy thông tin Variant (Size/Color)
         let variant = null;
         try {
-          // Tìm theo variant_id custom
           const vRes = await api.get(`/product_variants`, {
             params: { variant_id: item.variant_id },
           });
           variant = vRes.data[0];
 
-          // Nếu không thấy, tìm theo id json-server
           if (!variant) {
             const vRes2 = await api.get(`/product_variants/${item.variant_id}`);
             variant = vRes2.data;
           }
         } catch (e) {}
 
-        if (!variant) return null; // Variant đã bị xóa khỏi db, bỏ qua item này
-
-        // 2. Lấy thông tin Product (Tên, Ảnh) từ variant.product_id
+        if (!variant) return null;
         let product = null;
         try {
-          // Tìm theo product_id custom
           const pRes = await api.get(`/products`, {
             params: { product_id: variant.product_id },
           });
           product = pRes.data[0];
 
-          // Nếu không thấy, tìm theo id json-server
           if (!product) {
             const pRes2 = await api.get(`/products/${variant.product_id}`);
             product = pRes2.data;
@@ -161,7 +140,7 @@ export const getCartItems = async (cartId) => {
         return {
           ...item,
           product_name: product.name,
-          price: Number(product.price), // Đảm bảo là số
+          price: Number(product.price), 
           image: product.image_url,
           size: variant.size,
           color: variant.color,
@@ -171,7 +150,6 @@ export const getCartItems = async (cartId) => {
         };
       })
     );
-    // Lọc bỏ các item null (sản phẩm lỗi/đã xóa)
     return detailedItems.filter((i) => i !== null);
   } catch (error) {
     console.error("Error getting cart details:", error);
@@ -194,7 +172,6 @@ export const removeCartItem = async (id) => {
   return res.data;
 };
 
-// Alias cho removeCartItem để tránh lỗi nếu gọi sai tên
 export const deleteCartItem = removeCartItem;
 
 /* ===================== ORDERS & AUTH ===================== */
@@ -216,7 +193,6 @@ export const getOrderDetail = async (id) => {
 
 export const getOrderItems = async (orderId) => {
   try {
-    // Gọi endpoint: /order_item?order_id=...
     const response = await api.get(`/order_item?order_id=${orderId}`);
     return response.data;
   } catch (error) {
@@ -258,7 +234,6 @@ export const getOrdersByUserId = async (userId, altUserId) => {
 
     const merged = results.flat();
 
-    // unique theo json-server id
     const seen = new Set();
     const unique = [];
     for (const o of merged) {
@@ -310,17 +285,14 @@ export const registerUser = async (user) => {
     return { success: false, message: "Vui lòng nhập đầy đủ thông tin" };
   }
 
-  // 1) Check trùng email
   const check = await api.get("/users", { params: { email } });
   if (check.data.length > 0) {
     return { success: false, message: "Email đã tồn tại" };
   }
 
-  // 2) Generate user_id tăng dần
   const all = await api.get("/users");
   const maxUserId = (all.data || []).reduce((max, u) => Math.max(max, Number(u.user_id) || 0), 0);
 
-  // 3) roles theo authority
   const role = authority === "ADMIN" ? "ADMIN" : "USER";
 
   const newUser = {

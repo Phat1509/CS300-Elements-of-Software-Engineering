@@ -43,7 +43,7 @@ export default function OrderHistoryPage() {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
 
-  // ✅ FIX: ưu tiên user.user_id trước (number), fallback user.id (string)
+
   const userIdPrimary = user ? user.user_id ?? user.id : null;
   const userIdAlt = user ? user.id : null;
 
@@ -67,7 +67,6 @@ export default function OrderHistoryPage() {
       setErr("");
 
       try {
-        // ✅ FIX: fetch theo cả 2 kiểu id để không bị lẫn db cũ
         const list = await getOrdersByUserId(userIdPrimary, userIdAlt);
         if (!mounted) return;
         setOrders(Array.isArray(list) ? list : []);
@@ -216,7 +215,7 @@ export default function OrderHistoryPage() {
               </div>
             ) : (
               filtered.map((o) => {
-                const shownId = o.order_id ?? o.id; // để hiển thị
+                const shownId = o.order_id ?? o.id; 
                 const pill = statusPillClass(o.status);
                 const Icon = statusIcon(o.status);
 
@@ -237,9 +236,7 @@ export default function OrderHistoryPage() {
                             </span>
                           </div>
                           {(() => {
-                             // Lấy danh sách item để hiển thị tên
                              const iList = o.items || o.order_items || [];
-                             // Nối tên sản phẩm lại
                              const names = iList.map(i => i.product_name || i.name).join(", ");
                              
                              if (names) {
@@ -265,7 +262,6 @@ export default function OrderHistoryPage() {
                         <button
                           className="btn-solid"
                           style={{ marginTop: 10 }}
-                          // ✅ FIX: route theo json-server id để khỏi "Order not found"
                           onClick={() => navigate(`/orders/${o.id}`)}
                           disabled={!o.id}
                           title={!o.id ? "Missing order id" : "Track"}

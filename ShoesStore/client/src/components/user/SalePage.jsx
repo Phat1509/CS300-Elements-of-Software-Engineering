@@ -1,25 +1,22 @@
 // client/src/components/user/SalePage.jsx
 import React, { useEffect, useState, useMemo } from "react";
-import { Link } from "react-router-dom"; // Import Link
+import { Link } from "react-router-dom"; 
 import ProductCard from "./ProductCard";
 import { getProducts } from "../../utilities/api";
 
 export default function SalePage() {
   const [products, setProducts] = useState([]);
-  const [maxPrice, setMaxPrice] = useState(4000000); // Sửa: Max 4 triệu VND
+  const [maxPrice, setMaxPrice] = useState(4000000); 
   const [sortBy, setSortBy] = useState("discount");
   const [loading, setLoading] = useState(true);
 
-  // Fetch từ API
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
       try {
         const all = await getProducts();
 
-        // --- LOGIC LỌC SẢN PHẨM SALE ---
-        // 1. Phải đang active
-        // 2. Phải có discount_percentage > 0
+     
         const saleItems = all.filter(
           (p) => p.is_active && (p.discount_percentage || 0) > 0
         );
@@ -35,7 +32,6 @@ export default function SalePage() {
     fetchProducts();
   }, []);
 
-  // Filter theo price (VND)
   const filteredProducts = useMemo(
     () =>
       products.filter(
@@ -44,7 +40,6 @@ export default function SalePage() {
     [products, maxPrice]
   );
 
-  // Sort logic
   const sortedProducts = useMemo(() => {
     const arr = [...filteredProducts];
     switch (sortBy) {
@@ -58,7 +53,6 @@ export default function SalePage() {
         );
       case "discount":
       default:
-        // Sửa: Dùng discount_percentage để sort
         return arr.sort(
           (a, b) => (b.discount_percentage || 0) - (a.discount_percentage || 0)
         );
@@ -67,7 +61,7 @@ export default function SalePage() {
 
   const handleClearAll = () => setMaxPrice(4000000);
 
-  // UI Loading
+
   if (loading) {
     return (
       <main
@@ -174,7 +168,6 @@ export default function SalePage() {
                   image={p.image_url}
                   name={p.name}
                   price={p.price}
-                  // Hiển thị phần trăm giảm
                   extra={
                     p.discount_percentage
                       ? `-${p.discount_percentage}%`

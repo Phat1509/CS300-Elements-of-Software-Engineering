@@ -19,14 +19,13 @@ const ProductDetail = () => {
   const navigate = useNavigate();
 
   const { user } = useAuth();
-  const { addToCart } = useCart(); // Giả sử Context xử lý việc gọi API
+  const { addToCart } = useCart(); 
   const { toggleWishlist, isInWishlist } = useWishlist();
 
   const [product, setProduct] = useState(null);
   const [variants, setVariants] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // State cho lựa chọn
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
   const [quantity, setQuantity] = useState(1);
@@ -40,7 +39,6 @@ const ProductDetail = () => {
         const data = await getProductDetail(slug);
         setProduct(data);
 
-        // Variants có thể nằm ở nhiều key -> normalize
         const v =
           data?.variants ||
           data?.product_variants ||
@@ -97,7 +95,6 @@ const ProductDetail = () => {
     try {
       await toggleWishlist(productId);
     } catch (e) {
-      // Nếu chưa login thì đá qua sign in
       if (String(e?.message || e) === "NOT_LOGGED_IN") {
         navigate("/signin");
         return;
@@ -121,13 +118,10 @@ const ProductDetail = () => {
 
     setIsAdding(true);
     try {
-      // --- [QUAN TRỌNG] Tạo object Item chuẩn ---
       const cartItemData = {
-        // IDs quan trọng nhất để lưu xuống DB
         product_id: product.product_id || product.id,
         variant_id: selectedVariant.variant_id || selectedVariant.id, // Phải có cái này!
 
-        // Các thông tin hiển thị (cho UI Context render ngay lập tức)
         name: product.name,
         image: product.image || product.image_url,
         price: Number(product.price || 0),
@@ -135,7 +129,6 @@ const ProductDetail = () => {
         color: selectedVariant.color,
         quantity: quantity,
 
-        // Một số field phụ nếu cần
         slug: product.slug,
       };
 

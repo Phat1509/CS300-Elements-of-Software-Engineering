@@ -32,7 +32,6 @@ export const WishlistProvider = ({ children }) => {
 
   useEffect(() => {
     refreshWishlist(userId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
   const isInWishlist = (productId) => {

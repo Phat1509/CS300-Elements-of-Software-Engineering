@@ -1,28 +1,25 @@
 // client/src/components/user/SignInPage.jsx
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext"; // Import Context
+import { useAuth } from "../../context/AuthContext"; 
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(""); // State để hiển thị lỗi nếu có
+  const [error, setError] = useState(""); 
   
-  const { login } = useAuth(); // Lấy hàm login từ Context
+  const { login } = useAuth(); 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
-    // Gọi hàm login từ AuthContext
     const result = await login(email, password);
 
     if (result.success) {
-      // Đăng nhập thành công -> Chuyển hướng về trang chủ
       navigate("/");
     } else {
-      // Đăng nhập thất bại -> Hiện lỗi
       setError(result.message);
     }
   };
@@ -40,10 +37,8 @@ export default function SignInPage() {
 
       <section className="container" style={{ padding: "32px 0 64px" }}>
         <div className="auth-card">
-          {/* Form cần có onSubmit */}
           <form className="auth-form" onSubmit={handleSubmit}>
             
-            {/* Hiển thị lỗi nếu có */}
             {error && (
               <div style={{ color: "red", marginBottom: "1rem", textAlign: "center" }}>
                 {error}
@@ -55,7 +50,7 @@ export default function SignInPage() {
               <input
                 type="email"
                 className="input"
-                placeholder="admin@gmail.com" // Gợi ý user có sẵn để test
+                placeholder="admin@gmail.com" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -67,7 +62,7 @@ export default function SignInPage() {
               <input 
                 type="password" 
                 className="input" 
-                placeholder="123" // Gợi ý pass để test
+                placeholder="123" 
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -92,7 +87,6 @@ export default function SignInPage() {
               </button>
             </div>
 
-            {/* Đổi type="button" thành "submit" để kích hoạt onSubmit */}
             <button
               type="submit"
               className="btn btn-primary btn-lg"

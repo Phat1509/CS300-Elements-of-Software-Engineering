@@ -1,13 +1,13 @@
 // client/src/components/user/MenPage.jsx
 import React, { useState, useEffect, useMemo } from "react";
-import { Link } from "react-router-dom"; // <--- 1. Import Link
+import { Link } from "react-router-dom";
 import ProductCard from "./ProductCard";
 import { getProducts } from "../../utilities/api";
 
 export default function MenPage() {
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true); // <--- 2. Thêm loading state
-  const [error, setError] = useState(null); // <--- 3. Thêm error state
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null); 
 
   const [maxPrice, setMaxPrice] = useState(4000000);
   const [sortBy, setSortBy] = useState("popular");
@@ -56,14 +56,12 @@ export default function MenPage() {
         );
       case "popular":
       default:
-        // Nếu API trả về đã sort theo độ phổ biến thì giữ nguyên
         return arr;
     }
   }, [filteredProducts, sortBy]);
 
   const handleClearAll = () => setMaxPrice(4000000);
 
-  // --- RENDER LOADING / ERROR ---
   if (loading) {
     return (
       <main
@@ -96,7 +94,6 @@ export default function MenPage() {
     <main className="men-wrap">
       <section className="men-bc">
         <div className="container">
-          {/* 4. Dùng Link thay vì a href */}
           <Link to="/" className="men-bc-link">
             Home
           </Link>
@@ -159,7 +156,6 @@ export default function MenPage() {
             </div>
           </div>
 
-          {/* 5. Handle Empty State */}
           {sortedProducts.length === 0 ? (
             <div
               style={{ padding: "40px 0", textAlign: "center", width: "100%" }}
@@ -171,7 +167,7 @@ export default function MenPage() {
             <div className="men-grid">
               {sortedProducts.map((p) => (
                 <ProductCard
-                  key={p.product_id || p.id} // Fallback id
+                  key={p.product_id || p.id}
                   id={p.product_id || p.id}
                   image={p.image_url}
                   name={p.name}
