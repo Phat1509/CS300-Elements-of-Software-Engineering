@@ -30,9 +30,8 @@ export function AuthProvider({ children }) {
       
       const data = await loginAPI(email, password);
       
-      console.log("✅ Server trả về:", data); // Log 2: Quan trọng nhất!
+      console.log("Server trả về:", data); 
 
-      // Kiểm tra xem token nằm ở đâu
       if (!data.token) {
         throw new Error("API không trả về 'token'. Kiểm tra lại Log xem nó tên là gì?");
       }

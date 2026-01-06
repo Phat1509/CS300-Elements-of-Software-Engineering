@@ -7,21 +7,32 @@ const api = axios.create({
   headers: { "Content-Type": "application/json" },
 });
 
-// 2. Tự động gắn Token (để dùng cho các chức năng sau này)
-api.interceptors.request.use(
-  (config) => {
-    const user = JSON.parse(localStorage.getItem("user") || "{}");
-    const token = user.token || localStorage.getItem("accessToken");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
+
+
+// ===================== AUTHENTICATION =====================
+// 1. API Đăng nhập
+export const loginAPI = async (email, password) => {
+  // Gửi POST /auth/login 
+  const response = await api.post('/auth/login', { email, password });
+  return response.data; // Trả về { token, name, pid, is_verified }
+};
+
+// 2. API Đăng ký
+export const registerAPI = async (name, email, password) => {
+  // Gửi POST /auth/register 
+  const response = await api.post('/auth/register', { name, email, password });
+  return response.data;
+};
+
+// 3. API Lấy thông tin User hiện tại (khi F5 trang)
+export const getMeAPI = async () => {
+  // Gửi GET /auth/current
+  const response = await api.get('/auth/current');
+  return response.data; // Trả về { email, name, pid }
+};
+
 
 const mapProduct = (p) => {
-  // Kiểm tra xem link ảnh có phải link "dỏm" example.com không
   const isDummyLink = p.image_url && p.image_url.includes("example.com");
   
   return {
@@ -322,27 +333,7 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// ===================== AUTHENTICATION =====================
-// 1. API Đăng nhập
-export const loginAPI = async (email, password) => {
-  // Gửi POST /auth/login theo ảnh bạn gửi
-  const response = await api.post('/auth/login', { email, password });
-  return response.data; // Trả về { token, name, pid, is_verified }
-};
 
-// 2. API Đăng ký
-export const registerAPI = async (name, email, password) => {
-  // Gửi POST /auth/register theo ảnh bạn gửi
-  const response = await api.post('/auth/register', { name, email, password });
-  return response.data;
-};
-
-// 3. API Lấy thông tin User hiện tại (khi F5 trang)
-export const getMeAPI = async () => {
-  // Gửi GET /auth/current theo ảnh bạn gửi
-  const response = await api.get('/auth/current');
-  return response.data; // Trả về { email, name, pid }
-};
 
 /* ===================== WISHLIST & REVIEWS ===================== */
 
