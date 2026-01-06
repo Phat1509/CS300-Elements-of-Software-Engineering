@@ -5,773 +5,344 @@ import {
   ArrowLeft,
   ChevronRight,
   Copy,
-  Download,
   MapPin,
   Package,
   RotateCcw,
   Star,
   Truck,
+  CreditCard,
+  Calendar,
   X,
+  CheckCircle2
 } from "lucide-react";
 
-import { getOrders } from "../../utilities/api";
+import { getOrdersByUserId } from "../../utilities/api"; // Đảm bảo import đúng hàm API
+import { useAuth } from "../../context/AuthContext";
 
-function money(n) {
-  const v = Number(n || 0);
-  return `$${v.toFixed(2)}`;
-}
+// --- HELPER FUNCTIONS ---
+const formatCurrency = (n) => (Number(n) || 0).toLocaleString("en-US", { style: "currency", currency: "USD" });
 
-function safeText(v, fallback = "—") {
-  const s = String(v ?? "").trim();
-  return s ? s : fallback;
-}
-
-function formatDate(iso) {
+const formatDate = (iso) => {
   if (!iso) return "—";
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return "—";
-  return d.toLocaleString();
-}
+  return new Date(iso).toLocaleString("vi-VN", {
+    year: 'numeric', month: 'long', day: 'numeric',
+    hour: '2-digit', minute: '2-digit'
+  });
+};
 
-function normalizeStatus(s) {
-  const v = String(s || "").toLowerCase();
-  if (v.includes("deliver")) return "DELIVERED";
-  if (v.includes("ship")) return "SHIPPED";
-  if (v.includes("process")) return "PROCESSING";
-  if (v.includes("paid")) return "PAID";
-  if (v.includes("pend")) return "PENDING";
-  if (v.includes("cancel")) return "CANCELLED";
-  return String(s || "PENDING").toUpperCase();
-}
-
-function statusMeta(status) {
-  const v = normalizeStatus(status);
-  switch (v) {
+const getStatusTheme = (rawStatus) => {
+  const s = String(rawStatus || "PENDING").toUpperCase();
+  switch (s) {
     case "DELIVERED":
-      return { label: "Delivered", bg: "rgba(16,185,129,.14)", fg: "#065f46", icon: Package };
+      return { label: "Delivered", bg: "#dcfce7", color: "#166534", icon: CheckCircle2 };
     case "SHIPPED":
-      return { label: "Shipped", bg: "rgba(59,130,246,.14)", fg: "#1d4ed8", icon: Truck };
+      return { label: "Shipped", bg: "#dbeafe", color: "#1e40af", icon: Truck };
     case "PROCESSING":
-      return { label: "Processing", bg: "rgba(245,158,11,.14)", fg: "#92400e", icon: Package };
     case "PAID":
-      return { label: "Paid", bg: "rgba(34,197,94,.14)", fg: "#166534", icon: Package };
+      return { label: "Processing", bg: "#fef3c7", color: "#92400e", icon: Package };
     case "CANCELLED":
-      return { label: "Cancelled", bg: "rgba(239,68,68,.14)", fg: "#991b1b", icon: X };
-    case "PENDING":
+      return { label: "Cancelled", bg: "#fee2e2", color: "#991b1b", icon: X };
     default:
-      return { label: "Pending", bg: "rgba(148,163,184,.20)", fg: "#334155", icon: Package };
+      return { label: "Pending", bg: "#f1f5f9", color: "#475569", icon: Calendar };
   }
-}
+};
 
-function clamp(n, a, b) {
-  return Math.max(a, Math.min(b, n));
-}
-
-function ReviewModal({
-  open,
-  onClose,
-  rating,
-  setRating,
-  reviewText,
-  setReviewText,
-  onSave,
-  onClear,
-  savedReview,
-}) {
+// --- SUB-COMPONENT: REVIEW MODAL ---
+function ReviewModal({ open, onClose, rating, setRating, reviewText, setReviewText, onSave }) {
   if (!open) return null;
 
   return (
-    <div
-      onMouseDown={onClose}
-      style={{
-        position: "fixed",
-        inset: 0,
-        background: "rgba(15, 23, 42, .55)",
-        display: "grid",
-        placeItems: "center",
-        padding: 16,
-        zIndex: 50,
-      }}
-      role="dialog"
-      aria-modal="true"
-    >
-      <div
-        style={{
-          width: "min(560px, 100%)",
-          background: "#fff",
-          borderRadius: 16,
-          boxShadow: "0 30px 70px rgba(15,23,42,.25)",
-          overflow: "hidden",
-          border: "1px solid rgba(0,0,0,.08)",
-        }}
-        onMouseDown={(e) => e.stopPropagation()}
-      >
+    <div style={{
+        position: "fixed", inset: 0, zIndex: 1000,
+        backgroundColor: "rgba(0,0,0,0.5)", backdropFilter: "blur(4px)",
+        display: "flex", alignItems: "center", justifyContent: "center", padding: 16
+    }} onClick={onClose}>
+      <div style={{
+          background: "#fff", width: "100%", maxWidth: 500, borderRadius: 16,
+          boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)", overflow: "hidden"
+      }} onClick={e => e.stopPropagation()}>
+        
         {/* Header */}
-        <div
-          style={{
-            padding: "16px 16px 14px",
-            borderBottom: "1px solid rgba(0,0,0,.08)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: 12,
-          }}
-        >
-          <div>
-            <div style={{ fontWeight: 900, fontSize: 18, color: "#0f172a" }}>
-              Leave a review
-            </div>
-            <div style={{ fontSize: 13, color: "#64748b", marginTop: 2 }}>
-              Rate your delivery & product experience.
-            </div>
-          </div>
-
-          <button
-            type="button"
-            onClick={onClose}
-            style={{
-              width: 36,
-              height: 36,
-              borderRadius: 12,
-              border: "1px solid rgba(0,0,0,.08)",
-              background: "#fff",
-              display: "grid",
-              placeItems: "center",
-              cursor: "pointer",
-            }}
-            aria-label="Close"
-            title="Close"
-          >
-            <X size={18} />
-          </button>
+        <div style={{ padding: "16px 24px", borderBottom: "1px solid #e2e8f0", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <h3 style={{ margin: 0, fontSize: 18 }}>Đánh giá sản phẩm</h3>
+            <button onClick={onClose} style={{ background: "none", border: "none", cursor: "pointer" }}><X size={20} /></button>
         </div>
 
         {/* Body */}
-        <div style={{ padding: 16 }}>
-          {savedReview ? (
-            <div
-              style={{
-                border: "1px solid rgba(0,0,0,.08)",
-                borderRadius: 14,
-                padding: 12,
-                marginBottom: 12,
-                background: "rgba(2,6,23,.02)",
-              }}
-            >
-              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                <div style={{ fontWeight: 900, color: "#0f172a" }}>Saved review</div>
-                <div style={{ fontSize: 12, color: "#64748b" }}>
-                  {savedReview?.savedAt ? formatDate(savedReview.savedAt) : ""}
+        <div style={{ padding: 24 }}>
+            <div style={{ textAlign: "center", marginBottom: 20 }}>
+                <p className="muted" style={{ marginBottom: 12 }}>Bạn cảm thấy đơn hàng này thế nào?</p>
+                <div style={{ display: "flex", justifyContent: "center", gap: 8 }}>
+                    {[1, 2, 3, 4, 5].map((star) => (
+                        <button key={star} onClick={() => setRating(star)} style={{ background: "none", border: "none", cursor: "pointer", transition: "transform 0.1s" }}>
+                            <Star 
+                                size={32} 
+                                fill={star <= rating ? "#fbbf24" : "transparent"} 
+                                color={star <= rating ? "#fbbf24" : "#cbd5e1"} 
+                                strokeWidth={1.5}
+                            />
+                        </button>
+                    ))}
                 </div>
-              </div>
-
-              <div style={{ display: "flex", gap: 6, marginTop: 10 }}>
-                {Array.from({ length: 5 }).map((_, i) => {
-                  const n = i + 1;
-                  return (
-                    <Star
-                      key={n}
-                      size={16}
-                      color={n <= (savedReview?.rating || 0) ? "#0f172a" : "#cbd5e1"}
-                      fill={n <= (savedReview?.rating || 0) ? "#0f172a" : "transparent"}
-                    />
-                  );
-                })}
-              </div>
-
-              {savedReview?.text ? (
-                <div
-                  style={{
-                    marginTop: 10,
-                    color: "#0f172a",
-                    background: "#fff",
-                    border: "1px solid rgba(0,0,0,.06)",
-                    borderRadius: 12,
-                    padding: 12,
-                    lineHeight: 1.5,
-                    whiteSpace: "pre-wrap",
-                  }}
-                >
-                  {savedReview.text}
-                </div>
-              ) : null}
-
-              <div style={{ marginTop: 12, display: "flex", gap: 10, flexWrap: "wrap" }}>
-                <button
-                  type="button"
-                  onClick={onClear}
-                  style={{
-                    borderRadius: 14,
-                    padding: "10px 14px",
-                    fontWeight: 800,
-                    border: "1px solid rgba(0,0,0,.12)",
-                    background: "#fff",
-                    cursor: "pointer",
-                  }}
-                >
-                  Remove saved review
-                </button>
-              </div>
             </div>
-          ) : null}
 
-          <div style={{ fontWeight: 900, color: "#0f172a", marginBottom: 8 }}>
-            Your rating
-          </div>
-
-          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-            {Array.from({ length: 5 }).map((_, i) => {
-              const n = i + 1;
-              return (
-                <button
-                  key={n}
-                  type="button"
-                  onClick={() => setRating(n)}
-                  style={{
-                    width: 46,
-                    height: 40,
-                    borderRadius: 12,
-                    border: "1px solid rgba(0,0,0,.08)",
-                    background: n <= rating ? "rgba(250,204,21,.25)" : "#fff",
-                    cursor: "pointer",
-                    display: "grid",
-                    placeItems: "center",
-                  }}
-                  aria-label={`${n} star`}
-                  title={`${n} star`}
-                >
-                  <Star
-                    size={18}
-                    color={n <= rating ? "#0f172a" : "#94a3b8"}
-                    fill={n <= rating ? "#0f172a" : "transparent"}
-                  />
-                </button>
-              );
-            })}
-          </div>
-
-          <div style={{ fontWeight: 900, color: "#0f172a", marginTop: 16, marginBottom: 8 }}>
-            Comment (optional)
-          </div>
-
-          <textarea
-            value={reviewText}
-            onChange={(e) => setReviewText(e.target.value)}
-            placeholder="Tell us what you liked (or what we can improve)..."
-            style={{
-              width: "100%",
-              minHeight: 120,
-              resize: "vertical",
-              borderRadius: 14,
-              border: "1px solid rgba(0,0,0,.10)",
-              padding: 12,
-              outline: "none",
-              fontSize: 14,
-              lineHeight: 1.55,
-              boxShadow: "inset 0 1px 0 rgba(15,23,42,.02)",
-            }}
-          />
-          <div style={{ display: "flex", justifyContent: "space-between", marginTop: 10 }}>
-            <div style={{ fontSize: 12, color: "#64748b" }}>
-              Tip: Keep it short & honest.
-            </div>
-            <div style={{ fontSize: 12, color: "#94a3b8" }}>
-              {clamp((reviewText || "").length, 0, 2000)}/2000
-            </div>
-          </div>
+            <textarea
+                value={reviewText}
+                onChange={(e) => setReviewText(e.target.value)}
+                placeholder="Chia sẻ trải nghiệm của bạn về sản phẩm..."
+                style={{
+                    width: "100%", minHeight: 100, padding: 12, borderRadius: 8,
+                    border: "1px solid #cbd5e1", outline: "none", fontSize: 14, fontFamily: "inherit"
+                }}
+            />
         </div>
 
         {/* Footer */}
-        <div
-          style={{
-            padding: 16,
-            borderTop: "1px solid rgba(0,0,0,.08)",
-            display: "flex",
-            justifyContent: "flex-end",
-            gap: 10,
-            flexWrap: "wrap",
-          }}
-        >
-          <button
-            type="button"
-            onClick={onClose}
-            style={{
-              borderRadius: 14,
-              padding: "10px 14px",
-              fontWeight: 800,
-              border: "1px solid rgba(0,0,0,.12)",
-              background: "#fff",
-              cursor: "pointer",
-            }}
-          >
-            Cancel
-          </button>
-
-          <button
-            type="button"
-            onClick={onSave}
-            disabled={!rating}
-            style={{
-              borderRadius: 14,
-              padding: "10px 14px",
-              fontWeight: 900,
-              border: "none",
-              background: !rating ? "#94a3b8" : "#0f172a",
-              color: "#fff",
-              cursor: !rating ? "not-allowed" : "pointer",
-            }}
-          >
-            Save
-          </button>
+        <div style={{ padding: "16px 24px", background: "#f8fafc", borderTop: "1px solid #e2e8f0", display: "flex", justifyContent: "flex-end", gap: 12 }}>
+            <button onClick={onClose} className="btn btn-outline" style={{ border: "1px solid #cbd5e1" }}>Hủy</button>
+            <button onClick={onSave} disabled={rating === 0} className="btn btn-primary" style={{ opacity: rating === 0 ? 0.5 : 1 }}>Gửi đánh giá</button>
         </div>
       </div>
     </div>
   );
 }
 
+// --- MAIN COMPONENT ---
 export default function OrderDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { user, isAuthenticated } = useAuth();
 
   const [loading, setLoading] = useState(true);
   const [order, setOrder] = useState(null);
+  
+  // Review State
+  const [isReviewOpen, setIsReviewOpen] = useState(false);
+  const [rating, setRating] = useState(0);
+  const [reviewText, setReviewText] = useState("");
 
-  const user = useMemo(() => {
-    try {
-      return JSON.parse(localStorage.getItem("user"));
-    } catch (e) {
-      return null;
-    }
-  }, []);
-
+  // --- FETCH DATA ---
   useEffect(() => {
-    const run = async () => {
+    if (!isAuthenticated) { 
+        setLoading(false); 
+        return; 
+    }
+
+    const fetchOrder = async () => {
       setLoading(true);
       try {
-        const uid = user?.id || user?.user_id;
-        if (!uid) {
-          setOrder(null);
-          setLoading(false);
-          return;
-        }
-
-        const list = await getOrders(uid);
-        const found =
-          list.find((o) => String(o.id) === String(id)) ||
-          list.find((o) => String(o.order_id) === String(id)) ||
-          null;
-
-        setOrder(found);
+        const userId = user.id || user.user_id;
+        // API thường trả về list, ta lọc client-side (hoặc gọi API getOrderById nếu có)
+        const list = await getOrdersByUserId(userId); 
+        const found = list.find((o) => String(o.id) === String(id) || String(o.order_id) === String(id));
+        setOrder(found || null);
       } catch (e) {
-        console.error("Load order detail error:", e);
-        setOrder(null);
+        console.error("Error loading order:", e);
       } finally {
         setLoading(false);
       }
     };
+    fetchOrder();
+  }, [id, user, isAuthenticated]);
 
-    run();
-  }, [id, user]);
-
-  const status = useMemo(() => statusMeta(order?.status), [order?.status]);
-
-  const shippingFee = Number(order?.shipping_fee || 0);
-  const tax = Number(order?.tax || 0);
-  const totalAmount = Number(order?.total_amount || 0);
-
-  const trackingNumber =
-    order?.tracking_number || order?.trackingNumber || "";
-
-  const displayId = order?.order_id ?? order?.id ?? id;
-
-  const statusNormalized = useMemo(
-    () => normalizeStatus(order?.status),
-    [order?.status]
-  );
-  const canLeaveReview = statusNormalized === "DELIVERED";
-
-  const reviewStorageKey = useMemo(
-    () => `stepstyle_review_${String(displayId)}`,
-    [displayId]
-  );
-
-  const [isReviewOpen, setIsReviewOpen] = useState(false);
-  const [rating, setRating] = useState(0);
-  const [reviewText, setReviewText] = useState("");
-  const [savedReview, setSavedReview] = useState(null); // { rating, text, savedAt }
-
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem(reviewStorageKey);
-      if (!raw) return;
-      const parsed = JSON.parse(raw);
-      if (parsed && typeof parsed === "object") {
-        setSavedReview(parsed);
-        setRating(Number(parsed.rating) || 0);
-        setReviewText(parsed.text || "");
-      }
-    } catch (e) {}
-  }, [reviewStorageKey]);
-
-  const openReview = () => {
-    if (!canLeaveReview) return;
-    setIsReviewOpen(true);
-  };
-  const closeReview = () => setIsReviewOpen(false);
-
-  const saveReview = () => {
-    const payload = {
-      rating: Math.max(1, Math.min(5, Number(rating) || 0)),
-      text: (reviewText || "").trim(),
-      savedAt: new Date().toISOString(),
-    };
-
-    localStorage.setItem(reviewStorageKey, JSON.stringify(payload));
-    setSavedReview(payload);
-    setIsReviewOpen(false);
-  };
-
-  const clearReview = () => {
-    localStorage.removeItem(reviewStorageKey);
-    setSavedReview(null);
-    setRating(0);
-    setReviewText("");
-  };
-
-  const onBack = () => navigate(-1);
-
-  const onCopyTracking = async () => {
-    if (!trackingNumber) return;
-    try {
-      await navigator.clipboard.writeText(String(trackingNumber));
-      alert("Copied tracking number!");
-    } catch (e) {
-      alert("Copy failed.");
+  // --- ACTIONS ---
+  const handleCopyTracking = () => {
+    if (order?.tracking_number) {
+        navigator.clipboard.writeText(order.tracking_number);
+        alert("Đã sao chép mã vận đơn!");
     }
   };
 
-  const onBuyAgain = () => navigate("/");
+  const handleSaveReview = () => {
+    // TODO: Gọi API lưu review lên server
+    console.log("Saving review:", { orderId: id, rating, reviewText });
+    
+    // Giả lập lưu vào localStorage
+    const key = `review_${id}`;
+    localStorage.setItem(key, JSON.stringify({ rating, text: reviewText, date: new Date() }));
+    
+    alert("Cảm ơn bạn đã đánh giá!");
+    setIsReviewOpen(false);
+  };
 
-  if (loading) {
+  // --- RENDER HELPERS ---
+  if (!isAuthenticated && !loading) {
     return (
-      <main className="container" style={{ padding: "80px 0", textAlign: "center" }}>
-        <p>Loading order...</p>
-      </main>
+        <div className="container" style={{ padding: "100px 0", textAlign: "center" }}>
+            <h3>Vui lòng đăng nhập</h3>
+            <Link to="/login" className="btn btn-primary" style={{ marginTop: 16 }}>Đăng nhập</Link>
+        </div>
     );
   }
 
-  if (!user) {
-    return (
-      <main className="container" style={{ padding: "80px 0", textAlign: "center" }}>
-        <p className="muted">Please sign in to view your order.</p>
-        <Link className="btn btn-primary" to="/signin">
-          Sign in
-        </Link>
-      </main>
-    );
+  if (loading) {
+      return <div className="container" style={{ padding: "80px 0", textAlign: "center" }}>Đang tải thông tin đơn hàng...</div>;
   }
 
   if (!order) {
-    return (
-      <main className="container" style={{ padding: "80px 0", textAlign: "center" }}>
-        <p className="muted">Order not found.</p>
-        <button className="btn btn-outline" onClick={onBack}>
-          Go back
-        </button>
-      </main>
-    );
+      return (
+        <div className="container" style={{ padding: "80px 0", textAlign: "center" }}>
+            <h3>Không tìm thấy đơn hàng</h3>
+            <p className="muted">Đơn hàng #{id} không tồn tại hoặc bạn không có quyền truy cập.</p>
+            <button onClick={() => navigate("/orders")} className="btn btn-outline" style={{ marginTop: 16 }}>
+                <ArrowLeft size={16} style={{ marginRight: 8 }}/> Quay lại danh sách
+            </button>
+        </div>
+      );
   }
 
-  const StatusIcon = status.icon;
+  const statusTheme = getStatusTheme(order.status);
+  const StatusIcon = statusTheme.icon;
+  const items = order.items || order.order_items || [];
+  const displayId = order.id || order.order_id;
+  const canReview = String(order.status).toUpperCase() === "DELIVERED";
 
   return (
-    <>
+    <div style={{ background: "#f8fafc", minHeight: "100vh", paddingBottom: 60 }}>
       {/* Breadcrumb */}
-      <section className="men-bc" style={{ borderBottom: "1px solid #e5e7eb" }}>
-        <div className="container" style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <Link to="/" className="men-bc-link">
-            Home
-          </Link>
-          <ChevronRight size={14} className="muted" />
-          <Link to="/orders" className="men-bc-link">
-            Orders
-          </Link>
-          <ChevronRight size={14} className="muted" />
-          <span style={{ color: "#111", fontWeight: 600 }}>Order #{safeText(displayId)}</span>
+      <div style={{ background: "#fff", borderBottom: "1px solid #e2e8f0" }}>
+        <div className="container" style={{ padding: "16px 0", display: "flex", alignItems: "center", gap: 8, fontSize: 14, color: "#64748b" }}>
+            <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>Trang chủ</Link>
+            <ChevronRight size={14} />
+            <Link to="/orders" style={{ color: "inherit", textDecoration: "none" }}>Đơn hàng</Link>
+            <ChevronRight size={14} />
+            <span style={{ color: "#0f172a", fontWeight: 500 }}>#{displayId}</span>
         </div>
-      </section>
+      </div>
 
-      <main className="container" style={{ padding: "28px 0 70px" }}>
-        {/* Top row */}
-        <div style={{ display: "flex", justifyContent: "space-between", gap: 14, flexWrap: "wrap" }}>
-          <button
-            type="button"
-            className="btn btn-outline"
-            onClick={onBack}
-            style={{ display: "inline-flex", alignItems: "center", gap: 8 }}
-          >
-            <ArrowLeft size={16} /> Back
-          </button>
-
-          <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-            <span
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                padding: "10px 14px",
-                borderRadius: 999,
-                background: status.bg,
-                color: status.fg,
-                fontWeight: 900,
-                border: "1px solid rgba(0,0,0,.06)",
-              }}
-            >
-              <StatusIcon size={16} /> {status.label}
-            </span>
-          </div>
+      <main className="container" style={{ marginTop: 32 }}>
+        {/* Header Section */}
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16, marginBottom: 24 }}>
+            <div>
+                <h1 style={{ fontSize: 24, margin: "0 0 8px" }}>Chi tiết đơn hàng #{displayId}</h1>
+                <div style={{ fontSize: 14, color: "#64748b" }}>
+                    Ngày đặt: {formatDate(order.created_at)}
+                </div>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                 {/* Status Pill */}
+                <div style={{ 
+                    display: "flex", alignItems: "center", gap: 8, 
+                    padding: "8px 16px", borderRadius: 99, 
+                    background: statusTheme.bg, color: statusTheme.color,
+                    fontWeight: 600, fontSize: 14
+                }}>
+                    <StatusIcon size={18} />
+                    {statusTheme.label}
+                </div>
+            </div>
         </div>
 
-        {/* Summary card */}
-        <div
-          style={{
-            marginTop: 18,
-            border: "1px solid rgba(0,0,0,.08)",
-            borderRadius: 16,
-            overflow: "hidden",
-            background: "#fff",
-          }}
-        >
-          <div
-            style={{
-              padding: 16,
-              background: "linear-gradient(135deg, rgba(15,23,42,.03), rgba(59,130,246,.05))",
-              borderBottom: "1px solid rgba(0,0,0,.06)",
-            }}
-          >
-            <div style={{ display: "flex", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
-              <div>
-                <div style={{ fontWeight: 1000, fontSize: 18, color: "#0f172a" }}>
-                  Order #{safeText(displayId)}
-                </div>
-                <div style={{ marginTop: 4, fontSize: 13, color: "#64748b" }}>
-                  {statusNormalized === "DELIVERED" ? "Delivered on" : "Latest update"}{" "}
-                  <span style={{ color: "#0f172a", fontWeight: 700 }}>
-                    {formatDate(order?.updated_at || order?.created_at)}
-                  </span>
-                </div>
-              </div>
-
-              <div style={{ textAlign: "right" }}>
-                <div style={{ fontSize: 12, color: "#64748b" }}>Total</div>
-                <div style={{ fontWeight: 1000, fontSize: 22, color: "#0f172a" }}>
-                  {money(totalAmount)}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Body */}
-          <div style={{ padding: 16 }}>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-                gap: 14,
-              }}
-            >
-              {/* Shipping */}
-              <div
-                style={{
-                  border: "1px solid rgba(0,0,0,.08)",
-                  borderRadius: 14,
-                  padding: 14,
-                }}
-              >
-                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                  <div
-                    style={{
-                      width: 42,
-                      height: 42,
-                      borderRadius: 14,
-                      display: "grid",
-                      placeItems: "center",
-                      background: "rgba(59,130,246,.10)",
-                      border: "1px solid rgba(59,130,246,.18)",
-                    }}
-                  >
-                    <MapPin size={18} color="#1d4ed8" />
-                  </div>
-                  <div>
-                    <div style={{ fontWeight: 900, color: "#0f172a" }}>Shipping</div>
-                    <div style={{ fontSize: 13, color: "#64748b" }}>
-                      {safeText(order?.customer_note || "Standard Shipping")}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 24 }}>
+            
+            {/* LEFT COL: Items List */}
+            <div style={{ flex: 2, minWidth: "60%" }}>
+                <div style={{ background: "#fff", borderRadius: 12, border: "1px solid #e2e8f0", overflow: "hidden" }}>
+                    <div style={{ padding: "16px 24px", background: "#f8fafc", borderBottom: "1px solid #e2e8f0", fontWeight: 600 }}>
+                        Sản phẩm ({items.length})
                     </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Tracking */}
-              <div
-                style={{
-                  border: "1px solid rgba(0,0,0,.08)",
-                  borderRadius: 14,
-                  padding: 14,
-                }}
-              >
-                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                  <div
-                    style={{
-                      width: 42,
-                      height: 42,
-                      borderRadius: 14,
-                      display: "grid",
-                      placeItems: "center",
-                      background: "rgba(16,185,129,.10)",
-                      border: "1px solid rgba(16,185,129,.18)",
-                    }}
-                  >
-                    <Truck size={18} color="#065f46" />
-                  </div>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontWeight: 900, color: "#0f172a" }}>Tracking</div>
-                    <div style={{ fontSize: 13, color: "#64748b" }}>
-                      {trackingNumber ? (
-                        <span style={{ color: "#0f172a", fontWeight: 800 }}>{trackingNumber}</span>
-                      ) : (
-                        "—"
-                      )}
-                    </div>
-                  </div>
-
-                  <button
-                    type="button"
-                    className="btn btn-outline"
-                    onClick={onCopyTracking}
-                    disabled={!trackingNumber}
-                    style={{
-                      padding: "8px 10px",
-                      borderRadius: 12,
-                      opacity: trackingNumber ? 1 : 0.6,
-                      cursor: trackingNumber ? "pointer" : "not-allowed",
-                    }}
-                    title={trackingNumber ? "Copy" : "No tracking yet"}
-                  >
-                    <Copy size={16} />
-                  </button>
-                </div>
-              </div>
-
-              {/* Payment breakdown */}
-              <div
-                style={{
-                  border: "1px solid rgba(0,0,0,.08)",
-                  borderRadius: 14,
-                  padding: 14,
-                }}
-              >
-                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                  <div
-                    style={{
-                      width: 42,
-                      height: 42,
-                      borderRadius: 14,
-                      display: "grid",
-                      placeItems: "center",
-                      background: "rgba(250,204,21,.14)",
-                      border: "1px solid rgba(250,204,21,.22)",
-                    }}
-                  >
-                    <Download size={18} color="#92400e" />
-                  </div>
-                  <div>
-                    <div style={{ fontWeight: 900, color: "#0f172a" }}>Payment</div>
-                    <div style={{ fontSize: 13, color: "#64748b" }}>
-                      Shipping: <b style={{ color: "#0f172a" }}>{money(shippingFee)}</b> • Tax:{" "}
-                      <b style={{ color: "#0f172a" }}>{money(tax)}</b>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div style={{ gridColumn: "1 / -1", marginTop: 10, borderTop: "1px solid #f1f5f9", paddingTop: 16 }}>
-                <h4 style={{ fontSize: 16, fontWeight: 800, color: "#0f172a", marginBottom: 12 }}>
-                  Order Items ({ (order?.items || order?.order_items || []).length })
-                </h4>
-                <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                  {(() => {
-                    const items = order?.items || order?.order_items || order?.products || [];
-                    if (!items.length) return <p className="muted">No item details.</p>;
-
-                    return items.map((item, idx) => {
-                      // Lấy thông tin từng món
-                      const iName = item.product_name || item.name || "Product";
-                      const iImg = item.image || item.image_url || "https://placehold.co/60";
-                      const iQty = item.quantity || item.qty || 1;
-                      const iPrice = Number(item.price || item.unit_price || 0);
-                      const iSize = item.size ? `Size: ${item.size}` : "";
-                      const iColor = item.color ? `Color: ${item.color}` : "";
-                      
-                      return (
-                        <div key={idx} style={{ display: "flex", gap: 12, alignItems: "center" }}>
-                          <img 
-                            src={iImg} 
-                            alt={iName} 
-                            style={{ width: 60, height: 60, borderRadius: 8, objectFit: "cover", border: "1px solid #e2e8f0" }} 
-                          />
-                          <div style={{ flex: 1 }}>
-                            <div style={{ fontWeight: 600, color: "#334155" }}>{iName}</div>
-                            <div style={{ fontSize: 13, color: "#64748b" }}>
-                              {[iSize, iColor].filter(Boolean).join(" • ")}
+                    <div>
+                        {items.map((item, idx) => (
+                            <div key={idx} style={{ padding: 24, borderBottom: idx === items.length -1 ? "none" : "1px solid #f1f5f9", display: "flex", gap: 16 }}>
+                                <div style={{ width: 80, height: 80, borderRadius: 8, background: "#f1f5f9", overflow: "hidden", border: "1px solid #e2e8f0" }}>
+                                    <img 
+                                        src={item.image || item.image_url || "https://placehold.co/80"} 
+                                        alt={item.product_name} 
+                                        style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                                    />
+                                </div>
+                                <div style={{ flex: 1 }}>
+                                    <div style={{ fontWeight: 600, color: "#0f172a", marginBottom: 4 }}>{item.product_name || item.name}</div>
+                                    <div style={{ fontSize: 13, color: "#64748b", marginBottom: 8 }}>
+                                        {item.size && `Size: ${item.size}`} {item.color && `• Color: ${item.color}`}
+                                    </div>
+                                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                                        <div style={{ fontSize: 14 }}>x{item.quantity}</div>
+                                        <div style={{ fontWeight: 600 }}>{formatCurrency(item.price)}</div>
+                                    </div>
+                                </div>
                             </div>
-                          </div>
-                          <div style={{ textAlign: "right" }}>
-                            <div style={{ fontSize: 13, color: "#64748b" }}>{money(iPrice)} x {iQty}</div>
-                            <div style={{ fontWeight: 700, color: "#0f172a" }}>{money(iPrice * iQty)}</div>
-                          </div>
-                        </div>
-                      );
-                    });
-                  })()}
+                        ))}
+                    </div>
                 </div>
-              </div>
-            {/* Bottom actions */}
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                gap: 10,
-                flexWrap: "wrap",
-                marginTop: 16,
-              }}
-            >
-              {canLeaveReview && (
-                <button className="od-btnGhost" type="button" onClick={openReview}>
-                  <Star size={16} style={{ marginRight: 8, verticalAlign: "middle" }} />
-                  Leave Review
-                </button>
-              )}
 
-              <button className="od-btnSolid" type="button" onClick={onBuyAgain}>
-                <RotateCcw size={16} style={{ marginRight: 8, verticalAlign: "middle" }} />
-                Buy Again
-              </button>
+                {/* Actions Row */}
+                <div style={{ marginTop: 20, display: "flex", gap: 12, flexWrap: "wrap" }}>
+                    <button onClick={() => navigate('/')} className="btn btn-outline" style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                        <RotateCcw size={16} /> Mua lại
+                    </button>
+                    {canReview && (
+                        <button onClick={() => setIsReviewOpen(true)} className="btn btn-outline" style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                            <Star size={16} /> Viết đánh giá
+                        </button>
+                    )}
+                </div>
             </div>
-          </div>
+
+            {/* RIGHT COL: Summary Info */}
+            <div style={{ flex: 1 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+                    
+                    {/* Payment Summary */}
+                    <div style={{ background: "#fff", borderRadius: 12, border: "1px solid #e2e8f0", padding: 24 }}>
+                        <h4 style={{ margin: "0 0 16px", fontSize: 16, display: "flex", alignItems: "center", gap: 8 }}>
+                            <CreditCard size={18} color="#64748b"/> Thanh toán
+                        </h4>
+                        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 12, fontSize: 14, color: "#64748b" }}>
+                            <span>Tạm tính</span>
+                            <span>{formatCurrency(items.reduce((acc, i) => acc + (i.price * i.quantity), 0))}</span>
+                        </div>
+                        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 12, fontSize: 14, color: "#64748b" }}>
+                            <span>Phí vận chuyển</span>
+                            <span>{formatCurrency(order.shipping_fee || 0)}</span>
+                        </div>
+                        <div style={{ borderTop: "1px dashed #e2e8f0", margin: "12px 0" }} />
+                        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 18, fontWeight: 700, color: "#0f172a" }}>
+                            <span>Tổng cộng</span>
+                            <span>{formatCurrency(order.total_amount)}</span>
+                        </div>
+                    </div>
+
+                    {/* Shipping Info */}
+                    <div style={{ background: "#fff", borderRadius: 12, border: "1px solid #e2e8f0", padding: 24 }}>
+                        <h4 style={{ margin: "0 0 16px", fontSize: 16, display: "flex", alignItems: "center", gap: 8 }}>
+                            <MapPin size={18} color="#64748b"/> Địa chỉ nhận hàng
+                        </h4>
+                        <div style={{ fontSize: 14, color: "#334155", lineHeight: 1.6 }}>
+                            <div style={{ fontWeight: 600 }}>{user?.full_name || user?.username}</div>
+                            <div>{order.phone || user?.phone || "0987 *** ***"}</div>
+                            <div style={{ color: "#64748b", marginTop: 4 }}>
+                                {order.address || order.shipping_address || "Địa chỉ mặc định của khách hàng"}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Tracking Info (Optional) */}
+                    {order.tracking_number && (
+                        <div style={{ background: "#f0f9ff", borderRadius: 12, border: "1px solid #bae6fd", padding: 20 }}>
+                            <div style={{ fontSize: 13, color: "#0369a1", marginBottom: 4, fontWeight: 600 }}>MÃ VẬN ĐƠN</div>
+                            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                                <span style={{ fontSize: 16, fontWeight: 700, color: "#0284c7" }}>{order.tracking_number}</span>
+                                <button onClick={handleCopyTracking} title="Copy" style={{ background: "none", border: "none", cursor: "pointer", color: "#0369a1" }}>
+                                    <Copy size={16} />
+                                </button>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </div>
         </div>
       </main>
 
-      <ReviewModal
-        open={isReviewOpen}
-        onClose={closeReview}
+      <ReviewModal 
+        open={isReviewOpen} 
+        onClose={() => setIsReviewOpen(false)}
         rating={rating}
         setRating={setRating}
         reviewText={reviewText}
         setReviewText={setReviewText}
-        onSave={saveReview}
-        onClear={clearReview}
-        savedReview={savedReview}
+        onSave={handleSaveReview}
       />
-    </>
+    </div>
   );
 }

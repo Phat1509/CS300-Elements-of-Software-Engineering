@@ -1,64 +1,86 @@
-import React, { createContext, useState, useEffect, useContext } from "react";
-import { loginUser, registerUser } from "../utilities/api";
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { loginAPI, getMeAPI, registerAPI } from "../utilities/api";
 
 const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
+export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    try {
-      const storedUser = localStorage.getItem("user");
-      if (storedUser) setUser(JSON.parse(storedUser));
-    } catch (e) {
-      localStorage.removeItem("user");
-    } finally {
+    const initAuth = async () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        try {
+          const userData = await getMeAPI();
+          setUser(userData);
+        } catch (error) {
+          console.log("Lỗi check token cũ:", error);
+          logout();
+        }
+      }
       setLoading(false);
-    }
+    };
+    initAuth();
   }, []);
 
   const login = async (email, password) => {
     try {
-      const result = await loginUser(email, password); // { success, user, message }
-      if (result?.success) {
-        setUser(result.user);
-        localStorage.setItem("user", JSON.stringify(result.user));
-        return { success: true };
+      console.log("🚀 Đang gửi đăng nhập:", { email, password }); // Log 1
+      
+      const data = await loginAPI(email, password);
+      
+      console.log("✅ Server trả về:", data); // Log 2: Quan trọng nhất!
+
+      // Kiểm tra xem token nằm ở đâu
+      if (!data.token) {
+        throw new Error("API không trả về 'token'. Kiểm tra lại Log xem nó tên là gì?");
       }
-      return {
-        success: false,
-        message: result?.message || "Invalid email or password",
+
+      localStorage.setItem("token", data.token);
+      
+      const userInfo = {
+        name: data.name,
+        pid: data.pid,
+        isVerified: data.is_verified,
+        email: email 
       };
+      
+      console.log("💾 Đang lưu user:", userInfo); // Log 3
+      setUser(userInfo);
+      
+      return { success: true };
     } catch (error) {
-      return { success: false, message: "Network error" };
+      console.error("❌ Lỗi đăng nhập:", error); // Log 4
+      
+      const msg = error.response?.data?.message || error.message || "Đăng nhập thất bại";
+      return { success: false, message: msg };
     }
   };
 
-  const register = async (payload) => {
+  const register = async (name, email, password) => {
     try {
-      const result = await registerUser(payload); // { success, user, message }
-      if (result?.success) {
-        setUser(result.user);
-        localStorage.setItem("user", JSON.stringify(result.user));
-        return { success: true };
-      }
-      return { success: false, message: result?.message || "Register failed" };
+      console.log("Đang đăng ký:", { name, email, password });
+      await registerAPI(name, email, password);
+      return { success: true };
     } catch (error) {
-      return { success: false, message: error?.message || "Register failed" };
+      console.error("Lỗi đăng ký:", error);
+      const msg = error.response?.data?.message || "Đăng ký thất bại";
+      return { success: false, message: msg };
     }
   };
 
   const logout = () => {
+    localStorage.removeItem("token");
     setUser(null);
-    localStorage.removeItem("user");
+    window.location.href = "/signin";
   };
 
-  return (
-    <AuthContext.Provider value={{ user, login, logout, register, loading }}>
-      {!loading && children}
-    </AuthContext.Provider>
-  );
-};
+  const value = { user, isAuthenticated: !!user, loading, login, register, logout };
 
-export const useAuth = () => useContext(AuthContext);
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}
+
+export function useAuth() {
+  return useContext(AuthContext);
+}

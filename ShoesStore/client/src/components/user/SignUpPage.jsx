@@ -7,9 +7,7 @@ export default function SignUpPage() {
   const { register } = useAuth();
 
   const [fullname, setFullname] = useState("");
-  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [authority, setAuthority] = useState("USER");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
 
@@ -38,16 +36,11 @@ export default function SignUpPage() {
 
     setLoading(true);
     try {
-      const result = await register({
-        fullname,
-        username,
-        email,
-        password,
-        authority, 
-      });
+      const result = await register(fullname, email, password);
 
       if (result.success) {
-        navigate("/");
+        alert("Đăng ký thành công! Vui lòng đăng nhập.");
+        navigate("/signin");
       } else {
         setError(result.message || "Sign up failed.");
       }
@@ -74,17 +67,12 @@ export default function SignUpPage() {
         <div className="auth-card">
           <form className="auth-form" onSubmit={handleSubmit}>
             {error && (
-              <div
-                style={{
-                  color: "red",
-                  marginBottom: "1rem",
-                  textAlign: "center",
-                }}
-              >
+              <div style={{ color: "red", marginBottom: "1rem", textAlign: "center" }}>
                 {error}
               </div>
             )}
 
+            {/* Input Full Name */}
             <div className="form-group">
               <label className="auth-label">Full name</label>
               <input
@@ -97,17 +85,8 @@ export default function SignUpPage() {
               />
             </div>
 
-            <div className="form-group">
-              <label className="auth-label">Username</label>
-              <input
-                type="text"
-                className="input"
-                placeholder="khoa_nguyen"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </div>
 
+            {/* Input Email */}
             <div className="form-group">
               <label className="auth-label">Email address</label>
               <input
@@ -120,19 +99,8 @@ export default function SignUpPage() {
               />
             </div>
 
-            <div className="form-group">
-              <label className="auth-label">Authority</label>
-              <select
-                className="input"
-                value={authority}
-                onChange={(e) => setAuthority(e.target.value)}
-              >
-                <option value="USER">USER</option>
-                <option value="ADMIN">ADMIN</option>
-              </select>
-              
-            </div>
 
+            {/* Input Password */}
             <div className="form-group">
               <label className="auth-label">Password</label>
               <input
@@ -145,6 +113,7 @@ export default function SignUpPage() {
               />
             </div>
 
+            {/* Input Confirm Password */}
             <div className="form-group">
               <label className="auth-label">Confirm password</label>
               <input
@@ -157,10 +126,7 @@ export default function SignUpPage() {
               />
             </div>
 
-            <div
-              className="form-group"
-              style={{ display: "flex", alignItems: "flex-start", gap: 8 }}
-            >
+            <div className="form-group" style={{ display: "flex", alignItems: "flex-start", gap: 8 }}>
               <input
                 type="checkbox"
                 style={{ marginTop: 4 }}
@@ -185,10 +151,7 @@ export default function SignUpPage() {
               {loading ? "Creating..." : "Join us"}
             </button>
 
-            <p
-              className="muted"
-              style={{ textAlign: "center", marginTop: 16, fontSize: 14 }}
-            >
+            <p className="muted" style={{ textAlign: "center", marginTop: 16, fontSize: 14 }}>
               Already have an account?{" "}
               <Link to="/signin" className="link-btn">
                 Sign in

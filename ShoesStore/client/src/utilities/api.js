@@ -1,6 +1,5 @@
 import axios from "axios";
 
-// 1. Cấu hình server thật
 const API_URL = "https://shoes-store.beerpsi.cc/api";
 
 const api = axios.create({
@@ -21,8 +20,6 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-/* ===================== MAPPER (QUAN TRỌNG) ===================== */
-// Hàm này giúp biến dữ liệu từ API thành dạng mà giao diện của bạn hiểu
 const mapProduct = (p) => {
   // Kiểm tra xem link ảnh có phải link "dỏm" example.com không
   const isDummyLink = p.image_url && p.image_url.includes("example.com");
@@ -65,12 +62,9 @@ export const getProductById = async (id) => {
   try {
     const res = await api.get(`/products/${id}`);
     
-    // Kiểm tra cấu trúc trả về. 
-    // Thông thường API chi tiết trả về thẳng object sản phẩm trong res.data
-    // Hoặc res.data.data. Ở đây mình xử lý an toàn:
+
     const rawData = res.data.data || res.data; 
 
-    // Tái sử dụng hàm mapProduct để xử lý ảnh lỗi/placeholder y hệt danh sách
     return mapProduct(rawData);
   } catch (error) {
     console.error("Error fetching product detail:", error);
@@ -80,8 +74,6 @@ export const getProductById = async (id) => {
 
 
 
-// ... CÁC HÀM KHÁC GIỮ NGUYÊN HOẶC SẼ SỬA SAU ...
-// (Bạn giữ nguyên phần còn lại của file api.js cũ để tránh lỗi các trang khác)
 
 
 
@@ -240,8 +232,7 @@ export const removeCartItem = async (id) => {
 
 export const deleteCartItem = removeCartItem;
 
-/* ===================== ORDERS & AUTH ===================== */
-
+/* ===================== ORDERS */
 export const createOrder = async (orderData) => {
   const res = await api.post("/orders", orderData);
   return res.data;
@@ -323,58 +314,34 @@ export const getOrdersByUserId = async (userId, altUserId) => {
   }
 };
 
-export const loginUser = async (email, password) => {
-  const res = await api.get("/users", { params: { email } });
-
-  if (!res.data || res.data.length === 0) {
-    return { success: false, message: "Email không tồn tại" };
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
   }
+  return config;
+});
 
-  const user = res.data[0];
-
-  if (user.password !== password) {
-    return { success: false, message: "Sai mật khẩu" };
-  }
-
-  localStorage.setItem("user", JSON.stringify(user));
-  return { success: true, user };
+// ===================== AUTHENTICATION =====================
+// 1. API Đăng nhập
+export const loginAPI = async (email, password) => {
+  // Gửi POST /auth/login theo ảnh bạn gửi
+  const response = await api.post('/auth/login', { email, password });
+  return response.data; // Trả về { token, name, pid, is_verified }
 };
 
-export const registerUser = async (user) => {
-  const email = String(user?.email || "").trim().toLowerCase();
-  const password = String(user?.password || "");
-  const fullname = String(user?.fullname || "").trim();
-  const username = String(user?.username || "").trim();
-  const authority = String(user?.authority || "USER").toUpperCase();
+// 2. API Đăng ký
+export const registerAPI = async (name, email, password) => {
+  // Gửi POST /auth/register theo ảnh bạn gửi
+  const response = await api.post('/auth/register', { name, email, password });
+  return response.data;
+};
 
-  if (!fullname || !email || !password) {
-    return { success: false, message: "Vui lòng nhập đầy đủ thông tin" };
-  }
-
-  const check = await api.get("/users", { params: { email } });
-  if (check.data.length > 0) {
-    return { success: false, message: "Email đã tồn tại" };
-  }
-
-  const all = await api.get("/users");
-  const maxUserId = (all.data || []).reduce((max, u) => Math.max(max, Number(u.user_id) || 0), 0);
-
-  const role = authority === "ADMIN" ? "ADMIN" : "USER";
-
-  const newUser = {
-    user_id: maxUserId + 1,
-    username: username || email.split("@")[0],
-    fullname,
-    email,
-    password,
-    roles: [role],
-    created_at: new Date().toISOString(),
-  };
-
-  const res = await api.post("/users", newUser);
-
-  localStorage.setItem("user", JSON.stringify(res.data));
-  return { success: true, user: res.data };
+// 3. API Lấy thông tin User hiện tại (khi F5 trang)
+export const getMeAPI = async () => {
+  // Gửi GET /auth/current theo ảnh bạn gửi
+  const response = await api.get('/auth/current');
+  return response.data; // Trả về { email, name, pid }
 };
 
 /* ===================== WISHLIST & REVIEWS ===================== */
