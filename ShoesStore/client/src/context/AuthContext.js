@@ -5,12 +5,15 @@ const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const initAuth = async () => {
-      const token = localStorage.getItem("token");
-      if (token) {
+      const storedToken = localStorage.getItem("token");
+      if (storedToken) {
+        setToken(storedToken);
         try {
           const userData = await getMeAPI();
           console.log("🔄 Khôi phục user từ token:", userData);
@@ -45,7 +48,7 @@ export function AuthProvider({ children }) {
       }
 
       localStorage.setItem("token", token);
-
+      setToken(token);
       const userInfo = {
         id: data.id || data.user_id, // <--- QUAN TRỌNG NHẤT
         name: data.name,
@@ -86,7 +89,7 @@ export function AuthProvider({ children }) {
     window.location.href = "/signin";
   };
 
-  const value = { user, isAuthenticated: !!user, loading, login, register, logout };
+  const value = { user, token, isAuthenticated: !!user, loading, login, register, logout };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
