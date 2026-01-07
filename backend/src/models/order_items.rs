@@ -4,7 +4,7 @@ use sea_orm::entity::prelude::*;
 use serde::Deserialize;
 use validator::Validate;
 pub type OrderItems = Entity;
-
+//src/models/order_items.rs
 #[async_trait::async_trait]
 impl ActiveModelBehavior for ActiveModel {
     async fn before_save<C>(self, _db: &C, insert: bool) -> std::result::Result<Self, DbErr>

@@ -9,17 +9,17 @@ import {
   addOrderItem,
   updateProductStock,
   deleteCartItem,
-  updateCartItem, 
+  updateCartItem,
 } from "../../utilities/api";
 
 export default function CartPage() {
-  const { cartItems, totalPrice, removeFromCart, clearCart, fetchCart } = useCart(); 
+  const { cartItems, totalPrice, removeFromCart, clearCart, fetchCart } =
+    useCart();
   const { user } = useAuth();
   const navigate = useNavigate();
-  
-  const [loading, setLoading] = useState(false);
-  const [updatingIds, setUpdatingIds] = useState([]); 
 
+  const [loading, setLoading] = useState(false);
+  const [updatingIds, setUpdatingIds] = useState([]);
 
   const subtotal = Number(totalPrice) || 0;
   const shipping = cartItems.length > 0 ? 10 : 0;
@@ -40,7 +40,7 @@ export default function CartPage() {
 
     try {
       await updateCartItem(variantId, newQuantity);
-      
+
       if (fetchCart) {
         await fetchCart();
       }
@@ -71,88 +71,106 @@ export default function CartPage() {
 
   const handleCheckout = async () => {
     if (!user) {
-      alert("Vui lòng đăng nhập để thanh toán!");
-      navigate("/login"); 
-      return;
+      alert("Vui lòng đăng nhập!");
+      navigate("/login"); return;
     }
-
     if (cartItems.length === 0) return;
 
-    for (const item of cartItems) {
-      if (item.quantity > item.stock) {
-        alert(
-          `Sản phẩm "${item.product_name}" hiện không đủ hàng (Còn: ${item.stock}).`
-        );
+    // 1. Nhập địa chỉ (BẮT BUỘC - Rust không cho phép null)
+    let address = prompt("Nhập địa chỉ nhận hàng:", "123 Đường ABC");
+    if (!address || address.trim() === "") {
+        alert("Địa chỉ không được để trống!");
         return;
-      }
     }
 
-    if (!window.confirm(`Xác nhận thanh toán $${finalTotal.toFixed(2)}?`)) return;
-
+    if (!window.confirm(`Xác nhận đặt hàng?`)) return;
     setLoading(true);
 
     try {
-      const primaryUserId = user.id; 
-      
+      // 2. DEBUG DỮ LIỆU GIỎ HÀNG
+      console.log("🔍 Dữ liệu gốc cartItems:", cartItems);
+
+      // 3. CHUẨN HÓA DATA (Quan trọng nhất)
+      const itemsPayload = cartItems.map(item => {
+        const vId = item.variant_id || item.id || item.product_variant_id;
+        
+        return {
+          product_variant_id: parseInt(vId), 
+          quantity: parseInt(item.quantity)
+        };
+      });
+
+      const invalidItem = itemsPayload.find(i => isNaN(i.product_variant_id) || isNaN(i.quantity));
+      if (invalidItem) {
+          console.error(" Lỗi dữ liệu item:", invalidItem);
+          alert("Lỗi dữ liệu: Không tìm thấy ID sản phẩm. Vui lòng F12 xem console.");
+          setLoading(false);
+          return;
+      }
+
       const orderData = {
-        user_id: primaryUserId,
-        status: "PENDING",
-        total_amount: finalTotal,
-        created_at: new Date().toISOString(),
-        customer_note: "Standard Shipping",
-        shipping_fee: shipping,
-        tax: tax,
+        payment_method: "Cod", 
+        shipping_address: address,
+        items: itemsPayload 
       };
 
+      console.log("📤 PAYLOAD CHUẨN GỬI ĐI:", JSON.stringify(orderData, null, 2));
+
       const newOrder = await createOrder(orderData);
-      const orderId = newOrder?.id || newOrder?.order_id;
+      console.log("✅ Thành công:", newOrder);
 
-      if (!orderId) throw new Error("Không lấy được Order ID.");
-
-      await Promise.all(
-        cartItems.map(async (item) => {
+      // 6. Dọn dẹp giỏ hàng
+      await Promise.all(cartItems.map(async (item) => {
           try {
-            await addOrderItem({
-              order_id: orderId,
-              variant_id: item.variant_id, 
-              quantity: item.quantity,
-              price: item.price,
-            });
+             const vId = item.variant_id || item.id;
+             if(vId) {
+                await updateProductStock(vId, item.stock - item.quantity);
+                await deleteCartItem(vId);
+             }
+          } catch (e) {}
+      }));
 
-            const newStock = item.stock - item.quantity;
-            await updateProductStock(item.variant_id, newStock);
-
-            await deleteCartItem(item.variant_id);
-          } catch (itemErr) {
-             console.error(`Lỗi xử lý item ${item.product_name}`, itemErr);
-          }
-        })
-      );
-
-      if (clearCart) {
-        clearCart();
-      } else {
-        cartItems.forEach(item => removeFromCart(item.variant_id)); 
-      }
+      if (clearCart) clearCart();
+      else cartItems.forEach(item => removeFromCart(item.variant_id)); 
 
       alert("Đặt hàng thành công!");
       navigate("/orders"); 
+
     } catch (error) {
-      console.error("Checkout Error:", error);
-      alert("Thanh toán thất bại. Vui lòng thử lại.");
+      console.error(" Lỗi Checkout:", error);
+      if (error.response) {
+          console.log("🔥 Response Data:", error.response.data);
+          alert(`Lỗi Server (${error.response.status}): ${JSON.stringify(error.response.data)}`);
+      } else {
+          alert("Lỗi kết nối.");
+      }
     } finally {
       setLoading(false);
     }
   };
 
-  // UI Components
   if (cartItems.length === 0) {
     return (
-      <section className="container" style={{ padding: "60px 0", textAlign: "center" }}>
-        <div style={{ background: "#f8fafc", padding: 40, borderRadius: 12, maxWidth: 500, margin: "0 auto" }}>
+      <section
+        className="container"
+        style={{ padding: "60px 0", textAlign: "center" }}
+      >
+        <div
+          style={{
+            background: "#f8fafc",
+            padding: 40,
+            borderRadius: 12,
+            maxWidth: 500,
+            margin: "0 auto",
+          }}
+        >
           <ShoppingBag size={64} color="#94a3b8" style={{ marginBottom: 16 }} />
-          <h2 style={{ fontSize: 24, marginBottom: 10 }}>Giỏ hàng đang trống</h2>
-          <p className="muted" style={{ marginBottom: 24 }}>Hãy chọn những món đồ yêu thích của bạn nhé.</p>
+          <h2 style={{ fontSize: 24, marginBottom: 10 }}>
+            Giỏ hàng đang trống
+          </h2>
+          <p className="muted" style={{ marginBottom: 24 }}>
+            Hãy chọn những món đồ yêu thích của bạn nhé.
+          </p>
           <Link to="/" className="btn btn-primary">
             Tiếp tục mua sắm
           </Link>
@@ -164,11 +182,24 @@ export default function CartPage() {
   return (
     <>
       {/* Breadcrumb */}
-      <div className="breadcrumb" style={{background: "#f8f9fa", padding: "12px 0"}}>
-        <div className="container" style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 14 }}>
-          <Link to="/" style={{textDecoration: "none", color: "#666"}}>Home</Link>
-          <ChevronRight size={14} color="#999"/>
-          <span style={{fontWeight: 500}}>Cart</span>
+      <div
+        className="breadcrumb"
+        style={{ background: "#f8f9fa", padding: "12px 0" }}
+      >
+        <div
+          className="container"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+            fontSize: 14,
+          }}
+        >
+          <Link to="/" style={{ textDecoration: "none", color: "#666" }}>
+            Home
+          </Link>
+          <ChevronRight size={14} color="#999" />
+          <span style={{ fontWeight: 500 }}>Cart</span>
         </div>
       </div>
 
@@ -179,13 +210,15 @@ export default function CartPage() {
         </p>
 
         {/* LAYOUT: Grid 2 cột trên Desktop (2fr 1fr), 1 cột trên Mobile */}
-        <div className="cart-grid-layout" style={{ 
-            display: "grid", 
+        <div
+          className="cart-grid-layout"
+          style={{
+            display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", // Responsive cơ bản
             gap: 30,
-            alignItems: "start"
-        }}>
-          
+            alignItems: "start",
+          }}
+        >
           {/* LEFT: LIST ITEMS */}
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
             {cartItems.map((it) => (
@@ -197,72 +230,137 @@ export default function CartPage() {
                   border: "1px solid #e5e7eb",
                   borderRadius: 12,
                   padding: 16,
-                  background: "#fff"
+                  background: "#fff",
                 }}
               >
                 {/* Image */}
-                <div style={{width: 100, height: 100, flexShrink: 0}}>
-                    <img
+                <div style={{ width: 100, height: 100, flexShrink: 0 }}>
+                  <img
                     src={it.image || "https://placehold.co/100"}
                     alt={it.product_name}
                     style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                        borderRadius: 8,
-                        background: "#f1f1f1"
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      borderRadius: 8,
+                      background: "#f1f1f1",
                     }}
-                    onError={(e) => {e.target.src = "https://placehold.co/100?text=Error"}}
-                    />
+                    onError={(e) => {
+                      e.target.src = "https://placehold.co/100?text=Error";
+                    }}
+                  />
                 </div>
 
                 {/* Content */}
-                <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
+                <div
+                  style={{
+                    flex: 1,
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      gap: 10,
+                    }}
+                  >
                     <div>
-                      <h4 style={{ margin: "0 0 4px", fontSize: "16px" }}>{it.product_name}</h4>
-                      <p className="muted" style={{ fontSize: "13px", margin: 0 }}>
+                      <h4 style={{ margin: "0 0 4px", fontSize: "16px" }}>
+                        {it.product_name}
+                      </h4>
+                      <p
+                        className="muted"
+                        style={{ fontSize: "13px", margin: 0 }}
+                      >
                         Size: <b>{it.size}</b> | Color: <b>{it.color}</b>
                       </p>
                       {it.quantity >= it.stock && (
-                          <span style={{ color: "#dc2626", fontSize: "12px", fontWeight: 500 }}>
-                            (Kho chỉ còn: {it.stock})
-                          </span>
+                        <span
+                          style={{
+                            color: "#dc2626",
+                            fontSize: "12px",
+                            fontWeight: 500,
+                          }}
+                        >
+                          (Kho chỉ còn: {it.stock})
+                        </span>
                       )}
                     </div>
-                    <strong style={{ fontSize: "16px" }}>${(it.price * it.quantity).toFixed(2)}</strong>
+                    <strong style={{ fontSize: "16px" }}>
+                      ${(it.price * it.quantity).toFixed(2)}
+                    </strong>
                   </div>
 
-                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 12 }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      marginTop: 12,
+                    }}
+                  >
                     {/* Quantity Control */}
-                    <div style={{ display: "flex", alignItems: "center", border: "1px solid #ddd", borderRadius: 6 }}>
-                        <button
-                          onClick={() => decreaseQty(it)}
-                          disabled={it.quantity <= 1}
-                          style={{border: "none", background: "none", padding: "6px 10px", cursor: "pointer"}}
-                        >
-                          <Minus size={14} />
-                        </button>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        border: "1px solid #ddd",
+                        borderRadius: 6,
+                      }}
+                    >
+                      <button
+                        onClick={() => decreaseQty(it)}
+                        disabled={it.quantity <= 1}
+                        style={{
+                          border: "none",
+                          background: "none",
+                          padding: "6px 10px",
+                          cursor: "pointer",
+                        }}
+                      >
+                        <Minus size={14} />
+                      </button>
 
-                        <span style={{ minWidth: 24, textAlign: "center", fontWeight: 600, fontSize: 14 }}>
-                          {it.quantity}
-                        </span>
+                      <span
+                        style={{
+                          minWidth: 24,
+                          textAlign: "center",
+                          fontWeight: 600,
+                          fontSize: 14,
+                        }}
+                      >
+                        {it.quantity}
+                      </span>
 
-                        <button
-                          onClick={() => increaseQty(it)}
-                          disabled={it.quantity >= it.stock}
-                          style={{border: "none", background: "none", padding: "6px 10px", cursor: "pointer"}}
-                        >
-                          <Plus size={14} />
-                        </button>
+                      <button
+                        onClick={() => increaseQty(it)}
+                        disabled={it.quantity >= it.stock}
+                        style={{
+                          border: "none",
+                          background: "none",
+                          padding: "6px 10px",
+                          cursor: "pointer",
+                        }}
+                      >
+                        <Plus size={14} />
+                      </button>
                     </div>
 
                     {/* Remove Button */}
                     <button
                       onClick={() => removeFromCart(it.id)}
                       style={{
-                        background: "none", border: "none", color: "#ef4444", 
-                        cursor: "pointer", display: "flex", alignItems: "center", gap: 4, fontSize: 13
+                        background: "none",
+                        border: "none",
+                        color: "#ef4444",
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 4,
+                        fontSize: 13,
                       }}
                     >
                       <Trash2 size={16} /> Xóa
@@ -275,26 +373,57 @@ export default function CartPage() {
 
           {/* RIGHT: ORDER SUMMARY (Sticky) */}
           <div style={{ position: "sticky", top: 20 }}>
-            <div style={{ border: "1px solid #e5e7eb", borderRadius: 12, padding: 20, background: "#fff" }}>
-              <h3 style={{ marginTop: 0, marginBottom: 20, fontSize: 20 }}>Tóm tắt đơn hàng</h3>
-              
-              <div style={{ display: "flex", flexDirection: "column", gap: 12, fontSize: 15 }}>
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div
+              style={{
+                border: "1px solid #e5e7eb",
+                borderRadius: 12,
+                padding: 20,
+                background: "#fff",
+              }}
+            >
+              <h3 style={{ marginTop: 0, marginBottom: 20, fontSize: 20 }}>
+                Tóm tắt đơn hàng
+              </h3>
+
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 12,
+                  fontSize: 15,
+                }}
+              >
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
                   <span className="muted">Tạm tính</span>
                   <span>${subtotal.toFixed(2)}</span>
                 </div>
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
                   <span className="muted">Phí vận chuyển</span>
-                  <span>{shipping === 0 ? "Miễn phí" : `$${shipping.toFixed(2)}`}</span>
+                  <span>
+                    {shipping === 0 ? "Miễn phí" : `$${shipping.toFixed(2)}`}
+                  </span>
                 </div>
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
                   <span className="muted">Thuế (8%)</span>
                   <span>${tax.toFixed(2)}</span>
                 </div>
 
                 <hr style={{ margin: "10px 0", borderColor: "#eee" }} />
 
-                <div style={{ display: "flex", justifyContent: "space-between", fontWeight: 800, fontSize: "1.2rem" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    fontWeight: 800,
+                    fontSize: "1.2rem",
+                  }}
+                >
                   <span>Tổng cộng</span>
                   <span>${finalTotal.toFixed(2)}</span>
                 </div>
@@ -309,7 +438,7 @@ export default function CartPage() {
                   fontSize: 16,
                   fontWeight: 600,
                   opacity: loading ? 0.7 : 1,
-                  cursor: loading ? "not-allowed" : "pointer"
+                  cursor: loading ? "not-allowed" : "pointer",
                 }}
                 onClick={handleCheckout}
                 disabled={loading}
@@ -319,20 +448,36 @@ export default function CartPage() {
 
               {/* Payment Icons */}
               <div style={{ marginTop: 24 }}>
-                <p style={{ marginBottom: 10, fontWeight: 600, fontSize: "13px", color: "#666" }}>
+                <p
+                  style={{
+                    marginBottom: 10,
+                    fontWeight: 600,
+                    fontSize: "13px",
+                    color: "#666",
+                  }}
+                >
                   Chấp nhận thanh toán
                 </p>
                 <div style={{ display: "flex", gap: 8 }}>
-                  {["Visa", "Mastercard", "PayPal"].map(pm => (
-                      <span key={pm} style={{ background: "#f1f5f9", padding: "4px 8px", borderRadius: 4, fontSize: 12, color: "#475569", fontWeight: 500 }}>
-                          {pm}
-                      </span>
+                  {["Visa", "Mastercard", "PayPal"].map((pm) => (
+                    <span
+                      key={pm}
+                      style={{
+                        background: "#f1f5f9",
+                        padding: "4px 8px",
+                        borderRadius: 4,
+                        fontSize: 12,
+                        color: "#475569",
+                        fontWeight: 500,
+                      }}
+                    >
+                      {pm}
+                    </span>
                   ))}
                 </div>
               </div>
             </div>
           </div>
-
         </div>
       </section>
     </>

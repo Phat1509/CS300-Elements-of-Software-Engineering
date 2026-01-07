@@ -1,7 +1,7 @@
 pub use super::_entities::orders::{ActiveModel, Entity, Model};
 use sea_orm::entity::prelude::*;
 pub type Orders = Entity;
-
+//src/models/orders.rs
 #[async_trait::async_trait]
 impl ActiveModelBehavior for ActiveModel {
     async fn before_save<C>(self, _db: &C, insert: bool) -> std::result::Result<Self, DbErr>
