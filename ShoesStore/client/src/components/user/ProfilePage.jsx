@@ -11,8 +11,7 @@ export default function ProfilePage() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
   const [saving, setSaving] = useState(false);
@@ -31,9 +30,7 @@ export default function ProfilePage() {
         const data = await getMeAPI();
         setMe(data);
 
-        const parts = (data.name || "").trim().split(" ").filter(Boolean);
-        setFirstName(parts[0] || "");
-        setLastName(parts.slice(1).join(" "));
+        setName(data.name || "");
         setEmail(data.email || "");
       } catch {
         setError("Failed to load profile information.");
@@ -53,8 +50,7 @@ export default function ProfilePage() {
     setError("");
     setSuccess("");
 
-    const fullName = `${firstName} ${lastName}`.replace(/\s+/g, " ").trim();
-    if (!fullName) {
+    if (!name.trim()) {
       setError("Name cannot be empty.");
       return;
     }
@@ -62,8 +58,8 @@ export default function ProfilePage() {
     try {
       setSaving(true);
 
-      // PATCH /api/auth/profile
-      const updated = await updateProfileAPI(fullName);
+      // POST /api/auth/profile
+      const updated = await updateProfileAPI(name.trim());
 
       setMe(updated);
       await refreshUser();
@@ -85,9 +81,7 @@ export default function ProfilePage() {
     setSuccess("");
 
     if (!me) return;
-    const parts = (me.name || "").trim().split(" ").filter(Boolean);
-    setFirstName(parts[0] || "");
-    setLastName(parts.slice(1).join(" "));
+    setName(me.name || "");
     setEmail(me.email || "");
   };
 
@@ -197,14 +191,10 @@ export default function ProfilePage() {
               }}
             >
               <Field
-                label="First Name"
-                value={firstName}
-                onChange={setFirstName}
-              />
-              <Field
-                label="Last Name"
-                value={lastName}
-                onChange={setLastName}
+                label="Name"
+                value={name}
+                onChange={setName}
+                full
               />
               <Field
                 label="Email"
