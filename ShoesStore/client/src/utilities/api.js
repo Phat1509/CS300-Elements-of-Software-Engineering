@@ -39,8 +39,10 @@ const mapProduct = (p) => {
     name: p.name,
     image: isDummyLink || !p.image_url ? "https://placehold.co/400?text=No+Image" : p.image_url,
     price: Number(p.price) || 0,
+    discount_percentage: Number(p.discount_percentage) || 0,
     brandName: p.brand?.name || "",
     categoryName: p.category?.name || "",
+    variants: Array.isArray(p.variants) ? p.variants : [],
   };
 };
 
@@ -86,12 +88,12 @@ export const getCartItems = async () => {
 
       return {
         id: variant.id,
-
         variant_id: variant.id,
         cart_item_id: item.id,
         product_id: product.id,
         product_name: product.name,
         price: Number(product.price),
+        discount_percentage: Number(product.discount_percentage) || 0,
         quantity: item.quantity,
         totalPrice: Number(product.price) * item.quantity,
         size: variant.size,

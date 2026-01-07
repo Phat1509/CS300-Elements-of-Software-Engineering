@@ -21,9 +21,16 @@ export default function CartPage() {
   const [loading, setLoading] = useState(false);
   const [updatingIds, setUpdatingIds] = useState([]);
 
-  const subtotal = Number(totalPrice) || 0;
-  const shipping = cartItems.length > 0 ? 10 : 0;
-  const tax = subtotal * 0.08;
+  const subtotal = cartItems.reduce((acc, it) => {
+    const finalPricePerUnit =
+      it.discount_percentage > 0
+        ? it.price * (1 - it.discount_percentage / 100)
+        : it.price;
+    return acc + finalPricePerUnit * it.quantity;
+  }, 0);
+
+  const shipping = cartItems.length > 0 ? 10 : 0; // 10$ phí ship
+  const tax = subtotal * 0.08; // 8% thuế
   const finalTotal = subtotal + shipping + tax;
 
   // --- HANDLERS ---
@@ -72,15 +79,16 @@ export default function CartPage() {
   const handleCheckout = async () => {
     if (!user) {
       alert("Vui lòng đăng nhập!");
-      navigate("/login"); return;
+      navigate("/login");
+      return;
     }
     if (cartItems.length === 0) return;
 
     // 1. Nhập địa chỉ (BẮT BUỘC - Rust không cho phép null)
     let address = prompt("Nhập địa chỉ nhận hàng:", "123 Đường ABC");
     if (!address || address.trim() === "") {
-        alert("Địa chỉ không được để trống!");
-        return;
+      alert("Địa chỉ không được để trống!");
+      return;
     }
 
     if (!window.confirm(`Xác nhận đặt hàng?`)) return;
@@ -91,58 +99,70 @@ export default function CartPage() {
       console.log("🔍 Dữ liệu gốc cartItems:", cartItems);
 
       // 3. CHUẨN HÓA DATA (Quan trọng nhất)
-      const itemsPayload = cartItems.map(item => {
+      const itemsPayload = cartItems.map((item) => {
         const vId = item.variant_id || item.id || item.product_variant_id;
-        
+
         return {
-          product_variant_id: parseInt(vId), 
-          quantity: parseInt(item.quantity)
+          product_variant_id: parseInt(vId),
+          quantity: parseInt(item.quantity),
         };
       });
 
-      const invalidItem = itemsPayload.find(i => isNaN(i.product_variant_id) || isNaN(i.quantity));
+      const invalidItem = itemsPayload.find(
+        (i) => isNaN(i.product_variant_id) || isNaN(i.quantity)
+      );
       if (invalidItem) {
-          console.error(" Lỗi dữ liệu item:", invalidItem);
-          alert("Lỗi dữ liệu: Không tìm thấy ID sản phẩm. Vui lòng F12 xem console.");
-          setLoading(false);
-          return;
+        console.error(" Lỗi dữ liệu item:", invalidItem);
+        alert(
+          "Lỗi dữ liệu: Không tìm thấy ID sản phẩm. Vui lòng F12 xem console."
+        );
+        setLoading(false);
+        return;
       }
 
       const orderData = {
-        payment_method: "Cod", 
+        payment_method: "Cod",
         shipping_address: address,
-        items: itemsPayload 
+        items: itemsPayload,
       };
 
-      console.log("📤 PAYLOAD CHUẨN GỬI ĐI:", JSON.stringify(orderData, null, 2));
+      console.log(
+        "📤 PAYLOAD CHUẨN GỬI ĐI:",
+        JSON.stringify(orderData, null, 2)
+      );
 
       const newOrder = await createOrder(orderData);
       console.log("✅ Thành công:", newOrder);
 
       // 6. Dọn dẹp giỏ hàng
-      await Promise.all(cartItems.map(async (item) => {
+      await Promise.all(
+        cartItems.map(async (item) => {
           try {
-             const vId = item.variant_id || item.id;
-             if(vId) {
-                await updateProductStock(vId, item.stock - item.quantity);
-                await deleteCartItem(vId);
-             }
+            const vId = item.variant_id || item.id;
+            if (vId) {
+              await updateProductStock(vId, item.stock - item.quantity);
+              await deleteCartItem(vId);
+            }
           } catch (e) {}
-      }));
+        })
+      );
 
       if (clearCart) clearCart();
-      else cartItems.forEach(item => removeFromCart(item.variant_id)); 
+      else cartItems.forEach((item) => removeFromCart(item.variant_id));
 
       alert("Đặt hàng thành công!");
-      navigate("/orders"); 
-
+      navigate("/orders");
     } catch (error) {
       console.error(" Lỗi Checkout:", error);
       if (error.response) {
-          console.log("🔥 Response Data:", error.response.data);
-          alert(`Lỗi Server (${error.response.status}): ${JSON.stringify(error.response.data)}`);
+        console.log("🔥 Response Data:", error.response.data);
+        alert(
+          `Lỗi Server (${error.response.status}): ${JSON.stringify(
+            error.response.data
+          )}`
+        );
       } else {
-          alert("Lỗi kết nối.");
+        alert("Lỗi kết nối.");
       }
     } finally {
       setLoading(false);
@@ -289,9 +309,28 @@ export default function CartPage() {
                         </span>
                       )}
                     </div>
-                    <strong style={{ fontSize: "16px" }}>
-                      ${(it.price * it.quantity).toFixed(2)}
-                    </strong>
+                    <div style={{ textAlign: "right" }}>
+                      <strong style={{ fontSize: "16px", display: "block" }}>
+                        {(
+                          (it.discount_percentage > 0
+                            ? it.price * (1 - it.discount_percentage / 100)
+                            : it.price) * it.quantity
+                        ).toFixed(2)}
+                      </strong>
+
+                      {it.discount_percentage > 0 && (
+                        <span
+                          className="muted"
+                          style={{
+                            textDecoration: "line-through",
+                            fontSize: "12px",
+                            color: "#94a3b8",
+                          }}
+                        >
+                          ${(it.price * it.quantity).toFixed(2)}
+                        </span>
+                      )}
+                    </div>
                   </div>
 
                   <div

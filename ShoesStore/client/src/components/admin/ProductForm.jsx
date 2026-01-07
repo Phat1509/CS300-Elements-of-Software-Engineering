@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from "react";
 import adminApi from "../../utilities/adminApi";
 
+const FIXED_COLORS = [
+  { label: "Đen", value: "Black" },
+  { label: "Trắng", value: "White" },
+  { label: "Xám", value: "Grey" },
+  { label: "Đỏ", value: "Red" },
+  { label: "Xanh dương", value: "Blue" },
+  { label: "Vàng", value: "Yellow" },
+];
+
 const generateSlug = (text) => {
   return text
     .toString()
@@ -30,7 +39,12 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
   const [categories, setCategories] = useState([]);
   const [variants, setVariants] = useState([]);
   const [saving, setSaving] = useState(false);
-
+  const [selectedColor, setSelectedColor] = useState("");
+  const [variantForm, setVariantForm] = useState({
+    size: "",
+    color: "",
+    stock: 0,
+  });
   useEffect(() => {
     adminApi
       .getBrands()
@@ -64,23 +78,36 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
     }));
   };
 
+  const handleVariantChange = (e) => {
+    const { name, value } = e.target;
+    setVariantForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   const handleAddVariant = async () => {
     if (!initial?.id)
-      return alert(
-        "Vui lòng lưu thông tin cơ bản của sản phẩm trước khi thêm biến thể."
-      );
-    const size = prompt("Nhập Size (ví dụ: 42, L, XL...):");
-    const stock = prompt("Nhập số lượng tồn kho:", "10");
-    if (!size) return;
+      return alert("Vui lòng lưu sản phẩm trước khi thêm biến thể.");
+
+    const { size, color, stock } = variantForm;
+
+    if (!size || !color) return alert("Vui lòng nhập đầy đủ Size và Màu.");
+
+    // Check trùng size + color
+    const exists = variants.some((v) => v.size === size && v.color === color);
+    if (exists) return alert("Biến thể Size + Màu này đã tồn tại.");
 
     try {
       const newV = await adminApi.createVariant(initial.id, {
         size,
+        color,
         stock: parseInt(stock) || 0,
-        sku: `SKU-${initial.id}-${Date.now()}`,
-        color: null,
+        sku: `SKU-${initial.id}-${size}-${color}`,
       });
-      setVariants([...variants, newV]);
+
+      setVariants((prev) => [...prev, newV]);
+      setVariantForm({ size: "", color: "", stock: 0 });
     } catch (err) {
       alert("Lỗi: " + err.message);
     }
@@ -204,7 +231,6 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
           </div>
         </div>
 
-        {/* VARIANTS UI */}
         <div
           style={{
             background: "#f8f9fa",
@@ -213,35 +239,74 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
             marginTop: "15px",
           }}
         >
+          <strong>Biến thể (Size & Màu)</strong>
+
+          {/* FORM ADD VARIANT */}
           <div
             style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginBottom: "10px",
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr 1fr auto",
+              gap: "8px",
+              marginTop: "10px",
+              alignItems: "end",
             }}
           >
-            <strong>Biến thể (Size & Kho)</strong>
+            <input
+              className="input"
+              placeholder="Size (VD: 42, L, XL)"
+              name="size"
+              value={variantForm.size}
+              onChange={handleVariantChange}
+            />
+
+            <select
+              className="input"
+              name="color"
+              value={variantForm.color}
+              onChange={handleVariantChange}
+            >
+              <option value="">-- Màu sắc --</option>
+              {FIXED_COLORS.map((c) => (
+                <option key={c.value} value={c.value}>
+                  {c.label}
+                </option>
+              ))}
+            </select>
+
+            <input
+              className="input"
+              type="number"
+              min="0"
+              name="stock"
+              value={variantForm.stock}
+              onChange={handleVariantChange}
+              placeholder="Tồn kho"
+            />
+
             <button
               type="button"
               className="btn btn-sm btn-outline"
               onClick={handleAddVariant}
             >
-              + Thêm Size
+              + Thêm
             </button>
           </div>
-          <table style={{ width: "100%", fontSize: "13px" }}>
+
+          {/* LIST VARIANTS */}
+          <table style={{ width: "100%", fontSize: "13px", marginTop: "12px" }}>
             <thead>
               <tr style={{ borderBottom: "1px solid #ddd", textAlign: "left" }}>
                 <th>Size</th>
+                <th>Màu</th>
                 <th>Tồn kho</th>
-                <th>Hành động</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
               {variants.map((v) => (
                 <tr key={v.id}>
                   <td>{v.size}</td>
+                  <td>{v.color}</td>
                   <td>{v.stock}</td>
                   <td>
                     <button

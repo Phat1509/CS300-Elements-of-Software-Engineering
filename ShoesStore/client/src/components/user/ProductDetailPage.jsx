@@ -36,20 +36,12 @@ const ProductDetail = () => {
       setLoading(true);
       try {
         const data = await getProductById(id);
-        const productData = data?.items ? data.items[0] : data;
-
-        if (productData) {
-          setProduct(productData);
-          const v = productData.variants || [];
-          setVariants(Array.isArray(v) ? v : []);
-        } else {
-          setProduct(null);
-          setVariants([]);
+        if (data) {
+          setProduct(data);
+          setVariants(data.variants || []);
         }
       } catch (e) {
         console.error("Lỗi tải sản phẩm:", e);
-        setProduct(null);
-        setVariants([]);
       } finally {
         setLoading(false);
       }
@@ -103,7 +95,7 @@ const ProductDetail = () => {
       await toggleWishlist(product.id);
     } catch (e) {
       if (String(e?.message || e).includes("Login")) {
-        navigate("/login"); 
+        navigate("/login");
       } else {
         console.error("Lỗi Wishlist:", e);
       }
@@ -222,11 +214,7 @@ const ProductDetail = () => {
           {/* LEFT: IMAGE */}
           <div className="pd-image-box">
             <img
-              src={
-                product.image_url ||
-                product.image ||
-                "https://placehold.co/600x600?text=No+Image"
-              }
+              src={product.image}
               alt={product.name}
               style={{
                 width: "100%",
@@ -234,10 +222,6 @@ const ProductDetail = () => {
                 objectFit: "cover",
                 aspectRatio: "1/1",
                 background: "#f1f1f1",
-              }}
-              onError={(e) => {
-                e.currentTarget.src =
-                  "https://placehold.co/600x600?text=Image+Error";
               }}
             />
           </div>
@@ -281,9 +265,13 @@ const ProductDetail = () => {
 
             <div style={{ marginBottom: 20 }}>
               <span
-                style={{ fontSize: "24px", fontWeight: 700, color: "#111" }}
+                style={{ fontSize: "28px", fontWeight: 700, color: "#111" }}
               >
-                {Number(product.price).toLocaleString()}₫
+                $
+                {(
+                  product.price *
+                  (1 - product.discount_percentage / 100)
+                ).toFixed(2)}
               </span>
               {Number(product.discount_percentage || 0) > 0 && (
                 <span
