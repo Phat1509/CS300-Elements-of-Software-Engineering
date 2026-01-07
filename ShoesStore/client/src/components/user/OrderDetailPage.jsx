@@ -15,7 +15,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 
-import { getOrdersByUserId, cancelOrder } from "../../utilities/api";
+import { getOrders, cancelOrder } from "../../utilities/api";
 import { useAuth } from "../../context/AuthContext";
 
 // --- 1. NEW HELPER: HÀM CHUẨN HÓA DỮ LIỆU (QUAN TRỌNG) ---
@@ -265,8 +265,7 @@ export default function OrderDetailPage() {
       setLoading(true);
       try {
         const userId = user.id || user.user_id;
-        const list = await getOrdersByUserId(userId);
-
+        const list = await getOrders();
         const found = list.find(
           (o) =>
             String(o.id) === String(id) || String(o.order_id) === String(id)
@@ -576,15 +575,15 @@ export default function OrderDetailPage() {
                 </button>
               )}
               {canCancel && (
-                <button 
-                  onClick={handleCancelOrder} 
-                  className="btn btn-outline" 
-                  style={{ 
-                    display: "flex", 
-                    alignItems: "center", 
-                    gap: 8, 
+                <button
+                  onClick={handleCancelOrder}
+                  className="btn btn-outline"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 8,
                     color: "#ef4444", // Màu đỏ
-                    borderColor: "#ef4444" 
+                    borderColor: "#ef4444",
                   }}
                 >
                   <X size={16} /> Hủy đơn hàng
@@ -592,7 +591,7 @@ export default function OrderDetailPage() {
               )}
             </div>
           </div>
-          
+
           {/* RIGHT COL: Summary Info */}
           <div style={{ flex: 1 }}>
             <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>

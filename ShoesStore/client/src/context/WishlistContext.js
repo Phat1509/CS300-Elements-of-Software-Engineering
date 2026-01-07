@@ -1,8 +1,7 @@
 // client/src/context/WishlistContext.js
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useAuth } from "./AuthContext";
-import { getWishlist, addWishlist, removeWishlist } from "../utilities/api";
-
+import { getWishlist, addToWishlist as apiAddToWishlist, removeFromWishlist } from "../utilities/api";
 const WishlistContext = createContext();
 
 export const WishlistProvider = ({ children }) => {
@@ -20,7 +19,7 @@ export const WishlistProvider = ({ children }) => {
     }
     setWishlistLoading(true);
     try {
-      const list = await getWishlist(uid);
+      const list = await getWishlist();
       setWishlistEntries(Array.isArray(list) ? list : []);
     } catch (e) {
       console.error("refreshWishlist error:", e);
@@ -47,10 +46,7 @@ export const WishlistProvider = ({ children }) => {
     if (!userId) throw new Error("NOT_LOGGED_IN");
     if (isInWishlist(productId)) return;
 
-    await addWishlist({
-      user_id: userId,
-      product_id: Number(productId),
-    });
+    await apiAddToWishlist(productId);
 
     await refreshWishlist(userId);
   };
@@ -60,7 +56,7 @@ export const WishlistProvider = ({ children }) => {
     const entryId = getWishlistEntryId(productId);
     if (!entryId) return;
 
-    await removeWishlist(entryId);
+    await removeFromWishlist(productId);
     await refreshWishlist(userId);
   };
 

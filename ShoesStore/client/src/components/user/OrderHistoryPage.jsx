@@ -11,13 +11,10 @@ import {
   ArrowRight,
   ShoppingBag,
 } from "lucide-react";
-import { getOrdersByUserId, cancelOrder } from "../../utilities/api";
+import { getOrders, cancelOrder } from "../../utilities/api";
 import { useAuth } from "../../context/AuthContext"; // Import Auth Context
 
-// --- HELPER FUNCTIONS ---
-const formatCurrency = (n) => (Number(n) || 0).toLocaleString("en-US") + "$"; // Đổi sang $ cho đồng bộ với Cart
-// Nếu muốn dùng VND:
-// const formatCurrency = (n) => (Number(n) || 0).toLocaleString("vi-VN") + "₫";
+const formatCurrency = (n) => (Number(n) || 0).toLocaleString("en-US") + "$";
 
 const formatDate = (iso) => {
   if (!iso) return "-";
@@ -73,8 +70,7 @@ export default function OrderHistoryPage() {
 
   // --- LOAD DATA ---
   useEffect(() => {
-    // Nếu chưa đăng nhập thì thôi, để UI ở dưới xử lý redirect
-    if (!isAuthenticated || !user) {
+    if (!isAuthenticated) {
       setLoading(false);
       return;
     }
@@ -83,8 +79,8 @@ export default function OrderHistoryPage() {
     const fetchOrders = async () => {
       setLoading(true);
       try {
-        const userId = user.user_id || user.id;
-        const list = await getOrdersByUserId(userId);
+        const list = await getOrders(); 
+        
         if (mounted) {
           setOrders(Array.isArray(list) ? list : []);
         }
@@ -100,7 +96,7 @@ export default function OrderHistoryPage() {
     return () => {
       mounted = false;
     };
-  }, [user, isAuthenticated]);
+  }, [isAuthenticated]);
 
   // --- FILTER & SORT ---
   const filteredOrders = useMemo(() => {
@@ -562,7 +558,6 @@ export default function OrderHistoryPage() {
                     >
                       Chi tiết <ArrowRight size={16} />
                     </button>
-                    
                   </div>
                 </div>
               </div>
