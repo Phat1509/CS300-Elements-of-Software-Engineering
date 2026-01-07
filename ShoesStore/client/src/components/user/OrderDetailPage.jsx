@@ -15,7 +15,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 
-import { getOrders, cancelOrder } from "../../utilities/api";
+import { getOrders, cancelOrder, addProductReview } from "../../utilities/api";
 import { useAuth } from "../../context/AuthContext";
 
 // --- 1. NEW HELPER: HÀM CHUẨN HÓA DỮ LIỆU (QUAN TRỌNG) ---
@@ -37,9 +37,9 @@ const normalizeData = (rawOrder) => {
       // Gộp thông tin product vào để render dễ hơn
       product: {
         ...product,
+        id: product.id || item.product_id || item.productId, // thêm id để review
         name: product.name || "Sản phẩm không tên",
-        image_url:
-          product.image_url || "https://placehold.co/150?text=No+Image",
+        image_url: product.image_url || "https://placehold.co/150?text=No+Image",
       },
       product_variant: {
         ...variant,
@@ -112,17 +112,22 @@ const getStatusTheme = (rawStatus) => {
   }
 };
 
-// --- SUB-COMPONENT: REVIEW MODAL (GIỮ NGUYÊN) ---
+// --- SUB-COMPONENT: REVIEW MODAL (UPDATED) ---
 function ReviewModal({
   open,
   onClose,
+  items = [],
+  selectedProductId,
+  setSelectedProductId,
   rating,
   setRating,
   reviewText,
   setReviewText,
   onSave,
+  saving = false,
 }) {
   if (!open) return null;
+
   return (
     <div
       style={{
@@ -162,14 +167,54 @@ function ReviewModal({
           <button
             onClick={onClose}
             style={{ background: "none", border: "none", cursor: "pointer" }}
+            aria-label="Close"
           >
             <X size={20} />
           </button>
         </div>
+
         <div style={{ padding: 24 }}>
+          {/* Select product */}
+          <div style={{ maxWidth: 520, margin: "0 auto 16px" }}>
+            <div style={{ fontSize: 13, color: "#64748b", marginBottom: 8 }}>
+              Chọn sản phẩm cần đánh giá
+            </div>
+            <select
+              value={selectedProductId || ""}
+              onChange={(e) => {
+                const v = e.target.value;
+                setSelectedProductId(v ? Number(v) : null);
+              }}
+              style={{
+                width: "100%",
+                padding: 10,
+                borderRadius: 8,
+                border: "1px solid #cbd5e1",
+                outline: "none",
+                fontSize: 14,
+                background: "white",
+              }}
+            >
+              {(items || []).map((it, idx) => {
+                const pid = it?.product?.id || it?.product_id || it?.productId;
+                const name =
+                  it?.product?.name ||
+                  it?.product?.title ||
+                  it?.name ||
+                  `Sản phẩm #${idx + 1}`;
+                return (
+                  <option key={pid || idx} value={pid || ""} disabled={!pid}>
+                    {name}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+
+          {/* Stars */}
           <div style={{ textAlign: "center", marginBottom: 20 }}>
             <p className="muted" style={{ marginBottom: 12 }}>
-              Bạn cảm thấy đơn hàng này thế nào?
+              Bạn chấm mấy sao?
             </p>
             <div style={{ display: "flex", justifyContent: "center", gap: 8 }}>
               {[1, 2, 3, 4, 5].map((star) => (
@@ -182,6 +227,7 @@ function ReviewModal({
                     cursor: "pointer",
                     transition: "transform 0.1s",
                   }}
+                  aria-label={`Rate ${star} star`}
                 >
                   <Star
                     size={32}
@@ -193,6 +239,8 @@ function ReviewModal({
               ))}
             </div>
           </div>
+
+          {/* Comment */}
           <textarea
             value={reviewText}
             onChange={(e) => setReviewText(e.target.value)}
@@ -209,6 +257,7 @@ function ReviewModal({
             }}
           />
         </div>
+
         <div
           style={{
             padding: "16px 24px",
@@ -223,16 +272,19 @@ function ReviewModal({
             onClick={onClose}
             className="btn btn-outline"
             style={{ border: "1px solid #cbd5e1" }}
+            disabled={saving}
           >
             Hủy
           </button>
           <button
             onClick={onSave}
-            disabled={rating === 0}
+            disabled={saving || rating === 0 || !selectedProductId}
             className="btn btn-primary"
-            style={{ opacity: rating === 0 ? 0.5 : 1 }}
+            style={{
+              opacity: saving || rating === 0 || !selectedProductId ? 0.5 : 1,
+            }}
           >
-            Gửi đánh giá
+            {saving ? "Đang gửi..." : "Gửi đánh giá"}
           </button>
         </div>
       </div>
@@ -251,8 +303,10 @@ export default function OrderDetailPage() {
 
   // Review State
   const [isReviewOpen, setIsReviewOpen] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState(null);
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
+  const [savingReview, setSavingReview] = useState(false);
 
   // --- FETCH DATA (CÓ SỬA ĐỔI) ---
   useEffect(() => {
@@ -264,14 +318,12 @@ export default function OrderDetailPage() {
     const fetchOrder = async () => {
       setLoading(true);
       try {
-        const userId = user.id || user.user_id;
         const list = await getOrders();
         const found = list.find(
-          (o) =>
-            String(o.id) === String(id) || String(o.order_id) === String(id)
+          (o) => String(o.id) === String(id) || String(o.order_id) === String(id)
         );
 
-        // <--- CHANGE: Áp dụng hàm normalizeData ở đây
+        // Áp dụng normalizeData
         if (found) {
           const cleanOrder = normalizeData(found);
           setOrder(cleanOrder);
@@ -284,8 +336,9 @@ export default function OrderDetailPage() {
         setLoading(false);
       }
     };
+
     fetchOrder();
-  }, [id, user, isAuthenticated]);
+  }, [id, isAuthenticated]);
 
   // --- ACTIONS ---
   const handleCopyTracking = () => {
@@ -294,38 +347,64 @@ export default function OrderDetailPage() {
       alert("Đã sao chép mã vận đơn!");
     }
   };
+
   const handleCancelOrder = async () => {
-    if (!window.confirm("Bạn có chắc chắn muốn hủy đơn hàng này không?"))
-      return;
+    if (!window.confirm("Bạn có chắc chắn muốn hủy đơn hàng này không?")) return;
     try {
       await cancelOrder(order.id); // order.id đã được normalize
       setOrder((prev) => ({ ...prev, status: "CANCELLED" }));
       alert("Đã hủy đơn hàng thành công!");
     } catch (error) {
       console.error("Lỗi hủy đơn:", error);
-      alert(
-        "Không thể hủy đơn hàng (có thể đơn đã được xử lý hoặc lỗi hệ thống)."
-      );
+      alert("Không thể hủy đơn hàng (có thể đơn đã được xử lý hoặc lỗi hệ thống).");
     }
   };
-  const handleSaveReview = () => {
-    console.log("Saving review:", { orderId: id, rating, reviewText });
-    const key = `review_${id}`;
-    localStorage.setItem(
-      key,
-      JSON.stringify({ rating, text: reviewText, date: new Date() })
-    );
-    alert("Cảm ơn bạn đã đánh giá!");
-    setIsReviewOpen(false);
+
+  const handleOpenReview = () => {
+    const first = (order?.items || [])[0];
+    const pid =
+      first?.product?.id || first?.product_id || first?.productId || null;
+
+    setSelectedProductId(pid ? Number(pid) : null);
+    setRating(0);
+    setReviewText("");
+    setIsReviewOpen(true);
+  };
+
+  // Gửi review lên backend
+  const handleSaveReview = async () => {
+    try {
+      if (!selectedProductId) {
+        alert("Không tìm thấy sản phẩm để đánh giá.");
+        return;
+      }
+      if (!rating) {
+        alert("Vui lòng chọn số sao đánh giá.");
+        return;
+      }
+
+      setSavingReview(true);
+
+      // payload theo format thường gặp: { rating, content }
+      await addProductReview(selectedProductId, {
+        rating,
+        content: reviewText || "",
+      });
+
+      alert("Cảm ơn bạn đã đánh giá!");
+      setIsReviewOpen(false);
+    } catch (error) {
+      console.error("Lỗi gửi review:", error);
+      alert("Không thể gửi đánh giá. Vui lòng thử lại.");
+    } finally {
+      setSavingReview(false);
+    }
   };
 
   // --- RENDER HELPERS ---
   if (!isAuthenticated && !loading) {
     return (
-      <div
-        className="container"
-        style={{ padding: "100px 0", textAlign: "center" }}
-      >
+      <div className="container" style={{ padding: "100px 0", textAlign: "center" }}>
         <h3>Vui lòng đăng nhập</h3>
         <Link to="/login" className="btn btn-primary" style={{ marginTop: 16 }}>
           Đăng nhập
@@ -336,10 +415,7 @@ export default function OrderDetailPage() {
 
   if (loading) {
     return (
-      <div
-        className="container"
-        style={{ padding: "80px 0", textAlign: "center" }}
-      >
+      <div className="container" style={{ padding: "80px 0", textAlign: "center" }}>
         Đang tải thông tin đơn hàng...
       </div>
     );
@@ -347,10 +423,7 @@ export default function OrderDetailPage() {
 
   if (!order) {
     return (
-      <div
-        className="container"
-        style={{ padding: "80px 0", textAlign: "center" }}
-      >
+      <div className="container" style={{ padding: "80px 0", textAlign: "center" }}>
         <h3>Không tìm thấy đơn hàng</h3>
         <p className="muted">
           Đơn hàng #{id} không tồn tại hoặc bạn không có quyền truy cập.
@@ -368,14 +441,12 @@ export default function OrderDetailPage() {
 
   const statusTheme = getStatusTheme(order.status);
   const StatusIcon = statusTheme.icon;
-  // <--- CHANGE: Dữ liệu items đã được làm sạch, không cần logic || phức tạp
-  const items = order.items;
+  const items = order.items || [];
   const canReview = String(order.status).toUpperCase() === "DELIVERED";
   const canCancel = String(order.status).toUpperCase() === "PENDING";
+
   return (
-    <div
-      style={{ background: "#f8fafc", minHeight: "100vh", paddingBottom: 60 }}
-    >
+    <div style={{ background: "#f8fafc", minHeight: "100vh", paddingBottom: 60 }}>
       {/* Breadcrumb */}
       <div style={{ background: "#fff", borderBottom: "1px solid #e2e8f0" }}>
         <div
@@ -393,10 +464,7 @@ export default function OrderDetailPage() {
             Trang chủ
           </Link>
           <ChevronRight size={14} />
-          <Link
-            to="/orders"
-            style={{ color: "inherit", textDecoration: "none" }}
-          >
+          <Link to="/orders" style={{ color: "inherit", textDecoration: "none" }}>
             Đơn hàng
           </Link>
           <ChevronRight size={14} />
@@ -470,9 +538,9 @@ export default function OrderDetailPage() {
               >
                 Sản phẩm ({items.length})
               </div>
+
               <div>
                 {items.map((item, idx) => {
-                  // <--- CHANGE: Lấy trực tiếp từ dữ liệu đã chuẩn hóa
                   const { product, product_variant } = item;
 
                   return (
@@ -481,9 +549,7 @@ export default function OrderDetailPage() {
                       style={{
                         padding: 24,
                         borderBottom:
-                          idx === items.length - 1
-                            ? "none"
-                            : "1px solid #f1f5f9",
+                          idx === items.length - 1 ? "none" : "1px solid #f1f5f9",
                         display: "flex",
                         gap: 16,
                       }}
@@ -525,10 +591,8 @@ export default function OrderDetailPage() {
                             marginBottom: 8,
                           }}
                         >
-                          {product_variant.size &&
-                            `Size: ${product_variant.size}`}
-                          {product_variant.color &&
-                            ` • Color: ${product_variant.color}`}
+                          {product_variant.size && `Size: ${product_variant.size}`}
+                          {product_variant.color && ` • Color: ${product_variant.color}`}
                         </div>
                         <div
                           style={{
@@ -550,14 +614,7 @@ export default function OrderDetailPage() {
             </div>
 
             {/* Actions Row */}
-            <div
-              style={{
-                marginTop: 20,
-                display: "flex",
-                gap: 12,
-                flexWrap: "wrap",
-              }}
-            >
+            <div style={{ marginTop: 20, display: "flex", gap: 12, flexWrap: "wrap" }}>
               <button
                 onClick={() => navigate("/new")}
                 className="btn btn-outline"
@@ -565,15 +622,18 @@ export default function OrderDetailPage() {
               >
                 <RotateCcw size={16} /> Mua lại
               </button>
+
+              {/* Review button: only when DELIVERED */}
               {canReview && (
                 <button
-                  onClick={() => setIsReviewOpen(true)}
+                  onClick={handleOpenReview}
                   className="btn btn-outline"
                   style={{ display: "flex", alignItems: "center", gap: 8 }}
                 >
-                  <Star size={16} /> Viết đánh giá
+                  <Star size={16} /> Review đơn hàng
                 </button>
               )}
+
               {canCancel && (
                 <button
                   onClick={handleCancelOrder}
@@ -582,7 +642,7 @@ export default function OrderDetailPage() {
                     display: "flex",
                     alignItems: "center",
                     gap: 8,
-                    color: "#ef4444", // Màu đỏ
+                    color: "#ef4444",
                     borderColor: "#ef4444",
                   }}
                 >
@@ -615,6 +675,7 @@ export default function OrderDetailPage() {
                 >
                   <CreditCard size={18} color="#64748b" /> Thanh toán
                 </h4>
+
                 <div
                   style={{
                     display: "flex",
@@ -625,13 +686,11 @@ export default function OrderDetailPage() {
                   }}
                 >
                   <span>Tạm tính</span>
-                  {/* <--- CHANGE: Tính toán an toàn hơn vì item.price đã là số */}
                   <span>
-                    {formatCurrency(
-                      items.reduce((acc, i) => acc + i.price * i.quantity, 0)
-                    )}
+                    {formatCurrency(items.reduce((acc, i) => acc + i.price * i.quantity, 0))}
                   </span>
                 </div>
+
                 <div
                   style={{
                     display: "flex",
@@ -644,9 +703,9 @@ export default function OrderDetailPage() {
                   <span>Phí vận chuyển</span>
                   <span>{formatCurrency(order.shipping_fee)}</span>
                 </div>
-                <div
-                  style={{ borderTop: "1px dashed #e2e8f0", margin: "12px 0" }}
-                />
+
+                <div style={{ borderTop: "1px dashed #e2e8f0", margin: "12px 0" }} />
+
                 <div
                   style={{
                     display: "flex",
@@ -657,7 +716,6 @@ export default function OrderDetailPage() {
                   }}
                 >
                   <span>Tổng cộng</span>
-                  {/* <--- CHANGE: Dùng field đã chuẩn hóa total_amount */}
                   <span>{formatCurrency(order.total_amount)}</span>
                 </div>
               </div>
@@ -682,17 +740,11 @@ export default function OrderDetailPage() {
                 >
                   <MapPin size={18} color="#64748b" /> Địa chỉ nhận hàng
                 </h4>
-                <div
-                  style={{ fontSize: 14, color: "#334155", lineHeight: 1.6 }}
-                >
-                  <div style={{ fontWeight: 600 }}>
-                    {user?.full_name || user?.username}
-                  </div>
+
+                <div style={{ fontSize: 14, color: "#334155", lineHeight: 1.6 }}>
+                  <div style={{ fontWeight: 600 }}>{user?.full_name || user?.username}</div>
                   <div>{user?.phone || "0987 *** ***"}</div>
-                  {/* <--- CHANGE: Dùng field address đã chuẩn hóa */}
-                  <div style={{ color: "#64748b", marginTop: 4 }}>
-                    {order.address}
-                  </div>
+                  <div style={{ color: "#64748b", marginTop: 4 }}>{order.address}</div>
                 </div>
               </div>
 
@@ -716,16 +768,8 @@ export default function OrderDetailPage() {
                   >
                     MÃ VẬN ĐƠN
                   </div>
-                  <div
-                    style={{ display: "flex", alignItems: "center", gap: 10 }}
-                  >
-                    <span
-                      style={{
-                        fontSize: 16,
-                        fontWeight: 700,
-                        color: "#0284c7",
-                      }}
-                    >
+                  <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                    <span style={{ fontSize: 16, fontWeight: 700, color: "#0284c7" }}>
                       {order.tracking_number}
                     </span>
                     <button
@@ -751,11 +795,15 @@ export default function OrderDetailPage() {
       <ReviewModal
         open={isReviewOpen}
         onClose={() => setIsReviewOpen(false)}
+        items={items}
+        selectedProductId={selectedProductId}
+        setSelectedProductId={setSelectedProductId}
         rating={rating}
         setRating={setRating}
         reviewText={reviewText}
         setReviewText={setReviewText}
         onSave={handleSaveReview}
+        saving={savingReview}
       />
     </div>
   );

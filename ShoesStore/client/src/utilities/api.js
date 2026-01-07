@@ -176,12 +176,15 @@ export const removeFromWishlist = async (productId) => {
 
 /* ===================== REVIEWS ===================== */
 export const getProductReviews = async (productId) => {
-  const res = await api.get(`/products/${productId}/reviews`);
+  const res = await api.get(`/api/products/${productId}/reviews/`);
   return res.data;
 };
 
-export const addProductReview = async (productId, reviewData) => {
-  const res = await api.post(`/products/${productId}/reviews`, reviewData);
+export const addProductReview = async (productId, data) => {
+  const res = await api.post(`/api/products/${productId}/reviews/`, {
+    rating: data.rating,
+    content: data.content,
+  });
   return res.data;
 };
 

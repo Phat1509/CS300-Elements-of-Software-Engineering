@@ -123,6 +123,7 @@ pub async fn add(
     let user = users::Entity::find_by_id(auth.user.id).one(&ctx.db).await?;
     let mut item = ActiveModel {
         user_id: Set(auth.user.id),
+         product_id: Set(product_id), 
         ..Default::default()
     };
 
