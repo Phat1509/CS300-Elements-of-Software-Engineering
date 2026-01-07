@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Notice from "../common/Notice";
+import useNotice from "../../hooks/useNotice";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
@@ -14,6 +16,7 @@ export default function SignUpPage() {
   const [agree, setAgree] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const { notice, showNotice } = useNotice();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,7 +42,7 @@ export default function SignUpPage() {
       const result = await register(fullname, email, password);
 
       if (result.success) {
-        alert("Đăng ký thành công! Vui lòng đăng nhập.");
+        showNotice("success", "Sign up successful! Please sign in.");
         navigate("/signin");
       } else {
         setError(result.message || "Sign up failed.");
@@ -64,6 +67,7 @@ export default function SignUpPage() {
       </section>
 
       <section className="container" style={{ padding: "32px 0 64px" }}>
+        {notice && <Notice type={notice.type} message={notice.message} />}
         <div className="auth-card">
           <form className="auth-form" onSubmit={handleSubmit}>
             {error && (

@@ -1,5 +1,7 @@
 // client/src/components/user/WishlistPage.jsx
 import React, { useEffect, useMemo, useState } from "react";
+import Notice from "../common/Notice";
+import useNotice from "../../hooks/useNotice";
 import { Link } from "react-router-dom";
 import { ChevronRight, Heart, X } from "lucide-react";
 import ProductCard from "./ProductCard";
@@ -13,6 +15,8 @@ export default function WishlistPage() {
 
   const [products, setProducts] = useState([]);
   const [loadingProducts, setLoadingProducts] = useState(false);
+
+  const { notice, showNotice } = useNotice();
 
   const userId = user ? (user.id || user.user_id || user.pid) : null;
 
@@ -56,9 +60,10 @@ export default function WishlistPage() {
   const handleRemove = async (productId) => {
     try {
       await removeFromWishlistByProductId(productId);
+      showNotice("success", "Removed from wishlist.");
     } catch (e) {
       console.error("Error removing from wishlist:", e);
-      alert("Failed to remove item from wishlist. Please try again.");
+      showNotice("error", "Failed to remove item from wishlist. Please try again.");
     }
   };
 
@@ -73,6 +78,7 @@ export default function WishlistPage() {
       </div>
 
       <section className="container" style={{ padding: "30px 0 60px" }}>
+        {notice && <Notice type={notice.type} message={notice.message} />}
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
           <Heart size={22} />
           <h2 style={{ margin: 0 }}>Your Wishlist</h2>

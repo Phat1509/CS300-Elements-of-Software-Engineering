@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Notice from "../common/Notice";
+import useNotice from "../../hooks/useNotice";
 import { Link, useNavigate } from "react-router-dom";
 import { ChevronRight, Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import { useCart } from "../../context/CartContext";
@@ -20,6 +22,7 @@ export default function CartPage() {
 
   const [loading, setLoading] = useState(false);
   const [updatingIds, setUpdatingIds] = useState([]);
+  const { notice, showNotice } = useNotice();
 
   const subtotal = Number(totalPrice) || 0;
   const shipping = cartItems.length > 0 ? 10 : 0;
@@ -31,7 +34,7 @@ export default function CartPage() {
   const handleUpdateQuantity = async (variantId, newQuantity, currentStock) => {
     if (newQuantity < 1) return;
     if (newQuantity > currentStock) {
-      alert(`Chỉ còn ${currentStock} sản phẩm trong kho!`);
+      showNotice("error", `Only ${currentStock} items left in stock!`);
       return;
     }
 
@@ -60,30 +63,32 @@ export default function CartPage() {
   };
 
   const handleRemoveItem = async (variantId) => {
-    if (!window.confirm("Bạn có chắc muốn xóa sản phẩm này?")) return;
+    if (!window.confirm("Are you sure you want to remove this item?")) return;
     try {
       await deleteCartItem(variantId);
       removeFromCart(variantId);
+      showNotice("success", "Item removed from cart.");
     } catch (error) {
       console.error("Lỗi xóa item:", error);
+      showNotice("error", "Failed to remove item. Please try again.");
     }
   };
 
   const handleCheckout = async () => {
     if (!user) {
-      alert("Vui lòng đăng nhập!");
-      navigate("/login"); return;
+      showNotice("error", "Please sign in to checkout.");
+      navigate("/signin"); return;
     }
     if (cartItems.length === 0) return;
 
     // 1. Nhập địa chỉ (BẮT BUỘC - Rust không cho phép null)
-    let address = prompt("Nhập địa chỉ nhận hàng:", "123 Đường ABC");
+    let address = prompt("Enter your shipping address:", "123 Example Street");
     if (!address || address.trim() === "") {
-        alert("Địa chỉ không được để trống!");
+      showNotice("error", "Shipping address cannot be empty!");
         return;
     }
 
-    if (!window.confirm(`Xác nhận đặt hàng?`)) return;
+    if (!window.confirm(`Confirm your order?`)) return;
     setLoading(true);
 
     try {
@@ -103,7 +108,7 @@ export default function CartPage() {
       const invalidItem = itemsPayload.find(i => isNaN(i.product_variant_id) || isNaN(i.quantity));
       if (invalidItem) {
           console.error(" Lỗi dữ liệu item:", invalidItem);
-          alert("Lỗi dữ liệu: Không tìm thấy ID sản phẩm. Vui lòng F12 xem console.");
+          showNotice("error", "Data error: Product ID not found. See console.");
           setLoading(false);
           return;
       }
@@ -133,16 +138,16 @@ export default function CartPage() {
       if (clearCart) clearCart();
       else cartItems.forEach(item => removeFromCart(item.variant_id)); 
 
-      alert("Đặt hàng thành công!");
+      showNotice("success", "Order placed successfully.");
       navigate("/orders"); 
 
     } catch (error) {
       console.error(" Lỗi Checkout:", error);
       if (error.response) {
           console.log("🔥 Response Data:", error.response.data);
-          alert(`Lỗi Server (${error.response.status}): ${JSON.stringify(error.response.data)}`);
+          showNotice("error", `Server error (${error.response.status}).`);
       } else {
-          alert("Lỗi kết nối.");
+          showNotice("error", "Network error. Please try again.");
       }
     } finally {
       setLoading(false);
@@ -204,6 +209,7 @@ export default function CartPage() {
       </div>
 
       <section className="container" style={{ padding: "30px 0 60px" }}>
+        {notice && <Notice type={notice.type} message={notice.message} />}
         <h1 style={{ marginBottom: 8, fontSize: 28 }}>Giỏ hàng của bạn</h1>
         <p className="muted" style={{ marginBottom: 30 }}>
           {cartItems.length} sản phẩm · Miễn phí đổi trả trong 30 ngày

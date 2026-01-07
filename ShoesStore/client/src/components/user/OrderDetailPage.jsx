@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import Notice from "../common/Notice";
+import useNotice from "../../hooks/useNotice";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   ArrowLeft,
@@ -253,6 +255,7 @@ export default function OrderDetailPage() {
   const [isReviewOpen, setIsReviewOpen] = useState(false);
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
+  const { notice, showNotice } = useNotice();
 
   // --- FETCH DATA (CÓ SỬA ĐỔI) ---
   useEffect(() => {
@@ -292,21 +295,19 @@ export default function OrderDetailPage() {
   const handleCopyTracking = () => {
     if (order?.tracking_number) {
       navigator.clipboard.writeText(order.tracking_number);
-      alert("Đã sao chép mã vận đơn!");
+      showNotice("success", "Tracking number copied.");
     }
   };
   const handleCancelOrder = async () => {
-    if (!window.confirm("Bạn có chắc chắn muốn hủy đơn hàng này không?"))
+    if (!window.confirm("Are you sure you want to cancel this order?"))
       return;
     try {
       await cancelOrder(order.id); // order.id đã được normalize
       setOrder((prev) => ({ ...prev, status: "CANCELLED" }));
-      alert("Đã hủy đơn hàng thành công!");
+      showNotice("success", "Order cancelled successfully.");
     } catch (error) {
       console.error("Lỗi hủy đơn:", error);
-      alert(
-        "Không thể hủy đơn hàng (có thể đơn đã được xử lý hoặc lỗi hệ thống)."
-      );
+      showNotice("error", "Unable to cancel the order. It may have been processed or a system error occurred.");
     }
   };
   const handleSaveReview = () => {
@@ -316,7 +317,7 @@ export default function OrderDetailPage() {
       key,
       JSON.stringify({ rating, text: reviewText, date: new Date() })
     );
-    alert("Cảm ơn bạn đã đánh giá!");
+    showNotice("success", "Thank you for your review!");
     setIsReviewOpen(false);
   };
 
@@ -407,6 +408,7 @@ export default function OrderDetailPage() {
 
       <main className="container" style={{ marginTop: 32 }}>
         {/* Header Section */}
+        {notice && <Notice type={notice.type} message={notice.message} />}
         <div
           style={{
             display: "flex",

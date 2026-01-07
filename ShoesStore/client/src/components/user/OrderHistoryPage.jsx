@@ -1,5 +1,7 @@
 // client/src/components/user/OrderHistoryPage.jsx
 import React, { useEffect, useMemo, useState } from "react";
+import Notice from "../common/Notice";
+import useNotice from "../../hooks/useNotice";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Search,
@@ -70,6 +72,7 @@ export default function OrderHistoryPage() {
   const [orders, setOrders] = useState([]);
   const [q, setQ] = useState("");
   const [filter, setFilter] = useState("all");
+  const { notice, showNotice } = useNotice();
 
   // --- LOAD DATA ---
   useEffect(() => {
@@ -140,7 +143,7 @@ export default function OrderHistoryPage() {
   // --- HANDLE ACTIONS ---
   // --- HANDLE CANCEL ---
   const handleCancelOrder = async (orderId) => {
-    if (!window.confirm("Bạn có chắc chắn muốn hủy đơn hàng này?")) return;
+    if (!window.confirm("Are you sure you want to cancel this order?")) return;
 
     try {
       await cancelOrder(orderId);
@@ -148,10 +151,10 @@ export default function OrderHistoryPage() {
       setOrders((prev) =>
         prev.map((o) => (o.id === orderId ? { ...o, status: "CANCELLED" } : o))
       );
-      alert("Đã hủy đơn hàng thành công!");
+      showNotice("success", "Order cancelled successfully.");
     } catch (error) {
       console.error(error);
-      alert("Lỗi: Không thể hủy đơn hàng (hoặc đơn đã được xử lý).");
+      showNotice("error", "Unable to cancel the order. It may have been processed.");
     }
   };
   // --- STATS ---
@@ -203,6 +206,7 @@ export default function OrderHistoryPage() {
         }}
       >
         <div className="container">
+          {notice && <Notice type={notice.type} message={notice.message} />}
           <div
             style={{
               display: "flex",
