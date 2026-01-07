@@ -72,11 +72,11 @@ export const getProductById = async (id) => {
 export const getCartItems = async () => {
   try {
     const res = await api.get("/cart");
-    const rawItems = res.data || []; 
-    
+    const rawItems = res.data || [];
+
     if (!Array.isArray(rawItems)) return [];
 
-    console.log("Raw API Cart Data:", rawItems); // Log để kiểm tra
+    console.log("Raw API Cart Data:", rawItems); 
 
     return rawItems.map((item) => {
       const product = item.product || {};
@@ -85,19 +85,15 @@ export const getCartItems = async () => {
       const imageUrl = variant.image || product.image_url || product.image;
 
       return {
-        id: variant.id,       
-        
-        variant_id: variant.id, 
-        cart_item_id: item.id,   
-        product_id: product.id,  
-        
-        // Thông tin hiển thị
+        id: variant.id,
+
+        variant_id: variant.id,
+        cart_item_id: item.id,
+        product_id: product.id,
         product_name: product.name,
         price: Number(product.price),
-        quantity: item.quantity, 
+        quantity: item.quantity,
         totalPrice: Number(product.price) * item.quantity,
-        
-        // Thuộc tính
         size: variant.size,
         color: variant.color,
         stock: variant.stock,
@@ -138,6 +134,7 @@ export const removeCartItem = async (variantId) => {
 
 export const deleteCartItem = removeCartItem;
 
+
 /* ===================== ORDERS ===================== */
 
 export const createOrder = async (orderData) => {
@@ -145,68 +142,93 @@ export const createOrder = async (orderData) => {
   return res.data;
 };
 
-export const getOrders = async (userId) => {
-  const res = await api.get("/orders", {
-    params: { user_id: userId, _sort: "created_at", _order: "desc" },
-  });
+export const getOrders = async () => {
+  const res = await api.get("/orders");
   return res.data;
 };
 
 export const getOrderDetail = async (id) => {
-  const response = await api.get(`/orders/${id}`);
-  return response.data;
-};
-
-export const addOrderItem = async (itemData) => {
-  const res = await api.post("/order_item", itemData);
+  const res = await api.get(`/orders/${id}`);
   return res.data;
 };
-
-export const getOrdersByUserId = async (userId) => {
-    // Giữ lại hàm cũ nếu có dùng
-    return getOrders(userId);
-}
 
 export const cancelOrder = async (orderId) => {
   const res = await api.post(`/orders/${orderId}/cancel`);
   return res.data;
 };
 
+
 /* ===================== WISHLIST ===================== */
-export const getWishlist = async (userId) => {
-  const uid = parseInt(userId);
-  if (!uid || isNaN(uid)) return []; 
-  const res = await api.get("/wishlists", { params: { user_id: uid } });
+export const getWishlist = async () => {
+  const res = await api.get("/wishlist");
   return res.data;
 };
 
-export const addWishlist = async (data) => {
-  const res = await api.post("/wishlists", data);
+export const addToWishlist = async (productId) => {
+  const res = await api.post(`/products/${productId}/wishlist`);
   return res.data;
 };
 
-export const removeWishlist = async (id) => {
-  const res = await api.delete(`/wishlists/${id}`);
+export const removeFromWishlist = async (productId) => {
+  const res = await api.delete(`/products/${productId}/wishlist`);
   return res.data;
 };
+
+/* ===================== REVIEWS ===================== */
+export const getProductReviews = async (productId) => {
+  const res = await api.get(`/products/${productId}/reviews`);
+  return res.data;
+};
+
+export const addProductReview = async (productId, reviewData) => {
+  const res = await api.post(`/products/${productId}/reviews`, reviewData);
+  return res.data;
+};
+
 
 /* ===================== OTHERS ===================== */
 export const getCategories = async () => {
-    try { const res = await api.get("/categories"); return res.data; } catch { return []; }
+  try { const res = await api.get("/categories"); return res.data; } catch { return []; }
+};
+
+export const getBrands = async () => {
+  const res = await api.get("/brands");
+  return res.data;
 };
 export const getProductVariants = async (pid) => {
-    try { const res = await api.get("/product_variants", {params: {product_id: pid}}); return res.data; } catch { return []; }
+  try { const res = await api.get("/product_variants", { params: { product_id: pid } }); return res.data; } catch { return []; }
 };
 export const getReviewsByProduct = async (pid) => {
-    try { const res = await api.get("/reviews", {params: {product_id: pid}}); return res.data; } catch { return []; }
+  try { const res = await api.get("/reviews", { params: { product_id: pid } }); return res.data; } catch { return []; }
 };
 export const addReview = async (data) => {
-    const res = await api.post("/reviews", data); return res.data;
+  const res = await api.post("/reviews", data); return res.data;
 };
 export const updateProductStock = async (variantId, stock) => {
-    await api.patch(`/product_variants/${variantId}`, { stock });
+  await api.patch(`/product_variants/${variantId}`, { stock });
 };
 export const getProductDetail = async (id) => getProductById(id);
+
+export const forgotPasswordAPI = async (email) => {
+  const res = await api.post('/auth/forgot', { email });
+  return res.data;
+};
+
+export const resetPasswordAPI = async (token, password) => {
+  const res = await api.post('/auth/reset', { token, password });
+  return res.data;
+};
+// -------------------------------- EMAIL VERIFICATION -------------------- //
+export const verifyEmailAPI = async (token) => {
+  const res = await api.get(`/auth/verify/${token}`);
+  return res.data;
+};
+
+export const resendVerificationEmailAPI = async (email) => {
+  const res = await api.post('/auth/resend-verification-mail', { email });
+  return res.data;
+};
+
 
 // ===================== PROFILE =====================
 export const updateProfileAPI = async (name) => {
