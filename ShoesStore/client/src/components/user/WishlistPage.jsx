@@ -149,4 +149,6 @@ export default function WishlistPage() {
       </section>
     </>
   );
+ 
+
 }
