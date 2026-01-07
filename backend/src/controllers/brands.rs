@@ -129,7 +129,7 @@ pub async fn update(
 }
 
 #[utoipa::path(
-    post,
+    delete,
     path = "/api/brands/{id}",
     tags = ["Brands"],
     summary = "Delete a brand",
