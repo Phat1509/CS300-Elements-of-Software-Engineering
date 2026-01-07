@@ -101,7 +101,7 @@ export default function ProductsAdmin() {
                     <strong>{p.name}</strong>
                     <div className="small muted">ID: {p.id}</div>
                   </td>
-                  <td>{Number(p.price).toLocaleString()}₫</td>
+                  <td>${Number(p.price).toFixed(2)}</td>
                   <td>{p.is_active ? "✅" : "❌"}</td>
                   <td style={{ textAlign: 'right' }}>
                     <button onClick={() => setEditing(p)} className="btn-icon">✏️</button>

@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { ChevronRight, SlidersHorizontal } from "lucide-react";
+import { ChevronRight, SlidersHorizontal, Tag } from "lucide-react";
 import { Link } from "react-router-dom";
 import ProductCard from "./ProductCard";
 import { getProducts, getCategories, getBrands } from "../../utilities/api";
 
-export default function NewArrivalsPage() {
+export default function ProductListingPage() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showFilters, setShowFilters] = useState(false);
@@ -13,11 +13,12 @@ export default function NewArrivalsPage() {
   const [categories, setCategories] = useState([]);
   const [brands, setBrands] = useState([]);
 
+  // SỬA: Giá để theo Đô la (ví dụ tối đa 1000$)
   const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(10_000_000);
+  const [maxPrice, setMaxPrice] = useState(1000);
   const [sortBy, setSortBy] = useState("newest");
+  const [onlySale, setOnlySale] = useState(false); // Thêm lọc Sale
 
-  // State để lưu ID đang chọn
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedBrand, setSelectedBrand] = useState(null);
 
@@ -26,13 +27,11 @@ export default function NewArrivalsPage() {
     async function initPage() {
       try {
         setLoading(true);
-        // Gọi đồng thời cả 3 API
         const [pData, cData, bData] = await Promise.all([
           getProducts(),
           getCategories(),
           getBrands(),
         ]);
-
         setProducts(pData || []);
         setCategories(cData || []);
         setBrands(bData || []);
@@ -45,96 +44,248 @@ export default function NewArrivalsPage() {
     initPage();
   }, []);
 
-  // --- LOGIC LỌC (CLIENT-SIDE) ---
   const displayed = useMemo(() => {
     return products.filter((p) => {
-      // 1. Lọc giá
-      const matchPrice = p.price >= minPrice && p.price <= maxPrice;
-      // 2. Lọc trạng thái
+      // 1. Tính giá thực tế (Nếu có discount thì tính giá đã giảm, không thì giữ nguyên price)
+      const effectivePrice =
+        p.discount_percentage > 0
+          ? p.price * (1 - p.discount_percentage / 100)
+          : p.price;
+
+      // 2. Lọc theo khoảng giá người dùng chọn
+      const matchPrice =
+        effectivePrice >= minPrice && effectivePrice <= maxPrice;
+
+      // 3. Lọc Trạng thái
       const matchStatus = p.is_active === true;
-      // 3. Lọc danh mục (Nếu không chọn => true, nếu chọn => so sánh ID)
+
+      // 4. Lọc Danh mục & Thương hiệu
       const matchCat = selectedCategory
         ? Number(p.category_id) === Number(selectedCategory)
         : true;
-      // 4. Lọc thương hiệu
       const matchBrand = selectedBrand
         ? Number(p.brand_id) === Number(selectedBrand)
         : true;
 
-      return matchPrice && matchStatus && matchCat && matchBrand;
-    });
-  }, [products, minPrice, maxPrice, selectedCategory, selectedBrand]);
+      // 5. Lọc Giảm giá: Kiểm tra discount_percentage > 0
+      const isSale = p.discount_percentage > 0;
+      const matchSale = onlySale ? isSale : true;
 
+      return matchPrice && matchStatus && matchCat && matchBrand && matchSale;
+    });
+  }, [products, minPrice, maxPrice, selectedCategory, selectedBrand, onlySale]);
   // --- LOGIC SẮP XẾP ---
   const sortedDisplayed = useMemo(() => {
     const arr = [...displayed];
+
+    const getFinalPrice = (p) => {
+      return p.discount_percentage > 0
+        ? p.price * (1 - p.discount_percentage / 100)
+        : p.price;
+    };
+
     switch (sortBy) {
       case "price-low":
-        return arr.sort((a, b) => a.price - b.price);
+        return arr.sort((a, b) => getFinalPrice(a) - getFinalPrice(b));
       case "price-high":
-        return arr.sort((a, b) => b.price - a.price);
+        return arr.sort((a, b) => getFinalPrice(b) - getFinalPrice(a));
       default:
         return arr.sort((a, b) => b.id - a.id);
     }
   }, [displayed, sortBy]);
 
-  if (loading) {
+  if (loading)
     return (
-      <div
-        className="container"
-        style={{ padding: "80px", textAlign: "center" }}
-      >
-        <h3>Loading products...</h3>
+      <div style={{ padding: "80px", textAlign: "center" }}>
+        <h3>Loading...</h3>
       </div>
     );
-  }
 
   return (
-    <div className="na">
-      <section className="na-bc">
-        <div className="container na-bc-in">
-          <Link to="/" className="na-bc-link">
+    <div className="na" style={{ background: "#fff", minHeight: "100vh" }}>
+      {/* 1. BREADCRUMB - Tinh gọn */}
+      <nav
+        className="na-bc"
+        style={{
+          background: "#f8fafc",
+          padding: "12px 0",
+          borderBottom: "1px solid #e2e8f0",
+        }}
+      >
+        <div
+          className="container"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            fontSize: "14px",
+          }}
+        >
+          <Link to="/" style={{ color: "#64748b", textDecoration: "none" }}>
             Home
           </Link>
-          <ChevronRight className="na-bc-sep" size={16} />
-          <span>New Arrivals</span>
+          <ChevronRight size={14} color="#94a3b8" />
+          <span style={{ color: "#0f172a", fontWeight: "500" }}>Shop All</span>
         </div>
-      </section>
+      </nav>
 
-      <section className="na-head">
+      {/* 2. HEADER SECTION */}
+      <header
+        className="na-head"
+        style={{
+          padding: "40px 0",
+          textAlign: "center",
+          borderBottom: "1px solid #f1f5f9",
+        }}
+      >
         <div className="container">
-          <h1 className="na-title">New Arrivals</h1>
-          <p className="na-sub">Discover our latest collection.</p>
+          <h1
+            style={{
+              fontSize: "32px",
+              fontWeight: "800",
+              color: "#0f172a",
+              marginBottom: "8px",
+            }}
+          >
+            Our Collection
+          </h1>
+          <p style={{ color: "#64748b", maxWidth: "600px", margin: "0 auto" }}>
+            Khám phá những thiết kế mới nhất và các ưu đãi hấp dẫn.
+          </p>
         </div>
-      </section>
+      </header>
 
-      <section className="na-wrap">
-        <div className="container na-grid">
-          <aside className={`na-side ${showFilters ? "open" : ""}`}>
-            <div className="na-card">
-              <div className="na-card-top">
-                <h3 style={{ fontSize: "18px", fontWeight: "bold" }}>Bộ lọc</h3>
+      <section className="na-wrap" style={{ padding: "40px 0" }}>
+        <div
+          className="container na-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "260px 1fr",
+            gap: "40px",
+          }}
+        >
+          {/* 3. SIDEBAR FILTER */}
+          <aside
+            className={`na-side ${showFilters ? "open" : ""}`}
+            style={{ position: "sticky", top: "20px", height: "fit-content" }}
+          >
+            <div
+              style={{
+                background: "#fff",
+                borderRadius: "12px",
+                border: "1px solid #e2e8f0",
+                padding: "24px",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginBottom: "24px",
+                }}
+              >
+                <h3 style={{ fontSize: "18px", fontWeight: "700" }}>Bộ lọc</h3>
                 <button
-                  className="link-btn"
                   onClick={() => {
                     setMinPrice(0);
-                    setMaxPrice(10_000_000);
+                    setMaxPrice(1000); // Sửa về USD
                     setSelectedCategory(null);
                     setSelectedBrand(null);
+                    setOnlySale(false);
                   }}
-                  style={{ color: "#ef4444", fontSize: "13px" }}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    color: "#3b82f6",
+                    fontSize: "13px",
+                    cursor: "pointer",
+                    fontWeight: "500",
+                  }}
                 >
-                  Xóa tất cả
+                  Đặt lại
                 </button>
               </div>
 
-              <div className="na-block" style={{ marginTop: "20px" }}>
+              {/* Lọc Sale - Nổi bật */}
+              <div
+                style={{
+                  marginBottom: "24px",
+                  padding: "12px",
+                  background: "#fff1f2",
+                  borderRadius: "8px",
+                }}
+              >
+                <label
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "10px",
+                    cursor: "pointer",
+                    color: "#be123c",
+                    fontWeight: "600",
+                    fontSize: "14px",
+                  }}
+                >
+                  <input
+                    type="checkbox"
+                    checked={onlySale}
+                    onChange={(e) => setOnlySale(e.target.checked)}
+                    style={{
+                      accentColor: "#be123c",
+                      width: "16px",
+                      height: "16px",
+                    }}
+                  />
+                  Đang giảm giá %
+                </label>
+              </div>
+
+              {/* Khoảng giá - Sửa theo USD */}
+              <div className="filter-group" style={{ marginBottom: "30px" }}>
                 <h4
                   style={{
+                    fontSize: "14px",
+                    fontWeight: "600",
+                    textTransform: "uppercase",
+                    color: "#94a3b8",
+                    marginBottom: "16px",
+                  }}
+                >
+                  Giá tối đa ($)
+                </h4>
+                <input
+                  type="range"
+                  min="0"
+                  max="1000"
+                  step="10"
+                  value={maxPrice}
+                  onChange={(e) => setMaxPrice(Number(e.target.value))}
+                  style={{ width: "100%", accentColor: "#0f172a" }}
+                />
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginTop: "10px",
+                    fontWeight: "600",
+                    fontSize: "14px",
+                  }}
+                >
+                  <span>$0</span>
+                  <span>${maxPrice}</span>
+                </div>
+              </div>
+
+              {/* Danh mục */}
+              <div className="filter-group" style={{ marginBottom: "30px" }}>
+                <h4
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "600",
+                    textTransform: "uppercase",
+                    color: "#94a3b8",
                     marginBottom: "12px",
-                    fontSize: "15px",
-                    borderBottom: "1px solid #eee",
-                    paddingBottom: "5px",
                   }}
                 >
                   Danh mục
@@ -146,51 +297,38 @@ export default function NewArrivalsPage() {
                     gap: "8px",
                   }}
                 >
-                  <label
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "8px",
-                      cursor: "pointer",
-                    }}
-                  >
-                    <input
-                      type="radio"
-                      name="category"
-                      checked={selectedCategory === null}
-                      onChange={() => setSelectedCategory(null)}
-                    />
-                    <span style={{ fontSize: "14px" }}>Tất cả danh mục</span>
-                  </label>
                   {categories.map((cat) => (
                     <label
                       key={cat.id}
                       style={{
                         display: "flex",
                         alignItems: "center",
-                        gap: "8px",
+                        gap: "10px",
                         cursor: "pointer",
+                        fontSize: "14px",
                       }}
                     >
                       <input
                         type="radio"
-                        name="category"
+                        name="cat"
                         checked={selectedCategory === cat.id}
                         onChange={() => setSelectedCategory(cat.id)}
                       />
-                      <span style={{ fontSize: "14px" }}>{cat.name}</span>
+                      <span>{cat.name}</span>
                     </label>
                   ))}
                 </div>
               </div>
 
-              <div className="na-block" style={{ marginTop: "24px" }}>
+              {/* Thương hiệu */}
+              <div className="filter-group">
                 <h4
                   style={{
+                    fontSize: "14px",
+                    fontWeight: "600",
+                    textTransform: "uppercase",
+                    color: "#94a3b8",
                     marginBottom: "12px",
-                    fontSize: "15px",
-                    borderBottom: "1px solid #eee",
-                    paddingBottom: "5px",
                   }}
                 >
                   Thương hiệu
@@ -202,131 +340,113 @@ export default function NewArrivalsPage() {
                     gap: "8px",
                   }}
                 >
-                  <label
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "8px",
-                      cursor: "pointer",
-                    }}
-                  >
-                    <input
-                      type="radio"
-                      name="brand"
-                      checked={selectedBrand === null}
-                      onChange={() => setSelectedBrand(null)}
-                    />
-                    <span style={{ fontSize: "14px" }}>Tất cả thương hiệu</span>
-                  </label>
-                  {brands.map((brand) => (
+                  {brands.map((b) => (
                     <label
-                      key={brand.id}
+                      key={b.id}
                       style={{
                         display: "flex",
                         alignItems: "center",
-                        gap: "8px",
+                        gap: "10px",
                         cursor: "pointer",
+                        fontSize: "14px",
                       }}
                     >
                       <input
                         type="radio"
                         name="brand"
-                        checked={selectedBrand === brand.id}
-                        onChange={() => setSelectedBrand(brand.id)}
+                        checked={selectedBrand === b.id}
+                        onChange={() => setSelectedBrand(b.id)}
                       />
-                      <span style={{ fontSize: "14px" }}>{brand.name}</span>
+                      <span>{b.name}</span>
                     </label>
                   ))}
                 </div>
               </div>
-
-              {/* PHẦN LỌC GIÁ (GIỮ LẠI CỦA BẠN) */}
-              <div className="na-block" style={{ marginTop: "24px" }}>
-                <h4
-                  style={{
-                    marginBottom: "12px",
-                    fontSize: "15px",
-                    borderBottom: "1px solid #eee",
-                    paddingBottom: "5px",
-                  }}
-                >
-                  Khoảng giá
-                </h4>
-                <input
-                  type="range"
-                  className="range-input"
-                  min="0"
-                  max="10000000"
-                  step="100000"
-                  value={maxPrice}
-                  onChange={(e) => setMaxPrice(Number(e.target.value))}
-                  style={{ width: "100%", marginBottom: "12px" }}
-                />
-                <div
-                  className="na-range"
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    fontSize: "13px",
-                    fontWeight: "600",
-                  }}
-                >
-                  <span>{minPrice.toLocaleString()} ₫</span>
-                  <span>{maxPrice.toLocaleString()} ₫</span>
-                </div>
-              </div>
             </div>
-
-            <button
-              className="btn btn-outline lg-hidden"
-              style={{ marginTop: 16, width: "100%" }}
-              onClick={() => setShowFilters(false)}
-            >
-              Đóng bộ lọc
-            </button>
           </aside>
 
-          {/* ============ MAIN GRID ============ */}
+          {/* 4. MAIN PRODUCT LIST */}
           <main className="na-main">
-            <div className="na-toolbar">
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginBottom: "30px",
+                padding: "16px",
+                background: "#f8fafc",
+                borderRadius: "12px",
+              }}
+            >
               <button
-                className="btn btn-outline lg-hidden"
-                onClick={() => setShowFilters((s) => !s)}
+                className="lg-hidden btn-filter-mobile"
+                onClick={() => setShowFilters(true)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  padding: "8px 16px",
+                  borderRadius: "8px",
+                  border: "1px solid #e2e8f0",
+                  background: "#fff",
+                }}
               >
-                <SlidersHorizontal size={16} /> Filter
+                <SlidersHorizontal size={18} /> Lọc
               </button>
-              <p className="muted">
-                Showing <strong>{sortedDisplayed.length}</strong> products
+
+              <p style={{ color: "#64748b", margin: 0, fontSize: "15px" }}>
+                Hiển thị <strong>{sortedDisplayed.length}</strong> sản phẩm
               </p>
 
-              <div className="na-sort">
-                <span className="muted">Sort by:</span>
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "12px" }}
+              >
+                <span style={{ fontSize: "14px", color: "#64748b" }}>
+                  Sắp xếp:
+                </span>
                 <select
-                  className="input"
-                  style={{ width: "auto", padding: "8px" }}
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
+                  style={{
+                    padding: "8px 12px",
+                    borderRadius: "8px",
+                    border: "1px solid #e2e8f0",
+                    outline: "none",
+                    cursor: "pointer",
+                    fontSize: "14px",
+                  }}
                 >
-                  <option value="newest">Newest First</option>
-                  <option value="price-low">Price: Low to High</option>
-                  <option value="price-high">Price: High to Low</option>
+                  <option value="newest">Mới nhất</option>
+                  <option value="price-low">Giá: Thấp đến Cao</option>
+                  <option value="price-high">Giá: Cao đến Thấp</option>
                 </select>
               </div>
             </div>
 
-            {/* Grid Sản Phẩm */}
+            {/* Grid Sản phẩm */}
             {sortedDisplayed.length > 0 ? (
-              <div className="na-products">
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
+                  gap: "25px",
+                }}
+              >
                 {sortedDisplayed.map((p) => (
-                  // Truyền props đã được chuẩn hóa (mapProduct) vào ProductCard
                   <ProductCard key={p.id} {...p} />
                 ))}
               </div>
             ) : (
               <div
-                style={{ textAlign: "center", padding: "40px", color: "#666" }}
+                style={{
+                  textAlign: "center",
+                  padding: "100px 0",
+                  color: "#64748b",
+                }}
               >
-                No products found.
+                <div style={{ fontSize: "40px", marginBottom: "16px" }}>📦</div>
+                <h3>Không tìm thấy sản phẩm phù hợp</h3>
+                <p>Thử điều chỉnh lại bộ lọc của bạn nhé.</p>
               </div>
             )}
           </main>
