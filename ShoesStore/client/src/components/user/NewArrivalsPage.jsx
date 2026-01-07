@@ -21,16 +21,15 @@ export default function NewArrivalsPage() {
         setLoading(true);
         const data = await getProducts();
         
-        // LOG KIỂM TRA DỮ LIỆU
-        console.log("Dữ liệu về component:", data);
+        console.log("Data received:", data);
 
         if (data && data.length > 0) {
           setProducts(data);
         } else {
-            console.warn("API trả về rỗng hoặc lỗi");
+            console.warn("API returned empty or error");
         }
       } catch (err) {
-        console.error("Lỗi khi gọi API ở trang NewArrivals:", err);
+        console.error("Error calling API in NewArrivals:", err);
       } finally {
         setLoading(false);
       }
@@ -38,7 +37,6 @@ export default function NewArrivalsPage() {
     fetchProducts();
   }, []);
 
-  // Logic lọc client-side
   const displayed = useMemo(() => {
     return products.filter((p) => {
       const matchPrice = p.price >= minPrice && p.price <= maxPrice;
@@ -56,7 +54,6 @@ export default function NewArrivalsPage() {
       case "price-high":
         return arr.sort((a, b) => b.price - a.price);
       default:
-        // Sắp xếp mặc định theo ID mới nhất
         return arr.sort((a, b) => b.id - a.id);
     }
   }, [displayed, sortBy]);
@@ -64,7 +61,6 @@ export default function NewArrivalsPage() {
   if (loading) {
     return (
       <div className="container" style={{ padding: "80px", textAlign: "center" }}>
-        {/* Có thể thay bằng Spinner đẹp hơn */}
         <h3>Loading products...</h3>
       </div>
     );
@@ -72,7 +68,6 @@ export default function NewArrivalsPage() {
 
   return (
     <div className="na">
-      {/* ... Phần Breadcrumb và Header GIỮ NGUYÊN ... */}
        <section className="na-bc">
         <div className="container na-bc-in">
           <Link to="/" className="na-bc-link">Home</Link>
@@ -90,10 +85,7 @@ export default function NewArrivalsPage() {
 
       <section className="na-wrap">
         <div className="container na-grid">
-          {/* ... Phần Sidebar Filter GIỮ NGUYÊN ... */}
            <aside className={`na-side ${showFilters ? "open" : ""}`}>
-             {/* Copy y nguyên phần Filter Sidebar của bạn vào đây */}
-             {/* Để gọn code mình ẩn đi, bạn giữ nguyên code cũ đoạn này nhé */}
              <div className="na-card">
                <div className="na-card-top">
                  <h3>Filters</h3>
@@ -111,7 +103,6 @@ export default function NewArrivalsPage() {
               <button className="btn btn-outline lg-hidden" style={{ marginTop: 16, width: "100%" }} onClick={() => setShowFilters(false)}>Close Filters</button>
            </aside>
 
-          {/* ============ MAIN GRID ============ */}
           <main className="na-main">
             <div className="na-toolbar">
               <button className="btn btn-outline lg-hidden" onClick={() => setShowFilters((s) => !s)}>
@@ -129,11 +120,9 @@ export default function NewArrivalsPage() {
               </div>
             </div>
 
-            {/* Grid Sản Phẩm */}
             {sortedDisplayed.length > 0 ? (
               <div className="na-products">
                 {sortedDisplayed.map((p) => (
-                   // Truyền props đã được chuẩn hóa (mapProduct) vào ProductCard
                   <ProductCard key={p.id} {...p} />
                 ))}
               </div>

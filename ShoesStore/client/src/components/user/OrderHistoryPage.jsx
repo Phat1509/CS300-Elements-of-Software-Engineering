@@ -17,13 +17,11 @@ import { getOrdersByUserId, cancelOrder } from "../../utilities/api";
 import { useAuth } from "../../context/AuthContext"; // Import Auth Context
 
 // --- HELPER FUNCTIONS ---
-const formatCurrency = (n) => (Number(n) || 0).toLocaleString("en-US") + "$"; // Đổi sang $ cho đồng bộ với Cart
-// Nếu muốn dùng VND:
-// const formatCurrency = (n) => (Number(n) || 0).toLocaleString("vi-VN") + "₫";
+const formatCurrency = (n) => (Number(n) || 0).toLocaleString("en-US") + "$";
 
 const formatDate = (iso) => {
   if (!iso) return "-";
-  return new Date(iso).toLocaleDateString("vi-VN", {
+  return new Date(iso).toLocaleDateString("en-US", {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
@@ -58,7 +56,7 @@ const getStatusConfig = (status) => {
         color: "#dc2626",
         bg: "#fee2e2",
         icon: Package,
-      }; // Thêm trạng thái hủy
+      };
     default:
       return { text: "Pending", color: "#64748b", bg: "#f1f5f9", icon: Clock };
   }
@@ -66,7 +64,7 @@ const getStatusConfig = (status) => {
 
 export default function OrderHistoryPage() {
   const navigate = useNavigate();
-  const { user, isAuthenticated } = useAuth(); // Dùng hook chuẩn
+  const { user, isAuthenticated } = useAuth();
 
   const [loading, setLoading] = useState(true);
   const [orders, setOrders] = useState([]);
@@ -74,9 +72,7 @@ export default function OrderHistoryPage() {
   const [filter, setFilter] = useState("all");
   const { notice, showNotice } = useNotice();
 
-  // --- LOAD DATA ---
   useEffect(() => {
-    // Nếu chưa đăng nhập thì thôi, để UI ở dưới xử lý redirect
     if (!isAuthenticated || !user) {
       setLoading(false);
       return;
@@ -92,7 +88,7 @@ export default function OrderHistoryPage() {
           setOrders(Array.isArray(list) ? list : []);
         }
       } catch (e) {
-        console.error("Lỗi tải đơn hàng:", e);
+        console.error("Error loading orders:", e);
       } finally {
         if (mounted) setLoading(false);
       }
@@ -109,12 +105,12 @@ export default function OrderHistoryPage() {
   const filteredOrders = useMemo(() => {
     let result = [...orders];
 
-    // 1. Sort: Mới nhất lên đầu
+    // 1. Sort: Newest first
     result.sort(
       (a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0)
     );
 
-    // 2. Filter theo Search & Status
+    // 2. Filter by Search & Status
     if (q || filter !== "all") {
       const lowerQ = q.toLowerCase();
       result = result.filter((o) => {
@@ -237,29 +233,29 @@ export default function OrderHistoryPage() {
           >
             {[
               {
-                label: "Tổng đơn",
+                label: "Total Orders",
                 val: stats.total,
                 icon: ShoppingBag,
                 color: "#64748b",
               },
               {
-                label: "Đang xử lý",
+                label: "Processing",
                 val: stats.processing,
                 icon: Truck,
                 color: "#3b82f6",
               },
               {
-                label: "Hoàn thành",
+                label: "Delivered",
                 val: stats.delivered,
                 icon: CheckCircle2,
                 color: "#22c55e",
               },
               {
-                label: "Tổng chi tiêu",
+                label: "Total Spent",
                 val: formatCurrency(stats.spent),
                 icon: Package,
                 color: "#f59e0b",
-              }, // Icon Package đại diện
+              },
             ].map((st, idx) => (
               <div
                 key={idx}
@@ -326,7 +322,7 @@ export default function OrderHistoryPage() {
               }}
             />
             <input
-              placeholder="Tìm theo Mã đơn hoặc Giá tiền..."
+              placeholder="Search by Order ID or Price..."
               value={q}
               onChange={(e) => setQ(e.target.value)}
               style={{
@@ -350,18 +346,18 @@ export default function OrderHistoryPage() {
               height: 42,
             }}
           >
-            <option value="all">Tất cả trạng thái</option>
-            <option value="pending">Chờ xử lý (Pending)</option>
-            <option value="processing">Đang đóng gói (Processing)</option>
-            <option value="shipped">Đang giao (Shipped)</option>
-            <option value="delivered">Đã giao (Delivered)</option>
+            <option value="all">All Statuses</option>
+            <option value="pending">Pending</option>
+            <option value="processing">Processing</option>
+            <option value="shipped">Shipped</option>
+            <option value="delivered">Delivered</option>
           </select>
         </div>
 
         {/* Loading State */}
         {loading && (
           <div style={{ textAlign: "center", padding: 40 }}>
-            Đang tải danh sách đơn hàng...
+            Loading your orders...
           </div>
         )}
 
@@ -434,7 +430,7 @@ export default function OrderHistoryPage() {
                           display: "block",
                         }}
                       >
-                        MÃ ĐƠN HÀNG
+                        Order ID
                       </span>
                       <span style={{ fontWeight: 600 }}>#{order.id}</span>
                     </div>
@@ -446,7 +442,7 @@ export default function OrderHistoryPage() {
                           display: "block",
                         }}
                       >
-                        NGÀY ĐẶT
+                        Order Date
                       </span>
                       <span style={{ fontWeight: 500 }}>
                         {formatDate(order.created_at)}
@@ -492,10 +488,8 @@ export default function OrderHistoryPage() {
                   <div style={{ flex: 1 }}>
                     {items.length > 0 ? (
                       items.map((item, idx) => {
-                        // ✅ TRÍCH XUẤT DỮ LIỆU ĐÚNG TỪ CẤU TRÚC RUST
                         const product = item.product || {};
                         const variant = item.product_variant || {};
-                        // item.price và item.quantity lấy trực tiếp vì đã được flatten từ order_items
 
                         return (
                           <div
@@ -517,7 +511,6 @@ export default function OrderHistoryPage() {
                               }}
                             >
                               <img
-                                // SỬA: Lấy ảnh từ item.product.image_url
                                 src={
                                   product.image_url || "https://placehold.co/50"
                                 }
@@ -534,9 +527,8 @@ export default function OrderHistoryPage() {
                               />
                             </div>
                             <div>
-                              {/* SỬA: Lấy tên từ item.product.name */}
                               <div style={{ fontWeight: 500, fontSize: 14 }}>
-                                {product.name || "Sản phẩm không tồn tại"}
+                                {product.name || "Unnamed Product"}
                               </div>
                               <div style={{ fontSize: 13, color: "#64748b" }}>
                                 Qty: {item.quantity} x{" "}
@@ -548,14 +540,14 @@ export default function OrderHistoryPage() {
                         );
                       })
                     ) : (
-                      <p className="muted">Không có thông tin sản phẩm</p>
+                      <p className="muted">No product information</p>
                     )}
                   </div>
 
                   {/* Action Button */}
                   <div style={{ textAlign: "right" }}>
                     <button
-                      onClick={() => navigate(`/orders/${order.id}`)} // Route chi tiết đơn hàng
+                      onClick={() => navigate(`/orders/${order.id}`)}
                       className="btn btn-outline"
                       style={{
                         display: "flex",
@@ -564,7 +556,7 @@ export default function OrderHistoryPage() {
                         padding: "8px 16px",
                       }}
                     >
-                      Chi tiết <ArrowRight size={16} />
+                      View Details <ArrowRight size={16} />
                     </button>
                     
                   </div>

@@ -20,13 +20,12 @@ export default function KidsPage() {
           const catId = Number(p.category_id);
           const parentId = p.category ? Number(p.category.parent_id) : null;
 
-          // Lấy nếu là Kids (3) hoặc con của Kids (parent_id = 3)
           return (catId === 3 || parentId === 3) && p.is_active;
         });
 
         setProducts(kidsProducts);
       } catch (err) {
-        console.error("Lỗi fetch Kids:", err);
+        console.error("Error fetching Kids:", err);
       } finally {
         setLoading(false);
       }
@@ -68,7 +67,7 @@ export default function KidsPage() {
         className="men-wrap"
         style={{ minHeight: "60vh", paddingTop: 100, textAlign: "center" }}
       >
-        <p>Đang tải sản phẩm cho bé...</p>
+        <p>Loading kids products...</p>
       </main>
     );
   }
@@ -91,8 +90,7 @@ export default function KidsPage() {
         <div className="container">
           <h1 className="men-title">Kids&apos; Collection</h1>
           <p className="men-sub">
-            Thoải mái vui chơi, vận động với bộ sưu tập giày bền bỉ dành cho trẻ
-            em.
+            Comfort and fun for active kids with our durable shoe collection.
           </p>
         </div>
       </section>
@@ -142,10 +140,10 @@ export default function KidsPage() {
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
               >
-                <option value="popular">Phổ biến</option>
-                <option value="newest">Mới nhất</option>
-                <option value="price-low">Giá thấp đến cao</option>
-                <option value="price-high">Giá cao đến thấp</option>
+                <option value="popular">Default</option>
+                <option value="newest">Newest First</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
               </select>
             </div>
           </div>
@@ -154,8 +152,8 @@ export default function KidsPage() {
             <div
               style={{ padding: "40px", textAlign: "center", width: "100%" }}
             >
-              <h3>Chưa có sản phẩm nào</h3>
-              <p>Vui lòng quay lại sau.</p>
+              <h3>No products available</h3>
+              <p>Please check back later.</p>
             </div>
           ) : (
             <div className="men-grid">

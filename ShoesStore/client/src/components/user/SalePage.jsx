@@ -15,7 +15,6 @@ export default function SalePage() {
       try {
         const all = await getProducts();
 
-        // Lọc những sản phẩm có discount_percentage > 0
         const saleItems = all.filter(
           (p) => p.is_active && (p.discount_percentage || 0) > 0
         );
@@ -52,7 +51,6 @@ export default function SalePage() {
         );
       case "discount":
       default:
-        // Sắp xếp giảm giá nhiều nhất lên đầu
         return arr.sort(
           (a, b) => (b.discount_percentage || 0) - (a.discount_percentage || 0)
         );
@@ -64,7 +62,7 @@ export default function SalePage() {
   if (loading) {
     return (
       <main className="men-wrap" style={{ minHeight: "60vh", paddingTop: 100, textAlign: "center" }}>
-        <p>Đang tìm kiếm các ưu đãi tốt nhất...</p>
+        <p>Finding the best deals...</p>
       </main>
     );
   }
@@ -85,7 +83,7 @@ export default function SalePage() {
         <div className="container">
           <h1 className="men-title">Sale Collection</h1>
           <p className="men-sub">
-            Đừng bỏ lỡ những deal hời nhất! Săn ngay các mẫu giày cao cấp với mức giá ưu đãi.
+            Don't miss out on the best deals! Grab premium shoes at discounted prices.
           </p>
         </div>
       </section>
@@ -102,7 +100,7 @@ export default function SalePage() {
 
             {/* Price Range (VND) */}
             <div className="men-block">
-              <h4>Mức giá</h4>
+              <h4>Price Range</h4>
               <input
                 type="range"
                 min="0"
@@ -123,15 +121,15 @@ export default function SalePage() {
         <div className="men-main">
           <div className="men-toolbar">
             <p className="muted">
-              Tìm thấy {sortedProducts.length} sản phẩm giảm giá
+              Found {sortedProducts.length} items on sale
             </p>
             <div className="men-sort">
-              <span className="muted">Sắp xếp:</span>
+              <span className="muted">Sort by:</span>
               <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-                <option value="discount">Giảm nhiều nhất</option>
-                <option value="price-low">Giá: Thấp đến cao</option>
-                <option value="price-high">Giá: Cao đến thấp</option>
-                <option value="newest">Mới nhất</option>
+                <option value="discount">Highest Discount</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="newest">Newest First</option>
               </select>
             </div>
           </div>
@@ -149,7 +147,6 @@ export default function SalePage() {
                 <ProductCard
                   key={p.product_id || p.id}
                   id={p.product_id || p.id}
-                  // QUAN TRỌNG: Sửa p.image_url thành p.image để dùng ảnh placeholder nếu lỗi
                   image={p.image} 
                   name={p.name}
                   price={p.price}

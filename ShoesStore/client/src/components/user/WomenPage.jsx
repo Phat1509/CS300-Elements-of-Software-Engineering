@@ -6,7 +6,7 @@ import { getProducts } from "../../utilities/api";
 
 export default function WomenPage() {
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true); // Thêm loading
+  const [loading, setLoading] = useState(true);
   const [maxPrice, setMaxPrice] = useState(4000000);
   const [sortBy, setSortBy] = useState("popular");
 
@@ -64,7 +64,7 @@ export default function WomenPage() {
         className="men-wrap"
         style={{ minHeight: "60vh", paddingTop: 100, textAlign: "center" }}
       >
-        <p>Đang tải bộ sưu tập...</p>
+        <p>Loading collection...</p>
       </main>
     );
   }
@@ -87,7 +87,7 @@ export default function WomenPage() {
         <div className="container">
           <h1 className="men-title">Women&apos;s Collection</h1>
           <p className="men-sub">
-            Khám phá vẻ đẹp thanh lịch và sự thoải mái cho phái nữ.
+            Discover elegance and comfort for women.
           </p>
         </div>
       </section>
@@ -135,10 +135,10 @@ export default function WomenPage() {
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
               >
-                <option value="popular">Phổ biến</option>
-                <option value="newest">Mới nhất</option>
-                <option value="price-low">Giá: Thấp đến cao</option>
-                <option value="price-high">Giá: Cao đến thấp</option>
+                <option value="popular">Default</option>
+                <option value="newest">Newest First</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
               </select>
             </div>
           </div>

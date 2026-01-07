@@ -192,13 +192,13 @@ const ProductDetail = () => {
         className="container"
         style={{ padding: "100px 0", textAlign: "center" }}
       >
-        <h2>Không tìm thấy sản phẩm</h2>
+        <h2>Product not found</h2>
         <Link
           to="/"
           className="btn btn-primary"
           style={{ marginTop: 20, display: "inline-block" }}
         >
-          Quay về trang chủ
+          Back to Home
         </Link>
       </div>
     );
@@ -339,7 +339,7 @@ const ProductDetail = () => {
             </div>
 
             <p style={{ lineHeight: 1.6, color: "#444", marginBottom: 26 }}>
-              {product.description || "Chưa có mô tả cho sản phẩm này."}
+              {product.description || "No description available for this product."}
             </p>
 
             {/* OPTIONS: SIZE */}
@@ -429,13 +429,13 @@ const ProductDetail = () => {
             {selectedVariant ? (
               selectedVariant.stock === 0 ? (
                 <p style={{ color: "#111", margin: "10px 0 0" }}>
-                  Hết hàng tạm thời
+                  Temporarily out of stock
                 </p>
               ) : (
                 <p
                   style={{ color: "#16a34a", fontSize: 14, margin: "10px 0 0" }}
                 >
-                  ✓ Còn hàng (Tồn kho: {selectedVariant.stock})
+                  ✓ In stock (Available: {selectedVariant.stock})
                 </p>
               )
             ) : (

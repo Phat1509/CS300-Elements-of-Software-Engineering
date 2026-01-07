@@ -20,19 +20,17 @@ export default function MenPage() {
       try {
         const all = await getProducts();
 
-        // HOẶC sản phẩm thuộc danh mục con có parent_id là 1 (như Running, Sneakers của nam)
         const menProducts = all.filter((p) => {
           const catId = Number(p.category_id);
           const parentId = p.category ? Number(p.category.parent_id) : null;
 
-          // Lấy nếu là Men (1) hoặc con của Men (parent_id = 1)
           return (catId === 1 || parentId === 1) && p.is_active;
         });
 
         setProducts(menProducts);
       } catch (err) {
         console.error("Error fetching men products:", err);
-        setError("Không thể tải danh sách sản phẩm.");
+        setError("Unable to load products.");
       } finally {
         setLoading(false);
       }
@@ -71,7 +69,7 @@ export default function MenPage() {
         className="men-wrap"
         style={{ minHeight: "60vh", paddingTop: 100, textAlign: "center" }}
       >
-        <p>Đang tải sản phẩm...</p>
+        <p>Loading products...</p>
       </main>
     );
   }
@@ -87,7 +85,7 @@ export default function MenPage() {
           onClick={() => window.location.reload()}
           className="btn btn-outline"
         >
-          Thử lại
+          Retry
         </button>
       </main>
     );
@@ -109,7 +107,7 @@ export default function MenPage() {
         <div className="container">
           <h1 className="men-title">Men&apos;s Collection</h1>
           <p className="men-sub">
-            Khám phá bộ sưu tập giày nam mới nhất và chất lượng nhất.
+            Explore the latest and highest quality men's shoes collection.
           </p>
         </div>
       </section>
@@ -163,8 +161,8 @@ export default function MenPage() {
             <div
               style={{ padding: "40px 0", textAlign: "center", width: "100%" }}
             >
-              <h3>Không tìm thấy sản phẩm nào</h3>
-              <p className="muted">Thử điều chỉnh bộ lọc giá xem sao nhé.</p>
+              <h3>No products found</h3>
+              <p className="muted">Try adjusting the price filter.</p>
             </div>
           ) : (
             <div className="men-grid">
