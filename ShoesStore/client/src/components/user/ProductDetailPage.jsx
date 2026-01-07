@@ -1,5 +1,5 @@
 // client/src/components/user/ProductDetailPage.jsx
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import {
   ChevronRight,
@@ -29,6 +29,20 @@ const ProductDetail = () => {
   const [selectedColor, setSelectedColor] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [isAdding, setIsAdding] = useState(false);
+  const [notif, setNotif] = useState(null); // { type: 'success'|'error', message: string }
+  const notifTimerRef = useRef(null);
+
+  const showNotif = (type, message, timeout = 3000) => {
+    if (notifTimerRef.current) {
+      clearTimeout(notifTimerRef.current);
+      notifTimerRef.current = null;
+    }
+    setNotif({ type, message });
+    notifTimerRef.current = setTimeout(() => {
+      setNotif(null);
+      notifTimerRef.current = null;
+    }, timeout);
+  };
 
   /* ================= LOAD DATA ================= */
   useEffect(() => {
@@ -101,15 +115,16 @@ const ProductDetail = () => {
     if (!product) return;
     try {
       await toggleWishlist(product.id);
+      showNotif("success", "Wishlist updated.");
     } catch (e) {
       const errorMsg = String(e?.message || e);
       console.error("Wishlist error:", e);
       
       if (errorMsg.includes("NOT_LOGGED_IN") || errorMsg.includes("Login") || errorMsg.includes("Unauthorized")) {
-        alert("Please sign in to use Wishlist!");
+        showNotif("error", "Please sign in to use Wishlist!");
         navigate("/signin"); 
       } else {
-        alert("Failed to update wishlist. Please try again.");
+        showNotif("error", "Failed to update wishlist. Please try again.");
       }
     }
   };
@@ -119,17 +134,17 @@ const ProductDetail = () => {
       (sizes.length > 0 && !selectedSize) ||
       (colors.length > 0 && !selectedColor)
     ) {
-      alert("Vui lòng chọn đầy đủ Size và Màu sắc!");
+      showNotif("error", "Please select Size and Color!");
       return;
     }
 
     if (!selectedVariant) {
-      alert("Sản phẩm với tùy chọn này hiện không khả dụng.");
+      showNotif("error", "This product variant is currently unavailable.");
       return;
     }
 
     if (selectedVariant.stock < quantity) {
-      alert(`Chỉ còn lại ${selectedVariant.stock} sản phẩm trong kho!`);
+      showNotif("error", `Only ${selectedVariant.stock} items left in stock!`);
       return;
     }
 
@@ -137,7 +152,7 @@ const ProductDetail = () => {
 
     if (!variantId) {
       console.error("Variant Data Error:", selectedVariant);
-      alert("Lỗi dữ liệu: Không tìm thấy ID sản phẩm.");
+      showNotif("error", "Data error: Product ID not found.");
       return;
     }
 
@@ -149,9 +164,11 @@ const ProductDetail = () => {
 
       await addToCart(variantId, quantity);
 
+      showNotif("success", "Added to cart.");
       setQuantity(1);
     } catch (err) {
-      console.error("Lỗi thêm giỏ hàng:", err);
+      console.error("Add to cart error:", err);
+      showNotif("error", "Failed to add to cart. Please try again.");
     } finally {
       setIsAdding(false);
     }
@@ -257,6 +274,22 @@ const ProductDetail = () => {
               minWidth: 0,
             }}
           >
+            {notif && (
+              <div
+                style={{
+                  marginBottom: 12,
+                  padding: "10px 12px",
+                  borderRadius: 10,
+                  background: notif.type === "success" ? "#ecfdf5" : "#fef2f2",
+                  color: notif.type === "success" ? "#065f46" : "#991b1b",
+                  border: `1px solid ${notif.type === "success" ? "#a7f3d0" : "#fecaca"}`,
+                  fontSize: 14,
+                }}
+                role="alert"
+              >
+                {notif.message}
+              </div>
+            )}
             <h1 style={{ margin: "0 0 10px", fontSize: "28px" }}>
               {product.name}
             </h1>
