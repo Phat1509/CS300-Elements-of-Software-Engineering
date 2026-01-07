@@ -131,11 +131,6 @@ impl ProductUpdateParams {
     }
 }
 
-async fn load_item(ctx: &AppContext, id: i32) -> Result<Model> {
-    let item = Entity::find_by_id(id).one(&ctx.db).await?;
-    item.ok_or_else(|| Error::NotFound)
-}
-
 #[utoipa::path(
     get,
     path = "/api/products",
@@ -219,7 +214,7 @@ pub async fn add(
 #[debug_handler]
 pub async fn update(
     auth: auth::JWTWithUser<users::Model>,
-    Path(id): Path<i32>,
+    Path(id): Path<String>,
     State(ctx): State<AppContext>,
     Json(params): Json<ProductUpdateParams>,
 ) -> Result<Response> {
@@ -227,7 +222,9 @@ pub async fn update(
         return forbidden("You are not authorized to perform this action.");
     }
 
-    let item = load_item(&ctx, id).await?;
+    let item = Model::get_by_id_or_slug(&ctx.db, id)
+        .await?
+        .ok_or_else(|| Error::NotFound)?;
     let mut item = item.into_active_model();
     params.update(&mut item);
     let item = item.update(&ctx.db).await?;
@@ -249,14 +246,18 @@ pub async fn update(
 #[debug_handler]
 pub async fn remove(
     auth: auth::JWTWithUser<users::Model>,
-    Path(id): Path<i32>,
+    Path(id): Path<String>,
     State(ctx): State<AppContext>,
 ) -> Result<Response> {
     if !auth.user.is_staff {
         return forbidden("You are not authorized to perform this action.");
     }
 
-    load_item(&ctx, id).await?.delete(&ctx.db).await?;
+    Model::get_by_id_or_slug(&ctx.db, id)
+        .await?
+        .ok_or_else(|| Error::NotFound)?
+        .delete(&ctx.db)
+        .await?;
     format::empty()
 }
 
@@ -273,8 +274,11 @@ pub async fn remove(
     )
 )]
 #[debug_handler]
-pub async fn get_one(Path(id): Path<i32>, State(ctx): State<AppContext>) -> Result<Response> {
-    let (product, brand, category) = Model::find_by_id_with_brand_category(&ctx.db, id)
+pub async fn get_one(Path(id): Path<String>, State(ctx): State<AppContext>) -> Result<Response> {
+    let product = Model::get_by_id_or_slug(&ctx.db, id)
+        .await?
+        .ok_or_else(|| Error::NotFound)?;
+    let (product, brand, category) = Model::find_by_id_with_brand_category(&ctx.db, product.id)
         .await?
         .ok_or_else(|| Error::NotFound)?;
     let variants = product

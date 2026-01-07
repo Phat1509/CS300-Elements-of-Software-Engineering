@@ -1,4 +1,5 @@
-pub use super::_entities::categories::{ActiveModel, Entity, Model};
+pub use super::_entities::categories::{ActiveModel, Column, Entity, Model};
+use super::_macros::impl_find_by_slug;
 use sea_orm::entity::prelude::*;
 pub type Categories = Entity;
 
@@ -20,6 +21,7 @@ impl ActiveModelBehavior for ActiveModel {
 
 // implement your read-oriented logic here
 impl Model {}
+impl_find_by_slug!();
 
 // implement your write-oriented logic here
 impl ActiveModel {}
