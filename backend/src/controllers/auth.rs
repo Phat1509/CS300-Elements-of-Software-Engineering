@@ -204,7 +204,7 @@ async fn login(State(ctx): State<AppContext>, Json(params): Json<LoginParams>) -
 
     let token = user
         .generate_jwt(&jwt_secret.secret, jwt_secret.expiration)
-        .or_else(|_| {
+        .or_else(|e| {
             tracing::debug!(err = ?e, "could not create JWT token");
             unauthorized("unauthorized!")
         })?;
