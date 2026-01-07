@@ -24,7 +24,7 @@ export const registerAPI = async (name, email, password) => {
   return response.data;
 };
 
-// 3. API Lấy thông tin User hiện tại (khi F5 trang)
+// 3. API Lấy thông tin User hiện tại 
 export const getMeAPI = async () => {
   // Gửi GET /auth/current
   const response = await api.get('/auth/current');
