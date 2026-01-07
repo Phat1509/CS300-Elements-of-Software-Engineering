@@ -87,7 +87,7 @@ export default function WishlistPage() {
         {!userId ? (
           <div className="card" style={{ padding: 18 }}>
             <p style={{ marginTop: 0 }}>
-              Bạn cần <b>Sign in</b> để dùng Wishlist nha.
+              Please <b>Sign in</b> to view your wishlist.
             </p>
             <Link to="/signin" className="btn btn-primary" style={{ width: "fit-content" }}>
               Go to Sign in

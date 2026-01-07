@@ -180,14 +180,14 @@ export default function OrderHistoryPage() {
         className="container"
         style={{ padding: "80px 0", textAlign: "center" }}
       >
-        <h3>Vui lòng đăng nhập</h3>
-        <p className="muted">Bạn cần đăng nhập để xem lịch sử mua hàng.</p>
+        <h3>Please sign in</h3>
+        <p className="muted">You need to sign in to view your order history.</p>
         <Link
-          to="/login"
+          to="/signin"
           className="btn btn-primary"
           style={{ marginTop: 20, display: "inline-block" }}
         >
-          Đăng nhập ngay
+          Sign in now
         </Link>
       </div>
     );
@@ -218,10 +218,10 @@ export default function OrderHistoryPage() {
           >
             <div>
               <h1 style={{ margin: "0 0 8px", fontSize: "28px" }}>
-                Lịch sử đơn hàng
+                Order History
               </h1>
               <p className="muted" style={{ margin: 0 }}>
-                Quản lý và theo dõi trạng thái đơn hàng của bạn
+                Manage and track the status of your orders
               </p>
             </div>
           </div>
@@ -381,12 +381,12 @@ export default function OrderHistoryPage() {
               color="#cbd5e1"
               style={{ margin: "0 auto 20px" }}
             />
-            <h3>Không tìm thấy đơn hàng nào</h3>
+            <h3>No orders found</h3>
             <p className="muted" style={{ marginBottom: 20 }}>
-              Bạn chưa có đơn hàng nào hoặc không tìm thấy kết quả phù hợp.
+              You don't have any orders yet or no matching results were found.
             </p>
             <Link to="/" className="btn btn-primary">
-              Mua sắm ngay
+              Start shopping
             </Link>
           </div>
         )}

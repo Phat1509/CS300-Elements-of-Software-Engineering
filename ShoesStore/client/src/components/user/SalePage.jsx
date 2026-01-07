@@ -138,9 +138,9 @@ export default function SalePage() {
 
           {sortedProducts.length === 0 ? (
             <div style={{ padding: "40px", textAlign: "center", width: "100%" }}>
-              <h3>Hiện chưa có sản phẩm giảm giá trong tầm giá này</h3>
+              <h3>No discounted products in this price range</h3>
               <p className="muted">
-                 Có thể Database của bạn chưa set trường <b>discount_percentage</b> cho sản phẩm nào.
+                 Your database may not have the <b>discount_percentage</b> field set for products.
               </p>
             </div>
           ) : (

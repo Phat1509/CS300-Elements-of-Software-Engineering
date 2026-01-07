@@ -61,7 +61,7 @@ const ProductDetail = () => {
           setVariants([]);
         }
       } catch (e) {
-        console.error("Lỗi tải sản phẩm:", e);
+        console.error("Error loading product:", e);
         setProduct(null);
         setVariants([]);
       } finally {
@@ -440,7 +440,7 @@ const ProductDetail = () => {
               )
             ) : (
               <p style={{ color: "#666", fontSize: 14, margin: "10px 0 0" }}>
-                Vui lòng chọn Size và Màu
+                Please select size and color
               </p>
             )}
 

@@ -25,7 +25,7 @@ export default function WomenPage() {
 
         setProducts(womenProducts);
       } catch (err) {
-        console.error("Lỗi fetch women:", err);
+        console.error("Error fetching women products:", err);
       } finally {
         setLoading(false);
       }
@@ -147,8 +147,8 @@ export default function WomenPage() {
             <div
               style={{ padding: "40px", textAlign: "center", width: "100%" }}
             >
-              <h3>Không tìm thấy sản phẩm</h3>
-              <p>Vui lòng thử khoảng giá khác.</p>
+              <h3>No products found</h3>
+              <p>Please try a different price range.</p>
             </div>
           ) : (
             <div className="men-grid">
