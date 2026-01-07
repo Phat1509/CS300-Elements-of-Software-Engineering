@@ -93,7 +93,7 @@ export default function WishlistPage() {
           </div>
         ) : isEmpty ? (
           <div className="card" style={{ padding: 18 }}>
-            <p style={{ marginTop: 0 }}>Wishlist của bạn đang trống 👀</p>
+            <p style={{ marginTop: 0 }}>Your wishlist is empty.</p>
             <Link to="/new" className="btn btn-primary" style={{ width: "fit-content" }}>
               Browse new arrivals
             </Link>
