@@ -1,169 +1,156 @@
-// src/components/admin/OrdersAdmin.jsx
 import React, { useEffect, useState } from "react";
-import { getOrders, updateOrderStatus } from "../../utilities/adminApi";
+import adminApi from "../../utilities/adminApi"; // Đảm bảo import đúng
 import AdminLayout from "./AdminLayout";
 
-const OrdersAdmin = () => {
+export default function OrdersAdmin() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedOrder, setSelectedOrder] = useState(null);
 
-  useEffect(() => {
-    loadOrders();
-  }, []);
+  useEffect(() => { loadOrders(); }, []);
 
   const loadOrders = async () => {
     setLoading(true);
     try {
-      const data = await getOrders();
+      const data = await adminApi.getOrders();
       setOrders(Array.isArray(data) ? data : []);
-    } catch (error) {
-      console.error("Failed to load orders", error);
+    } catch (err) {
+      console.error("Lỗi tải đơn hàng:", err);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleStatusChange = async (orderId, newStatus) => {
-    const confirmMsg = 
-      newStatus === 'COMPLETED' ? "Xác nhận đơn hàng đã hoàn thành?" :
-      newStatus === 'SHIPPING' ? "Xác nhận bắt đầu giao hàng?" : 
-      "Đổi trạng thái đơn hàng?";
-      
-    if (!window.confirm(confirmMsg)) return;
-
+  const handleUpdateStatus = async (orderId, newStatus) => {
+    if (!window.confirm(`Chuyển đơn hàng #${orderId} sang trạng thái ${newStatus}?`)) return;
+    
     try {
-      await updateOrderStatus(orderId, newStatus);
-      await loadOrders(); 
+      // SỬA TÊN HÀM Ở ĐÂY CHO KHỚP VỚI adminApi.js
+      await adminApi.updateOrderStatus(orderId, newStatus);
       alert("Cập nhật trạng thái thành công!");
-    } catch (error) {
-      console.error("Update status failed", error);
-      alert("Lỗi cập nhật trạng thái. Kiểm tra console.");
+      loadOrders(); 
+      setSelectedOrder(null);
+    } catch (err) {
+      alert("Lỗi cập nhật: " + err.message);
     }
   };
 
-  const renderStatusBadge = (status) => {
-    let colorClass = "pill-gray"; 
-    let label = status;
-
+  const getStatusClass = (status) => {
     switch (status) {
-      case "PENDING":
-        colorClass = "pill-yellow"; 
-        break;
-      case "SHIPPING":
-        colorClass = "pill-blue"; 
-        break;
-      case "COMPLETED":
-        colorClass = "pill-green";
-        break;
-      case "CANCELLED":
-        colorClass = "pill-red";
-        break;
-      default:
-        break;
+      case 'Pending': return 'pill-gray';
+      case 'Paid': return 'pill-blue';
+      case 'Shipped': return 'pill-blue';
+      case 'Delivered': return 'pill-green';
+      case 'Cancelled': return 'pill-red';
+      default: return 'pill-gray';
     }
-
-    const styleMap = {
-      PENDING: { backgroundColor: '#fff3cd', color: '#856404' },
-      SHIPPING: { backgroundColor: '#cce5ff', color: '#004085' },
-      COMPLETED: { backgroundColor: '#d4edda', color: '#155724' },
-      CANCELLED: { backgroundColor: '#f8d7da', color: '#721c24' },
-    };
-
-    return (
-      <span className="pill" style={styleMap[status] || {}}>
-        {label}
-      </span>
-    );
   };
 
   return (
-    <AdminLayout title="Order Management">
-      <div className="admin-toolbar" style={{ justifyContent: 'flex-end' }}>
-         <button className="btn btn-outline" onClick={loadOrders}>
-            🔄 Refresh
-         </button>
-      </div>
-
-      {loading ? (
-        <div className="muted" style={{ padding: 20 }}>Loading orders...</div>
-      ) : (
-        <div className="admin-table-wrap">
-          <table className="admin-table">
-            <thead>
-              <tr>
-                <th style={{ width: 80 }}>ID</th>
-                <th>Date</th>
-                <th>Total</th>
-                <th>Status</th>
-                <th style={{ textAlign: "right" }}>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {orders.length === 0 ? (
+    <AdminLayout title="Quản lý Đơn hàng">
+      <div className="admin-panel">
+        {loading ? <p>Đang tải đơn hàng...</p> : (
+          <div className="admin-table-wrap">
+            <table className="admin-table">
+              <thead>
                 <tr>
-                  <td colSpan={5} className="text-center p-4 muted">
-                    No orders found.
-                  </td>
+                  <th>Mã đơn</th>
+                  <th>ID Khách</th>
+                  <th>Tổng tiền</th>
+                  <th>Thanh toán</th>
+                  <th>Trạng thái</th>
+                  <th style={{ textAlign: 'right' }}>Hành động</th>
                 </tr>
-              ) : (
-                orders.map((order) => {
-                   // Lấy ID chuẩn
-                   const realId = order.id || order.order_id;
-                   
-                   return (
-                    <tr key={realId}>
-                      <td>#{realId}</td>
+              </thead>
+              <tbody>
+                {orders.length === 0 ? (
+                  <tr><td colSpan="6" style={{textAlign:'center', padding: '20px'}}>Không có đơn hàng nào.</td></tr>
+                ) : (
+                  orders.map(order => (
+                    <tr key={order.id}>
+                      <td><strong>#{order.id}</strong></td>
+                      <td>User #{order.user_id}</td>
+                      <td>{Number(order.amount).toLocaleString()}đ</td>
+                      <td>{order.payment_method}</td>
                       <td>
-                        {new Date(order.created_at || Date.now()).toLocaleDateString('vi-VN')}
-                        <div className="muted small">
-                          {new Date(order.created_at || Date.now()).toLocaleTimeString('vi-VN')}
-                        </div>
+                        <span className={`pill ${getStatusClass(order.status)}`}>
+                          {order.status}
+                        </span>
                       </td>
-                      <td style={{ fontWeight: 'bold' }}>
-                        {Number(order.total_amount).toLocaleString()}₫
-                      </td>
-                      <td>
-                        {renderStatusBadge(order.status)}
-                      </td>
-                      <td style={{ textAlign: "right" }}>
-                        <div style={{ display: 'flex', gap: 5, justifyContent: 'flex-end' }}>
-                          
-                          {order.status === "PENDING" && (
-                            <button
-                              onClick={() => handleStatusChange(realId, "SHIPPING")}
-                              className="btn btn-sm"
-                              style={{ backgroundColor: '#007bff', color: 'white', border: 'none' }}
-                              title="Start Shipping"
-                            >
-                              🚚 Ship
-                            </button>
-                          )}
-
-                          {(order.status === "PENDING" || order.status === "SHIPPING") && (
-                            <button
-                              onClick={() => handleStatusChange(realId, "COMPLETED")}
-                              className="btn btn-sm"
-                              style={{ backgroundColor: '#28a745', color: 'white', border: 'none' }}
-                              title="Mark as Completed"
-                            >
-                            </button>
-                          )}
-                          
-                          {order.status === "COMPLETED" && (
-                            <span className="muted small">Archived</span>
-                          )}
-                        </div>
+                      <td style={{ textAlign: 'right' }}>
+                        <button 
+                          className="btn btn-outline" 
+                          onClick={() => setSelectedOrder(order)}
+                          style={{ padding: '4px 12px', fontSize: '12px' }}
+                        >
+                          Chi tiết / Xử lý
+                        </button>
                       </td>
                     </tr>
-                  );
-                })
-              )}
-            </tbody>
-          </table>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+
+      {selectedOrder && (
+        <div className="admin-modal-overlay" style={modalOverlayStyle}>
+          <div className="admin-panel" style={modalContentStyle}>
+            <div className="admin-panel-top">
+              <h3>Đơn hàng #{selectedOrder.id}</h3>
+              <button className="btn-icon" onClick={() => setSelectedOrder(null)}>✕</button>
+            </div>
+            
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
+              <div>
+                <p><strong>Địa chỉ:</strong> {selectedOrder.shipping_address || "N/A"}</p>
+                <p><strong>Ngày đặt:</strong> {new Date(selectedOrder.created_at).toLocaleString()}</p>
+                <p><strong>Phương thức:</strong> {selectedOrder.payment_method}</p>
+              </div>
+              <div>
+                <label><strong>Cập nhật trạng thái:</strong></label>
+                <select 
+                  className="input" 
+                  value={selectedOrder.status}
+                  onChange={(e) => handleUpdateStatus(selectedOrder.id, e.target.value)}
+                  style={{ marginTop: '8px' }}
+                >
+                  <option value="Pending">Pending</option>
+                  <option value="Paid">Paid</option>
+                  <option value="Shipped">Shipped</option>
+                  <option value="Delivered">Delivered</option>
+                  <option value="Cancelled">Cancelled</option>
+                </select>
+              </div>
+            </div>
+
+            <h4 className="muted" style={{ marginBottom: '10px' }}>Danh sách sản phẩm</h4>
+            <table className="admin-table mini">
+              <thead>
+                <tr>
+                  <th>Sản phẩm (Variant ID)</th>
+                  <th>Số lượng</th>
+                  <th>Đơn giá</th>
+                </tr>
+              </thead>
+              <tbody>
+                {selectedOrder.items?.map((item, idx) => (
+                  <tr key={idx}>
+                    <td>Biến thể #{item.product_variant_id}</td>
+                    <td>{item.quantity}</td>
+                    <td>{Number(item.price).toLocaleString()}đ</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
     </AdminLayout>
   );
-};
+}
 
-export default OrdersAdmin;
+const modalOverlayStyle = { position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 };
+const modalContentStyle = { width: '95%', maxWidth: '700px', background: '#fff', padding: '20px', borderRadius: '8px', boxShadow: '0 10px 25px rgba(0,0,0,0.2)' };

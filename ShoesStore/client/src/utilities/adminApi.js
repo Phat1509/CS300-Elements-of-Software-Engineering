@@ -1,13 +1,12 @@
 // client/src/utilities/adminApi.js
-
-const BASE = process.env.REACT_APP_API_URL; 
+const BASE = process.env.REACT_APP_API_URL;
 
 function getToken() {
     const userStr = localStorage.getItem("user");
     if (!userStr) return null;
     try {
         const user = JSON.parse(userStr);
-        return user.token; 
+        return user.token;
     } catch {
         return null;
     }
@@ -37,7 +36,7 @@ async function request(path, opts = {}) {
     return safeJson(res);
 }
 
-// --- 👟 PRODUCTS (CRUD) ---
+// ---  PRODUCTS (CRUD) ---
 export async function getAllProducts() {
     try {
         const res = await request('/api/products?page=1&page_size=1000');
@@ -61,13 +60,12 @@ export async function deleteProduct(id) {
     return request(`/api/products/${id}`, { method: 'DELETE' });
 }
 
-// --- 🎨 PRODUCT VARIANTS (CRUD - Khớp theo path lồng nhau trong Docs) ---
+// --- PRODUCT VARIANTS (CRUD) ---
 export async function getVariants(productId) {
     return request(`/api/products/${productId}/variants`);
 }
 
 export async function createVariant(productId, payload) {
-    // Docs: POST /api/products/{product_id}/variants
     return request(`/api/products/${productId}/variants`, {
         method: 'POST',
         body: JSON.stringify(payload)
@@ -75,7 +73,6 @@ export async function createVariant(productId, payload) {
 }
 
 export async function updateVariant(productId, variantId, payload) {
-    // Docs: PATCH /api/products/{product_id}/variants/{id}
     return request(`/api/products/${productId}/variants/${variantId}`, {
         method: 'PATCH',
         body: JSON.stringify(payload)
@@ -83,13 +80,12 @@ export async function updateVariant(productId, variantId, payload) {
 }
 
 export async function deleteVariant(productId, variantId) {
-    // Docs: DELETE /api/products/{product_id}/variants/{id}
     return request(`/api/products/${productId}/variants/${variantId}`, {
         method: 'DELETE'
     });
 }
 
-// --- 🏷️ BRANDS (CRUD) ---
+// --- BRANDS (CRUD) ---
 export async function getBrands() {
     return request('/api/brands');
 }
@@ -103,12 +99,10 @@ export async function updateBrand(id, payload) {
 }
 
 export async function deleteBrand(id) {
-    // Lưu ý: Docs của bạn ghi POST /api/brands/{id} để xóa, nhưng chuẩn thường là DELETE. 
-    // Tôi để theo tài liệu bạn gửi là POST. Nếu không được hãy đổi thành DELETE.
-    return request(`/api/brands/${id}`, { method: 'POST' }); 
+    return request(`/api/brands/${id}`, { method: 'POST' });
 }
 
-// --- 🗂 CATEGORIES (CRUD) ---
+// ---  CATEGORIES (CRUD) ---
 export async function getCategories() {
     return request('/api/categories');
 }
@@ -121,7 +115,7 @@ export async function deleteCategory(id) {
     return request(`/api/categories/${id}`, { method: 'DELETE' });
 }
 
-// --- 📦 ORDERS (ADMIN) ---
+// ---  ORDERS (ADMIN) ---
 export async function getOrders() {
     return request('/api/orders');
 }
@@ -131,14 +125,16 @@ export async function getOrderDetails(id) {
 }
 
 export async function updateOrderStatus(orderId, status) {
-    // API này bạn cần backend bổ sung như đã nói ở câu trước
     return request(`/api/orders/${orderId}`, {
         method: 'PATCH',
         body: JSON.stringify({ status })
     });
 }
 
-// Export object mặc định chứa tất cả các hàm
+export async function cancelOrder(id) {
+    return request(`/api/orders/${id}/cancel`, { method: 'POST' });
+}
+
 const adminApi = {
     getAllProducts, createProduct, updateProduct, deleteProduct,
     getVariants, createVariant, updateVariant, deleteVariant,

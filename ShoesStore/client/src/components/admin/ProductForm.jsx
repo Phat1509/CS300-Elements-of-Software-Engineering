@@ -16,9 +16,7 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
   const [variants, setVariants] = useState([]);
   const [saving, setSaving] = useState(false);
 
-  // Load danh sách bổ trợ và variants
   useEffect(() => {
-    // Gọi API lấy Brand và Category cho Dropdown
     adminApi.getBrands().then(res => setBrands(Array.isArray(res) ? res : []));
     adminApi.getCategories().then(res => setCategories(Array.isArray(res) ? res : []));
 
@@ -33,7 +31,6 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
         category_id: initial.category_id || "",
         discount_percentage: initial.discount_percentage || 0,
       });
-      // Tải danh sách variants của sản phẩm này
       adminApi.getVariants(initial.id).then(res => setVariants(Array.isArray(res) ? res : []));
     }
   }, [initial]);

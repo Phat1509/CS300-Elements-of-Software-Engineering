@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
-// Lấy URL Backend từ file .env
 const API_BASE = process.env.REACT_APP_API_URL;
 
 export default function AdminLogin() {
@@ -22,7 +21,6 @@ export default function AdminLogin() {
         throw new Error("Chưa cấu hình REACT_APP_API_URL trong file .env");
       }
 
-      // --- LOGIC MỚI: Gọi API Login chuẩn của Loco (Rust) ---
       const res = await fetch(`${API_BASE}/api/auth/login`, {
         method: "POST",
         headers: {
@@ -40,15 +38,12 @@ export default function AdminLogin() {
         throw new Error(data.description || data.message || "Tài khoản hoặc mật khẩu không đúng.");
       }
 
-      // Kiểm tra xem có token trả về không
       if (!data.token) {
         throw new Error("Lỗi hệ thống: Backend không trả về Token.");
       }
 
-      // Lưu user vào localStorage (đúng format để adminApi.js và ProtectedRoute đọc được)
       localStorage.setItem("user", JSON.stringify(data));
       
-      // Chuyển hướng vào trang quản lý sản phẩm
       navigate("/admin/products");
 
     } catch (err) {

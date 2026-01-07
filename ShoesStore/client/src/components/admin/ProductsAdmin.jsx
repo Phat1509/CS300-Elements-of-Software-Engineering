@@ -47,7 +47,7 @@ export default function ProductsAdmin() {
   };
 
   const handleSaved = () => {
-    loadProducts(); // Load lại toàn bộ để đảm bảo đồng bộ Category/Brand name từ Backend
+    loadProducts(); 
     closeForm();
   };
 
