@@ -1,7 +1,14 @@
 // client/src/components/user/ProductDetailPage.jsx
 import React, { useEffect, useState, useMemo } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { ChevronRight, Star, Minus, Plus, ShoppingCart, Heart } from "lucide-react";
+import {
+  ChevronRight,
+  Star,
+  Minus,
+  Plus,
+  ShoppingCart,
+  Heart,
+} from "lucide-react";
 
 import { getProductById } from "../../utilities/api";
 import { useCart } from "../../context/CartContext";
@@ -55,7 +62,8 @@ const ProductDetail = () => {
   const sizes = useMemo(() => {
     const s = new Set();
     variants.forEach((v) => {
-      if (v.size !== undefined && v.size !== null && v.size !== "") s.add(v.size);
+      if (v.size !== undefined && v.size !== null && v.size !== "")
+        s.add(v.size);
     });
     return Array.from(s).sort((a, b) => Number(a) - Number(b));
   }, [variants]);
@@ -77,7 +85,8 @@ const ProductDetail = () => {
     if (colors.length > 0 && !selectedColor) return null;
 
     return variants.find((v) => {
-      const matchSize = !selectedSize || String(v.size) === String(selectedSize);
+      const matchSize =
+        !selectedSize || String(v.size) === String(selectedSize);
       const matchColor =
         !selectedColor ||
         String(v.color).toLowerCase() === String(selectedColor).toLowerCase();
@@ -94,7 +103,7 @@ const ProductDetail = () => {
       await toggleWishlist(product.id);
     } catch (e) {
       if (String(e?.message || e).includes("Login")) {
-        navigate("/login"); // hoặc /signin tùy router
+        navigate("/login"); 
       } else {
         console.error("Lỗi Wishlist:", e);
       }
@@ -102,7 +111,10 @@ const ProductDetail = () => {
   };
 
   const handleAddToCart = async () => {
-    if ((sizes.length > 0 && !selectedSize) || (colors.length > 0 && !selectedColor)) {
+    if (
+      (sizes.length > 0 && !selectedSize) ||
+      (colors.length > 0 && !selectedColor)
+    ) {
       alert("Vui lòng chọn đầy đủ Size và Màu sắc!");
       return;
     }
@@ -117,25 +129,25 @@ const ProductDetail = () => {
       return;
     }
 
+    const variantId = selectedVariant.id || selectedVariant.variant_id;
+
+    if (!variantId) {
+      console.error("Variant Data Error:", selectedVariant);
+      alert("Lỗi dữ liệu: Không tìm thấy ID sản phẩm.");
+      return;
+    }
+
     setIsAdding(true);
     try {
-      const cartItemData = {
-        product_id: product.id,
-        variant_id: selectedVariant.id,
-        name: product.name,
-        image: selectedVariant.image_url || product.image_url || product.image,
-        price: Number(product.price || 0),
-        size: selectedVariant.size,
-        color: selectedVariant.color,
-        quantity: quantity,
-      };
+      console.log(
+        `🛒 AddToCart UI Calling: ID=${variantId}, Quantity=${quantity}`
+      );
 
-      await addToCart(cartItemData);
+      await addToCart(variantId, quantity);
+
       setQuantity(1);
-      alert("Đã thêm vào giỏ hàng thành công!");
     } catch (err) {
       console.error("Lỗi thêm giỏ hàng:", err);
-      alert("Không thể thêm vào giỏ hàng. Vui lòng thử lại.");
     } finally {
       setIsAdding(false);
     }
@@ -144,7 +156,10 @@ const ProductDetail = () => {
   /* ================= UI RENDER ================= */
   if (loading) {
     return (
-      <div className="container" style={{ padding: "100px 0", textAlign: "center" }}>
+      <div
+        className="container"
+        style={{ padding: "100px 0", textAlign: "center" }}
+      >
         Loading product...
       </div>
     );
@@ -152,7 +167,10 @@ const ProductDetail = () => {
 
   if (!product) {
     return (
-      <div className="container" style={{ padding: "100px 0", textAlign: "center" }}>
+      <div
+        className="container"
+        style={{ padding: "100px 0", textAlign: "center" }}
+      >
         <h2>Không tìm thấy sản phẩm</h2>
         <Link
           to="/"
@@ -171,10 +189,18 @@ const ProductDetail = () => {
   return (
     <main>
       {/* Breadcrumb */}
-      <div className="breadcrumb" style={{ background: "#f8f9fa", padding: "10px 0" }}>
+      <div
+        className="breadcrumb"
+        style={{ background: "#f8f9fa", padding: "10px 0" }}
+      >
         <div
           className="container"
-          style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 14 }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 5,
+            fontSize: 14,
+          }}
         >
           <Link to="/" style={{ color: "#666", textDecoration: "none" }}>
             Home
@@ -196,7 +222,11 @@ const ProductDetail = () => {
           {/* LEFT: IMAGE */}
           <div className="pd-image-box">
             <img
-              src={product.image_url || product.image || "https://placehold.co/600x600?text=No+Image"}
+              src={
+                product.image_url ||
+                product.image ||
+                "https://placehold.co/600x600?text=No+Image"
+              }
               alt={product.name}
               style={{
                 width: "100%",
@@ -206,7 +236,8 @@ const ProductDetail = () => {
                 background: "#f1f1f1",
               }}
               onError={(e) => {
-                e.currentTarget.src = "https://placehold.co/600x600?text=Image+Error";
+                e.currentTarget.src =
+                  "https://placehold.co/600x600?text=Image+Error";
               }}
             />
           </div>
@@ -222,10 +253,26 @@ const ProductDetail = () => {
               minWidth: 0,
             }}
           >
-            <h1 style={{ margin: "0 0 10px", fontSize: "28px" }}>{product.name}</h1>
+            <h1 style={{ margin: "0 0 10px", fontSize: "28px" }}>
+              {product.name}
+            </h1>
 
-            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 15 }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 2, color: "#111" }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+                marginBottom: 15,
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 2,
+                  color: "#111",
+                }}
+              >
                 <Star size={18} />
                 <span style={{ fontWeight: 700 }}>{rating}</span>
               </div>
@@ -233,7 +280,9 @@ const ProductDetail = () => {
             </div>
 
             <div style={{ marginBottom: 20 }}>
-              <span style={{ fontSize: "24px", fontWeight: 700, color: "#111" }}>
+              <span
+                style={{ fontSize: "24px", fontWeight: 700, color: "#111" }}
+              >
                 {Number(product.price).toLocaleString()}₫
               </span>
               {Number(product.discount_percentage || 0) > 0 && (
@@ -279,7 +328,10 @@ const ProductDetail = () => {
                       style={{
                         minWidth: 48,
                         height: 48,
-                        border: selectedSize === size ? "2px solid #111" : "1px solid #e5e7eb",
+                        border:
+                          selectedSize === size
+                            ? "2px solid #111"
+                            : "1px solid #e5e7eb",
                         background: selectedSize === size ? "#111" : "#fff",
                         color: selectedSize === size ? "#fff" : "#111",
                         borderRadius: 12,
@@ -320,8 +372,14 @@ const ProductDetail = () => {
                         height: 40,
                         borderRadius: "50%",
                         background: String(color).toLowerCase(),
-                        border: selectedColor === color ? "2px solid #111" : "1px solid #e5e7eb",
-                        boxShadow: selectedColor === color ? "0 0 0 2px white inset" : "none",
+                        border:
+                          selectedColor === color
+                            ? "2px solid #111"
+                            : "1px solid #e5e7eb",
+                        boxShadow:
+                          selectedColor === color
+                            ? "0 0 0 2px white inset"
+                            : "none",
                         cursor: "pointer",
                       }}
                     />
@@ -333,9 +391,13 @@ const ProductDetail = () => {
             {/* STOCK STATUS MSG */}
             {selectedVariant ? (
               selectedVariant.stock === 0 ? (
-                <p style={{ color: "#111", margin: "10px 0 0" }}>Hết hàng tạm thời</p>
+                <p style={{ color: "#111", margin: "10px 0 0" }}>
+                  Hết hàng tạm thời
+                </p>
               ) : (
-                <p style={{ color: "#16a34a", fontSize: 14, margin: "10px 0 0" }}>
+                <p
+                  style={{ color: "#16a34a", fontSize: 14, margin: "10px 0 0" }}
+                >
                   ✓ Còn hàng (Tồn kho: {selectedVariant.stock})
                 </p>
               )
@@ -385,13 +447,16 @@ const ProductDetail = () => {
                   <Minus size={16} />
                 </button>
 
-                <span style={{ fontWeight: 600, minWidth: 20, textAlign: "center" }}>
+                <span
+                  style={{ fontWeight: 600, minWidth: 20, textAlign: "center" }}
+                >
                   {quantity}
                 </span>
 
                 <button
                   onClick={() => {
-                    if (selectedVariant && quantity >= selectedVariant.stock) return;
+                    if (selectedVariant && quantity >= selectedVariant.stock)
+                      return;
                     setQuantity((q) => q + 1);
                   }}
                   style={{
@@ -411,7 +476,9 @@ const ProductDetail = () => {
               {/* Add to Cart (WIDE) */}
               <button
                 onClick={handleAddToCart}
-                disabled={isAdding || (selectedVariant && selectedVariant.stock === 0)}
+                disabled={
+                  isAdding || (selectedVariant && selectedVariant.stock === 0)
+                }
                 style={{
                   flex: 1,
                   height: 52,
@@ -428,7 +495,10 @@ const ProductDetail = () => {
                   gap: 10,
                   whiteSpace: "nowrap",
                   minWidth: 260,
-                  opacity: isAdding || (selectedVariant && selectedVariant.stock === 0) ? 0.6 : 1,
+                  opacity:
+                    isAdding || (selectedVariant && selectedVariant.stock === 0)
+                      ? 0.6
+                      : 1,
                 }}
               >
                 <ShoppingCart size={20} />

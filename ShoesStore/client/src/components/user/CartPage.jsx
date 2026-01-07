@@ -1,54 +1,83 @@
-// client/src/components/user/CartPage.jsx
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ChevronRight, Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import { useCart } from "../../context/CartContext";
-import { useAuth } from "../../context/AuthContext"; // Sử dụng Auth Context
+import { useAuth } from "../../context/AuthContext";
 
 import {
   createOrder,
   addOrderItem,
   updateProductStock,
   deleteCartItem,
+  updateCartItem, 
 } from "../../utilities/api";
 
 export default function CartPage() {
-  const { cartItems, total, addToCart, removeFromCart, clearCart } = useCart(); // Giả sử context có hàm clearCart, nếu không có thì bỏ qua
-  const { user } = useAuth(); // Lấy user từ Context thay vì localStorage
+  const { cartItems, totalPrice, removeFromCart, clearCart, fetchCart } = useCart(); 
+  const { user } = useAuth();
   const navigate = useNavigate();
+  
   const [loading, setLoading] = useState(false);
+  const [updatingIds, setUpdatingIds] = useState([]); 
 
-  // Tính toán chi phí
-  const subtotal = total;
+
+  const subtotal = Number(totalPrice) || 0;
   const shipping = cartItems.length > 0 ? 10 : 0;
   const tax = subtotal * 0.08;
   const finalTotal = subtotal + shipping + tax;
 
   // --- HANDLERS ---
-  const increaseQty = (item) => {
-    if (item.quantity >= item.stock) {
-      alert(`Chỉ còn ${item.stock} sản phẩm trong kho!`);
+
+  const handleUpdateQuantity = async (variantId, newQuantity, currentStock) => {
+    if (newQuantity < 1) return;
+    if (newQuantity > currentStock) {
+      alert(`Chỉ còn ${currentStock} sản phẩm trong kho!`);
       return;
     }
-    addToCart(item.variant_id, 1);
+
+    if (updatingIds.includes(variantId)) return;
+    setUpdatingIds((prev) => [...prev, variantId]);
+
+    try {
+      await updateCartItem(variantId, newQuantity);
+      
+      if (fetchCart) {
+        await fetchCart();
+      }
+    } catch (error) {
+      console.error("Lỗi update số lượng:", error);
+    } finally {
+      setUpdatingIds((prev) => prev.filter((id) => id !== variantId));
+    }
+  };
+
+  const increaseQty = (item) => {
+    handleUpdateQuantity(item.variant_id, item.quantity + 1, item.stock);
   };
 
   const decreaseQty = (item) => {
-    if (item.quantity > 1) {
-      addToCart(item.variant_id, -1);
+    handleUpdateQuantity(item.variant_id, item.quantity - 1, item.stock);
+  };
+
+  const handleRemoveItem = async (variantId) => {
+    if (!window.confirm("Bạn có chắc muốn xóa sản phẩm này?")) return;
+    try {
+      await deleteCartItem(variantId);
+      removeFromCart(variantId);
+    } catch (error) {
+      console.error("Lỗi xóa item:", error);
     }
   };
 
   const handleCheckout = async () => {
     if (!user) {
       alert("Vui lòng đăng nhập để thanh toán!");
-      navigate("/login"); // Hoặc /signin
+      navigate("/login"); 
       return;
     }
 
     if (cartItems.length === 0) return;
 
-    // Kiểm tra lại tồn kho một lần nữa trước khi gửi
     for (const item of cartItems) {
       if (item.quantity > item.stock) {
         alert(
@@ -63,9 +92,8 @@ export default function CartPage() {
     setLoading(true);
 
     try {
-      const primaryUserId = user.user_id || user.id; // Lấy ID an toàn
+      const primaryUserId = user.id; 
       
-      // 1. Tạo đơn hàng
       const orderData = {
         user_id: primaryUserId,
         status: "PENDING",
@@ -77,37 +105,38 @@ export default function CartPage() {
       };
 
       const newOrder = await createOrder(orderData);
-      const orderId = newOrder?.id;
+      const orderId = newOrder?.id || newOrder?.order_id;
 
       if (!orderId) throw new Error("Không lấy được Order ID.");
 
-      // 2. Thêm items vào đơn hàng & Trừ tồn kho & Xóa khỏi giỏ
-      // Lưu ý: Lý tưởng nhất là việc này nên làm ở Backend (Transaction)
       await Promise.all(
         cartItems.map(async (item) => {
-          // Thêm vào bảng Order Items
-          await addOrderItem({
-            order_id: orderId,
-            variant_id: item.variant_id,
-            quantity: item.quantity,
-            price: item.price,
-          });
+          try {
+            await addOrderItem({
+              order_id: orderId,
+              variant_id: item.variant_id, 
+              quantity: item.quantity,
+              price: item.price,
+            });
 
-          // Trừ tồn kho
-          const newStock = item.stock - item.quantity;
-          await updateProductStock(item.variant_id, newStock);
+            const newStock = item.stock - item.quantity;
+            await updateProductStock(item.variant_id, newStock);
 
-          // Xóa khỏi giỏ hàng database
-          await deleteCartItem(item.id);
+            await deleteCartItem(item.variant_id);
+          } catch (itemErr) {
+             console.error(`Lỗi xử lý item ${item.product_name}`, itemErr);
+          }
         })
       );
 
-      // 3. Clear giỏ hàng ở Client (nếu Context hỗ trợ)
-      // Nếu context không có hàm clearCart, có thể loop removeFromCart
-      cartItems.forEach(item => removeFromCart(item.id)); 
+      if (clearCart) {
+        clearCart();
+      } else {
+        cartItems.forEach(item => removeFromCart(item.variant_id)); 
+      }
 
       alert("Đặt hàng thành công!");
-      navigate("/orders"); // Điều hướng bằng React Router thay vì reload trang
+      navigate("/orders"); 
     } catch (error) {
       console.error("Checkout Error:", error);
       alert("Thanh toán thất bại. Vui lòng thử lại.");

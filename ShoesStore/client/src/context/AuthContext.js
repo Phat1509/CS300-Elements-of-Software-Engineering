@@ -7,7 +7,6 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // 1. Check Login khi F5 trang (Giữ đăng nhập)
   useEffect(() => {
     const initAuth = async () => {
       const token = localStorage.getItem("token");
@@ -15,15 +14,15 @@ export function AuthProvider({ children }) {
         try {
           const userData = await getMeAPI();
           console.log("🔄 Khôi phục user từ token:", userData);
-          
-          // Quan trọng: Map đúng ID để dùng cho Cart
+
+
           setUser({
             ...userData,
-            id: userData.id || userData.user_id, // Ưu tiên lấy id
+            id: userData.id || userData.user_id,
           });
         } catch (error) {
           console.log("Lỗi check token cũ:", error);
-          logout(); // Token hết hạn hoặc lỗi thì logout luôn
+          logout();
         }
       }
       setLoading(false);
@@ -31,15 +30,14 @@ export function AuthProvider({ children }) {
     initAuth();
   }, []);
 
-  // 2. Hàm Login
+
   const login = async (email, password) => {
     try {
       console.log("🚀 Đang gửi đăng nhập:", { email, password });
-      
-      const data = await loginAPI(email, password);
-      console.log("Server trả về:", data); 
 
-      // Kiểm tra xem server trả về token tên là gì (token hay access_token)
+      const data = await loginAPI(email, password);
+      console.log("Server trả về:", data);
+
       const token = data.token || data.access_token;
 
       if (!token) {
@@ -47,21 +45,19 @@ export function AuthProvider({ children }) {
       }
 
       localStorage.setItem("token", token);
-      
-      // Tạo object user đầy đủ để lưu vào state
-      // LƯU Ý: Phải lấy được ID để sau này truyền vào API Giỏ hàng
+
       const userInfo = {
         id: data.id || data.user_id, // <--- QUAN TRỌNG NHẤT
         name: data.name,
         pid: data.pid,
         isVerified: data.is_verified,
         email: email,
-        ...data // Lưu dự phòng các trường khác
+        ...data
       };
-      
+
       console.log("💾 Đang lưu user vào State:", userInfo);
       setUser(userInfo);
-      
+
       return { success: true };
     } catch (error) {
       console.error("❌ Lỗi đăng nhập:", error);
@@ -74,7 +70,6 @@ export function AuthProvider({ children }) {
   const register = async (name, email, password) => {
     try {
       console.log("Đang đăng ký:", { name, email, password });
-      // Backend đã sửa để verified luôn, nên chỉ cần await là xong
       await registerAPI(name, email, password);
       return { success: true };
     } catch (error) {
