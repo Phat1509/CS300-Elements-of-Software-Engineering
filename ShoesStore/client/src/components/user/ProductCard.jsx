@@ -1,7 +1,8 @@
 // client/src/components/user/ProductCard.jsx
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ShoppingCart } from "lucide-react";
+import { ShoppingCart, Heart } from "lucide-react";
+import { useWishlist } from "../../context/WishlistContext";
 
 export default function ProductCard({
   id,
@@ -15,6 +16,7 @@ export default function ProductCard({
 }) {
   const navigate = useNavigate();
 
+  const { isInWishlist, toggleWishlist } = useWishlist();
   // 1. QUAN TRỌNG: Ưu tiên lấy ID (số) để khớp với API getProductById
   const finalId = id || product_id;
 
@@ -51,6 +53,38 @@ export default function ProductCard({
                 style={{ width: "100%", aspectRatio: "1/1", objectFit: "cover" }}
                 onError={(e) => { e.target.src = "https://placehold.co/400?text=Error"; }}
             />
+            {/* Phần Heart */}
+            <button
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();   // chặn Link
+                e.stopPropagation();  // chặn bubble
+                toggleWishlist(finalId);
+              }}
+              style={{
+                position: "absolute",
+                top: 10,
+                right: 10,
+                background: "white",
+                border: "none",
+                borderRadius: "50%",
+                width: 34,
+                height: 34,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+                zIndex: 3,
+              }}
+              aria-label="Toggle wishlist"
+            >
+              <Heart
+                size={18}
+                fill={isInWishlist(finalId) ? "red" : "none"}
+                color={isInWishlist(finalId) ? "red" : "black"}
+              />
+            </button>
+
             {/* Hiển thị nhãn Extra (VD: Sale, New) nếu có */}
             {extra && (
                 <span className="pill-sm" style={{ position: "absolute", top: 10, left: 10, background: "black", color: "white", padding: "4px 8px", borderRadius: 4, fontSize: 12 }}>
