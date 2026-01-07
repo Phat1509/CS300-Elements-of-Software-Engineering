@@ -171,15 +171,24 @@ export const cancelOrder = async (orderId) => {
 
 
 /* ===================== WISHLIST ===================== */
-export const getWishlist = async () => {
+// export const getWishlist = async (userId) => {
+//   const uid = parseInt(userId);
+//   if (!uid || isNaN(uid)) return []; 
+//   const res = await api.get("/wishlists", { params: { user_id: uid } });
+//   return res.data;
+// };
+export const getWishlist = async (token) => {
   const res = await api.get("/wishlist");
   return res.data;
 };
 
 export const addToWishlist = async (productId) => {
+// toggle/ Add wishlist theo product_id
+
   const res = await api.post(`/products/${productId}/wishlist`);
   return res.data;
 };
+
 
 export const removeFromWishlist = async (productId) => {
   const res = await api.delete(`/products/${productId}/wishlist`);
