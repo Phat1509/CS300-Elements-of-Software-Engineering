@@ -151,14 +151,14 @@ export default function ResetPasswordPage() {
                   style={{
                     position: "absolute",
                     right: 12,
-                    top: 2,
-                    height: "calc(100% + 20px)",
-                    display: "flex",
-                    alignItems: "center",
+                    top: "50%",
+                    transform: "translateY(-50%)",
                     background: "none",
                     border: "none",
-                    padding: "6px 4px",
                     cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    padding: "4px",
                     color: "#6b7280",
                   }}
                 >
@@ -186,14 +186,14 @@ export default function ResetPasswordPage() {
                   style={{
                     position: "absolute",
                     right: 12,
-                    top: 2,
-                    height: "calc(100% + 20px)",
-                    display: "flex",
-                    alignItems: "center",
+                    top: "50%",
+                    transform: "translateY(-50%)",
                     background: "none",
                     border: "none",
-                    padding: "6px 4px",
                     cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    padding: "4px",
                     color: "#6b7280",
                   }}
                 >

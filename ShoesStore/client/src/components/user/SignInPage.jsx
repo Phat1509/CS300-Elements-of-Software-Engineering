@@ -87,36 +87,39 @@ export default function SignInPage() {
               />
             </div>
 
-            <div className="form-group" style={{ position: "relative" }}>
+            <div className="form-group">
               <label className="auth-label">Password</label>
-              <input 
-                type={showPassword ? "text" : "password"}
-                className="input" 
-                placeholder="••••••••" 
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword((v) => !v)}
-                aria-label={showPassword ? "Hide password" : "Show password"}
-                style={{
-                  position: "absolute",
-                  right: 12,
-                  top: 2,
-                  height: "calc(100% + 20px)",
-                  display: "flex",
-                  alignItems: "center",
-                  background: "none",
-                  border: "none",
-                  padding: "6px 4px",
-                  cursor: "pointer",
-                  color: "#6b7280",
-                }}
-              >
-                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-              </button>
+              <div style={{ position: "relative" }}>
+                <input 
+                  type={showPassword ? "text" : "password"}
+                  className="input" 
+                  placeholder="••••••••" 
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  style={{ paddingRight: "45px" }}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((v) => !v)}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  style={{
+                    position: "absolute",
+                    right: 12,
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    padding: "4px",
+                    color: "#6b7280",
+                  }}
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
             </div>
 
             <div
