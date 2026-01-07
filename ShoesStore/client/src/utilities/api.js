@@ -74,7 +74,6 @@ export const getProductById = async (id) => {
 export const getCartItems = async () => {
   try {
     const res = await api.get("/cart");
-    // API trả về mảng trực tiếp: [{ id, quantity, product: {...}, product_variant: {...} }]
     const rawItems = res.data || []; 
     
     if (!Array.isArray(rawItems)) return [];
@@ -82,26 +81,22 @@ export const getCartItems = async () => {
     console.log("Raw API Cart Data:", rawItems); // Log để kiểm tra
 
     return rawItems.map((item) => {
-      // Dựa trên JSON bạn gửi: item chính là cart item, bên trong có product và product_variant
       const product = item.product || {};
       const variant = item.product_variant || {};
 
-      // Ưu tiên ảnh của variant, nếu không có thì lấy ảnh product
       const imageUrl = variant.image || product.image_url || product.image;
 
       return {
-        // ID dùng để định danh khi render list
         id: variant.id,       
         
-        // Các ID quan trọng
         variant_id: variant.id, 
-        cart_item_id: item.id,   // Đây là ID số 3 trong ảnh
-        product_id: product.id,  // Đây là ID số 5 trong ảnh
+        cart_item_id: item.id,   
+        product_id: product.id,  
         
         // Thông tin hiển thị
         product_name: product.name,
         price: Number(product.price),
-        quantity: item.quantity, // Lấy trực tiếp, không qua cart_item
+        quantity: item.quantity, 
         totalPrice: Number(product.price) * item.quantity,
         
         // Thuộc tính
@@ -143,12 +138,10 @@ export const removeCartItem = async (variantId) => {
   return res.data;
 };
 
-// === FIX LỖI 1: Thêm alias này vì CartPage đang dùng tên cũ ===
 export const deleteCartItem = removeCartItem;
 
 /* ===================== ORDERS ===================== */
 
-// === FIX LỖI 2: Thêm hàm tạo đơn hàng ===
 export const createOrder = async (orderData) => {
   const res = await api.post("/orders", orderData);
   return res.data;
@@ -175,6 +168,11 @@ export const getOrdersByUserId = async (userId) => {
     // Giữ lại hàm cũ nếu có dùng
     return getOrders(userId);
 }
+
+export const cancelOrder = async (orderId) => {
+  const res = await api.post(`/orders/${orderId}/cancel`);
+  return res.data;
+};
 
 /* ===================== WISHLIST ===================== */
 export const getWishlist = async (userId) => {

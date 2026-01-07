@@ -11,7 +11,7 @@ import {
   ArrowRight,
   ShoppingBag,
 } from "lucide-react";
-import { getOrdersByUserId } from "../../utilities/api";
+import { getOrdersByUserId, cancelOrder } from "../../utilities/api";
 import { useAuth } from "../../context/AuthContext"; // Import Auth Context
 
 // --- HELPER FUNCTIONS ---
@@ -137,6 +137,23 @@ export default function OrderHistoryPage() {
     return result;
   }, [orders, q, filter]);
 
+  // --- HANDLE ACTIONS ---
+  // --- HANDLE CANCEL ---
+  const handleCancelOrder = async (orderId) => {
+    if (!window.confirm("Bạn có chắc chắn muốn hủy đơn hàng này?")) return;
+
+    try {
+      await cancelOrder(orderId);
+      // Cập nhật lại state UI ngay lập tức
+      setOrders((prev) =>
+        prev.map((o) => (o.id === orderId ? { ...o, status: "CANCELLED" } : o))
+      );
+      alert("Đã hủy đơn hàng thành công!");
+    } catch (error) {
+      console.error(error);
+      alert("Lỗi: Không thể hủy đơn hàng (hoặc đơn đã được xử lý).");
+    }
+  };
   // --- STATS ---
   const stats = useMemo(() => {
     return {
@@ -545,6 +562,7 @@ export default function OrderHistoryPage() {
                     >
                       Chi tiết <ArrowRight size={16} />
                     </button>
+                    
                   </div>
                 </div>
               </div>

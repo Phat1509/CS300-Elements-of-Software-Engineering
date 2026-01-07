@@ -1,5 +1,4 @@
-// client/src/components/user/OrderDetailPage.jsx
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   ArrowLeft,
@@ -16,10 +15,54 @@ import {
   CheckCircle2,
 } from "lucide-react";
 
-import { getOrdersByUserId } from "../../utilities/api"; // Đảm bảo import đúng hàm API
+import { getOrdersByUserId, cancelOrder } from "../../utilities/api";
 import { useAuth } from "../../context/AuthContext";
 
-// --- HELPER FUNCTIONS ---
+// --- 1. NEW HELPER: HÀM CHUẨN HÓA DỮ LIỆU (QUAN TRỌNG) ---
+// Hàm này giúp frontend "hiểu" được dữ liệu từ Rust Backend
+const normalizeData = (rawOrder) => {
+  if (!rawOrder) return null;
+
+  // Xử lý danh sách items
+  const items = (rawOrder.items || rawOrder.OrderItems || []).map((item) => {
+    // Đảm bảo lấy đúng thông tin product dù nó nằm ở đâu
+    const product = item.product || {};
+    const variant = item.product_variant || {};
+
+    return {
+      ...item,
+      // Ép kiểu số cho giá và số lượng để tính toán không bị lỗi
+      quantity: Number(item.quantity || 1),
+      price: Number(item.price || 0),
+      // Gộp thông tin product vào để render dễ hơn
+      product: {
+        ...product,
+        name: product.name || "Sản phẩm không tên",
+        image_url:
+          product.image_url || "https://placehold.co/150?text=No+Image",
+      },
+      product_variant: {
+        ...variant,
+        size: variant.size || "",
+        color: variant.color || "",
+      },
+    };
+  });
+
+  return {
+    ...rawOrder,
+    id: rawOrder.id || rawOrder.order_id,
+    status: String(rawOrder.status || "Pending"),
+    // Mapping: Backend trả 'amount', UI dùng 'total_amount'
+    total_amount: Number(rawOrder.amount || rawOrder.total_amount || 0),
+    // Mapping: Backend trả 'shipping_address', UI dùng 'address'
+    address: rawOrder.shipping_address || rawOrder.address || "",
+    shipping_fee: Number(rawOrder.shipping_fee || 0), // Mặc định 0 nếu không có
+    items: items,
+  };
+};
+
+// --- HELPER FUNCTIONS CŨ (GIỮ NGUYÊN) ---
 const formatCurrency = (n) =>
   (Number(n) || 0).toLocaleString("en-US", {
     style: "currency",
@@ -69,7 +112,7 @@ const getStatusTheme = (rawStatus) => {
   }
 };
 
-// --- SUB-COMPONENT: REVIEW MODAL ---
+// --- SUB-COMPONENT: REVIEW MODAL (GIỮ NGUYÊN) ---
 function ReviewModal({
   open,
   onClose,
@@ -80,7 +123,6 @@ function ReviewModal({
   onSave,
 }) {
   if (!open) return null;
-
   return (
     <div
       style={{
@@ -107,7 +149,6 @@ function ReviewModal({
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header */}
         <div
           style={{
             padding: "16px 24px",
@@ -125,8 +166,6 @@ function ReviewModal({
             <X size={20} />
           </button>
         </div>
-
-        {/* Body */}
         <div style={{ padding: 24 }}>
           <div style={{ textAlign: "center", marginBottom: 20 }}>
             <p className="muted" style={{ marginBottom: 12 }}>
@@ -154,7 +193,6 @@ function ReviewModal({
               ))}
             </div>
           </div>
-
           <textarea
             value={reviewText}
             onChange={(e) => setReviewText(e.target.value)}
@@ -171,8 +209,6 @@ function ReviewModal({
             }}
           />
         </div>
-
-        {/* Footer */}
         <div
           style={{
             padding: "16px 24px",
@@ -218,7 +254,7 @@ export default function OrderDetailPage() {
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
 
-  // --- FETCH DATA ---
+  // --- FETCH DATA (CÓ SỬA ĐỔI) ---
   useEffect(() => {
     if (!isAuthenticated) {
       setLoading(false);
@@ -229,13 +265,20 @@ export default function OrderDetailPage() {
       setLoading(true);
       try {
         const userId = user.id || user.user_id;
-        // API thường trả về list, ta lọc client-side (hoặc gọi API getOrderById nếu có)
         const list = await getOrdersByUserId(userId);
+
         const found = list.find(
           (o) =>
             String(o.id) === String(id) || String(o.order_id) === String(id)
         );
-        setOrder(found || null);
+
+        // <--- CHANGE: Áp dụng hàm normalizeData ở đây
+        if (found) {
+          const cleanOrder = normalizeData(found);
+          setOrder(cleanOrder);
+        } else {
+          setOrder(null);
+        }
       } catch (e) {
         console.error("Error loading order:", e);
       } finally {
@@ -252,18 +295,27 @@ export default function OrderDetailPage() {
       alert("Đã sao chép mã vận đơn!");
     }
   };
-
+  const handleCancelOrder = async () => {
+    if (!window.confirm("Bạn có chắc chắn muốn hủy đơn hàng này không?"))
+      return;
+    try {
+      await cancelOrder(order.id); // order.id đã được normalize
+      setOrder((prev) => ({ ...prev, status: "CANCELLED" }));
+      alert("Đã hủy đơn hàng thành công!");
+    } catch (error) {
+      console.error("Lỗi hủy đơn:", error);
+      alert(
+        "Không thể hủy đơn hàng (có thể đơn đã được xử lý hoặc lỗi hệ thống)."
+      );
+    }
+  };
   const handleSaveReview = () => {
-    // TODO: Gọi API lưu review lên server
     console.log("Saving review:", { orderId: id, rating, reviewText });
-
-    // Giả lập lưu vào localStorage
     const key = `review_${id}`;
     localStorage.setItem(
       key,
       JSON.stringify({ rating, text: reviewText, date: new Date() })
     );
-
     alert("Cảm ơn bạn đã đánh giá!");
     setIsReviewOpen(false);
   };
@@ -317,10 +369,10 @@ export default function OrderDetailPage() {
 
   const statusTheme = getStatusTheme(order.status);
   const StatusIcon = statusTheme.icon;
-  const items = order.items || order.order_items || [];
-  const displayId = order.id || order.order_id;
+  // <--- CHANGE: Dữ liệu items đã được làm sạch, không cần logic || phức tạp
+  const items = order.items;
   const canReview = String(order.status).toUpperCase() === "DELIVERED";
-
+  const canCancel = String(order.status).toUpperCase() === "PENDING";
   return (
     <div
       style={{ background: "#f8fafc", minHeight: "100vh", paddingBottom: 60 }}
@@ -349,9 +401,7 @@ export default function OrderDetailPage() {
             Đơn hàng
           </Link>
           <ChevronRight size={14} />
-          <span style={{ color: "#0f172a", fontWeight: 500 }}>
-            #{displayId}
-          </span>
+          <span style={{ color: "#0f172a", fontWeight: 500 }}>#{order.id}</span>
         </div>
       </div>
 
@@ -369,14 +419,13 @@ export default function OrderDetailPage() {
         >
           <div>
             <h1 style={{ fontSize: 24, margin: "0 0 8px" }}>
-              Chi tiết đơn hàng #{displayId}
+              Chi tiết đơn hàng #{order.id}
             </h1>
             <div style={{ fontSize: 14, color: "#64748b" }}>
               Ngày đặt: {formatDate(order.created_at)}
             </div>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            {/* Status Pill */}
             <div
               style={{
                 display: "flex",
@@ -390,8 +439,7 @@ export default function OrderDetailPage() {
                 fontSize: 14,
               }}
             >
-              <StatusIcon size={18} />
-              {statusTheme.label}
+              <StatusIcon size={18} /> {statusTheme.label}
             </div>
           </div>
         </div>
@@ -425,8 +473,8 @@ export default function OrderDetailPage() {
               </div>
               <div>
                 {items.map((item, idx) => {
-                  const product = item.product || {};
-                  const variant = item.product_variant || {};
+                  // <--- CHANGE: Lấy trực tiếp từ dữ liệu đã chuẩn hóa
+                  const { product, product_variant } = item;
 
                   return (
                     <div
@@ -452,8 +500,7 @@ export default function OrderDetailPage() {
                         }}
                       >
                         <img
-                          // SỬA: Dùng biến product đã lấy ở trên
-                          src={product.image_url || "https://placehold.co/80"}
+                          src={product.image_url}
                           alt={product.name}
                           style={{
                             width: "100%",
@@ -463,7 +510,6 @@ export default function OrderDetailPage() {
                         />
                       </div>
                       <div style={{ flex: 1 }}>
-                        {/* SỬA: Hiển thị tên */}
                         <div
                           style={{
                             fontWeight: 600,
@@ -471,9 +517,8 @@ export default function OrderDetailPage() {
                             marginBottom: 4,
                           }}
                         >
-                          {product.name || "Sản phẩm đã bị xóa"}
+                          {product.name}
                         </div>
-
                         <div
                           style={{
                             fontSize: 13,
@@ -481,10 +526,11 @@ export default function OrderDetailPage() {
                             marginBottom: 8,
                           }}
                         >
-                          {variant.size && `Size: ${variant.size}`}
-                          {variant.color && ` • Color: ${variant.color}`}
+                          {product_variant.size &&
+                            `Size: ${product_variant.size}`}
+                          {product_variant.color &&
+                            ` • Color: ${product_variant.color}`}
                         </div>
-
                         <div
                           style={{
                             display: "flex",
@@ -492,7 +538,6 @@ export default function OrderDetailPage() {
                             alignItems: "center",
                           }}
                         >
-                          {/* item.quantity và item.price lấy trực tiếp là ĐÚNG (do flatten) */}
                           <div style={{ fontSize: 14 }}>x{item.quantity}</div>
                           <div style={{ fontWeight: 600 }}>
                             {formatCurrency(item.price)}
@@ -515,7 +560,7 @@ export default function OrderDetailPage() {
               }}
             >
               <button
-                onClick={() => navigate("/")}
+                onClick={() => navigate("/new")}
                 className="btn btn-outline"
                 style={{ display: "flex", alignItems: "center", gap: 8 }}
               >
@@ -530,9 +575,24 @@ export default function OrderDetailPage() {
                   <Star size={16} /> Viết đánh giá
                 </button>
               )}
+              {canCancel && (
+                <button 
+                  onClick={handleCancelOrder} 
+                  className="btn btn-outline" 
+                  style={{ 
+                    display: "flex", 
+                    alignItems: "center", 
+                    gap: 8, 
+                    color: "#ef4444", // Màu đỏ
+                    borderColor: "#ef4444" 
+                  }}
+                >
+                  <X size={16} /> Hủy đơn hàng
+                </button>
+              )}
             </div>
           </div>
-
+          
           {/* RIGHT COL: Summary Info */}
           <div style={{ flex: 1 }}>
             <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
@@ -566,6 +626,7 @@ export default function OrderDetailPage() {
                   }}
                 >
                   <span>Tạm tính</span>
+                  {/* <--- CHANGE: Tính toán an toàn hơn vì item.price đã là số */}
                   <span>
                     {formatCurrency(
                       items.reduce((acc, i) => acc + i.price * i.quantity, 0)
@@ -582,7 +643,7 @@ export default function OrderDetailPage() {
                   }}
                 >
                   <span>Phí vận chuyển</span>
-                  <span>{formatCurrency(order.shipping_fee || 0)}</span>
+                  <span>{formatCurrency(order.shipping_fee)}</span>
                 </div>
                 <div
                   style={{ borderTop: "1px dashed #e2e8f0", margin: "12px 0" }}
@@ -597,6 +658,7 @@ export default function OrderDetailPage() {
                   }}
                 >
                   <span>Tổng cộng</span>
+                  {/* <--- CHANGE: Dùng field đã chuẩn hóa total_amount */}
                   <span>{formatCurrency(order.total_amount)}</span>
                 </div>
               </div>
@@ -627,11 +689,10 @@ export default function OrderDetailPage() {
                   <div style={{ fontWeight: 600 }}>
                     {user?.full_name || user?.username}
                   </div>
-                  <div>{order.phone || user?.phone || "0987 *** ***"}</div>
+                  <div>{user?.phone || "0987 *** ***"}</div>
+                  {/* <--- CHANGE: Dùng field address đã chuẩn hóa */}
                   <div style={{ color: "#64748b", marginTop: 4 }}>
-                    {order.address ||
-                      order.shipping_address ||
-                      "Địa chỉ mặc định của khách hàng"}
+                    {order.address}
                   </div>
                 </div>
               </div>
