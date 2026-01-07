@@ -1,11 +1,11 @@
-// src/components/admin/AdminLogin.jsx
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
-const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:3001";
+// Lấy URL Backend từ file .env
+const API_BASE = process.env.REACT_APP_API_URL;
 
 export default function AdminLogin() {
-  const [username, setUsername] = useState("admin"); // Mặc định để test cho nhanh
+  const [username, setUsername] = useState(""); 
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -18,32 +18,46 @@ export default function AdminLogin() {
     setLoading(true);
 
     try {
-      const res = await fetch(`${API_BASE}/users?username=${username}`);
-      if (!res.ok) throw new Error("Lỗi kết nối server");
-      
-      const users = await res.json();
-      const user = users[0]; 
-
-      if (!user) {
-        setError("Tài khoản không tồn tại.");
-      } else if (user.password !== password) {
-        setError("Sai mật khẩu.");
-      } else if (!user.roles || !user.roles.includes("ADMIN")) {
-        setError("Tài khoản này không có quyền truy cập Admin.");
-      } else {
-        localStorage.setItem("user", JSON.stringify(user));
-        
-        navigate("/admin");
+      if (!API_BASE) {
+        throw new Error("Chưa cấu hình REACT_APP_API_URL trong file .env");
       }
 
+      // --- LOGIC MỚI: Gọi API Login chuẩn của Loco (Rust) ---
+      const res = await fetch(`${API_BASE}/api/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: username,   
+          password: password
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.description || data.message || "Tài khoản hoặc mật khẩu không đúng.");
+      }
+
+      // Kiểm tra xem có token trả về không
+      if (!data.token) {
+        throw new Error("Lỗi hệ thống: Backend không trả về Token.");
+      }
+
+      // Lưu user vào localStorage (đúng format để adminApi.js và ProtectedRoute đọc được)
+      localStorage.setItem("user", JSON.stringify(data));
+      
+      // Chuyển hướng vào trang quản lý sản phẩm
+      navigate("/admin/products");
+
     } catch (err) {
-      console.error(err);
-      setError("Có lỗi xảy ra, vui lòng thử lại sau.");
+      console.error("Login Error:", err);
+      setError(err.message || "Có lỗi xảy ra, vui lòng thử lại sau.");
     } finally {
       setLoading(false);
     }
   };
-
   return (
     <main className="admin-auth">
       <div className="admin-auth-card">

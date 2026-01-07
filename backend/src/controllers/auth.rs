@@ -1,3 +1,4 @@
+// backend/src/controllers/auth.rs
 use std::sync::OnceLock;
 
 use loco_openapi::prelude::{routes, OpenApiRouter};

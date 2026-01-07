@@ -1,6 +1,6 @@
 // client/src/utilities/adminApi.js
 
-const BASE = process.env.REACT_APP_API_URL ; 
+const BASE = process.env.REACT_APP_API_URL  ; 
 // Hàm lấy token từ user đã đăng nhập
 function getToken() {
   const userStr = localStorage.getItem("user");
@@ -46,16 +46,44 @@ async function request(path, opts = {}) {
 // --- PRODUCTS ---
 
 export async function getAllProducts() {
-  // Backend Loco trả về phân trang.
-  // Tạm thời lấy trang 1 với size lớn để lấy "tất cả" cho admin dễ quản lý.
-  const res = await request('/api/products?page=1&page_size=1000');
-  
-  // Cấu trúc Loco: { items: [ { product: {...}, brand:..., category:... } ], counts: ... }
-  // Ta cần map để lấy cục "product" ra ngoài cho Frontend dễ dùng
-  if (res && Array.isArray(res.items)) {
-    return res.items.map(item => item.product);
+  try {
+    // 1. Gọi API lấy danh sách
+    const res = await request('/api/products?page=1&page_size=1000');
+    
+    console.log("Dữ liệu Products từ Backend:", res); // Dòng này giúp debug
+
+    // 2. Xử lý các trường hợp dữ liệu trả về khác nhau
+    let list = [];
+
+    if (Array.isArray(res)) {
+      // Trường hợp 1: Backend trả về luôn một mảng [ {...}, {...} ]
+      list = res;
+    } else if (res && Array.isArray(res.items)) {
+      // Trường hợp 2: Loco trả về { items: [...] }
+      list = res.items;
+    } else if (res && Array.isArray(res.results)) {
+      // Trường hợp 3: Một số framework khác trả về { results: [...] }
+      list = res.results;
+    }
+
+    // 3. Map dữ liệu để tránh lỗi "undefined"
+    return list.map(item => {
+      // Nếu item bị null/undefined thì bỏ qua (trả về object rỗng để không crash)
+      if (!item) return {}; 
+      
+      // Nếu cấu trúc lồng nhau: { product: {id:1...}, brand:... }
+      if (item.product && typeof item.product === 'object') {
+        return item.product;
+      }
+      
+      // Nếu cấu trúc phẳng: { id:1, name:... } (Đây là trường hợp của bạn)
+      return item;
+    });
+
+  } catch (error) {
+    console.error("Lỗi lấy danh sách sản phẩm:", error);
+    return [];
   }
-  return [];
 }
 
 export async function createProduct(payload) {

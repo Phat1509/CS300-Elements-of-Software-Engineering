@@ -1,6 +1,20 @@
-// src/components/admin/ProductForm.jsx
+// client/src/components/admin/ProductForm.jsx
 import React, { useState, useEffect } from "react";
 import adminApi from "../../utilities/adminApi";
+
+// Hàm hỗ trợ tạo slug từ tên sản phẩm (VD: "Giày Nike" -> "giay-nike")
+const generateSlug = (text) => {
+  return text
+    .toString()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "") // Xóa dấu tiếng Việt
+    .replace(/\s+/g, "-")           // Thay khoảng trắng bằng -
+    .replace(/[^\w-]+/g, "")        // Xóa ký tự đặc biệt
+    .replace(/--+/g, "-")           // Xóa dấu gạch ngang dư thừa
+    .replace(/^-+/, "")
+    .replace(/-+$/, "");
+};
 
 export default function ProductForm({ initial = null, onSaved, onCancel }) {
   const [form, setForm] = useState({
@@ -15,13 +29,11 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
   useEffect(() => {
     if (initial) {
       setForm({
-        name: initial.name || initial._name || "",
-        price: initial.price || initial._price || 0,
+        name: initial.name || "",
+        price: initial.price || 0,
         description: initial.description || "",
-        image_url: initial.image_url || initial.image || initial._image || "",
-        is_active: initial.hasOwnProperty("_active") 
-          ? initial._active 
-          : (initial.is_active ?? true),
+        image_url: initial.image_url || "",
+        is_active: initial.is_active ?? true,
       });
     } else {
       setForm({
@@ -47,35 +59,38 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
     setSaving(true);
 
     try {
+      // Chuẩn bị payload khớp với Rust struct
       const payload = {
         name: form.name,
-        price: Number(form.price),
-        description: form.description,
-        image_url: form.image_url, 
+        // Backend bắt buộc có slug khi tạo mới.
+        // Nếu update thì slug là optional (theo ProductUpdateParams), nhưng gửi luôn cũng không sao.
+        slug: generateSlug(form.name), 
+        price: parseFloat(form.price), // Rust f64 cần số
+        description: form.description || null, // Option<String>
+        image_url: form.image_url || null,     // Option<String>
         is_active: !!form.is_active,
+        // Tạm thời để null vì chưa làm UI chọn brand/category
+        brand_id: null,
+        category_id: null,
+        discount_percentage: null
       };
 
       console.log("Submitting Payload:", payload);
 
-      const id = initial ? (initial._id || initial.product_id || initial.id) : null;
-
-      console.log("Target ID:", id);
-
+      const id = initial ? initial.id : null;
       let result;
+
       if (id) {
-        console.log("Action: UPDATE");
+        // UPDATE
+        // Với update, backend Rust dùng Option<Option<T>>, gửi như trên vẫn ok
         result = await adminApi.updateProduct(id, payload);
       } else {
-        console.log("Action: CREATE");
+        // CREATE
         result = await adminApi.createProduct(payload);
       }
 
-      const savedData = result && typeof result === 'object' 
-        ? result 
-        : { ...payload, id: id, product_id: id }; 
-
-      onSaved(savedData);
-      
+      // Backend trả về object Model trực tiếp
+      onSaved(result);
       alert("Đã lưu thành công!");
 
     } catch (err) {
@@ -90,20 +105,20 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
     <form onSubmit={handleSubmit} className="admin-form-grid">
       <div className="admin-form-left">
         <div className="form-group">
-          <label>Product Name</label>
+          <label>Tên sản phẩm</label>
           <input
             className="input"
             name="name"
             value={form.name}
             onChange={handleChange}
             required
-            placeholder="Product Name"
+            placeholder="Nhập tên sản phẩm..."
           />
         </div>
 
         <div className="form-row" style={{ display: 'flex', gap: 10 }}>
           <div className="form-group" style={{ flex: 1 }}>
-            <label>Price</label>
+            <label>Giá (VNĐ)</label>
             <input
               className="input"
               name="price"
@@ -115,7 +130,7 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
             />
           </div>
           <div className="form-group" style={{ flex: 1 }}>
-            <label>Status</label>
+            <label>Trạng thái</label>
             <div style={{ marginTop: 8 }}>
               <label className="admin-switch">
                 <input
@@ -125,7 +140,7 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
                   onChange={handleChange}
                 />
                 <span style={{ marginLeft: 8 }}>
-                  {form.is_active ? "Active" : "Hidden"}
+                  {form.is_active ? "Đang bán" : "Ẩn"}
                 </span>
               </label>
             </div>
@@ -133,7 +148,7 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
         </div>
 
         <div className="form-group">
-          <label>Image URL</label>
+          <label>Link ảnh (URL)</label>
           <input
             className="input"
             name="image_url"
@@ -144,7 +159,7 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
         </div>
 
         <div className="form-group">
-          <label>Description</label>
+          <label>Mô tả chi tiết</label>
           <textarea
             className="input"
             name="description"
@@ -156,21 +171,21 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
 
         <div className="form-actions" style={{ marginTop: 20 }}>
           <button type="submit" className="btn btn-primary" disabled={saving}>
-            {saving ? "Saving..." : "Save Product"}
+            {saving ? "Đang lưu..." : "Lưu sản phẩm"}
           </button>
           <button 
-            type="button" 
+            type="button"
             className="btn btn-outline" 
-            onClick={onCancel} 
+            onClick={onCancel}
             style={{ marginLeft: 10 }}
           >
-            Cancel
+            Hủy bỏ
           </button>
         </div>
       </div>
 
       <div className="admin-form-right">
-        <label>Preview</label>
+        <label>Xem trước ảnh</label>
         <div className="admin-preview-box">
           {form.image_url ? (
             <img 
@@ -181,7 +196,7 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
             />
           ) : (
             <div className="muted" style={{ padding: 20, textAlign: 'center' }}>
-              No Image Preview
+              Chưa có ảnh
             </div>
           )}
         </div>

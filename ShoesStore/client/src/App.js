@@ -30,6 +30,7 @@ import ProductsAdmin from "./components/admin/ProductsAdmin";
 import OrdersAdmin from "./components/admin/OrdersAdmin";
 import AdminLogin from "./components/admin/AdminLogin";
 import ProfilePage from "./components/user/ProfilePage";
+import ProtectedRoute from "./components/admin/ProtectedRoute";
 import "./App.css";
 
 /** Wrap routes so we can use useLocation inside BrowserRouter */
@@ -71,9 +72,11 @@ function AppRoutes() {
 
         {/* Admin */}
         <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/admin/products" element={<ProductsAdmin />} />
-        <Route path="/admin/orders" element={<OrdersAdmin />} />
+        <Route element={<ProtectedRoute />}>
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/products" element={<ProductsAdmin />} />
+            <Route path="/admin/orders" element={<OrdersAdmin />} />
+        </Route>
       </Routes>
 
       {!isAdminRoute && <Footer />}

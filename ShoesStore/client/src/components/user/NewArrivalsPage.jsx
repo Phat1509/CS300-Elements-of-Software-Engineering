@@ -38,9 +38,14 @@ export default function NewArrivalsPage() {
     fetchProducts();
   }, []);
 
-  // Logic lọc client-side (Tạm thời giữ nguyên, sau này nên lọc từ Server)
+  // Logic lọc client-side
   const displayed = useMemo(() => {
-    return products.filter((p) => p.price >= minPrice && p.price <= maxPrice);
+    return products.filter((p) => {
+      const matchPrice = p.price >= minPrice && p.price <= maxPrice;
+      const matchStatus = p.is_active === true;
+
+      return matchPrice && matchStatus;
+    });
   }, [products, minPrice, maxPrice]);
 
   const sortedDisplayed = useMemo(() => {
