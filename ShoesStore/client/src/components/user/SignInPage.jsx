@@ -1,12 +1,17 @@
 // client/src/components/user/SignInPage.jsx
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Eye, EyeOff } from "lucide-react";
+import Notice from "../common/Notice";
+import useNotice from "../../hooks/useNotice";
 import { useAuth } from "../../context/AuthContext"; 
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(""); 
+  const [showPassword, setShowPassword] = useState(false);
+  const { notice, showNotice } = useNotice();
   
   const { login } = useAuth(); 
   const navigate = useNavigate();
@@ -20,7 +25,13 @@ export default function SignInPage() {
     if (result.success) {
       navigate("/");
     } else {
-      setError(result.message);
+      const msg = String(result.message || "Sign in failed.");
+      const friendly =
+        msg.includes("401") || msg.toLowerCase().includes("unauthorized")
+          ? "Email or password is incorrect."
+          : msg;
+      setError(friendly);
+      showNotice("error", friendly);
     }
   };
 
@@ -38,12 +49,7 @@ export default function SignInPage() {
       <section className="container" style={{ padding: "32px 0 64px" }}>
         <div className="auth-card">
           <form className="auth-form" onSubmit={handleSubmit}>
-            
-            {error && (
-              <div style={{ color: "red", marginBottom: "1rem", textAlign: "center" }}>
-                {error}
-              </div>
-            )}
+            {notice && <Notice type={notice.type} message={notice.message} />}
 
             <div className="form-group">
               <label className="auth-label">Email address</label>
@@ -57,16 +63,36 @@ export default function SignInPage() {
               />
             </div>
 
-            <div className="form-group">
+            <div className="form-group" style={{ position: "relative" }}>
               <label className="auth-label">Password</label>
               <input 
-                type="password" 
+                type={showPassword ? "text" : "password"}
                 className="input" 
-                placeholder="123" 
+                placeholder="••••••••" 
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
+              <button
+                type="button"
+                onClick={() => setShowPassword((v) => !v)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+                style={{
+                  position: "absolute",
+                  right: 12,
+                  top: 2,
+                  height: "calc(100% + 20px)",
+                  display: "flex",
+                  alignItems: "center",
+                  background: "none",
+                  border: "none",
+                  padding: "6px 4px",
+                  cursor: "pointer",
+                  color: "#6b7280",
+                }}
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
             </div>
 
             <div
