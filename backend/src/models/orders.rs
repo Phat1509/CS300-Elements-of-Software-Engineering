@@ -1,3 +1,4 @@
+// backend/src/models/orders.rs
 pub use super::_entities::orders::{ActiveModel, Entity, Model};
 use sea_orm::entity::prelude::*;
 pub type Orders = Entity;

@@ -1,3 +1,4 @@
+// backend/src/models/order_items.rs
 pub use super::_entities::order_items::{ActiveModel, Entity, Model};
 use loco_rs::prelude::Validatable;
 use sea_orm::entity::prelude::*;
