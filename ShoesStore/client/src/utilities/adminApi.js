@@ -99,7 +99,7 @@ export async function updateBrand(id, payload) {
 }
 
 export async function deleteBrand(id) {
-    return request(`/api/brands/${id}`, { method: 'POST' });
+    return request(`/api/brands/${id}`, { method: 'DELETE' });
 }
 
 // ---  CATEGORIES (CRUD) ---
