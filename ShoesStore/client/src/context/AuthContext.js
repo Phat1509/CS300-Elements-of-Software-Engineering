@@ -13,15 +13,14 @@ export function AuthProvider({ children }) {
       if (token) {
         try {
           const userData = await getMeAPI();
-          console.log("🔄 Khôi phục user từ token:", userData);
-
+          console.log("🔄 Restored user from token:", userData);
 
           setUser({
             ...userData,
-            id: userData.id || userData.user_id,
+            id: userData.id || userData.user_id || userData.pid,
           });
         } catch (error) {
-          console.log("Lỗi check token cũ:", error);
+          console.log("Error checking old token:", error);
           logout();
         }
       }
@@ -33,21 +32,21 @@ export function AuthProvider({ children }) {
 
   const login = async (email, password) => {
     try {
-      console.log("🚀 Đang gửi đăng nhập:", { email, password });
+      console.log("🚀 Sending login:", { email, password });
 
       const data = await loginAPI(email, password);
-      console.log("Server trả về:", data);
+      console.log("Server returned:", data);
 
       const token = data.token || data.access_token;
 
       if (!token) {
-        throw new Error("API không trả về 'token'.");
+        throw new Error("API did not return 'token'.");
       }
 
       localStorage.setItem("token", token);
 
       const userInfo = {
-        id: data.id || data.user_id, // <--- QUAN TRỌNG NHẤT
+        id: data.id || data.user_id || data.pid, // Support all formats
         name: data.name,
         pid: data.pid,
         isVerified: data.is_verified,
@@ -55,26 +54,26 @@ export function AuthProvider({ children }) {
         ...data
       };
 
-      console.log("💾 Đang lưu user vào State:", userInfo);
+      console.log("💾 Saving user to State:", userInfo);
       setUser(userInfo);
 
       return { success: true };
     } catch (error) {
-      console.error("❌ Lỗi đăng nhập:", error);
-      const msg = error.response?.data?.message || error.message || "Đăng nhập thất bại";
+      console.error("❌ Login error:", error);
+      const msg = error.response?.data?.message || error.message || "Login failed";
       return { success: false, message: msg };
     }
   };
 
-  // 3. Hàm Register
+  // 3. Register function
   const register = async (name, email, password) => {
     try {
-      console.log("Đang đăng ký:", { name, email, password });
+      console.log("Registering:", { name, email, password });
       await registerAPI(name, email, password);
       return { success: true };
     } catch (error) {
-      console.error("Lỗi đăng ký:", error);
-      const msg = error.response?.data?.message || "Đăng ký thất bại";
+      console.error("Registration error:", error);
+      const msg = error.response?.data?.message || "Registration failed";
       return { success: false, message: msg };
     }
   };

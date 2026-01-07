@@ -11,17 +11,23 @@ export const WishlistProvider = ({ children }) => {
   const [wishlistEntries, setWishlistEntries] = useState([]); // [{id, user_id, product_id}]
   const [wishlistLoading, setWishlistLoading] = useState(false);
 
-  const userId = user ? (user.id || user.user_id) : null;
+  const userId = user ? (user.id || user.user_id || user.pid) : null;
 
-  const refreshWishlist = async (uid = userId) => {
-    if (!uid) {
+  const refreshWishlist = async () => {
+    if (!userId) {
       setWishlistEntries([]);
       return;
     }
     setWishlistLoading(true);
     try {
-      const list = await getWishlist(uid);
-      setWishlistEntries(Array.isArray(list) ? list : []);
+      const list = await getWishlist();
+      // API returns array of products, convert to wishlist entries
+      const entries = Array.isArray(list) ? list.map(product => ({
+        id: product.id,
+        product_id: product.id,
+        user_id: userId
+      })) : [];
+      setWishlistEntries(entries);
     } catch (e) {
       console.error("refreshWishlist error:", e);
       setWishlistEntries([]);
@@ -31,7 +37,7 @@ export const WishlistProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    refreshWishlist(userId);
+    refreshWishlist();
   }, [userId]);
 
   const isInWishlist = (productId) => {
@@ -47,21 +53,16 @@ export const WishlistProvider = ({ children }) => {
     if (!userId) throw new Error("NOT_LOGGED_IN");
     if (isInWishlist(productId)) return;
 
-    await addWishlist({
-      user_id: userId,
-      product_id: Number(productId),
-    });
-
-    await refreshWishlist(userId);
+    await addWishlist(productId);
+    await refreshWishlist();
   };
 
   const removeFromWishlistByProductId = async (productId) => {
     if (!userId) throw new Error("NOT_LOGGED_IN");
-    const entryId = getWishlistEntryId(productId);
-    if (!entryId) return;
+    if (!isInWishlist(productId)) return;
 
-    await removeWishlist(entryId);
-    await refreshWishlist(userId);
+    await removeWishlist(productId);
+    await refreshWishlist();
   };
 
   const toggleWishlist = async (productId) => {

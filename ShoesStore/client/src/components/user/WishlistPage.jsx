@@ -1,7 +1,7 @@
 // client/src/components/user/WishlistPage.jsx
 import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronRight, Heart } from "lucide-react";
+import { ChevronRight, Heart, X } from "lucide-react";
 import ProductCard from "./ProductCard";
 import { useAuth } from "../../context/AuthContext";
 import { useWishlist } from "../../context/WishlistContext";
@@ -9,12 +9,12 @@ import { getProductDetail } from "../../utilities/api";
 
 export default function WishlistPage() {
   const { user } = useAuth();
-  const { wishlistEntries, wishlistLoading, refreshWishlist } = useWishlist();
+  const { wishlistEntries, wishlistLoading, refreshWishlist, removeFromWishlistByProductId } = useWishlist();
 
   const [products, setProducts] = useState([]);
   const [loadingProducts, setLoadingProducts] = useState(false);
 
-  const userId = user ? (user.id || user.user_id) : null;
+  const userId = user ? (user.id || user.user_id || user.pid) : null;
 
   const productIds = useMemo(() => {
     const ids = wishlistEntries.map((w) => w.product_id);
@@ -52,6 +52,15 @@ export default function WishlistPage() {
   useEffect(() => {
     if (userId) refreshWishlist(userId);
   }, [userId]);
+
+  const handleRemove = async (productId) => {
+    try {
+      await removeFromWishlistByProductId(productId);
+    } catch (e) {
+      console.error("Error removing from wishlist:", e);
+      alert("Failed to remove item from wishlist. Please try again.");
+    }
+  };
 
   const isEmpty = !wishlistLoading && !loadingProducts && products.length === 0;
 
@@ -92,8 +101,30 @@ export default function WishlistPage() {
         ) : (
           <div className="grid products-grid">
             {products.map((p) => (
+              <div key={p.id || p.product_id || p.slug} style={{ position: "relative" }}>
+                <button
+                  onClick={() => handleRemove(p.id || p.product_id)}
+                  style={{
+                    position: "absolute",
+                    top: 8,
+                    right: 8,
+                    zIndex: 10,
+                    width: 32,
+                    height: 32,
+                    borderRadius: "50%",
+                    border: "1px solid #e5e7eb",
+                    background: "#fff",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    cursor: "pointer",
+                    boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
+                  }}
+                  title="Remove from wishlist"
+                >
+                  <X size={16} color="#dc2626" />
+                </button>
               <ProductCard
-                key={p.id || p.product_id || p.slug}
                 id={p.id}
                 product_id={p.product_id}
                 image={p.image}
@@ -103,6 +134,7 @@ export default function WishlistPage() {
                 extra={p.extra}
                 slug={p.slug}
               />
+              </div>
             ))}
           </div>
         )}

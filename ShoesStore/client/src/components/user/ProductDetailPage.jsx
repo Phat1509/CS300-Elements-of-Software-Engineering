@@ -102,10 +102,14 @@ const ProductDetail = () => {
     try {
       await toggleWishlist(product.id);
     } catch (e) {
-      if (String(e?.message || e).includes("Login")) {
-        navigate("/login"); 
+      const errorMsg = String(e?.message || e);
+      console.error("Wishlist error:", e);
+      
+      if (errorMsg.includes("NOT_LOGGED_IN") || errorMsg.includes("Login") || errorMsg.includes("Unauthorized")) {
+        alert("Please sign in to use Wishlist!");
+        navigate("/signin"); 
       } else {
-        console.error("Lỗi Wishlist:", e);
+        alert("Failed to update wishlist. Please try again.");
       }
     }
   };
