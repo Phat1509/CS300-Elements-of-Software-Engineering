@@ -1,8 +1,10 @@
 use crate::models::{brands, categories};
 
-pub use super::_entities::products::{ActiveModel, Entity, Model};
+pub use super::_entities::products::{ActiveModel, Column, Entity, Model};
 use loco_rs::model::ModelResult;
 use sea_orm::entity::prelude::*;
+
+use super::_macros::impl_find_by_slug;
 
 pub type Products = Entity;
 
@@ -37,6 +39,8 @@ impl Model {
             .await?)
     }
 }
+
+impl_find_by_slug!();
 
 // implement your write-oriented logic here
 impl ActiveModel {}

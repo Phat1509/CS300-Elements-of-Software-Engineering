@@ -75,6 +75,7 @@ impl CategoryUpdateParams {
 
 async fn load_item(ctx: &AppContext, id: i32) -> Result<Model> {
     let item = Entity::find_by_id(id).one(&ctx.db).await?;
+
     item.ok_or_else(|| Error::NotFound)
 }
 
@@ -141,7 +142,7 @@ pub async fn add(
 #[debug_handler]
 pub async fn update(
     auth: auth::JWTWithUser<users::Model>,
-    Path(id): Path<i32>,
+    Path(id): Path<String>,
     State(ctx): State<AppContext>,
     Json(params): Json<CategoryUpdateParams>,
 ) -> Result<Response> {
@@ -154,7 +155,9 @@ pub async fn update(
         let _ = load_item(&ctx, parent_id).await?;
     }
 
-    let item = load_item(&ctx, id).await?;
+    let item = Model::get_by_id_or_slug(&ctx.db, id)
+        .await?
+        .ok_or_else(|| Error::NotFound)?;
     let mut item = item.into_active_model();
 
     params.update(&mut item);
@@ -176,14 +179,19 @@ pub async fn update(
 #[debug_handler]
 pub async fn remove(
     auth: auth::JWTWithUser<users::Model>,
-    Path(id): Path<i32>,
+    Path(id): Path<String>,
     State(ctx): State<AppContext>,
 ) -> Result<Response> {
     if !auth.user.is_staff {
         return forbidden("You are not authorized to perform this action.");
     }
 
-    load_item(&ctx, id).await?.delete(&ctx.db).await?;
+    Model::get_by_id_or_slug(&ctx.db, id)
+        .await?
+        .ok_or_else(|| Error::NotFound)?
+        .delete(&ctx.db)
+        .await?;
+
     format::empty()
 }
 
@@ -200,8 +208,12 @@ pub async fn remove(
     )
 )]
 #[debug_handler]
-pub async fn get_one(Path(id): Path<i32>, State(ctx): State<AppContext>) -> Result<Response> {
-    format::json(load_item(&ctx, id).await?)
+pub async fn get_one(Path(id): Path<String>, State(ctx): State<AppContext>) -> Result<Response> {
+    format::json(
+        Model::get_by_id_or_slug(&ctx.db, id)
+            .await?
+            .ok_or_else(|| Error::NotFound)?,
+    )
 }
 
 pub fn routes() -> Routes {

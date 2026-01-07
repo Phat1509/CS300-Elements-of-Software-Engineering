@@ -1,4 +1,5 @@
 pub mod _entities;
+mod _macros;
 pub mod brands;
 pub mod cart_items;
 pub mod categories;
