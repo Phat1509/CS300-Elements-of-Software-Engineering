@@ -11,7 +11,7 @@ use crate::{
     mailers::auth::AuthMailer,
     models::{
         _entities::users,
-        users::{LoginParams, RegisterParams},
+        users::{LoginParams, Model, RegisterParams},
     },
     views::auth::{CurrentResponse, LoginResponse},
 };
@@ -43,6 +43,11 @@ pub struct MagicLinkParams {
 #[derive(Debug, Deserialize, Serialize, utoipa::ToSchema)]
 pub struct ResendVerificationParams {
     pub email: String,
+}
+
+#[derive(Debug, Deserialize, Serialize, utoipa::ToSchema)]
+pub struct UserUpdateParams {
+    pub name: String,
 }
 
 /// Register function creates a new user with the given parameters and sends a
@@ -229,6 +234,28 @@ async fn current(auth: auth::JWT, State(ctx): State<AppContext>) -> Result<Respo
     format::json(CurrentResponse::new(&user))
 }
 
+#[utoipa::path(
+    patch,
+    path = "/api/auth/current",
+    tags = ["Authentication"],
+    summary = "Update current user",
+    responses(
+        (status = OK, description = "User updated", body = CurrentResponse),
+        (status = UNAUTHORIZED, description = "Unauthorized", body = ErrorDetail),
+    )
+)]
+async fn update(
+    auth: auth::JWTWithUser<Model>,
+    State(ctx): State<AppContext>,
+    Json(params): Json<UserUpdateParams>,
+) -> Result<Response> {
+    let mut user = auth.user.into_active_model();
+    user.name = Set(params.name);
+    let user = user.update(&ctx.db).await?;
+
+    format::json(CurrentResponse::new(&user))
+}
+
 /// Magic link authentication provides a secure and passwordless way to log in to the application.
 ///
 /// # Flow
@@ -362,6 +389,7 @@ pub fn routes() -> Routes {
         .add("/forgot", post(forgot))
         .add("/reset", post(reset))
         .add("/current", get(current))
+        .add("/current", patch(update))
         .add("/magic-link", post(magic_link))
         .add("/magic-link/{token}", get(magic_link_verify))
         .add("/resend-verification-mail", post(resend_verification_email))
@@ -374,7 +402,7 @@ pub fn api_routes() -> OpenApiRouter<AppContext> {
         .routes(routes!(login))
         .routes(routes!(forgot))
         .routes(routes!(reset))
-        .routes(routes!(current))
+        .routes(routes!(current, update))
         .routes(routes!(magic_link))
         .routes(routes!(magic_link_verify))
         .routes(routes!(resend_verification_email))
