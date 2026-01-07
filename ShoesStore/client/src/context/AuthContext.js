@@ -85,7 +85,20 @@ export function AuthProvider({ children }) {
     window.location.href = "/signin";
   };
 
-  const value = { user, isAuthenticated: !!user, loading, login, register, logout };
+  // 5. Refresh user data
+  const refreshUser = async () => {
+    try {
+      const userData = await getMeAPI();
+      setUser({
+        ...userData,
+        id: userData.id || userData.user_id || userData.pid,
+      });
+    } catch (error) {
+      console.error("Error refreshing user:", error);
+    }
+  };
+
+  const value = { user, isAuthenticated: !!user, loading, login, register, logout, refreshUser };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

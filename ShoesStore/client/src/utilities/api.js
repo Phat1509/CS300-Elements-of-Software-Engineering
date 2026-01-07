@@ -208,7 +208,7 @@ export const getProductDetail = async (id) => getProductById(id);
 
 // ===================== PROFILE =====================
 export const updateProfileAPI = async (name) => {
-  const response = await api.post("/auth/profile", { name }); // patch -> post
+  const response = await api.patch("/auth/current", { name });
   return response.data;
 };
 
