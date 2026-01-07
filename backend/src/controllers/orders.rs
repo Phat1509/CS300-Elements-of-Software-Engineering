@@ -51,11 +51,13 @@ pub async fn list(
     auth: auth::JWTWithUser<users::Model>,
     State(ctx): State<AppContext>,
 ) -> Result<Response> {
-    let result = Entity::find()
-        .filter(Column::UserId.eq(auth.user.id))
-        .find_with_related(order_items::Entity)
-        .all(&ctx.db)
-        .await?;
+    let mut query = Entity::find().find_with_related(order_items::Entity);
+
+    if !auth.user.is_staff {
+        query = query.filter(Column::UserId.eq(auth.user.id))
+    }
+
+    let result = query.all(&ctx.db).await?;
     let variants = product_variants::Model::find_many_with_product(
         &ctx.db,
         result
