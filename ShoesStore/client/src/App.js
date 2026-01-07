@@ -24,7 +24,6 @@ import SignUpPage from "./components/user/SignUpPage";
 import LegalPage from "./components/user/LegalPage";
 import OrderHistoryPage from "./components/user/OrderHistoryPage";
 import OrderDetailPage from "./components/user/OrderDetailPage";
-import ResetPasswordPage from "./components/user/ResetPasswordPage";
 
 import AdminDashboard from "./components/admin/AdminDashboard";
 import ProductsAdmin from "./components/admin/ProductsAdmin";
@@ -69,7 +68,6 @@ function AppRoutes() {
         {/* Auth (user) */}
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/reset-password" element={<ResetPasswordPage />} />
         <Route path="/legal" element={<LegalPage />} />
 
         {/* Admin */}
