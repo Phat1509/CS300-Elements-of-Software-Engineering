@@ -33,18 +33,6 @@ export default function Header() {
           <NavLink to="/new" className="nav-link">
             New Arrivals
           </NavLink>
-          <NavLink to="/men" className="nav-link">
-            Men
-          </NavLink>
-          <NavLink to="/women" className="nav-link">
-            Women
-          </NavLink>
-          <NavLink to="/kids" className="nav-link">
-            Kids
-          </NavLink>
-          <NavLink to="/sale" className="nav-link">
-            Sale
-          </NavLink>
 
           {/* Display logic: If NOT logged in, show Sign in/Join us */}
           {!user && (

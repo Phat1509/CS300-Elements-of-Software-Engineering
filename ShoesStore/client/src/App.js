@@ -57,10 +57,6 @@ function AppRoutes() {
 
         {/* User pages */}
         <Route path="/new" element={<NewArrivalsPage />} />
-        <Route path="/men" element={<MenPage />} />
-        <Route path="/women" element={<WomenPage />} />
-        <Route path="/kids" element={<KidsPage />} />
-        <Route path="/sale" element={<SalePage />} />
         <Route path="/wishlist" element={<WishlistPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/product/:id" element={<ProductDetail />} />        <Route path="/orders" element={<OrderHistoryPage />} />
