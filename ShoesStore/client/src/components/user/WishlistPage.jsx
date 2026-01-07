@@ -81,10 +81,10 @@ export default function WishlistPage() {
         {notice && <Notice type={notice.type} message={notice.message} />}
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
           <Heart size={22} />
-          <h2 style={{ margin: 0 }}>Your Wishlist</h2>
+          <h2>Your Wishlist</h2>
         </div>
 
-        {!userId ? (
+        {!user ? (
           <div className="card" style={{ padding: 18 }}>
             <p style={{ marginTop: 0 }}>
               Please <b>Sign in</b> to view your wishlist.
@@ -93,9 +93,9 @@ export default function WishlistPage() {
               Go to Sign in
             </Link>
           </div>
-        ) : wishlistLoading || loadingProducts ? (
+        ) : wishlistLoading ? (
           <div className="card" style={{ padding: 18 }}>
-            <p style={{ margin: 0 }}>Loading wishlist...</p>
+            <p>Loading wishlist...</p>
           </div>
         ) : isEmpty ? (
           <div className="card" style={{ padding: 18 }}>
@@ -132,13 +132,15 @@ export default function WishlistPage() {
                 </button>
               <ProductCard
                 id={p.id}
-                product_id={p.product_id}
-                image={p.image}
+                slug={p.slug}
                 image_url={p.image_url}
                 name={p.name}
                 price={p.price}
-                extra={p.extra}
-                slug={p.slug}
+                extra={
+                  p.discount_percentage
+                    ? `-${p.discount_percentage}%`
+                    : undefined
+                }
               />
               </div>
             ))}
