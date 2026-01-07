@@ -1,3 +1,4 @@
+// backend/src/controllers/product.rs
 #![allow(clippy::missing_errors_doc)]
 #![allow(clippy::unnecessary_struct_initialization)]
 #![allow(clippy::unused_async)]
