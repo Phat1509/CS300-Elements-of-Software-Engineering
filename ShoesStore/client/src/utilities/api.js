@@ -29,6 +29,18 @@ export const getMeAPI = async () => {
   return response.data;
 };
 
+export const forgotPasswordAPI = async (email) => {
+  // Sends reset code/token to the user's email
+  await api.post('/auth/forgot', { email });
+  return true;
+};
+
+export const resetPasswordAPI = async (token, password) => {
+  // Resets password using the code/token sent via email
+  const response = await api.post('/auth/reset', { password, token });
+  return response.data;
+};
+
 // ===================== HELPER MAPPER =====================
 const mapProduct = (p) => {
   const isDummyLink = p.image_url && p.image_url.includes("example.com");

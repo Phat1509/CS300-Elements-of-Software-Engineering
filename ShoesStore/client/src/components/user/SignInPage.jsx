@@ -5,16 +5,40 @@ import { Eye, EyeOff } from "lucide-react";
 import Notice from "../common/Notice";
 import useNotice from "../../hooks/useNotice";
 import { useAuth } from "../../context/AuthContext"; 
+import { forgotPasswordAPI } from "../../utilities/api";
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(""); 
   const [showPassword, setShowPassword] = useState(false);
+  const [sendingReset, setSendingReset] = useState(false);
   const { notice, showNotice } = useNotice();
   
   const { login } = useAuth(); 
   const navigate = useNavigate();
+
+  const handleForgotPassword = async () => {
+    if (!email.trim()) {
+      showNotice("error", "Please enter your email to reset your password.");
+      return;
+    }
+
+    try {
+      setSendingReset(true);
+      await forgotPasswordAPI(email.trim());
+      showNotice("success", "Verification code sent. Check your email.");
+      navigate("/reset-password", { state: { email: email.trim() } });
+    } catch (error) {
+      const msg =
+        error.response?.data?.message ||
+        error.message ||
+        "Failed to send reset email. Please try again.";
+      showNotice("error", msg);
+    } finally {
+      setSendingReset(false);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -108,8 +132,14 @@ export default function SignInPage() {
                 <input type="checkbox" />
                 <span>Remember me</span>
               </label>
-              <button type="button" className="link-btn">
-                Forgot password?
+              <button
+                type="button"
+                className="link-btn"
+                onClick={handleForgotPassword}
+                disabled={sendingReset}
+                style={{ opacity: sendingReset ? 0.7 : 1 }}
+              >
+                {sendingReset ? "Sending..." : "Forgot password?"}
               </button>
             </div>
 
