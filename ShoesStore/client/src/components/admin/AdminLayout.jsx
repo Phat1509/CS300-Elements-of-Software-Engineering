@@ -1,4 +1,4 @@
-//src/components/admin/AdminLayout.jsx
+// src/components/admin/AdminLayout.jsx
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 
@@ -17,22 +17,31 @@ export default function AdminLayout({ title, children }) {
 
         <nav className="admin-nav">
           <NavLink to="/admin" end className="admin-link">
-            Dashboard
+            📊 Dashboard
           </NavLink>
+          
           <NavLink to="/admin/products" className="admin-link">
-            Products
-          </NavLink>
-          <NavLink to="/admin/orders" className="admin-link">
-            Orders
+            👟 Products
           </NavLink>
 
-          {}
-          
+          <NavLink to="/admin/categories" className="admin-link">
+            🗂 Categories
+          </NavLink>
+
+          <NavLink to="/admin/brands" className="admin-link">
+            🏷 Brands
+          </NavLink>
+
+          <NavLink to="/admin/orders" className="admin-link">
+            📦 Orders
+          </NavLink>
         </nav>
 
         <div className="admin-side-bottom">
           <div className="admin-hint">
-            
+            <Link to="/" style={{ color: '#cbd5e1', fontSize: '13px', textDecoration: 'none' }}>
+              ← Quay lại Website
+            </Link>
           </div>
         </div>
       </aside>
@@ -41,6 +50,9 @@ export default function AdminLayout({ title, children }) {
       <main className="admin-main">
         <div className="admin-topbar">
           <h1 className="admin-title">{title || "Admin"}</h1>
+          <div className="admin-user-info" style={{ fontSize: '14px', color: '#64748b' }}>
+             Quyền: Quản trị viên
+          </div>
         </div>
 
         <div className="admin-content">{children}</div>

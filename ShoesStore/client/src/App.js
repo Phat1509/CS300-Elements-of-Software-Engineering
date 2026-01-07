@@ -31,6 +31,8 @@ import OrdersAdmin from "./components/admin/OrdersAdmin";
 import AdminLogin from "./components/admin/AdminLogin";
 import ProfilePage from "./components/user/ProfilePage";
 import ProtectedRoute from "./components/admin/ProtectedRoute";
+import BrandsAdmin from "./components/admin/BrandsAdmin";      // Thêm mới
+import CategoriesAdmin from "./components/admin/CategoriesAdmin"; // Thêm mới
 import "./App.css";
 
 /** Wrap routes so we can use useLocation inside BrowserRouter */
@@ -76,6 +78,8 @@ function AppRoutes() {
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/admin/products" element={<ProductsAdmin />} />
             <Route path="/admin/orders" element={<OrdersAdmin />} />
+            <Route path="/admin/brands" element={<BrandsAdmin />} />
+            <Route path="/admin/categories" element={<CategoriesAdmin />} />
         </Route>
       </Routes>
 
