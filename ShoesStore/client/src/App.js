@@ -22,6 +22,8 @@ import NewArrivalsPage from "./components/user/NewArrivalsPage";
 import SignInPage from "./components/user/SignInPage";
 import SignUpPage from "./components/user/SignUpPage";
 import LegalPage from "./components/user/LegalPage";
+import ProfilePage from "./components/user/ProfilePage";
+
 import OrderHistoryPage from "./components/user/OrderHistoryPage";
 import OrderDetailPage from "./components/user/OrderDetailPage";
 
@@ -62,6 +64,8 @@ function AppRoutes() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/product/:id" element={<ProductDetail />} />        <Route path="/orders" element={<OrderHistoryPage />} />
         <Route path="/orders/:id" element={<OrderDetailPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+
 
         {/* Auth (user) */}
         <Route path="/signin" element={<SignInPage />} />

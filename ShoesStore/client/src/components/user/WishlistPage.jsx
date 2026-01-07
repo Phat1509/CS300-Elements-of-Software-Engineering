@@ -14,7 +14,7 @@ export default function WishlistPage() {
   const [products, setProducts] = useState([]);
   const [loadingProducts, setLoadingProducts] = useState(false);
 
-  const userId = user ? (user.id || user.user_id) : null;
+  const userId = user ? user.id || user.user_id : null;
 
   const productIds = useMemo(() => {
     const ids = wishlistEntries.map((w) => w.product_id);
@@ -64,7 +64,14 @@ export default function WishlistPage() {
       </div>
 
       <section className="container" style={{ padding: "30px 0 60px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 10,
+            marginBottom: 16,
+          }}
+        >
           <Heart size={22} />
           <h2 style={{ margin: 0 }}>Your Wishlist</h2>
         </div>
@@ -72,9 +79,13 @@ export default function WishlistPage() {
         {!userId ? (
           <div className="card" style={{ padding: 18 }}>
             <p style={{ marginTop: 0 }}>
-              Bạn cần <b>Sign in</b> để dùng Wishlist nha.
+              You need to <b>Sign in</b> to use Wishlist.
             </p>
-            <Link to="/signin" className="btn btn-primary" style={{ width: "fit-content" }}>
+            <Link
+              to="/signin"
+              className="btn btn-primary"
+              style={{ width: "fit-content" }}
+            >
               Go to Sign in
             </Link>
           </div>
@@ -84,8 +95,12 @@ export default function WishlistPage() {
           </div>
         ) : isEmpty ? (
           <div className="card" style={{ padding: 18 }}>
-            <p style={{ marginTop: 0 }}>Wishlist của bạn đang trống 👀</p>
-            <Link to="/new" className="btn btn-primary" style={{ width: "fit-content" }}>
+            <p style={{ marginTop: 0 }}>Your wishlist is empty 👀</p>
+            <Link
+              to="/new"
+              className="btn btn-primary"
+              style={{ width: "fit-content" }}
+            >
               Browse new arrivals
             </Link>
           </div>

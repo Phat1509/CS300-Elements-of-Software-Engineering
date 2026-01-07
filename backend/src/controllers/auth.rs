@@ -5,6 +5,9 @@ use loco_rs::prelude::*;
 use regex::Regex;
 use serde::{Deserialize, Serialize};
 
+// ✅ thêm (để set ActiveValue cho SeaORM update)
+use sea_orm::ActiveValue;
+
 use crate::{
     controllers::ErrorDetail,
     mailers::auth::AuthMailer,
@@ -42,6 +45,11 @@ pub struct MagicLinkParams {
 #[derive(Debug, Deserialize, Serialize, utoipa::ToSchema)]
 pub struct ResendVerificationParams {
     pub email: String,
+}
+
+#[derive(Debug, Deserialize, Serialize, utoipa::ToSchema)]
+pub struct UpdateProfileParams {
+    pub name: String,
 }
 
 /// Register function creates a new user with the given parameters and sends a
@@ -162,9 +170,9 @@ async fn reset(State(ctx): State<AppContext>, Json(params): Json<ResetParams>) -
         // we don't want to expose our users email. if the email is invalid we still
         // returning success to the caller
         tracing::info!("reset token not found");
-
         return format::json(());
     };
+
     user.into_active_model()
         .reset_password(&ctx.db, &params.password)
         .await?;
@@ -228,20 +236,34 @@ async fn current(auth: auth::JWT, State(ctx): State<AppContext>) -> Result<Respo
     format::json(CurrentResponse::new(&user))
 }
 
+// ✅ NEW: Update profile (name)
+// ✅ FIX: đổi PATCH -> POST để tránh CORS preflight fail (Network Error)
+#[utoipa::path(
+    post,
+    path = "/api/auth/profile",
+    tags = ["Authentication"],
+    summary = "Update current user profile",
+    responses(
+        (status = OK, description = "Updated user", body = CurrentResponse),
+        (status = UNAUTHORIZED, description = "Unauthorized", body = ErrorDetail),
+    )
+)]
+#[debug_handler]
+async fn update_profile(
+    auth: auth::JWT,
+    State(ctx): State<AppContext>,
+    Json(params): Json<UpdateProfileParams>,
+) -> Result<Response> {
+    let user = users::Model::find_by_pid(&ctx.db, &auth.claims.pid).await?;
+
+    let mut active = user.into_active_model();
+    active.name = ActiveValue::Set(params.name);
+
+    let updated = active.update(&ctx.db).await?;
+    format::json(CurrentResponse::new(&updated))
+}
+
 /// Magic link authentication provides a secure and passwordless way to log in to the application.
-///
-/// # Flow
-/// 1. **Request a Magic Link**:
-///    A registered user sends a POST request to `/magic-link` with their email.
-///    If the email exists, a short-lived, one-time-use token is generated and sent to the user's email.
-///    For security and to avoid exposing whether an email exists, the response always returns 200, even if the email is invalid.
-///
-/// 2. **Click the Magic Link**:
-///    The user clicks the link (/magic-link/{token}), which validates the token and its expiration.
-///    If valid, the server generates a JWT and responds with a [`LoginResponse`].
-///    If invalid or expired, an unauthorized response is returned.
-///
-/// This flow enhances security by avoiding traditional passwords and providing a seamless login experience.
 #[utoipa::path(
     post,
     path = "/api/auth/magic-link",
@@ -361,6 +383,8 @@ pub fn routes() -> Routes {
         .add("/forgot", post(forgot))
         .add("/reset", post(reset))
         .add("/current", get(current))
+        // ✅ NEW (POST)
+        .add("/profile", post(update_profile))
         .add("/magic-link", post(magic_link))
         .add("/magic-link/{token}", get(magic_link_verify))
         .add("/resend-verification-mail", post(resend_verification_email))
@@ -374,6 +398,8 @@ pub fn api_routes() -> OpenApiRouter<AppContext> {
         .routes(routes!(forgot))
         .routes(routes!(reset))
         .routes(routes!(current))
+        // ✅ NEW (POST)
+        .routes(routes!(update_profile))
         .routes(routes!(magic_link))
         .routes(routes!(magic_link_verify))
         .routes(routes!(resend_verification_email))

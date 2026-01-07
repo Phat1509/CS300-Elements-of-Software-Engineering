@@ -1,12 +1,12 @@
 // client/src/components/user/Header.jsx
 import React from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext"; 
-import { useCart } from "../../context/CartContext"; 
+import { useAuth } from "../../context/AuthContext";
+import { useCart } from "../../context/CartContext";
 
 export default function Header() {
-  const { user, logout } = useAuth(); 
-  const { cartItems } = useCart(); 
+  const { user, logout } = useAuth();
+  const { cartItems } = useCart();
   const navigate = useNavigate();
 
   const count = cartItems.reduce(
@@ -46,7 +46,7 @@ export default function Header() {
             Sale
           </NavLink>
 
-          {/* Logic hiển thị: Nếu CHƯA login thì hiện Sign in/Join us */}
+          {/* Display logic: If NOT logged in, show Sign in/Join us */}
           {!user && (
             <>
               <NavLink to="/signin" className="nav-link auth-link">
@@ -62,18 +62,14 @@ export default function Header() {
         {/* Actions (right) */}
         <div className="actions">
           {/* Wishlist */}
-          <Link
-            to="/wishlist"
-            className="btn btn-outline"
-            aria-label="Wishlist"
-          >
+          <Link to="/wishlist" className="btn btn-outline" aria-label="Wishlist">
             ♡
           </Link>
 
           {/* User Actions */}
           {user ? (
             <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-              {/* [MỚI] Link xem lịch sử đơn hàng */}
+              {/* Orders */}
               <Link
                 to="/orders"
                 style={{
@@ -88,15 +84,35 @@ export default function Header() {
               >
                 📦 Orders
               </Link>
-              <div
-                style={{ width: "1px", height: "14px", background: "#ccc" }}
-              ></div>{" "}
-              {/* Đường kẻ dọc ngăn cách */}
-              {/* Hiển thị tên User */}
+
+              {/* Divider */}
+              <div style={{ width: "1px", height: "14px", background: "#ccc" }} />
+
+              {/* Profile */}
+              <Link
+                to="/profile"
+                style={{
+                  fontSize: "14px",
+                  fontWeight: "500",
+                  textDecoration: "none",
+                  color: "inherit",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "4px",
+                }}
+              >
+                👤 Profile
+              </Link>
+
+              {/* Divider */}
+              <div style={{ width: "1px", height: "14px", background: "#ccc" }} />
+
+              {/* Show user name */}
               <span style={{ fontSize: "14px", fontWeight: "500" }}>
-                Hi, {user.username}
+                Hi, {user.name}
               </span>
-              {/* Nút Logout */}
+
+              {/* Logout button */}
               <button
                 onClick={handleLogout}
                 className="btn btn-outline"
@@ -110,7 +126,7 @@ export default function Header() {
               </button>
             </div>
           ) : (
-            // Nếu chưa login, icon người dẫn đến trang signin
+            // If not logged in, user icon links to signin page
             <Link to="/signin" className="btn btn-outline" aria-label="Account">
               👤
             </Link>
@@ -121,7 +137,7 @@ export default function Header() {
             <Link to="/cart" className="btn btn-outline" aria-label="Cart">
               🛒
             </Link>
-            {/* Chỉ hiện badge khi số lượng > 0 */}
+            {/* Only show badge when count > 0 */}
             {count > 0 && <span className="badge cart-badge">{count}</span>}
           </div>
         </div>

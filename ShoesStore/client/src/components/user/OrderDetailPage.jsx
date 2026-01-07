@@ -16,7 +16,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 
-import { getOrdersByUserId } from "../../utilities/api"; // Đảm bảo import đúng hàm API
+import { getOrdersByUserId } from "../../utilities/api"; // Make sure the correct API function is imported
 import { useAuth } from "../../context/AuthContext";
 
 // --- HELPER FUNCTIONS ---
@@ -117,7 +117,7 @@ function ReviewModal({
             alignItems: "center",
           }}
         >
-          <h3 style={{ margin: 0, fontSize: 18 }}>Đánh giá sản phẩm</h3>
+          <h3 style={{ margin: 0, fontSize: 18 }}>Review product</h3>
           <button
             onClick={onClose}
             style={{ background: "none", border: "none", cursor: "pointer" }}
@@ -130,7 +130,7 @@ function ReviewModal({
         <div style={{ padding: 24 }}>
           <div style={{ textAlign: "center", marginBottom: 20 }}>
             <p className="muted" style={{ marginBottom: 12 }}>
-              Bạn cảm thấy đơn hàng này thế nào?
+              How was your order?
             </p>
             <div style={{ display: "flex", justifyContent: "center", gap: 8 }}>
               {[1, 2, 3, 4, 5].map((star) => (
@@ -158,7 +158,7 @@ function ReviewModal({
           <textarea
             value={reviewText}
             onChange={(e) => setReviewText(e.target.value)}
-            placeholder="Chia sẻ trải nghiệm của bạn về sản phẩm..."
+            placeholder="Share your experience with the product..."
             style={{
               width: "100%",
               minHeight: 100,
@@ -188,7 +188,7 @@ function ReviewModal({
             className="btn btn-outline"
             style={{ border: "1px solid #cbd5e1" }}
           >
-            Hủy
+            Cancel
           </button>
           <button
             onClick={onSave}
@@ -196,7 +196,7 @@ function ReviewModal({
             className="btn btn-primary"
             style={{ opacity: rating === 0 ? 0.5 : 1 }}
           >
-            Gửi đánh giá
+            Submit review
           </button>
         </div>
       </div>
@@ -229,7 +229,7 @@ export default function OrderDetailPage() {
       setLoading(true);
       try {
         const userId = user.id || user.user_id;
-        // API thường trả về list, ta lọc client-side (hoặc gọi API getOrderById nếu có)
+        // API usually returns a list; we filter client-side (or call getOrderById if available)
         const list = await getOrdersByUserId(userId);
         const found = list.find(
           (o) =>
@@ -249,22 +249,22 @@ export default function OrderDetailPage() {
   const handleCopyTracking = () => {
     if (order?.tracking_number) {
       navigator.clipboard.writeText(order.tracking_number);
-      alert("Đã sao chép mã vận đơn!");
+      alert("Tracking number copied!");
     }
   };
 
   const handleSaveReview = () => {
-    // TODO: Gọi API lưu review lên server
+    // TODO: Call API to save review to server
     console.log("Saving review:", { orderId: id, rating, reviewText });
 
-    // Giả lập lưu vào localStorage
+    // Simulate saving to localStorage
     const key = `review_${id}`;
     localStorage.setItem(
       key,
       JSON.stringify({ rating, text: reviewText, date: new Date() })
     );
 
-    alert("Cảm ơn bạn đã đánh giá!");
+    alert("Thanks for your review!");
     setIsReviewOpen(false);
   };
 
@@ -275,9 +275,9 @@ export default function OrderDetailPage() {
         className="container"
         style={{ padding: "100px 0", textAlign: "center" }}
       >
-        <h3>Vui lòng đăng nhập</h3>
+        <h3>Please log in</h3>
         <Link to="/login" className="btn btn-primary" style={{ marginTop: 16 }}>
-          Đăng nhập
+          Log in
         </Link>
       </div>
     );
@@ -289,7 +289,7 @@ export default function OrderDetailPage() {
         className="container"
         style={{ padding: "80px 0", textAlign: "center" }}
       >
-        Đang tải thông tin đơn hàng...
+        Loading order details...
       </div>
     );
   }
@@ -300,16 +300,16 @@ export default function OrderDetailPage() {
         className="container"
         style={{ padding: "80px 0", textAlign: "center" }}
       >
-        <h3>Không tìm thấy đơn hàng</h3>
+        <h3>Order not found</h3>
         <p className="muted">
-          Đơn hàng #{id} không tồn tại hoặc bạn không có quyền truy cập.
+          Order #{id} does not exist or you do not have permission to access it.
         </p>
         <button
           onClick={() => navigate("/orders")}
           className="btn btn-outline"
           style={{ marginTop: 16 }}
         >
-          <ArrowLeft size={16} style={{ marginRight: 8 }} /> Quay lại danh sách
+          <ArrowLeft size={16} style={{ marginRight: 8 }} /> Back to list
         </button>
       </div>
     );
@@ -339,14 +339,14 @@ export default function OrderDetailPage() {
           }}
         >
           <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
-            Trang chủ
+            Home
           </Link>
           <ChevronRight size={14} />
           <Link
             to="/orders"
             style={{ color: "inherit", textDecoration: "none" }}
           >
-            Đơn hàng
+            Orders
           </Link>
           <ChevronRight size={14} />
           <span style={{ color: "#0f172a", fontWeight: 500 }}>
@@ -369,10 +369,10 @@ export default function OrderDetailPage() {
         >
           <div>
             <h1 style={{ fontSize: 24, margin: "0 0 8px" }}>
-              Chi tiết đơn hàng #{displayId}
+              Order details #{displayId}
             </h1>
             <div style={{ fontSize: 14, color: "#64748b" }}>
-              Ngày đặt: {formatDate(order.created_at)}
+              Order date: {formatDate(order.created_at)}
             </div>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
@@ -421,7 +421,7 @@ export default function OrderDetailPage() {
                   fontWeight: 600,
                 }}
               >
-                Sản phẩm ({items.length})
+                Products ({items.length})
               </div>
               <div>
                 {items.map((item, idx) => {
@@ -452,7 +452,7 @@ export default function OrderDetailPage() {
                         }}
                       >
                         <img
-                          // SỬA: Dùng biến product đã lấy ở trên
+                          // FIX: Use the product variable defined above
                           src={product.image_url || "https://placehold.co/80"}
                           alt={product.name}
                           style={{
@@ -463,7 +463,7 @@ export default function OrderDetailPage() {
                         />
                       </div>
                       <div style={{ flex: 1 }}>
-                        {/* SỬA: Hiển thị tên */}
+                        {/* FIX: Display name */}
                         <div
                           style={{
                             fontWeight: 600,
@@ -471,7 +471,7 @@ export default function OrderDetailPage() {
                             marginBottom: 4,
                           }}
                         >
-                          {product.name || "Sản phẩm đã bị xóa"}
+                          {product.name || "Product has been removed"}
                         </div>
 
                         <div
@@ -492,7 +492,7 @@ export default function OrderDetailPage() {
                             alignItems: "center",
                           }}
                         >
-                          {/* item.quantity và item.price lấy trực tiếp là ĐÚNG (do flatten) */}
+                          {/* item.quantity and item.price are correct to read directly (flattened) */}
                           <div style={{ fontSize: 14 }}>x{item.quantity}</div>
                           <div style={{ fontWeight: 600 }}>
                             {formatCurrency(item.price)}
@@ -519,7 +519,7 @@ export default function OrderDetailPage() {
                 className="btn btn-outline"
                 style={{ display: "flex", alignItems: "center", gap: 8 }}
               >
-                <RotateCcw size={16} /> Mua lại
+                <RotateCcw size={16} /> Buy again
               </button>
               {canReview && (
                 <button
@@ -527,7 +527,7 @@ export default function OrderDetailPage() {
                   className="btn btn-outline"
                   style={{ display: "flex", alignItems: "center", gap: 8 }}
                 >
-                  <Star size={16} /> Viết đánh giá
+                  <Star size={16} /> Write a review
                 </button>
               )}
             </div>
@@ -554,7 +554,7 @@ export default function OrderDetailPage() {
                     gap: 8,
                   }}
                 >
-                  <CreditCard size={18} color="#64748b" /> Thanh toán
+                  <CreditCard size={18} color="#64748b" /> Payment
                 </h4>
                 <div
                   style={{
@@ -565,7 +565,7 @@ export default function OrderDetailPage() {
                     color: "#64748b",
                   }}
                 >
-                  <span>Tạm tính</span>
+                  <span>Subtotal</span>
                   <span>
                     {formatCurrency(
                       items.reduce((acc, i) => acc + i.price * i.quantity, 0)
@@ -581,7 +581,7 @@ export default function OrderDetailPage() {
                     color: "#64748b",
                   }}
                 >
-                  <span>Phí vận chuyển</span>
+                  <span>Shipping fee</span>
                   <span>{formatCurrency(order.shipping_fee || 0)}</span>
                 </div>
                 <div
@@ -596,7 +596,7 @@ export default function OrderDetailPage() {
                     color: "#0f172a",
                   }}
                 >
-                  <span>Tổng cộng</span>
+                  <span>Total</span>
                   <span>{formatCurrency(order.total_amount)}</span>
                 </div>
               </div>
@@ -619,7 +619,7 @@ export default function OrderDetailPage() {
                     gap: 8,
                   }}
                 >
-                  <MapPin size={18} color="#64748b" /> Địa chỉ nhận hàng
+                  <MapPin size={18} color="#64748b" /> Shipping address
                 </h4>
                 <div
                   style={{ fontSize: 14, color: "#334155", lineHeight: 1.6 }}
@@ -631,7 +631,7 @@ export default function OrderDetailPage() {
                   <div style={{ color: "#64748b", marginTop: 4 }}>
                     {order.address ||
                       order.shipping_address ||
-                      "Địa chỉ mặc định của khách hàng"}
+                      "Customer default address"}
                   </div>
                 </div>
               </div>
@@ -654,7 +654,7 @@ export default function OrderDetailPage() {
                       fontWeight: 600,
                     }}
                   >
-                    MÃ VẬN ĐƠN
+                    TRACKING NUMBER
                   </div>
                   <div
                     style={{ display: "flex", alignItems: "center", gap: 10 }}

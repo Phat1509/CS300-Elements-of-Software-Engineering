@@ -47,7 +47,7 @@ const ProductDetail = () => {
           setVariants([]);
         }
       } catch (e) {
-        console.error("Lỗi tải sản phẩm:", e);
+        console.error("Error loading product:", e);
         setProduct(null);
         setVariants([]);
       } finally {
@@ -62,8 +62,7 @@ const ProductDetail = () => {
   const sizes = useMemo(() => {
     const s = new Set();
     variants.forEach((v) => {
-      if (v.size !== undefined && v.size !== null && v.size !== "")
-        s.add(v.size);
+      if (v.size !== undefined && v.size !== null && v.size !== "") s.add(v.size);
     });
     return Array.from(s).sort((a, b) => Number(a) - Number(b));
   }, [variants]);
@@ -85,8 +84,7 @@ const ProductDetail = () => {
     if (colors.length > 0 && !selectedColor) return null;
 
     return variants.find((v) => {
-      const matchSize =
-        !selectedSize || String(v.size) === String(selectedSize);
+      const matchSize = !selectedSize || String(v.size) === String(selectedSize);
       const matchColor =
         !selectedColor ||
         String(v.color).toLowerCase() === String(selectedColor).toLowerCase();
@@ -103,9 +101,9 @@ const ProductDetail = () => {
       await toggleWishlist(product.id);
     } catch (e) {
       if (String(e?.message || e).includes("Login")) {
-        navigate("/login"); 
+        navigate("/login");
       } else {
-        console.error("Lỗi Wishlist:", e);
+        console.error("Wishlist error:", e);
       }
     }
   };
@@ -115,17 +113,17 @@ const ProductDetail = () => {
       (sizes.length > 0 && !selectedSize) ||
       (colors.length > 0 && !selectedColor)
     ) {
-      alert("Vui lòng chọn đầy đủ Size và Màu sắc!");
+      alert("Please select both Size and Color!");
       return;
     }
 
     if (!selectedVariant) {
-      alert("Sản phẩm với tùy chọn này hiện không khả dụng.");
+      alert("This product option is currently unavailable.");
       return;
     }
 
     if (selectedVariant.stock < quantity) {
-      alert(`Chỉ còn lại ${selectedVariant.stock} sản phẩm trong kho!`);
+      alert(`Only ${selectedVariant.stock} items left in stock!`);
       return;
     }
 
@@ -133,21 +131,19 @@ const ProductDetail = () => {
 
     if (!variantId) {
       console.error("Variant Data Error:", selectedVariant);
-      alert("Lỗi dữ liệu: Không tìm thấy ID sản phẩm.");
+      alert("Data error: Product variant ID not found.");
       return;
     }
 
     setIsAdding(true);
     try {
-      console.log(
-        `🛒 AddToCart UI Calling: ID=${variantId}, Quantity=${quantity}`
-      );
+      console.log(`🛒 AddToCart UI Calling: ID=${variantId}, Quantity=${quantity}`);
 
       await addToCart(variantId, quantity);
 
       setQuantity(1);
     } catch (err) {
-      console.error("Lỗi thêm giỏ hàng:", err);
+      console.error("Error adding to cart:", err);
     } finally {
       setIsAdding(false);
     }
@@ -171,13 +167,13 @@ const ProductDetail = () => {
         className="container"
         style={{ padding: "100px 0", textAlign: "center" }}
       >
-        <h2>Không tìm thấy sản phẩm</h2>
+        <h2>Product not found</h2>
         <Link
           to="/"
           className="btn btn-primary"
           style={{ marginTop: 20, display: "inline-block" }}
         >
-          Quay về trang chủ
+          Back to home
         </Link>
       </div>
     );
@@ -280,9 +276,7 @@ const ProductDetail = () => {
             </div>
 
             <div style={{ marginBottom: 20 }}>
-              <span
-                style={{ fontSize: "24px", fontWeight: 700, color: "#111" }}
-              >
+              <span style={{ fontSize: "24px", fontWeight: 700, color: "#111" }}>
                 {Number(product.price).toLocaleString()}₫
               </span>
               {Number(product.discount_percentage || 0) > 0 && (
@@ -302,7 +296,7 @@ const ProductDetail = () => {
             </div>
 
             <p style={{ lineHeight: 1.6, color: "#444", marginBottom: 26 }}>
-              {product.description || "Chưa có mô tả cho sản phẩm này."}
+              {product.description || "No description available for this product."}
             </p>
 
             {/* OPTIONS: SIZE */}
@@ -392,18 +386,16 @@ const ProductDetail = () => {
             {selectedVariant ? (
               selectedVariant.stock === 0 ? (
                 <p style={{ color: "#111", margin: "10px 0 0" }}>
-                  Hết hàng tạm thời
+                  Temporarily out of stock
                 </p>
               ) : (
-                <p
-                  style={{ color: "#16a34a", fontSize: 14, margin: "10px 0 0" }}
-                >
-                  ✓ Còn hàng (Tồn kho: {selectedVariant.stock})
+                <p style={{ color: "#16a34a", fontSize: 14, margin: "10px 0 0" }}>
+                  ✓ In stock (Available: {selectedVariant.stock})
                 </p>
               )
             ) : (
               <p style={{ color: "#666", fontSize: 14, margin: "10px 0 0" }}>
-                Vui lòng chọn Size và Màu
+                Please select Size and Color
               </p>
             )}
 
@@ -447,16 +439,13 @@ const ProductDetail = () => {
                   <Minus size={16} />
                 </button>
 
-                <span
-                  style={{ fontWeight: 600, minWidth: 20, textAlign: "center" }}
-                >
+                <span style={{ fontWeight: 600, minWidth: 20, textAlign: "center" }}>
                   {quantity}
                 </span>
 
                 <button
                   onClick={() => {
-                    if (selectedVariant && quantity >= selectedVariant.stock)
-                      return;
+                    if (selectedVariant && quantity >= selectedVariant.stock) return;
                     setQuantity((q) => q + 1);
                   }}
                   style={{
@@ -476,9 +465,7 @@ const ProductDetail = () => {
               {/* Add to Cart (WIDE) */}
               <button
                 onClick={handleAddToCart}
-                disabled={
-                  isAdding || (selectedVariant && selectedVariant.stock === 0)
-                }
+                disabled={isAdding || (selectedVariant && selectedVariant.stock === 0)}
                 style={{
                   flex: 1,
                   height: 52,

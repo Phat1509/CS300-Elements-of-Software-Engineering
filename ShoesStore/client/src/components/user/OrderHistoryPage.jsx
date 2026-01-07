@@ -15,8 +15,8 @@ import { getOrdersByUserId } from "../../utilities/api";
 import { useAuth } from "../../context/AuthContext"; // Import Auth Context
 
 // --- HELPER FUNCTIONS ---
-const formatCurrency = (n) => (Number(n) || 0).toLocaleString("en-US") + "$"; // Đổi sang $ cho đồng bộ với Cart
-// Nếu muốn dùng VND:
+const formatCurrency = (n) => (Number(n) || 0).toLocaleString("en-US") + "$"; // Switch to $ to match Cart
+// If you want VND:
 // const formatCurrency = (n) => (Number(n) || 0).toLocaleString("vi-VN") + "₫";
 
 const formatDate = (iso) => {
@@ -56,7 +56,7 @@ const getStatusConfig = (status) => {
         color: "#dc2626",
         bg: "#fee2e2",
         icon: Package,
-      }; // Thêm trạng thái hủy
+      }; // Added cancelled status
     default:
       return { text: "Pending", color: "#64748b", bg: "#f1f5f9", icon: Clock };
   }
@@ -64,7 +64,7 @@ const getStatusConfig = (status) => {
 
 export default function OrderHistoryPage() {
   const navigate = useNavigate();
-  const { user, isAuthenticated } = useAuth(); // Dùng hook chuẩn
+  const { user, isAuthenticated } = useAuth(); // Use the standard hook
 
   const [loading, setLoading] = useState(true);
   const [orders, setOrders] = useState([]);
@@ -73,7 +73,7 @@ export default function OrderHistoryPage() {
 
   // --- LOAD DATA ---
   useEffect(() => {
-    // Nếu chưa đăng nhập thì thôi, để UI ở dưới xử lý redirect
+    // If not logged in, stop here; the UI below will handle it
     if (!isAuthenticated || !user) {
       setLoading(false);
       return;
@@ -89,7 +89,7 @@ export default function OrderHistoryPage() {
           setOrders(Array.isArray(list) ? list : []);
         }
       } catch (e) {
-        console.error("Lỗi tải đơn hàng:", e);
+        console.error("Error loading orders:", e);
       } finally {
         if (mounted) setLoading(false);
       }
@@ -106,12 +106,12 @@ export default function OrderHistoryPage() {
   const filteredOrders = useMemo(() => {
     let result = [...orders];
 
-    // 1. Sort: Mới nhất lên đầu
+    // 1. Sort: newest first
     result.sort(
       (a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0)
     );
 
-    // 2. Filter theo Search & Status
+    // 2. Filter by Search & Status
     if (q || filter !== "all") {
       const lowerQ = q.toLowerCase();
       result = result.filter((o) => {
@@ -124,8 +124,7 @@ export default function OrderHistoryPage() {
 
         // Match status dropdown
         let matchFilter = true;
-        if (filter === "pending")
-          matchFilter = s === "PENDING" || s === "PLACED";
+        if (filter === "pending") matchFilter = s === "PENDING" || s === "PLACED";
         if (filter === "processing")
           matchFilter = s === "PROCESSING" || s === "PAID";
         if (filter === "shipped") matchFilter = s === "SHIPPED";
@@ -160,23 +159,21 @@ export default function OrderHistoryPage() {
         className="container"
         style={{ padding: "80px 0", textAlign: "center" }}
       >
-        <h3>Vui lòng đăng nhập</h3>
-        <p className="muted">Bạn cần đăng nhập để xem lịch sử mua hàng.</p>
+        <h3>Please log in</h3>
+        <p className="muted">You need to log in to view your order history.</p>
         <Link
           to="/login"
           className="btn btn-primary"
           style={{ marginTop: 20, display: "inline-block" }}
         >
-          Đăng nhập ngay
+          Log in now
         </Link>
       </div>
     );
   }
 
   return (
-    <div
-      style={{ background: "#f8fafc", minHeight: "100vh", paddingBottom: 60 }}
-    >
+    <div style={{ background: "#f8fafc", minHeight: "100vh", paddingBottom: 60 }}>
       {/* HEADER & STATS */}
       <section
         style={{
@@ -197,10 +194,10 @@ export default function OrderHistoryPage() {
           >
             <div>
               <h1 style={{ margin: "0 0 8px", fontSize: "28px" }}>
-                Lịch sử đơn hàng
+                Order history
               </h1>
               <p className="muted" style={{ margin: 0 }}>
-                Quản lý và theo dõi trạng thái đơn hàng của bạn
+                Manage and track the status of your orders
               </p>
             </div>
           </div>
@@ -216,29 +213,29 @@ export default function OrderHistoryPage() {
           >
             {[
               {
-                label: "Tổng đơn",
+                label: "Total orders",
                 val: stats.total,
                 icon: ShoppingBag,
                 color: "#64748b",
               },
               {
-                label: "Đang xử lý",
+                label: "In progress",
                 val: stats.processing,
                 icon: Truck,
                 color: "#3b82f6",
               },
               {
-                label: "Hoàn thành",
+                label: "Completed",
                 val: stats.delivered,
                 icon: CheckCircle2,
                 color: "#22c55e",
               },
               {
-                label: "Tổng chi tiêu",
+                label: "Total spent",
                 val: formatCurrency(stats.spent),
                 icon: Package,
                 color: "#f59e0b",
-              }, // Icon Package đại diện
+              },
             ].map((st, idx) => (
               <div
                 key={idx}
@@ -267,14 +264,10 @@ export default function OrderHistoryPage() {
                   <st.icon size={24} color={st.color} />
                 </div>
                 <div>
-                  <div
-                    style={{ fontSize: 20, fontWeight: 700, color: "#0f172a" }}
-                  >
+                  <div style={{ fontSize: 20, fontWeight: 700, color: "#0f172a" }}>
                     {st.val}
                   </div>
-                  <div style={{ fontSize: 13, color: "#64748b" }}>
-                    {st.label}
-                  </div>
+                  <div style={{ fontSize: 13, color: "#64748b" }}>{st.label}</div>
                 </div>
               </div>
             ))}
@@ -305,7 +298,7 @@ export default function OrderHistoryPage() {
               }}
             />
             <input
-              placeholder="Tìm theo Mã đơn hoặc Giá tiền..."
+              placeholder="Search by Order ID or Amount..."
               value={q}
               onChange={(e) => setQ(e.target.value)}
               style={{
@@ -329,18 +322,18 @@ export default function OrderHistoryPage() {
               height: 42,
             }}
           >
-            <option value="all">Tất cả trạng thái</option>
-            <option value="pending">Chờ xử lý (Pending)</option>
-            <option value="processing">Đang đóng gói (Processing)</option>
-            <option value="shipped">Đang giao (Shipped)</option>
-            <option value="delivered">Đã giao (Delivered)</option>
+            <option value="all">All statuses</option>
+            <option value="pending">Pending</option>
+            <option value="processing">Processing</option>
+            <option value="shipped">Shipped</option>
+            <option value="delivered">Delivered</option>
           </select>
         </div>
 
         {/* Loading State */}
         {loading && (
           <div style={{ textAlign: "center", padding: 40 }}>
-            Đang tải danh sách đơn hàng...
+            Loading order list...
           </div>
         )}
 
@@ -360,12 +353,12 @@ export default function OrderHistoryPage() {
               color="#cbd5e1"
               style={{ margin: "0 auto 20px" }}
             />
-            <h3>Không tìm thấy đơn hàng nào</h3>
+            <h3>No orders found</h3>
             <p className="muted" style={{ marginBottom: 20 }}>
-              Bạn chưa có đơn hàng nào hoặc không tìm thấy kết quả phù hợp.
+              You don&apos;t have any orders yet, or no results match your search.
             </p>
             <Link to="/" className="btn btn-primary">
-              Mua sắm ngay
+              Shop now
             </Link>
           </div>
         )}
@@ -375,7 +368,7 @@ export default function OrderHistoryPage() {
           {filteredOrders.map((order) => {
             const statusCfg = getStatusConfig(order.status);
             const StatusIcon = statusCfg.icon;
-            const items = order.items || order.order_items || []; // Fallback an toàn
+            const items = order.items || order.order_items || [];
 
             return (
               <div
@@ -402,9 +395,7 @@ export default function OrderHistoryPage() {
                     gap: 10,
                   }}
                 >
-                  <div
-                    style={{ display: "flex", gap: 16, alignItems: "center" }}
-                  >
+                  <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
                     <div>
                       <span
                         style={{
@@ -413,7 +404,7 @@ export default function OrderHistoryPage() {
                           display: "block",
                         }}
                       >
-                        MÃ ĐƠN HÀNG
+                        ORDER ID
                       </span>
                       <span style={{ fontWeight: 600 }}>#{order.id}</span>
                     </div>
@@ -425,16 +416,14 @@ export default function OrderHistoryPage() {
                           display: "block",
                         }}
                       >
-                        NGÀY ĐẶT
+                        ORDER DATE
                       </span>
                       <span style={{ fontWeight: 500 }}>
                         {formatDate(order.created_at)}
                       </span>
                     </div>
                   </div>
-                  <div
-                    style={{ display: "flex", alignItems: "center", gap: 12 }}
-                  >
+                  <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                     <span style={{ fontWeight: 700, fontSize: 16 }}>
                       {formatCurrency(order.total_amount)}
                     </span>
@@ -471,10 +460,8 @@ export default function OrderHistoryPage() {
                   <div style={{ flex: 1 }}>
                     {items.length > 0 ? (
                       items.map((item, idx) => {
-                        // ✅ TRÍCH XUẤT DỮ LIỆU ĐÚNG TỪ CẤU TRÚC RUST
                         const product = item.product || {};
                         const variant = item.product_variant || {};
-                        // item.price và item.quantity lấy trực tiếp vì đã được flatten từ order_items
 
                         return (
                           <div
@@ -496,10 +483,7 @@ export default function OrderHistoryPage() {
                               }}
                             >
                               <img
-                                // SỬA: Lấy ảnh từ item.product.image_url
-                                src={
-                                  product.image_url || "https://placehold.co/50"
-                                }
+                                src={product.image_url || "https://placehold.co/50"}
                                 alt={product.name}
                                 style={{
                                   width: "100%",
@@ -507,19 +491,16 @@ export default function OrderHistoryPage() {
                                   objectFit: "cover",
                                 }}
                                 onError={(e) =>
-                                  (e.target.src =
-                                    "https://placehold.co/50?text=...")
+                                  (e.target.src = "https://placehold.co/50?text=...")
                                 }
                               />
                             </div>
                             <div>
-                              {/* SỬA: Lấy tên từ item.product.name */}
                               <div style={{ fontWeight: 500, fontSize: 14 }}>
-                                {product.name || "Sản phẩm không tồn tại"}
+                                {product.name || "Product not found"}
                               </div>
                               <div style={{ fontSize: 13, color: "#64748b" }}>
-                                Qty: {item.quantity} x{" "}
-                                {formatCurrency(item.price)}
+                                Qty: {item.quantity} x {formatCurrency(item.price)}
                                 {variant.size && ` | Size: ${variant.size}`}
                               </div>
                             </div>
@@ -527,14 +508,14 @@ export default function OrderHistoryPage() {
                         );
                       })
                     ) : (
-                      <p className="muted">Không có thông tin sản phẩm</p>
+                      <p className="muted">No product information</p>
                     )}
                   </div>
 
                   {/* Action Button */}
                   <div style={{ textAlign: "right" }}>
                     <button
-                      onClick={() => navigate(`/orders/${order.id}`)} // Route chi tiết đơn hàng
+                      onClick={() => navigate(`/orders/${order.id}`)}
                       className="btn btn-outline"
                       style={{
                         display: "flex",
@@ -543,7 +524,7 @@ export default function OrderHistoryPage() {
                         padding: "8px 16px",
                       }}
                     >
-                      Chi tiết <ArrowRight size={16} />
+                      Details <ArrowRight size={16} />
                     </button>
                   </div>
                 </div>

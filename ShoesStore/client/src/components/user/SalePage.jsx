@@ -15,7 +15,7 @@ export default function SalePage() {
       try {
         const all = await getProducts();
 
-        // Lọc những sản phẩm có discount_percentage > 0
+        // Filter products with discount_percentage > 0
         const saleItems = all.filter(
           (p) => p.is_active && (p.discount_percentage || 0) > 0
         );
@@ -52,7 +52,7 @@ export default function SalePage() {
         );
       case "discount":
       default:
-        // Sắp xếp giảm giá nhiều nhất lên đầu
+        // Sort by highest discount first
         return arr.sort(
           (a, b) => (b.discount_percentage || 0) - (a.discount_percentage || 0)
         );
@@ -63,8 +63,11 @@ export default function SalePage() {
 
   if (loading) {
     return (
-      <main className="men-wrap" style={{ minHeight: "60vh", paddingTop: 100, textAlign: "center" }}>
-        <p>Đang tìm kiếm các ưu đãi tốt nhất...</p>
+      <main
+        className="men-wrap"
+        style={{ minHeight: "60vh", paddingTop: 100, textAlign: "center" }}
+      >
+        <p>Searching for the best deals...</p>
       </main>
     );
   }
@@ -74,7 +77,9 @@ export default function SalePage() {
       {/* Breadcrumb */}
       <section className="men-bc">
         <div className="container">
-          <Link to="/" className="men-bc-link">Home</Link>
+          <Link to="/" className="men-bc-link">
+            Home
+          </Link>
           <span className="men-bc-sep">›</span>
           <span>Sale</span>
         </div>
@@ -85,7 +90,8 @@ export default function SalePage() {
         <div className="container">
           <h1 className="men-title">Sale Collection</h1>
           <p className="men-sub">
-            Đừng bỏ lỡ những deal hời nhất! Săn ngay các mẫu giày cao cấp với mức giá ưu đãi.
+            Don&apos;t miss the best deals! Grab premium shoes at discounted
+            prices.
           </p>
         </div>
       </section>
@@ -97,12 +103,18 @@ export default function SalePage() {
           <div className="men-card">
             <div className="men-card-top">
               <h3>Filters</h3>
-              <button className="link-btn" type="button" onClick={handleClearAll}>Clear All</button>
+              <button
+                className="link-btn"
+                type="button"
+                onClick={handleClearAll}
+              >
+                Clear All
+              </button>
             </div>
 
             {/* Price Range (VND) */}
             <div className="men-block">
-              <h4>Mức giá</h4>
+              <h4>Price</h4>
               <input
                 type="range"
                 min="0"
@@ -123,24 +135,25 @@ export default function SalePage() {
         <div className="men-main">
           <div className="men-toolbar">
             <p className="muted">
-              Tìm thấy {sortedProducts.length} sản phẩm giảm giá
+              Found {sortedProducts.length} discounted products
             </p>
             <div className="men-sort">
-              <span className="muted">Sắp xếp:</span>
+              <span className="muted">Sort by:</span>
               <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-                <option value="discount">Giảm nhiều nhất</option>
-                <option value="price-low">Giá: Thấp đến cao</option>
-                <option value="price-high">Giá: Cao đến thấp</option>
-                <option value="newest">Mới nhất</option>
+                <option value="discount">Biggest discount</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="newest">Newest</option>
               </select>
             </div>
           </div>
 
           {sortedProducts.length === 0 ? (
             <div style={{ padding: "40px", textAlign: "center", width: "100%" }}>
-              <h3>Hiện chưa có sản phẩm giảm giá trong tầm giá này</h3>
+              <h3>No discounted products in this price range yet</h3>
               <p className="muted">
-                 Có thể Database của bạn chưa set trường <b>discount_percentage</b> cho sản phẩm nào.
+                Your database might not have <b>discount_percentage</b> set for
+                any products.
               </p>
             </div>
           ) : (
@@ -149,8 +162,8 @@ export default function SalePage() {
                 <ProductCard
                   key={p.product_id || p.id}
                   id={p.product_id || p.id}
-                  // QUAN TRỌNG: Sửa p.image_url thành p.image để dùng ảnh placeholder nếu lỗi
-                  image={p.image} 
+                  // IMPORTANT: Use p.image to fall back to placeholder if there's an error
+                  image={p.image}
                   name={p.name}
                   price={p.price}
                   extra={

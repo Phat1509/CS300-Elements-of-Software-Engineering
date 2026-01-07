@@ -6,7 +6,7 @@ import { getProducts } from "../../utilities/api";
 
 export default function WomenPage() {
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true); // Thêm loading
+  const [loading, setLoading] = useState(true); // Add loading
   const [maxPrice, setMaxPrice] = useState(4000000);
   const [sortBy, setSortBy] = useState("popular");
 
@@ -25,7 +25,7 @@ export default function WomenPage() {
 
         setProducts(womenProducts);
       } catch (err) {
-        console.error("Lỗi fetch women:", err);
+        console.error("Error fetching women products:", err);
       } finally {
         setLoading(false);
       }
@@ -64,7 +64,7 @@ export default function WomenPage() {
         className="men-wrap"
         style={{ minHeight: "60vh", paddingTop: 100, textAlign: "center" }}
       >
-        <p>Đang tải bộ sưu tập...</p>
+        <p>Loading collection...</p>
       </main>
     );
   }
@@ -87,7 +87,7 @@ export default function WomenPage() {
         <div className="container">
           <h1 className="men-title">Women&apos;s Collection</h1>
           <p className="men-sub">
-            Khám phá vẻ đẹp thanh lịch và sự thoải mái cho phái nữ.
+            Discover elegance and comfort designed for women.
           </p>
         </div>
       </section>
@@ -131,24 +131,19 @@ export default function WomenPage() {
             <p className="muted">Showing {sortedProducts.length} products</p>
             <div className="men-sort">
               <span className="muted">Sort by:</span>
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-              >
-                <option value="popular">Phổ biến</option>
-                <option value="newest">Mới nhất</option>
-                <option value="price-low">Giá: Thấp đến cao</option>
-                <option value="price-high">Giá: Cao đến thấp</option>
+              <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+                <option value="popular">Popular</option>
+                <option value="newest">Newest</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
               </select>
             </div>
           </div>
 
           {sortedProducts.length === 0 ? (
-            <div
-              style={{ padding: "40px", textAlign: "center", width: "100%" }}
-            >
-              <h3>Không tìm thấy sản phẩm</h3>
-              <p>Vui lòng thử khoảng giá khác.</p>
+            <div style={{ padding: "40px", textAlign: "center", width: "100%" }}>
+              <h3>No products found</h3>
+              <p>Please try a different price range.</p>
             </div>
           ) : (
             <div className="men-grid">

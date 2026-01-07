@@ -7,6 +7,25 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // ✅ Refresh user từ backend (dùng sau khi update profile)
+  const refreshUser = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setUser(null);
+      return null;
+    }
+
+    const userData = await getMeAPI();
+    const merged = {
+      ...(user || {}),
+      ...userData,
+      // giữ id nếu backend không trả
+      id: userData.id || userData.user_id || user?.id,
+    };
+    setUser(merged);
+    return merged;
+  };
+
   useEffect(() => {
     const initAuth = async () => {
       const token = localStorage.getItem("token");
@@ -14,7 +33,6 @@ export function AuthProvider({ children }) {
         try {
           const userData = await getMeAPI();
           console.log("🔄 Khôi phục user từ token:", userData);
-
 
           setUser({
             ...userData,
@@ -28,9 +46,10 @@ export function AuthProvider({ children }) {
       setLoading(false);
     };
     initAuth();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-
+  // 2. Hàm Login
   const login = async (email, password) => {
     try {
       console.log("🚀 Đang gửi đăng nhập:", { email, password });
@@ -52,7 +71,7 @@ export function AuthProvider({ children }) {
         pid: data.pid,
         isVerified: data.is_verified,
         email: email,
-        ...data
+        ...data,
       };
 
       console.log("💾 Đang lưu user vào State:", userInfo);
@@ -61,7 +80,10 @@ export function AuthProvider({ children }) {
       return { success: true };
     } catch (error) {
       console.error("❌ Lỗi đăng nhập:", error);
-      const msg = error.response?.data?.message || error.message || "Đăng nhập thất bại";
+      const msg =
+        error.response?.data?.message ||
+        error.message ||
+        "Đăng nhập thất bại";
       return { success: false, message: msg };
     }
   };
@@ -86,7 +108,15 @@ export function AuthProvider({ children }) {
     window.location.href = "/signin";
   };
 
-  const value = { user, isAuthenticated: !!user, loading, login, register, logout };
+  const value = {
+    user,
+    isAuthenticated: !!user,
+    loading,
+    login,
+    register,
+    logout,
+    refreshUser, // ✅ thêm vào context
+  };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

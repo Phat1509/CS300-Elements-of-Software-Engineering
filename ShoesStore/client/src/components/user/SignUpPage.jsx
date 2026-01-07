@@ -39,7 +39,7 @@ export default function SignUpPage() {
       const result = await register(fullname, email, password);
 
       if (result.success) {
-        alert("Đăng ký thành công! Vui lòng đăng nhập.");
+        alert("Sign up successful! Please sign in.");
         navigate("/signin");
       } else {
         setError(result.message || "Sign up failed.");
@@ -67,7 +67,13 @@ export default function SignUpPage() {
         <div className="auth-card">
           <form className="auth-form" onSubmit={handleSubmit}>
             {error && (
-              <div style={{ color: "red", marginBottom: "1rem", textAlign: "center" }}>
+              <div
+                style={{
+                  color: "red",
+                  marginBottom: "1rem",
+                  textAlign: "center",
+                }}
+              >
                 {error}
               </div>
             )}
@@ -78,13 +84,12 @@ export default function SignUpPage() {
               <input
                 type="text"
                 className="input"
-                placeholder="Nguyen Van A"
+                placeholder="John Doe"
                 value={fullname}
                 onChange={(e) => setFullname(e.target.value)}
                 required
               />
             </div>
-
 
             {/* Input Email */}
             <div className="form-group">
@@ -98,7 +103,6 @@ export default function SignUpPage() {
                 required
               />
             </div>
-
 
             {/* Input Password */}
             <div className="form-group">
@@ -126,7 +130,10 @@ export default function SignUpPage() {
               />
             </div>
 
-            <div className="form-group" style={{ display: "flex", alignItems: "flex-start", gap: 8 }}>
+            <div
+              className="form-group"
+              style={{ display: "flex", alignItems: "flex-start", gap: 8 }}
+            >
               <input
                 type="checkbox"
                 style={{ marginTop: 4 }}
@@ -151,7 +158,10 @@ export default function SignUpPage() {
               {loading ? "Creating..." : "Join us"}
             </button>
 
-            <p className="muted" style={{ textAlign: "center", marginTop: 16, fontSize: 14 }}>
+            <p
+              className="muted"
+              style={{ textAlign: "center", marginTop: 16, fontSize: 14 }}
+            >
               Already have an account?{" "}
               <Link to="/signin" className="link-btn">
                 Sign in
