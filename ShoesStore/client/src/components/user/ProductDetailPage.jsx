@@ -29,6 +29,7 @@ const ProductDetail = () => {
   const [selectedColor, setSelectedColor] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [isAdding, setIsAdding] = useState(false);
+  const [wishlistLoading, setWishlistLoading] = useState(false);
 
   /* ================= LOAD DATA ================= */
   useEffect(() => {
@@ -90,7 +91,9 @@ const ProductDetail = () => {
 
   /* ================= HANDLERS ================= */
   const handleToggleWishlist = async () => {
-    if (!product) return;
+    if (!product || wishlistLoading) return;
+    setWishlistLoading(true);
+
     try {
       await toggleWishlist(product.id);
     } catch (e) {
@@ -99,6 +102,8 @@ const ProductDetail = () => {
       } else {
         console.error("Lỗi Wishlist:", e);
       }
+    } finally {
+    setWishlistLoading(false);
     }
   };
 
@@ -496,6 +501,7 @@ const ProductDetail = () => {
               {/* Heart */}
               <button
                 onClick={handleToggleWishlist}
+                disabled={wishlistLoading}
                 style={{
                   width: 52,
                   height: 52,
