@@ -1,3 +1,4 @@
+//src//components/admin/ProductsAdmin.jsx
 import React, { useEffect, useMemo, useState } from "react";
 import adminApi, { getAllProducts } from "../../utilities/adminApi"; 
 import ProductForm from "./ProductForm";

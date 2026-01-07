@@ -1,9 +1,7 @@
 import axios from "axios";
 
-const API_URL = "https://shoes-store.beerpsi.cc/api";
-
 const api = axios.create({
-  baseURL: API_URL,
+  baseURL: process.env.API_URL,
   headers: { "Content-Type": "application/json" },
 });
 
@@ -209,5 +207,11 @@ export const updateProductStock = async (variantId, stock) => {
     await api.patch(`/product_variants/${variantId}`, { stock });
 };
 export const getProductDetail = async (id) => getProductById(id);
+
+// ===================== PROFILE =====================
+export const updateProfileAPI = async (name) => {
+  const response = await api.post("/auth/profile", { name }); // patch -> post
+  return response.data;
+};
 
 export default api;

@@ -1,3 +1,4 @@
+// src/components/admin/ProductForm.jsx
 import React, { useState, useEffect } from "react";
 import adminApi from "../../utilities/adminApi";
 

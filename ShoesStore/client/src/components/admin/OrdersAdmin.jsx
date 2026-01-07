@@ -1,3 +1,4 @@
+// src/components/admin/OrdersAdmin.jsx
 import React, { useEffect, useState } from "react";
 import { getOrders, updateOrderStatus } from "../../utilities/adminApi";
 import AdminLayout from "./AdminLayout";

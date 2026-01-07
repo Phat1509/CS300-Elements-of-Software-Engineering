@@ -29,7 +29,7 @@ import AdminDashboard from "./components/admin/AdminDashboard";
 import ProductsAdmin from "./components/admin/ProductsAdmin";
 import OrdersAdmin from "./components/admin/OrdersAdmin";
 import AdminLogin from "./components/admin/AdminLogin";
-
+import ProfilePage from "./components/user/ProfilePage";
 import "./App.css";
 
 /** Wrap routes so we can use useLocation inside BrowserRouter */
@@ -62,6 +62,7 @@ function AppRoutes() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/product/:id" element={<ProductDetail />} />        <Route path="/orders" element={<OrderHistoryPage />} />
         <Route path="/orders/:id" element={<OrderDetailPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
 
         {/* Auth (user) */}
         <Route path="/signin" element={<SignInPage />} />
