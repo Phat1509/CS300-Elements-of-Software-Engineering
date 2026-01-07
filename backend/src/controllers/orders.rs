@@ -35,6 +35,41 @@ pub struct OrderCreateParams {
     pub items: Vec<OrderItemCreateParams>,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize, utoipa::ToSchema)]
+pub struct OrderUpdateParams {
+    #[serde(default)]
+    pub status: Option<OrderStatus>,
+
+    #[serde(default)]
+    pub amount: Option<Decimal>,
+
+    #[serde(default)]
+    pub payment_method: Option<PaymentMethod>,
+
+    #[serde(default)]
+    pub shipping_address: Option<String>,
+}
+
+impl OrderUpdateParams {
+    pub fn update(&self, item: &mut ActiveModel) {
+        if let Some(status) = self.status {
+            item.status = Set(status);
+        }
+
+        if let Some(amount) = self.amount {
+            item.amount = Set(amount);
+        }
+
+        if let Some(payment_method) = self.payment_method {
+            item.payment_method = Set(payment_method);
+        }
+
+        if let Some(ref shipping_address) = self.shipping_address {
+            item.shipping_address = Set(Some(shipping_address.clone()));
+        }
+    }
+}
+
 #[utoipa::path(
     get,
     path = "/api/orders",
@@ -211,6 +246,47 @@ pub async fn get_one(
 }
 
 #[utoipa::path(
+    patch,
+    path = "/api/orders/{id}",
+    tags = ["Orders"],
+    summary = "Edit order",
+    responses(
+        (status = OK, description = "Order edited", body = Order),
+        (status = UNAUTHORIZED, description = "Unauthorized", body = ErrorDetail),
+        (status = FORBIDDEN, description = "Forbidden", body = ErrorDetail),
+        (status = NOT_FOUND, description = "Order not found", body = ErrorDetail)
+    )
+)]
+pub async fn update(
+    auth: auth::JWTWithUser<users::Model>,
+    Path(id): Path<i32>,
+    State(ctx): State<AppContext>,
+    Json(params): Json<OrderUpdateParams>,
+) -> Result<Response> {
+    if !auth.user.is_staff {
+        return forbidden("You are not authorized to perform this action.");
+    }
+
+    let mut order = Entity::find_by_id(id)
+        .one(&ctx.db)
+        .await?
+        .ok_or_else(|| Error::NotFound)?
+        .into_active_model();
+
+    params.update(&mut order);
+
+    let order = order.update(&ctx.db).await?;
+    let order_items = order.find_related(order_items::Entity).all(&ctx.db).await?;
+    let variants = product_variants::Model::find_many_with_product(
+        &ctx.db,
+        order_items.iter().map(|item| item.product_variant_id),
+    )
+    .await?;
+
+    format::json(Order::create(order, order_items, &variants))
+}
+
+#[utoipa::path(
     post,
     path = "/api/orders/{id}/cancel",
     tags = ["Orders"],
@@ -256,12 +332,13 @@ pub fn routes() -> Routes {
         .add("/", get(list))
         .add("/", post(add))
         .add("{id}", get(get_one))
+        .add("{id}", patch(update))
         .add("{id}/cancel", post(cancel))
 }
 
 pub fn api_routes() -> OpenApiRouter<AppContext> {
     OpenApiRouter::new()
         .routes(routes!(list, add))
-        .routes(routes!(get_one))
+        .routes(routes!(get_one, update))
         .routes(routes!(cancel))
 }
