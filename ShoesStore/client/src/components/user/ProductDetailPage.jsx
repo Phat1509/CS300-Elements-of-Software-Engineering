@@ -9,7 +9,7 @@ import {
   ShoppingCart,
   Heart,
 } from "lucide-react";
-
+import Notice from "../common/Notice";
 import { getProductById } from "../../utilities/api";
 import { useCart } from "../../context/CartContext";
 import { useWishlist } from "../../context/WishlistContext";
@@ -32,7 +32,7 @@ const ProductDetail = () => {
   const [notif, setNotif] = useState(null); // { type: 'success'|'error', message: string }
   const notifTimerRef = useRef(null);
 
- const showNotif = (type, message, timeout = 3000) => {
+  const showNotif = (type, message, timeout = 3000) => {
     if (notifTimerRef.current) {
       clearTimeout(notifTimerRef.current);
       notifTimerRef.current = null;
@@ -100,14 +100,16 @@ const ProductDetail = () => {
     });
   }, [variants, selectedSize, selectedColor, sizes.length, colors.length]);
 
-  const inWishlist = product ? isInWishlist(product.id || product.product_id) : false;
+  const inWishlist = product
+    ? isInWishlist(product.id || product.product_id)
+    : false;
 
   /* ================= HANDLERS ================= */
   const handleToggleWishlist = async () => {
     if (!product) return;
-    
+
     const productId = product.id || product.product_id;
-    
+
     try {
       await toggleWishlist(productId);
       showNotif("success", "Wishlist updated.");
@@ -133,17 +135,23 @@ const ProductDetail = () => {
       (sizes.length > 0 && !selectedSize) ||
       (colors.length > 0 && !selectedColor)
     ) {
-      alert("Vui lòng chọn đầy đủ Size và Màu sắc!");
+      showNotif("error", "Please select the full size and color!");
       return;
     }
 
     if (!selectedVariant) {
-      alert("Sản phẩm với tùy chọn này hiện không khả dụng.");
+      showNotif(
+        "error",
+        "Products with this option are currently unavailable."
+      );
       return;
     }
 
     if (selectedVariant.stock < quantity) {
-      alert(`Chỉ còn lại ${selectedVariant.stock} sản phẩm trong kho!`);
+      showNotif(
+        "error",
+        `Only ${selectedVariant.stock} products are left in stock!`
+      );
       return;
     }
 
@@ -151,17 +159,17 @@ const ProductDetail = () => {
 
     if (!variantId) {
       console.error("Variant Data Error:", selectedVariant);
-      alert("Lỗi dữ liệu: Không tìm thấy ID sản phẩm.");
+      showNotif("error", "Data error: Product ID not found.");
       return;
     }
 
     setIsAdding(true);
     try {
       await addToCart(variantId, quantity);
-
       setQuantity(1);
+      showNotif("success", "Product added to cart!");
     } catch (err) {
-      console.error("Lỗi thêm giỏ hàng:", err);
+      showNotif("error", "Cannot add to cart. Try again later!");
     } finally {
       setIsAdding(false);
     }
@@ -223,7 +231,11 @@ const ProductDetail = () => {
           <span style={{ color: "#111", fontWeight: 500 }}>{product.name}</span>
         </div>
       </div>
-
+      {notif && (
+        <div className="container" style={{ marginTop: 20 }}>
+           <Notice type={notif.type} message={notif.message} />
+        </div>
+      )}
       <section className="container" style={{ padding: "40px 0 80px" }}>
         <div
           className="pd-grid"

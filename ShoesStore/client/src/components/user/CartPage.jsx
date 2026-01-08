@@ -21,6 +21,7 @@ export default function CartPage() {
 
   const [loading, setLoading] = useState(false);
   const [updatingIds, setUpdatingIds] = useState([]);
+  const [address, setAddress] = useState("123 Example Street");
   const { notice, showNotice } = useNotice();
   const subtotal = cartItems.reduce((acc, it) => {
     const finalPricePerUnit =
@@ -86,9 +87,8 @@ export default function CartPage() {
     }
     if (cartItems.length === 0) return;
 
-    let address = prompt("Enter your shipping address:", "123 Example Street");
     if (!address || address.trim() === "") {
-      showNotice("error", "Shipping address cannot be empty!");
+      showNotice("error", "Please enter your shipping address!");
       return;
     }
 
@@ -215,7 +215,11 @@ export default function CartPage() {
           <span style={{ fontWeight: 500 }}>Cart</span>
         </div>
       </div>
-
+      {notice && (
+        <div className="container" style={{ marginTop: 20 }}>
+          <Notice type={notice.type} message={notice.message} />
+        </div>
+      )}
       <section className="container" style={{ padding: "30px 0 60px" }}>
         <h1 style={{ marginBottom: 8, fontSize: 28 }}>Your Shopping Cart</h1>
         <p className="muted" style={{ marginBottom: 30 }}>
@@ -461,7 +465,24 @@ export default function CartPage() {
                   <span>${finalTotal.toFixed(2)}</span>
                 </div>
               </div>
-
+              <div style={{ marginTop: 20 }}>
+                <label style={{ display: "block", marginBottom: 6, fontSize: 13, fontWeight: 600 }}>
+                  Shipping Address
+                </label>
+                <input
+                  type="text"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  placeholder="Enter your address..."
+                  style={{
+                    width: "100%",
+                    padding: "10px",
+                    borderRadius: 6,
+                    border: "1px solid #ddd",
+                    fontSize: 14
+                  }}
+                />
+              </div>
               <button
                 className="btn btn-primary"
                 style={{
