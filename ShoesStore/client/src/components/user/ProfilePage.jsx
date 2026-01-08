@@ -11,8 +11,7 @@ export default function ProfilePage() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
   const [saving, setSaving] = useState(false);
@@ -31,9 +30,7 @@ export default function ProfilePage() {
         const data = await getMeAPI();
         setMe(data);
 
-        const parts = (data.name || "").trim().split(" ").filter(Boolean);
-        setFirstName(parts[0] || "");
-        setLastName(parts.slice(1).join(" "));
+        setName(data.name || "");
         setEmail(data.email || "");
       } catch {
         setError("Failed to load profile information.");
@@ -53,8 +50,8 @@ export default function ProfilePage() {
     setError("");
     setSuccess("");
 
-    const fullName = `${firstName} ${lastName}`.replace(/\s+/g, " ").trim();
-    if (!fullName) {
+    const trimmedName = name.trim();
+    if (!trimmedName) {
       setError("Name cannot be empty.");
       return;
     }
@@ -62,8 +59,7 @@ export default function ProfilePage() {
     try {
       setSaving(true);
 
-      // PATCH /api/auth/profile
-      const updated = await updateProfileAPI(fullName);
+      const updated = await updateProfileAPI(trimmedName);
 
       setMe(updated);
       await refreshUser();
@@ -85,9 +81,7 @@ export default function ProfilePage() {
     setSuccess("");
 
     if (!me) return;
-    const parts = (me.name || "").trim().split(" ").filter(Boolean);
-    setFirstName(parts[0] || "");
-    setLastName(parts.slice(1).join(" "));
+    setName(me.name || "");
     setEmail(me.email || "");
   };
 
@@ -147,17 +141,17 @@ export default function ProfilePage() {
 
             <nav style={{ display: "grid", gap: 8 }}>
               <NavLink className="btn btn-outline" to="/profile">
-                👤 Profile
+                Profile
               </NavLink>
               <NavLink className="btn btn-outline" to="/orders">
-                📦 Orders
+                Orders
               </NavLink>
               <button
                 onClick={handleLogout}
                 className="btn btn-outline"
                 style={{ color: "#dc2626" }}
               >
-                🚪 Logout
+                Logout
               </button>
             </nav>
           </aside>
@@ -191,32 +185,24 @@ export default function ProfilePage() {
               onSubmit={handleSave}
               style={{
                 display: "grid",
-                gridTemplateColumns: "1fr 1fr",
                 gap: 14,
                 marginTop: 18,
               }}
             >
               <Field
-                label="First Name"
-                value={firstName}
-                onChange={setFirstName}
-              />
-              <Field
-                label="Last Name"
-                value={lastName}
-                onChange={setLastName}
+                label="Full Name"
+                value={name}
+                onChange={setName}
               />
               <Field
                 label="Email"
                 value={email}
                 onChange={setEmail}
-                full
                 readOnly
               />
 
               <div
                 style={{
-                  gridColumn: "1 / -1",
                   display: "flex",
                   gap: 10,
                   marginTop: 10,
@@ -242,9 +228,9 @@ export default function ProfilePage() {
   );
 }
 
-function Field({ label, value, onChange, full, readOnly }) {
+function Field({ label, value, onChange, readOnly }) {
   return (
-    <div style={{ gridColumn: full ? "1 / -1" : "auto" }}>
+    <div>
       <label style={{ fontSize: 13, color: "#64748b" }}>{label}</label>
       <input
         value={value}
