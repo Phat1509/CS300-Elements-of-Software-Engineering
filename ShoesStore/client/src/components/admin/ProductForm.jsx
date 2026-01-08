@@ -73,10 +73,8 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
   const sortedCategories = useMemo(() => {
     if (!categories || categories.length === 0) return [];
 
-    // 1. Gom nhóm theo cha
     const grouping = {};
     categories.forEach((cat) => {
-      // Một số API trả về parent_id, số khác trả về parentId, check cả 2
       const pid = cat.parent_id || cat.parentId || "root";
       if (!grouping[pid]) grouping[pid] = [];
       grouping[pid].push(cat);
@@ -97,7 +95,7 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
 
     if (grouping[null]) traverse(null, 0);
     else if (grouping[0]) traverse(0, 0);
-    else if (grouping["root"]) traverse("root", 0); // fallback
+    else if (grouping["root"]) traverse("root", 0); 
 
     return result.length > 0 ? result : categories;
   }, [categories]);
@@ -118,68 +116,118 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
   };
 
   const handleAddVariant = async () => {
-    if (!initial?.id)
-      return alert("Please save the product before adding variants.");
-
     const { size, color, stock } = variantForm;
-
     if (!size || !color) return alert("Please provide both Size and Color.");
 
-    // Check duplicate size + color
     const exists = variants.some((v) => v.size === size && v.color === color);
     if (exists) return alert("This Size + Color variant already exists.");
 
-    try {
-      const newV = await adminApi.createVariant(initial.id, {
-        size,
-        color,
-        stock: parseInt(stock) || 0,
-        sku: `SKU-${initial.id}-${size}-${color}`,
-      });
+    const newVariant = {
+      size,
+      color,
+      stock: parseInt(stock) || 0,
+      id: initial?.id ? null : `temp-${Date.now()}`,
+      isTemp: !initial?.id, 
+    };
 
-      setVariants((prev) => [...prev, newV]);
+    if (initial?.id) {
+      try {
+        const apiRes = await adminApi.createVariant(initial.id, {
+          ...newVariant,
+          sku: `SKU-${initial.id}-${size}-${color}`,
+        });
+        setVariants((prev) => [...prev, apiRes]);
+        setVariantForm({ size: "", color: "", stock: 0 });
+      } catch (err) {
+        alert("Error: " + err.message);
+      }
+    } else {
+      setVariants((prev) => [...prev, newVariant]);
       setVariantForm({ size: "", color: "", stock: 0 });
-    } catch (err) {
-      alert("Error: " + err.message);
     }
   };
 
   const handleDeleteVariant = async (vId) => {
     if (!window.confirm("Delete this variant?")) return;
-    try {
-      await adminApi.deleteVariant(initial.id, vId);
+
+    const isTemp = vId.toString().startsWith("temp-");
+
+    if (isTemp) {
       setVariants(variants.filter((v) => v.id !== vId));
-    } catch (err) {
-      alert("Error: " + err.message);
+    } else {
+      try {
+        await adminApi.deleteVariant(initial.id, vId);
+        setVariants(variants.filter((v) => v.id !== vId));
+      } catch (err) {
+        alert("Error: " + err.message);
+      }
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (variants.length === 0) {
+      alert("Please add at least one Variant (Size & Color) before saving the product.");
+      return; 
+    }
+    if (!form.category_id) {
+      alert("Please select a Category.");
+      return;
+    }
+    if (!form.brand_id) {
+      alert("Please select a Brand.");
+      return;
+    }
     setSaving(true);
     try {
       const payload = {
         ...form,
         slug: generateSlug(form.name),
-        price: parseFloat(form.price),
+        price: parseFloat(form.price), 
+        discount_percentage: parseFloat(form.discount_percentage) || 0,
         brand_id: form.brand_id ? parseInt(form.brand_id) : null,
         category_id: form.category_id ? parseInt(form.category_id) : null,
-        discount_percentage: parseFloat(form.discount_percentage) || 0,
       };
 
-      const result = initial
-        ? await adminApi.updateProduct(initial.id, payload)
-        : await adminApi.createProduct(payload);
+      // 3. Tạo hoặc Update Product
+      let productResult;
+      if (initial) {
+        productResult = await adminApi.updateProduct(initial.id, payload);
+      } else {
+        productResult = await adminApi.createProduct(payload);
+      }
 
-      onSaved(result);
-      alert("Saved successfully!");
+      const productId = productResult.id; 
+
+      const tempVariants = variants.filter(
+        (v) => v.isTemp || (typeof v.id === 'string' && v.id.startsWith("temp-"))
+      );
+
+      if (tempVariants.length > 0) {
+        await Promise.all(
+          tempVariants.map((v) => {
+            return adminApi.createVariant(productId, {
+              size: v.size,
+              color: v.color,
+              stock: parseInt(v.stock),
+              sku: `SKU-${productId}-${v.size}-${v.color}`, // Tạo SKU tự động
+            });
+          })
+        );
+      }
+
+      alert("Product & Variants saved successfully!");
+      onSaved(productResult); 
     } catch (err) {
-      alert("Error: " + err.message);
+      console.error(err);
+      alert("Failed to save: " + (err.message || "Bad Request. Check your inputs."));
     } finally {
       setSaving(false);
     }
   };
 
+  
   return (
     <form onSubmit={handleSubmit} className="admin-form-grid">
       <div className="admin-form-left">
@@ -202,6 +250,7 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
               name="brand_id"
               value={form.brand_id}
               onChange={handleChange}
+              required
             >
               <option value="">-- Select Brand --</option>
               {brands.map((b) => (
@@ -218,6 +267,7 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
               name="category_id"
               value={form.category_id}
               onChange={handleChange}
+              required
             >
               <option value="">-- Select Category --</option>
               {sortedCategories.map((c) => (

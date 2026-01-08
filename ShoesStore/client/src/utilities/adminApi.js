@@ -14,8 +14,14 @@ function getToken() {
 
 async function safeJson(res) {
     if (!res) return null;
+    
+    if (res.status === 204) return null;
+
     try {
-        if (res.ok) return await res.json();
+        if (res.ok) {
+            const text = await res.text();
+            return text ? JSON.parse(text) : null;
+        }
         const txt = await res.text().catch(() => '<no body>');
         throw new Error(`Server returned ${res.status}: ${txt}`);
     } catch (e) {
