@@ -2,6 +2,9 @@ import React, { useState, useEffect, useMemo } from "react";
 import adminApi from "../../utilities/adminApi";
 import Notice from "../common/Notice";
 import useNotice from "../../hooks/useNotice";
+// 1. Import
+import ConfirmModal from "../common/ConfirmModal";
+
 const FIXED_COLORS = [
   { label: "Black", value: "Black" },
   { label: "White", value: "White" },
@@ -45,6 +48,9 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
     color: "",
     stock: 0,
   });
+
+  // 2. State Modal
+  const [delVarData, setDelVarData] = useState({ show: false, id: null });
   const { notice, showNotice } = useNotice();
 
   useEffect(() => {
@@ -101,6 +107,7 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
 
     return result.length > 0 ? result : categories;
   }, [categories]);
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setForm((prev) => ({
@@ -124,8 +131,10 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
       return;
     }
     const exists = variants.some((v) => v.size === size && v.color === color);
-    if (exists) return alert("This Size + Color variant already exists.");
-
+    if (exists) {
+      showNotice("error", "This Size + Color variant already exists.");
+      return;
+    }
     const newVariant = {
       size,
       color,
@@ -151,19 +160,29 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
     }
   };
 
-  const handleDeleteVariant = async (vId) => {
-    if (!window.confirm("Delete this variant?")) return;
+  // 3. Logic Xóa Variant Mới
+  const openDeleteVariantModal = (vId) => {
+    setDelVarData({ show: true, id: vId });
+  };
+
+  const executeDeleteVariant = async () => {
+    const vId = delVarData.id;
+    if (!vId) return;
 
     const isTemp = vId.toString().startsWith("temp-");
 
     if (isTemp) {
       setVariants(variants.filter((v) => v.id !== vId));
+      setDelVarData({ show: false, id: null });
     } else {
       try {
         await adminApi.deleteVariant(initial.id, vId);
         setVariants(variants.filter((v) => v.id !== vId));
+        showNotice("success", "Variant deleted.");
       } catch (err) {
         showNotice("error", "Failed to delete variant: " + err.message);
+      } finally {
+        setDelVarData({ show: false, id: null });
       }
     }
   };
@@ -194,7 +213,6 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
         category_id: form.category_id ? parseInt(form.category_id) : null,
       };
 
-      // 3. Tạo hoặc Update Product
       let productResult;
       if (initial) {
         productResult = await adminApi.updateProduct(initial.id, payload);
@@ -216,7 +234,7 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
               size: v.size,
               color: v.color,
               stock: parseInt(v.stock),
-              sku: `SKU-${productId}-${v.size}-${v.color}`, // Tạo SKU tự động
+              sku: `SKU-${productId}-${v.size}-${v.color}`,
             });
           })
         );
@@ -244,6 +262,17 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
           <Notice type={notice.type} message={notice.message} />
         </div>
       )}
+
+      {/* 4. Modal Component */}
+      <ConfirmModal
+        isOpen={delVarData.show}
+        title="Delete Variant?"
+        message="Are you sure you want to remove this size/color variant?"
+        isDanger={true}
+        onConfirm={executeDeleteVariant}
+        onCancel={() => setDelVarData({ show: false, id: null })}
+      />
+
       <div className="admin-form-left">
         <div className="form-group">
           <label>Product Name</label>
@@ -406,7 +435,8 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
                   <td>
                     <button
                       type="button"
-                      onClick={() => handleDeleteVariant(v.id)}
+                      // 5. Update onClick
+                      onClick={() => openDeleteVariantModal(v.id)}
                       style={{
                         color: "red",
                         border: "none",

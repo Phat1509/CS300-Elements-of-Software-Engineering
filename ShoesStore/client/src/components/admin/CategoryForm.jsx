@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import adminApi from "../../utilities/adminApi";
+// 1. Import các component cần thiết
+import ConfirmModal from "../common/ConfirmModal";
+import useNotice from "../../hooks/useNotice";
+import Notice from "../common/Notice";
 
 const generateSlug = (text) => {
   return text.toString().toLowerCase().normalize("NFD")
@@ -18,6 +22,12 @@ export default function CategoryForm({ initial = null, allCategories = [], onSav
     parent_id: "" 
   });
   const [saving, setSaving] = useState(false);
+  
+  // 2. State quản lý Modal Confirm
+  const [showConfirm, setShowConfirm] = useState(false);
+
+  // 3. Hook quản lý thông báo lỗi (nếu có lỗi khi validate form)
+  const { notice, showNotice } = useNotice();
 
   useEffect(() => {
     if (initial) {
@@ -40,9 +50,26 @@ export default function CategoryForm({ initial = null, allCategories = [], onSav
     });
   };
 
-  const handleSubmit = async (e) => {
+  // 4. Bước 1: Khi bấm nút Save -> Chỉ kiểm tra và mở Modal
+  const handlePreSubmit = (e) => {
     e.preventDefault();
+    
+    // Validate đơn giản
+    if (!form.name.trim()) {
+      showNotice("error", "Category Name is required!");
+      return;
+    }
+
+    // Mở Modal hỏi xác nhận
+    setShowConfirm(true);
+  };
+
+  // 5. Bước 2: Hàm thực thi lưu (Được gọi khi chọn 'Save' trong Modal)
+  const executeSave = async () => {
+    // Đóng modal trước
+    setShowConfirm(false);
     setSaving(true);
+
     try {
       const payload = {
         name: form.name,
@@ -55,10 +82,13 @@ export default function CategoryForm({ initial = null, allCategories = [], onSav
       } else {
         await adminApi.createCategory(payload);
       }
-      onSaved();
-      alert("Category saved successfully!");
+      
+      // Gọi callback để cha (CategoriesAdmin) xử lý tiếp (load lại data, hiện thông báo thành công)
+      onSaved(); 
+      
     } catch (err) {
-      alert("Error: " + err.message);
+      // Nếu lỗi API thì hiện thông báo đỏ ngay tại form
+      showNotice("error", "Error: " + err.message);
     } finally { 
       setSaving(false); 
     }
@@ -67,7 +97,24 @@ export default function CategoryForm({ initial = null, allCategories = [], onSav
   const parentOptions = allCategories.filter(c => initial ? c.id !== initial.id : true);
 
   return (
-    <form onSubmit={handleSubmit} className="admin-form">
+    // Đổi onSubmit thành handlePreSubmit
+    <form onSubmit={handlePreSubmit} className="admin-form">
+      
+      {/* Hiển thị thông báo lỗi (nếu có) */}
+      {notice && <Notice type={notice.type} message={notice.message} />}
+
+      {/* 6. Chèn Confirm Modal vào đây */}
+      <ConfirmModal 
+        isOpen={showConfirm}
+        title={initial ? "Update Category?" : "Create Category?"}
+        message={`Are you sure you want to save category "${form.name}"?`}
+        confirmText="Save"
+        cancelText="Cancel"
+        isDanger={false} // Hành động Save thường dùng màu xanh (false)
+        onConfirm={executeSave}
+        onCancel={() => setShowConfirm(false)}
+      />
+
       <div className="form-group">
         <label>Category Name</label>
         <input 
@@ -75,7 +122,7 @@ export default function CategoryForm({ initial = null, allCategories = [], onSav
           value={form.name} 
           onChange={handleNameChange} 
           required 
-          placeholder="Ví dụ: Giày Chạy Bộ, Phụ Kiện..."
+          placeholder="Examples: Running Shoes, Accessories..."
         />
       </div>
 
@@ -85,7 +132,7 @@ export default function CategoryForm({ initial = null, allCategories = [], onSav
           className="input" 
           value={form.slug} 
           onChange={(e) => setForm({...form, slug: e.target.value})}
-          placeholder="giay-chay-bo"
+          placeholder="running-shoes, accessories..."
         />
         <small className="muted">SEO-friendly URL.</small>
       </div>

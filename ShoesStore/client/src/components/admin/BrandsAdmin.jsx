@@ -4,14 +4,17 @@ import BrandForm from "./BrandForm";
 import AdminLayout from "./AdminLayout";
 import Notice from "../common/Notice";
 import useNotice from "../../hooks/useNotice";
+// 1. Import ConfirmModal
+import ConfirmModal from "../common/ConfirmModal";
 
 export default function BrandsAdmin() {
   const [brands, setBrands] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(null);
   const [showNew, setShowNew] = useState(false);
-
-  // Hook thông báo
+  
+  const [deleteData, setDeleteData] = useState({ show: false, id: null });
+  
   const { notice, showNotice } = useNotice();
 
   useEffect(() => {
@@ -25,25 +28,28 @@ export default function BrandsAdmin() {
       setBrands(Array.isArray(data) ? data : []);
     } catch (err) {
       console.error(err);
-      // Tiếng Anh: Thông báo lỗi tải dữ liệu
       showNotice("error", "Failed to load brands list.");
     } finally {
       setLoading(false);
     }
   };
 
-  const handleDelete = async (id) => {
-    // Tiếng Anh: Xác nhận xóa
-    if (!window.confirm("Are you sure you want to delete this brand?")) return;
+  const openDeleteModal = (id) => {
+    setDeleteData({ show: true, id });
+  };
+
+  const executeDelete = async () => {
+    const id = deleteData.id;
+    if (!id) return;
 
     try {
       await adminApi.deleteBrand(id);
       setBrands(brands.filter((b) => b.id !== id));
-      // Tiếng Anh: Thông báo thành công
       showNotice("success", "Brand deleted successfully.");
     } catch (e) {
-      // Tiếng Anh: Thông báo lỗi
       showNotice("error", "Error: " + (e.message || "Failed to delete brand."));
+    } finally {
+      setDeleteData({ show: false, id: null });
     }
   };
 
@@ -51,7 +57,6 @@ export default function BrandsAdmin() {
     loadBrands();
     setShowNew(false);
     setEditing(null);
-    // Tiếng Anh: Thông báo lưu thành công
     showNotice("success", "Brand saved successfully.");
   };
 
@@ -79,10 +84,21 @@ export default function BrandsAdmin() {
         </div>
       )}
 
+      {/* 5. Chèn ConfirmModal vào giao diện */}
+      <ConfirmModal 
+        isOpen={deleteData.show}
+        title="Delete Brand?"
+        message="Are you sure you want to delete this brand? This action cannot be undone."
+        confirmText="Delete"
+        cancelText="Cancel"
+        isDanger={true}
+        onConfirm={executeDelete}
+        onCancel={() => setDeleteData({ show: false, id: null })}
+      />
+
       {(showNew || editing) && (
         <div className="admin-panel" style={{ border: "1px solid #2563eb" }}>
           <div className="admin-panel-top">
-            {/* Tiếng Anh: Header của Form */}
             <strong>{showNew ? "Create New Brand" : "Update Brand"}</strong>
             <button
               className="btn-icon"
@@ -145,7 +161,8 @@ export default function BrandsAdmin() {
                         <button
                           className="btn-icon delete"
                           title="Delete"
-                          onClick={() => handleDelete(b.id)}
+                          // 6. Gọi hàm mở Modal tại đây
+                          onClick={() => openDeleteModal(b.id)}
                         >
                           🗑️
                         </button>

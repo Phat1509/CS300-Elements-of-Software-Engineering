@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import adminApi from "../../utilities/adminApi";
 import CategoryForm from "./CategoryForm";
 import AdminLayout from "./AdminLayout";
-// 1. Import Notice & Hook
 import Notice from "../common/Notice";
 import useNotice from "../../hooks/useNotice";
+// 1. Import ConfirmModal
+import ConfirmModal from "../common/ConfirmModal";
 
 export default function CategoriesAdmin() {
   const [categories, setCategories] = useState([]);
@@ -12,7 +13,9 @@ export default function CategoriesAdmin() {
   const [editing, setEditing] = useState(null);
   const [showNew, setShowNew] = useState(false);
 
-  // 2. Khởi tạo hook
+  // 2. State quản lý Modal xóa
+  const [deleteData, setDeleteData] = useState({ show: false, id: null });
+
   const { notice, showNotice } = useNotice();
 
   useEffect(() => {
@@ -27,34 +30,38 @@ export default function CategoriesAdmin() {
       setCategories(list);
     } catch (err) {
       console.error("Load categories failed:", err);
-      // Tiếng Anh: Thông báo lỗi tải trang
       showNotice("error", "Failed to load categories list.");
     } finally {
       setLoading(false);
     }
   };
 
-  const handleDelete = async (id) => {
-    // Tiếng Anh: Xác nhận xóa
-    if (!window.confirm("Are you sure you want to delete this category?")) return;
+  // 3. Hàm mở Modal (thay thế handleDelete cũ)
+  const openDeleteModal = (id) => {
+    setDeleteData({ show: true, id });
+  };
+
+  // 4. Hàm thực thi xóa (gọi khi bấm Yes trong Modal)
+  const executeDelete = async () => {
+    const id = deleteData.id;
+    if (!id) return;
 
     try {
       await adminApi.deleteCategory(id);
       setCategories(categories.filter((c) => c.id !== id));
-      // 3. Thay alert bằng showNotice success (Tiếng Anh)
       showNotice("success", "Category deleted successfully.");
     } catch (e) {
-      // 4. Thay alert lỗi bằng showNotice error
       showNotice("error", "Error: " + (e.message || "Failed to delete category."));
+    } finally {
+      // Đóng modal và reset
+      setDeleteData({ show: false, id: null });
     }
   };
 
-  // Hàm xử lý khi lưu thành công
   const handleSaved = () => {
     loadData();
     setShowNew(false);
     setEditing(null);
-    // Tiếng Anh: Thông báo lưu thành công
     showNotice("success", "Category saved successfully.");
   };
 
@@ -75,12 +82,24 @@ export default function CategoriesAdmin() {
         </button>
       </div>
 
-      {/* 5. Hiển thị Notice Area */}
+      {/* Hiển thị Notice Area */}
       {notice && (
         <div style={{ marginBottom: 20 }}>
           <Notice type={notice.type} message={notice.message} />
         </div>
       )}
+
+      {/* 5. Chèn ConfirmModal vào giao diện */}
+      <ConfirmModal 
+        isOpen={deleteData.show}
+        title="Delete Category?"
+        message="Are you sure you want to delete this category? Sub-categories might also be affected."
+        confirmText="Delete"
+        cancelText="Cancel"
+        isDanger={true}
+        onConfirm={executeDelete}
+        onCancel={() => setDeleteData({ show: false, id: null })}
+      />
 
       {(showNew || editing) && (
         <div
@@ -88,7 +107,6 @@ export default function CategoriesAdmin() {
           style={{ border: "2px solid #2563eb", marginBottom: 30 }}
         >
           <div className="admin-panel-top">
-            {/* Tiếng Anh: Header Form */}
             <strong>
               {showNew ? "Create New Category" : `Edit Category: ${editing?.name}`}
             </strong>
@@ -105,7 +123,7 @@ export default function CategoriesAdmin() {
           <CategoryForm
             initial={editing}
             allCategories={categories}
-            onSaved={handleSaved} // Gọi hàm handleSaved mới
+            onSaved={handleSaved}
             onCancel={() => {
               setShowNew(false);
               setEditing(null);
@@ -162,7 +180,8 @@ export default function CategoriesAdmin() {
                         </button>
                         <button
                           className="btn-icon delete"
-                          onClick={() => handleDelete(c.id)}
+                          // 6. Gọi hàm mở Modal tại đây
+                          onClick={() => openDeleteModal(c.id)}
                           title="Delete"
                         >
                           🗑️

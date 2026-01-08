@@ -2,9 +2,9 @@ import React, { useEffect, useMemo, useState } from "react";
 import adminApi from "../../utilities/adminApi";
 import ProductForm from "./ProductForm";
 import AdminLayout from "./AdminLayout";
-// 1. Import Notice & Hook
 import Notice from "../common/Notice";
 import useNotice from "../../hooks/useNotice";
+import ConfirmModal from "../common/ConfirmModal";
 
 export default function ProductsAdmin() {
   const [products, setProducts] = useState([]);
@@ -13,6 +13,8 @@ export default function ProductsAdmin() {
   const [onlyActive, setOnlyActive] = useState(false);
   const [editing, setEditing] = useState(null);
   const [showNew, setShowNew] = useState(false);
+
+  const [deleteData, setDeleteData] = useState({ show: false, id: null });
 
   const { notice, showNotice } = useNotice();
 
@@ -41,19 +43,22 @@ export default function ProductsAdmin() {
       .sort((a, b) => b.id - a.id);
   }, [products, query, onlyActive]);
 
-  const handleDelete = async (id) => {
-    if (!window.confirm(`Are you sure you want to delete product ID: ${id}?`))
-      return;
+  const openDeleteModal = (id) => {
+    setDeleteData({ show: true, id });
+  };
+
+  const executeDelete = async () => {
+    const id = deleteData.id;
+    if (!id) return;
 
     try {
       await adminApi.deleteProduct(id);
       setProducts((prev) => prev.filter((p) => p.id !== id));
       showNotice("success", "Product deleted successfully.");
     } catch (e) {
-      showNotice(
-        "error",
-        "Error: " + (e.message || "Failed to delete product.")
-      );
+      showNotice("error", "Error: " + (e.message || "Failed to delete product."));
+    } finally {
+      setDeleteData({ show: false, id: null });
     }
   };
 
@@ -103,6 +108,18 @@ export default function ProductsAdmin() {
           <Notice type={notice.type} message={notice.message} />
         </div>
       )}
+
+      {/* 5. Nhúng Modal vào giao diện */}
+      <ConfirmModal 
+        isOpen={deleteData.show}
+        title="Delete Product?"
+        message="Are you sure you want to delete this product? This action cannot be undone."
+        confirmText="Delete"
+        cancelText="Cancel"
+        isDanger={true} 
+        onConfirm={executeDelete} 
+        onCancel={() => setDeleteData({ show: false, id: null })} // Đóng modal
+      />
 
       {(showNew || editing) && (
         <div
@@ -177,7 +194,7 @@ export default function ProductsAdmin() {
                         ✏️
                       </button>
                       <button
-                        onClick={() => handleDelete(p.id)}
+                        onClick={() => openDeleteModal(p.id)}
                         className="btn-icon delete"
                         title="Delete"
                       >
