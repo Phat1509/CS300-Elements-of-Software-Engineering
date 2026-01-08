@@ -66,13 +66,19 @@ impl ReviewUpdateParams {
     )
 )]
 #[debug_handler]
-pub async fn list(Path(product_id): Path<i32>, State(ctx): State<AppContext>) -> Result<Response> {
+pub async fn list(
+    Path(product_id): Path<String>,
+    State(ctx): State<AppContext>,
+) -> Result<Response> {
+    let product = products::Model::get_by_id_or_slug(&ctx.db, product_id)
+        .await?
+        .ok_or_else(|| Error::NotFound)?;
     let (product, brand, category) =
-        products::Model::find_by_id_with_brand_category(&ctx.db, product_id)
+        products::Model::find_by_id_with_brand_category(&ctx.db, product.id)
             .await?
             .ok_or_else(|| Error::NotFound)?;
     let reviews = Entity::find()
-        .filter(Column::ProductId.eq(product_id))
+        .filter(Column::ProductId.eq(product.id))
         .find_also_related(users::Entity)
         .all(&ctx.db)
         .await?
@@ -112,17 +118,21 @@ pub async fn list(Path(product_id): Path<i32>, State(ctx): State<AppContext>) ->
 #[debug_handler]
 pub async fn add(
     auth: auth::JWTWithUser<users::Model>,
-    Path(product_id): Path<i32>,
+    Path(product_id): Path<String>,
     State(ctx): State<AppContext>,
     Json(params): Json<ReviewCreateParams>,
 ) -> Result<Response> {
+    let product = products::Model::get_by_id_or_slug(&ctx.db, product_id)
+        .await?
+        .ok_or_else(|| Error::NotFound)?;
     let (product, brand, category) =
-        products::Model::find_by_id_with_brand_category(&ctx.db, product_id)
+        products::Model::find_by_id_with_brand_category(&ctx.db, product.id)
             .await?
             .ok_or_else(|| Error::NotFound)?;
     let user = users::Entity::find_by_id(auth.user.id).one(&ctx.db).await?;
     let mut item = ActiveModel {
         user_id: Set(auth.user.id),
+        product_id: Set(product.id),
         ..Default::default()
     };
 
@@ -157,14 +167,17 @@ pub async fn add(
 )]
 #[debug_handler]
 pub async fn get_one(
-    Path((product_id, user_id)): Path<(i32, i32)>,
+    Path((product_id, user_id)): Path<(String, i32)>,
     State(ctx): State<AppContext>,
 ) -> Result<Response> {
+    let product = products::Model::get_by_id_or_slug(&ctx.db, product_id)
+        .await?
+        .ok_or_else(|| Error::NotFound)?;
     let (product, brand, category) =
-        products::Model::find_by_id_with_brand_category(&ctx.db, product_id)
+        products::Model::find_by_id_with_brand_category(&ctx.db, product.id)
             .await?
             .ok_or_else(|| Error::NotFound)?;
-    let (review, user) = Model::find_by_product_and_user(&ctx.db, product_id, user_id)
+    let (review, user) = Model::find_by_product_and_user(&ctx.db, product.id, user_id)
         .await?
         .ok_or_else(|| Error::NotFound)?;
 
@@ -198,7 +211,7 @@ pub async fn get_one(
 #[debug_handler]
 pub async fn update(
     auth: auth::JWTWithUser<users::Model>,
-    Path((product_id, user_id)): Path<(i32, i32)>,
+    Path((product_id, user_id)): Path<(String, i32)>,
     State(ctx): State<AppContext>,
     Json(params): Json<ReviewUpdateParams>,
 ) -> Result<Response> {
@@ -206,11 +219,14 @@ pub async fn update(
         return forbidden("You are not authorized to perform this action.");
     }
 
+    let product = products::Model::get_by_id_or_slug(&ctx.db, product_id)
+        .await?
+        .ok_or_else(|| Error::NotFound)?;
     let (product, brand, category) =
-        products::Model::find_by_id_with_brand_category(&ctx.db, product_id)
+        products::Model::find_by_id_with_brand_category(&ctx.db, product.id)
             .await?
             .ok_or_else(|| Error::NotFound)?;
-    let (review, user) = Model::find_by_product_and_user(&ctx.db, product_id, user_id)
+    let (review, user) = Model::find_by_product_and_user(&ctx.db, product.id, user_id)
         .await?
         .ok_or_else(|| Error::NotFound)?;
     let mut review = review.into_active_model();
@@ -249,14 +265,17 @@ pub async fn update(
 #[debug_handler]
 pub async fn remove(
     auth: auth::JWTWithUser<users::Model>,
-    Path((product_id, user_id)): Path<(i32, i32)>,
+    Path((product_id, user_id)): Path<(String, i32)>,
     State(ctx): State<AppContext>,
 ) -> Result<Response> {
     if auth.user.id != user_id && !auth.user.is_staff {
         return forbidden("You are not authorized to perform this action.");
     }
 
-    let _ = Model::delete_by_product_and_user(&ctx.db, product_id, user_id).await?;
+    let product = products::Model::get_by_id_or_slug(&ctx.db, product_id)
+        .await?
+        .ok_or_else(|| Error::NotFound)?;
+    let _ = Model::delete_by_product_and_user(&ctx.db, product.id, user_id).await?;
 
     format::empty()
 }
