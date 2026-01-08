@@ -1,5 +1,5 @@
 // client/src/components/user/WishlistPage.jsx
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect } from "react";
 import Notice from "../common/Notice";
 import useNotice from "../../hooks/useNotice";
 import { Link } from "react-router-dom";
@@ -7,51 +7,17 @@ import { ChevronRight, Heart, X } from "lucide-react";
 import ProductCard from "./ProductCard";
 import { useAuth } from "../../context/AuthContext";
 import { useWishlist } from "../../context/WishlistContext";
-import { getProductDetail } from "../../utilities/api";
 
 export default function WishlistPage() {
   const { user } = useAuth();
   const { wishlistEntries, wishlistLoading, refreshWishlist, removeFromWishlistByProductId } = useWishlist();
 
-  const [products, setProducts] = useState([]);
-  const [loadingProducts, setLoadingProducts] = useState(false);
-
   const { notice, showNotice } = useNotice();
 
   const userId = user ? (user.id || user.user_id || user.pid) : null;
 
-  const productIds = useMemo(() => {
-    const ids = wishlistEntries.map((w) => w.product_id);
-    return Array.from(new Set(ids.map((x) => String(x))));
-  }, [wishlistEntries]);
-
-  useEffect(() => {
-    if (!userId) {
-      setProducts([]);
-      return;
-    }
-
-    const load = async () => {
-      setLoadingProducts(true);
-      try {
-        const list = await Promise.all(
-          productIds.map(async (pid) => {
-            try {
-              return await getProductDetail(pid);
-            } catch (e) {
-              console.error("getProductDetail error:", pid, e);
-              return null;
-            }
-          })
-        );
-        setProducts(list.filter(Boolean));
-      } finally {
-        setLoadingProducts(false);
-      }
-    };
-
-    load();
-  }, [userId, productIds]);
+  // wishlistEntries are already products from the API
+  const products = wishlistEntries;
 
   useEffect(() => {
     if (userId) refreshWishlist(userId);
@@ -67,7 +33,7 @@ export default function WishlistPage() {
     }
   };
 
-  const isEmpty = !wishlistLoading && !loadingProducts && products.length === 0;
+  const isEmpty = !wishlistLoading && products.length === 0;
 
   return (
     <>
@@ -93,7 +59,7 @@ export default function WishlistPage() {
               Go to Sign in
             </Link>
           </div>
-        ) : wishlistLoading || loadingProducts ? (
+        ) : wishlistLoading ? (
           <div className="card" style={{ padding: 18 }}>
             <p style={{ margin: 0 }}>Loading wishlist...</p>
           </div>
@@ -105,16 +71,16 @@ export default function WishlistPage() {
             </Link>
           </div>
         ) : (
-          <div className="grid products-grid">
+          <div className="grid-products" style={{ maxWidth: 1200, margin: '0 auto' }}>
             {products.map((p) => (
-              <div key={p.id || p.product_id || p.slug} style={{ position: "relative" }}>
+              <div key={p.id || p.product_id || p.slug} style={{ position: "relative", isolation: "isolate" }}>
                 <button
                   onClick={() => handleRemove(p.id || p.product_id)}
                   style={{
                     position: "absolute",
                     top: 8,
                     right: 8,
-                    zIndex: 10,
+                    zIndex: 1,
                     width: 32,
                     height: 32,
                     borderRadius: "50%",
@@ -124,9 +90,18 @@ export default function WishlistPage() {
                     alignItems: "center",
                     justifyContent: "center",
                     cursor: "pointer",
-                    boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
+                    boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+                    transition: "all 0.2s"
                   }}
                   title="Remove from wishlist"
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "#fee2e2";
+                    e.currentTarget.style.transform = "scale(1.1)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "#fff";
+                    e.currentTarget.style.transform = "scale(1)";
+                  }}
                 >
                   <X size={16} color="#dc2626" />
                 </button>

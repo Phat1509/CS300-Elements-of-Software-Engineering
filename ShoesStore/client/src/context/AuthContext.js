@@ -13,15 +13,12 @@ export function AuthProvider({ children }) {
       if (token) {
         try {
           const userData = await getMeAPI();
-          console.log("🔄 Khôi phục user từ token:", userData);
-
-
           setUser({
             ...userData,
             id: userData.id || userData.user_id,
           });
         } catch (error) {
-          console.log("Lỗi check token cũ:", error);
+          console.error("Token validation error:", error);
           logout();
         }
       }
@@ -33,10 +30,7 @@ export function AuthProvider({ children }) {
 
   const login = async (email, password) => {
     try {
-      console.log("🚀 Đang gửi đăng nhập:", { email, password });
-
       const data = await loginAPI(email, password);
-      console.log("Server trả về:", data);
 
       const token = data.token || data.access_token;
 
@@ -47,7 +41,7 @@ export function AuthProvider({ children }) {
       localStorage.setItem("token", token);
 
       const userInfo = {
-        id: data.id || data.user_id, // <--- QUAN TRỌNG NHẤT
+        id: data.id || data.user_id,
         name: data.name,
         pid: data.pid,
         isVerified: data.is_verified,
@@ -55,26 +49,23 @@ export function AuthProvider({ children }) {
         ...data
       };
 
-      console.log("💾 Đang lưu user vào State:", userInfo);
       setUser(userInfo);
 
       return { success: true };
     } catch (error) {
-      console.error("❌ Lỗi đăng nhập:", error);
-      const msg = error.response?.data?.message || error.message || "Đăng nhập thất bại";
+      console.error("Login error:", error);
+      const msg = error.response?.data?.message || error.message || "Login failed";
       return { success: false, message: msg };
     }
   };
 
-  // 3. Hàm Register
   const register = async (name, email, password) => {
     try {
-      console.log("Đang đăng ký:", { name, email, password });
       await registerAPI(name, email, password);
       return { success: true };
     } catch (error) {
-      console.error("Lỗi đăng ký:", error);
-      const msg = error.response?.data?.message || "Đăng ký thất bại";
+      console.error("Register error:", error);
+      const msg = error.response?.data?.message || "Registration failed";
       return { success: false, message: msg };
     }
   };

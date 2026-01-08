@@ -7,10 +7,10 @@ const WishlistContext = createContext();
 export const WishlistProvider = ({ children }) => {
   const { user } = useAuth();
 
-  const [wishlistEntries, setWishlistEntries] = useState([]); // [{id, user_id, product_id}]
+  const [wishlistEntries, setWishlistEntries] = useState([]); // Array of product objects from API
   const [wishlistLoading, setWishlistLoading] = useState(false);
 
-  const userId = user ? (user.id || user.user_id) : null;
+  const userId = user ? (user.id || user.user_id || user.pid) : null;
 
   const refreshWishlist = async (uid = userId) => {
     if (!uid) {
@@ -34,12 +34,19 @@ export const WishlistProvider = ({ children }) => {
   }, [userId]);
 
   const isInWishlist = (productId) => {
-    return wishlistEntries.some((w) => String(w.product_id) === String(productId));
+    // API returns products directly, so check product.id
+    return wishlistEntries.some((product) => {
+      const pid = product.id || product.product_id;
+      return String(pid) === String(productId);
+    });
   };
 
   const getWishlistEntryId = (productId) => {
-    const found = wishlistEntries.find((w) => String(w.product_id) === String(productId));
-    return found ? found.id : null;
+    const found = wishlistEntries.find((product) => {
+      const pid = product.id || product.product_id;
+      return String(pid) === String(productId);
+    });
+    return found ? (found.id || found.product_id) : null;
   };
 
   const addToWishlist = async (productId) => {
@@ -47,7 +54,6 @@ export const WishlistProvider = ({ children }) => {
     if (isInWishlist(productId)) return;
 
     await apiAddToWishlist(productId);
-
     await refreshWishlist(userId);
   };
 
@@ -80,7 +86,7 @@ export const WishlistProvider = ({ children }) => {
       addToWishlist,
       removeFromWishlistByProductId,
     }),
-    [wishlistEntries, wishlistLoading]
+    [wishlistEntries, wishlistLoading, userId]
   );
 
   return <WishlistContext.Provider value={value}>{children}</WishlistContext.Provider>;

@@ -100,13 +100,16 @@ const ProductDetail = () => {
     });
   }, [variants, selectedSize, selectedColor, sizes.length, colors.length]);
 
-  const inWishlist = product ? isInWishlist(product.id) : false;
+  const inWishlist = product ? isInWishlist(product.id || product.product_id) : false;
 
   /* ================= HANDLERS ================= */
   const handleToggleWishlist = async () => {
     if (!product) return;
+    
+    const productId = product.id || product.product_id;
+    
     try {
-      await toggleWishlist(product.id);
+      await toggleWishlist(productId);
       showNotif("success", "Wishlist updated.");
     } catch (e) {
       const errorMsg = String(e?.message || e);
@@ -154,10 +157,6 @@ const ProductDetail = () => {
 
     setIsAdding(true);
     try {
-      console.log(
-        `🛒 AddToCart UI Calling: ID=${variantId}, Quantity=${quantity}`
-      );
-
       await addToCart(variantId, quantity);
 
       setQuantity(1);
