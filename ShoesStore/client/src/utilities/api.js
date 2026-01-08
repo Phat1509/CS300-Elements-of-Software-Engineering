@@ -29,6 +29,16 @@ export const getMeAPI = async () => {
   return response.data;
 };
 
+export const forgotPasswordAPI = async (email) => {
+  await api.post('/auth/forgot', { email });
+  return true;
+};
+
+export const resetPasswordAPI = async (token, password) => {
+  const response = await api.post('/auth/reset', { token, password });
+  return response.data;
+};
+
 // ===================== HELPER MAPPER =====================
 const mapProduct = (p) => {
   const isDummyLink = p.image_url && p.image_url.includes("example.com");
@@ -211,15 +221,7 @@ export const updateProductStock = async (variantId, stock) => {
 };
 export const getProductDetail = async (id) => getProductById(id);
 
-export const forgotPasswordAPI = async (email) => {
-  const res = await api.post('/auth/forgot', { email });
-  return res.data;
-};
 
-export const resetPasswordAPI = async (token, password) => {
-  const res = await api.post('/auth/reset', { token, password });
-  return res.data;
-};
 // -------------------------------- EMAIL VERIFICATION -------------------- //
 export const verifyEmailAPI = async (token) => {
   const res = await api.get(`/auth/verify/${token}`);

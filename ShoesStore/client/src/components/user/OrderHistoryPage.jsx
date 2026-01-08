@@ -1,6 +1,8 @@
 // client/src/components/user/OrderHistoryPage.jsx
 import React, { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Notice from "../common/Notice";
+import useNotice from "../../hooks/useNotice";
 import {
   Search,
   Package,
@@ -67,6 +69,7 @@ export default function OrderHistoryPage() {
   const [orders, setOrders] = useState([]);
   const [q, setQ] = useState("");
   const [filter, setFilter] = useState("all");
+  const { notice, showNotice } = useNotice();
 
   // --- LOAD DATA ---
   useEffect(() => {
@@ -79,8 +82,8 @@ export default function OrderHistoryPage() {
     const fetchOrders = async () => {
       setLoading(true);
       try {
-        const list = await getOrders(); 
-        
+        const list = await getOrders();
+
         if (mounted) {
           setOrders(Array.isArray(list) ? list : []);
         }
@@ -144,10 +147,13 @@ export default function OrderHistoryPage() {
       setOrders((prev) =>
         prev.map((o) => (o.id === orderId ? { ...o, status: "CANCELLED" } : o))
       );
-      alert("Đã hủy đơn hàng thành công!");
+      showNotice("success", "Order cancelled successfully.");
     } catch (error) {
       console.error(error);
-      alert("Lỗi: Không thể hủy đơn hàng (hoặc đơn đã được xử lý).");
+      showNotice(
+        "error",
+        "Unable to cancel the order. It may have been processed."
+      );
     }
   };
   // --- STATS ---
@@ -173,14 +179,14 @@ export default function OrderHistoryPage() {
         className="container"
         style={{ padding: "80px 0", textAlign: "center" }}
       >
-        <h3>Vui lòng đăng nhập</h3>
-        <p className="muted">Bạn cần đăng nhập để xem lịch sử mua hàng.</p>
+        <h3>Please sign in</h3>
+        <p className="muted">You need to sign in to view your order history.</p>
         <Link
           to="/login"
           className="btn btn-primary"
           style={{ marginTop: 20, display: "inline-block" }}
         >
-          Đăng nhập ngay
+          Sign in now
         </Link>
       </div>
     );
@@ -199,6 +205,7 @@ export default function OrderHistoryPage() {
         }}
       >
         <div className="container">
+          {notice && <Notice type={notice.type} message={notice.message} />}
           <div
             style={{
               display: "flex",
@@ -210,10 +217,10 @@ export default function OrderHistoryPage() {
           >
             <div>
               <h1 style={{ margin: "0 0 8px", fontSize: "28px" }}>
-                Lịch sử đơn hàng
+                Order History
               </h1>
               <p className="muted" style={{ margin: 0 }}>
-                Quản lý và theo dõi trạng thái đơn hàng của bạn
+                Manage and track the status of your orders
               </p>
             </div>
           </div>
@@ -342,18 +349,18 @@ export default function OrderHistoryPage() {
               height: 42,
             }}
           >
-            <option value="all">Tất cả trạng thái</option>
-            <option value="pending">Chờ xử lý (Pending)</option>
-            <option value="processing">Đang đóng gói (Processing)</option>
-            <option value="shipped">Đang giao (Shipped)</option>
-            <option value="delivered">Đã giao (Delivered)</option>
+            <option value="all">All Statuses</option>
+            <option value="pending">Pending</option>
+            <option value="processing">Processing (Processing)</option>
+            <option value="shipped">Shipped</option>
+            <option value="delivered">Delivered</option>
           </select>
         </div>
 
         {/* Loading State */}
         {loading && (
           <div style={{ textAlign: "center", padding: 40 }}>
-            Đang tải danh sách đơn hàng...
+            Loading your orders...
           </div>
         )}
 
@@ -375,10 +382,10 @@ export default function OrderHistoryPage() {
             />
             <h3>Không tìm thấy đơn hàng nào</h3>
             <p className="muted" style={{ marginBottom: 20 }}>
-              Bạn chưa có đơn hàng nào hoặc không tìm thấy kết quả phù hợp.
+              You don't have any orders yet or no matching results were found.
             </p>
             <Link to="/" className="btn btn-primary">
-              Mua sắm ngay
+              Start shopping
             </Link>
           </div>
         )}

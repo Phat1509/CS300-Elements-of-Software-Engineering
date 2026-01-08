@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import Notice from "../common/Notice";
+import useNotice from "../../hooks/useNotice";
 import {
   ArrowLeft,
   ChevronRight,
@@ -18,23 +20,18 @@ import {
 import { getOrders, cancelOrder } from "../../utilities/api";
 import { useAuth } from "../../context/AuthContext";
 
-// --- 1. NEW HELPER: HÀM CHUẨN HÓA DỮ LIỆU (QUAN TRỌNG) ---
-// Hàm này giúp frontend "hiểu" được dữ liệu từ Rust Backend
 const normalizeData = (rawOrder) => {
   if (!rawOrder) return null;
 
   // Xử lý danh sách items
   const items = (rawOrder.items || rawOrder.OrderItems || []).map((item) => {
-    // Đảm bảo lấy đúng thông tin product dù nó nằm ở đâu
     const product = item.product || {};
     const variant = item.product_variant || {};
 
     return {
       ...item,
-      // Ép kiểu số cho giá và số lượng để tính toán không bị lỗi
       quantity: Number(item.quantity || 1),
       price: Number(item.price || 0),
-      // Gộp thông tin product vào để render dễ hơn
       product: {
         ...product,
         name: product.name || "Sản phẩm không tên",
@@ -53,16 +50,13 @@ const normalizeData = (rawOrder) => {
     ...rawOrder,
     id: rawOrder.id || rawOrder.order_id,
     status: String(rawOrder.status || "Pending"),
-    // Mapping: Backend trả 'amount', UI dùng 'total_amount'
     total_amount: Number(rawOrder.amount || rawOrder.total_amount || 0),
-    // Mapping: Backend trả 'shipping_address', UI dùng 'address'
     address: rawOrder.shipping_address || rawOrder.address || "",
-    shipping_fee: Number(rawOrder.shipping_fee || 0), // Mặc định 0 nếu không có
+    shipping_fee: Number(rawOrder.shipping_fee || 0),
     items: items,
   };
 };
 
-// --- HELPER FUNCTIONS CŨ (GIỮ NGUYÊN) ---
 const formatCurrency = (n) =>
   (Number(n) || 0).toLocaleString("en-US", {
     style: "currency",
@@ -253,6 +247,7 @@ export default function OrderDetailPage() {
   const [isReviewOpen, setIsReviewOpen] = useState(false);
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
+  const { notice, showNotice } = useNotice();
 
   // --- FETCH DATA (CÓ SỬA ĐỔI) ---
   useEffect(() => {
@@ -291,20 +286,19 @@ export default function OrderDetailPage() {
   const handleCopyTracking = () => {
     if (order?.tracking_number) {
       navigator.clipboard.writeText(order.tracking_number);
-      alert("Đã sao chép mã vận đơn!");
+      showNotice("success", "Tracking number copied.");
     }
   };
   const handleCancelOrder = async () => {
-    if (!window.confirm("Bạn có chắc chắn muốn hủy đơn hàng này không?"))
-      return;
+    if (!window.confirm("Are you sure you want to cancel this order?")) return;
     try {
       await cancelOrder(order.id); // order.id đã được normalize
       setOrder((prev) => ({ ...prev, status: "CANCELLED" }));
-      alert("Đã hủy đơn hàng thành công!");
+      showNotice("success", "Order cancelled successfully.");
     } catch (error) {
       console.error("Lỗi hủy đơn:", error);
-      alert(
-        "Không thể hủy đơn hàng (có thể đơn đã được xử lý hoặc lỗi hệ thống)."
+      showNotice(
+        "errError cancelling ordere to cancel the order. It may have been processed or a system error occurred."
       );
     }
   };
@@ -315,7 +309,8 @@ export default function OrderDetailPage() {
       key,
       JSON.stringify({ rating, text: reviewText, date: new Date() })
     );
-    alert("Cảm ơn bạn đã đánh giá!");
+    showNotice("success", "Thank you for your review!");
+
     setIsReviewOpen(false);
   };
 
@@ -326,9 +321,9 @@ export default function OrderDetailPage() {
         className="container"
         style={{ padding: "100px 0", textAlign: "center" }}
       >
-        <h3>Vui lòng đăng nhập</h3>
+        <h3>Please sign in</h3>
         <Link to="/login" className="btn btn-primary" style={{ marginTop: 16 }}>
-          Đăng nhập
+          sign in
         </Link>
       </div>
     );
@@ -340,7 +335,7 @@ export default function OrderDetailPage() {
         className="container"
         style={{ padding: "80px 0", textAlign: "center" }}
       >
-        Đang tải thông tin đơn hàng...
+        Loading your order...
       </div>
     );
   }
@@ -351,16 +346,16 @@ export default function OrderDetailPage() {
         className="container"
         style={{ padding: "80px 0", textAlign: "center" }}
       >
-        <h3>Không tìm thấy đơn hàng</h3>
+        <h3>Order not found</h3>
         <p className="muted">
-          Đơn hàng #{id} không tồn tại hoặc bạn không có quyền truy cập.
+          Order #{id} does not exist or you do not have access to it.
         </p>
         <button
           onClick={() => navigate("/orders")}
           className="btn btn-outline"
           style={{ marginTop: 16 }}
         >
-          <ArrowLeft size={16} style={{ marginRight: 8 }} /> Quay lại danh sách
+          <ArrowLeft size={16} style={{ marginRight: 8 }} /> Back to Orders
         </button>
       </div>
     );
@@ -390,14 +385,14 @@ export default function OrderDetailPage() {
           }}
         >
           <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
-            Trang chủ
+            Home
           </Link>
           <ChevronRight size={14} />
           <Link
             to="/orders"
             style={{ color: "inherit", textDecoration: "none" }}
           >
-            Đơn hàng
+            Orders
           </Link>
           <ChevronRight size={14} />
           <span style={{ color: "#0f172a", fontWeight: 500 }}>#{order.id}</span>
@@ -418,10 +413,10 @@ export default function OrderDetailPage() {
         >
           <div>
             <h1 style={{ fontSize: 24, margin: "0 0 8px" }}>
-              Chi tiết đơn hàng #{order.id}
+              Order Details #{order.id}
             </h1>
             <div style={{ fontSize: 14, color: "#64748b" }}>
-              Ngày đặt: {formatDate(order.created_at)}
+              Order Date: {formatDate(order.created_at)}
             </div>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
@@ -468,7 +463,7 @@ export default function OrderDetailPage() {
                   fontWeight: 600,
                 }}
               >
-                Sản phẩm ({items.length})
+                Products ({items.length})
               </div>
               <div>
                 {items.map((item, idx) => {
@@ -563,7 +558,7 @@ export default function OrderDetailPage() {
                 className="btn btn-outline"
                 style={{ display: "flex", alignItems: "center", gap: 8 }}
               >
-                <RotateCcw size={16} /> Mua lại
+                <RotateCcw size={16} /> Buy Again
               </button>
               {canReview && (
                 <button
@@ -571,7 +566,7 @@ export default function OrderDetailPage() {
                   className="btn btn-outline"
                   style={{ display: "flex", alignItems: "center", gap: 8 }}
                 >
-                  <Star size={16} /> Viết đánh giá
+                  <Star size={16} /> Write Review
                 </button>
               )}
               {canCancel && (
@@ -586,7 +581,7 @@ export default function OrderDetailPage() {
                     borderColor: "#ef4444",
                   }}
                 >
-                  <X size={16} /> Hủy đơn hàng
+                  <X size={16} /> Cancel Order
                 </button>
               )}
             </div>
@@ -613,7 +608,7 @@ export default function OrderDetailPage() {
                     gap: 8,
                   }}
                 >
-                  <CreditCard size={18} color="#64748b" /> Thanh toán
+                  <CreditCard size={18} color="#64748b" />  Payment
                 </h4>
                 <div
                   style={{
@@ -624,8 +619,7 @@ export default function OrderDetailPage() {
                     color: "#64748b",
                   }}
                 >
-                  <span>Tạm tính</span>
-                  {/* <--- CHANGE: Tính toán an toàn hơn vì item.price đã là số */}
+                  <span>Subtotal</span>
                   <span>
                     {formatCurrency(
                       items.reduce((acc, i) => acc + i.price * i.quantity, 0)
@@ -641,7 +635,7 @@ export default function OrderDetailPage() {
                     color: "#64748b",
                   }}
                 >
-                  <span>Phí vận chuyển</span>
+                  <span>Shipping Fee</span>
                   <span>{formatCurrency(order.shipping_fee)}</span>
                 </div>
                 <div
@@ -656,8 +650,7 @@ export default function OrderDetailPage() {
                     color: "#0f172a",
                   }}
                 >
-                  <span>Tổng cộng</span>
-                  {/* <--- CHANGE: Dùng field đã chuẩn hóa total_amount */}
+                  <span>Total</span>
                   <span>{formatCurrency(order.total_amount)}</span>
                 </div>
               </div>
@@ -680,7 +673,7 @@ export default function OrderDetailPage() {
                     gap: 8,
                   }}
                 >
-                  <MapPin size={18} color="#64748b" /> Địa chỉ nhận hàng
+                  <MapPin size={18} color="#64748b" /> Shipping Address
                 </h4>
                 <div
                   style={{ fontSize: 14, color: "#334155", lineHeight: 1.6 }}
@@ -714,7 +707,7 @@ export default function OrderDetailPage() {
                       fontWeight: 600,
                     }}
                   >
-                    MÃ VẬN ĐƠN
+                    TRACKING NUMBER
                   </div>
                   <div
                     style={{ display: "flex", alignItems: "center", gap: 10 }}

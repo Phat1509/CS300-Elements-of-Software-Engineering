@@ -3,7 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { ChevronRight, Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import { useCart } from "../../context/CartContext";
 import { useAuth } from "../../context/AuthContext";
-
+import Notice from "../common/Notice";
+import useNotice from "../../hooks/useNotice";
 import {
   createOrder,
   addOrderItem,
@@ -20,7 +21,7 @@ export default function CartPage() {
 
   const [loading, setLoading] = useState(false);
   const [updatingIds, setUpdatingIds] = useState([]);
-
+  const { notice, showNotice } = useNotice();
   const subtotal = cartItems.reduce((acc, it) => {
     const finalPricePerUnit =
       it.discount_percentage > 0
@@ -38,7 +39,7 @@ export default function CartPage() {
   const handleUpdateQuantity = async (variantId, newQuantity, currentStock) => {
     if (newQuantity < 1) return;
     if (newQuantity > currentStock) {
-      alert(`Chỉ còn ${currentStock} sản phẩm trong kho!`);
+      showNotice("error", `Only ${currentStock} items left in stock!`);
       return;
     }
 
@@ -67,31 +68,31 @@ export default function CartPage() {
   };
 
   const handleRemoveItem = async (variantId) => {
-    if (!window.confirm("Bạn có chắc muốn xóa sản phẩm này?")) return;
+    if (!window.confirm("Are you sure you want to remove this item?")) return;
     try {
       await deleteCartItem(variantId);
       removeFromCart(variantId);
+      showNotice("success", "Item removed from cart.");
     } catch (error) {
-      console.error("Lỗi xóa item:", error);
+      showNotice("error", "Failed to remove item. Please try again.");
     }
   };
 
   const handleCheckout = async () => {
     if (!user) {
-      alert("Vui lòng đăng nhập!");
-      navigate("/login");
+      showNotice("error", "Please sign in to checkout.");
+      navigate("/signin");
       return;
     }
     if (cartItems.length === 0) return;
 
-    // 1. Nhập địa chỉ (BẮT BUỘC - Rust không cho phép null)
-    let address = prompt("Nhập địa chỉ nhận hàng:", "123 Đường ABC");
+    let address = prompt("Enter your shipping address:", "123 Example Street");
     if (!address || address.trim() === "") {
-      alert("Địa chỉ không được để trống!");
+      showNotice("error", "Shipping address cannot be empty!");
       return;
     }
 
-    if (!window.confirm(`Xác nhận đặt hàng?`)) return;
+    if (!window.confirm(`Confirm your order?`)) return;
     setLoading(true);
 
     try {
@@ -113,9 +114,7 @@ export default function CartPage() {
       );
       if (invalidItem) {
         console.error(" Lỗi dữ liệu item:", invalidItem);
-        alert(
-          "Lỗi dữ liệu: Không tìm thấy ID sản phẩm. Vui lòng F12 xem console."
-        );
+        showNotice("error", "Data error: Product ID not found. See console.");
         setLoading(false);
         return;
       }
@@ -150,19 +149,15 @@ export default function CartPage() {
       if (clearCart) clearCart();
       else cartItems.forEach((item) => removeFromCart(item.variant_id));
 
-      alert("Đặt hàng thành công!");
+      showNotice("success", "Order placed successfully.");
       navigate("/orders");
     } catch (error) {
       console.error(" Lỗi Checkout:", error);
       if (error.response) {
         console.log("🔥 Response Data:", error.response.data);
-        alert(
-          `Lỗi Server (${error.response.status}): ${JSON.stringify(
-            error.response.data
-          )}`
-        );
+        showNotice("error", `Server error (${error.response.status}).`);
       } else {
-        alert("Lỗi kết nối.");
+        showNotice("error", "Network error. Please try again.");
       }
     } finally {
       setLoading(false);
@@ -185,14 +180,12 @@ export default function CartPage() {
           }}
         >
           <ShoppingBag size={64} color="#94a3b8" style={{ marginBottom: 16 }} />
-          <h2 style={{ fontSize: 24, marginBottom: 10 }}>
-            Giỏ hàng đang trống
-          </h2>
+          <h2 style={{ fontSize: 24, marginBottom: 10 }}>Your cart is empty</h2>
           <p className="muted" style={{ marginBottom: 24 }}>
-            Hãy chọn những món đồ yêu thích của bạn nhé.
+            Choose your favorite items to get started.
           </p>
           <Link to="/" className="btn btn-primary">
-            Tiếp tục mua sắm
+            Continue shopping
           </Link>
         </div>
       </section>
@@ -224,9 +217,9 @@ export default function CartPage() {
       </div>
 
       <section className="container" style={{ padding: "30px 0 60px" }}>
-        <h1 style={{ marginBottom: 8, fontSize: 28 }}>Giỏ hàng của bạn</h1>
+        <h1 style={{ marginBottom: 8, fontSize: 28 }}>Your Shopping Cart</h1>
         <p className="muted" style={{ marginBottom: 30 }}>
-          {cartItems.length} sản phẩm · Miễn phí đổi trả trong 30 ngày
+          {cartItems.length} items · Free returns within 30 days
         </p>
 
         {/* LAYOUT: Grid 2 cột trên Desktop (2fr 1fr), 1 cột trên Mobile */}
@@ -305,7 +298,7 @@ export default function CartPage() {
                             fontWeight: 500,
                           }}
                         >
-                          (Kho chỉ còn: {it.stock})
+                          (Only {it.stock} left in stock)
                         </span>
                       )}
                     </div>
@@ -402,7 +395,8 @@ export default function CartPage() {
                         fontSize: 13,
                       }}
                     >
-                      <Trash2 size={16} /> Xóa
+                      <Trash2 size={16} />
+                      Remove
                     </button>
                   </div>
                 </div>
@@ -421,7 +415,7 @@ export default function CartPage() {
               }}
             >
               <h3 style={{ marginTop: 0, marginBottom: 20, fontSize: 20 }}>
-                Tóm tắt đơn hàng
+                Order Summary
               </h3>
 
               <div
@@ -435,13 +429,13 @@ export default function CartPage() {
                 <div
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
-                  <span className="muted">Tạm tính</span>
+                  <span className="muted">Subtotal</span>
                   <span>${subtotal.toFixed(2)}</span>
                 </div>
                 <div
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
-                  <span className="muted">Phí vận chuyển</span>
+                  <span className="muted">Shipping</span>
                   <span>
                     {shipping === 0 ? "Miễn phí" : `$${shipping.toFixed(2)}`}
                   </span>
@@ -449,7 +443,7 @@ export default function CartPage() {
                 <div
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
-                  <span className="muted">Thuế (8%)</span>
+                  <span className="muted">Tax (8%)</span>
                   <span>${tax.toFixed(2)}</span>
                 </div>
 
@@ -463,7 +457,7 @@ export default function CartPage() {
                     fontSize: "1.2rem",
                   }}
                 >
-                  <span>Tổng cộng</span>
+                  <span>Total</span>
                   <span>${finalTotal.toFixed(2)}</span>
                 </div>
               </div>
@@ -482,7 +476,7 @@ export default function CartPage() {
                 onClick={handleCheckout}
                 disabled={loading}
               >
-                {loading ? "Đang xử lý..." : "Thanh toán ngay"}
+                {loading ? "Processing..." : "Checkout Now"}
               </button>
 
               {/* Payment Icons */}

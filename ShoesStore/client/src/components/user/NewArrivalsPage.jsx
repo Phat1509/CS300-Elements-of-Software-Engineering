@@ -46,20 +46,16 @@ export default function ProductListingPage() {
 
   const displayed = useMemo(() => {
     return products.filter((p) => {
-      // 1. Tính giá thực tế (Nếu có discount thì tính giá đã giảm, không thì giữ nguyên price)
       const effectivePrice =
         p.discount_percentage > 0
           ? p.price * (1 - p.discount_percentage / 100)
           : p.price;
 
-      // 2. Lọc theo khoảng giá người dùng chọn
       const matchPrice =
         effectivePrice >= minPrice && effectivePrice <= maxPrice;
 
-      // 3. Lọc Trạng thái
       const matchStatus = p.is_active === true;
 
-      // 4. Lọc Danh mục & Thương hiệu
       const matchCat = selectedCategory
         ? Number(p.category_id) === Number(selectedCategory)
         : true;
@@ -67,7 +63,6 @@ export default function ProductListingPage() {
         ? Number(p.brand_id) === Number(selectedBrand)
         : true;
 
-      // 5. Lọc Giảm giá: Kiểm tra discount_percentage > 0
       const isSale = p.discount_percentage > 0;
       const matchSale = onlySale ? isSale : true;
 
@@ -150,7 +145,7 @@ export default function ProductListingPage() {
             Our Collection
           </h1>
           <p style={{ color: "#64748b", maxWidth: "600px", margin: "0 auto" }}>
-            Khám phá những thiết kế mới nhất và các ưu đãi hấp dẫn.
+            Discover our latest collection.
           </p>
         </div>
       </header>
@@ -185,7 +180,7 @@ export default function ProductListingPage() {
                   marginBottom: "24px",
                 }}
               >
-                <h3 style={{ fontSize: "18px", fontWeight: "700" }}>Bộ lọc</h3>
+                <h3 style={{ fontSize: "18px", fontWeight: "700" }}> Filter</h3>
                 <button
                   onClick={() => {
                     setMinPrice(0);
@@ -203,7 +198,7 @@ export default function ProductListingPage() {
                     fontWeight: "500",
                   }}
                 >
-                  Đặt lại
+                  reset 
                 </button>
               </div>
 
@@ -237,7 +232,7 @@ export default function ProductListingPage() {
                       height: "16px",
                     }}
                   />
-                  Đang giảm giá %
+                 Sale up %
                 </label>
               </div>
 
@@ -252,7 +247,7 @@ export default function ProductListingPage() {
                     marginBottom: "16px",
                   }}
                 >
-                  Giá tối đa ($)
+                  Max price ($)
                 </h4>
                 <input
                   type="range"
@@ -288,7 +283,7 @@ export default function ProductListingPage() {
                     marginBottom: "12px",
                   }}
                 >
-                  Danh mục
+                  Categories 
                 </h4>
                 <div
                   style={{
@@ -331,7 +326,7 @@ export default function ProductListingPage() {
                     marginBottom: "12px",
                   }}
                 >
-                  Thương hiệu
+                  Brand
                 </h4>
                 <div
                   style={{
@@ -395,14 +390,14 @@ export default function ProductListingPage() {
               </button>
 
               <p style={{ color: "#64748b", margin: 0, fontSize: "15px" }}>
-                Hiển thị <strong>{sortedDisplayed.length}</strong> sản phẩm
+               Show <strong>{sortedDisplayed.length}</strong> products 
               </p>
 
               <div
                 style={{ display: "flex", alignItems: "center", gap: "12px" }}
               >
                 <span style={{ fontSize: "14px", color: "#64748b" }}>
-                  Sắp xếp:
+                  sort:
                 </span>
                 <select
                   value={sortBy}
@@ -416,9 +411,9 @@ export default function ProductListingPage() {
                     fontSize: "14px",
                   }}
                 >
-                  <option value="newest">Mới nhất</option>
-                  <option value="price-low">Giá: Thấp đến Cao</option>
-                  <option value="price-high">Giá: Cao đến Thấp</option>
+                  <option value="newest">Latest</option>
+                  <option value="price-low">Price: Low to High</option>
+                  <option value="price-high">Price: High to Low </option>
                 </select>
               </div>
             </div>

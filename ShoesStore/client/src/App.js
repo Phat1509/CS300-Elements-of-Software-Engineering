@@ -11,10 +11,7 @@ import Footer from "./components/user/Footer";
 import Hero from "./components/user/Hero";
 
 import HomePage from "./components/user/HomePage";
-import MenPage from "./components/user/MenPage";
-import WomenPage from "./components/user/WomenPage";
-import KidsPage from "./components/user/KidsPage";
-import SalePage from "./components/user/SalePage";
+
 import WishlistPage from "./components/user/WishlistPage";
 import CartPage from "./components/user/CartPage";
 import ProductDetail from "./components/user/ProductDetailPage";
