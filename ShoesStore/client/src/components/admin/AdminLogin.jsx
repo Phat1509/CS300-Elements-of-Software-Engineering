@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 const API_BASE = process.env.REACT_APP_API_URL;
-
+console.log("API_BASE =", API_BASE);
 export default function AdminLogin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");

@@ -1,5 +1,5 @@
 // client/src/components/user/ProductDetailPage.jsx
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import {
   ChevronRight,
@@ -29,6 +29,20 @@ const ProductDetail = () => {
   const [selectedColor, setSelectedColor] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [isAdding, setIsAdding] = useState(false);
+  const [notif, setNotif] = useState(null); // { type: 'success'|'error', message: string }
+  const notifTimerRef = useRef(null);
+
+ const showNotif = (type, message, timeout = 3000) => {
+    if (notifTimerRef.current) {
+      clearTimeout(notifTimerRef.current);
+      notifTimerRef.current = null;
+    }
+    setNotif({ type, message });
+    notifTimerRef.current = setTimeout(() => {
+      setNotif(null);
+      notifTimerRef.current = null;
+    }, timeout);
+  };
 
   /* ================= LOAD DATA ================= */
   useEffect(() => {
@@ -93,11 +107,20 @@ const ProductDetail = () => {
     if (!product) return;
     try {
       await toggleWishlist(product.id);
+      showNotif("success", "Wishlist updated.");
     } catch (e) {
-      if (String(e?.message || e).includes("Login")) {
-        navigate("/login");
+      const errorMsg = String(e?.message || e);
+      console.error("Wishlist error:", e);
+
+      if (
+        errorMsg.includes("NOT_LOGGED_IN") ||
+        errorMsg.includes("Login") ||
+        errorMsg.includes("Unauthorized")
+      ) {
+        showNotif("error", "Please sign in to use Wishlist!");
+        navigate("/signin");
       } else {
-        console.error("Lỗi Wishlist:", e);
+        showNotif("error", "Failed to update wishlist. Please try again.");
       }
     }
   };
@@ -169,7 +192,7 @@ const ProductDetail = () => {
           className="btn btn-primary"
           style={{ marginTop: 20, display: "inline-block" }}
         >
-           Back to Home
+          Back to Home
         </Link>
       </div>
     );
@@ -391,7 +414,7 @@ const ProductDetail = () => {
               )
             ) : (
               <p style={{ color: "#666", fontSize: 14, margin: "10px 0 0" }}>
-                 Please select size and color
+                Please select size and color
               </p>
             )}
 

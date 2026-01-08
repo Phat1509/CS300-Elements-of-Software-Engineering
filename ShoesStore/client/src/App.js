@@ -9,6 +9,7 @@ import { WishlistProvider } from "./context/WishlistContext";
 import Header from "./components/user/Header";
 import Footer from "./components/user/Footer";
 import Hero from "./components/user/Hero";
+import ChatWidget from "./components/common/ChatWidget";
 
 import HomePage from "./components/user/HomePage";
 
@@ -68,15 +69,16 @@ function AppRoutes() {
         {/* Admin */}
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route element={<ProtectedRoute />}>
-            <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/admin/products" element={<ProductsAdmin />} />
-            <Route path="/admin/orders" element={<OrdersAdmin />} />
-            <Route path="/admin/brands" element={<BrandsAdmin />} />
-            <Route path="/admin/categories" element={<CategoriesAdmin />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/products" element={<ProductsAdmin />} />
+          <Route path="/admin/orders" element={<OrdersAdmin />} />
+          <Route path="/admin/brands" element={<BrandsAdmin />} />
+          <Route path="/admin/categories" element={<CategoriesAdmin />} />
         </Route>
       </Routes>
 
       {!isAdminRoute && <Footer />}
+      {!isAdminRoute && <ChatWidget />}
     </>
   );
 }
