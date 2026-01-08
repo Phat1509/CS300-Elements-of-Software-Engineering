@@ -512,8 +512,8 @@ export default function ProductListingPage() {
                 }}
               >
                 <div style={{ fontSize: "40px", marginBottom: "16px" }}>📦</div>
-                <h3>Không tìm thấy sản phẩm phù hợp</h3>
-                <p>Thử điều chỉnh lại bộ lọc của bạn nhé.</p>
+                <h3>No matching products found</h3>
+                <p>Try adjusting your filters.</p>
               </div>
             )}
           </main>
