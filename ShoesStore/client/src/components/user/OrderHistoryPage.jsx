@@ -455,9 +455,6 @@ export default function OrderHistoryPage() {
                   <div
                     style={{ display: "flex", alignItems: "center", gap: 12 }}
                   >
-                    <span style={{ fontWeight: 700, fontSize: 16 }}>
-                      {formatCurrency(order.total_amount)}
-                    </span>
                     <div
                       style={{
                         display: "flex",

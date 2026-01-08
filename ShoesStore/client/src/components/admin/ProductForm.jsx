@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import adminApi from "../../utilities/adminApi";
-
+import Notice from "../common/Notice";
+import useNotice from "../../hooks/useNotice";
 const FIXED_COLORS = [
   { label: "Black", value: "Black" },
   { label: "White", value: "White" },
@@ -44,6 +45,7 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
     color: "",
     stock: 0,
   });
+  const { notice, showNotice } = useNotice();
 
   useEffect(() => {
     adminApi
@@ -95,7 +97,7 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
 
     if (grouping[null]) traverse(null, 0);
     else if (grouping[0]) traverse(0, 0);
-    else if (grouping["root"]) traverse("root", 0); 
+    else if (grouping["root"]) traverse("root", 0);
 
     return result.length > 0 ? result : categories;
   }, [categories]);
@@ -117,8 +119,10 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
 
   const handleAddVariant = async () => {
     const { size, color, stock } = variantForm;
-    if (!size || !color) return alert("Please provide both Size and Color.");
-
+    if (!size || !color) {
+      showNotice("error", "Please provide both Size and Color.");
+      return;
+    }
     const exists = variants.some((v) => v.size === size && v.color === color);
     if (exists) return alert("This Size + Color variant already exists.");
 
@@ -127,7 +131,7 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
       color,
       stock: parseInt(stock) || 0,
       id: initial?.id ? null : `temp-${Date.now()}`,
-      isTemp: !initial?.id, 
+      isTemp: !initial?.id,
     };
 
     if (initial?.id) {
@@ -139,7 +143,7 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
         setVariants((prev) => [...prev, apiRes]);
         setVariantForm({ size: "", color: "", stock: 0 });
       } catch (err) {
-        alert("Error: " + err.message);
+        showNotice("error", "Error adding variant: " + err.message);
       }
     } else {
       setVariants((prev) => [...prev, newVariant]);
@@ -159,7 +163,7 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
         await adminApi.deleteVariant(initial.id, vId);
         setVariants(variants.filter((v) => v.id !== vId));
       } catch (err) {
-        alert("Error: " + err.message);
+        showNotice("error", "Failed to delete variant: " + err.message);
       }
     }
   };
@@ -168,15 +172,15 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
     e.preventDefault();
 
     if (variants.length === 0) {
-      alert("Please add at least one Variant (Size & Color) before saving the product.");
-      return; 
+      showNotice("error", "Please add at least one Variant (Size & Color).");
+      return;
     }
     if (!form.category_id) {
-      alert("Please select a Category.");
+      showNotice("error", "Please select a Category.");
       return;
     }
     if (!form.brand_id) {
-      alert("Please select a Brand.");
+      showNotice("error", "Please select a Brand.");
       return;
     }
     setSaving(true);
@@ -184,7 +188,7 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
       const payload = {
         ...form,
         slug: generateSlug(form.name),
-        price: parseFloat(form.price), 
+        price: parseFloat(form.price),
         discount_percentage: parseFloat(form.discount_percentage) || 0,
         brand_id: form.brand_id ? parseInt(form.brand_id) : null,
         category_id: form.category_id ? parseInt(form.category_id) : null,
@@ -198,10 +202,11 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
         productResult = await adminApi.createProduct(payload);
       }
 
-      const productId = productResult.id; 
+      const productId = productResult.id;
 
       const tempVariants = variants.filter(
-        (v) => v.isTemp || (typeof v.id === 'string' && v.id.startsWith("temp-"))
+        (v) =>
+          v.isTemp || (typeof v.id === "string" && v.id.startsWith("temp-"))
       );
 
       if (tempVariants.length > 0) {
@@ -217,19 +222,28 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
         );
       }
 
-      alert("Product & Variants saved successfully!");
-      onSaved(productResult); 
+      showNotice("success", "Product & Variants saved successfully!");
+      setTimeout(() => {
+        onSaved(productResult);
+      }, 1000);
     } catch (err) {
       console.error(err);
-      alert("Failed to save: " + (err.message || "Bad Request. Check your inputs."));
+      showNotice(
+        "error",
+        "Failed to save: " + (err.message || "Check your inputs.")
+      );
     } finally {
       setSaving(false);
     }
   };
 
-  
   return (
     <form onSubmit={handleSubmit} className="admin-form-grid">
+      {notice && (
+        <div style={{ gridColumn: "1 / -1", marginBottom: "15px" }}>
+          <Notice type={notice.type} message={notice.message} />
+        </div>
+      )}
       <div className="admin-form-left">
         <div className="form-group">
           <label>Product Name</label>

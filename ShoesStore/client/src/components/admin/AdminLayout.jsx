@@ -10,7 +10,7 @@ export default function AdminLayout({ title, children }) {
         <Link to="/admin" className="admin-brand" aria-label="Admin Home">
           <div className="admin-brand-dot">S</div>
           <div>
-            <div className="admin-brand-name">StepStyle</div>
+            <div className="admin-brand-name">DONGNVIKI</div>
             <div className="admin-brand-sub">Admin Panel</div>
           </div>
         </Link>
