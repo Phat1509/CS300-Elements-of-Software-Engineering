@@ -32,9 +32,18 @@ export default function ProductListingPage() {
           getCategories(),
           getBrands(),
         ]);
+
         setProducts(pData || []);
-        setCategories(cData || []);
-        setBrands(bData || []);
+
+        const uniqueCategories = Array.from(
+          new Map((cData || []).map((c) => [c.id, c])).values()
+        );
+        setCategories(uniqueCategories);
+
+        const uniqueBrands = Array.from(
+          new Map((bData || []).map((b) => [b.id, b])).values()
+        );
+        setBrands(uniqueBrands);
       } catch (err) {
         console.error("Lỗi khi tải dữ liệu:", err);
       } finally {
@@ -198,7 +207,7 @@ export default function ProductListingPage() {
                     fontWeight: "500",
                   }}
                 >
-                  reset 
+                  reset
                 </button>
               </div>
 
@@ -232,7 +241,7 @@ export default function ProductListingPage() {
                       height: "16px",
                     }}
                   />
-                 Sale up %
+                  Sale up %
                 </label>
               </div>
 
@@ -272,7 +281,7 @@ export default function ProductListingPage() {
                 </div>
               </div>
 
-              {/* Danh mục */}
+              {/* Danh mục phân cấp */}
               <div className="filter-group" style={{ marginBottom: "30px" }}>
                 <h4
                   style={{
@@ -283,7 +292,7 @@ export default function ProductListingPage() {
                     marginBottom: "12px",
                   }}
                 >
-                  Categories 
+                  Categories
                 </h4>
                 <div
                   style={{
@@ -292,26 +301,73 @@ export default function ProductListingPage() {
                     gap: "8px",
                   }}
                 >
-                  {categories.map((cat) => (
-                    <label
-                      key={cat.id}
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "10px",
-                        cursor: "pointer",
-                        fontSize: "14px",
-                      }}
-                    >
-                      <input
-                        type="radio"
-                        name="cat"
-                        checked={selectedCategory === cat.id}
-                        onChange={() => setSelectedCategory(cat.id)}
-                      />
-                      <span>{cat.name}</span>
-                    </label>
-                  ))}
+                  {/* Lấy danh mục cha (Men, Women, Kids) */}
+                  {categories
+                    .filter((cat) => !cat.parent_id)
+                    .map((parent) => (
+                      <div
+                        key={parent.id}
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "4px",
+                        }}
+                      >
+                        {/* Nút chọn cha */}
+                        <label
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "8px",
+                            cursor: "pointer",
+                            fontSize: "14px",
+                            fontWeight: "600",
+                          }}
+                        >
+                          <input
+                            type="radio"
+                            name="cat"
+                            checked={selectedCategory === parent.id}
+                            onChange={() => setSelectedCategory(parent.id)}
+                          />
+                          <span>{parent.name}</span>
+                        </label>
+
+                        {/* Danh mục con thụt vào */}
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            paddingLeft: "16px",
+                            gap: "6px",
+                          }}
+                        >
+                          {categories
+                            .filter((cat) => cat.parent_id === parent.id)
+                            .map((child) => (
+                              <label
+                                key={child.id}
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  gap: "8px",
+                                  cursor: "pointer",
+                                  fontSize: "14px",
+                                  fontWeight: "400",
+                                }}
+                              >
+                                <input
+                                  type="radio"
+                                  name="cat"
+                                  checked={selectedCategory === child.id}
+                                  onChange={() => setSelectedCategory(child.id)}
+                                />
+                                <span>{child.name}</span>
+                              </label>
+                            ))}
+                        </div>
+                      </div>
+                    ))}
                 </div>
               </div>
 
@@ -390,7 +446,7 @@ export default function ProductListingPage() {
               </button>
 
               <p style={{ color: "#64748b", margin: 0, fontSize: "15px" }}>
-               Show <strong>{sortedDisplayed.length}</strong> products 
+                Show <strong>{sortedDisplayed.length}</strong> products
               </p>
 
               <div
