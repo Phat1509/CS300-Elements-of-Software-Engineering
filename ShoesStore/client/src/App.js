@@ -9,6 +9,7 @@ import { WishlistProvider } from "./context/WishlistContext";
 import Header from "./components/user/Header";
 import Footer from "./components/user/Footer";
 import Hero from "./components/user/Hero";
+import ChatWidget from "./components/common/ChatWidget";
 
 import HomePage from "./components/user/HomePage";
 
@@ -77,6 +78,7 @@ function AppRoutes() {
       </Routes>
 
       {!isAdminRoute && <Footer />}
+      {!isAdminRoute && <ChatWidget />}
     </>
   );
 }
