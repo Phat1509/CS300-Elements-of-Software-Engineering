@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 const API_BASE = process.env.REACT_APP_API_URL;
 
 export default function AdminLogin() {
-  const [username, setUsername] = useState(""); 
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -27,25 +27,31 @@ export default function AdminLogin() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: username,   
-          password: password
+          email: username,
+          password: password,
         }),
       });
 
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.description || data.message || "Tài khoản hoặc mật khẩu không đúng.");
+        throw new Error(
+          data.description ||
+            data.message ||
+            "Tài khoản hoặc mật khẩu không đúng."
+        );
       }
 
       if (!data.token) {
         throw new Error("Lỗi hệ thống: Backend không trả về Token.");
       }
+      if (!data.is_staff) {
+        throw new Error("Bạn không có quyền truy cập vào trang quản trị!");
+      }
 
       localStorage.setItem("user", JSON.stringify(data));
-      
-      navigate("/admin/products");
 
+      navigate("/admin/products");
     } catch (err) {
       console.error("Login Error:", err);
       setError(err.message || "Có lỗi xảy ra, vui lòng thử lại sau.");
