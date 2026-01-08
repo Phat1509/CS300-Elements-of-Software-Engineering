@@ -29,15 +29,11 @@ export const getMeAPI = async () => {
   return response.data;
 };
 
-export const forgotPasswordAPI = async (email) => {
-  // Sends reset code/token to the user's email
-  await api.post('/auth/forgot', { email });
-  return true;
-};
-
-export const resetPasswordAPI = async (token, password) => {
-  // Resets password using token from forgot password flow
-  const response = await api.post('/auth/reset', { token, password });
+export const changePasswordAPI = async (currentPassword, newPassword) => {
+  const response = await api.post('/auth/change-password', { 
+    old_password: currentPassword, 
+    new_password: newPassword 
+  });
   return response.data;
 };
 
