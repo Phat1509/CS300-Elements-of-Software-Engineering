@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import adminApi from "../../utilities/adminApi";
 
 const FIXED_COLORS = [
@@ -70,6 +70,37 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
     }
   }, [initial]);
 
+  const sortedCategories = useMemo(() => {
+    if (!categories || categories.length === 0) return [];
+
+    // 1. Gom nhóm theo cha
+    const grouping = {};
+    categories.forEach((cat) => {
+      // Một số API trả về parent_id, số khác trả về parentId, check cả 2
+      const pid = cat.parent_id || cat.parentId || "root";
+      if (!grouping[pid]) grouping[pid] = [];
+      grouping[pid].push(cat);
+    });
+
+    const result = [];
+    const traverse = (parentId, level) => {
+      const list = grouping[parentId] || [];
+      list.forEach((cat) => {
+        const prefix = level > 0 ? "— ".repeat(level) + " " : "";
+        result.push({
+          ...cat,
+          displayName: prefix + cat.name,
+        });
+        traverse(cat.id, level + 1);
+      });
+    };
+
+    if (grouping[null]) traverse(null, 0);
+    else if (grouping[0]) traverse(0, 0);
+    else if (grouping["root"]) traverse("root", 0); // fallback
+
+    return result.length > 0 ? result : categories;
+  }, [categories]);
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setForm((prev) => ({
@@ -189,9 +220,9 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
               onChange={handleChange}
             >
               <option value="">-- Select Category --</option>
-              {categories.map((c) => (
+              {sortedCategories.map((c) => (
                 <option key={c.id} value={c.id}>
-                  {c.name}
+                  {c.displayName || c.name}
                 </option>
               ))}
             </select>
