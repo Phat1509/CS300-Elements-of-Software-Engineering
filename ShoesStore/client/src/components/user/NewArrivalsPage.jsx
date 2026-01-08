@@ -386,7 +386,7 @@ export default function ProductListingPage() {
                   background: "#fff",
                 }}
               >
-                <SlidersHorizontal size={18} /> Lọc
+                <SlidersHorizontal size={18} /> filter
               </button>
 
               <p style={{ color: "#64748b", margin: 0, fontSize: "15px" }}>

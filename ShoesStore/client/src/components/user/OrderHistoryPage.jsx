@@ -236,25 +236,25 @@ export default function OrderHistoryPage() {
           >
             {[
               {
-                label: "Tổng đơn",
+                label: "Total Orders",
                 val: stats.total,
                 icon: ShoppingBag,
                 color: "#64748b",
               },
               {
-                label: "Đang xử lý",
+                label: "Processing",
                 val: stats.processing,
                 icon: Truck,
                 color: "#3b82f6",
               },
               {
-                label: "Hoàn thành",
+                label: "Delivered",
                 val: stats.delivered,
                 icon: CheckCircle2,
                 color: "#22c55e",
               },
               {
-                label: "Tổng chi tiêu",
+                label: "Total Spent",
                 val: formatCurrency(stats.spent),
                 icon: Package,
                 color: "#f59e0b",
@@ -325,7 +325,7 @@ export default function OrderHistoryPage() {
               }}
             />
             <input
-              placeholder="Tìm theo Mã đơn hoặc Giá tiền..."
+              placeholder="Search by Order ID or Price..."
               value={q}
               onChange={(e) => setQ(e.target.value)}
               style={{
@@ -351,7 +351,7 @@ export default function OrderHistoryPage() {
           >
             <option value="all">All Statuses</option>
             <option value="pending">Pending</option>
-            <option value="processing">Processing (Processing)</option>
+            <option value="processing">Processing</option>
             <option value="shipped">Shipped</option>
             <option value="delivered">Delivered</option>
           </select>
@@ -380,7 +380,7 @@ export default function OrderHistoryPage() {
               color="#cbd5e1"
               style={{ margin: "0 auto 20px" }}
             />
-            <h3>Không tìm thấy đơn hàng nào</h3>
+            <h3>No orders found</h3>
             <p className="muted" style={{ marginBottom: 20 }}>
               You don't have any orders yet or no matching results were found.
             </p>
@@ -433,7 +433,7 @@ export default function OrderHistoryPage() {
                           display: "block",
                         }}
                       >
-                        MÃ ĐƠN HÀNG
+                         Order ID
                       </span>
                       <span style={{ fontWeight: 600 }}>#{order.id}</span>
                     </div>
@@ -445,7 +445,7 @@ export default function OrderHistoryPage() {
                           display: "block",
                         }}
                       >
-                        NGÀY ĐẶT
+                         Order ID Date
                       </span>
                       <span style={{ fontWeight: 500 }}>
                         {formatDate(order.created_at)}
@@ -547,7 +547,7 @@ export default function OrderHistoryPage() {
                         );
                       })
                     ) : (
-                      <p className="muted">Không có thông tin sản phẩm</p>
+                      <p className="muted">No product information</p>
                     )}
                   </div>
 
@@ -563,7 +563,7 @@ export default function OrderHistoryPage() {
                         padding: "8px 16px",
                       }}
                     >
-                      Chi tiết <ArrowRight size={16} />
+                      View Details<ArrowRight size={16} />
                     </button>
                   </div>
                 </div>
