@@ -40,7 +40,7 @@ export default function AdminLayout({ title, children }) {
         <div className="admin-side-bottom">
           <div className="admin-hint">
             <Link to="/" style={{ color: '#cbd5e1', fontSize: '13px', textDecoration: 'none' }}>
-              ← Quay lại Website
+              ← Back to Website
             </Link>
           </div>
         </div>
@@ -51,7 +51,7 @@ export default function AdminLayout({ title, children }) {
         <div className="admin-topbar">
           <h1 className="admin-title">{title || "Admin"}</h1>
           <div className="admin-user-info" style={{ fontSize: '14px', color: '#64748b' }}>
-             Quyền: Quản trị viên
+             Role: Administrator
           </div>
         </div>
 

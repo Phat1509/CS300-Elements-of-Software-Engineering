@@ -17,7 +17,7 @@ export default function OrdersAdmin() {
       const data = await adminApi.getOrders();
       setOrders(Array.isArray(data) ? data : (data?.items || []));
     } catch (err) {
-      console.error("Lỗi tải đơn hàng:", err);
+      console.error("Failed to load orders:", err);
     } finally {
       setLoading(false);
     }
@@ -29,24 +29,24 @@ export default function OrdersAdmin() {
       const detail = await adminApi.getOrderDetails(orderId);
       setSelectedOrder(detail);
     } catch (err) {
-      alert("Không tải được chi tiết đơn hàng: " + err.message);
+      alert("Failed to load order details: " + err.message);
     } finally {
       setLoadingDetail(false);
     }
   };
 
   const handleUpdateStatus = async (orderId, newStatus) => {
-    if (!window.confirm(`Chuyển đơn hàng #${orderId} sang trạng thái ${newStatus}?`)) return;
+    if (!window.confirm(`Change order #${orderId} to status ${newStatus}?`)) return;
     
     try {
       await adminApi.updateOrderStatus(orderId, newStatus);
-      alert("Cập nhật trạng thái thành công!");
+      alert("Status updated successfully!");
       
       loadOrders(); 
       
       setSelectedOrder(prev => ({ ...prev, status: newStatus }));
     } catch (err) {
-      alert("Lỗi cập nhật: " + err.message);
+      alert("Update error: " + err.message);
     }
   };
 
@@ -62,39 +62,43 @@ export default function OrdersAdmin() {
   };
 
   return (
-    <AdminLayout title="Quản lý Đơn hàng">
+    <AdminLayout title="Order Management">
       <div className="admin-panel">
         <div className="admin-panel-top">
-             <h3>Danh sách đơn hàng</h3>
-             <button className="btn btn-sm btn-outline" onClick={loadOrders}>Làm mới</button>
+             <h3>Order List</h3>
+             <button className="btn btn-sm btn-outline" onClick={loadOrders}>Refresh</button>
         </div>
 
-        {loading ? <p>Đang tải dữ liệu...</p> : (
+        {loading ? <p>Loading data...</p> : (
           <div className="admin-table-wrap">
             <table className="admin-table">
               <thead>
                 <tr>
-                  <th>Mã đơn</th>
-                  <th>ID Khách</th>
-                  <th>Tổng tiền</th>
-                  <th>Thanh toán</th>
-                  <th>Trạng thái</th>
-                  <th style={{ textAlign: 'right' }}>Hành động</th>
+                  <th>Order #</th>
+                  <th>Customer ID</th>
+                  <th>Total</th>
+                  <th>Payment</th>
+                  <th>Status</th>
+                  <th style={{ textAlign: 'right' }}>Action</th>
                 </tr>
               </thead>
               <tbody>
                 {orders.length === 0 ? (
-                  <tr><td colSpan="6" style={{textAlign:'center', padding: '20px'}}>Không có đơn hàng nào.</td></tr>
+                  <tr><td colSpan="6" style={{textAlign:'center', padding: '20px'}}>No orders found.</td></tr>
                 ) : (
                   orders.map(order => (
                     <tr key={order.id}>
                       <td><strong>#{order.id}</strong></td>
-                      <td>User #{order.user_id}</td>
-                      <td>{Number(order.total_price || order.amount).toLocaleString()}đ</td>
+                      <td>Customer #{order.user_id}</td>
+                      <td>{Number(order.total_price || order.amount).toLocaleString()}₫</td>
                       <td>{order.payment_method}</td>
                       <td>
                         <span className={`pill ${getStatusClass(order.status)}`}>
-                          {order.status}
+                          {order.status === 'Pending' ? 'Pending' :
+                           order.status === 'Paid' ? 'Paid' :
+                           order.status === 'Shipped' ? 'Shipped' :
+                           order.status === 'Delivered' ? 'Delivered' :
+                           order.status === 'Cancelled' ? 'Cancelled' : order.status}
                         </span>
                       </td>
                       <td style={{ textAlign: 'right' }}>
@@ -102,7 +106,7 @@ export default function OrdersAdmin() {
                           className="btn btn-primary btn-sm" 
                           onClick={() => handleViewDetail(order.id)}
                         >
-                          Chi tiết
+                          View
                         </button>
                       </td>
                     </tr>
@@ -118,57 +122,57 @@ export default function OrdersAdmin() {
         <div className="admin-modal-overlay" style={modalOverlayStyle}>
           <div className="admin-panel" style={modalContentStyle}>
             <div className="admin-panel-top">
-              <h3>Chi tiết đơn hàng #{selectedOrder.id}</h3>
+              <h3>Order Details #{selectedOrder.id}</h3>
               <button className="btn-icon" onClick={() => setSelectedOrder(null)}>✕</button>
             </div>
             
             {loadingDetail ? (
-                <p>Đang cập nhật...</p> 
+                <p>Loading...</p> 
             ) : (
                 <>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px', fontSize: '14px' }}>
                   <div style={{ background: '#f9fafb', padding: '15px', borderRadius: '8px' }}>
-                    <h4 style={{marginTop:0}}>Thông tin khách hàng</h4>
-                    <p><strong>Người nhận:</strong> {selectedOrder.full_name || "N/A"}</p>
-                    <p><strong>Địa chỉ:</strong> {selectedOrder.shipping_address || "N/A"}</p>
-                    <p><strong>Ngày đặt:</strong> {selectedOrder.created_at ? new Date(selectedOrder.created_at).toLocaleString() : "N/A"}</p>
-                    <p><strong>Phương thức:</strong> {selectedOrder.payment_method}</p>
+                    <h4 style={{marginTop:0}}>Customer Info</h4>
+                    <p><strong>Recipient:</strong> {selectedOrder.full_name || "N/A"}</p>
+                    <p><strong>Address:</strong> {selectedOrder.shipping_address || "N/A"}</p>
+                    <p><strong>Order Date:</strong> {selectedOrder.created_at ? new Date(selectedOrder.created_at).toLocaleString() : "N/A"}</p>
+                    <p><strong>Payment Method:</strong> {selectedOrder.payment_method}</p>
                   </div>
                   
                   <div style={{ background: '#f9fafb', padding: '15px', borderRadius: '8px' }}>
-                    <h4 style={{marginTop:0}}>Xử lý đơn hàng</h4>
-                    <label style={{display:'block', marginBottom: '5px'}}>Trạng thái hiện tại:</label>
+                    <h4 style={{marginTop:0}}>Order Processing</h4>
+                    <label style={{display:'block', marginBottom: '5px'}}>Current Status:</label>
                     <select 
                       className="input" 
                       value={selectedOrder.status}
                       onChange={(e) => handleUpdateStatus(selectedOrder.id, e.target.value)}
                       style={{ width: '100%', marginBottom: '10px' }}
                     >
-                      <option value="Pending">Chờ xử lý (Pending)</option>
-                      <option value="Paid">Đã thanh toán (Paid)</option>
-                      <option value="Shipped">Đang giao (Shipped)</option>
-                      <option value="Delivered">Đã giao (Delivered)</option>
-                      <option value="Cancelled">Đã hủy (Cancelled)</option>
+                      <option value="Pending">Pending</option>
+                      <option value="Paid">Paid</option>
+                      <option value="Shipped">Shipped</option>
+                      <option value="Delivered">Delivered</option>
+                      <option value="Cancelled">Cancelled</option>
                     </select>
                     
                     {selectedOrder.status === 'Pending' && (
                         <p style={{fontSize: '12px', color: '#666'}}>
-                            * Có thể hủy đơn khi đơn hàng chưa được xử lý.
+                            * Orders can be cancelled before processing.
                         </p>
                     )}
                   </div>
                 </div>
 
-                <h4 className="muted" style={{ marginBottom: '10px' }}>Sản phẩm trong đơn</h4>
+                <h4 className="muted" style={{ marginBottom: '10px' }}>Products in Order</h4>
                 <div style={{maxHeight: '300px', overflowY: 'auto', border: '1px solid #eee'}}>
                     <table className="admin-table mini">
                     <thead>
                         <tr>
-                        <th>Tên sản phẩm</th>
-                        <th>Phân loại</th>
-                        <th>Số lượng</th>
-                        <th>Đơn giá</th>
-                        <th>Thành tiền</th>
+                        <th>Product Name</th>
+                        <th>Variant</th>
+                        <th>Quantity</th>
+                        <th>Unit Price</th>
+                        <th>Total</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -184,19 +188,19 @@ export default function OrdersAdmin() {
                                     {!item.size && !item.color && `Variant #${item.product_variant_id}`}
                                 </td>
                                 <td>{item.quantity}</td>
-                                <td>{Number(item.price).toLocaleString()}đ</td>
-                                <td>{Number(item.price * item.quantity).toLocaleString()}đ</td>
+                                <td>{Number(item.price).toLocaleString()}₫</td>
+                                <td>{Number(item.price * item.quantity).toLocaleString()}₫</td>
                             </tr>
                             ))
                         ) : (
-                            <tr><td colSpan="5" style={{textAlign: "center"}}>Không có dữ liệu sản phẩm</td></tr>
+                            <tr><td colSpan="5" style={{textAlign: "center"}}>No product data</td></tr>
                         )}
                     </tbody>
                     </table>
                 </div>
                 
                 <div style={{marginTop: '20px', textAlign: 'right', fontSize: '18px', fontWeight: 'bold'}}>
-                    Tổng cộng: {Number(selectedOrder.total_price || selectedOrder.amount).toLocaleString()}đ
+                    Total: {Number(selectedOrder.total_price || selectedOrder.amount).toLocaleString()}₫
                 </div>
                 </>
             )}

@@ -21,7 +21,7 @@ export default function BrandsAdmin() {
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm("Xóa thương hiệu này?")) return;
+    if (!window.confirm("Delete this brand?")) return;
     try {
       await adminApi.deleteBrand(id);
       setBrands(brands.filter(b => b.id !== id));
@@ -32,10 +32,10 @@ export default function BrandsAdmin() {
     <AdminLayout title="Quản lý Thương hiệu">
       <div className="admin-toolbar">
         <div className="admin-toolbar-left">
-          <p className="muted">{brands.length} thương hiệu trong hệ thống</p>
+          <p className="muted">{brands.length}brand in the system</p>
         </div>
         <button className="btn btn-primary" onClick={() => { setEditing(null); setShowNew(true); }}>
-          + Thêm Thương hiệu
+          + Add New Brand
         </button>
       </div>
 
@@ -54,15 +54,15 @@ export default function BrandsAdmin() {
       )}
 
       <div className="admin-panel">
-        {loading ? <p>Đang tải...</p> : (
+        {loading ? <p>Loading...</p> : (
           <div className="admin-table-wrap">
             <table className="admin-table">
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Tên thương hiệu</th>
-                  <th>Mô tả</th>
-                  <th style={{ textAlign: 'right' }}>Hành động</th>
+                  <th>Brand name</th>
+                  <th>Description</th>
+                  <th style={{ textAlign: 'right' }}>Action</th>
                 </tr>
               </thead>
               <tbody>

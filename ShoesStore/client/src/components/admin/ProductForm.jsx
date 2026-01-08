@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import adminApi from "../../utilities/adminApi";
 
 const FIXED_COLORS = [
-  { label: "Đen", value: "Black" },
-  { label: "Trắng", value: "White" },
-  { label: "Xám", value: "Grey" },
-  { label: "Đỏ", value: "Red" },
-  { label: "Xanh dương", value: "Blue" },
-  { label: "Vàng", value: "Yellow" },
+  { label: "Black", value: "Black" },
+  { label: "White", value: "White" },
+  { label: "Grey", value: "Grey" },
+  { label: "Red", value: "Red" },
+  { label: "Blue", value: "Blue" },
+  { label: "Yellow", value: "Yellow" },
 ];
 
 const generateSlug = (text) => {
@@ -39,12 +39,12 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
   const [categories, setCategories] = useState([]);
   const [variants, setVariants] = useState([]);
   const [saving, setSaving] = useState(false);
-  const [selectedColor, setSelectedColor] = useState("");
   const [variantForm, setVariantForm] = useState({
     size: "",
     color: "",
     stock: 0,
   });
+
   useEffect(() => {
     adminApi
       .getBrands()
@@ -88,15 +88,15 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
 
   const handleAddVariant = async () => {
     if (!initial?.id)
-      return alert("Vui lòng lưu sản phẩm trước khi thêm biến thể.");
+      return alert("Please save the product before adding variants.");
 
     const { size, color, stock } = variantForm;
 
-    if (!size || !color) return alert("Vui lòng nhập đầy đủ Size và Màu.");
+    if (!size || !color) return alert("Please provide both Size and Color.");
 
-    // Check trùng size + color
+    // Check duplicate size + color
     const exists = variants.some((v) => v.size === size && v.color === color);
-    if (exists) return alert("Biến thể Size + Màu này đã tồn tại.");
+    if (exists) return alert("This Size + Color variant already exists.");
 
     try {
       const newV = await adminApi.createVariant(initial.id, {
@@ -109,17 +109,17 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
       setVariants((prev) => [...prev, newV]);
       setVariantForm({ size: "", color: "", stock: 0 });
     } catch (err) {
-      alert("Lỗi: " + err.message);
+      alert("Error: " + err.message);
     }
   };
 
   const handleDeleteVariant = async (vId) => {
-    if (!window.confirm("Xóa biến thể này?")) return;
+    if (!window.confirm("Delete this variant?")) return;
     try {
       await adminApi.deleteVariant(initial.id, vId);
       setVariants(variants.filter((v) => v.id !== vId));
     } catch (err) {
-      alert("Lỗi: " + err.message);
+      alert("Error: " + err.message);
     }
   };
 
@@ -141,9 +141,9 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
         : await adminApi.createProduct(payload);
 
       onSaved(result);
-      alert("Lưu thành công!");
+      alert("Saved successfully!");
     } catch (err) {
-      alert("Lỗi: " + err.message);
+      alert("Error: " + err.message);
     } finally {
       setSaving(false);
     }
@@ -153,7 +153,7 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
     <form onSubmit={handleSubmit} className="admin-form-grid">
       <div className="admin-form-left">
         <div className="form-group">
-          <label>Tên sản phẩm</label>
+          <label>Product Name</label>
           <input
             className="input"
             name="name"
@@ -165,14 +165,14 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
 
         <div className="form-row" style={{ display: "flex", gap: 10 }}>
           <div className="form-group" style={{ flex: 1 }}>
-            <label>Thương hiệu</label>
+            <label>Brand</label>
             <select
               className="input"
               name="brand_id"
               value={form.brand_id}
               onChange={handleChange}
             >
-              <option value="">-- Chọn Brand --</option>
+              <option value="">-- Select Brand --</option>
               {brands.map((b) => (
                 <option key={b.id} value={b.id}>
                   {b.name}
@@ -181,14 +181,14 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
             </select>
           </div>
           <div className="form-group" style={{ flex: 1 }}>
-            <label>Danh mục</label>
+            <label>Category</label>
             <select
               className="input"
               name="category_id"
               value={form.category_id}
               onChange={handleChange}
             >
-              <option value="">-- Chọn Category --</option>
+              <option value="">-- Select Category --</option>
               {categories.map((c) => (
                 <option key={c.id} value={c.id}>
                   {c.name}
@@ -200,7 +200,7 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
 
         <div className="form-row" style={{ display: "flex", gap: 10 }}>
           <div className="form-group" style={{ flex: 1 }}>
-            <label>Giá niêm yết ($)</label>
+            <label>Price ($)</label>
             <input
               className="input"
               type="number"
@@ -212,7 +212,7 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
             />
           </div>
           <div className="form-group" style={{ flex: 1 }}>
-            <label>Giảm giá (%)</label>
+            <label>Discount (%)</label>
             <input
               className="input"
               type="number"
@@ -224,7 +224,7 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
               <div
                 style={{ fontSize: "12px", color: "#10b981", marginTop: "4px" }}
               >
-                Giá sau giảm: $
+                Price after discount: $
                 {(form.price * (1 - form.discount_percentage / 100)).toFixed(2)}
               </div>
             )}
@@ -239,7 +239,7 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
             marginTop: "15px",
           }}
         >
-          <strong>Biến thể (Size & Màu)</strong>
+          <strong>Variants (Size & Color)</strong>
 
           {/* FORM ADD VARIANT */}
           <div
@@ -253,7 +253,7 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
           >
             <input
               className="input"
-              placeholder="Size (VD: 42, L, XL)"
+              placeholder="Size (e.g., 42, L, XL)"
               name="size"
               value={variantForm.size}
               onChange={handleVariantChange}
@@ -265,7 +265,7 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
               value={variantForm.color}
               onChange={handleVariantChange}
             >
-              <option value="">-- Màu sắc --</option>
+              <option value="">-- Color --</option>
               {FIXED_COLORS.map((c) => (
                 <option key={c.value} value={c.value}>
                   {c.label}
@@ -280,7 +280,7 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
               name="stock"
               value={variantForm.stock}
               onChange={handleVariantChange}
-              placeholder="Tồn kho"
+              placeholder="Stock"
             />
 
             <button
@@ -288,7 +288,7 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
               className="btn btn-sm btn-outline"
               onClick={handleAddVariant}
             >
-              + Thêm
+              + Add
             </button>
           </div>
 
@@ -297,8 +297,8 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
             <thead>
               <tr style={{ borderBottom: "1px solid #ddd", textAlign: "left" }}>
                 <th>Size</th>
-                <th>Màu</th>
-                <th>Tồn kho</th>
+                <th>Color</th>
+                <th>Stock</th>
                 <th></th>
               </tr>
             </thead>
@@ -319,7 +319,7 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
                         cursor: "pointer",
                       }}
                     >
-                      Xóa
+                      Delete
                     </button>
                   </td>
                 </tr>
@@ -329,7 +329,7 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
         </div>
 
         <div className="form-group" style={{ marginTop: 15 }}>
-          <label>Mô tả chi tiết</label>
+          <label>Description</label>
           <textarea
             className="input"
             name="description"
@@ -341,7 +341,7 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
 
         <div className="form-actions" style={{ marginTop: 20 }}>
           <button type="submit" className="btn btn-primary" disabled={saving}>
-            {saving ? "Đang lưu..." : "Lưu sản phẩm"}
+            {saving ? "Saving..." : "Save Product"}
           </button>
           <button
             type="button"
@@ -349,13 +349,13 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
             onClick={onCancel}
             style={{ marginLeft: 10 }}
           >
-            Hủy
+            Cancel
           </button>
         </div>
       </div>
 
       <div className="admin-form-right">
-        <label>URL Hình ảnh</label>
+        <label>Image URL</label>
         <input
           className="input"
           name="image_url"
@@ -382,7 +382,7 @@ export default function ProductForm({ initial = null, onSaved, onCancel }) {
               style={{ maxWidth: "100%", maxHeight: "100%" }}
             />
           ) : (
-            <span className="muted">Xem trước ảnh</span>
+            <span className="muted">Image preview</span>
           )}
         </div>
       </div>

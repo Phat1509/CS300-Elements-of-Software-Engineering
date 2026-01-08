@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 const API_BASE = process.env.REACT_APP_API_URL;
-console.log("API_BASE =", API_BASE);
+
 export default function AdminLogin() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState(""); // Đổi tên biến thành email cho rõ nghĩa
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -18,7 +18,7 @@ export default function AdminLogin() {
 
     try {
       if (!API_BASE) {
-        throw new Error("Chưa cấu hình REACT_APP_API_URL trong file .env");
+        throw new Error("REACT_APP_API_URL is not configured in .env file");
       }
 
       const res = await fetch(`${API_BASE}/api/auth/login`, {
@@ -27,7 +27,7 @@ export default function AdminLogin() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: username,
+          email: email, // Backend mong đợi trường 'email'
           password: password,
         }),
       });
@@ -38,27 +38,31 @@ export default function AdminLogin() {
         throw new Error(
           data.description ||
             data.message ||
-            "Tài khoản hoặc mật khẩu không đúng."
+            "Invalid email or password."
         );
       }
 
       if (!data.token) {
-        throw new Error("Lỗi hệ thống: Backend không trả về Token.");
-      }
-      if (!data.is_staff) {
-        throw new Error("Bạn không có quyền truy cập vào trang quản trị!");
+        throw new Error("System Error: Backend did not return a Token.");
       }
 
+      // Kiểm tra quyền Admin
+      if (!data.is_staff) {
+        throw new Error("Access Denied: You do not have permission to access the Admin Panel.");
+      }
+
+      localStorage.setItem("token", data.token); 
       localStorage.setItem("user", JSON.stringify(data));
 
-      navigate("/admin/products");
+      navigate("/admin"); 
     } catch (err) {
       console.error("Login Error:", err);
-      setError(err.message || "Có lỗi xảy ra, vui lòng thử lại sau.");
+      setError(err.message || "An error occurred. Please try again later.");
     } finally {
       setLoading(false);
     }
   };
+
   return (
     <main className="admin-auth">
       <div className="admin-auth-card">
@@ -77,13 +81,15 @@ export default function AdminLogin() {
 
         <form onSubmit={handleLogin} className="admin-auth-form">
           <div className="form-group">
-            <label className="muted">Username</label>
+            <label className="muted">Email</label>
             <input
               className="input"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="admin"
-              autoComplete="username"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="admin@example.com"
+              autoComplete="email"
+              required
             />
           </div>
 
@@ -94,8 +100,9 @@ export default function AdminLogin() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Nhập password admin..."
+              placeholder="Enter admin password..."
               autoComplete="current-password"
+              required
             />
           </div>
 
@@ -116,7 +123,7 @@ export default function AdminLogin() {
 
           <div className="admin-auth-links">
             <Link to="/" className="link-btn">
-              ← Back to store
+              ← Back to Store
             </Link>
           </div>
         </form>

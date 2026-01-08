@@ -27,15 +27,15 @@ export default function BrandForm({ initial = null, onSaved, onCancel }) {
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-group">
-        <label>Tên thương hiệu</label>
+        <label>Brand name</label>
         <input className="input" value={form.name} onChange={e => setForm({...form, name: e.target.value})} required />
       </div>
       <div className="form-group">
-        <label>Mô tả ngắn</label>
+        <label>Sort description</label>
         <textarea className="input" value={form.description} onChange={e => setForm({...form, description: e.target.value})} rows="3" />
       </div>
       <div style={{ marginTop: 20 }}>
-        <button type="submit" className="btn btn-primary" disabled={saving}>Lưu lại</button>
+        <button type="submit" className="btn btn-primary" disabled={saving}>Save</button>
         <button type="button" className="btn btn-outline" onClick={onCancel} style={{ marginLeft: 10 }}>Hủy</button>
       </div>
     </form>

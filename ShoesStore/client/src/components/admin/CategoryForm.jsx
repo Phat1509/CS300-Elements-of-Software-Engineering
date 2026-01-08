@@ -56,9 +56,9 @@ export default function CategoryForm({ initial = null, allCategories = [], onSav
         await adminApi.createCategory(payload);
       }
       onSaved();
-      alert("Lưu danh mục thành công!");
+      alert("Category saved successfully!");
     } catch (err) {
-      alert("Lỗi: " + err.message);
+      alert("Error: " + err.message);
     } finally { 
       setSaving(false); 
     }
@@ -69,7 +69,7 @@ export default function CategoryForm({ initial = null, allCategories = [], onSav
   return (
     <form onSubmit={handleSubmit} className="admin-form">
       <div className="form-group">
-        <label>Tên danh mục</label>
+        <label>Category Name</label>
         <input 
           className="input" 
           value={form.name} 
@@ -80,24 +80,24 @@ export default function CategoryForm({ initial = null, allCategories = [], onSav
       </div>
 
       <div className="form-group">
-        <label>Slug (Tự động sinh)</label>
+        <label>Slug (Auto-generated)</label>
         <input 
           className="input" 
           value={form.slug} 
           onChange={(e) => setForm({...form, slug: e.target.value})}
           placeholder="giay-chay-bo"
         />
-        <small className="muted">Đường dẫn thân thiện cho SEO.</small>
+        <small className="muted">SEO-friendly URL.</small>
       </div>
 
       <div className="form-group">
-        <label>Danh mục cha (Không bắt buộc)</label>
+        <label>Parent Category (Optional)</label>
         <select 
           className="input" 
           value={form.parent_id} 
           onChange={(e) => setForm({...form, parent_id: e.target.value})}
         >
-          <option value="">-- Là danh mục gốc --</option>
+          <option value="">-- Root Category --</option>
           {parentOptions.map(c => (
             <option key={c.id} value={c.id}>{c.name}</option>
           ))}
@@ -106,10 +106,10 @@ export default function CategoryForm({ initial = null, allCategories = [], onSav
 
       <div className="form-actions" style={{ marginTop: 20 }}>
         <button type="submit" className="btn btn-primary" disabled={saving}>
-          {saving ? "Đang lưu..." : "Lưu danh mục"}
+          {saving ? "Saving..." : "Save Category"}
         </button>
         <button type="button" className="btn btn-outline" onClick={onCancel} style={{ marginLeft: 10 }}>
-          Hủy bỏ
+          Cancel
         </button>
       </div>
     </form>

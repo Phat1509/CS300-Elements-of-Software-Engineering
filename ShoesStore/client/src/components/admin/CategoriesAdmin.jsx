@@ -29,9 +29,9 @@ export default function CategoriesAdmin() {
     try {
       await adminApi.deleteCategory(id);
       setCategories(categories.filter(c => c.id !== id));
-      alert("Đã xóa danh mục thành công!");
+      alert("The category has been successfully deleted.!");
     } catch (e) { 
-      alert("Lỗi khi xóa: " + e.message); 
+      alert("error : " + e.message); 
     }
   };
 
@@ -39,10 +39,10 @@ export default function CategoriesAdmin() {
     <AdminLayout title="Quản lý Danh mục">
       <div className="admin-toolbar">
         <div className="admin-toolbar-left">
-          <p className="muted">Tổng cộng: {categories.length} danh mục</p>
+          <p className="muted">Total: {categories.length} category</p>
         </div>
         <button className="btn btn-primary" onClick={() => { setEditing(null); setShowNew(true); }}>
-          + Thêm Danh mục
+          + Add New Category
         </button>
       </div>
 
@@ -62,21 +62,21 @@ export default function CategoriesAdmin() {
       )}
 
       <div className="admin-panel">
-        {loading ? <p>Đang tải dữ liệu...</p> : (
+        {loading ? <p>Loading data ...</p> : (
           <div className="admin-table-wrap">
             <table className="admin-table">
               <thead>
                 <tr>
                   <th style={{ width: 60 }}>ID</th>
-                  <th>Tên danh mục</th>
+                  <th>Category name</th>
                   <th>Slug</th>
-                  <th>Danh mục cha</th>
-                  <th style={{ textAlign: 'right' }}>Hành động</th>
+                  <th>Parent category</th>
+                  <th style={{ textAlign: 'right' }}>Action</th>
                 </tr>
               </thead>
               <tbody>
                 {categories.length === 0 ? (
-                  <tr><td colSpan="5" style={{ textAlign: 'center', padding: 20 }}>Chưa có danh mục nào.</td></tr>
+                  <tr><td colSpan="5" style={{ textAlign: 'center', padding: 20 }}>There are no categories yet.</td></tr>
                 ) : (
                   categories.map(c => (
                     <tr key={c.id}>
