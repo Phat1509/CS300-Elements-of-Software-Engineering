@@ -46,6 +46,12 @@ pub struct ResendVerificationParams {
 }
 
 #[derive(Debug, Deserialize, Serialize, utoipa::ToSchema)]
+pub struct ChangePasswordParams {
+    pub old_password: String,
+    pub new_password: String,
+}
+
+#[derive(Debug, Deserialize, Serialize, utoipa::ToSchema)]
 pub struct UserUpdateParams {
     pub name: String,
 }
@@ -380,6 +386,35 @@ async fn resend_verification_email(
     format::json(())
 }
 
+#[utoipa::path(
+    post,
+    path = "/api/auth/change-password",
+    tags = ["Authentication"],
+    summary = "Change password",
+    responses(
+        (status = OK, description = "Password changed"),
+        (status = BAD_REQUEST, description = "Old password is not correct", body = ErrorDetail),
+        (status = UNAUTHORIZED, description = "Not authenticated", body = ErrorDetail),
+    )
+)]
+#[debug_handler]
+async fn change_password(
+    auth: auth::JWTWithUser<users::Model>,
+    State(ctx): State<AppContext>,
+    Json(params): Json<ChangePasswordParams>,
+) -> Result<Response> {
+    if !auth.user.verify_password(&params.old_password) {
+        return bad_request("Old password is not correct.");
+    }
+
+    auth.user
+        .into_active_model()
+        .reset_password(&ctx.db, &params.new_password)
+        .await?;
+
+    format::empty()
+}
+
 pub fn routes() -> Routes {
     Routes::new()
         .prefix("/api/auth")
@@ -393,6 +428,7 @@ pub fn routes() -> Routes {
         .add("/magic-link", post(magic_link))
         .add("/magic-link/{token}", get(magic_link_verify))
         .add("/resend-verification-mail", post(resend_verification_email))
+        .add("/change-password", post(change_password))
 }
 
 pub fn api_routes() -> OpenApiRouter<AppContext> {
@@ -406,4 +442,5 @@ pub fn api_routes() -> OpenApiRouter<AppContext> {
         .routes(routes!(magic_link))
         .routes(routes!(magic_link_verify))
         .routes(routes!(resend_verification_email))
+        .routes(routes!(change_password))
 }
