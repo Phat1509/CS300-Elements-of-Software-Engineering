@@ -55,7 +55,10 @@ const mapProduct = (p) => {
 /* ===================== PRODUCTS ===================== */
 export const getProducts = async (params = {}) => {
   try {
-    const res = await api.get("/products", { params });
+    const defaultParams = { page: 1, page_size: 1000 };
+    const finalParams = { ...defaultParams, ...params };
+
+    const res = await api.get("/products", { params: finalParams });
     const rawData = res.data.items || [];
     return rawData.map(mapProduct);
   } catch (error) {

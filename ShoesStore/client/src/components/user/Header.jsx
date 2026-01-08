@@ -25,13 +25,13 @@ export default function Header() {
         {/* Logo */}
         <Link to="/" className="logo" aria-label="Go home">
           <div className="logo-dot">S</div>
-          <span className="logo-text">StepStyle</span>
+          <span className="logo-text">DONGNVIKI</span>
         </Link>
 
         {/* Nav */}
         <nav className="nav">
           <NavLink to="/new" className="nav-link">
-            New Arrivals
+            Store
           </NavLink>
 
           {/* Display logic: If NOT logged in, show Sign in/Join us */}

@@ -53,21 +53,37 @@ export default function ProductListingPage() {
     initPage();
   }, []);
 
+  /* ================= XỬ LÝ LỌC SẢN PHẨM ================= */
   const displayed = useMemo(() => {
+
+    let validCategoryIds = [];
+    
+    if (selectedCategory) {
+      const selectedId = Number(selectedCategory);
+      validCategoryIds.push(selectedId); 
+      
+      const childIds = categories
+        .filter(c => Number(c.parent_id) === selectedId)
+        .map(c => Number(c.id));
+        
+      validCategoryIds = [...validCategoryIds, ...childIds];
+    }
+
     return products.filter((p) => {
       const effectivePrice =
         p.discount_percentage > 0
           ? p.price * (1 - p.discount_percentage / 100)
           : p.price;
-
       const matchPrice =
         effectivePrice >= minPrice && effectivePrice <= maxPrice;
 
       const matchStatus = p.is_active === true;
 
+
       const matchCat = selectedCategory
-        ? Number(p.category_id) === Number(selectedCategory)
+        ? validCategoryIds.includes(Number(p.category_id))
         : true;
+
       const matchBrand = selectedBrand
         ? Number(p.brand_id) === Number(selectedBrand)
         : true;
@@ -77,7 +93,7 @@ export default function ProductListingPage() {
 
       return matchPrice && matchStatus && matchCat && matchBrand && matchSale;
     });
-  }, [products, minPrice, maxPrice, selectedCategory, selectedBrand, onlySale]);
+  }, [products, minPrice, maxPrice, selectedCategory, selectedBrand, onlySale, categories]); // Nhớ thêm categories vào dependency
   // --- LOGIC SẮP XẾP ---
   const sortedDisplayed = useMemo(() => {
     const arr = [...displayed];
