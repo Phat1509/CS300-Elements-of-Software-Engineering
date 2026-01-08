@@ -22,35 +22,52 @@ export default function ProductListingPage() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedBrand, setSelectedBrand] = useState(null);
 
-  // --- LOAD DATA ---
-  useEffect(() => {
-    async function initPage() {
-      try {
-        setLoading(true);
-        const [pData, cData, bData] = await Promise.all([
-          getProducts(),
-          getCategories(),
-          getBrands(),
-        ]);
+  const fetchData = async (isBackground = false) => {
+    // Nếu là load lần đầu thì hiện Loading, nếu load ngầm (khi focus lại) thì không hiện
+    if (!isBackground) setLoading(true);
+    
+    try {
+      const [pData, cData, bData] = await Promise.all([
+        getProducts(),
+        getCategories(),
+        getBrands(),
+      ]);
 
-        setProducts(pData || []);
+      // Cập nhật Products (cái quan trọng nhất cần làm mới)
+      setProducts(pData || []);
 
-        const uniqueCategories = Array.from(
-          new Map((cData || []).map((c) => [c.id, c])).values()
-        );
-        setCategories(uniqueCategories);
+      // Cập nhật Categories & Brands (nếu cần thiết)
+      // Lưu ý: Nếu Categories/Brands ít thay đổi, bạn có thể bọc cái này trong if(!isBackground)
+      const uniqueCategories = Array.from(
+        new Map((cData || []).map((c) => [c.id, c])).values()
+      );
+      setCategories(uniqueCategories);
 
-        const uniqueBrands = Array.from(
-          new Map((bData || []).map((b) => [b.id, b])).values()
-        );
-        setBrands(uniqueBrands);
-      } catch (err) {
-        console.error("Lỗi khi tải dữ liệu:", err);
-      } finally {
-        setLoading(false);
-      }
+      const uniqueBrands = Array.from(
+        new Map((bData || []).map((b) => [b.id, b])).values()
+      );
+      setBrands(uniqueBrands);
+
+    } catch (err) {
+      console.error("Lỗi khi tải dữ liệu:", err);
+    } finally {
+      setLoading(false);
     }
-    initPage();
+  };
+
+  useEffect(() => {
+    fetchData(false);
+
+    const handleFocus = () => {
+      console.log("🔄 Tab focused: Refreshing data...");
+      fetchData(true); 
+    };
+
+    window.addEventListener("focus", handleFocus);
+
+    return () => {
+      window.removeEventListener("focus", handleFocus);
+    };
   }, []);
 
   /* ================= XỬ LÝ LỌC SẢN PHẨM ================= */
