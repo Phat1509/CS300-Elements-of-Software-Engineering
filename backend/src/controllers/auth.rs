@@ -90,7 +90,9 @@ async fn register(
         .into_active_model()
         .set_email_verification_sent(&ctx.db)
         .await?;
-    user.into_active_model().verified(&ctx.db).await?;
+    let user = user.into_active_model().verified(&ctx.db).await?;
+
+    AuthMailer::send_welcome(&ctx, &user).await?;
 
     format::json(())
 }
